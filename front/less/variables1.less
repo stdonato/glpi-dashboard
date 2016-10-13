@@ -1,0 +1,92 @@
+
+/******************* Color variables *********************/
+
+/*	 Global Color variables @requested not to change these values if you are not sure of what you are doing
+----------------------------------------------------------------------------------------------------------- */
+
+@boxedBackgroundImage: 'http://newevolutiondesigns.com/images/freebies/abstract-background-19.jpg';
+
+@bodyBackground 	: 	#f1f1f1;
+
+@primary 	: 	#23bab5;
+@secondary 	: 	#232b2d;
+
+@success 	: 	#a0d269;
+@info 		: 	#6cadd1;
+@warning 	: 	#eac841;
+@danger 	: 	#df6c6e;
+
+@inverse : #373947;
+//@primary 	: 	#FF706C; dark pink
+//@primary 	: 	#a6d87a; green
+
+
+@options-background 	: 	#f4f4f4;
+
+@primaryBorder 	: 	darken(@primary,10%);
+@successBorder 	: 	darken(@success,10%);
+@infoBorder 		: 	darken(@info,10%);
+@warningBorder 	: 	darken(@warning,10%);
+@dangerBorder 	: 	darken(@danger,10%);
+
+/*	 Fonts
+-------------------------------------------------------------------------------------------------- */
+
+@first-font:'Open Sans', sans-serif;
+@second-font:'Droid Sans', sans-serif;
+@third-font:'Lato', sans-serif;
+/*	 Navbar variables @you change these variables , make sure to get a good color combination ;)
+-------------------------------------------------------------------------------------------------- */
+
+@navBackground 	: 	@primary;
+@navBarHeight 	: 	60px; 			/* Desired height is 90px , below 80px is not recommended */
+@navTextColor 	: 	#FFFFFF;
+
+
+/*	 LeftSidebar variables @you change these variables , make sure to get a good color combination ;)
+-------------------------------------------------------------------------------------------------- */
+
+@leftSidebarBackground 				: 	@secondary;
+@leftSidebarWidth 					: 	220px;
+@leftSidebarMiniWidth 	 			: 	80px;
+@leftSidebarMinHeight 				: 	1200px;
+@leftSidebarLinkColor  				: 	lighten(@leftSidebarBackground,40%); //#5e696c
+@leftSidebarLinkLeftBorder  				: 	@primary;
+
+/*	 LeftSidebar variables @you change these variables , make sure to get a good color combination ;)
+-------------------------------------------------------------------------------------------------- */
+
+@rightSidebarBackground 		            	: 	#f9f9f9;
+@rightSidebarWidth 					: 	300px;
+
+/*	 Panels variables
+-------------------------------------------------------------------------------------------------- */
+
+@panelInfoBg 					 				: 	#FFFFFF;
+@panelInfoHeadingBg 	 				: 	@info;
+@panelInfoHeadingColor				: 	lighten(@info,30%);
+@panelInfoHeadingBorder       : 	lighten(@panelInfoHeadingBg,10%);
+
+@panelSuccessBg 					 		: 	#FFFFFF;
+@panelSuccessHeadingBg 	 			: 	@success;
+@panelSuccessHeadingColor			: 	lighten(@success,30%);
+@panelSuccessHeadingBorder    : 	lighten(@panelSuccessHeadingBg,10%);
+
+@panelWarningBg 					 		: 	#FFFFFF;
+@panelWarningHeadingBg 	 			: 	@warning;
+@panelWarningHeadingColor			: 	lighten(@warning,30%);
+@panelWarningHeadingBorder    : 	lighten(@panelWarningHeadingBg,10%);
+
+@panelDangerBg 					 			: 	#FFFFFF;
+@panelDangerHeadingBg 	 			: 	@danger;
+@panelDangerHeadingColor			: 	lighten(@danger,40%);
+@panelDangerHeadingBorder     : 	lighten(@panelDangerHeadingBg,10%);
+
+
+
+.transition(@transition) {
+  -webkit-transition: @transition;
+     -moz-transition: @transition;
+       -o-transition: @transition;
+          transition: @transition;
+}

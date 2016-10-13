@@ -1,0 +1,3 @@
+	var metric = {
+		reloadId : null
+	};	
