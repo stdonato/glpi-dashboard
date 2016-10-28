@@ -488,3 +488,6 @@ msgstr "Zusammenfassung"
 
 msgid "Selected"
 msgstr "Ausgewählt"
+
+msgid "Popup"
+msgstr "Pop-up"

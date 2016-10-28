@@ -18,7 +18,6 @@ msgstr ""
 "Language: ru_RU\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-
 msgid "Dashboard"
 msgstr "Панель отчетов"
 
@@ -519,6 +518,8 @@ msgstr "Информация о сервере"
 msgid "SLA"
 msgstr "SLA"
 
+msgid "Popup"
+msgstr "всплывающие уведомления"
 
 
 

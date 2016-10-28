@@ -6,7 +6,6 @@ include ("../../../config/config.php");
 global $DB;
 
 Session::checkLoginUser();
-//Session::checkRight("profile", "r");
 
 # entity in index
 $sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
@@ -703,11 +702,15 @@ setTimeout(function(){
 					
 					$list = preg_match( '/glpiID\|s:[0-9]:"(.+)/', $string, $matches );
 					
-					$posicao = strpos($matches[0], 'glpiID|s:');
-					$string2 = substr($matches[0], $posicao, 25);
-					$string3 = explode("\"", $string2); 
+					$arr = isset($matches[0]) ? $matches[0] : '';
 					
-					$arr_ids[] = $string3[1];
+					$posicao = strpos($arr, 'glpiID|s:');
+					
+					$string2 = substr($arr, $posicao, 25);
+					
+					$string3 = explode("\"", $string2);
+					
+					$arr_ids[] = isset($string3[1]) ? $string3[1] : '';
 					
 					}
 				}

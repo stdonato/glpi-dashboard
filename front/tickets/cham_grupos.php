@@ -261,8 +261,7 @@ if(isset($_REQUEST['order'])) {
 else {
 		$order = "ORDER BY glpi_tickets.date_mod DESC";
 }
-			
-			
+						
 			$sql_cham = "SELECT glpi_tickets.id AS id, glpi_tickets.name AS descri, glpi_tickets.status AS status, glpi_tickets.date_mod, 
 			glpi_tickets.priority,  glpi_tickets.due_date AS duedate, glpi_tickets.locations_id AS lid
 			FROM glpi_tickets, glpi_groups,`glpi_groups_tickets` 
@@ -274,9 +273,7 @@ else {
 			".$status1."
 			GROUP BY id
 			".$order."";
-			
-			//AND glpi_tickets.status NOT IN  ".$status." 			
-			//ORDER BY glpi_tickets.date_mod DESC";
+					
 			
 			$result_cham = $DB->query($sql_cham);
 			
@@ -307,13 +304,12 @@ else {
 					$th_due = "<th style='text-align:center;'><a href='chamados.php?order=da'>&nbsp<font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('Due Date','dashboard')."<a href='chamados.php?order=dd'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>";
 				}			
 			}
-					
-					
+										
 				echo "<table id='tickets' class='display' style='font-size: 20px; font-weight:bold;' cellpadding = 2px >				
 				<thead>
 					<tr class='up-down'>
-						<th style='text-align:center;'><a href='chamados.php?&order=ta'>&nbsp<font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('ID','dashboard')."<a href='chamados.php?&order=td'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>
-						<th style='text-align:center;'><a href='chamados.php?&order=sa'><font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('Status')."<a href='chamados.php?&order=sd'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>
+						<th style='text-align:center;'><a href='cham_grupos.php?grp=".$grp."&order=ta'>&nbsp<font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('ID','dashboard')."<a href='cham_grupos.php?grp=".$grp."&order=td'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>
+						<th style='text-align:center;'><a href='cham_grupos.php?grp=".$grp."&order=sa'><font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('Status')."<a href='cham_grupos.php?grp=".$grp."&order=sd'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>
 						<th style='text-align:center;'>". __('Title')."</th>
 						<th style='text-align:center;'>". __('Technician')."</th>
 						<th style='text-align:center;'>". __('Requester')."</th>";
@@ -323,7 +319,7 @@ else {
 					}	
 					
 				echo $th_due."									
-						<th style='text-align:center;'><a href='chamados.php?&order=pa'>&nbsp<font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('Priority')."<a href='chamados.php?&order=pd'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>
+						<th style='text-align:center;'><a href='cham_grupos.php?grp=".$grp."&order=pa'>&nbsp<font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('Priority')."<a href='cham_grupos.php?grp=".$grp."&order=pd'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>
 					</tr>
 				</thead>
 				<tbody>";

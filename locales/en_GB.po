@@ -467,3 +467,6 @@ msgstr "Summary"
 
 msgid "Selected"
 msgstr "Selected"
+
+msgid "Popup"
+msgstr "Popup"

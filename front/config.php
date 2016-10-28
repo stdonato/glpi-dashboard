@@ -622,7 +622,7 @@ function chart(theme) {
 									}				
 					
 					echo "</td><td>";
-						echo _sx('button', 'Show')." ".__('Due date').":&nbsp; 
+						echo _sx('button', 'Show')." ".__('Due Date', 'dashboard').":&nbsp; 
 							<select id='due' name='due' style='width: 130px;' onChange='reload(\"form6\")'> ";
 								if($due == 1) {							
 									echo "					
@@ -638,7 +638,7 @@ function chart(theme) {
 									}				
 		
 					echo "</td><td>";				
-					echo _sx('button', 'Show')." ".__('Popup').":&nbsp;&nbsp; 
+					echo _sx('button', 'Show')." ".__('Popup','dashboard').":&nbsp;&nbsp; 
 							<select id='pop' name='pop' style='width: 130px;' onChange='reload(\"form6\")'> ";
 								if($pop == 1) {							
 									echo "					

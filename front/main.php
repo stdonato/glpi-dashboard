@@ -6,22 +6,6 @@ include ("../../../config/config.php");
 global $DB;
 
 Session::checkLoginUser();
-//Session::checkRight("profile", "r");
-
-/*
-function find_SQL_Version() {
-   $output = shell_exec('mysql -V');
-   preg_match('@[0-9]+\.[0-9]+\.[0-9]+@', $output, $version);
-   return $version[0][0].".".$version[0][2];
-}
-
-echo 'Your SQL version is ' . find_SQL_Version(); 
-
-if(find_SQL_Version() >= 5.7) {
-$mode = "SET SESSION sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';";
-$DB->query($mode);
-}
-*/
 
 # entity in index
 $sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
@@ -804,12 +788,15 @@ setTimeout(function(){
 						
 						$list = preg_match( '/glpiID\|s:[0-9]:"(.+)/', $string, $matches);
 						
-						//if(isset($list)) {							
-							$posicao = strpos($matches[0], 'glpiID|s:');
-							$string2 = substr($matches[0], $posicao, 25);
-							$string3 = explode("\"", $string2); 							
-							$arr_ids[] = $string3[1];
-						//}						
+						$arr = isset($matches[0]) ? $matches[0] : '';
+						
+						$posicao = strpos($arr, 'glpiID|s:');
+						
+						$string2 = substr($arr, $posicao, 25);
+						
+						$string3 = explode("\"", $string2);
+						
+						$arr_ids[] = isset($string3[1]) ? $string3[1] : '';						
 					}
 				}
 				

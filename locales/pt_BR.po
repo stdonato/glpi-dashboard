@@ -518,3 +518,6 @@ msgstr "Server Info"
 
 msgid "SLA"
 msgstr "SLA"
+
+msgid "Popup"
+msgstr "Popup"
