@@ -1,21 +1,17 @@
-Versão 0.7.7:
+Versão 0.7.8:
 
-- Ajustes no layout;
-- Correção do idioma Russo;
-- Correção do idioma Alemão;
-- Total nos relatórios de Custo;
-- Seletor de tempo de atualização na pagina de Metricas;
+- Correção do idioma Russo, de novo;
+- Correção dos relatórios de SLA;
+- Correção dos gráficos de SLA;
 - Correções de bugs diversos;
 - Você agora pode me comprar uma cerveja pelo paypal; :)
 
 
-Version 0.7.7:
+Version 0.7.8:
 
-- Fixed layout;
-- Russian language correction;
-- German language correction;
-- Total Costs in cost reports;
-- Refresh time selector in Metrics page;
+- Russian language correction, again;
+- Fix SLA reports;
+- Fix SLA graphs;
 - Fix minor bugs;
 - Now you can buy me a beer in Paypal; :)
 

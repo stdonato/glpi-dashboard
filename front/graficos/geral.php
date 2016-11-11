@@ -1,6 +1,5 @@
 <?php
 
-//define('GLPI_ROOT', '../../../..');
 include ("../../../../inc/includes.php");
 include ("../../../../config/config.php");
 
@@ -43,6 +42,7 @@ global $DB;
 
 <script src="../js/highcharts.js"></script>
 <script src="../js/highcharts-3d.js"></script>
+<script src="../js/modules/boost.js"></script>
 <script src="../js/modules/exporting.js"></script>
 <script src="../js/modules/no-data-to-display.js"></script>
 
@@ -63,17 +63,6 @@ $sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' A
 $result_e = $DB->query($sql_e);
 $sel_ent = $DB->result($result_e,0,'value');
 
-/*
-if($sel_ent == -1) {
-
-	//get all user entities
-	$entities = Profile_User::getUserEntities($_SESSION['glpiID'], true);	
-	$ent = implode(",",$entities);
-	$entidade = "AND glpi_tickets.entities_id IN (".$ent.")";	
-	$problem = "";
-	
-}
-*/
 
 if($sel_ent != '') {			
 	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.")";

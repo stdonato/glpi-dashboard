@@ -26,14 +26,25 @@ else {
 }
 
 
+
+// distinguish between 0.90.x and 9.1 version
+if (GLPI_VERSION >= 9.1){
+	$slaid = "slts_ttr_id";		
+}
+
+else {
+	$slaid = "slas_id";	
+}
+
+
 $query3 = "
-SELECT count( glpi_tickets.id ) AS conta, glpi_tickets.`slas_id` AS id, glpi_slas.name
+SELECT count( glpi_tickets.id ) AS conta, glpi_tickets.".$slaid." AS id, glpi_slas.name
 FROM glpi_tickets, glpi_slas
-WHERE glpi_tickets.slas_id = glpi_slas.id
+WHERE glpi_tickets.".$slaid." = glpi_slas.id
 AND glpi_tickets.is_deleted = 0
 AND glpi_tickets.date ".$datas."
 ".$entidade."
-GROUP BY `slas_id`
+GROUP BY ".$slaid."
 ORDER BY conta DESC ";
 
 $result3 = $DB->query($query3) or die('erro');

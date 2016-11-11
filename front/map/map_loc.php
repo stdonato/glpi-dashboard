@@ -13,8 +13,7 @@ Session::checkRight("profile", READ);
 <html> 
 <head>
 <title>GLPI - <?php echo __('Tickets Map','dashboard'); ?></title>
-<!-- <base href= "<?php $_SERVER['SERVER_NAME'] ?>" > 
-<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript" ></script>   -->
+
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
@@ -170,15 +169,15 @@ while ($row = $DB->fetch_assoc($result_loc))
 
 if ($quant == 0) {
 	$color = $icon_green.$quant."";
-	$num_up = 0;	
-	$num_down = 1;
+	$num_up = 1;	
+	$num_down = 0;
 	
 }
 
 else {
 	$color = $icon_red.$quant."";
-	$num_up = 1;	
-	$num_down = 0;
+	$num_up = 0;	
+	$num_down = 1;
 }
 
 echo "['$title', $lat, $lng, '$local', '$color', '$host', $id, $quant, $num_up, $num_down, '$url'],";

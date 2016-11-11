@@ -72,28 +72,11 @@ function plugin_dashboard_install(){
 			$DB->query($query) or die("error updating table glpi_plugin_dashboard_config entity value" . $DB->error());
 		}
 		
-		//$query_pop = "INSERT INTO glpi_plugin_dashboard_config WHERE name = 'entity' AND value = '-1' ";		
-		//$result_pop = $DB->query($query_pop) or die("error alter table glpi_plugin_dashboard_config value size" . $DB->error());
-	
 	}
 
 //SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
 //SET sql_mode=(SELECT CONCAT(@@sql_mode,',ONLY_FULL_GROUP_BY'));
-
-//set session sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
-/*	
-	//notifications
-	if (! TableExists("glpi_plugin_dashboard_notify")) {
-		$query_notify = "CREATE TABLE IF NOT EXISTS `glpi_plugin_dashboard_notify` (
-		  `users_id` varchar(50) NOT NULL,
-		  `quant` int(6) NOT NULL,
-		  `type` int(2) NOT NULL,
-		  PRIMARY KEY (`users_id`,`type`)
-		) ENGINE=InnoDB DEFAULT CHARSET=latin1; ";
-	
-	$DB->query($query_notify) or die("error creating table glpi_plugin_dashboard_notify " . $DB->error());
-	}
-*/			
+		
 	return true;
 }
 
@@ -114,10 +97,6 @@ function plugin_dashboard_uninstall(){
 	$restore_mode = "SET sql_mode=(SELECT CONCAT(@@sql_mode,',ONLY_FULL_GROUP_BY'));";
 	$DB->query($restore_mode);
 	
-	/*
-	$drop_notify = "DROP TABLE glpi_plugin_dashboard_notify";
-	$DB->query($drop_notify);	
-	*/
 	return true;
 
 }

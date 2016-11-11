@@ -38,6 +38,19 @@ if($sel_ent == '' || $sel_ent == -1) {
 else {
 	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.") ";
 }
+
+
+// distinguish between 0.90.x and 9.1 version
+if (GLPI_VERSION >= 9.1){
+	$slaid = "AND glpi_tickets.slts_ttr_id = ";
+	$sla_comp = "AND glpi_tickets.slts_ttr_id = glpi_slas.id";	
+}
+
+else {
+	$slaid = "AND glpi_tickets.slas_id = ";
+	$sla_comp = "AND glpi_tickets.slas_id = glpi_slas.id";
+}
+
 ?>
 
 <html> 
@@ -209,7 +222,7 @@ glpi_tickets.status, glpi_tickets.due_date AS duedate, sla_waiting_duration AS s
 FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time, glpi_slas.id AS sla_id
 FROM glpi_tickets, glpi_slas
 WHERE glpi_tickets.is_deleted = 0
-AND glpi_tickets.slas_id = glpi_slas.id
+".$sla_comp."
 AND glpi_tickets.date ".$datas2."
 ".$entidade."
 OR glpi_slas.is_recursive = 1
@@ -246,7 +259,7 @@ echo "
 				FROM glpi_tickets
 				WHERE glpi_tickets.is_deleted = 0
 				AND glpi_tickets.date ".$datas2."
-				AND glpi_tickets.slas_id = ".$row['sla_id']."
+				".$slaid.$row['sla_id']."
 				".$entidade." ";
 				
 				$result_cham = $DB->query($sql_cham);
@@ -260,7 +273,7 @@ echo "
 				WHERE glpi_tickets.is_deleted = 0
 				AND glpi_tickets.date ".$datas2."
 				AND glpi_tickets.status NOT IN ".$status_closed."
-				AND glpi_tickets.slas_id = ".$row['sla_id']." 
+				".$slaid.$row['sla_id']."
 				".$entidade." ";
 				
 				$result_abe = $DB->query($sql_abe);	
@@ -274,7 +287,7 @@ echo "
 				WHERE glpi_tickets.is_deleted = 0
 				AND glpi_tickets.date ".$datas2."
 				AND glpi_tickets.status = 5
-				AND glpi_tickets.slas_id = ".$row['sla_id']."
+				".$slaid.$row['sla_id']."
 				".$entidade." ";
 				
 				$result_sol = $DB->query($sql_sol);	
@@ -288,22 +301,21 @@ echo "
 				WHERE glpi_tickets.is_deleted = 0
 				AND glpi_tickets.date ".$datas2."
 				AND glpi_tickets.status = 6
-				AND glpi_tickets.slas_id = ".$row['sla_id']." 
+				".$slaid.$row['sla_id']." 
 				".$entidade." ";
 				
 				$result_fech = $DB->query($sql_fech);	
 				$data_fech = $DB->fetch_assoc($result_fech);
 				$fechados = $data_fech['total'];		
-				
-				
+								
 				//count by status
 				$query_stat = "
 				SELECT
 				SUM(case when glpi_tickets.solvedate IS NULL then 1 else 0 end) AS solve_sla				
 				FROM glpi_tickets
 				WHERE glpi_tickets.is_deleted = '0'				
-				AND glpi_tickets.slas_id = ".$row['sla_id']."
 				AND glpi_tickets.date ".$datas2."
+				".$slaid.$row['sla_id']."
 				".$entidade."";
 			
 				$result_stat = $DB->query($query_stat);			

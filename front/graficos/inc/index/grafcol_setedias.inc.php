@@ -37,17 +37,17 @@ while ($row = $DB->fetch_assoc($query_tecd)) {
 	". $entidade ."
 	GROUP BY data ";
 	
-	$query_tec = $DB->query($sql_tec);
+	$query_tec = $DB->query($sql_tec);	
 	
 	$row_result = $DB->fetch_assoc($query_tec);
 	
-		$v_row_result = $row_result['data'];
-		if($row_result['conta'] != '') {
-			$arr_grfa[$v_row_result] = $row_result['conta'];
-			}
-		else {
-			$arr_grfa[$v_row_result] = 0;
-			}	
+	$v_row_result = $row_result['data'];
+	if($row_result['conta'] != '') {
+		$arr_grfa[$v_row_result] = $row_result['conta'];
+	}
+	else {
+		$arr_grfa[$v_row_result] = 0;
+	}	
 }
 		
 $quanta = array_values($arr_grfa) ;
@@ -71,13 +71,13 @@ while ($row = $DB->fetch_assoc($query_tecd))	{
 	
 	$row_result = $DB->fetch_assoc($query_teci);
 	
-		$v_row_result = $row_result['data'];
-		if($row_result['conta'] != '') {
-			$arr_grfi[$v_row_result] = $row_result['conta'];
-			}
-		else {
-			$arr_grfi[$v_row_result] = 0;
-			}	
+	$v_row_result = $row_result['data'];
+	if($row_result['conta'] != '') {
+		$arr_grfi[$v_row_result] = $row_result['conta'];
+	}
+	else {
+		$arr_grfi[$v_row_result] = 0;
+	}	
 }	
 
 $quanti = array_values($arr_grfi) ;
@@ -195,4 +195,4 @@ $(function () {
 </script>
 ";
 		
-		?>
+?>

@@ -13,9 +13,7 @@ Session::checkRight("profile", READ);
 <html> 
 <head>
 <title>GLPI - <?php echo __('Tickets Map','dashboard'); ?></title>
-<!-- <base href= "<?php $_SERVER['SERVER_NAME'] ?>" > 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>  
--->
+
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
@@ -30,8 +28,10 @@ Session::checkRight("profile", READ);
 <script src="../js/jquery.js" type="text/javascript" ></script>
 
 <script src="./js/markerclusterer.js" type="text/javascript" ></script>
-<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript" ></script>  
 <link href="css/google_api.css" rel="stylesheet" type="text/css" />   
+<script
+	src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript" >
+</script>  
   
 <script src="../js/bootstrap.min.js" type="text/javascript" ></script>  
 
@@ -229,15 +229,15 @@ while ($row = $DB->fetch_assoc($result_loc))
 
 if ($quant == 0) {
 	$color = $icon_green.$quant."";
-	$num_up = 0;	
-	$num_down = 1;
+	$num_up = 1;	
+	$num_down = 0;
 	
 }
 
 else {
 	$color = $icon_red.$quant."";
-	$num_up = 1;	
-	$num_down = 0;
+	$num_up = 0;	
+	$num_down = 1;
 }
 
 echo "['$title', $lat, $lng, '$local', '$color', '$host', $id, $quant, $num_up, $num_down, '$url'],";

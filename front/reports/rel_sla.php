@@ -52,6 +52,16 @@ else {
 	$entidade_s = "AND entities_id IN (".$sel_ent.") ";
 	$entidade_sw = "WHERE entities_id IN (".$sel_ent.") OR is_recursive = 1 ";
 }
+
+// distinguish between 0.90.x and 9.1 version
+if (GLPI_VERSION >= 9.1){
+	$slaid = "AND glpi_tickets.slts_ttr_id = ".$id_sla."";	
+}
+
+else {
+	$slaid = "AND glpi_tickets.slas_id = ".$id_sla."";
+}	
+
 ?>
 
 <html>
@@ -130,6 +140,7 @@ else {
 				<tr>
 				<td style="width: 310px;">
 				<?php
+					
 				$url = $_SERVER['REQUEST_URI'];
 				$arr_url = explode("?", $url);
 				$url2 = $arr_url[0];
@@ -271,8 +282,8 @@ $sql_cham =
 glpi_tickets.status, glpi_tickets.due_date AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
 FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time
 FROM glpi_tickets
-WHERE glpi_tickets.slas_id = ".$id_sla."
-AND glpi_tickets.is_deleted = 0
+WHERE glpi_tickets.is_deleted = 0
+".$slaid."
 AND glpi_tickets.date ".$datas2."
 AND glpi_tickets.status IN ".$status."
 ".$entidade."
@@ -286,8 +297,8 @@ $result_cham = $DB->query($sql_cham);
 $conta_cons1 =
 "SELECT glpi_tickets.id AS total, FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time
 FROM glpi_tickets
-WHERE glpi_tickets.slas_id = ".$id_sla."
-AND glpi_tickets.is_deleted = 0
+WHERE glpi_tickets.is_deleted = 0
+".$slaid."
 AND glpi_tickets.date ".$datas2."
 AND glpi_tickets.status IN ".$status."
 ".$entidade."
@@ -304,8 +315,8 @@ if($conta_cons > 0) {
 //montar barra
 $sql_ab = "SELECT glpi_tickets.id AS total
 FROM glpi_tickets
-WHERE glpi_tickets.slas_id = ".$id_sla."
-AND glpi_tickets.is_deleted = 0
+WHERE glpi_tickets.is_deleted = 0
+".$slaid."
 AND glpi_tickets.date ".$datas2."
 AND glpi_tickets.status IN ".$status_open."
 " ;
@@ -375,9 +386,9 @@ $w = $conta_cons - $v;
 	SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve,
 	SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
 	FROM glpi_tickets
-	WHERE glpi_tickets.is_deleted = '0'
+	WHERE glpi_tickets.is_deleted = 0
+	".$slaid." 
 	AND glpi_tickets.date ".$datas2."
-	AND glpi_tickets.slas_id = ".$id_sla."
 	".$entidade."";
 
 	$result_stat = $DB->query($query_stat);

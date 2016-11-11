@@ -341,8 +341,8 @@
 		<!-- interval selector -->
 		<div class="col-xs-3 col-sm-4 col-md-4 col-lg-1 form-group pull-right" style="float: right; width:125px;">
 			<select id="reload_selecter" class="form-control pull-right">
-				<option value="0">Manual</option>						
-				<option value="30">30s</option>			
+				<option value="30">30s</option>						
+				<option value="45">45s</option>			
 				<option value="60">60s</option>
 				<option value="120">120s</option>
 				<option value="240">240s</option>
