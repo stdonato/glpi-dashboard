@@ -44,10 +44,10 @@ else {
 
 
 $sql_ent = "
-SELECT id, name
+SELECT id, name, completename AS cname
 FROM `glpi_entities`
 WHERE id IN (".$ents.")
-ORDER BY `name` ASC ";
+ORDER BY `cname` ASC ";
 
 $result_ent = $DB->query($sql_ent);
 
@@ -160,7 +160,7 @@ $result_ent = $DB->query($sql_ent);
 										while ($row_result = $DB->fetch_assoc($result_ent))
 										 {
 										 	$v_row_result = $row_result['id'];
-										 	$arr_ent[$v_row_result] = $row_result['name'] ;
+										 	$arr_ent[$v_row_result] = $row_result['cname'] ;
 										 }
 										
 										$name = 'sel_ent';
@@ -251,13 +251,13 @@ $result_ent = $DB->query($sql_ent);
 		
 		//entity name
 		$sql_entname = "
-		SELECT id, name
+		SELECT id, name, completename AS cname
 		FROM `glpi_entities`
 		WHERE id = ".$id_ent."
-		ORDER BY `name` ASC ";
+		ORDER BY `cname` ASC ";
 
 		$result_entname = $DB->query($sql_entname);
-		$entname = $DB->result($result_entname,0,'name');
+		$entname = $DB->result($result_entname,0,'cname');
 
 		
 		// Chamados

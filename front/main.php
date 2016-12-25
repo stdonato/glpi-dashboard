@@ -27,7 +27,7 @@ else {
 
 if($sel_ent != '') {			
 	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.")";
-	$entidade_u = "AND glpi_users.entities_id IN (".$sel_ent.")";
+	$entidade_u = "AND gpu.entities_id IN (".$sel_ent.")";
 
 }
 
@@ -36,7 +36,7 @@ else {
 	$entities = $_SESSION['glpiactiveentities'];	
 	$ent = implode(",",$entities);	
 	$entidade = "AND glpi_tickets.entities_id IN (".$ent.")";
-	$entidade_u = "AND glpi_users.entities_id IN (".$ent.")";	
+	$entidade_u = "AND gpu.entities_id IN (".$ent.")";			
 }
 
 
@@ -297,11 +297,11 @@ $result_hoje = $DB->query($sql_hoje);
 $total_hoje = $DB->fetch_assoc($result_hoje);
 
 // total users
-$sql_users = "SELECT COUNT(id) AS total
-				FROM `glpi_users`
-				WHERE is_deleted = 0
-				".$entidade_u."
-				AND is_active = 1";
+$sql_users = "SELECT COUNT(DISTINCT gu.id) AS total
+				FROM glpi_users gu, glpi_profiles_users gpu 
+				WHERE gu.id = gpu.users_id 
+				AND gu.is_deleted = 0							
+				".$entidade_u." ";
 
 $result_users = $DB->query($sql_users);
 $total_users = $DB->fetch_assoc($result_users);
@@ -509,7 +509,7 @@ setTimeout(function(){
 		</div>
 	</div>
 	   <?php 
-			include ("graficos/inc/index/graflinhas_index_sel.inc.php");
+			include ("graphs/inc/index/graflinhas_index_sel.inc.php");
 		?>						
 
 </div>
@@ -525,7 +525,7 @@ setTimeout(function(){
       <!-- /widget-header -->      
       <div id="pie1">	 			
 				<?php
-					include ("graficos/inc/index/grafpie_index.inc.php");
+					include ("graphs/inc/index/grafpie_index.inc.php");
 				?> 	 						            
 		</div> 
 	</div>
@@ -540,7 +540,7 @@ setTimeout(function(){
       <!-- /widget-header -->      
 			<div id="graf7"> 
 				<?php
-					include ("graficos/inc/index/grafcol_setedias.inc.php");
+					include ("graphs/inc/index/grafcol_setedias.inc.php");
 				?> 	 				              
 			</div> 
   		</div>      
@@ -555,7 +555,7 @@ setTimeout(function(){
       <!-- /widget-header -->
 			<div id="graf9"> 			
 				<?php
-					include ("graficos/inc/index/grafbar_age.inc.php");
+					include ("graphs/inc/index/grafbar_age.inc.php");
 				?> 	 						            
 			</div> 
 	</div>
@@ -570,7 +570,7 @@ setTimeout(function(){
       <!-- /widget-header -->
 			<div id="graf8"> 
 				<?php
-					include ("graficos/inc/index/grafpie_time.inc.php");
+					include ("graphs/inc/index/grafpie_time.inc.php");
 				?> 	 				              
 			</div> 
   		</div>      
@@ -777,11 +777,9 @@ setTimeout(function(){
 				
 				if($conta > 0) {
 				
-					for($i=0; $i < $conta; $i++) {
-					//foreach($arquivos as $a) {
+					for($i=0; $i < $conta; $i++) {					
 					
-						$file = $arquivos[$i];
-						//$file = $a;
+						$file = $arquivos[$i];						
 						
 						$string = file_get_contents( $file ); 
 						//poderia ser um string ao invés de file_get_contents().
@@ -823,8 +821,7 @@ setTimeout(function(){
 	          if($num_users <= 10) {
 	          	echo '<div class="widget-content striped" style="min-height:318px;">'; }
 	          else {
-	          	echo '<div class="widget-content striped" style="min-height:318px;">'; }
-	          	//echo '   <div class="widget-content striped ">'; }	          	
+	          	echo '<div class="widget-content striped" style="min-height:318px;">'; }	          		          	
 				?>        
               <table id="logged_users" class="table table-hover table-bordered table-condensed" >                         
 				<?php

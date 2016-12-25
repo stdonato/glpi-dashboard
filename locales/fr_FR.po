@@ -67,7 +67,7 @@ msgid "Tickets by Status"
 msgstr "Tickets par État"
 
 msgid "Tickets by Entity"
-msgstr "Tickets par l'entité"
+msgstr "Tickets par entité"
 
 msgid "Tickets by Category"
 msgstr "Tickets par catégorie"
@@ -76,7 +76,7 @@ msgid "Daily Evolution"
 msgstr "Evolution quotidienne"
 
 msgid "Tickets Total"
-msgstr "Tickets totale"
+msgstr "Tickets totaux"
 
 msgid "by Entity"
 msgstr "par entité"
@@ -117,7 +117,7 @@ msgstr "Tout"
 msgid "New version"
 msgstr "Nouvelle version"
 
-msgid "avaliable"
+msgid "available"
 msgstr "disponible"
 
 msgid "January"
@@ -276,7 +276,7 @@ msgid "Computers by Operating System"
 msgstr "Ordinateur par Système"
 
 msgid "Computers by Type"
-msgstr "Ordinateures par Type"
+msgstr "Ordinateurs par Type"
 
 msgid "Quantity"
 msgstr "Montant"
@@ -336,7 +336,7 @@ msgid "Monitor"
 msgstr "Moniteur"
 
 msgid "Printer"
-msgstr "Imprimeur"
+msgstr "Imprimante"
 
 msgid "Networkequipment"
 msgstr "Équipements de réseau"
@@ -384,7 +384,7 @@ msgid "Print"
 msgstr "Imprimer"
 
 msgid "by SLA"
-msgstr "por SLA"
+msgstr "par SLA"
 
 msgid "Select a SLA"
 msgstr "Sélectionnez un SLA"

@@ -18,7 +18,7 @@ if(!empty($_POST['submit']))
 else {
 	$data_ini = date("Y-m-01");
 	$data_fin = date("Y-m-d");
-	}
+}
 
 if(!isset($_POST["sel_sla"])) {
 	$id_sla = $_GET["sla"];
@@ -29,7 +29,7 @@ else {
 }
 
 
-# entity
+// entity
 $sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
 $result_e = $DB->query($sql_e);
 $sel_ent = $DB->result($result_e,0,'value');
@@ -67,7 +67,7 @@ else {
 <html>
 <head>
 <title> GLPI - <?php echo __('Tickets') .'  '. __('by SLA', 'dashboard') ?> </title>
-<!-- <base href= "<?php $_SERVER['SERVER_NAME'] ?>" > -->
+
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
@@ -132,10 +132,12 @@ else {
 				</style>
 				<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 
-		<div id="titulo_rel"> <?php echo __('Tickets') .'  '. __('by SLA', 'dashboard') ?> </div>
-		<div id="datas-tec3" class="span12 fluid" >
+		<div id="titulo_rel"> 
+			<?php echo __('Tickets', 'dashboard') .'  '. __('by SLA', 'dashboard') ?> - <?php echo __('Time to resolve'); ?> 
+		</div>
+		<div id="datas-tec" class="span12 fluid" >
 
-			<form id="form1" name="form1" class="form_rel" method="post" action="rel_sla.php?con=1" onsubmit="datai();dataf();">
+			<form id="form1" name="form1" class="form_rel" method="post" action="rel_sltsr.php?con=1" onsubmit="datai();dataf();">
 				<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
 				<tr>
 				<td style="width: 310px;">
@@ -178,9 +180,10 @@ else {
 			// SLA list
 			$sql_loc = "
 			SELECT id, name AS name
-			FROM glpi_slas
-			".$entidade_sw."
-			ORDER BY `name` ASC ";
+			FROM glpi_slts
+			WHERE type = 0
+			".$entidade_s."
+			ORDER BY name ASC ";
 
 			$result_loc = $DB->query($sql_loc);
 
@@ -242,7 +245,7 @@ else {
 
 if($id_sla == " " || $id_sla == 0) {
 	echo '<script language="javascript"> alert(" ' . __('Select a SLA', 'dashboard') . ' "); </script>';
-	echo '<script language="javascript"> location.href="rel_sla.php"; </script>';
+	echo '<script language="javascript"> location.href="rel_sltsr.php"; </script>';
 }
 
 if($data_ini2 == $data_fin2) {
@@ -307,6 +310,7 @@ ORDER BY id DESC ";
 
 $result_cons1 = $DB->query($conta_cons1);
 $conta_cons = $DB->numrows($result_cons1);
+//$conta_cons = $conta_cons;
 
 
 if($conta_cons > 0) {
@@ -354,7 +358,7 @@ else { $barra = 0;}
 // sla name
 $sql_nm = "
 SELECT id , name AS name
-FROM `glpi_slas`
+FROM `glpi_slts`
 WHERE id = ".$id_sla."
 ";
 
@@ -406,7 +410,7 @@ echo "
 /*	function pagina()
 	{
 	var page=document.getElementById('npage').value;
-	location.href = 'rel_sla.php?con=1&stat=".$status1."&date1=".$data_ini2."&date2=".$data_fin2."&sla=".$id_sla ."&npage='+page;
+	location.href = 'rel_sltsr.php?con=1&stat=".$status1."&date1=".$data_ini2."&date2=".$data_fin2."&sla=".$id_sla ."&npage='+page;
 	} */
 </script>
 
@@ -431,9 +435,9 @@ echo "
 <table align='right' style='margin-bottom:10px;'>
 	<tr>
 		<td>
-			<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_sla.php?con=1&stat=open&sla=".$id_sla."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened', 'dashboard')." </button>
-			<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_sla.php?con=1&stat=close&sla=".$id_sla."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed', 'dashboard')." </button>
-			<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_sla.php?con=1&stat=all&sla=".$id_sla."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>
+			<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_sltsr.php?con=1&stat=open&sla=".$id_sla."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened', 'dashboard')." </button>
+			<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_sltsr.php?con=1&stat=close&sla=".$id_sla."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed', 'dashboard')." </button>
+			<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_sltsr.php?con=1&stat=all&sla=".$id_sla."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>
 		</td>
 	</tr>
 	<tr>

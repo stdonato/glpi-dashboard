@@ -187,10 +187,10 @@ function dropdown( $name, array $options, $selected=null )
 			
 			// lista de entidades
 			$sql_ent = "
-			SELECT id, name
+			SELECT id, name, completename AS cname
 			FROM glpi_entities
 			WHERE id IN (".$ents.")
-			ORDER BY name ASC ";
+			ORDER BY cname ASC ";
 			
 			$result_ent = $DB->query($sql_ent);
 			
@@ -201,7 +201,7 @@ function dropdown( $name, array $options, $selected=null )
 			while ($row_ent = $DB->fetch_assoc($result_ent))		
 			{ 
 				$v_row_ent = $row_ent['id'];
-				$arr_ent[$v_row_ent] = $row_ent['name'] ;			
+				$arr_ent[$v_row_ent] = $row_ent['cname'] ;			
 			} 
 				
 			$name = 'sel_ent';
@@ -527,7 +527,7 @@ if($consulta > 0) {
 
 // nome da entidade
 $sql_nm = "
-SELECT name
+SELECT name, completename AS cname
 FROM `glpi_entities`
 WHERE id = ".$id_ent."";
 
@@ -570,7 +570,7 @@ echo "
 <div class='well info_box fluid col-md-12 report-tic' style='margin-left: -1px;'>
 
 <table class='fluid'  style=' width:100%; font-size: 18px; font-weight:bold;  margin-bottom:25px;  margin-top:20px; ' cellpadding = 1px>
-	<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Entity', 'dashboard').": </span>".$ent_name['name']." </td>
+	<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Entity', 'dashboard').": </span>".$ent_name['cname']." </td>
 	<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Tickets', 'dashboard').": </span>".$consulta." </td>
 	<td colspan='3' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'>
 	".__('Period', 'dashboard') .": </span> " . conv_data($data_ini2) ." a ". conv_data($data_fin2)." 

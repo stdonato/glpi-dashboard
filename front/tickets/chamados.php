@@ -211,12 +211,12 @@ if ($ontem['total'] == $hoje['total']) { $up_down = "../img/blank.gif"; }
 
 //entity name
 $query_name = "
-SELECT name 
+SELECT name, completename AS cname 
 FROM glpi_entities
 WHERE glpi_entities.id IN (".$ent.")" ;
 
 $result_n = $DB->query($query_name);
-$ent_name = $DB->result($result_n, 0, 'name');
+$ent_name = $DB->result($result_n, 0, 'cname');
 
 ?>
 
@@ -415,7 +415,7 @@ $ent_name = $DB->result($result_n, 0, 'name');
 				$row_loc = $DB->fetch_assoc($result_loc);	
 				
 				//get entity				
-				$sql_ent = "SELECT id, name
+				$sql_ent = "SELECT id, name, completename AS cname
 				FROM glpi_entities
 				WHERE glpi_entities.id = ". $row['entity'] ." ";
 				    
@@ -431,7 +431,7 @@ $ent_name = $DB->result($result_n, 0, 'name');
 					<td style='vertical-align:middle;'><span >". $row_req['name'] ." ".$row_req['sname'] ."</span> </td>";
 
 				if($show_ent == 1) {
-					echo "<td style='vertical-align:middle; text-align:left; font-size:14pt;'>" . $row_ent['name'] . "</td>";
+					echo "<td style='vertical-align:middle; text-align:left; font-size:14pt;'>" . $row_ent['cname'] . "</td>";
 				}
 					
 				if($show_loc == 1) {

@@ -219,15 +219,12 @@ else {
 										while ($row_result = $DB->fetch_assoc($result_techs))
 										    {
 										   	$v_row_result = $row_result['id'];
-										    	$arr_techs[$v_row_result] = $row_result['name'] ;
-										      //$arr_techs[$v_row_result] = $row_result['name'] ." (". $row_result['id'] .")" ;
+										    	$arr_techs[$v_row_result] = $row_result['name'] ;										      
 										    }
 
 										$name = 'sel_techs';
 										$options = $arr_techs;
-										$selected = -1;
-										//$selected = $id_techs;
-
+										$selected = -1;										
 										echo dropdown( $name, $options, $selected );
 
 										?>

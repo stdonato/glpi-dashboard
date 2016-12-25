@@ -10,7 +10,6 @@ Session::checkRight("profile", READ);
 <html> 
 <head>
 <title> GLPI - <?php echo __('Open Tickets','dashboard'); ?> </title>
-<!-- <base href= "<?php $_SERVER['SERVER_NAME'] ?>" > -->
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
   <meta http-equiv="content-language" content="en-us" />
@@ -84,10 +83,10 @@ else {
 }
 
 $sql_ent = "
-SELECT id, name
+SELECT id, name, completename AS cname
 FROM `glpi_entities`
 WHERE id IN (".$ents.")
-ORDER BY `name` ASC ";
+ORDER BY `cname` ASC ";
 
 $result_ent = $DB->query($sql_ent);
 $ent = $DB->fetch_assoc($result_ent);
@@ -101,7 +100,7 @@ $DB->data_seek($result_ent, 0) ;
 while ($row_result = $DB->fetch_assoc($result_ent))		
 	{ 
 		$v_row_result = $row_result['id'];
-		$arr_ent[$v_row_result] = $row_result['name'] ;			
+		$arr_ent[$v_row_result] = $row_result['cname'] ;			
 	} 
 	
 $name = 'sel_ent';

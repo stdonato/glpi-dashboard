@@ -33,7 +33,6 @@ else {
 <html>
 <head>
 <title> GLPI - <?php echo __('Tickets', 'dashboard') .'  '. __('by Entity', 'dashboard') ?> </title>
-<!-- <base href= "<?php $_SERVER['SERVER_NAME'] ?>" > -->
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
@@ -146,7 +145,7 @@ else {
 
 
 										$sql_ent = "
-										SELECT id, name
+										SELECT id, name, completename AS cname
 										FROM `glpi_entities`
 										WHERE id IN (".$ents.")
 										ORDER BY `name` ASC ";
@@ -160,7 +159,7 @@ else {
 										while ($row_result = $DB->fetch_assoc($result_ent))
 										    {
 										    	$v_row_result = $row_result['id'];
-										    	$arr_ent[$v_row_result] = $row_result['name'] ;
+										    	$arr_ent[$v_row_result] = $row_result['cname'] ;
 										    }
 
 										$name = 'sel_ent';
@@ -417,9 +416,9 @@ else {
 					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Status')." </th>
 					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Type')." </th>
 					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Title')." </th>
-					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Requester')." </th>
+					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; max-width:120px;'> ".__('Requester')." </th>
 					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Technician')." </th>
-					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Category')." </th>
+					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; max-width:120px;'> ".__('Category')." </th>
 					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Assets')." </th>
 					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Opened', 'dashboard')."</th>
 					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Closed', 'dashboard')." </th>
@@ -467,7 +466,7 @@ else {
 
 
 		//category
-		    	$sql_cat = "SELECT name
+		    	$sql_cat = "SELECT name, completename
 				FROM glpi_itilcategories
 				WHERE id = ".$row['cat']." ";
 
@@ -505,7 +504,7 @@ else {
 			<td style='vertical-align:middle;'> ". substr($row['descr'],0,55) ." </td>
 			<td style='vertical-align:middle;'> ". $row_user['name'] ." ". $row_user['sname'] ." </td>
 			<td style='vertical-align:middle;'> ". $row_tec['name'] ." ". $row_tec['sname'] ." </td>
-			<td style='vertical-align:middle;'> ". $row_cat['name'] ." </td>
+			<td style='vertical-align:middle;'> ". $row_cat['completename'] ." </td>
 			<td style='vertical-align:middle;'> <a href=". $url_type.$row_item['id'] ." target=_blank >". $row_item['name'] ." </a></td>
 			<td style='vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
 			<td style='vertical-align:middle;'> ". conv_data_hora($row['closedate']) ." </td>

@@ -372,85 +372,85 @@ if($theme == '') {
                                     </a>
                                     <ul  class="animated fadeInDown">
                                          <li class=' '>
-                                              <a href="./graficos/geral.php" data-original-title=' Geral' target="_blank">
+                                              <a href="./graphs/geral.php" data-original-title=' Geral' target="_blank">
                                                 <i class="fa fa-angle-right"></i>
                                                 <span class='hidden-minibar'> <?php echo __('Overall','dashboard'); ?></span>
                                             </a>
                                         </li>
                                           <li class=' '>
-                                              <a href="./graficos/tecnicos.php" data-original-title=' Técnicos' target="_blank">
+                                              <a href="./graphs/tecnicos.php" data-original-title=' Técnicos' target="_blank">
                                                 <i class="fa fa-angle-right"></i>
                                                 <span class='hidden-minibar'> <?php echo __('Technician','dashboard'); ?></span>
                                             </a>
                                         </li>
                                         <li class=' '>
-                                              <a href="./graficos/usuarios.php" data-original-title=' Usuários' target="_blank">
+                                              <a href="./graphs/usuarios.php" data-original-title=' Usuários' target="_blank">
                                                 <i class="fa fa-angle-right"></i>
                                                 <span class='hidden-minibar'> <?php echo __('Requester','dashboard'); ?></span>
                                             </a>
                                         </li>
                                           <li class=' '>
-                                              <a href="./graficos/grupos.php" data-original-title=' Grupos' target="_blank">
+                                              <a href="./graphs/grupos.php" data-original-title=' Grupos' target="_blank">
                                                 <i class="fa fa-angle-right"></i>
                                                 <span class='hidden-minibar'> <?php echo __('Group','dashboard'); ?></span>
                                             </a>
                                         </li>
                                         <li class=' '>
-                                              <a href="./graficos/entidades.php" data-original-title=' Entidades' target="_blank">
+                                              <a href="./graphs/entidades.php" data-original-title=' Entidades' target="_blank">
                                                 <i class="fa fa-angle-right"></i>
                                                 <span class='hidden-minibar'> <?php echo __('Entity','dashboard'); ?></span>
                                             </a>
                                         </li>
                                         <li class=' '>
-                                              <a href="./graficos/ativos.php" data-original-title=' Ativos' target="_blank">
+                                              <a href="./graphs/ativos.php" data-original-title=' Ativos' target="_blank">
                                                 <i class="fa fa-angle-right"></i>
                                                 <span class='hidden-minibar'> <?php echo __('Assets'); ?></span>
                                             </a>
                                         </li>
                                          <li class=' '>
-                                              <a href="./graficos/satisfacao.php" data-original-title=' Satisfação' target="_blank">
+                                              <a href="./graphs/satisfacao.php" data-original-title=' Satisfação' target="_blank">
                                                 <i class="fa fa-angle-right"></i>
                                                 <span class='hidden-minibar'> <?php echo __('Satisfaction','dashboard'); ?></span>
                                             </a>
                                         </li>
 								 					 <li class=' '>
-                                              <a href="./graficos/graf_tecnico.php" data-original-title=' por Técnico' target="_blank">
+                                              <a href="./graphs/graf_tecnico.php" data-original-title=' por Técnico' target="_blank">
                                                 <i class="fa fa-angle-right"></i>
                                                 <span class='hidden-minibar'> <?php echo __('by Technician','dashboard'); ?></span>
                                             </a>
                                         </li>
                                          <li class=' '>
-                                              <a href="./graficos/graf_usuario.php" data-original-title=' por Usuário' target="_blank">
+                                              <a href="./graphs/graf_usuario.php" data-original-title=' por Usuário' target="_blank">
                                                 <i class="fa fa-angle-right"></i>
                                                 <span class='hidden-minibar'> <?php echo __('by Requester','dashboard'); ?></span>
                                             </a>
                                         </li>
 													 <li class=' '>
-                                              <a href="./graficos/graf_grupo.php" data-original-title=' por Grupo' target="_blank">
+                                              <a href="./graphs/graf_grupo.php" data-original-title=' por Grupo' target="_blank">
                                                 <i class="fa fa-angle-right"></i>
                                                 <span class='hidden-minibar'> <?php echo __('by Group','dashboard'); ?></span>
                                             </a>
                                         </li>
   													 <li class=' '>
-                                              <a href="./graficos/graf_entidade.php" data-original-title=' por Entidade' target="_blank">
+                                              <a href="./graphs/graf_entidade.php" data-original-title=' por Entidade' target="_blank">
                                                 <i class="fa fa-angle-right"></i>
                                                 <span class='hidden-minibar'> <?php echo __('by Entity','dashboard'); ?></span>
                                             </a>
                                         </li>
                                         <li class=' '>
-                                              <a href="./graficos/graf_localidade.php" data-original-title=' por Localidade' target="_blank">
+                                              <a href="./graphs/graf_localidade.php" data-original-title=' por Localidade' target="_blank">
                                                 <i class="fa fa-angle-right"></i>
                                                 <span class='hidden-minibar'> <?php echo __('by Location','dashboard'); ?></span>
                                             </a>
                                         </li>
                                          <li class=' '>
-                                              <a href="./graficos/geral_mes.php" data-original-title=' por Data' target="_blank">
+                                              <a href="./graphs/geral_mes.php" data-original-title=' por Data' target="_blank">
                                                 <i class="fa fa-angle-right"></i>
                                                 <span class='hidden-minibar'> <?php echo __('by Date','dashboard'); ?></span>
                                             </a>
                                         </li>
                                        <li class=' '>
-                                              <a href="./graficos/slas.php" data-original-title=' por SLA' target="_blank">
+                                              <a href="./graphs/slas.php" data-original-title=' por SLA' target="_blank">
                                                 <i class="fa fa-angle-right"></i>
                                                 <span class='hidden-minibar'> <?php echo __('by SLA','dashboard'); ?></span>
                                             </a>

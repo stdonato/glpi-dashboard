@@ -447,9 +447,9 @@ else {
 </div>
 
 <style type="text/css">
-table.dataTable thead > tr > th {
-    padding-right: 10px;
-}
+	table.dataTable thead > tr > th {
+	    padding-right: 10px;
+	}
 </style>
 
 <script type="text/javascript" charset="utf-8">

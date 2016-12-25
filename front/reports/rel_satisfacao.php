@@ -210,9 +210,9 @@ else {
 	
 	//listar chamados
 	echo "
-	<div class='well info_box fluid col-md-12 report-tic' style='margin-left: -1px;'>
+	<div class='well info_box fluid report-tic col-md-12 col-sm-12 ' style='margin-left: -1px;'>
 	
-	<table class='fluid'  style='font-size: 18px; font-weight:bold;  margin-bottom:25px;  margin-top:20px; ' cellpadding = 1px>
+	<table class='fluid' style='width:100%; font-size: 18px; font-weight:bold;  margin-bottom:25px;  margin-top:20px; ' cellpadding = 1px>
 		<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Entity', 'dashboard').": </span>".$ent_name['name']." </td>
 		<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Tickets', 'dashboard').": </span>".$consulta." </td>
 		<td colspan='3' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'>

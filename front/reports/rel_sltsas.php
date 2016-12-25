@@ -39,18 +39,6 @@ else {
 	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.") ";
 }
 
-
-// distinguish between 0.90.x and 9.1 version
-if (GLPI_VERSION >= 9.1){
-	$slaid = "AND glpi_tickets.slts_ttr_id = ";
-	$sla_comp = "AND glpi_tickets.slts_ttr_id = glpi_slas.id";	
-}
-
-else {
-	$slaid = "AND glpi_tickets.slas_id = ";
-	$sla_comp = "AND glpi_tickets.slas_id = glpi_slas.id";
-}
-
 ?>
 
 <html> 
@@ -112,55 +100,55 @@ else {
 			
 			<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 			
-				<div id="titulo_graf"> <?php echo __('Tickets', 'dashboard') .'  '. __('by SLA', 'dashboard') ?> </div>				
+				<div id="titulo_graf"> 
+					<?php echo __('Tickets', 'dashboard') .'  '. __('by SLA', 'dashboard') ?> - <?php echo __('Time to own'); ?> 				
+				</div>				
 				<div id="datas-tec" class="col-md-12 fluid" >			 
-				<form id="form1" name="form1" class="form_rel" method="post" action="rel_slas.php?con=1" onsubmit="datai();dataf();" style="margin-left: 37%;"> 
-				<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
-				<tr>
-					<td style="width: 300px;">
-					<?php
-					$url = $_SERVER['REQUEST_URI']; 
-					$arr_url = explode("?", $url);
-					$url2 = $arr_url[0];
-					    
-					echo'
-								<table>
-									<tr>
-										<td>
-										   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-										    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >		    	
-										    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
-									    	</div>
-										</td>
-										<td>&nbsp;</td>
-										<td>
-									   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-										    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >		    	
-										    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
-									    	</div>
-										</td>
-										<td>&nbsp;</td>
-									</tr>
-								</table> ';
-					?>
+				<form id="form1" name="form1" class="form_rel" method="post" action="rel_sltsas.php?con=1" onsubmit="datai();dataf();" style="margin-left: 37%;"> 
+					<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
+						<tr>
+							<td style="width: 300px;">
+							<?php
+							$url = $_SERVER['REQUEST_URI']; 
+							$arr_url = explode("?", $url);
+							$url2 = $arr_url[0];
+							    
+							echo'
+										<table>
+											<tr>
+												<td>
+												   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+												    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >		    	
+												    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
+											    	</div>
+												</td>
+												<td>&nbsp;</td>
+												<td>
+											   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+												    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >		    	
+												    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
+											    	</div>
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+										</table> ';
+							?>
+							
+							<script language="Javascript">					
+								$('#dp1').datepicker('update');
+								$('#dp2').datepicker('update');					
+							</script>
+							</td>			
+							<td style="margin-top:2px;">	</td>
+					</tr>
+					<tr><td height="15px"></td></tr>
+					<tr>
+						<td colspan="2" align="center">
+							<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult','dashboard'); ?> </button>
+							<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2.'?con=1'; ?>'" ><i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean','dashboard'); ?> </button>
+						</td>
+					</tr>
 					
-					<script language="Javascript">					
-						$('#dp1').datepicker('update');
-						$('#dp2').datepicker('update');					
-					</script>
-					</td>			
-					<td style="margin-top:2px;">
-
-					</td>
-			</tr>
-			<tr><td height="15px"></td></tr>
-			<tr>
-				<td colspan="2" align="center">
-					<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult','dashboard'); ?> </button>
-					<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2.'?con=1'; ?>'" ><i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean','dashboard'); ?> </button>
-				</td>
-			</tr>
-				
 				</table>
 			<?php Html::closeForm(); ?>
 			<!-- </form> -->
@@ -214,18 +202,32 @@ else {
 			
 			else {
 				$status = $status_all;
-				}
+			}
+
+
+// distinguish between 0.90.x and 9.1 version
+//if (GLPI_VERSION >= 9.1){
+	$slaid = "AND glpi_tickets.slts_tto_id = ";
+	$sla_comp = "AND glpi_tickets.slts_tto_id = glpi_slts.id";	
+//}
+/*
+else {
+	$slaid = "AND glpi_tickets.slas_id = ";
+	$sla_comp = "AND glpi_tickets.slas_id = glpi_slts.id";
+}
+*/
 	
 $sql_sla = 
-"SELECT COUNT(glpi_tickets.id) AS total, glpi_slas.name AS sla_name, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, 
+"SELECT COUNT(glpi_tickets.id) AS total, glpi_slts.name AS sla_name, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, 
 glpi_tickets.status, glpi_tickets.due_date AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
-FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time, glpi_slas.id AS sla_id
-FROM glpi_tickets, glpi_slas
+FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time, glpi_slts.id AS sla_id
+FROM glpi_tickets, glpi_slts
 WHERE glpi_tickets.is_deleted = 0
-".$sla_comp."
+AND glpi_slts.type = 1
+
 AND glpi_tickets.date ".$datas2."
 ".$entidade."
-OR glpi_slas.is_recursive = 1
+
 GROUP BY sla_name DESC
 ORDER BY total DESC ";
 
@@ -235,8 +237,8 @@ $conta_cons = $DB->numrows($result_sla);
 
 if($conta_cons > 0) {
 			
-echo "<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>";		
-echo "							
+	echo "<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>";		
+	echo "							
 			<table id='sla' class='display'  style='font-size: 12px; font-weight:bold;' cellpadding = 2px>
 				<thead>
 					<tr>
@@ -245,11 +247,10 @@ echo "
 						<th style='text-align:center; cursor:pointer;'> ". __('Opened','dashboard') ."</th>
 						<th style='text-align:center; cursor:pointer;'> ". __('Solved','dashboard') ."</th>	
 						<th style='text-align:center; cursor:pointer;'> ". __('Closed','dashboard') ."</th>															
-						<th style='text-align:center; cursor:pointer;'> ". __('Within','dashboard') ."</th>	
-						
+						<th style='text-align:center; cursor:pointer;'> ". __('Within','dashboard') ."</th>							
 					</tr>
 				</thead>
-			<tbody> ";
+				<tbody> ";
 			
 			while($row = $DB->fetch_assoc($result_sla)){			
 											
@@ -257,7 +258,7 @@ echo "
 				$sql_cham = 
 				"SELECT count( glpi_tickets.id ) AS total, glpi_tickets.solvedate as solvedate, glpi_tickets.due_date AS duedate, sla_waiting_duration AS slawait
 				FROM glpi_tickets
-				WHERE glpi_tickets.is_deleted = 0
+				WHERE glpi_tickets.is_deleted = 0				
 				AND glpi_tickets.date ".$datas2."
 				".$slaid.$row['sla_id']."
 				".$entidade." ";
@@ -309,9 +310,9 @@ echo "
 				$fechados = $data_fech['total'];		
 								
 				//count by status
+				//SELECT SUM(case when glpi_tickets.takeintoaccount_delay_stat <> 0 then 1 else 0 end) AS solve_sla				
 				$query_stat = "
-				SELECT
-				SUM(case when glpi_tickets.solvedate IS NULL then 1 else 0 end) AS solve_sla				
+				SELECT SUM(case when glpi_tickets.takeintoaccount_delay_stat >= (time_to_own - date) then 1 else 0 end) AS solve_sla				
 				FROM glpi_tickets
 				WHERE glpi_tickets.is_deleted = '0'				
 				AND glpi_tickets.date ".$datas2."
@@ -323,25 +324,24 @@ echo "
 														
 				//barra de porcentagem
 				if($conta_cons > 0) {
-				
-				if($status == $status_closed ) {
-				    $barra = 100;
-				    $cor = "progress-bar-success";
-					}
-				
-				else {
-				
-					//porcentagem
-					$perc = round(($solve_sla*100)/$chamados,2);
-					$barra = 100 - $perc;
 					
-					// cor barra
-					if($barra == 100) { $cor = "progress-bar-success"; }
-					if($barra >= 80 and $barra < 100) { $cor = " "; }
-					if($barra > 51 and $barra < 80) { $cor = "progress-bar-warning"; }
-					if($barra > 0 and $barra <= 50) { $cor = "progress-bar-danger"; }
-					if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }
-				
+					if($status == $status_closed ) {
+					    $barra = 100;
+					    $cor = "progress-bar-success";
+					}
+					
+					else {
+					
+						//porcentagem
+						$perc = round(($solve_sla*100)/$chamados,2);
+						$barra = 100 - $perc;
+						
+						// cor barra
+						if($barra == 100) { $cor = "progress-bar-success"; }
+						if($barra >= 80 and $barra < 100) { $cor = " "; }
+						if($barra > 51 and $barra < 80) { $cor = "progress-bar-warning"; }
+						if($barra > 0 and $barra <= 50) { $cor = "progress-bar-danger"; }
+						if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }					
 					}
 				}
 				
@@ -349,7 +349,7 @@ echo "
 						
 				echo "	
 				<tr>
-					<td style='vertical-align:middle; text-align:left;'><a href='rel_sla.php?con=1&sla=". $row['sla_id'] ."&date1=".$data_ini2."&date2=".$data_fin2."' target='_blank' >".$row['sla_name']." </a></td>
+					<td style='vertical-align:middle; text-align:left;'><a href='rel_sltsa.php?con=1&sla=". $row['sla_id'] ."&date1=".$data_ini2."&date2=".$data_fin2."' target='_blank' >".$row['sla_name']." </a></td>
 					<td style='vertical-align:middle; text-align:center;'> ". $chamados ." </td>
 					<td style='vertical-align:middle; text-align:center;'> ". $abertos ." </td>
 					<td style='vertical-align:middle; text-align:center;'> ". $solucionados ." </td>
@@ -429,6 +429,7 @@ echo "
 			        
 			    } );
 			} );
+
 					
 			</script> 
 			

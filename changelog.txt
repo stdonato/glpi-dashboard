@@ -1,16 +1,21 @@
-Versão 0.7.8:
+Versão 0.7.9:
 
-- Correção do idioma Russo, de novo;
-- Correção dos relatórios de SLA;
-- Correção dos gráficos de SLA;
+- Correção do idioma Francês;
+- Relatórios de SLA por tempo de atendimento e de solução;
+- Gráficos de SLA por tempo de atendimento e de solução;
+- Nomes completos das entidades nos relatórios e menus dropdown;
+- Correção das opções de exportação do relatórios;
 - Correções de bugs diversos;
 - Você agora pode me comprar uma cerveja pelo paypal; :)
 
 
-Version 0.7.8:
+Version 0.7.9:
 
-- Russian language correction, again;
-- Fix SLA reports;
+- French language fixes;
+- SLA reports by time to own and time to resolve;
+- SLA graphs by time to own and time to resolve;
+- Complete names for entities;
+- Fix reports export;
 - Fix SLA graphs;
 - Fix minor bugs;
 - Now you can buy me a beer in Paypal; :)

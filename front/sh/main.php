@@ -323,7 +323,7 @@ setTimeout(function(){
 	</div>
 
 	   <?php 
-			include ("graficos/inc/index/graflinhas_index_sel.inc.php");
+			include ("graphs/inc/index/graflinhas_index_sel.inc.php");
 		?>					
 	
 	<div class="row-fluid" style="margin-top: 75px;">
@@ -331,7 +331,7 @@ setTimeout(function(){
 		<div class="col-sm-6 col-md-6 knob-wrapper">
 			<div id="pie1" style="height:320px;"> 			
 				<?php
-				include ("graficos/inc/index/grafpie_index.inc.php");
+				include ("graphs/inc/index/grafpie_index.inc.php");
 				?> 	 						            
 			</div> 
 		</div>
@@ -339,7 +339,7 @@ setTimeout(function(){
 		<div class="col-sm-6 col-md-6 knob-wrapper">
 			<div id="pie2" style="height:320px;"> 
 				<?php
-				include ("graficos/inc/index/grafpie_stat_geral.inc.php");
+				include ("graphs/inc/index/grafpie_stat_geral.inc.php");
 				?> 	 				              
 			</div> 
   		</div>  

@@ -10,13 +10,13 @@ else {
 }
 
 $sql_tec = "
-SELECT count(glpi_tickets.id) AS conta, glpi_entities.name AS name
+SELECT count(glpi_tickets.id) AS conta, glpi_entities.name AS name, glpi_entities.completename AS cname
 FROM `glpi_entities`, glpi_tickets
 WHERE glpi_tickets.entities_id = glpi_entities.id
 AND glpi_tickets.is_deleted = 0
 ".$entidade."
 AND glpi_tickets.date ".$datas."
-GROUP BY name
+GROUP BY cname
 ORDER BY conta DESC";
 
 $query_tec = $DB->query($sql_tec);
@@ -52,7 +52,7 @@ $(function () {
 
 while ($entity = $DB->fetch_assoc($query_tec)) {
 
-echo "'". $entity['name']."',";
+echo "'". $entity['cname']."',";
 
 }
 

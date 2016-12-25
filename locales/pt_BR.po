@@ -521,3 +521,10 @@ msgstr "SLA"
 
 msgid "Popup"
 msgstr "Popup"
+
+msgid "to own"
+msgstr "para aceitar"
+
+msgid "to resolve"
+msgstr "para solução"
+

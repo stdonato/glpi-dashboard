@@ -120,7 +120,7 @@ function chart(theme) {
 					
 					// lista de entidades
 					$sql_ent = "
-					SELECT id, name
+					SELECT id, name, completename AS cname
 					FROM `glpi_entities`
 					WHERE id IN (".$ents.")
 					ORDER BY `name` ASC ";
@@ -134,7 +134,7 @@ function chart(theme) {
 					while ($row_result = $DB->fetch_assoc($result_ent))
 					 {
 					    $v_row_result = $row_result['id'];
-					    $arr_ent[$v_row_result] = $row_result['name'] ;
+					    $arr_ent[$v_row_result] = $row_result['cname'] ;
 					 }
 					 
 					//reload page	

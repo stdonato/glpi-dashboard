@@ -29,9 +29,11 @@ Session::checkRight("profile", READ);
 
 <script src="./js/markerclusterer.js" type="text/javascript" ></script>
 <link href="css/google_api.css" rel="stylesheet" type="text/css" />   
-<script
-	src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript" >
+
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?callback=initMap">
 </script>  
+<!-- src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript" > -->   
   
 <script src="../js/bootstrap.min.js" type="text/javascript" ></script>  
 

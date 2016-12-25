@@ -119,7 +119,7 @@ if(Session::haveRight("profile", "r"))
 		$redir = '';
 	}
 else {		
-		$redir = '<meta http-equiv="refresh" content="0; url=graficos/graf_tech.php?con=1" />'; 
+		$redir = '<meta http-equiv="refresh" content="0; url=graphs/graf_tech.php?con=1" />'; 
 	}
     
 
@@ -306,8 +306,8 @@ $(window).load(function () {
           <ul class="nav navbar-nav">
                    
           <li class="nav-link dropdown"><span onclick="location.href=('index.php')"><a href="#" data-toggle="dropdown" class="dropdown-toggle nav-icon"><i class='fa fa-dashboard'></i>&nbsp;Dashboard</a></span></li>
-			 <li class="nav-link dropdown"><span onclick="window.open('./graficos/graf_tech.php?con=1','iframe1');"><a href="#" data-toggle="dropdown" class="dropdown-toggle nav-icon"><i class='fa fa-area-chart'></i>&nbsp;<?php echo __('My Dashboard','dashboard');?></a></span></li>
-			 <!-- <li class="nav-link1"><a href="./graficos/graf_tech.php" target="iframe1" data-toggle="dropdown" class="dropdown-toggle" style="color:#fff;">Meu Painel</a></li> -->
+			 <li class="nav-link dropdown"><span onclick="window.open('./graphs/graf_tech.php?con=1','iframe1');"><a href="#" data-toggle="dropdown" class="dropdown-toggle nav-icon"><i class='fa fa-area-chart'></i>&nbsp;<?php echo __('My Dashboard','dashboard');?></a></span></li>
+			 <!-- <li class="nav-link1"><a href="./graphs/graf_tech.php" target="iframe1" data-toggle="dropdown" class="dropdown-toggle" style="color:#fff;">Meu Painel</a></li> -->
 
            <!-- Classic dropdown -->
             <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle"><span class="text-nav"><i class='fa fa-edit'></i>&nbsp;<?php echo __('Tickets','dashboard');?>&nbsp;<b class="caret"></b></span></a>
@@ -366,30 +366,30 @@ $(window).load(function () {
                         <li>
                           <!-- <p><strong>Links Title</strong></p> -->
                         </li>
-                        <li><a href="./graficos/geral.php" target="iframe1" style="color:#555;"> <?php echo __('Overall','dashboard'); ?></a></li>
-                        <li><a href="./graficos/tecnicos.php" target="iframe1" style="color:#555;"> <?php echo __('Technician','dashboard'); ?> </a></li>
-                        <li><a href="./graficos/usuarios.php" target="iframe1" style="color:#555;"> <?php echo __('Requester','dashboard'); ?> </a></li>
-                        <li><a href="./graficos/entidades.php" target="iframe1" style="color:#555;"> <?php echo __('Entity','dashboard'); ?> </a></li>
-                        <li><a href="./graficos/categorias.php" target="iframe1" style="color:#555;"> <?php echo __('Category'); ?> </a></li>
-                        <li><a href="./graficos/grupos.php" target="iframe1" style="color:#555;"> <?php echo __('Group','dashboard'); ?> </a></li>
-                        <li><a href="./graficos/local.php" target="iframe1" style="color:#555;"> <?php echo __('Location'); ?> </a></li>
-                        <li><a href="./graficos/ativos.php" target="iframe1" style="color:#555;"> <?php echo __('Assets'); ?> </a></li>
-                        <li><a href="./graficos/satisfacao.php" target="iframe1" style="color:#555;"> <?php echo __('Satisfaction','dashboard'); ?> </a></li>
-                        <li><a href="./graficos/times.php" target="iframe1" style="color:#555;"> <?php echo __('Time range'); ?> </a></li>
+                        <li><a href="./graphs/geral.php" target="iframe1" style="color:#555;"> <?php echo __('Overall','dashboard'); ?></a></li>
+                        <li><a href="./graphs/tecnicos.php" target="iframe1" style="color:#555;"> <?php echo __('Technician','dashboard'); ?> </a></li>
+                        <li><a href="./graphs/usuarios.php" target="iframe1" style="color:#555;"> <?php echo __('Requester','dashboard'); ?> </a></li>
+                        <li><a href="./graphs/entidades.php" target="iframe1" style="color:#555;"> <?php echo __('Entity','dashboard'); ?> </a></li>
+                        <li><a href="./graphs/categorias.php" target="iframe1" style="color:#555;"> <?php echo __('Category'); ?> </a></li>
+                        <li><a href="./graphs/grupos.php" target="iframe1" style="color:#555;"> <?php echo __('Group','dashboard'); ?> </a></li>
+                        <li><a href="./graphs/local.php" target="iframe1" style="color:#555;"> <?php echo __('Location'); ?> </a></li>
+                        <li><a href="./graphs/ativos.php" target="iframe1" style="color:#555;"> <?php echo __('Assets'); ?> </a></li>
+                        <li><a href="./graphs/satisfacao.php" target="iframe1" style="color:#555;"> <?php echo __('Satisfaction','dashboard'); ?> </a></li>
+                        <li><a href="./graphs/times.php" target="iframe1" style="color:#555;"> <?php echo __('Time range'); ?> </a></li>
                       </ul>
 
                       <ul class="col-sm-2 list-unstyled" style="width:180px;">
                         <li>
                           <!-- <p><strong>Links Title</strong></p> -->
                         </li>                        
-                        <li><a href="./graficos/geral_mes.php" target="iframe1" style="color:#555;"> <?php echo __('by Date','dashboard'); ?> </a></li>
-                        <li><a href="./graficos/graf_tecnico.php" target="iframe1" style="color:#555;"> <?php echo __('by Technician','dashboard'); ?> </a></li>
-                        <li><a href="./graficos/graf_usuario.php" target="iframe1" style="color:#555;"> <?php echo __('by Requester','dashboard'); ?> </a></li>
-                        <li><a href="./graficos/graf_entidade.php" target="iframe1" style="color:#555;"> <?php echo __('by Entity','dashboard'); ?> </a></li>
-								<li><a href="./graficos/graf_categoria.php" target="iframe1" style="color:#555;"> <?php echo __('by Category','dashboard'); ?> </a></li>
-								<li><a href="./graficos/graf_grupo.php" target="iframe1" style="color:#555;"> <?php echo __('by Group','dashboard'); ?> </a></li>
-								<li><a href="./graficos/graf_localidade.php" target="iframe1" style="color:#555;"> <?php echo __('by Location','dashboard'); ?> </a></li>
-								<li><a href="./graficos/slas.php" target="iframe1" style="color:#555;"> <?php echo __('by SLA','dashboard'); ?> </a></li>
+                        <li><a href="./graphs/geral_mes.php" target="iframe1" style="color:#555;"> <?php echo __('by Date','dashboard'); ?> </a></li>
+                        <li><a href="./graphs/graf_tecnico.php" target="iframe1" style="color:#555;"> <?php echo __('by Technician','dashboard'); ?> </a></li>
+                        <li><a href="./graphs/graf_usuario.php" target="iframe1" style="color:#555;"> <?php echo __('by Requester','dashboard'); ?> </a></li>
+                        <li><a href="./graphs/graf_entidade.php" target="iframe1" style="color:#555;"> <?php echo __('by Entity','dashboard'); ?> </a></li>
+								<li><a href="./graphs/graf_categoria.php" target="iframe1" style="color:#555;"> <?php echo __('by Category','dashboard'); ?> </a></li>
+								<li><a href="./graphs/graf_grupo.php" target="iframe1" style="color:#555;"> <?php echo __('by Group','dashboard'); ?> </a></li>
+								<li><a href="./graphs/graf_localidade.php" target="iframe1" style="color:#555;"> <?php echo __('by Location','dashboard'); ?> </a></li>
+								<li><a href="./graphs/slas.php" target="iframe1" style="color:#555;"> <?php echo __('by SLA','dashboard'); ?> </a></li>
 								<li><a href="./pati/graf_pati.php" target="iframe1" style="color:#555;"> <?php echo __('por PATI','dashboard'); ?> </a></li>								
                       </ul>
                     </div>

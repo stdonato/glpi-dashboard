@@ -124,13 +124,13 @@ else {
 		
 		//entity name
 		$sql_entname = "
-		SELECT id, name
+		SELECT id, name, completename AS cname
 		FROM `glpi_entities`
 		WHERE id = ".$id_ent."
-		ORDER BY `name` ASC ";
+		ORDER BY `cname` ASC ";
 
 		$result_entname = $DB->query($sql_entname);
-		$entname = $DB->result($result_entname,0,'name');
+		$entname = $DB->result($result_entname,0,'cname');
 
 		
 		// Chamados

@@ -12,7 +12,6 @@ $mydate = isset($_POST["date1"]) ? $_POST["date1"] : "";
 <html> 
 <head>
 <title>GLPI - <?php echo __('Tickets','dashboard') .'  '. __('by Entity','dashboard'); ?></title>
-<!-- <base href= "<?php $_SERVER['SERVER_NAME'] ?>" > -->
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
