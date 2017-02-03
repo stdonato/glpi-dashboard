@@ -233,7 +233,6 @@ $sql_cham =
 glpi_tickettasks.users_id AS uid, glpi_tickettasks.actiontime, glpi_tickettasks.begin AS begin, glpi_tickettasks.end
 FROM `glpi_tickets` , glpi_tickettasks
 WHERE glpi_tickets.id = glpi_tickettasks.`tickets_id`
-
 AND glpi_tickets.is_deleted = 0
 AND glpi_tickettasks.date ". $datas2 ."
 ".$entidade."

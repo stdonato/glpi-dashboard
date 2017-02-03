@@ -539,17 +539,17 @@ while($row = $DB->fetch_assoc($result_cham)){
 	$today = date("Y-m-d H:i:s");
 
 	if($row['solvedate'] > $row['duedate']) {
-		echo "<td style='vertical-align:middle; text-align:center; color:red;'> ". __('Overdue','dashboard') ." </td>";
+		echo "<td style='vertical-align:middle; text-align:center; color:red;'> <span class='label label-danger'>". __('Overdue','dashboard') ." </span></td>";
 	}	
 
 	else {	
 		
 		if(!isset($row['solvedate']) AND $today > $row['duedate']) {
-			echo "<td style='vertical-align:middle; text-align:center; color:red;'> ". __('Overdue','dashboard') ." </td>";
+			echo "<td style='vertical-align:middle; text-align:center; color:red;'> <span class='label label-danger'>". __('Overdue','dashboard') ." </span></td>";
 		}
 	
 		else {
-			echo "<td style='vertical-align:middle; text-align:center; color:green;'> ". __('Within','dashboard') ." </td>";
+			echo "<td style='vertical-align:middle; text-align:center; color:green;'> <span class='label label-success'>". __('Within','dashboard') ." </span> </td>";
 		}
 		
 	}

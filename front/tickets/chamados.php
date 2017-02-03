@@ -98,7 +98,6 @@ WHERE glpi_tickets.is_deleted = 0
 ".$status1."
 AND glpi_tickets.entities_id IN (".$ent.")" ;
 
-//AND glpi_tickets.status NOT IN ".$status." 
 
 $result = $DB->query($sql);
 $data = $DB->fetch_assoc($result);
@@ -241,9 +240,7 @@ $ent_name = $DB->result($result_n, 0, 'cname');
 			</div>	
 		<div id="lista_chamados1" class="well info_box row-fluid report" style="">
 		
-		<?php 
-		
-		//echo $ent;
+		<?php 				
 		
 		if(isset($_REQUEST['order'])) {
 		
@@ -309,6 +306,11 @@ $ent_name = $DB->result($result_n, 0, 'cname');
 				
 				$show_ent = $DB->result($result_ent,0,'value');
 				
+				$query_tit = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'title' AND users_id = ".$_SESSION['glpiID']." ";																
+				$result_tit = $DB->query($query_tit);
+				
+				$show_tit = $DB->result($result_tit,0,'value');
+				
 				if($show_due != 0) {
 					if($count_due > 0) {
 						$th_due = "<th style='text-align:center;'><a href='chamados.php?order=da'>&nbsp<font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('Due Date','dashboard')."<a href='chamados.php?order=dd'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>";
@@ -320,9 +322,13 @@ $ent_name = $DB->result($result_n, 0, 'cname');
 				<thead>
 					<tr class='up-down'>
 						<th style='text-align:center;'><a href='chamados.php?&order=ta'>&nbsp<font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('ID','dashboard')."<a href='chamados.php?&order=td'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>
-						<th style='text-align:center;'><a href='chamados.php?&order=sa'><font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('Status')."<a href='chamados.php?&order=sd'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>
-						<th style='text-align:center;'>". __('Title')."</th>
-						<th style='text-align:center;'>". __('Technician')."</th>
+						<th style='text-align:center;'><a href='chamados.php?&order=sa'><font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('Status')."<a href='chamados.php?&order=sd'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>";
+
+				if($show_tit != 0 || $show_tit == '') {	
+					echo	"<th style='text-align:center;'>". __('Title')."</th>";
+					}
+						
+				echo "<th style='text-align:center;'>". __('Technician')."</th>
 						<th style='text-align:center;'>". __('Requester')."</th>";
 
 				if($show_ent == 1) {	
@@ -425,9 +431,13 @@ $ent_name = $DB->result($result_n, 0, 'cname');
 				echo "
 				<tr class='title'>
 					<td style='text-align:center; vertical-align:middle;'> <a href=../../../../front/ticket.form.php?id=". $row['id'] ." target=_blank > <span >" . $row['id'] . "</span> </a></td>
-					<td style='vertical-align:middle;'><span style='color:#000099';><img src=../../../../pics/".$status1.".png />  ".Ticket::getStatus($row['status'])."</span ></td>
-					<td style='vertical-align:middle;'><a href=../../../../front/ticket.form.php?id=". $row['id'] ." target=_blank > <span >" . $row['descri'] . "</span> </a></td>
-					<td style='vertical-align:middle;'><span >". $row_tec['name'] ." ".$row_tec['sname'] ."</span> </td>
+					<td style='vertical-align:middle;'><span style='color:#000099';><img src=../../../../pics/".$status1.".png />  ".Ticket::getStatus($row['status'])."</span ></td>";
+				
+				if($show_tit != 0 || $show_tit == '') {	
+					echo "<td style='vertical-align:middle;'><a href=../../../../front/ticket.form.php?id=". $row['id'] ." target=_blank > <span >" . $row['descri'] . "</span> </a></td>";
+				}
+					
+				echo "<td style='vertical-align:middle;'><span >". $row_tec['name'] ." ".$row_tec['sname'] ."</span> </td>
 					<td style='vertical-align:middle;'><span >". $row_req['name'] ." ".$row_req['sname'] ."</span> </td>";
 
 				if($show_ent == 1) {

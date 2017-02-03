@@ -297,6 +297,11 @@ else {
 			$result_loc = $DB->query($query_loc);
 			
 			$show_loc = $DB->result($result_loc,0,'value');
+			
+			$query_tit = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'title' AND users_id = ".$_SESSION['glpiID']." ";																
+			$result_tit = $DB->query($query_tit);
+			
+			$show_tit = $DB->result($result_tit,0,'value');			
 				
 			
 			if($show_due == 1) {
@@ -309,9 +314,13 @@ else {
 				<thead>
 					<tr class='up-down'>
 						<th style='text-align:center;'><a href='cham_grupos.php?grp=".$grp."&order=ta'>&nbsp<font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('ID','dashboard')."<a href='cham_grupos.php?grp=".$grp."&order=td'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>
-						<th style='text-align:center;'><a href='cham_grupos.php?grp=".$grp."&order=sa'><font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('Status')."<a href='cham_grupos.php?grp=".$grp."&order=sd'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>
-						<th style='text-align:center;'>". __('Title')."</th>
-						<th style='text-align:center;'>". __('Technician')."</th>
+						<th style='text-align:center;'><a href='cham_grupos.php?grp=".$grp."&order=sa'><font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('Status')."<a href='cham_grupos.php?grp=".$grp."&order=sd'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>";
+						
+				if($show_tit != 0 || $show_tit == '') {	
+					echo	"<th style='text-align:center;'>". __('Title')."</th>";
+					}
+					
+				echo "<th style='text-align:center;'>". __('Technician')."</th>
 						<th style='text-align:center;'>". __('Requester')."</th>";
 					
 				if($show_loc == 1) {	
@@ -412,9 +421,13 @@ else {
 	echo "
 	<tr class='title'>
 		<td style='text-align:center; vertical-align:middle;'> <a href=../../../../front/ticket.form.php?id=". $row['id'] ." target=_blank > <span >" . $row['id'] . "</span> </a></td>
-		<td style='vertical-align:middle;'><span style='color:#000099';><img src=../../../../pics/".$status1.".png />  ".Ticket::getStatus($row['status'])."</span ></td>
-		<td style='vertical-align:middle;'><a href=../../../../front/ticket.form.php?id=". $row['id'] ." target=_blank > <span >" . $row['descri'] . "</span> </a></td>
-		<td style='vertical-align:middle;'><span >". $row_tec['name'] ." ".$row_tec['sname'] ."</span> </td>		
+		<td style='vertical-align:middle;'><span style='color:#000099';><img src=../../../../pics/".$status1.".png />  ".Ticket::getStatus($row['status'])."</span ></td>";		
+
+	if($show_tit != 0 || $show_tit == '') {	
+		echo "<td style='vertical-align:middle;'><a href=../../../../front/ticket.form.php?id=". $row['id'] ." target=_blank > <span >" . $row['descri'] . "</span> </a></td>";
+	}
+
+	echo "<td style='vertical-align:middle;'><span >". $row_tec['name'] ." ".$row_tec['sname'] ."</span> </td>		
 		<td style='vertical-align:middle;'><span >". $row_req['name'] ." ".$row_req['sname'] ."</span> </td>";
 					
 				if($show_loc == 1) {

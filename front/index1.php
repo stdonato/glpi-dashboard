@@ -341,6 +341,7 @@ else {
 				               <ul class="dropdown-menu">
 				                  <li><a href="./reports/rel_tarefa.php" target="iframe1" style="color:#000;"> <?php echo __('Technician'); ?> </a></li>
                         		<li><a href="./reports/rel_tarefa_cham.php" target="iframe1" style="color:#000;"> <?php echo  __('Tickets','dashboard'); ?> </a></li>   
+                        		<li><a href="./reports/rel_task_ent.php" target="iframe1" style="color:#000;"> <?php echo  __('Entity','dashboard'); ?> </a></li>   
 				               </ul>
 				             </li>
 				             

@@ -535,34 +535,34 @@ $result_nm = $DB->query($sql_nm);
 $ent_name = $DB->fetch_assoc($result_nm);
 
 
-    //count by status
-    $query_stat = "
-	SELECT
-	SUM(case when glpi_tickets.status = 1 then 1 else 0 end) AS new,
-	SUM(case when glpi_tickets.status = 2 then 1 else 0 end) AS assig,
-	SUM(case when glpi_tickets.status = 3 then 1 else 0 end) AS plan,
-	SUM(case when glpi_tickets.status = 4 then 1 else 0 end) AS pend,
-	SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve,
-	SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
-	FROM glpi_tickets
-	WHERE glpi_tickets.is_deleted = 0
-	".$entidade."
-	".$period."
-	".$id_sta."
-	".$id_due."
-	AND glpi_tickets.requesttypes_id LIKE '%".$id_req."'
-	AND glpi_tickets.priority LIKE '%".$id_pri."'
-	AND glpi_tickets.itilcategories_id LIKE '%".$id_cat."'
-	AND glpi_tickets.type LIKE '%".$id_tip."' ";
+ //count by status
+ $query_stat = "
+SELECT
+SUM(case when glpi_tickets.status = 1 then 1 else 0 end) AS new,
+SUM(case when glpi_tickets.status = 2 then 1 else 0 end) AS assig,
+SUM(case when glpi_tickets.status = 3 then 1 else 0 end) AS plan,
+SUM(case when glpi_tickets.status = 4 then 1 else 0 end) AS pend,
+SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve,
+SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
+FROM glpi_tickets
+WHERE glpi_tickets.is_deleted = 0
+".$entidade."
+".$period."
+".$id_sta."
+".$id_due."
+AND glpi_tickets.requesttypes_id LIKE '%".$id_req."'
+AND glpi_tickets.priority LIKE '%".$id_pri."'
+AND glpi_tickets.itilcategories_id LIKE '%".$id_cat."'
+AND glpi_tickets.type LIKE '%".$id_tip."' ";
 
-    $result_stat = $DB->query($query_stat);
+ $result_stat = $DB->query($query_stat);
 
-    $new = $DB->result($result_stat,0,'new');
-    $assig = $DB->result($result_stat,0,'assig');
-    $plan = $DB->result($result_stat,0,'plan');
-    $pend = $DB->result($result_stat,0,'pend');
-    $solve = $DB->result($result_stat,0,'solve');
-    $close = $DB->result($result_stat,0,'close');
+ $new = $DB->result($result_stat,0,'new');
+ $assig = $DB->result($result_stat,0,'assig');
+ $plan = $DB->result($result_stat,0,'plan');
+ $pend = $DB->result($result_stat,0,'pend');
+ $solve = $DB->result($result_stat,0,'solve');
+ $close = $DB->result($result_stat,0,'close');
 
 
 //listar chamados
@@ -678,8 +678,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 	
 	$result_cat = $DB->query($sql_cat);	
 	$row_cat = $DB->fetch_assoc($result_cat);
-	
-	//vencimento	
+			
 	//check due_date	
 	$sql_due = "SELECT due_date, closedate, solvedate 
 	FROM glpi_tickets
@@ -699,15 +698,11 @@ echo "
 		<td style='vertical-align:middle;'> ". $pri ." </td>
 		<td style='vertical-align:middle; max-width:150px;'> ". $row_cat['name'] ." </td>		
 		<td style='vertical-align:middle;'> ". substr($row_user['title'],0,55) ." </td>
-		<td style='vertical-align:middle; max-width:550px;'> ". $row_user['content'] ." </td>
+		<td style='vertical-align:middle; max-width:550px;'> ". html_entity_decode($row_user['content']) ." </td>
 		<td style='vertical-align:middle;'> ". $row_user['name'] ." ".$row_user['sname'] ." </td>
 		<td style='vertical-align:middle;'> ". $row_tec['name'] ." ".$row_tec['sname'] ." </td>
 		<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['date']) ." </td>		
-		<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['solvedate']) ." </td>";
-		
-		
-			//due date
-			//$now = date("Y-m-d H:i");
+		<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['solvedate']) ." </td>";		
 			
 			$today = date("Y-m-d H:i:s");
 			

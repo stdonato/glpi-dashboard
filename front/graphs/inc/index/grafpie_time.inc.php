@@ -63,12 +63,12 @@ $(function () {
                 layout: 'vertical',
                 align: 'right',
                 verticalAlign: 'middle',
-                x: -30,
+                x: 0,
                 y: 0,
-                floating: false,
+                floating: true,
                 borderWidth: 0,
                // backgroundColor: '#FFFFFF',
-                adjustChartSize: false,
+                adjustChartSize: true,
                 format: '{series.name}: <b>{point.percentage:.1f}%</b>'
             },
             credits: {

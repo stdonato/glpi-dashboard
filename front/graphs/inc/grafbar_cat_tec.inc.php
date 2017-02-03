@@ -8,8 +8,6 @@ $result_ent = $DB->query($sql_ent) or die('erro');
 $num_ent = $DB->fetch_assoc($result_ent);
 
 
-//echo '<div id="grafcat_tec" class="span12" >';
-
 if($data_ini == $data_fin) {
 	$datas = "LIKE '".$data_ini."%'";	
 }	

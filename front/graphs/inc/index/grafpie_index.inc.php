@@ -50,10 +50,10 @@ $(function () {
                 text: ''                
             },
              legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle',
-                x: 15,
+                layout: 'horizontal',
+                align: 'middle',
+                verticalAlign: 'bottom',
+                x: 0,
                 y: 0,
                 floating: true,
                 borderWidth: 0,

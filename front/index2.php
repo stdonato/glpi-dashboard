@@ -464,6 +464,12 @@ else {
 	                                                <span class='hidden-minibar'> <?php echo __('Tickets','dashboard'); ?> </span>
 	                                            </a>
 	                                        </li> 
+	                                        <li>
+	                                            <a href="#" onclick="window.open('./reports/rel_task_ent.php','iframe1'); scrollWin();" data-original-title=' Tarefas'>
+	                                                <i class="fa fa-angle-right"></i>
+	                                                <span class='hidden-minibar'> <?php echo __('Entity','dashboard'); ?> </span>
+	                                            </a>
+	                                        </li> 
 		                                        </ul>
 		                                  </li>  
 		                                  
