@@ -5,8 +5,6 @@
 
 3 - Acessar no menu do GLPI: Plugins -> Dashboard
 
-4 - Para configurar a quantidade da anos no index, edite o arquivo index1.php, alterando o valor da variável "$num_years": 0 para todos, 1 para ano atual e 2 ou mais conforme a quantidade que desejar exibir.
-
 
 #############################################################
 
