@@ -42,11 +42,11 @@ function plugin_version_dashboard(){
 	global $DB, $LANG;
 
 	return array('name'			=> __('Dashboard','dashboard'),
-					'version' 			=> '0.7.9',
+					'version' 			=> '0.8.0',
 					'author'			   => '<a href="mailto:stevenesdonato@gmail.com"> Stevenes Donato </b> </a>',
 					'license'		 	=> 'GPLv2+',
 					'homepage'			=> 'https://forge.glpi-project.org/projects/dashboard',
-					'minGlpiVersion'	=> '0.85'
+					'minGlpiVersion'	=> '0.90'
 					);
 }
 
@@ -54,7 +54,7 @@ function plugin_dashboard_check_prerequisites(){
         if (GLPI_VERSION>=0.85){
                 return true;
         } else {
-                echo "GLPI version NOT compatible. Requires GLPI 0.85";
+                echo "GLPI version NOT compatible. Requires GLPI 0.90";
         }
 }
 
