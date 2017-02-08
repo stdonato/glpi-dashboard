@@ -1,0 +1,525 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Nikolay Petrov <techobsl@yandex.ru>, 2016
+
+msgid ""
+msgstr ""
+"Project-Id-Version: GLPI Project\n"
+"Rebyt-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-08 15:21+0100\n"
+"PO-Revision-Date: Fri Sep 16 2016 12:09:35 GMT+0300 (RTZ 2 (Moscow, St. Petersburg, Volgograd))\n"
+"Last-Translator: Nikolay Petrov <techobsl@yandex.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Dashboard"
+msgstr "Панель отчетов"
+
+msgid "Tickets"
+msgstr "Заявки"
+
+msgid "Reports"
+msgstr "Отчеты"
+
+msgid "Charts"
+msgstr "Диаграммы"
+
+msgid "Home"
+msgstr "Домой"
+
+msgid "Tickets Statistics"
+msgstr "Статистика заявок"
+
+msgid "by Technician"
+msgstr "По специалисту"
+
+msgid "by Requester"
+msgstr "По заказчику"
+
+msgid "by Date"
+msgstr "По дате"
+
+msgid "Overall"
+msgstr "Общий"
+
+msgid "Today"
+msgstr "Сегодня"
+
+msgid "Total"
+msgstr "Всего"
+
+msgid "users"
+msgstr "пользователи"
+
+msgid "active"
+msgstr "активно"
+
+msgid "Tickets Evolution"
+msgstr "Рост заявок"
+
+msgid "Tickets by Status"
+msgstr "Заявки по статусу"
+
+msgid "Tickets by Entity"
+msgstr "Заявки по организации"
+
+msgid "Tickets by Category"
+msgstr "Заявки по категории"
+
+msgid "Daily Evolution"
+msgstr "Ежедневный рост"
+
+msgid "Tickets Total"
+msgstr "Всего заявок"
+
+msgid "by Entity"
+msgstr "По организации"
+
+msgid "TOP 10 - Requester"
+msgstr "Топ 10 заказчиков"
+
+msgid "Entity"
+msgstr "Организация"
+
+msgid "Open Tickets"
+msgstr "Открытые заявки"
+
+msgid "Today Tickets"
+msgstr "Заявки сегодня"
+
+msgid "by Group"
+msgstr "По группе"
+
+msgid "Group"
+msgstr "Группа"
+
+msgid "Satisfaction"
+msgstr "Удовлетворенность"
+
+msgid "Late"
+msgstr "Просрочено"
+
+msgid "Opened Tickets by Status"
+msgstr "Открыто заявок, по статусу"
+
+msgid "Last Tickets"
+msgstr "Последние заявки"
+
+msgid "All"
+msgstr "Все"
+
+msgid "New version"
+msgstr "Новая версия"
+
+msgid "avaliable"
+msgstr "доступно"
+
+msgid "January"
+msgstr "Январь"
+
+msgid "February"
+msgstr "Февраль"
+
+msgid "March"
+msgstr "Март"
+
+msgid "April"
+msgstr "Апрель"
+
+msgid "May"
+msgstr "Май"
+
+msgid "June"
+msgstr "Июнь"
+
+msgid "July"
+msgstr "Июль"
+
+msgid "August"
+msgstr "Август"
+
+msgid "September"
+msgstr "Сентябрь"
+
+msgid "October"
+msgstr "Октябрь"
+
+msgid "November"
+msgstr "Ноябрь"
+
+msgid "December"
+msgstr "Декабрь"
+
+msgid "Sunday"
+msgstr "Воскресенье"
+
+msgid "Monday"
+msgstr "Понедельник"
+
+msgid "Tuesday"
+msgstr "Вторник"
+
+msgid "Wednesday"
+msgstr "Среда"
+
+msgid "Thursday"
+msgstr "Четверг"
+
+msgid "Friday"
+msgstr "Пятница"
+
+msgid "Saturday"
+msgstr "Суббота"
+
+msgid "Consult"
+msgstr "Показать"
+
+msgid "Clean"
+msgstr "Очистить"
+
+msgid "No ticket found"
+msgstr "Заявоки не найдены"
+
+msgid "Select a technician"
+msgstr "Выберите специалиста"
+
+msgid "Select a requester"
+msgstr "Выберите заказчика"
+
+msgid "Title"
+msgstr "Заголовок"
+
+msgid "Opening date"
+msgstr "Дата открытия"
+
+msgid "Close date"
+msgstr "Дата закрытия"
+
+msgid "Technician"
+msgid_plural "Technicians"
+msgstr[0] "Специалист"
+msgstr[1] "Cпециалисты"
+
+msgid "Closed"
+msgstr "Закрыто"
+
+msgid "Previous"
+msgstr "Предыдущее"
+
+msgid "Next"
+msgstr "Далее"
+
+msgid "Requester"
+msgstr "Заказчик"
+
+msgid "Opened"
+msgstr "Открыто"
+
+msgid "Period"
+msgstr "Период"
+
+msgid "Yesterday"
+msgstr "Вчера"
+
+msgid "Last 7 days"
+msgstr "Последние 7 дней"
+
+msgid "Last 15 days"
+msgstr "Последние 15 дней"
+
+msgid "Last 30 days"
+msgstr "Последние 30 дней"
+
+msgid "Last 90 days"
+msgstr "Последние 90 дней"
+
+msgid "Last 180 days"
+msgstr "Последние 180 дней"
+
+msgid "Last 3 months"
+msgstr "Последние 3 месяца"
+
+msgid "Select a entity"
+msgstr "Выберите организацию"
+
+msgid "Select a group"
+msgstr "Выберите группу"
+
+msgid "Version"
+msgstr "Версия"
+
+msgid "Developed by"
+msgstr "Разработал"
+
+msgid "User rights management"
+msgstr "Управление правами пользователя"
+
+msgid "Tab display"
+msgstr "Сменить отображение"
+
+msgid "Tickets by Source"
+msgstr "Заявки по источнику"
+
+msgid "Last Events"
+msgstr "Последние события"
+
+msgid "Logged Users"
+msgstr "Пользователей активно"
+
+msgid "Computers by Operating System"
+msgstr "Компьютеры по операционной системе"
+
+msgid "Computers by Type"
+msgstr "Компьютеры по типу"
+
+msgid "Quantity"
+msgstr "Количество"
+
+msgid "Monitors by Manufacturer"
+msgstr "Мониторы по производителю"
+
+msgid "Monitors by Model"
+msgstr "Мониторы по модели"
+
+msgid "Printers by Manufacturer"
+msgstr "Принтеры по производителю"
+
+msgid "Printers by Model"
+msgstr "Принтеры по модели"
+
+msgid "Networkequipments by Manufacturer"
+msgstr "Сетевое оборудование по производителю"
+
+msgid "Networkequipments by Model"
+msgstr "Сетевое оборудование по модели"
+
+msgid "Phones by Manufacturer"
+msgstr "Сетевое оборудование по производителю"
+
+msgid "Phones by Model"
+msgstr "Телефоны по модели"
+
+msgid "Peripherals by Manufacturer"
+msgstr "Периферия по производителю"
+
+msgid "Peripherals by Model"
+msgstr "Периферия по модели"
+
+msgid "Top 10 - Software Vendors"
+msgstr "Топ 10 производителей ПО"
+
+msgid "Top 10 - Software Install"
+msgstr "Топ 10 установок ПО"
+
+msgid "Cartridges by Manufacturer"
+msgstr "Картриджи по производителю"
+
+msgid "Used"
+msgstr "Использовано"
+
+msgid "Assets by Type"
+msgstr "Оборудование по типу"
+
+msgid "Unknown"
+msgstr "Неизвестно"
+
+msgid "Computer"
+msgstr "Компьютеры"
+
+msgid "Monitor"
+msgstr "Мониторы"
+
+msgid "Printer"
+msgstr "Принтеры"
+
+msgid "Networkequipment"
+msgstr "Сетевое оборудование"
+
+msgid "Phone"
+msgstr "Телефоны"
+
+msgid "Peripheral"
+msgstr "Периферия"
+
+msgid "Map"
+msgstr "Карта"
+
+msgid "Tickets Map"
+msgstr "Карта заявок"
+
+msgid "Fill in entities: address, city, state and country."
+msgstr "Заполните в организации: адрес, город, область и страну."
+
+msgid "Select"
+msgstr "Выбрать"
+
+msgid "by Category"
+msgstr "По категории"
+
+msgid "Select a category"
+msgstr "Выбрать категорию"
+
+msgid "by Location"
+msgstr "По местоположению"
+
+msgid "Select a location"
+msgstr "Выберите местоположение"
+
+msgid "Welcome"
+msgstr "Добро пожаловать"
+
+msgid "Select a asset"
+msgstr "Выберите оборудование"
+
+msgid "by Assets"
+msgstr "По оборудованию"
+
+msgid "Print"
+msgstr "Печать"
+
+msgid "by SLA"
+msgstr "По SLA"
+
+msgid "Select a SLA"
+msgstr "Выберите SLA"
+
+msgid "Current"
+msgstr "Текущий"
+
+msgid "Current year"
+msgstr "Текущий год"
+
+msgid "Period in index page"
+msgstr "Период в индексной странице"
+
+msgid "Theme"
+msgstr "Тема"
+
+msgid "by Type"
+msgstr "По типу"
+
+msgid "Select a type"
+msgstr "Выберите тип"
+
+msgid "Select a manufacturer"
+msgstr "Выберите производителя"
+
+msgid "Weekly Tickets"
+msgstr "Еженедельные заявки"
+
+msgid "Show/hide columns"
+msgstr "Показать/скрыть столбцы"
+
+msgid "day"
+msgstr "день"
+
+msgid "days"
+msgstr "дней"
+
+msgid "Ticket Solving Period"
+msgstr "Заявки по сроку решения"
+
+msgid "Open Tickets Age"
+msgstr "Срок открытия заявки"
+
+msgid "My Dashboard"
+msgstr "Моя панель"
+
+msgid "Tickets by Priority"
+msgstr "Заявки по приоритету"
+
+msgid "Solved"
+msgstr "Pешена"
+
+msgid "Tickets across time"
+msgstr "Заявки по времени"
+
+msgid "Tickets by hour"
+msgstr "Заявки по часам"
+
+msgid "Tickets by week day"
+msgstr "Заявки по дням недели"
+
+msgid "Tickets by month"
+msgstr "Заявки по месяцам"
+
+msgid "Due Date"
+msgstr "Срок выполнения"
+
+msgid "Overdue"
+msgstr "Просроченный"
+
+msgid "Within"
+msgstr "Со сроком решения"
+
+msgid "Metrics"
+msgstr "Метрика"
+
+msgid "Period for Metrics"
+msgstr "Период метрики"
+
+msgid "Current month"
+msgstr "Текущий месяц"
+
+msgid "Last 60 days"
+msgstr "Последние 60 дней"
+
+msgid "Show Server info"
+msgstr "Показать информацию о сервере"
+
+msgid "Tickets Page"
+msgstr "Страница заявок"
+
+msgid "Widgets settings"
+msgstr "Настройка элементов"
+
+msgid "Summary Report"
+msgstr "Сводный отчет"
+
+msgid "Summary"
+msgstr "Сводка"
+
+msgid "Response time"
+msgstr "Время реагирования"
+
+msgid "Selected"
+msgstr "Выбранный"
+
+msgid "Status in Tickets page"
+msgstr "Статус на странице заявок"
+
+msgid "Layout"
+msgstr "Макет"
+
+msgid "Background"
+msgstr "Фон"
+
+msgid "Charts Theme"
+msgstr "Тема графиков"
+
+msgid "Left side menu"
+msgstr "Меню слева"
+
+msgid "Top menu"
+msgstr "Верхнее меню"
+
+msgid "Info"
+msgstr "Информация"
+
+msgid "Server Info"
+msgstr "Информация о сервере"
+
+msgid "SLA"
+msgstr "SLA"
+
+msgid "Popup"
+msgstr "всплывающие уведомления"
+
+
+

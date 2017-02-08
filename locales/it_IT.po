@@ -1,0 +1,493 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# Stevenes Donato <stevenesdonato@gmail.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: GLPI Project\n"
+"Rebyt-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-08 15:21+0100\n"
+"PO-Revision-Date: 2014-09-18 17:25+0100\n"
+"Last-Translator: Luciano Cataldo <lucianocataldo@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.6.9\n"
+"Language: it_IT\n"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Tickets"
+msgstr "Ticket"
+
+msgid "Reports"
+msgstr "Report"
+
+msgid "Charts"
+msgstr "Grafici"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Tickets Statistics"
+msgstr "Statistiche Ticket"
+
+msgid "by Technician"
+msgstr "per Tecnico"
+
+msgid "by Requester"
+msgstr "per Richiedente"
+
+msgid "by Date"
+msgstr "per Data"
+
+msgid "Overall"
+msgstr "Tutti"
+
+msgid "Today"
+msgstr "Oggi"
+
+msgid "Total"
+msgstr "Totale"
+
+msgid "users"
+msgstr "utenti"
+
+msgid "active"
+msgstr "attivo"
+
+msgid "Tickets Evolution"
+msgstr "Evoluzione Ticket"
+
+msgid "Tickets by Status"
+msgstr "Ticket per Stato"
+
+msgid "Tickets by Entity"
+msgstr "Ticket per Entità"
+
+msgid "Tickets by Category"
+msgstr "Ticket per Categoria"
+
+msgid "Daily Evolution"
+msgstr "Evoluzione giornaliera"
+
+msgid "Tickets Total"
+msgstr "Ticket Totale"
+
+msgid "by Entity"
+msgstr "per Entità"
+
+msgid "TOP 10 - Requester"
+msgstr "TOP 10 - Richiedente"
+
+msgid "Entity"
+msgstr "Entità"
+
+msgid "Open Tickets"
+msgstr "Ticket Aperti"
+
+msgid "Today Tickets"
+msgstr "Ticket Odierni"
+
+msgid "by Group"
+msgstr "per Gruppo"
+
+msgid "Group"
+msgstr "Gruppo"
+
+msgid "Satisfaction"
+msgstr "Gradimento"
+
+msgid "Late"
+msgstr "Late"
+
+msgid "Opened Tickets by Status"
+msgstr "Ticket Aperti per Stato"
+
+msgid "Last Tickets"
+msgstr "Ultimi Ticket"
+
+msgid "All"
+msgstr "Tutti"
+
+msgid "New version"
+msgstr "Nuova versione"
+
+msgid "avaliable"
+msgstr "disponibile "
+
+msgid "January"
+msgstr "Gennaio"
+
+msgid "February"
+msgstr "Febbraio"
+
+msgid "March"
+msgstr "March"
+
+msgid "April"
+msgstr "Aprile"
+
+msgid "May"
+msgstr "Maggio"
+
+msgid "June"
+msgstr "Giugno"
+
+msgid "July"
+msgstr "Luglio"
+
+msgid "August"
+msgstr "Agosto"
+
+msgid "September"
+msgstr "Settembre"
+
+msgid "October"
+msgstr "Ottobre"
+
+msgid "November"
+msgstr "Novembre"
+
+msgid "December"
+msgstr "Dicembre"
+
+msgid "Sunday"
+msgstr "Domenica"
+
+msgid "Monday"
+msgstr "Lunedì"
+
+msgid "Tuesday"
+msgstr "Martedì"
+
+msgid "Wednesday"
+msgstr "Mercoledì"
+
+msgid "Thursday"
+msgstr "Giovedì "
+
+msgid "Friday"
+msgstr "Venerdì"
+
+msgid "Saturday"
+msgstr "Sabato"
+
+msgid "Consult"
+msgstr "Consultare"
+
+msgid "Clean"
+msgstr "Cancellare"
+
+msgid "No ticket found"
+msgstr "Nessun ticket trovato"
+
+msgid "Select a technician"
+msgstr "Seleziona un tecnico"
+
+msgid "Select a requester"
+msgstr "Seleziona un richiedente"
+
+msgid "Title"
+msgstr "Titolo"
+
+msgid "Opening date"
+msgstr "Data di apertura"
+
+msgid "Close date"
+msgstr "Data di chiusura"
+
+msgid "Technician"
+msgid_plural "Technicians"
+msgstr[0] "Tecnico"
+msgstr[1] "Tecnicos"
+
+msgid "Closed"
+msgstr "Chiuso"
+
+msgid "Previous"
+msgstr "Precedente"
+
+msgid "Next"
+msgstr "Successivo"
+
+msgid "Requester"
+msgstr "Richiedente"
+
+msgid "Opened"
+msgstr "Aperto"
+
+msgid "Period"
+msgstr "Periodo"
+
+msgid "Yesterday"
+msgstr "Ieri"
+
+msgid "Last 7 days"
+msgstr "Ultimi 7 giorni"
+
+msgid "Last 15 days"
+msgstr "Ultimi 15 giorni"
+
+msgid "Last 30 days"
+msgstr "Ultimi 30 giorni"
+
+msgid "Last 90 days"
+msgstr "Ultimi 90 giorni"
+
+msgid "Last 180 days"
+msgstr "Ultimi 180 giorni"
+
+msgid "Last 3 months"
+msgstr "Ultimi 3 mesi"
+
+msgid "Select a entity"
+msgstr "Seleziona una entità"
+
+msgid "Select a group"
+msgstr "Seleziona un gruppo"
+
+msgid "Version"
+msgstr "Versione"
+
+msgid "Developed by"
+msgstr "Sviluppato da"
+
+msgid "User rights management"
+msgstr "gestione dei diritti degli utenti"
+
+msgid "Tab display"
+msgstr "Scheda di visualizzazione"
+
+msgid "Tickets by Source"
+msgstr "Ticket per Sorgente"
+
+msgid "Last Events"
+msgstr "Ultimi Eventi"
+
+msgid "Logged Users"
+msgstr "Utenti Registrati"
+
+msgid "Computers by Operating System"
+msgstr "Computer per Sistema Operativo"
+
+msgid "Computers by Type"
+msgstr "Computer per Tipo"
+
+msgid "Quantity"
+msgstr "Quantità"
+
+msgid "Monitors by Manufacturer"
+msgstr "Schermi per Marca"
+
+msgid "Monitors by Model"
+msgstr "Schermi per Modello"
+
+msgid "Printers by Manufacturer"
+msgstr "Stampanti per Marca"
+
+msgid "Printers by Model"
+msgstr "Stampanti per Modello"
+
+msgid "Networkequipments by Manufacturer"
+msgstr "Apparato di rete per Marca"
+
+msgid "Networkequipments by Model"
+msgstr "Apparato di rete per Modello"
+
+msgid "Phones by Manufacturer"
+msgstr "Telefoni per Marca"
+
+msgid "Phones by Model"
+msgstr "Telefoni per Modello"
+
+msgid "Peripherals by Manufacturer"
+msgstr "Periferiche per Marca"
+
+msgid "Peripherals by Model"
+msgstr "Periferiche per Modello"
+
+msgid "Top 10 - Software Vendors"
+msgstr "Top 10 - Software per Vendor"
+
+msgid "Top 10 - Software Install"
+msgstr "Top 10 - Software Installato"
+
+msgid "Cartridges by Manufacturer"
+msgstr "Cartucce per Marca"
+
+msgid "Used"
+msgstr "Usato"
+
+msgid "Assets by Type"
+msgstr "Asset per Tipo"
+
+msgid "Unknown"
+msgstr "Sconosciuto"
+
+msgid "Computer"
+msgstr "Computer"
+
+msgid "Monitor"
+msgstr "Schermo"
+
+msgid "Printer"
+msgstr "Stampante"
+
+msgid "Networkequipment"
+msgstr "Apparato di rete"
+
+msgid "Phone"
+msgstr "Telefono"
+
+msgid "Peripheral"
+msgstr "Periferiche"
+
+msgid "Map"
+msgstr "Mappa"
+
+msgid "Tickets Map"
+msgstr "Mappa Ticket"
+
+msgid "Fill in entities: address, city, state and country."
+msgstr "Riempire in entità: indirizzo, città, stato e paese."
+
+msgid "Select"
+msgstr "Seleziona"
+
+msgid "by Category"
+msgstr "per Categoria"
+
+msgid "Select a category"
+msgstr "Seleziona una categoria"
+
+msgid "by Location"
+msgstr "per Posizione"
+
+msgid "Select a location"
+msgstr "Seleziona una posizione"
+
+msgid "Welcome"
+msgstr "Benvenuto"
+
+msgid "Select a asset"
+msgstr "Seleziona un asset"
+
+msgid "by Assets"
+msgstr "per Asset"
+
+msgid "Print"
+msgstr "Stampa"
+
+msgid "by SLA"
+msgstr "per SLA"
+
+msgid "Select a SLA"
+msgstr "Seleziona uno SLA"
+
+msgid "Current"
+msgstr "Corrente"
+
+msgid "Current year"
+msgstr "Anno in corso"
+
+msgid "Period in index page"
+msgstr "Periodo in pagina di indice"
+
+msgid "Theme"
+msgstr "Tema"
+
+msgid "by Type"
+msgstr "per Tipo"
+
+msgid "Select a type"
+msgstr "Seleziona un tipo"
+
+msgid "Select a manufacturer"
+msgstr "Seleziona un costruttore"
+
+msgid "Weekly Tickets"
+msgstr "Ticket Settimanali"
+
+msgid "Show/hide columns"
+msgstr "Mostra/Nascondi colonne "
+
+msgid "day"
+msgstr "giorno"
+
+msgid "days"
+msgstr "giorni"
+
+msgid "Ticket Solving Period"
+msgstr "Tempo di Soluzione di Tickets"
+
+msgid "Open Tickets Age"
+msgstr "Age di Tickets Aperto"
+
+msgid "My Dashboard"
+msgstr "Il mio Cruscotto"
+
+msgid "Tickets by Priority"
+msgstr "Chiamate per Priorità"
+
+msgid "Solved"
+msgstr "Risolto"
+
+msgid "Tickets across time"
+msgstr "Tickets per tempo"
+
+msgid "Tickets by hour"
+msgstr "Tickets per ora"
+
+msgid "Tickets by week day"
+msgstr "Tickets per giorno della settimana"
+
+msgid "Tickets by month"
+msgstr "Tickets per mesi"
+
+msgid "Due Date"
+msgstr "Data di scadenza"
+
+msgid "Overdue"
+msgstr "In Ritardo"
+
+msgid "Within"
+msgstr "Entro"
+
+msgid "Metrics"
+msgstr "Metricas"
+
+msgid "Period for Metrics"
+msgstr "Periodo para Metricas"
+
+msgid "Current month"
+msgstr "Questo mese"
+
+msgid "Last 60 days"
+msgstr "Ultimi 60 giorni"
+
+msgid "Show Server info"
+msgstr "Visualizzare le informazioni del server"
+
+msgid "Tickets Page"
+msgstr "Pagina de Tickets"
+
+msgid "Widgets settings"
+msgstr "Configurazione de Widgets"
+
+msgid "Summary Report"
+msgstr "Relazione di Sintesi"
+
+msgid "Summary"
+msgstr "Sintesi"
+
+msgid "Selected"
+msgstr "Selezionato"
+
+msgid "Popup"
+msgstr "Pop-up"

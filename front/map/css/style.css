@@ -1,0 +1,71 @@
+#headxx {
+	width: 950px;
+   margin-left: -500px;
+	left: 53%;
+	position: relative;
+	background-color: #fff;
+	color: #fff;
+	padding-top: 20px;
+	padding-bottom: 2px;
+
+ /* Rounded Corners */
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: 4px 4px 4px #888888;
+}
+
+
+#titulo {
+	min-width: 900px;
+	width: 950px;
+	margin-left: -500px;
+	left: 50%; 
+	/*margin-top: 40px; */
+	margin-bottom: 20px;
+	position: relative; 
+	text-align: center;
+	color:#000099; 
+	font-size:26pt; 
+	font-weight:bold; 
+	/*font-family: 'Verdana, sans-serif';  */
+	/*text-shadow:0.1em 0.0em 0.1em rgba(4,4,4,.5);*/
+	text-shadow:0.0em 0.1em 0.1em #888888;
+
+}
+
+#conteudo {
+ 	min-width: 900px;
+	width: 950px;
+	margin-left: -500px;
+	left: 50%; 
+	margin-bottom: 20px;
+	position: relative; 
+	text-align: center;
+	font-size:26pt; 
+	font-weight:bold; 
+	text-shadow:0.0em 0.1em 0.1em #888888;
+
+}
+
+#datas-tec {
+   min-width: 800px;
+	width: 900px;
+   margin-left: -300px;
+	left: 52%;
+	margin-top: 25px;
+	position: relative;
+	text-align: center;
+}
+
+#voltar {
+   min-width: 800px;
+	width: 500px;
+   margin-left: -300px;
+	left: 38%;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	position: relative;
+	text-align: center;
+}
+

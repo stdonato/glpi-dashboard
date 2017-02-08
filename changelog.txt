@@ -1,0 +1,19 @@
+Versão 0.8.0:
+
+- Relatório de tarefas por entidade;
+- Opção para ocultar o título do chamado nas telas de chamados;
+- Atualização da biblioteca Highcharts;
+- Correção na exportação de relatórios;
+- Correções de bugs diversos;
+- Você agora pode me comprar uma cerveja pelo paypal; :)
+
+
+Version 0.8.0:
+
+- New Tasks by Entity report;
+- Option to hide ticket tittle in Tickets page;
+- Highcharts updated; 
+- Fix reports export;
+- Fix minor bugs;
+- Now you can buy me a beer in Paypal; :)
+

@@ -1,0 +1,530 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Stevenes Donato <stevenesdonato@gmail.com>, 2014
+
+msgid ""
+msgstr ""
+"Project-Id-Version: GLPI Project\n"
+"Rebyt-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-08 15:21+0100\n"
+"PO-Revision-Date: 2014-02-08 15:21+0400\n"
+"Last-Translator: Stevenes Donato <stevenesdonato@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+
+msgid "Dashboard"
+msgstr "Painel"
+
+msgid "Tickets"
+msgstr "Chamados"
+
+msgid "Reports"
+msgstr "Relatórios"
+
+msgid "Charts"
+msgstr "Gráficos"
+
+msgid "Home"
+msgstr "Início"
+
+msgid "Tickets Statistics"
+msgstr "Estatísticas de Chamados"
+
+msgid "by Technician"
+msgstr "por Técnico"
+
+msgid "by Requester"
+msgstr "por Requerente"
+
+msgid "by Date"
+msgstr "por Data"
+
+msgid "Overall"
+msgstr "Geral"
+
+msgid "Today"
+msgstr "Hoje"
+
+msgid "Total"
+msgstr "no Total"
+
+msgid "users"
+msgstr "usuários"
+
+msgid "active"
+msgstr "ativos"
+
+msgid "Tickets Evolution"
+msgstr "Número de Chamados"
+
+msgid "Tickets by Status"
+msgstr "Chamados por Status"
+
+msgid "Tickets by Entity"
+msgstr "Chamados por Entidade"
+
+msgid "Tickets by Category"
+msgstr "Chamados por Categoria"
+
+msgid "Daily Evolution"
+msgstr "Evolução Diária"
+
+msgid "Tickets Total"
+msgstr "Total de Chamados"
+
+msgid "by Entity"
+msgstr "por Entidade"
+
+msgid "TOP 10 - Requester"
+msgstr "TOP 10 - Requerentes"
+
+msgid "Entity"
+msgstr "Entidade"
+
+msgid "Open Tickets"
+msgstr "Chamados Abertos"
+
+msgid "Today Tickets"
+msgstr "Chamados de Hoje"
+
+msgid "by Group"
+msgstr "por Grupo"
+
+msgid "Group"
+msgstr "Grupo"
+
+msgid "Satisfaction"
+msgstr "Satisfação"
+
+msgid "Late"
+msgstr "Atrasado"
+
+msgid "Opened Tickets by Status"
+msgstr "Chamados Abertos por Status"
+
+msgid "Last Tickets"
+msgstr "Últimos Chamados"
+
+msgid "All"
+msgstr "Todos"
+
+msgid "New version"
+msgstr "Nova versão"
+
+msgid "avaliable"
+msgstr "disponível"
+
+msgid "January"
+msgstr "Janeiro"
+
+msgid "February"
+msgstr "Fevereiro"
+
+msgid "March"
+msgstr "Março"
+
+msgid "April"
+msgstr "Abril"
+
+msgid "May"
+msgstr "Maio"
+
+msgid "June"
+msgstr "Junho"
+
+msgid "July"
+msgstr "Julho"
+
+msgid "August"
+msgstr "Agosto"
+
+msgid "September"
+msgstr "Setembro"
+
+msgid "October"
+msgstr "Outubro"
+
+msgid "November"
+msgstr "Novembro"
+
+msgid "December"
+msgstr "Dezembro"
+
+msgid "Sunday"
+msgstr "Domingo"
+
+msgid "Monday"
+msgstr "Segunda-feira"
+
+msgid "Tuesday"
+msgstr "Terça-feira"
+
+msgid "Wednesday"
+msgstr "Quarta-feira"
+
+msgid "Thursday"
+msgstr "Quinta-feira"
+
+msgid "Friday"
+msgstr "Sexta-feira"
+
+msgid "Saturday"
+msgstr "Sábado"
+
+msgid "Consult"
+msgstr "Consultar"
+
+msgid "Clean"
+msgstr "Limpar"
+
+msgid "No ticket found"
+msgstr "Nenhum chamado encontrado"
+
+msgid "Select a technician"
+msgstr "Selecione um técnico"
+
+msgid "Select a requester"
+msgstr "Selecione um requerente"
+
+msgid "Title"
+msgstr "Título"
+
+msgid "Opening date"
+msgstr "Aberto em"
+
+msgid "Close date"
+msgstr "Fechado em"
+
+msgid "Technician"
+msgid_plural "Technicians"
+msgstr[0] "Técnico"
+msgstr[1] "Técnicos"
+
+msgid "Closed"
+msgstr "Fechado"
+
+msgid "Previous"
+msgstr "Anterior"
+
+msgid "Next"
+msgstr "Próxima"
+
+msgid "Requester"
+msgstr "Requerente"
+
+msgid "Opened"
+msgstr "Aberto"
+
+msgid "Period"
+msgstr "Período"
+
+msgid "Yesterday"
+msgstr "Ontem"
+
+msgid "Last 7 days"
+msgstr "Últimos 7 dias"
+
+msgid "Last 15 days"
+msgstr "Últimos 15 dias"
+
+msgid "Last 30 days"
+msgstr "Últimos 30 dias"
+
+msgid "Last 90 days"
+msgstr "Últimos 90 dias"
+
+msgid "Last 180 days"
+msgstr "Últimos 180 dias"
+
+msgid "Last 3 months"
+msgstr "Últimos 3 meses"
+
+msgid "Select a entity"
+msgstr "Selecione uma entidade"
+
+msgid "Select a group"
+msgstr "Selecione um grupo"
+
+msgid "Version"
+msgstr "Versão"
+
+msgid "Developed by"
+msgstr "Desenvolvido por"
+
+msgid "User rights management"
+msgstr "User rights management"
+
+msgid "Tab display"
+msgstr "Tab display"
+
+msgid "Tickets by Source"
+msgstr "Chamados por Origem"
+
+msgid "Last Events"
+msgstr "Últimos Eventos"
+
+msgid "Logged Users"
+msgstr "Requerentes Conectados"
+
+msgid "Computers by Operating System"
+msgstr "Computadores por Sistema Operacional"
+
+msgid "Computers by Type"
+msgstr "Computadores por Tipo"
+
+msgid "Quantity"
+msgstr "Quantidade"
+
+msgid "Monitors by Manufacturer"
+msgstr "Monitores por Fabricante"
+
+msgid "Monitors by Model"
+msgstr "Monitores por Modelo"
+
+msgid "Printers by Manufacturer"
+msgstr "Impressoras por Fabricante"
+
+msgid "Printers by Model"
+msgstr "Impressoras por Modelo"
+
+msgid "Networkequipments by Manufacturer"
+msgstr "Redes por Fabricante"
+
+msgid "Networkequipments by Model"
+msgstr "Redes por Modelo"
+
+msgid "Phones by Manufacturer"
+msgstr "Telefones por Fabricante"
+
+msgid "Phones by Model"
+msgstr "Telefones por Modelo"
+
+msgid "Peripherals by Manufacturer"
+msgstr "Dispositivos por Fabricante"
+
+msgid "Peripherals by Model"
+msgstr "Dispositivos por Modelo"
+
+msgid "Top 10 - Software Vendors"
+msgstr "Top 10 - Softwares por Fabricante"
+
+msgid "Top 10 - Software Install"
+msgstr "Top 10 - Instalações de Software"
+
+msgid "Cartridges by Manufacturer"
+msgstr "Cartuchos por Fabricante"
+
+msgid "Used"
+msgstr "Usados"
+
+msgid "Assets by Type"
+msgstr "Ativos por Tipo"
+
+msgid "Unknown"
+msgstr "Não informado"
+
+msgid "Computer"
+msgstr "Computador"
+
+msgid "Monitor"
+msgstr "Monitor"
+
+msgid "Printer"
+msgstr "Impressora"
+
+msgid "Networkequipment"
+msgstr "Redes"
+
+msgid "Phone"
+msgstr "Telefone"
+
+msgid "Peripheral"
+msgstr "Dispositivos"
+
+msgid "Map"
+msgstr "Mapa"
+
+msgid "Tickets Map"
+msgstr "Mapa de Chamados"
+
+msgid "Fill in entities: address, city, state and country."
+msgstr "Preencha nas entidades: endereço, cidade, estado e país."
+
+msgid "Select"
+msgstr "Selecione"
+
+msgid "by Category"
+msgstr "por Categoria"
+
+msgid "Select a category"
+msgstr "Selecione uma categoria"
+
+msgid "by Location"
+msgstr "por Localização"
+
+msgid "Select a location"
+msgstr "Selecione uma localização"
+
+msgid "Welcome"
+msgstr "Bem-vindo"
+
+msgid "Select a asset"
+msgstr "Selecione um ativo"
+
+msgid "by Assets"
+msgstr "por Ativos"
+
+msgid "Print"
+msgstr "Imprimir"
+
+msgid "by SLA"
+msgstr "por SLA"
+
+msgid "Select a SLA"
+msgstr "Selecione um SLA"
+
+msgid "Current"
+msgstr "Atual"
+
+msgid "Current year"
+msgstr "Ano atual"
+
+msgid "Period in index page"
+msgstr "Período para página inicial"
+
+msgid "Theme"
+msgstr "Tema"
+
+msgid "by Type"
+msgstr "por Tipo"
+
+msgid "Select a type"
+msgstr "Selecione um tipo"
+
+msgid "Select a manufacturer"
+msgstr "Selecione um fabricante"
+
+msgid "Weekly Tickets"
+msgstr "Chamados da Semana"
+
+msgid "Show/hide columns"
+msgstr "Exibir/Ocultar colunas"
+
+msgid "day"
+msgstr "dia"
+
+msgid "days"
+msgstr "dias"
+
+msgid "Ticket Solving Period"
+msgstr "Tempo de Solução de Chamados"
+
+msgid "Open Tickets Age"
+msgstr "Idade dos Chamados Abertos"
+
+msgid "My Dashboard"
+msgstr "Meu Painel"
+
+msgid "Tickets by Priority"
+msgstr "Chamados por Prioridade"
+
+msgid "Solved"
+msgstr "Solucionado"
+
+msgid "Tickets across time"
+msgstr "Chamados por Tempo"
+
+msgid "Tickets by hour"
+msgstr "Chamados por horário"
+
+msgid "Tickets by week day"
+msgstr "Chamados por dia da semana"
+
+msgid "Tickets by month"
+msgstr "Chamados por mês"
+
+msgid "Due Date"
+msgstr "Vencimento"
+
+msgid "Overdue"
+msgstr "Vencido"
+
+msgid "Within"
+msgstr "No prazo"
+
+msgid "Metrics"
+msgstr "Métricas"
+
+msgid "Period for Metrics"
+msgstr "Período para Métricas"
+
+msgid "Current month"
+msgstr "Mês atual"
+
+msgid "Last 60 days"
+msgstr "Últimos 60 dias"
+
+msgid "Show Server info"
+msgstr "Exibir informação do servidor"
+
+msgid "Tickets Page"
+msgstr "Página de Chamados"
+
+msgid "Widgets settings"
+msgstr "Configuração de Widgets"
+
+msgid "Summary Report"
+msgstr "Relatório Sintético"
+
+msgid "Summary"
+msgstr "Sintético"
+
+msgid "Response time"
+msgstr "Tempo de Resposta"
+
+msgid "Selected"
+msgstr "Selecionados"
+
+msgid "Status in Tickets page"
+msgstr "Status exibidos na página de Chamados"
+
+msgid "Layout"
+msgstr "Layout"
+
+msgid "Background"
+msgstr "Imagem da página"
+
+msgid "Charts Theme"
+msgstr "Tema dos gráficos"
+
+msgid "Left side menu"
+msgstr "Menu à esquerda"
+
+msgid "Top menu"
+msgstr "Menu no topo"
+
+msgid "Info"
+msgstr "Informações"
+
+msgid "Server Info"
+msgstr "Server Info"
+
+msgid "SLA"
+msgstr "SLA"
+
+msgid "Popup"
+msgstr "Popup"
+
+msgid "to own"
+msgstr "para aceitar"
+
+msgid "to resolve"
+msgstr "para solução"
+

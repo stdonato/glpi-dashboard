@@ -1,0 +1,9 @@
+ html, body, #map_canvas, #map-canvas {
+        height: 90%;
+		  width: 97.5%;
+        margin: 0px;
+		  margin-left: 15px;	
+        padding: 0px;
+        margin-top: 30px;
+   
+      }
