@@ -1704,3 +1704,12 @@ td > a:hover {
 #graf_linhas {margin-top: 25px;}
 
 .head-asset {width: 98%;}
+
+.mapkey {
+	height:320px; 
+	margin:auto; 
+	margin-top:30px; 
+	float:none; 
+	text-align:left; 
+	font-size:14pt;
+}

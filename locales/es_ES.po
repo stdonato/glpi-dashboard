@@ -488,3 +488,21 @@ msgstr "Sucinto"
 
 msgid "Selected"
 msgstr "Seleccionados"
+
+msgid "Enter the latitude and longitude in Administration -> Entities -> Dashboard Map"
+msgstr "Insira una latitud y longitud en Administración -> Entidad ->  Mapa Tablero de informes"
+
+msgid "Google maps API key"
+msgstr "Google mapas API key"
+
+msgid "Dashboard map"
+msgstr "Mapa Tablero de informes"
+
+msgid "To configure Google maps"
+msgstr "Para configurar los mapas de Google"
+
+msgid "Create an API key"
+msgstr "Crear una clave de API"
+
+msgid "Paste your key bellow and save"
+msgstr "Pegue la clave abajo y guarde"

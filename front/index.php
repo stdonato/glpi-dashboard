@@ -6,19 +6,7 @@ include ("../../../config/config.php");
 global $DB;
 
 Session::checkLoginUser();
-/*
-function find_SQL_Version() {
-   $output = shell_exec('mysql -V');
-   preg_match('@[0-9]+\.[0-9]+\.[0-9]+@', $output, $version);
-   return $version[0][0].".".$version[0][2];
-}
 
-//echo 'Your SQL version is ' . find_SQL_Version(); 
-if(find_SQL_Version() >= 5.7) {
-*/	
-//	$mode = "SET GLOBAL sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';";
-//	$DB->query($mode);
-//}
 
 $query_lay = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'layout' AND users_id = ".$_SESSION['glpiID']." ";																
 					$result_lay = $DB->query($query_lay);

@@ -37,7 +37,7 @@ $(function () {
             chart: {            
             type: 'pie',
             options3d: {
-				enabled: true,
+				enabled: false,
                 alpha: 45,
                 beta: 0
             },                               	
@@ -45,17 +45,16 @@ $(function () {
                 plotBorderWidth: null,
                 plotShadow: false
             },
-            title: {
-                //text: '" . __('Opened Tickets by Status','dashboard') . "'
+            title: {                
                 text: ''                
             },
              legend: {
                 layout: 'horizontal',
-                align: 'middle',
+                align: 'center',
                 verticalAlign: 'bottom',
                 x: 0,
                 y: 0,
-                floating: true,
+                floating: false,
                 borderWidth: 0,
                // backgroundColor: '#FFFFFF',
                 adjustChartSize: true
@@ -70,8 +69,8 @@ $(function () {
                 pie: {
                     allowPointSelect: true,
                     cursor: 'pointer',
-                    size: '84%',
-                    innerSize: 84,
+                    size: '95%',                    
+                    innerSize: 90,
                     depth: 40,
                     dataLabels: {
 									format: '{point.y} - ( {point.percentage:.1f}% )',

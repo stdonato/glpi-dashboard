@@ -1,7 +1,7 @@
 <?php
 
 if($data_ini == $data_fin) {
-$datas = "LIKE '".$data_ini."%'";
+	$datas = "LIKE '".$data_ini."%'";
 }
 
 $data1 = $data_ini;

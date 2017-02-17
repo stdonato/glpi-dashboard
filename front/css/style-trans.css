@@ -1655,5 +1655,12 @@ td > a:hover {
 	margin-bottom: 20px;
 }
 
-
+.mapkey {
+	height:320px; 
+	margin:auto; 
+	margin-top:30px; 
+	float:none; 
+	text-align:left; 
+	font-size:14pt;
+}
 

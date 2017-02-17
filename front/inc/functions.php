@@ -5,10 +5,10 @@ function conv_data($data) {
         $source = $data;
         $date = new DateTime($source);
         
-	 switch ($_SESSION['glpidate_format']) {
-    case "0": $dataf = $date->format('Y-m-d'); break;
-    case "1": $dataf = $date->format('d-m-Y'); break;
-    case "2": $dataf = $date->format('m-d-Y'); break;    
+		 switch ($_SESSION['glpidate_format']) {
+	    case "0": $dataf = $date->format('Y-m-d'); break;
+	    case "1": $dataf = $date->format('d-m-Y'); break;
+	    case "2": $dataf = $date->format('m-d-Y'); break;    
     }        
         
         //return $date->format('d-m-Y');}
@@ -24,14 +24,14 @@ function conv_data_hora($data) {
         $source = $data;
         $date = new DateTime($source);
 
-    switch ($_SESSION['glpidate_format']) {
-    case "0": $dataf = $date->format('Y-m-d H:i'); break;
-    case "1": $dataf = $date->format('d-m-Y H:i'); break;
-    case "2": $dataf = $date->format('m-d-Y H:i'); break;    
-    }                 
-        
-        //return $date->format('d-m-Y H:i');}
-        return $dataf;}
+	    switch ($_SESSION['glpidate_format']) {
+		    case "0": $dataf = $date->format('Y-m-d H:i'); break;
+		    case "1": $dataf = $date->format('d-m-Y H:i'); break;
+		    case "2": $dataf = $date->format('m-d-Y H:i'); break;    
+	    }                 
+                
+    	 return $dataf; 
+    } 
     else {
         return "";
     }

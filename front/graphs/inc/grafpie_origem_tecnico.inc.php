@@ -2,28 +2,30 @@
 <?php
 
 if($data_ini == $data_fin) {
-$datas = "LIKE '".$data_ini."%'";	
+	$datas = "LIKE '".$data_ini."%'";	
 }	
 
 else {
-$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";	
+	$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";	
 }
-
 
 $query2 = "
 SELECT glpi_requesttypes.name AS request, count( glpi_tickets.id ) AS total
-FROM `glpi_tickets` , glpi_requesttypes
+FROM `glpi_tickets`, glpi_requesttypes, glpi_tickets_users
 WHERE glpi_tickets.is_deleted =0
 AND glpi_tickets.date ".$datas."
 AND glpi_tickets.`requesttypes_id` = glpi_requesttypes.id
-".$entidade."
+".$entidade_age."
+AND glpi_tickets_users.users_id = ".$id_tec."
+AND glpi_tickets_users.type = 2
+AND glpi_tickets_users.tickets_id = glpi_tickets.id
 GROUP BY request
 ORDER BY total DESC";
-
 		
 $result2 = $DB->query($query2) or die('erro');
 
 $arr_grf2 = array();
+
 while ($row_result = $DB->fetch_assoc($result2)) { 
 	$v_row_result = $row_result['request'];
 	$arr_grf2[$v_row_result] = $row_result['total'];			
@@ -42,7 +44,7 @@ echo "
 $(function () {		
     	   		
 		// Build the chart
-        $('#graf4').highcharts({
+        $('#graf_source').highcharts({
             chart: {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,

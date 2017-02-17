@@ -1,40 +1,18 @@
 <?php
 
-class PluginDashboardConfig extends CommonDBTM {
-
-   static protected $notable = true;
-   
-   /**
-    * @see CommonGLPI::getMenuName()
-   **/
-   static function getMenuName() {
-      return __('Dashboard');
-   }
-   
-   /**
-    *  @see CommonGLPI::getMenuContent()
-    *
-    *  @since version 0.5.6
-   **/
-   static function getMenuContent() {
-   	global $CFG_GLPI;
-   
-   	$menu = array();
-
-      $menu['title']   = __('Dashboard','dashboard');
-      $menu['page']    = '/plugins/dashboard/front/index.php';
-   	return $menu;
-   }
-}
-
-function plugin_init_dashboard() {
+function plugin_init_dashboard() {		
   
    global $PLUGIN_HOOKS, $LANG ;
        
+   Plugin::registerClass('PluginDashboardConfig', [
+      'addtabon' => ['Entity']
+   ]);
+
+	 $PLUGIN_HOOKS['config_page']['dashboard'] = '../../front/config.form.php?forcetab=PluginDashboardConfig$1';
+   
     $PLUGIN_HOOKS['csrf_compliant']['dashboard'] = true;   
     $PLUGIN_HOOKS["menu_toadd"]['dashboard'] = array('plugins'  => 'PluginDashboardConfig');
     $PLUGIN_HOOKS['config_page']['dashboard'] = 'front/index.php';
-                
 }
 
 
@@ -42,7 +20,7 @@ function plugin_version_dashboard(){
 	global $DB, $LANG;
 
 	return array('name'			=> __('Dashboard','dashboard'),
-					'version' 			=> '0.8.0',
+					'version' 			=> '0.8.1',
 					'author'			   => '<a href="mailto:stevenesdonato@gmail.com"> Stevenes Donato </b> </a>',
 					'license'		 	=> 'GPLv2+',
 					'homepage'			=> 'https://forge.glpi-project.org/projects/dashboard',
@@ -51,7 +29,7 @@ function plugin_version_dashboard(){
 }
 
 function plugin_dashboard_check_prerequisites(){
-        if (GLPI_VERSION>=0.85){
+        if (GLPI_VERSION>=0.90){
                 return true;
         } else {
                 echo "GLPI version NOT compatible. Requires GLPI 0.90";

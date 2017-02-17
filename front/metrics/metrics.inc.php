@@ -447,7 +447,6 @@ $query_sat =
 	$periody	
 	$entidade ";
 	
-//	AND glpi_tickets.date BETWEEN '" . $lastweek ." 00:00:00' AND '". $yesterday." 23:59:59'
 	 
 	$result_staty = $DB->query($query_staty);
 	

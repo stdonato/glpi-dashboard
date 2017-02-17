@@ -81,23 +81,21 @@ function chart(theme) {
 <body style="background-color: #e5e5e5;">
 
 <div id='content'>
-	<div id='container-fluid' style="margin: 0px 5% 0px 5%;"> 	
+	<div id='container-fluid' style="margin: 0px 5% 0px 7%;"> 	
 	
-		<div id="head-tic" class="fluid">	
-			<a href="./index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px; margin-top:15px;"></i><span></span></a>
+		<div id="head-tic" class="fluid" >	
+			<a href="./index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:5px; margin-top:15px;"></i><span></span></a>
 			<div id="titulo" class="tit-config" style="margin-bottom: 25px;"> <a href="config.php" ><?php echo __('Setup')." ".__('Dashboard','dashboard'); ?> </a></div> 
 		</div>
 				                                                           
-			<div id="charts" class="fluid chart" style="background-color:#fff;">
-				<!-- <div id="pad-wrapper" style="background-color:#e5e5e5;"> -->		
+			<div id="charts" class="fluid chart" style="background-color:#fff;">				
 			
 					<div id="tabela" class="fluid" >		
 					<?php
 					
 					// selected entity for index
 					$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
-					$result_e = $DB->query($sql_e);
-					//$prev_ent = $DB->result($result_e,0,'value');
+					$result_e = $DB->query($sql_e);					
 					$prev_ent = $DB->fetch_assoc($result_e);	
 					
 			      echo '<div id="datas-tec2" class="col-md-12 fluid" style="background-color:#fff; margin-top:20px;">';
@@ -164,9 +162,9 @@ function chart(theme) {
 																		
 															
 		echo '<div id="datas-tecx" class="col-md-12 fluid">'; 																															 
-		echo "<table id='main' class='table-config' border='0' style='width:700px;'>";
-			echo "<tr>";
-				echo "<td>";			                                		 
+		echo "<table id='main' class='col-md-12 table-config' border='0' style='width:700px; margin:auto; float:none;'>\n";
+			echo "<tr>\n";
+				echo "<td>\n";			                                		 
 			 		echo '<form id="form2" name="form2" method="post" action="config.php?conf=1">';   					
 					echo " -- ".__('Entity','dashboard').":&nbsp;";				
 					//echo dropdown( $name, $options, $selected );	
@@ -187,7 +185,9 @@ function chart(theme) {
 				echo "</td>";		
 			echo "</tr>";
 
-				   if(isset($_REQUEST['conf']) && $_REQUEST['conf'] == 1 ) {					         								
+				   if(isset($_REQUEST['conf']) && $_REQUEST['conf'] == 1 ) {	
+				         	
+					//	if($_REQUEST['sel_ent'] != -1) {				
 								
 							$ents_sel = $_REQUEST['sel_ent'];	
 								
@@ -215,11 +215,7 @@ function chart(theme) {
 								//reload page
 								echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=config.php'>";																						
 							}												
-					}	
-					
-					echo "</table>";
-					
-					echo "<table id='main' class='table-config' border='0' >";											    
+					}												    
 			
 					// years in index
 					$sql_y = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'num_years' AND users_id = ".$_SESSION['glpiID']."";
@@ -351,7 +347,7 @@ function chart(theme) {
 					echo "<option value='4' ".$active_stat[4].">". __('Pending')."</option>\n";														
 					echo "</select>"."\n";
 										
-					echo "<tr><td align='center'><button type='button' class='btn btn-primary' onclick='javascript:this.form.submit();' style='margin-top:-25px;' > ".__('Save')."</button></td></tr>";
+					echo "<tr><td align='center'><button type='button' class='btn btn-primary' onclick='javascript:this.form.submit();' > ".__('Save')."</button></td></tr>";
 					Html::closeForm(); 										
 				echo "</td>";		
 			echo "</tr>";
@@ -359,185 +355,18 @@ function chart(theme) {
 
 				if(isset($_REQUEST['status']) && $_REQUEST['status'] == 1 ) {	
 				         																												
-						$status = implode(',',$_REQUEST['sel_stat']);												
-						
-						$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
-									  VALUES ('status', '".$status."', '".$_SESSION['glpiID']."') 
-									  ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$status."' ";																
-						$result = $DB->query($query);	
-						
-						//reload page
-						echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=config.php'>";																						
+								$status = implode(',',$_REQUEST['sel_stat']);												
+								
+								$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
+											  VALUES ('status', '".$status."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$status."' ";																
+								$result = $DB->query($query);	
+								
+								//reload page
+								echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=config.php'>";																						
 											
 					}										
-								
-
-		// Tickets page settings
-			$query_due = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'duedate' AND users_id = ".$_SESSION['glpiID']." ";																
-			$result_due = $DB->query($query_due);			
-			$due = $DB->result($result_due,0,'value');	
-
-			$query_ent = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity_cham' AND users_id = ".$_SESSION['glpiID']." ";																
-			$result_ent = $DB->query($query_ent);			
-			$ent_cham = $DB->result($result_ent,0,'value');
-			
-			$query_loc = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'location' AND users_id = ".$_SESSION['glpiID']." ";																
-			$result_loc = $DB->query($query_loc);			
-			$loc = $DB->result($result_loc,0,'value');
-			
-			$query_pop = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'popup' AND users_id = ".$_SESSION['glpiID']." ";																
-			$result_pop = $DB->query($query_pop);			
-			$pop = $DB->result($result_pop,0,'value');	
-			
-			$query_tit = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'title' AND users_id = ".$_SESSION['glpiID']." ";																
-			$result_tit = $DB->query($query_tit);			
-			$tit = $DB->result($result_tit,0,'value');		
-						
-			
-			echo "<tr>";
-			echo "<td>";								
-					echo '<form id="form6" name="form6" class="form6" method="post" action="config.php?due=1&loc=1&entity=1">';
-					
-					echo "-- ".__('Tickets Page','dashboard').":&nbsp; <br><p>";
-					
-					echo "<table><tr><td>";   						
-						echo _sx('button', 'Show')." ".__('Entity').":&nbsp;&nbsp; 
-							<select id='entity' name='entity' style='width: 130px;' onChange='reload(\"form6\")'> ";
-								if($ent_cham == 1) {							
-									echo "					
-										<option value='0'>".__('No')."</option>
-										<option value='1' selected>".__('Yes')."</option>
-									</select>";						   			
-									}
-								else 	{							
-									echo "					
-										<option value='0' selected>".__('No')."</option>
-										<option value='1'>".__('Yes')."</option>
-									</select>";						   			
-									}
-					echo "</td><td>";			
-														
-						echo _sx('button', 'Show')." ".__('Location').":&nbsp;&nbsp; 
-							<select id='loc' name='loc' style='width: 130px;' onChange='reload(\"form6\")'> ";			
-								if($loc == 1) {							
-									echo "					
-										<option value='0'>".__('No')."</option>
-										<option value='1' selected>".__('Yes')."</option>
-									</select>";						   			
-									}
-								else 	{							
-									echo "					
-										<option value='0' selected>".__('No')."</option>
-										<option value='1'>".__('Yes')."</option>
-									</select>";						   			
-									}				
-					
-					echo "</td><td>";
-						echo _sx('button', 'Show')." ".__('Due Date', 'dashboard').":&nbsp; 
-							<select id='due' name='due' style='width: 130px;' onChange='reload(\"form6\")'> ";
-								if($due == 1) {							
-									echo "					
-										<option value='0'>".__('No')."</option>
-										<option value='1' selected>".__('Yes')."</option>
-									</select><br><p>";						   			
-									}
-								else 	{							
-									echo "					
-										<option value='0' selected>".__('No')."</option>
-										<option value='1'>".__('Yes')."</option>
-									</select><br></p>";						   			
-									}				
-		
-					echo "</td><td>";				
-					echo _sx('button', 'Show')." ".__('Popup','dashboard').":&nbsp;&nbsp; 
-							<select id='pop' name='pop' style='width: 130px;' onChange='reload(\"form6\")'> ";
-								if($pop == 1) {							
-									echo "					
-										<option value='0'>".__('No')."</option>
-										<option value='1' selected>".__('Yes')."</option>
-									</select>";						   			
-									}
-								else 	{							
-									echo "					
-										<option value='0' selected>".__('No')."</option>
-										<option value='1'>".__('Yes')."</option>
-									</select>";						   			
-									}			
-
-					echo "</td><td>";				
-					echo _sx('button', 'Show')." ".__('Title').":&nbsp;&nbsp; 
-							<select id='tit' name='tit' style='width: 130px;' onChange='reload(\"form6\")'> ";
-								if($tit == 1) {							
-									echo "					
-										<option value='0'>".__('No')."</option>
-										<option value='1' selected>".__('Yes')."</option>
-									</select>";						   			
-									}
-								else 	{							
-									echo "					
-										<option value='0' selected>".__('No')."</option>
-										<option value='1'>".__('Yes')."</option>
-									</select>";						   			
-									}											
-																																				
-					Html::closeForm();
-					echo "</td></tr></table>";	
-			echo "</td>";			
-			echo "</tr>";				
-			
-			if(isset($_POST['due']))  {	      	
-							
-								//Update duedate value
-								$up_due = $_POST['due'];												
-								
-								$query_due = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
-											  VALUES ('duedate', '".$up_due."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$up_due."' ";																
-								$result_due = $DB->query($query_due);																																																			
-					}	
-
-			if(isset($_POST['entity']))  {	      	
-														
-								//Update entity value
-								$up_ent = $_POST['entity'];												
-								
-								$query_ent = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
-											  VALUES ('entity_cham', '".$up_ent."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$up_ent."' ";																
-								$result_ent = $DB->query($query_ent);																																																				
-					}
-					
-			if(isset($_POST['loc']))  {	      	
-														
-								//Update location value
-								$up_loc = $_POST['loc'];												
-								
-								$query_loc = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
-											  VALUES ('location', '".$up_loc."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$up_loc."' ";																
-								$result_loc = $DB->query($query_loc);																																																				
-					}	
-					
-			if(isset($_POST['pop']))  {	      	
-														
-								//Update popup value
-								$up_pop = $_POST['pop'];												
-								
-								$query_pop = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
-											  VALUES ('popup', '".$up_pop."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$up_pop."' ";																
-								$result_pop = $DB->query($query_pop);																																																				
-					}		
-				
-		 	if(isset($_POST['tit']))  {	      	
-														
-								//Update title value
-								$up_tit = $_POST['tit'];												
-								
-								$query_tit = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
-											  VALUES ('title', '".$up_tit."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$up_tit."' ";																
-								$result_tit = $DB->query($query_tit);																																																				
-					}				
-			
-								
 																							 
-	   //index page period					                               
+					                               
 		echo "<tr>";
 		echo "<td>";					
 				
@@ -727,19 +556,190 @@ function chart(theme) {
 			
 			if(isset($_POST['info']))  {	      	
 							
-				$info = $_POST['info'];																				
-				$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
-							 VALUES ('info', '".$info."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$info."' ";																
-				$result = $DB->query($query);																																					
-			}	
+								$info = $_POST['info'];																				
+								$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
+											  VALUES ('info', '".$info."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$info."' ";																
+								$result = $DB->query($query);																																					
+					}	
 					
 					
-			// widgets config
+			// Tickets page settings
+			$query_due = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'duedate' AND users_id = ".$_SESSION['glpiID']." ";																
+			$result_due = $DB->query($query_due);			
+			$due = $DB->result($result_due,0,'value');	
+
+			$query_ent = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity_cham' AND users_id = ".$_SESSION['glpiID']." ";																
+			$result_ent = $DB->query($query_ent);			
+			$ent_cham = $DB->result($result_ent,0,'value');
+			
+			$query_loc = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'location' AND users_id = ".$_SESSION['glpiID']." ";																
+			$result_loc = $DB->query($query_loc);			
+			$loc = $DB->result($result_loc,0,'value');
+			
+			$query_pop = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'popup' AND users_id = ".$_SESSION['glpiID']." ";																
+			$result_pop = $DB->query($query_pop);			
+			$pop = $DB->result($result_pop,0,'value');
+			
+			$query_tit = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'title' AND users_id = ".$_SESSION['glpiID']." ";																
+			$result_tit = $DB->query($query_tit);			
+			$tit = $DB->result($result_tit,0,'value');				
+						
+			
+			echo "<tr>";
+			echo "<td>";								
+					echo '<form id="form6" name="form6" class="form6" method="post" action="config.php?due=1&loc=1&entity=1">';
+					
+					echo "-- ".__('Tickets Page','dashboard').":&nbsp; <br><p>";
+					
+					echo "<table><tr><td>";   						
+						echo _sx('button', 'Show')." ".__('Entity').":&nbsp;&nbsp; 
+							<select id='entity' name='entity' style='width: 130px;' onChange='reload(\"form6\")'> ";
+								if($ent_cham == 1) {							
+									echo "					
+										<option value='0'>".__('No')."</option>
+										<option value='1' selected>".__('Yes')."</option>
+									</select>";						   			
+									}
+								else 	{							
+									echo "					
+										<option value='0' selected>".__('No')."</option>
+										<option value='1'>".__('Yes')."</option>
+									</select>";						   			
+									}
+					echo "</td><td>";			
+														
+						echo _sx('button', 'Show')." ".__('Location').":&nbsp;&nbsp; 
+							<select id='loc' name='loc' style='width: 130px;' onChange='reload(\"form6\")'> ";			
+								if($loc == 1) {							
+									echo "					
+										<option value='0'>".__('No')."</option>
+										<option value='1' selected>".__('Yes')."</option>
+									</select>";						   			
+									}
+								else 	{							
+									echo "					
+										<option value='0' selected>".__('No')."</option>
+										<option value='1'>".__('Yes')."</option>
+									</select>";						   			
+									}				
+					
+					echo "</td><td>";
+						echo _sx('button', 'Show')." ".__('Due Date', 'dashboard').":&nbsp; 
+							<select id='due' name='due' style='width: 130px;' onChange='reload(\"form6\")'> ";
+								if($due == 1) {							
+									echo "					
+										<option value='0'>".__('No')."</option>
+										<option value='1' selected>".__('Yes')."</option>
+									</select><br><p>";						   			
+									}
+								else 	{							
+									echo "					
+										<option value='0' selected>".__('No')."</option>
+										<option value='1'>".__('Yes')."</option>
+									</select><br></p>";						   			
+									}				
+		
+					echo "</td><td>";				
+					echo _sx('button', 'Show')." ".__('Popup','dashboard').":&nbsp;&nbsp; 
+							<select id='pop' name='pop' style='width: 130px;' onChange='reload(\"form6\")'> ";
+								if($pop == 1) {							
+									echo "					
+										<option value='0'>".__('No')."</option>
+										<option value='1' selected>".__('Yes')."</option>
+									</select>";						   			
+									}
+								else 	{							
+									echo "					
+										<option value='0' selected>".__('No')."</option>
+										<option value='1'>".__('Yes')."</option>
+									</select>";						   			
+									}		
+									
+					echo "</td><td>";				
+					echo _sx('button', 'Show')." ".__('Title').":&nbsp;&nbsp; 
+							<select id='tit' name='tit' style='width: 130px;' onChange='reload(\"form6\")'> ";
+								if($tit == 1) {							
+									echo "					
+										<option value='0'>".__('No')."</option>
+										<option value='1' selected>".__('Yes')."</option>
+									</select>";						   			
+									}
+								else 	{							
+									echo "					
+										<option value='0' selected>".__('No')."</option>
+										<option value='1'>".__('Yes')."</option>
+									</select>";						   			
+									}
+
+																																					
+					Html::closeForm();
+					echo "</td></tr></table>";	
+			echo "</td>";			
+			echo "</tr>";				
+			
+			if(isset($_POST['due']))  {	      	
+							
+								//Update duedate value
+								$up_due = $_POST['due'];												
+								
+								$query_due = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
+											  VALUES ('duedate', '".$up_due."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$up_due."' ";																
+								$result_due = $DB->query($query_due);																																																			
+					}	
+
+			if(isset($_POST['entity']))  {	      	
+														
+								//Update entity value
+								$up_ent = $_POST['entity'];												
+								
+								$query_ent = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
+											  VALUES ('entity_cham', '".$up_ent."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$up_ent."' ";																
+								$result_ent = $DB->query($query_ent);																																																				
+					}
+					
+			if(isset($_POST['loc']))  {	      	
+														
+								//Update location value
+								$up_loc = $_POST['loc'];												
+								
+								$query_loc = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
+											  VALUES ('location', '".$up_loc."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$up_loc."' ";																
+								$result_loc = $DB->query($query_loc);																																																				
+					}	
+					
+			if(isset($_POST['pop']))  {	      	
+														
+								//Update popup value
+								$up_pop = $_POST['pop'];												
+								
+								$query_pop = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
+											  VALUES ('popup', '".$up_pop."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$up_pop."' ";																
+								$result_pop = $DB->query($query_pop);																																																				
+					}	
+					
+			if(isset($_POST['tit']))  {	      	
+														
+								//Update title value
+								$up_tit = $_POST['tit'];												
+								
+								$query_tit = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
+											  VALUES ('title', '".$up_tit."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$up_tit."' ";																
+								$result_tit = $DB->query($query_tit);																																																				
+					}										
+			
+			//index widgets
 			echo "<tr>";
 			echo "<td>";		
 			echo "-- ". __('Widgets settings','dashboard').":  &nbsp; &nbsp;  <button class='btn btn-sm btn-primary' onclick='window.localStorage.clear();'>". __('Clear')." ". __('Settings')."</button>";
 			echo "</td>";
-			echo "</tr>";		
+			echo "</tr>";	
+			
+			// google maps API key
+			echo "<tr>";
+			echo "<td>";		
+			echo "-- ". __('Google maps API key','dashboard').":  &nbsp; &nbsp;  <button class='btn btn-sm btn-primary' onclick='window.open(\"./map/map_key.php\");'>". __('Edit')."</button>";
+			echo "</td>";
+			echo "</tr>";	
 					
 			/*		
 			//file upload				
@@ -907,8 +907,7 @@ function chart(theme) {
 					<div id="trans-s" style="position:absolute; margin-left:13%; margin-top: -60%; cursor:pointer;">
 						<img src="./img/trans-s.png" alt="transparent" />
 					</div>	
-					
-					
+										
 					<div id="defaultc-s" style="position:absolute; margin-left:18%; margin-top: -40%; cursor:pointer;">
 						<img src="./img/defaultc-s.png" alt="default" />
 					</div>

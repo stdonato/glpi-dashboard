@@ -521,5 +521,22 @@ msgstr "SLA"
 msgid "Popup"
 msgstr "всплывающие уведомления"
 
+msgid "Enter the latitude and longitude in Administration -> Entities -> Dashboard Map"
+msgstr "Введите долготу и широту в Администрирование -> Организации -> Карта панели отчетов"
+
+msgid "Google maps API key"
+msgstr "Ключ API Google карт"
+
+msgid "Dashboard map"
+msgstr "Карта панели отчетов"
+
+msgid "To configure Google maps"
+msgstr "настроить ключ API"
+
+msgid "Create an API key"
+msgstr "Создать ключ API"
+
+msgid "Paste your key bellow and save"
+msgstr "Вставьте ваш ключ ниже и сохраните"
 
 

@@ -424,35 +424,39 @@ echo '<div id="name"  style="margin-top: 15px;">
 				</script>
 				
 				
-					<div id="graf_linhas" class="col-md-12" style="height: 450px; margin-top: 20px !important; margin-left: 0px;">
+					<div id="graf_linhas" class="col-md-12 col-sm-12" style="height: 450px; margin-top: 20px !important; margin-left: 0px;">
 						<?php  include ("./inc/graflinhas_tec.inc.php"); ?>
 					</div>
 				
-					<div id="graf2" class="col-md-6" >
+					<div id="graf2" class="col-md-6 col-sm-6" >
 						<?php  include ("./inc/grafpie_stat_tec.inc.php");  ?>
 					</div>
 				
-					<div id="graf_tipo" class="col-md-6" style="margin-left: 0%;">
+					<div id="graf_tipo" class="col-md-6 col-sm-6" style="margin-left: 0%;">
 						<?php include ("./inc/grafpie_tipo_tec.inc.php");  ?>
 					</div>
 				
-					<div id="graf4" class="col-md-12" style="height: 450px; margin-left: 0px;">
+					<div id="graf4" class="col-md-12 col-sm-12" style="height: 450px; margin-left: 0px;">
 						<?php include ("./inc/grafcat_tec.inc.php"); ?>
 					</div>
 				
-					<div id="graf_time" class="col-md-6">
+					<div id="graf_time" class="col-md-6 col-sm-6">
 						<?php include ("./inc/grafbar_age_tech.inc.php");  ?>
 					</div>
 				
-					<div id="graf_prio" class="col-md-6" style="margin-left: 0%;">
+					<div id="graf_prio" class="col-md-6 col-sm-6" style="margin-left: 0%;">
 						<?php include ("./inc/grafpie_prio_tech.inc.php");  ?>
 					</div>
 				
-					<div id="graf_time1" class="col-md-12" style="height: 450px; margin-top:30px; margin-bottom:20px; margin-left: 0px;">
+					<div id="graf_time1" class="col-md-6 col-sm-6 col-sm-6" style="height: 450px; margin-top:30px; margin-bottom:0px; margin-left: 0px;">			
 						<?php  include ("./inc/grafpie_time_tech.inc.php"); ?>
 					</div>
+		
+					<div id="graf_source" class="col-md-6 col-sm-6 col-sm-6" style="height: 450px; margin-top:30px; margin-bottom:0px; margin-left: 0px;">						
+						<?php  include ("./inc/grafpie_origem_tech.inc.php"); ?>
+					</div>	
 				
-					<div id="graf_sat" class="col-md-12" style="height: 450px; margin-top:20px !important; margin-bottom:30px; margin-left: 0px;">
+					<div id="graf_sat" class="col-md-12 col-sm-12" style="height: 450px; margin-top:20px !important; margin-bottom:30px; margin-left: 0px;">
 						<?php include ("./inc/grafcol_sat_tec.inc.php"); ?>
 					</div>
 				

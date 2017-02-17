@@ -1714,3 +1714,13 @@ td > a:hover {
 #map_canvas { height: 110%; width: 104%; margin-left: -2%;}
 
 #titulo2 h3 { margin-top: -40px; margin-left: 10px; color: #000;}
+
+
+.mapkey {
+	height:320px; 
+	margin:auto; 
+	margin-top:30px; 
+	float:none; 
+	text-align:left; 
+	font-size:14pt;
+}

@@ -11,8 +11,8 @@ Session::checkRight("profile", READ);
 
 if(!empty($_POST['submit']))
 {
-    $data_ini = $_REQUEST['date1'];
-    $data_fin = $_REQUEST['date2'];
+    $data_ini = $_POST['date1'];
+    $data_fin = $_POST['date2'];
 }
 
 else {
@@ -45,22 +45,12 @@ if($sel_ent == '' || $sel_ent == -1) {
 	$entidade_s = "AND entities_id IN (".$ent.") ";
 	$entidade_sw = "WHERE entities_id IN (".$ent.") OR is_recursive = 1 ";
 	$entidade1 = "";
-
 }
 else {
 	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.") ";
 	$entidade_s = "AND entities_id IN (".$sel_ent.") ";
 	$entidade_sw = "WHERE entities_id IN (".$sel_ent.") OR is_recursive = 1 ";
 }
-
-// distinguish between 0.90.x and 9.1 version
-if (GLPI_VERSION >= 9.1){
-	$slaid = "AND glpi_tickets.slts_tto_id = ".$id_sla."";	
-}
-
-else {
-	$slaid = "AND glpi_tickets.slas_id = ".$id_sla."";
-}	
 
 ?>
 
@@ -123,12 +113,8 @@ else {
 				<div id="head-lg" class="fluid">
 
 				<style type="text/css">
-				a:link, a:visited, a:active {
-					text-decoration: none
-					}
-				a:hover {
-					color: #000099;
-					}
+				a:link, a:visited, a:active {text-decoration: none; }
+				a:hover {color: #000099;}
 				</style>
 				<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 
@@ -137,80 +123,79 @@ else {
 				</div>
 
 			<div id="datas-tec" class="span12 fluid" >
-			<form id="form1" name="form1" class="form_rel" method="post" action="rel_sltsa.php?con=1" onsubmit="datai();dataf();">
+			<form id="form1" name="form1" class="form_rel" method="post" action="rel_sltsa.php?con=1">
 				<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
-				<tr>
-				<td style="width: 310px;">
-				<?php
-					
-				$url = $_SERVER['REQUEST_URI'];
-				$arr_url = explode("?", $url);
-				$url2 = $arr_url[0];
-
-				echo'
-						<table>
-							<tr>
-								<td>
-								   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-								    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
-								    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-							    	</div>
-								</td>
-								<td>&nbsp;</td>
-								<td>
-							   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-								    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
-								    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-							    	</div>
-								</td>
-								<td>&nbsp;</td>
-							</tr>
-						</table> ';
-				?>
-
-				<script language="Javascript">
-					$('#dp1').datepicker('update');
-					$('#dp2').datepicker('update');
-				</script>
-				</td>
-				<td style="margin-top:2px;">
-
-			<?php
-
-			// SLA list
-			$sql_loc = "
-			SELECT id, name AS name
-			FROM glpi_slts
-			WHERE type = 1
-			".$entidade_s."
-			ORDER BY `name` ASC ";
-
-			$result_loc = $DB->query($sql_loc);
-
-			$arr_sla = array();
-			$arr_sla[0] = "-- ". __('Select a SLA', 'dashboard') . " --" ;
-
-			while ($row_result = $DB->fetch_assoc($result_loc))
-				{
-					$v_row_result = $row_result['id'];
-					$arr_sla[$v_row_result] = $row_result['name'] ;
-				}
-
-			$name = 'sel_sla';
-			$options = $arr_sla;
-			$selected = $id_sla;
-
-			echo dropdown( $name, $options, $selected );
-			?>
-				</td>
-				</tr>
-				<tr><td height="15px"></td></tr>
-				<tr>
-				<td colspan="2" align="center">
-					<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult', 'dashboard'); ?></button>
-					<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2 ?>'" > <i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean', 'dashboard'); ?> </button></td>
-				</td>
-				</tr>
+					<tr>
+						<td style="width: 310px;">
+						<?php
+							
+						$url = $_SERVER['REQUEST_URI'];
+						$arr_url = explode("?", $url);
+						$url2 = $arr_url[0];
+		
+						echo'
+								<table>
+									<tr>
+										<td>
+										   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+										    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
+										    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+									    	</div>
+										</td>
+										<td>&nbsp;</td>
+										<td>
+									   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+										    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
+										    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+									    	</div>
+										</td>
+										<td>&nbsp;</td>
+									</tr>
+								</table> ';
+						?>
+		
+						<script language="Javascript">
+							$('#dp1').datepicker('update');
+							$('#dp2').datepicker('update');
+						</script>
+						</td>
+						<td style="margin-top:2px;">	
+						<?php
+			
+						// SLA list
+						$sql_loc = "
+						SELECT id, name AS name
+						FROM glpi_slts
+						WHERE type = 1
+						".$entidade_s."
+						ORDER BY `name` ASC ";
+			
+						$result_loc = $DB->query($sql_loc);
+			
+						$arr_sla = array();
+						$arr_sla[0] = "-- ". __('Select a SLA', 'dashboard') . " --" ;
+			
+						while ($row_result = $DB->fetch_assoc($result_loc))
+							{
+								$v_row_result = $row_result['id'];
+								$arr_sla[$v_row_result] = $row_result['name'] ;
+							}
+			
+						$name = 'sel_sla';
+						$options = $arr_sla;
+						$selected = $id_sla;
+			
+						echo dropdown( $name, $options, $selected );
+						?>
+						</td>
+					</tr>
+					<tr><td height="15px"></td></tr>
+					<tr>
+						<td colspan="2" align="center">
+							<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult', 'dashboard'); ?></button>
+							<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2 ?>'" > <i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean', 'dashboard'); ?> </button></td>
+						</td>
+					</tr>
 				</table>
 		<?php Html::closeForm(); ?>
 		<!-- </form> -->
@@ -256,6 +241,16 @@ else {
 	$datas2 = "BETWEEN '".$data_ini2." 00:00:00' AND '".$data_fin2." 23:59:59'";
 }
 
+
+// distinguish between 0.90.x and 9.1 version
+if (GLPI_VERSION >= 9.1){
+	$slaid = "AND glpi_tickets.slts_tto_id = ".$id_sla."";	
+}
+
+else {
+	$slaid = "AND glpi_tickets.slas_id = ".$id_sla."";
+}	
+
 //status
 $status = "";
 $status_open = "('2','1','3','4')";
@@ -281,17 +276,15 @@ else {
 
 // Chamados
 $sql_cham =
-"SELECT glpi_tickets.id AS id, glpi_tickets.name AS descr, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate,
-glpi_tickets.status, glpi_tickets.due_date AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
+"SELECT glpi_tickets.id AS id, glpi_tickets.name AS descr, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, glpi_tickets.status, glpi_tickets.due_date AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
 FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.takeintoaccount_delay_stat ) AS time,
-(glpi_tickets.time_to_own - glpi_tickets.date) AS tto, glpi_tickets.takeintoaccount_delay_stat AS tia
+glpi_tickets.time_to_own AS tto, glpi_tickets.takeintoaccount_delay_stat AS tia, glpi_tickets.date_creation AS aceite
 FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = 0
 ".$slaid."
 AND glpi_tickets.date ".$datas2."
 AND glpi_tickets.status IN ".$status."
 ".$entidade."
-
 GROUP BY id DESC
 ORDER BY id DESC ";
 
@@ -322,38 +315,37 @@ FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = 0
 ".$slaid."
 AND glpi_tickets.date ".$datas2."
-AND glpi_tickets.status IN ".$status_open."
-" ;
+AND glpi_tickets.status IN ".$status_open." ";
 
 $result_ab = $DB->query($sql_ab) or die ("erro_ab");
 $data_ab = $DB->numrows($result_ab);
 
 $abertos = $data_ab;
 
-//barra de porcentagem
-if($conta_cons > 0) {
-
-if($status == $status_close ) {
-    $barra = 100;
-    $cor = "progress-bar-success";
-}
-
-else {
-
-	//porcentagem
-	$perc = round(($abertos*100)/$conta_cons,2);
-	$barra = 100 - $perc;
-
-	// cor barra
-	if($barra == 100) { $cor = "progress-bar-success"; }
-	if($barra >= 80 and $barra < 100) { $cor = " "; }
-	if($barra > 51 and $barra < 80) { $cor = "progress-bar-warning"; }
-	if($barra > 0 and $barra <= 50) { $cor = "progress-bar-danger"; }
-	if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }
-
+	//barra de porcentagem
+	if($conta_cons > 0) {
+	
+	if($status == $status_close ) {
+	    $barra = 100;
+	    $cor = "progress-bar-success";
 	}
-}
-else { $barra = 0;}
+	
+	else {
+	
+		//porcentagem
+		$perc = round(($abertos*100)/$conta_cons,2);
+		$barra = 100 - $perc;
+	
+		// cor barra
+		if($barra == 100) { $cor = "progress-bar-success"; }
+		if($barra >= 80 and $barra < 100) { $cor = " "; }
+		if($barra > 51 and $barra < 80) { $cor = "progress-bar-warning"; }
+		if($barra > 0 and $barra <= 50) { $cor = "progress-bar-danger"; }
+		if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }
+	
+		}
+	}
+	else { $barra = 0;}
 
 
 // sla name
@@ -403,17 +395,9 @@ $w = $conta_cons - $v;
 	$pend = $DB->result($result_stat,0,'pend');
 	$solve = $DB->result($result_stat,0,'solve');
 	$close = $DB->result($result_stat,0,'close');
-
-
+	
 //list tickets
 echo "
-<script>
-/*	function pagina()
-	{
-	var page=document.getElementById('npage').value;
-	location.href = 'rel_sltsa.php?con=1&stat=".$status1."&date1=".$data_ini2."&date2=".$data_fin2."&sla=".$id_sla ."&npage='+page;
-	} */
-</script>
 
 <div class='well info_box fluid col-md-12 col-sm-12 report' style='margin-left: -1px;'>
 
@@ -468,16 +452,16 @@ echo "
 <table id='sla' class='display'  style='font-size: 12px; font-weight:bold;' >
 	<thead>
 		<tr>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Tickets', 'dashboard')." </th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Status')." </th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Type')." </th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Title')." </th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Requester')." </th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Technician')." </th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Opened', 'dashboard')."</th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Time to own')." </th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ". __('Accepted') ."</th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ". __('Status')." </th>
+			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> ".__('Tickets', 'dashboard')." </th>
+			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> ".__('Status')." </th>
+			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> ".__('Type')." </th>
+			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> ".__('Title')." </th>
+			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> ".__('Requester')." </th>
+			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> ".__('Technician')." </th>
+			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> ".__('Opened', 'dashboard')."</th>
+			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> ".__('Time to own')." </th>
+			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> "._x('status', 'Accepted') ."</th>
+			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> ".__('Status')." </th>
 		</tr>
 	</thead>
 <tbody> ";
@@ -526,7 +510,6 @@ while($row = $DB->fetch_assoc($result_cham)){
 	else { $type = "Request";}
 
 	echo "
-
 	<tr>
 		<td style='vertical-align:middle; text-align:center;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
 		<td style='vertical-align:middle; text-align:left;'><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/>&nbsp; ".Ticket::getStatus($row['status'])."  </td>
@@ -534,38 +517,31 @@ while($row = $DB->fetch_assoc($result_cham)){
 		<td style='vertical-align:middle;'> ". substr($row['descr'],0,55) ." </td>
 		<td style='vertical-align:middle;'> ". $row_user['name'] ." ".$row_user['sname'] ." </td>
 		<td style='vertical-align:middle;'> ". $row_tec['name'] ." ".$row_tec['sname'] ." </td>
-		<td style='vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
-		<td style='vertical-align:middle;'> ". conv_data_hora($row['tto']) ." </td>
-		<td style='vertical-align:middle;'> ". time_ext($row['time']) ."</td> ";
+		<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['date']) ." </td>
+		<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['tto']) ." </td>
+		<td style='vertical-align:middle; text-align:center;'> ". time_ext($row['time']) ."</td> ";
 
 
-	//sla status
-	
+	//sla status	
 	$today = date("Y-m-d H:i:s");
-
-	if($row['tto'] <= $row['tia']) {
+	
+	if(isset($row['aceite']) && $row['aceite'] >= $row['tto']) {	
 		echo "<td style='vertical-align:middle; text-align:center; color:red;'> <span class='label label-danger'>". __('Overdue','dashboard') ." </span></td>";
 	}	
-/*
-	else {	
-		
-		if(!isset($row['solvedate']) AND $today > $row['duedate']) {
-			echo "<td style='vertical-align:middle; text-align:center; color:red;'> <span class='label label-danger'>". __('Overdue','dashboard') ." </span></td>";
-		}
-*/	
-		else {
-			echo "<td style='vertical-align:middle; text-align:center; color:green;'> <span class='label label-success'>". __('Within','dashboard') ." </span></td>";
-		}
-		
-//	}
+
+	if(isset($row['aceite']) && $row['aceite'] < $row['tto']) {	
+		echo "<td style='vertical-align:middle; text-align:center; color:green;'> <span class='label label-success'>". __('Within','dashboard') ." </span></td>";
+	}
 
 	echo "
-		</tr>";
+		</tr>";		
+
 	}
 
 	echo "</tbody>
 			</table>
-			</div>"; ?>
+			</div>"; 			
+?>
 
 <script type="text/javascript" charset="utf-8">
 

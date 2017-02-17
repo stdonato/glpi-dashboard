@@ -491,3 +491,21 @@ msgstr "Selezionato"
 
 msgid "Popup"
 msgstr "Pop-up"
+
+msgid "Enter the latitude and longitude in Administration -> Entities -> Dashboard Map"
+msgstr "Inserire la latitudine e la longitudine in Amministrazione -> Enti -> Mappa Dashboard"
+
+msgid "Google maps API key"
+msgstr "Google maps chiave API"
+
+msgid "Dashboard map"
+msgstr "Mappa Dashboard"
+
+msgid "To configure Google maps"
+msgstr "Per configurare le mappe di Google"
+
+msgid "Create an API key"
+msgstr "Creare una chiave API"
+
+msgid "Paste your key bellow and save"
+msgstr "Incollare la chiave qui sotto e salvare"

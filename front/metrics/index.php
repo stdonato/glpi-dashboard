@@ -91,7 +91,7 @@
 			</header>
 			<div class="content" >
 				<div class="metric5"><?php echo $new; ?></div>
-				<div class="metric-small5"><?php //if(isset($newy) && $newy != 0) { percent($new,$newy); } else { echo '0'; } ?></div>
+				<div class="metric-small5"></div>
 			</div>
 		</div>
 		
@@ -101,7 +101,7 @@
 			</header>
 			<div class="content">
 				<div class="metric5"><?php echo $assigned;?></div>
-				<div class="metric-small5"><?php //percent($assigned,$assignedy); ?></div>
+				<div class="metric-small5"></div>
 			</div>
 		</div>
 
@@ -111,7 +111,7 @@
 			</header>
 			<div class="content">
 				<div class="metric5"><?php echo $pend;?></div>
-				<div class="metric-small5"><?php //percent($pend,$pendy); ?></div>
+				<div class="metric-small5"></div>
 			</div>
 		</div>
 		
@@ -141,8 +141,7 @@
 				<div class="metric5"><?php echo $notopen;?></div>
 				<?php 
 					if($count_notop < 5) {
-						echo "<div class='metric-small5'>";
-						//percent($notopen,$notopeny);
+						echo "<div class='metric-small5'>";						
 						echo  " </div>";
 					}
 				?>		
@@ -155,7 +154,7 @@
 			</header>
 			<div class="content">
 				<div class="metric5"><?php echo $total;?></div>
-				<div class="metric-small5"><?php //percent($total,$totaly); ?></div>			
+				<div class="metric-small5"></div>			
 			</div>
 		</div>
 	</div> <!-- fim row1 -->
@@ -176,17 +175,16 @@
 						<p class="cf-td-date metric-small" ></p>						
 						-->
 						<script type="text/javascript">
-								var d_names = <?php echo '"'.$dia.'"' ; ?>;
-		var m_names = <?php echo '"'.$mes.'"' ; ?>;
+							var d_names = <?php echo '"'.$dia.'"' ; ?>;
+							var m_names = <?php echo '"'.$mes.'"' ; ?>;
+							
+							var d = new Date();
+							var curr_day = d.getDay();
+							var curr_date = d.getDate();
+							var curr_month = d.getMonth();
+							var curr_year = d.getFullYear();
 		
-		var d = new Date();
-		var curr_day = d.getDay();
-		var curr_date = d.getDate();
-		var curr_month = d.getMonth();
-		var curr_year = d.getFullYear();
-		
-		document.write("<span style='font-size:32px; margin-top: -6px !important;'>" + d_names + "</span><br> <span style='font-size:32px;'>" + curr_date + " " + m_names + " " + curr_year + "</span><br>" );
-		
+							document.write("<span style='font-size:32px; margin-top: -6px !important;'>" + d_names + "</span><br> <span style='font-size:32px;'>" + curr_date + " " + m_names + " " + curr_year + "</span><br>" );		
 						</script>
 						<span style="font-size:20px;"><?php echo __('Period'). ": ".$period_name ?></span>
 					</div>					

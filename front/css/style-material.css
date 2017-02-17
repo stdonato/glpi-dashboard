@@ -2286,3 +2286,12 @@ margin-bottom: 30px;*/
 
 .navbar-nav > li > a:hover {background-color: #4184F3 !important; }
 
+.mapkey {
+	height:320px; 
+	margin:auto; 
+	margin-top:-120px; 
+	float:none; 
+	text-align:left; 
+	font-size:14pt;
+}
+

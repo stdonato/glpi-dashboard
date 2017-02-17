@@ -18,7 +18,7 @@ if(!empty($_POST['submit']))
 else {
     $data_ini = date("Y-m-01");
     $data_fin = date("Y-m-d");
-    }
+}
 
 if(!isset($_POST["sel_tec"])) {
     $id_tec = $_GET["tec"];
@@ -72,10 +72,6 @@ else {
 <script src="../js/extensions/Select/js/dataTables.select.js"></script>
 <link href="../js/extensions/Select/css/select.bootstrap.css" type="text/css" rel="stylesheet" />
 
-<!--
-<link href="../js/extensions/TableTools/css/dataTables.tableTools.css" type="text/css" rel="stylesheet" />
-<script src="../js/extensions/TableTools/js/dataTables.tableTools.js"></script>
--->
 
 <?php echo '<link rel="stylesheet" type="text/css" href="../css/style-'.$_SESSION['style'].'">';  ?>
 

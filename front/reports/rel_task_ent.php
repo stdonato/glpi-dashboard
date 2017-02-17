@@ -103,90 +103,90 @@ a:hover {
     <div id="datas-tec" class="span12 fluid" >
     <form id="form1" name="form1" class="form_rel" method="post" action="rel_task_ent.php?con=1">
     <table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef">
-    <tr>
-<td style="width: 310px;">
-<?php
-
-echo '
-	<table>
-		<tr>
-			<td>
-			   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-			    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >		    	
-			    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
-		    	</div>
+	   <tr>
+			<td style="width: 310px;">
+			<?php
+			
+			echo '
+				<table>
+					<tr>
+						<td>
+						   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+						    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >		    	
+						    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
+					    	</div>
+						</td>
+						<td>&nbsp;</td>
+						<td>
+					   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+						    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >		    	
+						    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
+					    	</div>
+						</td>
+						<td>&nbsp;</td>
+					</tr>
+				</table> ';
+			?>
+			
+			<script language="Javascript">
+				$('#dp1').datepicker('update');
+				$('#dp2').datepicker('update');
+			</script>
+			
 			</td>
-			<td>&nbsp;</td>
-			<td>
-		   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-			    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >		    	
-			    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
-		    	</div>
-			</td>
-			<td>&nbsp;</td>
-		</tr>
-	</table> ';
-?>
+			
+			<td style="margin-top:2px;">
+			<?php
+			
+				//seleciona entidade
+				$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
+				$result_e = $DB->query($sql_e);
+				$sel_ent = $DB->result($result_e,0,'value');
+			
+				if($sel_ent == '' || $sel_ent == -1) {
+					$entities = $_SESSION['glpiactiveentities'];
+					$ents = implode(",",$entities);
+				}
+				else {
+					$ents = $sel_ent;
+				}
+			
+			
+				$sql_ent = "
+				SELECT id, name, completename AS cname
+				FROM `glpi_entities`
+				WHERE id IN (".$ents.")
+				ORDER BY `name` ASC ";
+			
+				$result_ent = $DB->query($sql_ent);
+			
+				$arr_ent = array();
+				$arr_ent[0] = "-- ". __('Select a entity', 'dashboard') . " --" ;
+				
+				while ($row_result = $DB->fetch_assoc($result_ent))
+				    {
+				    	$v_row_result = $row_result['id'];
+				    	$arr_ent[$v_row_result] = $row_result['cname'] ;
+				    }
+			
+				$name = 'sel_ent';
+				$options = $arr_ent;
+				$selected = $id_ent;
+			
+				echo dropdown( $name, $options, $selected );
+			
+			?>
+		</td>
+	</tr>
+	<tr><td height="15px"></td></tr>
+	<tr>
+		<td colspan="2" align="center">
+			<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult', 'dashboard'); ?></button>
+			<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2 ?>'" > <i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean', 'dashboard'); ?> </button></td>
+		</td>
+	</tr>
 
-<script language="Javascript">
-	$('#dp1').datepicker('update');
-	$('#dp2').datepicker('update');
-</script>
-
-</td>
-
-<td style="margin-top:2px;">
-<?php
-
-	//seleciona entidade
-	$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
-	$result_e = $DB->query($sql_e);
-	$sel_ent = $DB->result($result_e,0,'value');
-
-	if($sel_ent == '' || $sel_ent == -1) {
-		$entities = $_SESSION['glpiactiveentities'];
-		$ents = implode(",",$entities);
-	}
-	else {
-		$ents = $sel_ent;
-	}
-
-
-	$sql_ent = "
-	SELECT id, name, completename AS cname
-	FROM `glpi_entities`
-	WHERE id IN (".$ents.")
-	ORDER BY `name` ASC ";
-
-	$result_ent = $DB->query($sql_ent);
-
-	$arr_ent = array();
-	$arr_ent[0] = "-- ". __('Select a entity', 'dashboard') . " --" ;
-	
-	while ($row_result = $DB->fetch_assoc($result_ent))
-	    {
-	    	$v_row_result = $row_result['id'];
-	    	$arr_ent[$v_row_result] = $row_result['cname'] ;
-	    }
-
-	$name = 'sel_ent';
-	$options = $arr_ent;
-	$selected = $id_ent;
-
-	echo dropdown( $name, $options, $selected );
-
-?>
-</td>
-</tr>
-<tr><td height="15px"></td></tr>
-<tr>
-	<td colspan="2" align="center">
-		<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult', 'dashboard'); ?></button>
-		<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2 ?>'" > <i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean', 'dashboard'); ?> </button></td>
-	</td>
-</tr>
-
-    </table>
+   </table>
 <?php Html::closeForm(); ?>
 <!-- </form> -->
 
@@ -301,12 +301,12 @@ while($row = $DB->fetch_assoc($result_cons1)){
 	<table id='tarefa' class='display' style='font-size: 13px; font-weight:bold;' cellpadding = 2px>
 		<thead>
 			<tr>
-				<th style='text-align:center; cursor:pointer;'> ". __('Ticket') ."  </th>
-				<th style='text-align:center; cursor:pointer;'> ". __('Date') ." </th>
-				<th style='text-align:center; cursor:pointer;'> ". __('Description') ."</th>
-				<th style='text-align:center; cursor:pointer;'> ". __('Duration') ." </th>
-				<th style='text-align:center; cursor:pointer;'> ". __('Begin') ." </th>
-				<th style='text-align:center; cursor:pointer;'> ". __('End') ."  </th>
+				<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Ticket') ."  </th>
+				<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Date') ." </th>
+				<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Description') ."</th>
+				<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Duration') ." </th>
+				<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Begin') ." </th>
+				<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('End') ."  </th>
 			</tr>
 		</thead>
 	<tbody>";
@@ -318,12 +318,12 @@ while($row = $DB->fetch_assoc($result_cham)){
 	
 	echo "
 	<tr>
-	<td style='text-align:center;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
-	<td style='text-align:center;'> ". conv_data_hora($row['date']) ." </td>
-	<td style='max-width:450px;'> ". $row['content'] ." </td>
-	<td style='text-align:center;'> ". time_ext($row['actiontime']) ."</td>
-	<td style='text-align:center;'> ". conv_data_hora($row['begin']) ."</td>
-	<td style='text-align:center;'> ". conv_data_hora($row['end']) ."</td>
+	<td style='text-align:center; vertical-align:middle;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
+	<td style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
+	<td style='max-width:450px; vertical-align:middle;'> ". $row['content'] ." </td>
+	<td style='text-align:center; vertical-align:middle;''> ". time_ext($row['actiontime']) ."</td>
+	<td style='text-align:center; vertical-align:middle;''> ". conv_data_hora($row['begin']) ."</td>
+	<td style='text-align:center; vertical-align:middle;''> ". conv_data_hora($row['end']) ."</td>
 	</tr>";
 }
 

@@ -93,7 +93,7 @@ else {
 <body style="background-color: #e5e5e5; margin-left:0%;">
 
 <div id='content' >
-	<div id='container-fluid' style="margin: 0px 2% 0px 2%;"> 
+	<div id='container-fluid' style="margin: 0px 2.5% 0px 2.5%;"> 
 		<div id="charts" class="fluid chart"> 
 			<div id="pad-wrapper" >
 			<div id="head-rel" class="fluid">			
@@ -206,17 +206,10 @@ else {
 
 
 // distinguish between 0.90.x and 9.1 version
-//if (GLPI_VERSION >= 9.1){
-	$slaid = "AND glpi_tickets.slts_tto_id = ";
-	$sla_comp = "AND glpi_tickets.slts_tto_id = glpi_slts.id";	
-//}
-/*
-else {
-	$slaid = "AND glpi_tickets.slas_id = ";
-	$sla_comp = "AND glpi_tickets.slas_id = glpi_slts.id";
-}
-*/
-	
+//if (GLPI_VERSION >= 9.1){	
+$slaid = "AND glpi_tickets.slts_tto_id = ";
+$sla_comp = "AND glpi_tickets.slts_tto_id = glpi_slts.id";	
+
 $sql_sla = 
 "SELECT COUNT(glpi_tickets.id) AS total, glpi_slts.name AS sla_name, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, 
 glpi_tickets.status, glpi_tickets.due_date AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
@@ -224,7 +217,6 @@ FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_
 FROM glpi_tickets, glpi_slts
 WHERE glpi_tickets.is_deleted = 0
 AND glpi_slts.type = 1
-
 AND glpi_tickets.date ".$datas2."
 ".$entidade."
 

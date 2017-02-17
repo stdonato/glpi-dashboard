@@ -11,14 +11,14 @@ Session::checkRight("profile", READ);
 
 if(!empty($_POST['submit']))
 {
-    $data_ini =  $_POST['date1'];
+    $data_ini = $_POST['date1'];
     $data_fin = $_POST['date2'];
 }
 
 else {
     $data_ini = date("Y-m-01");
     $data_fin = date("Y-m-d");
-    }
+}
 
 if(!isset($_POST["sel_grp"])) {
 	$id_grp = $_GET["grp"];
@@ -115,7 +115,7 @@ else {
 			<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
    		 <div id="titulo_rel"> <?php echo __('Tickets', 'dashboard').'  '. __('by Group', 'dashboard') ?>  </div>
 			 <div id="datas-tec" class="span12 fluid" >
-			    <form id="form1" name="form1" class="form_rel" method="post" action="rel_grupo.php?con=1" onsubmit="datai();dataf();">
+			    <form id="form1" name="form1" class="form_rel" method="post" action="rel_grupo.php?con=1">
 				    <table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
 				    <tr>
 					<td style="width: 310px;">

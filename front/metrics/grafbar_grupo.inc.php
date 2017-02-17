@@ -52,7 +52,7 @@ $(function () {
                 	  //rotation: -55,
                     align: 'right',
                     style: {
-                    	font: '10pt Trebuchet MS, Verdana, sans-serif',                 
+                    	//font: '10pt Trebuchet MS, Verdana, sans-serif',                 
    	              	color: '#A0A0A0' 
                     }
                 }
@@ -90,7 +90,7 @@ $(function () {
                     style: {
                     	//font: 'Trebuchet MS, Verdana, sans-serif',
                     	fontSize: '13px',                 
-   	              	fontWeight: 'bold',
+   	              	//fontWeight: 'bold',
    	              	textShadow: false
                     },
                     formatter: function () {

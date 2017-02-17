@@ -1,19 +1,19 @@
-Versão 0.8.0:
+Versão 0.8.1:
 
-- Relatório de tarefas por entidade;
-- Opção para ocultar o título do chamado nas telas de chamados;
-- Atualização da biblioteca Highcharts;
-- Correção na exportação de relatórios;
+- Ajuda atualizada;
+- Correção do relatório de chamados por tempo para aceitar;
+- Adicionado gráfico de chamados por origem em Gráficos -> por Técnico;
+- Alteração nos mapas para que seja informada uma chave da API do Google maps pelo usuário;
 - Correções de bugs diversos;
 - Você agora pode me comprar uma cerveja pelo paypal; :)
 
 
-Version 0.8.0:
+Version 0.8.1:
 
-- New Tasks by Entity report;
-- Option to hide ticket tittle in Tickets page;
-- Highcharts updated; 
-- Fix reports export;
+- Help page updated;
+- Fix time to own report;
+- New graph of tickets source in technician graphs;
+- Maps updated with Google maps API key insertion by user;
 - Fix minor bugs;
 - Now you can buy me a beer in Paypal; :)
 

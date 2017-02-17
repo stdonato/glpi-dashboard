@@ -327,8 +327,10 @@ else {
 					echo	"<th style='text-align:center;'>". __('Location')."</th>";
 					}	
 					
-				echo $th_due."									
-						<th style='text-align:center;'><a href='cham_grupos.php?grp=".$grp."&order=pa'>&nbsp<font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('Priority')."<a href='cham_grupos.php?grp=".$grp."&order=pd'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>
+				if(isset($th_due)) {				
+					echo $th_due;		
+				}							
+				echo "<th style='text-align:center;'><a href='cham_grupos.php?grp=".$grp."&order=pa'>&nbsp<font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('Priority')."<a href='cham_grupos.php?grp=".$grp."&order=pd'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>
 					</tr>
 				</thead>
 				<tbody>";

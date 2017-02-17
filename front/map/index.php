@@ -8,6 +8,20 @@ global $DB;
 
 Session::checkLoginUser();
 Session::checkRight("profile", READ);
+
+//check if exists google maps api key
+$query_key = "SELECT * FROM glpi_plugin_dashboard_config WHERE name = 'map_key'"; 
+$res_key = $DB->query($query_key);
+$api_key = $DB->result($res_key,0,'value'); 
+
+if($api_key != '') {
+	$key = $api_key;
+}
+else {
+	$key = '';
+	echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=\"map_key.php\"'>";
+}
+
 ?>
 
 <html> 
@@ -28,95 +42,38 @@ Session::checkRight("profile", READ);
 <script src="../js/jquery.js" type="text/javascript" ></script>
 
 <script src="./js/markerclusterer.js" type="text/javascript" ></script>
-<link href="css/google_api.css" rel="stylesheet" type="text/css" />   
+<link href="css/google_api.css" rel="stylesheet" type="text/css" />     
 
-<script async defer
-	src="https://maps.googleapis.com/maps/api/js?callback=initMap">
-</script>  
-<!-- src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript" > -->   
-  
+
+<?php 
+echo '<script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&callback=initMap&key='.$key.'">'; 
+echo "</script>\n" 
+?>  
+
+<!-- src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript" >      
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>  	
+src="https://maps.googleapis.com/maps/api/js?sensor=false&callback=initMap">
+-->
+
 <script src="../js/bootstrap.min.js" type="text/javascript" ></script>  
 
 <?php echo '<link rel="stylesheet" type="text/css" href="../css/style-'.$_SESSION['style'].'">';  ?> 
 
 <style type="text/css">
 	html { margin-top: 3px;}
+	a, a:visited { color: #0776cc;}
 </style>
 
 </head>
 
 <?php
 
-//Add locations to dashboard map
-$query_id =	"
-SELECT id, address, town, state, country, name
-FROM glpi_entities gt
-WHERE id NOT IN (SELECT entities_id FROM glpi_plugin_dashboard_map)
-AND gt.address IS NOT NULL
-AND gt.town IS NOT NULL
-ORDER BY gt.id ";
-
-$result_id = $DB->query($query_id) or die ("erro id");
-
-
 // check if any entity has address
 $query1 = "SELECT entities_id FROM glpi_plugin_dashboard_map";
 $result1 = $DB->query($query1);
-
 $teste = $DB->fetch_assoc($result1);
 
 $conta_teste = count($teste);
-
-$DB->data_seek($result_id, 0) ;
-while ($row = $DB->fetch_assoc($result_id))
-{
-
-	$local = $row['address'].",".$row['town'].",".$row['state'].",".$row['country'] ;
-	$url = "http://maps.googleapis.com/maps/api/geocode/xml?sensor=false&address=".$local;    
-	$contents1 = file_get_contents($url);
-	$xml = simplexml_load_file($url);
-	$ent_id = $row['id'];
-	$response = $xml->status;
-	$lat = $xml->result->geometry->location->lat;
-	$lng = $xml->result->geometry->location->lng;
-	$location = $row['name'];
-	
-if($response == 'OK') {
-
-    $insert = "
-	INSERT INTO glpi_plugin_dashboard_map (entities_id, location, lat, lng) 
-	VALUES ('$ent_id', '$location', '$lat', '$lng')";			 
-	
-	$DB->query($insert);
-	
-	echo '<script type="text/javascript">alert("'.$location.' adicionado!");</script>';
-}
-
-else {
-	echo '<script type="text/javascript">alert("'.$location.' não encontrado!");</script>';
-}
-
-}
-
-//delete locations
-$query_del = "
-SELECT gpdm.entities_id AS id, gpdm.location
-FROM glpi_plugin_dashboard_map gpdm, glpi_entities gt
-WHERE gpdm.entities_id IN (SELECT id FROM glpi_entities WHERE address = ' ' AND town = ' ')
-AND gt.id = gpdm.entities_id ";
-
-$result_del = $DB->query($query_del) or die ("error del");
-
-while ($row = $DB->fetch_assoc($result_del))
-{
-	$del = "DELETE FROM glpi_plugin_dashboard_map WHERE entities_id = ".$row['id'];
-	$DB->query($del);
-	
-	$up = "UPDATE `glpi`.`glpi_entities` SET `town` = NULL WHERE `glpi_entities`.`id` = ".$row['id'];
-	$DB->query($up);
-	
-	echo '<script type="text/javascript">alert("'.$row['location'].' removido!");</script>';
-}
 
 $status = "";
 $status_open = "('1','2','3','4','13','14')";
@@ -153,39 +110,44 @@ else {
 		$state = __('Opened','dashboard');
 	}
 
-
 if(isset($_GET['period_option'])) {
 
 $post_date = $_GET['period_option'];
+$period = $_GET['period_option'];
 
-$period = $post_date;
-
-switch($post_date) {
-
-				case ("today") :
-				   $data_ini2 = date('Y-m-d');
-				   $data_fin2 = date('Y-m-d');										
-					$sel_date = "AND gt.date LIKE '".$data_ini2."%'";	
-				break;
-				case ("week") :
-				   $data_ini2 = date('Y-m-d', strtotime('-1 week'));
-				   $data_fin2 = date('Y-m-d');
-					$sel_date = "AND gt.date BETWEEN '" . $data_ini2 ." 00:00:00' AND '".$data_fin2." 23:59:59'";
-				break;
-				case ("month") :
-				   $data_ini2 = date('Y-m-d', strtotime('-1 month'));
-				   $data_fin2 = date('Y-m-d');					
-					$sel_date = "AND gt.date BETWEEN '" . $data_ini2 ." 00:00:00' AND '".$data_fin2." 23:59:59'";
-				break;				
-				case ("all") :
-				   $data_ini2 = date('Y-m-d', strtotime('-1 year'));
-				   $data_fin2 = date('Y-m-d');								
-					$sel_date = "";
-				break;	
-				default:
-					$sel_date = "";
-				} 
+	switch($post_date) {
+	
+		case ("today") :
+		   $data_ini2 = date('Y-m-d');
+		   $data_fin2 = date('Y-m-d');														   
+		   $sel_date = "AND gt.date LIKE '".$data_ini2."%'";	
+		break;
+		case ("week") :
+		   $data_ini2 = date('Y-m-d', strtotime('-1 week'));
+		   $data_fin2 = date('Y-m-d');
+			$sel_date = "AND gt.date BETWEEN '" . $data_ini2 ." 00:00:00' AND '".$data_fin2." 23:59:59'";
+		break;
+		case ("month") :
+		   $data_ini2 = date('Y-m-d', strtotime('-1 month'));
+		   $data_fin2 = date('Y-m-d');					
+			$sel_date = "AND gt.date BETWEEN '" . $data_ini2 ." 00:00:00' AND '".$data_fin2." 23:59:59'";
+		break;				
+		case ("all") :
+		   $data_ini2 = date('Y-m-d', strtotime('-1 year'));
+		   $data_fin2 = date('Y-m-d');								
+			$sel_date = "";
+		break;	
+		default:
+			$sel_date = "";
+	} 
 }
+
+else {
+	$period = "all";
+	$data_ini2 = date('Y-m-d', strtotime('-1 year'));
+   $data_fin2 = date('Y-m-d');								
+	$sel_date = "";
+	 }
 
 ?>
 
@@ -202,14 +164,14 @@ $icon_green = "http://chart.apis.google.com/chart?chst=d_map_spin&chld=1|0|43B53
 
 //select not closed tickets
 $query_loc = "
-SELECT gpdm.entities_id, gpdm.location, gpdm.lat, gpdm.lng, count( gt.id ) AS conta
-FROM glpi_plugin_dashboard_map gpdm
-LEFT JOIN glpi_tickets gt ON gpdm.entities_id = gt.entities_id
-AND gt.status IN ".$status."
-".$sel_date."
-AND gt.is_deleted = 0
-GROUP BY gpdm.id
-ORDER BY gpdm.entities_id ";
+	SELECT gpdm.entities_id, gpdm.location, gpdm.lat, gpdm.lng, count( gt.id ) AS conta
+	FROM glpi_plugin_dashboard_map gpdm
+	LEFT JOIN glpi_tickets gt ON gpdm.entities_id = gt.entities_id
+	AND gt.status IN ".$status."
+	".$sel_date."
+	AND gt.is_deleted = 0
+	GROUP BY gpdm.id
+	ORDER BY gpdm.entities_id ";
 
 $result_loc = $DB->query($query_loc) or die ("erro");
 
@@ -224,10 +186,7 @@ while ($row = $DB->fetch_assoc($result_loc))
   $local = $row['location']; 
   $lat = $row['lat']; 
   $lng = $row['lng']; 
-  $quant = $row['conta'];   
-  //$num_up = $row['conta'];
-  //$num_down = $row['conta'];   
-
+  $quant = $row['conta'];  
 
 if ($quant == 0) {
 	$color = $icon_green.$quant."";
@@ -250,11 +209,9 @@ echo "['$title', $lat, $lng, '$local', '$color', '$host', $id, $quant, $num_up, 
     
 function initialize() {
    
-var mapOptions = {
-	//mapTypeId: google.maps.MapTypeId.ROADMAP
-	mapTypeId: google.maps.MapTypeId.HYBRID
-//zoom:9,
-//center: new google.maps.LatLng(40,-3)
+	var mapOptions = {	
+		mapTypeId: google.maps.MapTypeId.HYBRID,
+		//center: new google.maps.LatLng(40,-3)
 	};
 	
     var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
@@ -264,10 +221,10 @@ var mapOptions = {
     for (i = 0; i < locations.length; i++) {  
 
 // avoid markers with same location
-	 var min = .999999;
-	 var max = 1.000001;    
-  	 var offsetLat = locations[i][1] * (Math.random() * (max - min) + min);
-    var offsetLng = locations[i][2] * (Math.random() * (max - min) + min);      
+	var min = .999999;
+	var max = 1.000001;    
+  	var offsetLat = locations[i][1] * (Math.random() * (max - min) + min);
+   var offsetLng = locations[i][2] * (Math.random() * (max - min) + min);      
     
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(offsetLat, offsetLng),
@@ -288,21 +245,21 @@ var mapOptions = {
         
       });
 
-//marker animation
-marker.setAnimation(google.maps.Animation.DROP);
-      	
-      google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
-        return function() {
-          infowindow.setContent('<b>'+locations[i][5] + '</b><br> <?php echo $state; ?>: ' + locations[i][7]);
-          infowindow.open(map, marker);
-        }
-      })(marker, i)); 
-
-// close infowindow when zoom change 
-google.maps.event.addListener(map, 'zoom_changed', function() { infowindow.close() }); 
+	//marker animation
+	marker.setAnimation(google.maps.Animation.DROP);
+	      	
+	      google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
+	        return function() {
+	          infowindow.setContent('<b>'+locations[i][5] + '</b><br> <?php echo $state; ?>: ' + locations[i][7]);
+	          infowindow.open(map, marker);
+	        }
+	      })(marker, i)); 
+	
+	// close infowindow when zoom change 
+	google.maps.event.addListener(map, 'zoom_changed', function() { infowindow.close() }); 
             
 	markers.push(marker)			
-    }
+   }
 
 //center map
     var bounds = new google.maps.LatLngBounds();
@@ -393,10 +350,10 @@ var iconCalculator = function(markers, numStyles) {
     infowindow.setContent(titles); //set infowindow content to titles    
     infowindow.open(map, info);
 
-//close infowindow
+	//close infowindow
     google.maps.event.addListener(markerClusterer, 'mouseout', function() { infowindow.close() });
 
-// close infowindow when zoom change
+	// close infowindow when zoom change
 	google.maps.event.addListener(map, 'zoom_changed', function() { infowindow.close() });
 
 });
@@ -446,29 +403,31 @@ var iconCalculator = function(markers, numStyles) {
 </script>
 <script type="text/javascript">
 
-	function ChecaEstado() {
+		function ChecaEstado() {
 		
 		//localStorage.clear();	
-		var estado = localStorage.getItem('statuse');	
+		var estado = localStorage.getItem('status');	
 		var head = document.getElementById('head-map').style.display;  		
 		
 		if (estado == 0 ) {
 			document.getElementById('head-map').style.display = 'none';
 			document.getElementById('head-map2').style.display = 'block';
 	      document.getElementById('buttons').style.display = 'none';
-	      document.getElementById('map_canvas').style.height = '100%';	      
+	      document.getElementById('map_canvas').style.height = '100%';
+	      //document.getElementById('charts').style.marginTop = '20px';
 			document.getElementById('map_canvas').style.marginTop = '5px';
 
-			localStorage.setItem('statuse',0);			
+			localStorage.setItem('status',0);			
 		}
 		if (estado == 1 ) {
 			document.getElementById('head-map').style.display = 'block';
 			document.getElementById('head-map2').style.display = 'none';
 	      document.getElementById('buttons').style.display = 'block';
-	      document.getElementById('map_canvas').style.height = '90%';	      
+	      document.getElementById('map_canvas').style.height = '90%';
+	      //document.getElementById('charts').style.marginTop = '20px';
 	      document.getElementById('map_canvas').style.marginTop = '15px';
 	      
-			localStorage.setItem('statuse',1);			
+			localStorage.setItem('status',1);			
 		}
 	}
 
@@ -478,16 +437,17 @@ var iconCalculator = function(markers, numStyles) {
 		//localStorage.clear();		
 	    var head = document.getElementById('head-map').style.display;
 	    var buttons = document.getElementById('buttons').style.display;
-	    var estado = localStorage.getItem('statuse');	    
+	    var estado = localStorage.getItem('status');	    
 	    	    	    	    	    	    
 	    if(head == "block" && buttons == "block") {	       			    	
 	        document.getElementById('head-map').style.display = 'none';
 	        document.getElementById('head-map2').style.display = 'block';
 	        document.getElementById('buttons').style.display = 'none';
-	        document.getElementById('map_canvas').style.height = '100%';	           
+	        document.getElementById('map_canvas').style.height = '100%';
+	        //document.getElementById('charts').style.marginTop = '15px';	   
 	        document.getElementById('map_canvas').style.marginTop = '5px';	
 	              		      
-	        localStorage.setItem('statuse',0);	        
+	        localStorage.setItem('status',0);	        
 	     }	    	    
 	    	    	    			      		        	    		    
 		 if(head == "none" && buttons == "none") {		 	
@@ -497,19 +457,19 @@ var iconCalculator = function(markers, numStyles) {
 	        document.getElementById('map_canvas').style.height = '90%';
 	        document.getElementById('map_canvas').style.marginTop = '15px';	
 	                       
-	        localStorage.setItem('statuse',1);	        
+	        localStorage.setItem('status',1);	        
 	     }	     	    	     
 	}
 </script>
 
 <body onload="initialize(); ChecaEstado();" style="background:#e5e5e5;">
 
-	<div id='container-fluid' style="margin: 0px 0px 0px 1%;" > 
-						
+	<div id='container-fluid' style="margin: 0px 0px 0px 1%;" > 		
+
 		<button id="hidetop" onclick="MudaEstado();" class="btn btn-primary btn-sm">Show/Hide</button>
-		
+
 		<div id="head-map" class="row-fluid" style="z-index:-999; display:block;">
-			<div id="titulo"><?php echo __('Tickets','dashboard')." ". __('by Entity','dashboard'); ?></div>				
+			<div id="titulo"><?php echo __('Tickets','dashboard')." ". __('by Entity','dashboard'); ?></div>	
 		</div>	
 		
 		<div id="head-map2" class="col-md-12 fluid" style="display: none; margin-top:15px;">
@@ -533,23 +493,24 @@ var iconCalculator = function(markers, numStyles) {
 				        <button type="button" value="all" 	data-toggle="button" name="period" class="btn btn-default btnd" onclick="document.getElementById('period_option').value='all'; mapa();"><?php echo __('All', 'dashboard'); ?></button>
 				    </div>
 				    
-				    <input type="hidden"  id="period_option" name="period_option" value="<?php echo $period; ?>">   
-				</div>	 	       						
-			
-			<?php
-			if($conta_teste == "0") {
-			
-			echo '
-			<div id="teste" class="alert alert-danger" role="alert"  style="margin-top:25px;"><a href='.$CFG_GLPI['root_doc'].'/front/entity.php target=_blank class="alert-link" > '.__('Fill in entities: address, city, state and country.','dashboard').' </a></div>	';
-				}
-			?>
+				    <input type="hidden" id="period_option" name="period_option" value="<?php echo $period; ?>">    
+				</div>	
+				
+				<?php				
+					if($conta_teste == "0") {				
+						echo '<div id="teste" class="alert alert-danger" role="alert"  style="margin-top:25px;"><a href='.$CFG_GLPI['root_doc'].'/front/entity.php target=_blank class="alert-link" ><b> '.__('Enter the latitude and longitude in Administration -> Entities -> Dashboard Map','dashboard').' </b></a></div>	';
+					}
+				?> 	       
+
 				<script type="text/javascript">
 				function mapa() {
 					var stat = document.getElementById('stat_option').value;
 					var period = document.getElementById('period_option').value;
 					location.href='index.php?period_option=' + period + '&stat_option=' + stat;
 				}
+				</script>
 
+				<script type="text/javascript" >
 				$(function () {
 				    $('div.btn-group[data-toggle-name]').each(function () {
 				        var group = $(this);
@@ -568,10 +529,9 @@ var iconCalculator = function(markers, numStyles) {
 				        });
 				    });
 				});				
-				</script>
-				</div>	 			
+				</script> 			
 				<div id="map_canvas"></div>
-				
+			</div>
 	</div>
 </body>
 </html>

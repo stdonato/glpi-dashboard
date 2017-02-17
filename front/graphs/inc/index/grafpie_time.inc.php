@@ -47,7 +47,7 @@ $(function () {
             chart: {
             type: 'pie',
             options3d: {
-				enabled: true,
+				enabled: false,
                 alpha: 45,
                 beta: 0
             },
@@ -66,8 +66,7 @@ $(function () {
                 x: 0,
                 y: 0,
                 floating: true,
-                borderWidth: 0,
-               // backgroundColor: '#FFFFFF',
+                borderWidth: 0,               
                 adjustChartSize: true,
                 format: '{series.name}: <b>{point.percentage:.1f}%</b>'
             },

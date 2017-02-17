@@ -8,6 +8,20 @@ global $DB;
 
 Session::checkLoginUser();
 Session::checkRight("profile", READ);
+
+//check if exists google maps api key
+$query_key = "SELECT * FROM glpi_plugin_dashboard_config WHERE name = 'map_key'"; 
+$res_key = $DB->query($query_key);
+$api_key = $DB->result($res_key,0,'value'); 
+
+if($api_key != '') {
+	$key = $api_key;
+}
+else {
+	$key = '';
+	echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=\"map_key.php\"'>";
+}
+
 ?>
 
 <html> 
@@ -30,12 +44,11 @@ Session::checkRight("profile", READ);
 <script src="./js/markerclusterer.js" type="text/javascript" ></script>
 <link href="css/google_api.css" rel="stylesheet" type="text/css" />     
 
-<script async defer
-	src="https://maps.googleapis.com/maps/api/js?callback=initMap">
-</script>  
-<!-- src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript" >      
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>  
--->
+
+<?php 
+echo '<script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&callback=initMap&key='.$key.'">'; 
+echo "</script>\n" 
+?>  
 
 <script src="../js/bootstrap.min.js" type="text/javascript" ></script>  
 
@@ -43,6 +56,7 @@ Session::checkRight("profile", READ);
 
 <style type="text/css">
 	html { margin-top: 3px;}
+	a, a:visited { color: #0776cc;}
 </style>
 
 </head>
@@ -86,35 +100,34 @@ else {
 
 if(isset($_GET['period_option'])) {
 
-$post_date = $_GET['period_option'];
-$period = $_GET['period_option'];
-
-switch($post_date) {
-
-				case ("today") :
-				   $data_ini2 = date('Y-m-d');
-				   $data_fin2 = date('Y-m-d');										
-				   //$sel_date = "AND gt.date BETWEEN '" . $data_ini2 ." 00:00:00' AND '".$data_fin2." 23:59:59'";
-				   $sel_date = "AND gt.date LIKE '".$data_ini2."%'";	
-				break;
-				case ("week") :
-				   $data_ini2 = date('Y-m-d', strtotime('-1 week'));
-				   $data_fin2 = date('Y-m-d');
-					$sel_date = "AND gt.date BETWEEN '" . $data_ini2 ." 00:00:00' AND '".$data_fin2." 23:59:59'";
-				break;
-				case ("month") :
-				   $data_ini2 = date('Y-m-d', strtotime('-1 month'));
-				   $data_fin2 = date('Y-m-d');					
-					$sel_date = "AND gt.date BETWEEN '" . $data_ini2 ." 00:00:00' AND '".$data_fin2." 23:59:59'";
-				break;				
-				case ("all") :
-				   $data_ini2 = date('Y-m-d', strtotime('-1 year'));
-				   $data_fin2 = date('Y-m-d');								
-					$sel_date = "";
-				break;	
-				default:
-					$sel_date = "";
-				} 
+	$post_date = $_GET['period_option'];
+	$period = $_GET['period_option'];
+	
+	switch($post_date) {
+	
+		case ("today") :
+		   $data_ini2 = date('Y-m-d');
+		   $data_fin2 = date('Y-m-d');														   
+		   $sel_date = "AND gt.date LIKE '".$data_ini2."%'";	
+		break;
+		case ("week") :
+		   $data_ini2 = date('Y-m-d', strtotime('-1 week'));
+		   $data_fin2 = date('Y-m-d');
+			$sel_date = "AND gt.date BETWEEN '" . $data_ini2 ." 00:00:00' AND '".$data_fin2." 23:59:59'";
+		break;
+		case ("month") :
+		   $data_ini2 = date('Y-m-d', strtotime('-1 month'));
+		   $data_fin2 = date('Y-m-d');					
+			$sel_date = "AND gt.date BETWEEN '" . $data_ini2 ." 00:00:00' AND '".$data_fin2." 23:59:59'";
+		break;				
+		case ("all") :
+		   $data_ini2 = date('Y-m-d', strtotime('-1 year'));
+		   $data_fin2 = date('Y-m-d');								
+			$sel_date = "";
+		break;	
+		default:
+			$sel_date = "";
+	} 
 }
 
 else {
@@ -122,7 +135,21 @@ else {
 	$data_ini2 = date('Y-m-d', strtotime('-1 year'));
    $data_fin2 = date('Y-m-d');								
 	$sel_date = "";
-	 }
+}
+
+$query_cloc = "SELECT COUNT(id) AS conta FROM `glpi_locations` WHERE latitude IS NOT NULL";
+
+$res_cloc = $DB->query($query_cloc);
+$cloc = $DB->result($res_cloc,0,'conta');
+
+$conta_loc = count($cloc);
+
+$query_coo = "	SELECT id
+	FROM glpi_locations
+	WHERE latitude IS NOT NULL	
+	ORDER BY id ASC ";
+	
+$res_coo = $DB->query($query_coo);
 
 ?>
 
@@ -137,41 +164,46 @@ var locations = [
 $icon_red = "http://chart.apis.google.com/chart?chst=d_map_spin&chld=1|0|FF0000|14|_|";
 $icon_green = "http://chart.apis.google.com/chart?chst=d_map_spin&chld=1|0|43B53C|14|_|";
 
-//select not closed tickets
-$query_loc = "
 
-SELECT gl.id, gl.entities_id, gl.name AS location, gl.latitude AS lat, gl.longitude AS lng, count( gt.id ) AS conta
-FROM glpi_locations gl, glpi_tickets gt
-WHERE gl.entities_id = gt.entities_id
-
-AND gl.id IN (SELECT id FROM `glpi_locations` WHERE latitude IS NOT NULL )
-
-AND gt.status IN ".$status."
-".$sel_date."
-AND gt.locations_id = gl.id
-AND gt.is_deleted =0
-GROUP BY gl.id
-ORDER BY `conta` DESC ";
-
-$result_loc = $DB->query($query_loc) or die ("erro");
-
-while ($row = $DB->fetch_assoc($result_loc))
-{
+while ($row_id = $DB->fetch_assoc($res_coo)) {
+	
+	// get location info
+	$query_loc = "
+	SELECT gl.id, gl.entities_id, gl.name AS location, gl.latitude AS lat, gl.longitude AS lng
+	FROM glpi_locations gl
+	WHERE gl.id = ".$row_id['id']."		
+	GROUP BY gl.id
+	ORDER BY gl.id DESC";	
+	
+	$result = $DB->query($query_loc) or die ("error query_loc");
+	$row = $DB->fetch_assoc($result);
+	
+	// get location tickets
+	$query_cham = "
+	SELECT gt.locations_id, COUNT(gt.id) AS conta
+	FROM glpi_tickets gt
+	WHERE gt.locations_id = ".$row_id['id']."
+	AND gt.status IN ".$status."
+	".$sel_date."	
+	AND gt.is_deleted = 0
+	GROUP BY gt.locations_id 
+	ORDER BY gt.locations_id DESC";	
+	
+	$result_cham = $DB->query($query_cham) or die ("error query_cham");
+	$row_cham = $DB->fetch_assoc($result_cham); 
  
   $id = $row['entities_id'];
   $title = $row['location'];  
-  $url = $CFG_GLPI['root_doc']."/front/ticket.php?is_deleted=0&field[0]=view&searchtype[0]=contains&contains[0]=notold&link[1]=AND&field[1]=80&searchtype[1]=equals&contains[1]=".$row['entities_id']."&itemtype=Ticket&start=0";   	
+  $url = $CFG_GLPI['root_doc']."/front/ticket.php?is_deleted=0&field[0]=view&searchtype[0]=contains&contains[0]=notold&link[1]=AND&field[1]=80&searchtype[1]=equals&contains[1]=".$row['entities_id']."&itemtype=Ticket&start=0";      	
   $host = "<a href=". $url ." target=_blank >" . $title . " (".$id.")</a>";  
-  $status = $row['conta'];  
+  //$status = $row['conta'];  
   $local = $row['location']; 
   $lat = $row['lat']; 
   $lng = $row['lng']; 
-  $quant = $row['conta'];  
-  //$num_up = $row['conta'];
-  //$num_down = $row['conta'];   
-
+  $quant = $row_cham['conta'];  
 
 if ($quant == 0) {
+	$quant = 0;
 	$color = $icon_green.$quant."";
 	$num_up = 1;	
 	$num_down = 0;
@@ -192,12 +224,12 @@ echo "['$title', $lat, $lng, '$local', '$color', '$host', $id, $quant, $num_up, 
     
 function initialize() {
    
-var mapOptions = {
-	//mapTypeId: google.maps.MapTypeId.ROADMAP
-	mapTypeId: google.maps.MapTypeId.HYBRID
-//zoom:9,
-//center: new google.maps.LatLng(40,-3)
-	};
+	var mapOptions = {
+		//mapTypeId: google.maps.MapTypeId.ROADMAP
+		mapTypeId: google.maps.MapTypeId.HYBRID
+		//zoom:9,
+		//center: new google.maps.LatLng(40,-3)
+		};
 	
     var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
     var infowindow = new google.maps.InfoWindow();
@@ -244,7 +276,7 @@ marker.setAnimation(google.maps.Animation.DROP);
 google.maps.event.addListener(map, 'zoom_changed', function() { infowindow.close() }); 
             
 	markers.push(marker)			
-    }
+   }
 
 //center map
     var bounds = new google.maps.LatLngBounds();
@@ -335,10 +367,10 @@ var iconCalculator = function(markers, numStyles) {
     infowindow.setContent(titles); //set infowindow content to titles    
     infowindow.open(map, info);
 
-//close infowindow
+	//close infowindow
     google.maps.event.addListener(markerClusterer, 'mouseout', function() { infowindow.close() });
 
-// close infowindow when zoom change
+	// close infowindow when zoom change
 	google.maps.event.addListener(map, 'zoom_changed', function() { infowindow.close() });
 
 });
@@ -511,9 +543,6 @@ var iconCalculator = function(markers, numStyles) {
 				</script> 			
 				<div id="map_canvas"></div>
 			</div>
-		
 	</div>
-
-
 </body>
 </html>

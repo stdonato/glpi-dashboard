@@ -18,16 +18,16 @@ function plugin_dashboard_install(){
 //map
    if (! TableExists("glpi_plugin_dashboard_map")) {
 		$query_map = "CREATE TABLE IF NOT EXISTS `glpi_plugin_dashboard_map` (
-  `id` int(4) NOT NULL AUTO_INCREMENT,
-  `entities_id` int(4) NOT NULL,
-  `location` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `lat` float NOT NULL,
-  `lng` float NOT NULL,
-  PRIMARY KEY (`id`,`entities_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;";
-
-	$DB->query($query_map) or die("error creating table glpi_plugin_dashboard_map " . $DB->error());
+	  `id` int(4) NOT NULL AUTO_INCREMENT,
+	  `entities_id` int(4) NOT NULL,
+	  `location` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+	  `lat` float NOT NULL,
+	  `lng` float NOT NULL,
+	  PRIMARY KEY (`id`,`entities_id`)) 
+	  ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;";
 	
+		$DB->query($query_map) or die("error creating table glpi_plugin_dashboard_map " . $DB->error());
+		
 	}	
 	
 	
@@ -64,18 +64,18 @@ function plugin_dashboard_install(){
 		
 		//Config entities
 		$query_ent = "SELECT users_id FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND value = '-1' ";		
-		$result = $DB->query($query_ent) or die("error alter table glpi_plugin_dashboard_config value size" . $DB->error());
-		//$sel_ent = $DB->result($result_e,0,'value');
+		$result = $DB->query($query_ent) or die("error alter table glpi_plugin_dashboard_config value size" . $DB->error());		
 		
 		while ($row = $DB->fetch_assoc($result)) {
 			$query = "UPDATE glpi_plugin_dashboard_config SET value = '' WHERE name = 'entity' AND users_id = ".$row['users_id']." ";
 			$DB->query($query) or die("error updating table glpi_plugin_dashboard_config entity value" . $DB->error());
-		}
-		
+		}				
 	}
-
-//SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
-//SET sql_mode=(SELECT CONCAT(@@sql_mode,',ONLY_FULL_GROUP_BY'));
+	
+	if (TableExists("glpi_plugin_dashboard_map")) {	
+		$query_alt = "ALTER TABLE `glpi_plugin_dashboard_map` ADD UNIQUE (`location`); ";		
+		$DB->query($query_alt) or die("error update table glpi_plugin_dashboard_map primary key " . $DB->error());	
+	}	
 		
 	return true;
 }

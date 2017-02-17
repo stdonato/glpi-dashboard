@@ -93,7 +93,7 @@ else {
 <body style="background-color: #e5e5e5; margin-left:0%;">
 
 <div id='content' >
-	<div id='container-fluid' style="margin: 0px 2% 0px 2%;"> 
+	<div id='container-fluid' style="margin: 0px 2.5% 0px 2.5%;"> 
 		<div id="charts" class="fluid chart"> 
 			<div id="pad-wrapper" >
 			<div id="head-rel" class="fluid">			
@@ -205,17 +205,9 @@ else {
 				}
 
 
-// distinguish between 0.90.x and 9.1 version
-//if (GLPI_VERSION >= 9.1){
 	$slaid = "AND glpi_tickets.slts_ttr_id = ";
 	$sla_comp = "AND glpi_tickets.slts_ttr_id = glpi_slts.id";	
-//}
-/*
-else {
-	$slaid = "AND glpi_tickets.slas_id = ";
-	$sla_comp = "AND glpi_tickets.slas_id = glpi_slts.id";
-}
-*/
+
 	
 $sql_sla = 
 "SELECT COUNT(glpi_tickets.id) AS total, glpi_slts.name AS sla_name, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, 
