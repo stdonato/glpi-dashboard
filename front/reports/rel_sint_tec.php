@@ -78,7 +78,6 @@ else {
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/bootstrap-datepicker.js"></script>
 <link href="../css/datepicker.css" rel="stylesheet" type="text/css">
-<link href="../less/datepicker.less" rel="stylesheet" type="text/css">
 
 <style type="text/css">	
 	select { width: 60px; }

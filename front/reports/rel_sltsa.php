@@ -76,7 +76,6 @@ else {
 <script src="../inc/select2/select2.js" type="text/javascript" language="javascript"></script>
 <script src="../js/bootstrap-datepicker.js"></script>
 <link href="../css/datepicker.css" rel="stylesheet" type="text/css">
-<link href="../less/datepicker.less" rel="stylesheet" type="text/css">
 
 <script src="../js/media/js/jquery.dataTables.min.js"></script>
 <link href="../js/media/css/dataTables.bootstrap.css" type="text/css" rel="stylesheet" />
