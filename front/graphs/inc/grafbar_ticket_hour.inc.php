@@ -32,8 +32,7 @@ $quant3 = array_values($arr_grf3) ;
 $soma3 = array_sum($arr_grf3);
 
 
-$grf_2 = implode("','",$grf3);
-$grf_3 = "'$grf_2'";
+$grf_3 = json_encode($grf3);
 $quant_2 = implode(',',$quant3);
 
 

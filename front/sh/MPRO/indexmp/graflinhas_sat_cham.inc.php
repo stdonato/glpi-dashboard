@@ -85,8 +85,7 @@ else {
 $grfm = array_keys($arr_grfm) ;
 $quantm = array_values($arr_grfm) ;
 
-$grfm2 = implode("','",$grfm);
-$grfm3 = "'$grfm2'";
+$grfm3 = json_encode($grfm);
 $quantm2 = implode(',',$quantm);
 
 $status = "('5','6')"	;	
@@ -171,8 +170,7 @@ $arr_open = array_merge($arr_month, $arr_grfa);
 $grfa = array_keys($arr_open) ;
 $quanta = array_values($arr_open) ;
 
-$grfa2 = implode("','",$grfa);
-$grfa3 = "'$grfa2'";
+$grfa3 = json_encode($grfa);
 $quanta2 = implode(',',$quanta);
 
 
@@ -230,8 +228,7 @@ else {
 $grff = array_keys($arr_grff) ;
 $quantf = array_values($arr_grff) ;
 
-$grff2 = implode("','",$grff);
-$grff3 = "'$grff2'";
+$grff3 = json_encode($grff);
 $quantf2 = implode(',',$quantf);
 
 
@@ -295,8 +292,7 @@ $arr_sat = array_merge($arr_month, $arr_grfsat); //$arr_grfsat
 $grfsat = array_keys($arr_sat) ;
 $quantsat = array_values($arr_sat);
 
-$grfsat2 = implode("','",$grfsat);
-$grfsat3 = "'$grfsat2'";
+$grfsat3 = json_encode($grfsat);
 $quantsat2 = implode(',',$quantsat);
 
 
