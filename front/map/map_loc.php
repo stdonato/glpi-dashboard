@@ -46,7 +46,7 @@ else {
 
 
 <?php 
-echo '<script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&callback=initMap&key='.$key.'">'; 
+echo '<script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&key='.$key.'">'; 
 echo "</script>\n" 
 ?>  
 
@@ -158,8 +158,10 @@ $res_coo = $DB->query($query_coo);
 <script type="text/javascript">
 
 var markers=[];	                 
-var locations = [
+var locations = 
 <?php
+
+$locations = [];
 
 $icon_red = "http://chart.apis.google.com/chart?chst=d_map_spin&chld=1|0|FF0000|14|_|";
 $icon_green = "http://chart.apis.google.com/chart?chst=d_map_spin&chld=1|0|43B53C|14|_|";
@@ -216,11 +218,24 @@ else {
 	$num_down = 1;
 }
 
-echo "['$title', $lat, $lng, '$local', '$color', '$host', $id, $quant, $num_up, $num_down, '$url'],";
-
-}
-?>
+$locations[] = [
+        $title,
+        $lat,
+        $lng,
+        $local,
+        $color,
+        $host,
+        $id,
+        $quant,
+        $num_up,
+        $num_down,
+        $url
     ];
+}
+
+echo json_encode($locations);
+?>
+;
     
 function initialize() {
    
