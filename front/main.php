@@ -158,7 +158,6 @@ $_SESSION['back'] = $back;
   	 <?php 
  	 	echo '<link rel="stylesheet" type="text/css" href="./css/skin-'.$theme.'">'; 
 	 	echo '<link rel="stylesheet" type="text/css" href="./css/index-style-'.$style.'">';
-		echo '<script src="./js/themes/'.$_SESSION['charts_colors'].'"></script>';
  	 ?>  	
  	
  	<!-- gauge -->
@@ -896,6 +895,8 @@ setTimeout(function(){
 <script src="js/bootstrap-switch.js"></script> 
 <script src="js/highcharts.js" type="text/javascript" ></script>
 <script src="js/highcharts-3d.js" type="text/javascript" ></script>
+<script src="./js/themes/<?php echo $_SESSION['charts_colors'] ?>"></script>';
+
 <script src="js/modules/exporting.js" type="text/javascript" ></script>
 <script src="js/modules/no-data-to-display.js" type="text/javascript" ></script>
 

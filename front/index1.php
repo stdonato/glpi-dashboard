@@ -205,7 +205,6 @@ else {
   	 <?php 
  	 	echo '<link rel="stylesheet" type="text/css" href="./css/skin-'.$theme.'">'; 
 	 	echo '<link rel="stylesheet" type="text/css" href="./css/style-'.$style.'">';
-	 	echo '<script src="./js/themes/'.$_SESSION['charts_colors'].'"></script>';
  	 ?>  	  	 
 </head>
 
