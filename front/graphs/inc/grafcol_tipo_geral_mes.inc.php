@@ -93,8 +93,7 @@ $row_result2 = $DB->fetch_assoc($months2);
 $grfa = array_keys($arr_grfa) ;
 $quanta = array_values($arr_grfa) ;
 
-$grfa2 = implode("','",$grfa);
-$grfa3 = "'$grfa2'";
+$grfa3 = json_encode($grfa);
 $quanta2 = implode(',',$quanta);
 
 
@@ -179,8 +178,7 @@ $row_result2 = $DB->fetch_assoc($months2);
 $grfs = array_keys($arr_grfs) ;
 $quants = array_values($arr_grfs) ;
 
-$grfs2 = implode("','",$grfs);
-$grfs3 = "'$grfs2'";
+$grfs3 = json_encode($grfs);
 $quants2 = implode(',',$quants);
 
 // problems
@@ -260,8 +258,7 @@ $row_result2 = $DB->fetch_assoc($months2);
 $grfp = array_keys($arr_grfp) ;
 $quantp = array_values($arr_grfp) ;
 
-$grfp2 = implode("','",$grfp);
-$grfp3 = "'$grfp2'";
+$grfp3 = json_encode($grfp);
 $quantp2 = implode(',',$quantp);
 
 echo "problemas";

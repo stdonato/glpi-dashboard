@@ -20,8 +20,7 @@ while ($row_result = $DB->fetch_assoc($query_tecd))
 	$arr_data[] = $row_result['data'];	
 } 
 
-$datas1 = implode("','",$arr_data);
-$datas = "'$datas1'";	
+$datas = json_encode($arr_data);	
 	
 
 //REQUESTS 

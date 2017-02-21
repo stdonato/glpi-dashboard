@@ -46,8 +46,7 @@ $quant4 = array_values($arr_grf4) ;
 $soma4 = array_sum($arr_grf4);
 
 
-$grf_2 = implode("','",$grf4);
-$grf_3 = "'$grf_2'";
+$grf_3 = json_encode($grf3);
 $quant_2 = implode(',',$quant4);
 
 echo "

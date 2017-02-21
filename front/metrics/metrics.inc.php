@@ -182,8 +182,7 @@ while ($row_result = $DB->fetch_assoc($resultm))
 $grfm = array_keys($arr_grfm) ;
 $quantm = array_values($arr_grfm) ;
 
-$grfm2 = implode("','",$grfm);
-$grfm3 = "'$grfm2'";
+$grfm3 = json_encode($grfm);
 $quantm2 = implode(',',$quantm);
 
 $opened = array_sum($quantm);
@@ -225,8 +224,7 @@ while ($row_result = $DB->fetch_assoc($resultd))
 $grfd = array_keys($arr_day) ;
 $quantd = array_values($arr_day) ;
 
-$grfd2 = implode("','",$grfd);
-$grfd3 = "'$grfd2'";
+$grfd3 = json_encode($grfd);
 $quantd2 = implode(',',$quantd);
 
 $bydays = array_sum($quantd);

@@ -40,8 +40,7 @@ while ($row_result = $DB->fetch_assoc($result))
 $grfsat = array_keys($arr_grfsat) ;
 $quantsat = array_values($arr_grfsat);
 
-$grfsat2 = implode("','",$grfsat);
-$grfsat3 = "'$grfsat2'";
+$grf_3 = json_encode($grf3);
 $quantsat2 = implode(',',$quantsat);
 
 

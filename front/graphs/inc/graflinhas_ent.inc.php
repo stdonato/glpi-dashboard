@@ -56,8 +56,9 @@ while ($row_result = $DB->fetch_assoc($resultm))
 $grfm = array_keys($arr_grfm) ;
 $quantm = array_values($arr_grfm) ;
 
-$grfm2 = implode("','",$grfm);
-$grfm3 = "'$grfm2'";
+$grfm3 = json_encode($grfm);
+
+var_dump($grfm3);
 
 $quantm2 = implode(',',$quantm);
 

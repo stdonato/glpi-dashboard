@@ -24,8 +24,7 @@ while ($row_result = $DB->fetch_assoc($resultm))
 $grfm = array_keys($arr_grfm) ;
 $quantm = array_values($arr_grfm) ;
 
-$grfm2 = implode("','",$grfm);
-$grfm3 = "'$grfm2'";
+$grfm3 = json_encode($grfm);
 $quantm2 = implode(',',$quantm);
 
 $opened = array_sum($quantm);
@@ -76,8 +75,7 @@ $arr_open = array_merge($arr_month, $arr_grfa);
 $grfa = array_keys($arr_open) ;
 $quanta = array_values($arr_open) ;
 
-$grfa2 = implode("','",$grfa);
-$grfa3 = "'$grfa2'";
+$grfa3 = json_encode($grfa);
 $quanta2 = implode(',',$quanta);
 
 
@@ -113,8 +111,7 @@ while ($row_result = $DB->fetch_assoc($resultm))
 $grfs = array_keys($arr_grfs) ;
 $quants = array_values($arr_grfs) ;
 
-$grfs2 = implode("','",$grfs);
-$grfs3 = "'$grfs2'";
+$grfs3 = json_encode($grfs);
 $quants2 = implode(',',$quants);
 
 
@@ -150,8 +147,7 @@ while ($row_result = $DB->fetch_assoc($resultm))
 $grfp = array_keys($arr_grfp) ;
 $quantp = array_values($arr_grfp) ;
 
-$grfp2 = implode("','",$grfp);
-$grfp3 = "'$grfp2'";
+$grfp3 = json_encode($grfp);
 $quantp2 = implode(',',$quantp);
 
 echo "
