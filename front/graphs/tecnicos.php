@@ -31,7 +31,6 @@ $mydate = isset($_POST["date1"]) ? $_POST["date1"] : "";
 <script src="../js/jquery-ui.min.js"></script>
 <script src="../js/bootstrap-datepicker.js"></script>
 <link href="../css/datepicker.css" rel="stylesheet" type="text/css">
-<link href="../less/datepicker.less" rel="stylesheet" type="text/css">
 
 <?php echo '<link rel="stylesheet" type="text/css" href="../css/style-'.$_SESSION['style'].'">';  ?>
 <?php echo '<script src="../js/themes/'.$_SESSION['charts_colors'].'"></script>'; ?>

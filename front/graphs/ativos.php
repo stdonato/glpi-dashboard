@@ -31,7 +31,6 @@ $mydate = isset($_POST["date1"]) ? $_POST["date1"] : "";
 
 <script src="../js/bootstrap-datepicker.js"></script>
 <link href="../css/datepicker.css" rel="stylesheet" type="text/css">
-<link href="../less/datepicker.less" rel="stylesheet" type="text/css">
 
 <link href="../inc/select2/select2.css" rel="stylesheet" type="text/css">
 <script src="../inc/select2/select2.js" type="text/javascript" language="javascript"></script>

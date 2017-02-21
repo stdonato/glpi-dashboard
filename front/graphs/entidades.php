@@ -23,7 +23,6 @@ $mydate = isset($_POST["date1"]) ? $_POST["date1"] : "";
 <link href="../css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
 <link href="../css/font-awesome.css" type="text/css" rel="stylesheet" />
 <link href="../css/datepicker.css" rel="stylesheet" type="text/css">
-<link href="../less/datepicker.less" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="../js/jquery.min.js"></script> 
 <script src="../js/jquery-ui.min.js"></script>
