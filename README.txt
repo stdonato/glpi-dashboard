@@ -1,5 +1,5 @@
 
-1 - Proceder a instalção como a de um plugin qualquer, descompactando o arquivo e copiando a pasta para a pasta plugins no servidor de GLPI.
+1 - Proceder a instalação como a de um plugin qualquer, descompactando o arquivo e copiando a pasta para a pasta plugins no servidor de GLPI.
 
 2 - Na interface do GLPI acessar Configurar -> Plugins e efetuar a instalação.
 
