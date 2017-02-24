@@ -61,7 +61,7 @@ $(function () {
             },
            
             xAxis: {
-                categories: [$grf_3],
+                categories: $grf_3,
                 labels: {                    
                     align: 'right',
                     style: {

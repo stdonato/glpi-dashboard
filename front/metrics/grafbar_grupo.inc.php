@@ -46,7 +46,7 @@ $(function () {
             },
 
             xAxis: {
-                categories: [$grf_3],
+                categories: $grf_3,
                 labels: {
                 	  //rotation: -55,
                     align: 'right',
