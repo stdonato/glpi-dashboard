@@ -156,7 +156,7 @@ $selected = "0";
 					<span style="color:#8b1a1a; font-size:35pt; font-weight:bold;"> </span> </div>
 				
 						<div id="datas-tec" class="span12 row-fluid" > 
-						<form id="form1" name="form1" class="form2" method="post" action="?date1=<?php echo $data_ini ?>&date2=<?php echo $data_fin ?>&con=1" onsubmit="datai();dataf();"> 
+						<form id="form1" name="form1" class="form2" method="post" action="?date1=<?php echo $data_ini ?>&date2=<?php echo $data_fin ?>&con=1"> 
 						<table border="0" cellspacing="0" cellpadding="1" bgcolor="#efefef">
 						
 						<tr>

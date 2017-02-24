@@ -93,7 +93,7 @@ $result_ent = $DB->query($sql_ent);
 					<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:20px;"></i><span></span></a>					
 					<div id="titulo_rel"> <?php echo __('Summary Report','dashboard') .' - ' .__('Entity'); ?> </div>		
 						<div id="datas-tec" class="span12 fluid" >			
-						    <form id="form1" name="form1" class="form_rel" method="post" action="rel_sint_ent.php?con=1" onsubmit="datai();dataf();">
+						    <form id="form1" name="form1" class="form_rel" method="post" action="rel_sint_ent.php?con=1">
 							    <table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
 								    <tr>
 										<td style="width: 310px;">
