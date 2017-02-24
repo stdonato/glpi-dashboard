@@ -171,7 +171,6 @@ else {
   	 <?php 
  	 	echo '<link rel="stylesheet" type="text/css" href="./css/skin-'.$theme.'">'; 
 	 	echo '<link rel="stylesheet" type="text/css" href="./css/style-'.$style.'">';
-	 	echo '<script src="./js/themes/'.$_SESSION['charts_colors'].'"></script>';
  	 ?> 
  	 
  	 <script src="js/jquery.js"></script> 
@@ -1097,6 +1096,7 @@ $total_users = $DB->fetch_assoc($result_users);
 <script src="js/highcharts-3d.js" type="text/javascript" ></script>
 <script src="js/modules/exporting.js" type="text/javascript" ></script>
 <script src="js/modules/no-data-to-display.js" type="text/javascript" ></script>
+<script src="js/themes/<?php echo $_SESSION['charts_colors'] ?>"></script>';
 
 <!-- knob -->
 <script src="js/jquery.knob.js"></script>
