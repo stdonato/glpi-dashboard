@@ -218,10 +218,8 @@ else {
 		</div>
 	</div>
 
-<!-- Highcharts export dependencies -->
-<script src="../js/modules/canvas-tools.js"></script>
+<!-- Highcharts export xls, csv -->
 <script src="../js/export-csv.js"></script>
-<script src="../js/jspdf.min.js"></script>
 
 <!-- This module, after the dependencies 
 <script src="../js/highcharts-export-clientside.js"></script>
