@@ -157,7 +157,7 @@ else {
 			<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 				<div id="titulo_rel" > <?php echo __('Tickets','dashboard') .'  '. __('by Technician','dashboard') ?> </div>
 					<div id="datas-tec" class="span12 fluid" >
-					<form id="form1" name="form1" class="form_rel" method="post" action="rel_tecnicos.php?con=1" onsubmit="datai();dataf();">
+					<form id="form1" name="form1" class="form_rel" method="post" action="rel_tecnicos.php?con=1">
 
 						<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
 						    		<tr>

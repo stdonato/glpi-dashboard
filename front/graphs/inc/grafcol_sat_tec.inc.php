@@ -71,8 +71,8 @@ $(function () {
                 adjustChartSize: true
             },
             xAxis: {
-                categories: [".$grfsat3."],
-					labels: {
+                categories: $grfsat3,
+                labels: {
                     rotation: -55,
                     align: 'right',
                     style: {

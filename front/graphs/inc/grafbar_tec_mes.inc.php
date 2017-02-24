@@ -68,8 +68,8 @@ $(function () {
                 text: ''
             },
             xAxis: {
-            categories: [ ";
-
+            categories: ";
+                                $categories = array();
 				$DB->data_seek($query_tec, 0) ;
 				while ($tecnico = $DB->fetch_assoc($query_tec)) {
 
@@ -84,14 +84,15 @@ $(function () {
 
 
 					$user_name = str_replace("'","`",$chamado['name']." ". $chamado['sname']);
-					echo "'". $user_name ."',";
+                                        $categories[] = $user_name;
 
 				}
+                                echo json_encode($categories);
 
 			//zerar rows para segundo while
 			$DB->data_seek($query_tec, 0) ;
 
-			echo "    ],
+			echo ",
                 title: {
                     text: null
                 },

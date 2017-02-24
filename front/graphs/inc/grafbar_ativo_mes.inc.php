@@ -77,15 +77,16 @@ echo "	};
                 text: ''
             },
             xAxis: {
-            categories: [ ";
+            categories: ";
 
 $DB->data_seek($query_grp, 0) ;
+$categories = array();
 while ($grupo = $DB->fetch_assoc($query_grp)) {
-
-echo "'". $grupo['name']."',";
+    $categories[] = $grupo['name'];
 }
+echo json_encode($categories);
 
-echo "    ],
+echo ",
                 title: {
                     text: null
                 },

@@ -23,7 +23,6 @@ $mydate = isset($_POST["date1"]) ? $_POST["date1"] : "";
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
 <link href="../css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
 <link href="../css/font-awesome.css" type="text/css" rel="stylesheet" />
-<!-- <link href="../inc/calendar/calendar.css" rel="stylesheet" type="text/css"> -->
 
 <script type="text/javascript" src="../js/jquery.min.js"></script> 
 <script src="../js/highcharts.js"></script>
@@ -69,7 +68,7 @@ $datahoje = date("Y-m-d");
 						<div id="titulo_graf" style="margin-bottom:45px;"> <?php echo __('Tickets','dashboard') .'  '. __('by Group','dashboard');  ?>  
 					
 							<div id="datas" class="col-md-12 fluid" > 
-								<form id="form1" name="form1" class="form1" method="post" action="?date1=<?php echo $data_ini ?>&date2=<?php echo $data_fin ?>" onsubmit="datai();dataf();"> 
+								<form id="form1" name="form1" class="form1" method="post" action="?date1=<?php echo $data_ini ?>&date2=<?php echo $data_fin ?>"> 
 									<table border="0" cellspacing="0" cellpadding="2">
 									<tr>
 										<td style="width: 300px;">		

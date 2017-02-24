@@ -156,7 +156,7 @@ $selected = "0";
 					<span style="color:#8b1a1a; font-size:35pt; font-weight:bold;"> </span> </div>
 				
 						<div id="datas-tec" class="span12 row-fluid" > 
-						<form id="form1" name="form1" class="form2" method="post" action="?date1=<?php echo $data_ini ?>&date2=<?php echo $data_fin ?>&con=1" onsubmit="datai();dataf();"> 
+						<form id="form1" name="form1" class="form2" method="post" action="?date1=<?php echo $data_ini ?>&date2=<?php echo $data_fin ?>&con=1"> 
 						<table border="0" cellspacing="0" cellpadding="1" bgcolor="#efefef">
 						
 						<tr>
@@ -334,12 +334,12 @@ AND glpi_tickets.entities_id IN (".$id_ent.") ";
 
 $result_stat = $DB->query($query_stat);
 
-$new = $DB->result($result_stat,0,'new');
-$assig = $DB->result($result_stat,0,'assig');
-$plan = $DB->result($result_stat,0,'plan');
-$pend = $DB->result($result_stat,0,'pend');
-$solve = $DB->result($result_stat,0,'solve');
-$close = $DB->result($result_stat,0,'close');        
+$new = $DB->result($result_stat,0,'new') + 0;
+$assig = $DB->result($result_stat,0,'assig') + 0;
+$plan = $DB->result($result_stat,0,'plan') + 0;
+$pend = $DB->result($result_stat,0,'pend') + 0;
+$solve = $DB->result($result_stat,0,'solve') + 0;
+$close = $DB->result($result_stat,0,'close') + 0;
 
 echo '<div id="entidade2" class="span12 row-fluid" style="margin-bottom: 15px;">';
 echo '<div id="name"  style="margin-top: 15px;"><span>'.$ent_name.'</span> - <span style = "color:#000;"> '.$total['total'].' '.__('Tickets','dashboard').'</span></div>

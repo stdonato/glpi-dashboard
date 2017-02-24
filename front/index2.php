@@ -171,7 +171,6 @@ else {
   	 <?php 
  	 	echo '<link rel="stylesheet" type="text/css" href="./css/skin-'.$theme.'">'; 
 	 	echo '<link rel="stylesheet" type="text/css" href="./css/style-'.$style.'">';
-	 	echo '<script src="./js/themes/'.$_SESSION['charts_colors'].'"></script>';
  	 ?> 
  	 
  	 <script src="js/jquery.js"></script> 
@@ -1029,21 +1028,6 @@ $total_users = $DB->fetch_assoc($result_users);
 <!-- .content -->
                         
 <div class="container-fluid " style="margin-top:60px;">            
-  
-<script type="text/javascript" >
-	window.odometerOptions = {
-	   format: '( ddd).dd'
-	};
-	
-	setTimeout(function(){
-	    odometer1.innerHTML = <?php echo $total_hoje['total']; ?>;
-	    odometer2.innerHTML = <?php echo $total_mes['total']; ?>;
-	    odometer3.innerHTML = <?php echo $total_ano['total']; ?>;
-	    odometer4.innerHTML = <?php echo $total_users['total']; ?>;
-	}, 1000);
-
-</script> 
-
 </div>   
  <iframe id="iframe1" name="iframe1" class="iframe iframe-side" src="main2.php" scrolling="no"></iframe>
 
@@ -1097,6 +1081,7 @@ $total_users = $DB->fetch_assoc($result_users);
 <script src="js/highcharts-3d.js" type="text/javascript" ></script>
 <script src="js/modules/exporting.js" type="text/javascript" ></script>
 <script src="js/modules/no-data-to-display.js" type="text/javascript" ></script>
+<script src="js/themes/<?php echo $_SESSION['charts_colors'] ?>"></script>';
 
 <!-- knob -->
 <script src="js/jquery.knob.js"></script>

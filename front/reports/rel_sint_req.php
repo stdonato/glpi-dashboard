@@ -105,7 +105,7 @@ else {
 					
 					<div id="titulo_rel"> <?php echo __('Summary Report','dashboard') ." - ". __('Requester') ?> </div>		
 						<div id="datas-tec" class="span12 fluid" >			
-						    <form id="form1" name="form1" class="form_rel" method="post" action="rel_sint_req.php?con=1" onsubmit="datai();dataf();">
+						    <form id="form1" name="form1" class="form_rel" method="post" action="rel_sint_req.php?con=1">
 							    <table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
 								    <tr>
 										<td style="width: 310px;">
@@ -379,12 +379,12 @@ else {
 		
 			$result_stat = $DB->query($query_stat);
 		
-			$new = $DB->result($result_stat,0,'new');
-			$assig = $DB->result($result_stat,0,'assig');
-			$plan = $DB->result($result_stat,0,'plan');
-			$pend = $DB->result($result_stat,0,'pend');
-			$solve = $DB->result($result_stat,0,'solve');
-			$close = $DB->result($result_stat,0,'close');	
+                        $new = $DB->result($result_stat,0,'new') + 0;
+                        $assig = $DB->result($result_stat,0,'assig') + 0;
+                        $plan = $DB->result($result_stat,0,'plan') + 0;
+                        $pend = $DB->result($result_stat,0,'pend') + 0;
+                        $solve = $DB->result($result_stat,0,'solve') + 0;
+                        $close = $DB->result($result_stat,0,'close') + 0;
 			
 			
 			//count by type

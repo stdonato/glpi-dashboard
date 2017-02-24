@@ -162,7 +162,7 @@ $(function () {
                 text: ''
             },
             xAxis: {
-                categories: [$grfm3]
+                categories: $grfm3
             },
             yAxis: {
                 min: 0,

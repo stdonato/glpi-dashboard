@@ -105,7 +105,7 @@ else {
 				<?php echo __('Tickets','dashboard') ." ". __('by Date','dashboard');  ?> 
 				
 				<div id="datas" class="col-md-12 fluid" > 
-				<form id="form1" name="form1" class="form1" method="post" action="?date1=<?php echo $data_ini ?>&date2=<?php echo $data_fin ?>" onsubmit="datai();dataf();"> 
+				<form id="form1" name="form1" class="form1" method="post" action="?date1=<?php echo $data_ini ?>&date2=<?php echo $data_fin ?>"> 
 					<table border="0" cellspacing="0" cellpadding="2">
 						<tr>
 							<td style="width: 300px;">			
@@ -218,10 +218,8 @@ else {
 		</div>
 	</div>
 
-<!-- Highcharts export dependencies -->
-<script src="../js/modules/canvas-tools.js"></script>
+<!-- Highcharts export xls, csv -->
 <script src="../js/export-csv.js"></script>
-<script src="../js/jspdf.min.js"></script>
 
 <!-- This module, after the dependencies 
 <script src="../js/highcharts-export-clientside.js"></script>

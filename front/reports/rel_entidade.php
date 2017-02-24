@@ -90,7 +90,7 @@ else {
 				<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 				    <div id="titulo_rel"> <?php echo __('Tickets', 'dashboard') .'  '. __('by Entity', 'dashboard') ?> </div>
 						    <div id="datas-tec" class="col-md-12 fluid" >
-							    <form id="form1" name="form1" class="form_rel" method="post" action="rel_entidade.php?con=1" onsubmit="datai();dataf();">
+							    <form id="form1" name="form1" class="form_rel" method="post" action="rel_entidade.php?con=1">
 								    <table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
 								    <tr>
 										<td style="width: 310px;">
@@ -359,12 +359,12 @@ else {
 
 		$result_stat = $DB->query($query_stat);
 
-		$new = $DB->result($result_stat,0,'new');
-		$assig = $DB->result($result_stat,0,'assig');
-		$plan = $DB->result($result_stat,0,'plan');
-		$pend = $DB->result($result_stat,0,'pend');
-		$solve = $DB->result($result_stat,0,'solve');
-		$close = $DB->result($result_stat,0,'close');
+                $new = $DB->result($result_stat,0,'new') + 0;
+                $assig = $DB->result($result_stat,0,'assig') + 0;
+                $plan = $DB->result($result_stat,0,'plan') + 0;
+                $pend = $DB->result($result_stat,0,'pend') + 0;
+                $solve = $DB->result($result_stat,0,'solve') + 0;
+                $close = $DB->result($result_stat,0,'close') + 0;
 
 
 		//listar chamados

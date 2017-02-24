@@ -69,19 +69,19 @@ $(function () {
                 text: ''
             },
             xAxis: {
-            categories: [ ";
+            categories: ";
 
 $DB->data_seek($query_tec, 0) ;
+$categories = array();
 while ($tecnico = $DB->fetch_assoc($query_tec)) {
-
-	$user_name = $tecnico['name'];
-	echo "'". $user_name ."',";
+    $categories[] = $tecnico['name'];
 }
+echo json_encode($categories);
 
 //zerar rows para segundo while
 $DB->data_seek($query_tec, 0) ;
 
-echo "    ],
+echo ",
                 title: {
                     text: null
                 },
