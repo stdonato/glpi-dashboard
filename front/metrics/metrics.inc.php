@@ -420,13 +420,13 @@ $query_sat =
 	
 	$result_stat = $DB->query($query_stat);
 	
-	$new = $DB->result($result_stat,0,'new');
-	$assig = $DB->result($result_stat,0,'assig');
-	$plan = $DB->result($result_stat,0,'plan');
-	$pend = $DB->result($result_stat,0,'pend');
-	$solved = $DB->result($result_stat,0,'solve');
-	$closed = $DB->result($result_stat,0,'close'); 
-	
+        $new = $DB->result($result_stat,0,'new') + 0;
+        $assig = $DB->result($result_stat,0,'assig') + 0;
+        $plan = $DB->result($result_stat,0,'plan') + 0;
+        $pend = $DB->result($result_stat,0,'pend') + 0;
+        $solve = $DB->result($result_stat,0,'solve') + 0;
+        $close = $DB->result($result_stat,0,'close') + 0;
+
 	$assigned = $assig + $plan;
 	$total = $new + $assig + $plan + $pend + $solved;
 	

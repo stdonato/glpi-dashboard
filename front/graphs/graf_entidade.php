@@ -300,12 +300,12 @@ AND glpi_tickets.entities_id = ".$id_ent." ";
 
 $result_stat = $DB->query($query_stat);
 
-$new = $DB->result($result_stat,0,'new');
-$assig = $DB->result($result_stat,0,'assig');
-$plan = $DB->result($result_stat,0,'plan');
-$pend = $DB->result($result_stat,0,'pend');
-$solve = $DB->result($result_stat,0,'solve');
-$close = $DB->result($result_stat,0,'close');
+$new = $DB->result($result_stat,0,'new') + 0;
+$assig = $DB->result($result_stat,0,'assig') + 0;
+$plan = $DB->result($result_stat,0,'plan') + 0;
+$pend = $DB->result($result_stat,0,'pend') + 0;
+$solve = $DB->result($result_stat,0,'solve') + 0;
+$close = $DB->result($result_stat,0,'close') + 0;
 
 echo '<div id="entidade2" class="col-md-12 fluid" style="margin-bottom: 15px;">';
 echo '<div id="name"  style="margin-top: 15px;"><span>'.$ent_name['name'].'</span> - <span class="total_tech"> '.$total['total'].' '.__('Tickets','dashboard').'</span></div>
