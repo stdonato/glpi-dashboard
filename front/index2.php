@@ -1028,21 +1028,6 @@ $total_users = $DB->fetch_assoc($result_users);
 <!-- .content -->
                         
 <div class="container-fluid " style="margin-top:60px;">            
-  
-<script type="text/javascript" >
-	window.odometerOptions = {
-	   format: '( ddd).dd'
-	};
-	
-	setTimeout(function(){
-	    odometer1.innerHTML = <?php echo $total_hoje['total']; ?>;
-	    odometer2.innerHTML = <?php echo $total_mes['total']; ?>;
-	    odometer3.innerHTML = <?php echo $total_ano['total']; ?>;
-	    odometer4.innerHTML = <?php echo $total_users['total']; ?>;
-	}, 1000);
-
-</script> 
-
 </div>   
  <iframe id="iframe1" name="iframe1" class="iframe iframe-side" src="main2.php" scrolling="no"></iframe>
 
