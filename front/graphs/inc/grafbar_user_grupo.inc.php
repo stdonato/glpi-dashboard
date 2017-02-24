@@ -40,14 +40,15 @@ $(function () {
                 text: ''
             },
             xAxis: {
-            categories: [ ";
+            categories: ";
 
+$categories = array();
 while ($grupo = $DB->fetch_assoc($query_grp_b)) {
-
-echo "'". $grupo['name']." ".$grupo['sname']."',";
+    $categories[] = $grupo['name']." ".$grupo['sname'];
 }
+echo json_encode($categories);
 
-echo "    ],
+echo ",
                 title: {
                     text: null
                 },

@@ -275,7 +275,7 @@ $(function () {
                 text: '".__('Tickets','dashboard')." ".__('by Type','dashboard')."'
             },
             xAxis: {
-                categories: [$grfm3]
+                categories: $grfp3
             },
             yAxis: {
                 min: 0,
