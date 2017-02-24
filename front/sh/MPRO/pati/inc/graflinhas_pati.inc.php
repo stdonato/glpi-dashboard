@@ -135,7 +135,7 @@ $(function ()
                 //backgroundColor: '#FFFFFF'
             },
             xAxis: {
-                categories: [$grfm3],
+                categories: $grfm3,
 						  labels: {
                     rotation: -55,
                     align: 'right',

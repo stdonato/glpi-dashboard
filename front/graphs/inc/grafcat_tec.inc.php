@@ -53,7 +53,7 @@ $(function () {
             },
 
             xAxis: {
-                categories: [$grf_3a],
+                categories: $grf_3a,
                 labels: {
                     rotation: 0,
                     align: 'right',

@@ -113,7 +113,7 @@ $(function () {
                return ''+ Highcharts.numberFormat(this.x, 0);
          		},
 
-				categories: [$datas],                      
+				categories: $datas,                      
 
              title: {
                  text: ''
