@@ -25,11 +25,11 @@ $datas = json_encode($arr_data);
 
 //REQUESTS 
 $DB->data_seek($query_tecd, 0);
+
 while ($row = $DB->fetch_assoc($query_tecd)) { 
 	
 	$sql_tec = "
-	SELECT DATE_FORMAT(date, '%Y-%m-%d') as data, COUNT(id) as conta1,
-	SUM(case when glpi_tickets.type = 2 then 1 else 0 end) AS conta
+	SELECT DATE_FORMAT(date, '%Y-%m-%d') as data, COUNT(id) as conta1, SUM(case when glpi_tickets.type = 2 then 1 else 0 end) AS conta
 	FROM glpi_tickets
 	WHERE glpi_tickets.is_deleted = 0	
 	AND DATE_FORMAT( date, '%Y-%m-%d' ) = '".$row['data']."'
@@ -38,9 +38,9 @@ while ($row = $DB->fetch_assoc($query_tecd)) {
 	
 	$query_tec = $DB->query($sql_tec);	
 	
-	$row_result = $DB->fetch_assoc($query_tec);
-	
+	$row_result = $DB->fetch_assoc($query_tec);	
 	$v_row_result = $row_result['data'];
+	
 	if($row_result['conta'] != '') {
 		$arr_grfa[$v_row_result] = $row_result['conta'];
 	}
@@ -48,18 +48,18 @@ while ($row = $DB->fetch_assoc($query_tecd)) {
 		$arr_grfa[$v_row_result] = 0;
 	}	
 }
-		
-$quanta = array_values($arr_grfa) ;
-$quanta2 = implode(',',$quanta);		
-
+	
+//if(count($arr_grfa) > 0) {		
+	$quanta = array_values($arr_grfa) ;
+	$quanta2 = implode(',',$quanta);		
+//}
 
 //INCIDENTS
 $DB->data_seek($query_tecd, 0);
 while ($row = $DB->fetch_assoc($query_tecd))	{ 
 
 	$sql_teci = "
-	SELECT DATE_FORMAT(date, '%Y-%m-%d') as data, COUNT(id) as conta1,
-	SUM(case when glpi_tickets.type = 1 then 1 else 0 end) AS conta
+	SELECT DATE_FORMAT(date, '%Y-%m-%d') as data, COUNT(id) as conta1, SUM(case when glpi_tickets.type = 1 then 1 else 0 end) AS conta
 	FROM glpi_tickets
 	WHERE glpi_tickets.is_deleted = 0	
 	AND DATE_FORMAT( date, '%Y-%m-%d' ) = '".$row['data']."'
@@ -68,9 +68,9 @@ while ($row = $DB->fetch_assoc($query_tecd))	{
 		
 	$query_teci = $DB->query($sql_teci);
 	
-	$row_result = $DB->fetch_assoc($query_teci);
-	
+	$row_result = $DB->fetch_assoc($query_teci);	
 	$v_row_result = $row_result['data'];
+	
 	if($row_result['conta'] != '') {
 		$arr_grfi[$v_row_result] = $row_result['conta'];
 	}
@@ -79,7 +79,7 @@ while ($row = $DB->fetch_assoc($query_tecd))	{
 	}	
 }	
 
-$quanti = array_values($arr_grfi) ;
+$quanti = array_values($arr_grfi);
 $quanti2 = implode(',',$quanti);
 
 
@@ -192,6 +192,6 @@ $(function () {
     });
 
 </script>
-";
-		
+";	
+	
 ?>

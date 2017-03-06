@@ -414,7 +414,7 @@ setTimeout(function(){
    </div> 
       <!-- /widget-header -->
 	<div id="grfrow" class="row-fluid col-sm-11 col-md-11 card" style="width:100%;">	
-      <h4> <?php //echo __('Tickets Evolution','dashboard'); ?> </h4>
+      
       <p id="choices" style=" margin-right: 20px; margin-top: 5px; text-align:right; width:<?php echo $width_os; ?>;"></p>	  	
 		<div class="demo-container" style="margin-bottom:10px;">						
 		
@@ -457,15 +457,7 @@ setTimeout(function(){
 									    min: 0,
 									    max: '.$totalmem.',
 									    title: "'.$titlem.'",
-									    label: "'.$umem.' %",
-									    //startAnimationType:bounce,
-									    //levelColorsGradient: false									    
-									      /* levelColors: [
-									       	"#9FCA0C",
-									       	"#F9C800",
-									       	"#FB8300",
-									         "#ff0000"									          
-									        ] */
+									    label: "'.$umem.' %"
 									
 									    });
 									    </script>
@@ -486,16 +478,7 @@ setTimeout(function(){
 									    min: 0,
 									    max: '.$totald.',
 									    title: "'.$titled.'",
-									    label: "'.$udisk.' %",		
-									    //startAnimationType:bounce,
-										 //levelColorsGradient: false						       
-									      /* levelColors: [
-									       	"#9FCA0C",
-									       	"#F9C800",
-									       	"#FB8300",
-									         "#ff0000"									          
-									        ] */
-									
+									    label: "'.$udisk.' %"		
 									    });
 									    </script>
 								<!-- </div> -->

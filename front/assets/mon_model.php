@@ -20,20 +20,17 @@ AND glpi_monitormodels.id = glpi_monitors.monitormodels_id
 GROUP BY glpi_monitormodels.name
 ORDER BY count( glpi_monitors.id ) DESC ";
 
-		
 $result_os = $DB->query($query_os) or die('erro');
-
 $arr_grf_os = array();
 
 if($unk != 0) {
-$arr_grf_os[__('Unknown', 'dashboard')] = $unk;
+	$arr_grf_os[__('Unknown', 'dashboard')] = $unk;
 }
 
-while ($row_result = $DB->fetch_assoc($result_os))		
-	{ 
+while ($row_result = $DB->fetch_assoc($result_os))	{ 
 	$v_row_result = $row_result['name'];
 	$arr_grf_os[$v_row_result] = $row_result['conta'];			
-	} 
+} 
 	
 $grf_os2 = array_keys($arr_grf_os);
 $quant_os2 = array_values($arr_grf_os);

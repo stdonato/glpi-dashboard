@@ -21,14 +21,13 @@ for($i=0; $i < $conta_y; $i++) {
 	$resultm = $DB->query($query_m);
 	
 	echo '
-	"'.$arr_years[$i].'": {
-					label: "'.$arr_years[$i].'", ';
+	"'.$arr_years[$i].'": {label: "'.$arr_years[$i].'", ';
 	
 	echo 'data: [';
 	
 	while ($row_m = $DB->fetch_assoc($resultm)) {
-	
-	 echo '['.$row_m['month'].', '.$row_m['nb'].'],'; 
+		//echo '['.$row_m['month'].', '.$row_m['nb'].'],'; 
+		echo "['".$row_m["month"]."', '".$row_m["nb"]."'],"; 
 	}
 	
 	echo '] }, ';
@@ -37,9 +36,7 @@ for($i=0; $i < $conta_y; $i++) {
 
 ?>
 
-	// hard-code color indices to prevent them from shifting as
-		// countries are turned on/off
-
+	// hard-code color indices to prevent them from shifting as countries are turned on/off
 		var i = 1;
 		$.each(datasets, function(key, val) {
 			val.color = i;

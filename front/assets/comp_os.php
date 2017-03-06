@@ -26,15 +26,14 @@ $result_os = $DB->query($query_os) or die('erro');
 $arr_grf_os = array();
 
 if($unk != 0) {
-$arr_grf_os[__('Unknow','dashboard')] = $unk;
+	$arr_grf_os[__('Unknown','dashboard')] = $unk;
 }
 
 
-while ($row_result = $DB->fetch_assoc($result_os))		
-	{ 
+while ($row_result = $DB->fetch_assoc($result_os))	{ 
 	$v_row_result = $row_result['so'];
 	$arr_grf_os[$v_row_result] = $row_result['conta'];			
-	} 
+} 
 	
 $grf_os2 = array_keys($arr_grf_os);
 $quant_os2 = array_values($arr_grf_os);
@@ -96,4 +95,4 @@ echo "                ]
     });
 
 		</script>"; 
-		?>
+?>

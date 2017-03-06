@@ -46,6 +46,7 @@ else {
 	}
 
 
+//Count assets 
 function conta($asset, $sel_ent) {
 
 	global $DB;
@@ -72,14 +73,14 @@ function conta($asset, $sel_ent) {
 	
 	if($total != "") {
 		return $total;
-	    }
+	}
 	
 	else {
 		return "0";
-	    }
+	}
 }	
 
-//cartridges and consumables
+// Count cartridges and consumables
 function conta1($asset,$sel_ent) {
 
 	global $DB;
@@ -158,7 +159,8 @@ foreach($arr_assets as $asset) {
 <script src="../js/jquery.min.js" type="text/javascript"></script>
 <script src="../js/highcharts.js"></script>
 <script src="../js/modules/exporting.js"></script>
-<script src="../js/themes/grid-light.js"></script>  
+<!--<script src="../js/themes/grid-light.js"></script>  -->
+<?php echo '<script src="../js/themes/'.$_SESSION['charts_colors'].'"></script>'; ?>
 
 <script src="../js/media/js/jquery.dataTables.min.js"></script>
 <link href="../js/media/css/dataTables.bootstrap.css" type="text/css" rel="stylesheet" />
@@ -183,6 +185,21 @@ foreach($arr_assets as $asset) {
 
 <?php echo '<link rel="stylesheet" type="text/css" href="../css/style-'.$_SESSION['style'].'">';  ?>  
 <?php echo '<script src="../js/themes/'.$_SESSION['charts_colors'].'"></script>'; ?>
+
+
+<script type="text/javascript">
+	function showDiv(div){
+		
+		if (document.getElementById(div).style.display == 'block') 
+		  { 		
+			document.getElementById(div).style.display = 'none';
+			}
+		else {		
+			document.getElementById(div).style.display = 'block';
+			}
+	
+	}
+</script>	
 
 </head>
 
@@ -236,30 +253,30 @@ foreach($arr_assets as $asset) {
 	            	<td> <a href="assets.php#" onclick=showDiv(\'computers\') style="color: #fff;">
 	            	'._n('Computer','Computers',2).'<br>'. conta(computers,$sel_ent) .'</a></td>
 	            	
-	            	<td> <a href="assets.php#" onclick=showDivM(\'monitors\') style="color: #fff;">
+	            	<td> <a href="assets.php#" onclick=showDiv(\'monitors\') style="color: #fff;">
 	            	'._n('Monitor','Monitors',2).'<br>'. conta(monitors,$sel_ent) .'</a></td>
 	            	
-	            	<td> <a href="assets.php#" onclick=showDivP(\'printers\') style="color: #fff;">
+	            	<td> <a href="assets.php#" onclick=showDiv(\'printers\') style="color: #fff;">
 	            	'._n('Printer','Printers',2).'<br>'. conta(printers,$sel_ent) .'</a></td>
 	            	
-	            	<td> <a href="assets.php#" onclick=showDivN(\'net\') style="color: #fff;">
+	            	<td> <a href="assets.php#" onclick=showDiv(\'net\') style="color: #fff;">
 	            	'._n('Network','Networks',2).'<br>'. conta(networkequipments,$sel_ent) .'</a></td>
 	            	
-	            	<td> <a href="assets.php#" onclick=showDivT(\'phone\') style="color: #fff;">
+	            	<td> <a href="assets.php#" onclick=showDiv(\'phone\') style="color: #fff;">
 	            	'._n('Phone','Phones',2).'<br>'. conta(phones,$sel_ent) .' </a></td>
 	            	
-	            	<td> <a href="assets.php#" onclick=showDivD(\'peripheral\') style="color: #fff;">
+	            	<td> <a href="assets.php#" onclick=showDiv(\'peripheral\') style="color: #fff;">
 	            	'._n('Device','Devices',2).'<br>'. conta(peripherals,$sel_ent) .' </a></td>
 	            	
-	            	<td> <a href="assets.php#" onclick=showDivS(\'soft\') style="color: #fff;">
+	            	<td> <a href="assets.php#" onclick=showDiv(\'soft\') style="color: #fff;">
 	            	'._n('Software','Softwares',2).'<br>'. conta(softwares,$sel_ent) .'</a></td>
 	            	
-	            	<td> <a href="assets.php#" onclick=showDivC(\'cart\') style="color: #fff;">
+	            	<td> <a href="assets.php#" onclick=showDiv(\'cart\') style="color: #fff;">
 	            	'._n('Cartridge','Cartridges',2).'<br>'. conta1(cartridges,$sel_ent) .'</a></td>
 	            	
 	            	<td> '._n('Consumable','Consumables',2).'<br>'. conta1(consumables,$sel_ent) .' </td>
 	            	
-	            	<td> <a href="assets.php#" onclick=showDivG(\'global\') style="color: #fff;">
+	            	<td> <a href="assets.php#" onclick=showDiv(\'global\') style="color: #fff;">
 	            	'.__('Global').'<br>'. $global .' </a></td> ';
 	            ?>	
 	            </tr>                                 
@@ -270,21 +287,7 @@ foreach($arr_assets as $asset) {
 	</div>	  
 
 <div id='container-fluid' style="margin: 0 2% 0 0; float:none;"> 
-	<div id='charts_assets' style="col-md-12 fluid">		    	    	   
-		 	      	
-		<script type="text/javascript">
-			function showDiv(computers){
-				
-				if (document.getElementById(computers).style.display == 'block') 
-				  { 		
-					document.getElementById(computers).style.display = 'none';
-					}
-				else {		
-					document.getElementById(computers).style.display = 'block';
-					}
-			
-			}
-			</script>		 	
+	<div id='charts_assets' style="col-md-12 fluid">		    	    	   		 	      		 	
 	
 				<div id="computers" class="col-md-12" style="display:none; margin:auto; float:none; color:#000;"> 										
 					
@@ -297,7 +300,7 @@ foreach($arr_assets as $asset) {
 					</div>
 					
 					<div id="graf_manufac" class="well col-md-12" style="margin-top: 25px; margin-left: 1%;">
-						<?php  include('./comp_manufac.php'); ?>		
+						<?php  include('./comp_manuf.php'); ?>		
 					</div>
 									
 					<div id="graf_ticket" class="well col-md-12" style="margin-top: 20px; margin-left: 1%;">
@@ -305,161 +308,69 @@ foreach($arr_assets as $asset) {
 					</div>			
 														
 				</div>
-					
-					
-		<script type="text/javascript">
-		function showDivM(monitors){
-			
-		if (document.getElementById(monitors).style.display == 'block') 
-		  { 		
-			document.getElementById(monitors).style.display = 'none';
-			}
-		else {	
-			document.getElementById(monitors).style.display = 'block';
-			}
-		
-		}
-		</script>	
+						
 					<div id="monitors" style="display:none; margin:auto; float:none;" class="col-md-12"> 							
-						<div id="graf_mon1" class="col-md-6" style="margin-top: 0;">
+						<div id="graf_mon1" class="col-md-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./mon_manuf.php'); ?>		
 						</div>
-						<div id="graf_mon2" class="col-md-6" style="margin-top: 0;">
+						<div id="graf_mon2" class="col-md-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./mon_model.php'); ?>		
 						</div>						
 					</div>
 			
-		<script type="text/javascript">
-		function showDivP(printers){
-			
-		if (document.getElementById(printers).style.display == 'block') 
-		  { 		
-			document.getElementById(printers).style.display = 'none';
-			}
-		else {	
-			document.getElementById(printers).style.display = 'block';
-			}
-		
-		}
-		</script>	
 					<div id="printers" style="display:none; margin: auto;" class="col-md-12"> 				
-						<div id="graf_printer1" class="col-md-6" style="margin-top: 0;">
+						<div id="graf_printer1" class="col-md-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./printer_manuf.php'); ?>		
 						</div>
-						<div id="graf_printer2" class="col-md-6" style="margin-top: 0;">
+						<div id="graf_printer2" class="col-md-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./printer_model.php'); ?>		
 						</div>							
 					</div>	
-		
-		<script type="text/javascript">
-		function showDivN(net){
-			
-		if (document.getElementById(net).style.display == 'block') 
-		  { 		
-			document.getElementById(net).style.display = 'none';
-			}
-		else {	
-			document.getElementById(net).style.display = 'block';
-			}
-		
-		}
-		</script>
+
 		
 					<div id="net" style="display:none; margin: auto; float:none;" class="col-md-12"> 						
-						<div id="graf_net1" class="col-md-6 " style="margin-top: 0;">
+						<div id="graf_net1" class="col-md-6 " style="margin-top: 0; min-height:500px;">
 							<?php  include('./net_manuf.php'); ?>		
 						</div>
-						<div id="graf_net2" class="col-md-6 " style="margin-top: 0;">
+						<div id="graf_net2" class="col-md-6 " style="margin-top: 0; min-height:500px;">
 							<?php  include('./net_model.php'); ?>		
 						</div>							
 					</div>				
-					
-		<script type="text/javascript">
-		function showDivT(phone){
-			
-		if (document.getElementById(phone).style.display == 'block') 
-		  { 		
-			document.getElementById(phone).style.display = 'none';
-			}
-		else {	
-			document.getElementById(phone).style.display = 'block';
-			}
-		
-		}
-		</script>	
+	
 					<div id="phone" style="display:none; margin: auto;" class="col-md-12"> 							
-						<div id="graf_phone1" class="col-md-6" style="">
+						<div id="graf_phone1" class="col-md-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./phone_manuf.php'); ?>		
 						</div>
-						<div id="graf_phone2" class="col-md-6"  style="">
+						<div id="graf_phone2" class="col-md-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./phone_model.php'); ?>		
 						</div>
 						<div id="phones_report" class="col-md-12 well" style="margin-top:25px; margin-left: 1%;">
 							<?php  include('./phone_report.php'); ?>		
 						</div>							
 					</div>				
-					
-		<script type="text/javascript">
-		function showDivD(peripheral){
-			
-		if (document.getElementById(peripheral).style.display == 'block') 
-		  { 		
-			document.getElementById(peripheral).style.display = 'none';
-			}
-		else {	
-			document.getElementById(peripheral).style.display = 'block';
-			}
-		
-		}
-		</script>	
+						
 					<div id="peripheral" style="display:none; margin: auto;" class="col-md-12"> 					
-						<div id="graf_perip1" class="col-md-6" style="">
+						<div id="graf_perip1" class="col-md-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./perip_manuf.php'); ?>		
 						</div>
-						<div id="graf_perip2" class="col-md-6" style="">
+						<div id="graf_perip2" class="col-md-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./perip_model.php'); ?>		
 						</div>							
 					</div>			
 					
-		<script type="text/javascript">
-		function showDivS(soft){
-			
-		if (document.getElementById(soft).style.display == 'block') 
-		  { 		
-			document.getElementById(soft).style.display = 'none';
-			}
-		else {	
-			document.getElementById(soft).style.display = 'block';
-			}
-		
-		}
-		</script>	
 					<div id="soft" style="display:none; margin: auto;" class="col-md-12">
 					<!--<a href="assets.php#"><img src="../img/close.png" alt="close" onclick="showDivS('soft')" style="position:absolute; float:right;"></a>-->
-						<div id="graf_soft1" class="col-md-6" style="">
+						<div id="graf_soft1" class="col-md-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./soft_manuf.php'); ?>		
 						</div>
-						<div id="graf_soft2" class="col-md-6" style="">
+						<div id="graf_soft2" class="col-md-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./soft_install.php'); ?>		
 						</div>							
 					</div>							
-			
-		<script type="text/javascript">
-		function showDivC(cart){
-			
-		if (document.getElementById(cart).style.display == 'block') 
-		  { 		
-			document.getElementById(cart).style.display = 'none';
-			}
-		else {	
-			document.getElementById(cart).style.display = 'block';
-			}
-		
-		}
-		</script>	
+				
 					<div id="cart" style="display:none; margin: auto;" class="col-md-12"> 
 					<!-- <a href="assets.php#"><img src="../img/close.png" alt="close" onclick="showDivC('cart')" style="position:absolute; float:right;"></a> -->
-						<div id="graf_cart1" class="col-md-12" style="width: 98%;">
+						<div id="graf_cart1" class="col-md-12" style="margin-top: 0; min-height:500px; width: 98%;">
 							<?php  include('./cart_manuf.php'); ?>		
 						</div>
 						<div id="graf_cart2" class="col-md-12 well" style="margin-top: 25px; margin-left: 1%;">
@@ -467,22 +378,9 @@ foreach($arr_assets as $asset) {
 						</div>							
 					</div>
 				
-		<script type="text/javascript">
-		function showDivG(global){
-			
-		if (document.getElementById(global).style.display == 'block') 
-		  { 		
-			document.getElementById(global).style.display = 'none';
-			}
-		else {	
-			document.getElementById(global).style.display = 'block';
-			}
-		
-		}
-		</script>
 					<div id="global" style="display:none; margin: auto;" class="col-md-12">
 					<!--<a href="assets.php#"><img src="../img/close.png" alt="close" onclick="showDivG('global')" style="position:absolute; float:right;"></a>-->			
-						<div id="graf_global1" class="col-md-12" style="width: 98%;">
+						<div id="graf_global1" class="col-md-12" style="margin-top: 0; min-height:500px; width: 98%;">
 							<?php  include('./global_assets.php'); ?>		
 						</div>
 						<div id="asset_tickets" class="well col-md-12" style="margin-top: 25px; margin-left: 1%;">
