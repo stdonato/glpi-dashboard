@@ -80,7 +80,7 @@ else {
 <body style="background-color: #e5e5e5; margin-left:0%;">
 
 <div id='content' >
-<div id='container-fluid' style="margin: 0px 5% 0px 5%;">
+<div id='container-fluid' style="margin: 0px 2% 0px 2%;">
 
 <div id="charts" class="fluid chart" >
 <div id="pad-wrapper" >
@@ -240,7 +240,7 @@ else {
 // Chamados
 $sql_cham =
 "SELECT glpi_tickets.id AS id, glpi_tickettasks.taskcategories_id AS tipo, glpi_tickettasks.date AS date, glpi_tickettasks.content,
-glpi_tickettasks.users_id, glpi_tickettasks.actiontime, glpi_tickettasks.begin AS begin, glpi_tickettasks.end
+glpi_tickettasks.users_id AS uid, glpi_tickettasks.actiontime, glpi_tickettasks.begin AS begin, glpi_tickettasks.end
 FROM glpi_tickettasks, glpi_tickets
 WHERE glpi_tickets.entities_id = ".$id_ent."
 AND glpi_tickets.id = glpi_tickettasks.tickets_id
@@ -302,6 +302,8 @@ while($row = $DB->fetch_assoc($result_cons1)){
 			<tr>
 				<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Ticket') ."  </th>
 				<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Date') ." </th>
+				<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Technician') ." </th>
+				<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Requester') ." </th>
 				<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Description') ."</th>
 				<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Duration') ." </th>
 				<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Begin') ." </th>
@@ -315,14 +317,36 @@ while($row = $DB->fetch_assoc($result_cons1)){
 $DB->data_seek($result_cham, 0);
 while($row = $DB->fetch_assoc($result_cham)){
 	
+	//nome e total
+	$sql_nome = "
+	SELECT glpi_users.id, glpi_users.firstname , glpi_users.realname, glpi_users.name
+	FROM glpi_users, glpi_tickettasks
+	WHERE glpi_tickettasks.users_id = glpi_users.id
+	AND glpi_users.id = ".$row['uid']." ";
+	
+	$result_nome = $DB->query($sql_nome) ;
+	$row_nome = $DB->fetch_assoc($result_nome);
+	
+	//Requester
+	$sql_req = "SELECT gu.firstname AS name, gu.realname AS sname
+					FROM glpi_users gu, glpi_tickets_users gtu
+					WHERE gtu.tickets_id = ".$row['id']."
+					AND gtu.users_id = gu.id
+					AND gtu.type = 1 ";
+	
+	$result_req = $DB->query($sql_req) ;
+	$req = $DB->fetch_assoc($result_req);
+	
 	echo "
 	<tr>
-	<td style='text-align:center; vertical-align:middle;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
-	<td style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
-	<td style='max-width:450px; vertical-align:middle;'> ". $row['content'] ." </td>
-	<td style='text-align:center; vertical-align:middle;''> ". time_ext($row['actiontime']) ."</td>
-	<td style='text-align:center; vertical-align:middle;''> ". conv_data_hora($row['begin']) ."</td>
-	<td style='text-align:center; vertical-align:middle;''> ". conv_data_hora($row['end']) ."</td>
+		<td style='text-align:center; vertical-align:middle;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
+		<td style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
+		<td style='vertical-align:middle;'> ". $row_nome['firstname'] ." ".$row_nome['realname']." </td>
+		<td style='vertical-align:middle;'> ". $req['name']." ".$req['sname']." </td>
+		<td style='max-width:400px; vertical-align:middle;'> ". $row['content'] ." </td>
+		<td style='text-align:center; vertical-align:middle;''> ". time_ext($row['actiontime']) ."</td>
+		<td style='text-align:center; vertical-align:middle;''> ". conv_data_hora($row['begin']) ."</td>
+		<td style='text-align:center; vertical-align:middle;''> ". conv_data_hora($row['end']) ."</td>
 	</tr>";
 }
 

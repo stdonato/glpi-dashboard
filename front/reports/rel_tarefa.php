@@ -80,7 +80,7 @@ else {
 <body style="background-color: #e5e5e5; margin-left:0%;">
 
 <div id='content' >
-<div id='container-fluid' style="margin: 0px 5% 0px 5%;">
+<div id='container-fluid' style="margin: 0px 2% 0px 2%;">
 
 <div id="charts" class="fluid chart" >
 <div id="pad-wrapper" >
@@ -119,16 +119,12 @@ if($sel_ent == '') {
 	$ent = implode(",",$entities);
 
 	$entidade = "AND glpi_tickets.entities_id IN (".$ent.") ";
-	//$entidade_t = "AND entities_id IN (".$ent.") ";
-	//$entidade_tw = "WHERE entities_id IN (".$ent.") ";
 	$entidade_u = "AND glpi_profiles_users.entities_id IN (".$ent.") ";
 	$entidade1 = "";
 	
 }
 else {
 	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.") ";
-	//$entidade_t = "AND entities_id IN (".$sel_ent.") ";
-	//$entidade_tw = "WHERE entities_id IN (".$sel_ent.") ";
 	$entidade_u = "AND glpi_profiles_users.entities_id IN (".$sel_ent.") ";
 }
 
@@ -267,7 +263,6 @@ else {
 }
 
 // Chamados
-
 $sql_cham =
 "SELECT glpi_tickets.id AS id, glpi_tickettasks.taskcategories_id AS tipo, glpi_tickettasks.date AS date, glpi_tickettasks.content,
 glpi_tickettasks.users_id, glpi_tickettasks.actiontime, glpi_tickettasks.begin AS begin, glpi_tickettasks.end
@@ -289,7 +284,7 @@ glpi_tickettasks.users_id, glpi_tickettasks.actiontime, glpi_tickettasks.begin, 
 FROM `glpi_tickets` , glpi_tickettasks
 WHERE glpi_tickets.id = glpi_tickettasks.`tickets_id`
 AND glpi_tickettasks.users_id_tech = ". $id_tec ."
-AND glpi_tickets.is_deleted =0
+AND glpi_tickets.is_deleted = 0
 AND glpi_tickettasks.date ". $datas2 ."
 ".$entidade."
 ORDER BY id DESC ";
@@ -340,6 +335,7 @@ while($row = $DB->fetch_assoc($result_nome)){
 			<tr>
 				<th style='text-align:center; cursor:pointer;'> ". __('Ticket') ."  </th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Date') ." </th>
+				<th style='text-align:center; cursor:pointer;'> ". __('Requester') ." </th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Description') ."</th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Duration') ." </th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Begin') ." </th>
@@ -355,14 +351,23 @@ while($row = $DB->fetch_assoc($result_nome)){
 $DB->data_seek($result_cham, 0);
 while($row = $DB->fetch_assoc($result_cham)){
 	
+	$sql_req = "SELECT gu.firstname AS name, gu.realname AS sname
+					FROM glpi_users gu, glpi_tickets_users gtu
+					WHERE gtu.tickets_id = ".$row['id']."
+					AND gtu.users_id = gu.id
+					AND gtu.type = 1 ";
+	$result_req = $DB->query($sql_req);
+	$req = $DB->fetch_assoc($result_req);
+	
 	echo "
 	<tr>
-	<td style='text-align:center;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
-	<td style='text-align:center;'> ". conv_data_hora($row['date']) ." </td>
-	<td style='max-width:450px;'> ". $row['content'] ." </td>
-	<td style='text-align:center;'> ". time_ext($row['actiontime']) ."</td>
-	<td style='text-align:center;'> ". conv_data_hora($row['begin']) ."</td>
-	<td style='text-align:center;'> ". conv_data_hora($row['end']) ."</td>
+	<td style='text-align:center; vertical-align:middle;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
+	<td style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
+	<td style='text-align:left; vertical-align:middle;'> ". $req['name']." ".$req['sname']." </td>
+	<td style='max-width:400px; vertical-align:middle;'> ". $row['content'] ." </td>
+	<td style='text-align:center; vertical-align:middle;'> ". time_ext($row['actiontime']) ."</td>
+	<td style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['begin']) ."</td>
+	<td style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['end']) ."</td>
 	</tr>";
 }
 

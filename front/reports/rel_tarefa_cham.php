@@ -282,6 +282,7 @@ while($row = $DB->fetch_assoc($result_cons1)){
 				<th style='text-align:center; cursor:pointer;'> ". __('Ticket') ."  </th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Date') ." </th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Technician') ." </th>
+				<th style='text-align:center; cursor:pointer;'> ". __('Requester') ." </th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Description') ."</th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Duration') ." </th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Begin') ." </th>
@@ -304,16 +305,27 @@ while($row = $DB->fetch_assoc($result_cham)){
 	$result_nome = $DB->query($sql_nome) ;
 	$row_nome = $DB->fetch_assoc($result_nome);
 	
+	//Requester
+	$sql_req = "SELECT gu.firstname AS name, gu.realname AS sname
+					FROM glpi_users gu, glpi_tickets_users gtu
+					WHERE gtu.tickets_id = ".$row['id']."
+					AND gtu.users_id = gu.id
+					AND gtu.type = 1 ";
+	
+	$result_req = $DB->query($sql_req) ;
+	$req = $DB->fetch_assoc($result_req);
+	
 	
 	echo "
 	<tr>
-	<td style='text-align:center; vertical-align:middle;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
-	<td style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
-	<td style='vertical-align:middle;'> ". $row_nome['firstname'] ." ".$row_nome['realname']." </td>
-	<td style='max-width:350px; vertical-align:middle;'> ". $row['content'] ." </td>
-	<td style='text-align:center; vertical-align:middle;'> ". time_ext($row['actiontime']) ."</td>
-	<td style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['begin']) ."</td>
-	<td style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['end']) ."</td>
+		<td style='text-align:center; vertical-align:middle;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
+		<td style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
+		<td style='vertical-align:middle;'> ". $row_nome['firstname'] ." ".$row_nome['realname']." </td>
+		<td style='vertical-align:middle;'> ". $req['name']." ".$req['sname']." </td>
+		<td style='max-width:400px; vertical-align:middle;'> ". $row['content'] ." </td>
+		<td style='text-align:center; vertical-align:middle;'> ". time_ext($row['actiontime']) ."</td>
+		<td style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['begin']) ."</td>
+		<td style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['end']) ."</td>
 	</tr>";
 }
 

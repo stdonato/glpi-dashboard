@@ -1,18 +1,17 @@
-Versão 0.8.1:
+Versão 0.8.2:
 
-- Ajuda atualizada;
-- Correção do relatório de chamados por tempo para aceitar;
-- Adicionado gráfico de chamados por origem em Gráficos -> por Técnico;
-- Alteração nos mapas para que seja informada uma chave da API do Google maps pelo usuário;
+- Correção na exibição de Solucionados tela de métricas;
+- Correção de gráficos na tela de Ativos;
+- Requerente e técnico nos relatórios de Tarefas;
 - Correções de bugs diversos;
 - Você agora pode me comprar uma cerveja pelo paypal; :)
 
 
-Version 0.8.1:
+Version 0.8.2:
 
-- Help page updated;
-- Fix time to own report;
-- New graph of tickets source in technician graphs;
+- Fix Solved tickets in Metrics page;
+- Fix graphs in Assets page;
+- Requester e technician in Task reports;
 - Maps updated with Google maps API key insertion by user;
 - Fix minor bugs;
 - Now you can buy me a beer in Paypal; :)
