@@ -288,6 +288,7 @@ if(isset($_REQUEST['con'])) {
 		}
 
 $sql_tec = "
+
 SELECT DISTINCT glpi_users.id AS id , glpi_users.firstname AS fname, glpi_users.realname AS rname, COUNT(glpi_tickets.id) AS chamados, glpi_users.picture
 FROM glpi_users , glpi_tickets_users, glpi_profiles_users, glpi_tickets". $glpi_techs ."
 WHERE glpi_tickets_users.users_id = glpi_users.id
@@ -339,8 +340,10 @@ echo "
 				<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Tickets')." </th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Opened','dashboard') ."</th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Solved','dashboard') ."</th>
-				<th style='text-align:center; cursor:pointer;'> ". __('Closed','dashboard') ."</th>
+				<th style='text-align:center; cursor:pointer;'> ". __('Closed','dashboard') ."</th>				
 				<th style='text-align:center; '> % ". __('Closed','dashboard') ."</th> 
+				<th style='text-align:center; cursor:pointer;'> ". __('Late') ."</th>
+				<th style='text-align:center; '> % ". __('Not Late', 'dashboard') . "</th> 
 				<!--<th style='text-align:center; cursor:pointer;'> ". __('Tasks sum','dashboard') ."</th>-->";
 				if($sats != '') {
 					echo "<th style='text-align:center; '> ". __('Satisfaction','dashboard') ."</th>";
@@ -411,6 +414,7 @@ $data_clo = $DB->fetch_assoc($result_clo);
 
 $fechados = $data_clo['total'];
 
+
 /*
 //Tasks sum
 $sql_tasksum = "SELECT SUM(actiontime) as actiontimesum
@@ -475,6 +479,72 @@ else {
 
 else { $barra = 0;}
 
+//chamados atrasados
+$sql_due = "
+SELECT count( glpi_tickets.id ) AS total, glpi_tickets.id as ID
+FROM glpi_tickets_users, glpi_tickets, glpi_users". $glpi_techs ."
+WHERE glpi_tickets.id = glpi_tickets_users.tickets_id
+AND
+(
+  `glpi_tickets`.`due_date` IS NOT NULL AND `glpi_tickets`.`status` <> 4
+)
+
+AND 
+(
+  `glpi_tickets`.`solvedate` > `glpi_tickets`.`due_date`  
+  OR (
+    `glpi_tickets`.`solvedate` IS NULL AND `glpi_tickets`.`due_date` < NOW()
+  )
+)
+
+AND glpi_tickets_users.type = 2
+AND glpi_tickets_users.users_id = ".$id_tec['id']."
+AND glpi_tickets_users.users_id = glpi_users.id
+AND glpi_tickets.is_deleted = 0
+AND glpi_tickets.solvedate ".$datas2."
+". $entidade ."
+". $grupo ."
+". $grupo1 ." " ;
+
+$result_due = $DB->query($sql_due) or die ("erro_ab");
+
+$data_due = $DB->fetch_assoc($result_due);
+ 
+$atrasados = $data_due['total'];
+
+
+
+//barra de porcentagem - Chamados no prazo
+if($conta_cons > 0) {
+
+if($status == $status_closed ) {
+    $barra_due = 100;
+    $cor_due = "progress-bar-success";
+	}
+
+else {
+
+	//porcentagem
+	$perc = round(($atrasados*100)/($solucionados+$fechados),1);
+	$barra_due = 100 - $perc;
+	
+/**
+* To-do: Turn values below configurable
+*/
+	// cor barra_due
+	if($barra_due >= 95) { $cor_due = "progress-bar-success"; }
+	if($barra_due >= 90 and $barra_due < 95) { $cor_due = " "; }
+	if($barra_due > 70 and $barra_due < 90) { $cor_due = "progress-bar-warning"; }
+	if($barra_due > 0 and $barra_due <= 70) { $cor_due = "progress-bar-danger"; }
+	if($barra_due <= 0) { $cor_due = "progress-bar-danger"; $barra_due = 0; }
+
+	}
+}
+
+else { $barra_due = 0;}
+
+
+
 $total_cham = $abertos + $solucionados + $fechados;
 
 		echo "
@@ -486,14 +556,26 @@ $total_cham = $abertos + $solucionados + $fechados;
 			<td style='vertical-align:middle; text-align:center;'> ". $total_cham ." </td>
 			<td style='vertical-align:middle; text-align:center;'> ". $abertos ." </td>
 			<td style='vertical-align:middle; text-align:center;'> ". $solucionados ." </td>
-			<td style='vertical-align:middle; text-align:center;'> ". $fechados ." </td>
+			<td style='vertical-align:middle; text-align:center;'> ". $fechados ." </td>			
 			<td style='vertical-align:middle; text-align:center;'>
 				<div class='progress' style='margin-top: 5px; margin-bottom: 5px;'>
 					<div class='progress-bar ". $cor ." progress-bar-striped active' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
 			 			".$barra." %
 			 		</div>
 				</div>
-		   </td>";
+		   </td>
+		   <td style='vertical-align:middle; text-align:center;'> ". $atrasados ." </td>
+		   <td style='vertical-align:middle; text-align:center;'>
+				<div class='progress' style='margin-top: 5px; margin-bottom: 5px;'>
+					<div class='progress-bar ". $cor_due ." progress-bar-striped active' role='progressbar' aria-valuenow='".$barra_due."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra_due."%;'>
+			 			".$barra_due." %
+			 		</div>
+				</div>
+		   </td>
+		   
+		   
+		   "
+		   ;
 		   
 if($sats != '') {
 		echo "<td style='vertical-align:middle; text-align:center;'>
