@@ -162,11 +162,10 @@ a:hover {
 				$arr_ent = array();
 				$arr_ent[0] = "-- ". __('Select a entity', 'dashboard') . " --" ;
 				
-				while ($row_result = $DB->fetch_assoc($result_ent))
-				    {
-				    	$v_row_result = $row_result['id'];
-				    	$arr_ent[$v_row_result] = $row_result['cname'] ;
-				    }
+				while ($row_result = $DB->fetch_assoc($result_ent)) {
+					$v_row_result = $row_result['id'];
+					$arr_ent[$v_row_result] = $row_result['cname'] ;
+				}
 			
 				$name = 'sel_ent';
 				$options = $arr_ent;
@@ -286,18 +285,18 @@ while($row = $DB->fetch_assoc($result_cons1)){
 	<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>
 	
 	<table class='fluid'  style='width:100%; font-size: 18px; font-weight:bold; margin-bottom: 30px;' cellpadding = 1px>
-	<tr>
-		<td style='vertical-align:middle; width:40%;'> <span style='color: #000;'>".__('Entity').": </span>  ". $tech. "</td>
-		<td colspan='3' style='font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'>".__('Period', 'dashboard') .": </span> " . conv_data($data_ini2) ." a ". conv_data($data_fin2)."</td>
-	</tr>
-	<tr><td>&nbsp;</td></tr>
-	<tr>
-		<td style='vertical-align:middle;'> <span style='color: #000;'>"._n('Task', 'Tasks',2).": </span>". $conta_cons ."</td>
-		<td style='vertical-align:middle;'> <span style='color: #000;'>".__('Time').": </span>". time_ext($tempo_total) ."</td>
-	</tr>
+		<tr>
+			<td style='vertical-align:middle; width:40%;'> <span style='color: #000;'>".__('Entity').": </span>  ". $tech. "</td>
+			<td colspan='3' style='font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'>".__('Period', 'dashboard') .": </span> " . conv_data($data_ini2) ." a ". conv_data($data_fin2)."</td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr>
+			<td style='vertical-align:middle;'> <span style='color: #000;'>"._n('Task', 'Tasks',2).": </span>". $conta_cons ."</td>
+			<td style='vertical-align:middle;'> <span style='color: #000;'>".__('Time').": </span>". time_ext($tempo_total) ."</td>
+		</tr>
 	</table>
 	
-	<table id='tarefa' class='display' style='font-size: 13px; font-weight:bold;' cellpadding = 2px>
+	<table id='tarefa' class='display' style='font-size: 12px; font-weight:bold;' cellpadding = 2px>
 		<thead>
 			<tr>
 				<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Ticket') ."  </th>
@@ -405,7 +404,7 @@ $(document).ready(function() {
                   {
                  		extend: "pdfHtml5",
                  		orientation: "landscape",
-                 		message: "<?php echo __('Entity'); ?> : <?php echo $tech.'\n'; ?>     <?php echo  __('Period','dashboard'); ?> : <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2); ?>",
+                 		message: "<?php echo __('Entity'); ?> : <?php echo $tech.'\n'; ?> <?php echo  __('Period','dashboard'); ?> : <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2).'\n'; ?> <?php echo __('Time'); ?> : <?php echo time_ext($tempo_total); ?>",
                   } 
                   ]
              }

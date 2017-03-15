@@ -15,8 +15,7 @@ ORDER BY data ASC ";
 $query_tecd = $DB->query($sql_tecd);
 
 $arr_data = array();
-while ($row_result = $DB->fetch_assoc($query_tecd))		
-{ 
+while ($row_result = $DB->fetch_assoc($query_tecd)){ 
 	$arr_data[] = $row_result['data'];	
 } 
 

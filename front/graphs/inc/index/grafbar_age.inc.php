@@ -25,6 +25,7 @@ FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = 0
 AND glpi_tickets.type = 2
 AND glpi_tickets.date BETWEEN '" . $dataf_s ." 00:00:00' AND '".$datai_s." 23:59:59'
+AND DATE_FORMAT( date, '%Y' ) IN (".$years.")  
 ". $entidade ."
 AND status NOT IN (5,6) ";
 
@@ -39,6 +40,7 @@ FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = 0
 AND glpi_tickets.type = 2
 AND glpi_tickets.date BETWEEN '" . $dataf_q ." 00:00:00' AND '".$datai_q." 23:59:59'
+AND DATE_FORMAT( date, '%Y' ) IN (".$years.")  
 ". $entidade ."
 AND status NOT IN (5,6) ";
 
@@ -53,6 +55,7 @@ FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = 0
 AND glpi_tickets.type = 2
 AND glpi_tickets.date BETWEEN '" . $dataf_m ." 00:00:00' AND '".$datai_m." 23:59:59'
+AND DATE_FORMAT( date, '%Y' ) IN (".$years.")  
 ". $entidade ."
 AND status NOT IN (5,6) ";
 
@@ -67,6 +70,7 @@ FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = 0
 AND glpi_tickets.type = 2
 AND glpi_tickets.date BETWEEN '" . $dataf_m1 ." 00:00:00' AND '".$datai_m1." 23:59:59'
+AND DATE_FORMAT( date, '%Y' ) IN (".$years.")  
 ". $entidade ."
 AND status NOT IN (5,6) ";
 
@@ -81,6 +85,7 @@ FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = 0
 AND glpi_tickets.type = 2
 AND glpi_tickets.date BETWEEN '" . $dataf_m2 ." 00:00:00' AND '".$datai_m2." 23:59:59'
+AND DATE_FORMAT( date, '%Y' ) IN (".$years.")  
 ". $entidade ."
 AND status NOT IN (5,6) ";
 
@@ -96,6 +101,7 @@ FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = 0
 AND glpi_tickets.type = 1
 AND glpi_tickets.date BETWEEN '" . $dataf_s ." 00:00:00' AND '".$datai_s." 23:59:59'
+AND DATE_FORMAT( date, '%Y' ) IN (".$years.")  
 ". $entidade ."
 AND status NOT IN (5,6) ";
 
@@ -110,6 +116,7 @@ FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = 0
 AND glpi_tickets.type = 1
 AND glpi_tickets.date BETWEEN '" . $dataf_q ." 00:00:00' AND '".$datai_q." 23:59:59'
+AND DATE_FORMAT( date, '%Y' ) IN (".$years.")  
 ". $entidade ."
 AND status NOT IN (5,6) ";
 
@@ -124,6 +131,7 @@ FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = 0
 AND glpi_tickets.type = 1
 AND glpi_tickets.date BETWEEN '" . $dataf_m ." 00:00:00' AND '".$datai_m." 23:59:59'
+AND DATE_FORMAT( date, '%Y' ) IN (".$years.")  
 ". $entidade ."
 AND status NOT IN (5,6) ";
 
@@ -138,6 +146,7 @@ FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = 0
 AND glpi_tickets.type = 1
 AND glpi_tickets.date BETWEEN '" . $dataf_m1 ." 00:00:00' AND '".$datai_m1." 23:59:59'
+AND DATE_FORMAT( date, '%Y' ) IN (".$years.")  
 ". $entidade ."
 AND status NOT IN (5,6) ";
 
@@ -153,6 +162,7 @@ FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = 0
 AND glpi_tickets.type = 1
 AND glpi_tickets.date BETWEEN '" . $dataf_m2 ." 00:00:00' AND '".$datai_m2." 23:59:59'
+AND DATE_FORMAT( date, '%Y' ) IN (".$years.")  
 ". $entidade ."
 AND status NOT IN (5,6) ";
 

@@ -2,6 +2,7 @@ Versão 0.8.2:
 
 - Correção na exibição de Solucionados tela de métricas;
 - Correção de gráficos na tela de Ativos;
+- Relatório de Tarefas por Requerente;
 - Requerente e técnico nos relatórios de Tarefas;
 - Correções de bugs diversos;
 - Você agora pode me comprar uma cerveja pelo paypal; :)
@@ -11,6 +12,7 @@ Version 0.8.2:
 
 - Fix Solved tickets in Metrics page;
 - Fix graphs in Assets page;
+- Tasks by Requester Report;
 - Requester e technician in Task reports;
 - Maps updated with Google maps API key insertion by user;
 - Fix minor bugs;

@@ -31,7 +31,7 @@ else {
 
 <html>
 <head>
-<title> GLPI - <?php echo _n('Task','Tasks',2) .'  '. __('by Technician', 'dashboard') ?> </title>
+<title> GLPI - <?php echo _n('Task','Tasks',2) .'  '. __('by Requester', 'dashboard') ?> </title>
 <!-- <base href= "<?php $_SERVER['SERVER_NAME'] ?>" > -->
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
@@ -97,13 +97,13 @@ a:hover {
 
 <a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 
-    <div id="titulo_rel"> <?php echo _n('Task','Tasks',2) .'  '. __('by Technician','dashboard') ?>  </div>
+    <div id="titulo_rel"> <?php echo _n('Task','Tasks',2) .'  '. __('by Requester','dashboard') ?>  </div>
 
     <div id="datas-tec" class="span12 fluid" >
-    <form id="form1" name="form1" class="form_rel" method="post" action="rel_tarefa.php?con=1">
+    <form id="form1" name="form1" class="form_rel" method="post" action="rel_task_req.php?con=1">
     <table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef">
     <tr>
-<td style="width: 310px;">
+	<td style="width: 310px;">
 <?php
 
 # entity
@@ -129,16 +129,13 @@ else {
 }
 
 $sql_tec = "
-SELECT DISTINCT glpi_users.`id` AS id , glpi_users.`firstname` AS name, glpi_users.`realname` AS sname										        										       										        
- FROM `glpi_profiles_users`										
- LEFT JOIN `glpi_tickets_users`
-      ON (`glpi_tickets_users`.`users_id`=`glpi_profiles_users`.`users_id`)										
- LEFT JOIN `glpi_users`
-      ON (`glpi_users`.`id` = `glpi_profiles_users`.`users_id`)
- WHERE `glpi_profiles_users`.`is_recursive` = 1
-      AND `glpi_users`.`is_deleted` = '0' 
-	   AND `glpi_users`.`is_active` = '1'
-	   AND glpi_tickets_users.type = 2											 										 
+SELECT DISTINCT glpi_users.id AS id , glpi_users.firstname AS name, glpi_users.realname AS sname
+FROM glpi_users, glpi_tickets_users, glpi_profiles_users
+WHERE glpi_tickets_users.users_id = glpi_users.id
+AND glpi_profiles_users.users_id = glpi_tickets_users.users_id
+AND glpi_tickets_users.type = 1
+AND glpi_users.is_deleted = 0
+AND `glpi_users`.`is_active` = '1'
 ".$entidade_u."
 ORDER BY name ASC ";
 
@@ -183,7 +180,7 @@ echo '
 // lista de técnicos
 $res_tec = $DB->query($sql_tec);
 $arr_tec = array();
-$arr_tec[0] = "-- ". __('Select a technician', 'dashboard') . " --" ;
+$arr_tec[0] = "-- ". __('Select a requester', 'dashboard') . " --" ;
 
 $DB->data_seek($result_tec, 0);
 
@@ -249,8 +246,8 @@ else {
 }
 
 if($id_tec == 0) {
-	echo '<script language="javascript"> alert(" ' . __('Select a technician', 'dashboard') . ' "); </script>';
-	echo '<script language="javascript"> location.href="rel_tarefa.php"; </script>';
+	echo '<script language="javascript"> alert(" ' . __('Select a requester', 'dashboard') . ' "); </script>';
+	echo '<script language="javascript"> location.href="rel_task_req.php"; </script>';
 }
 
 if($data_ini2 === $data_fin2) {
@@ -263,12 +260,12 @@ else {
 
 // Chamados
 $sql_cham =
-"SELECT glpi_tickets.id AS id, glpi_tickettasks.taskcategories_id AS tipo, glpi_tickettasks.date AS date, glpi_tickettasks.content,
+"SELECT glpi_tickets_users.tickets_id AS id, glpi_tickettasks.taskcategories_id AS tipo, glpi_tickettasks.date AS date, glpi_tickettasks.content,
 glpi_tickettasks.users_id, glpi_tickettasks.actiontime, glpi_tickettasks.begin AS begin, glpi_tickettasks.end
-FROM `glpi_tickets` , glpi_tickettasks
-WHERE glpi_tickets.id = glpi_tickettasks.`tickets_id`
-AND glpi_tickettasks.users_id_tech = ". $id_tec ."
-AND glpi_tickets.is_deleted = 0
+FROM `glpi_tickets_users`, glpi_tickettasks, glpi_tickets
+WHERE glpi_tickets_users.tickets_id = glpi_tickettasks.tickets_id
+AND glpi_tickets_users.tickets_id = glpi_tickets.id
+AND glpi_tickets_users.users_id = ". $id_tec ."
 AND glpi_tickettasks.date ". $datas2 ."
 ".$entidade."
 ORDER BY id DESC, begin ASC ";
@@ -277,12 +274,12 @@ $result_cham = $DB->query($sql_cham);
 
 
 $consulta1 =
-"SELECT glpi_tickets.id AS id, glpi_tickettasks.taskcategories_id AS tipo, glpi_tickettasks.date AS date, glpi_tickettasks.content,
-glpi_tickettasks.users_id, glpi_tickettasks.actiontime, glpi_tickettasks.begin, glpi_tickettasks.end
-FROM `glpi_tickets` , glpi_tickettasks
-WHERE glpi_tickets.id = glpi_tickettasks.`tickets_id`
-AND glpi_tickettasks.users_id_tech = ". $id_tec ."
-AND glpi_tickets.is_deleted = 0
+"SELECT glpi_tickets_users.tickets_id AS id, glpi_tickettasks.taskcategories_id AS tipo, glpi_tickettasks.date AS date, glpi_tickettasks.content,
+glpi_tickettasks.users_id, glpi_tickettasks.actiontime, glpi_tickettasks.begin AS begin, glpi_tickettasks.end
+FROM `glpi_tickets_users`, glpi_tickettasks, glpi_tickets
+WHERE glpi_tickets_users.tickets_id = glpi_tickettasks.tickets_id
+AND glpi_tickets_users.tickets_id = glpi_tickets.id
+AND glpi_tickets_users.users_id = ". $id_tec ."
 AND glpi_tickettasks.date ". $datas2 ."
 ".$entidade."
 ORDER BY id DESC ";
@@ -318,7 +315,7 @@ while($row = $DB->fetch_assoc($result_nome)){
 	
 	<table class='fluid'  style='width:100%; font-size: 18px; font-weight:bold; margin-bottom: 30px;' cellpadding = 1px>
 	<tr>
-		<td style='vertical-align:middle; width:40%;'> <span style='color: #000;'>".__('Technician', 'dashboard').": </span>  ". $row['firstname'] ." ". $row['realname']. "</td>
+		<td style='vertical-align:middle; width:40%;'> <span style='color: #000;'>".__('Requester').": </span>  ". $row['firstname'] ." ". $row['realname']. "</td>
 		<td colspan='3' style='font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'>".__('Period', 'dashboard') .": </span> " . conv_data($data_ini2) ." a ". conv_data($data_fin2)."</td>
 	</tr>
 	<tr><td>&nbsp;</td></tr>
@@ -333,7 +330,7 @@ while($row = $DB->fetch_assoc($result_nome)){
 			<tr>
 				<th style='text-align:center; cursor:pointer;'> ". __('Ticket') ."  </th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Date') ." </th>
-				<th style='text-align:center; cursor:pointer;'> ". __('Requester') ." </th>
+				<th style='text-align:center; cursor:pointer;'> ". __('Technician') ." </th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Description') ."</th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Duration') ." </th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Begin') ." </th>
@@ -353,7 +350,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 					FROM glpi_users gu, glpi_tickets_users gtu
 					WHERE gtu.tickets_id = ".$row['id']."
 					AND gtu.users_id = gu.id
-					AND gtu.type = 1 ";
+					AND gtu.type = 2 ";
 	$result_req = $DB->query($sql_req);
 	$req = $DB->fetch_assoc($result_req);
 	
@@ -399,21 +396,21 @@ $(document).ready(function() {
                  text: "<?php echo __('Print','dashboard'); ?>",
 						  buttons:[ 
 						  	{               
-			                 extend: "print",
-			                 autoPrint: true,
-			                 text: "<?php echo __('All','dashboard'); ?>",
-			                 message: "<div id='print' class='info_box fluid span12' style='margin-bottom:35px; margin-left: -1px;'><table id='print_tb' class='fluid'  style='width: 80%; margin-left: 10%; font-size: 18px; font-weight:bold;' cellpadding = '1px'><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo __('Technician','dashboard'); ?> : </span><?php echo $tech; ?> </td> <td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  _n('Task','Tasks',2); ?> : </span><?php echo $conta_cons ; ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'><?php echo __('Time'); ?></span> : <?php echo time_ext($tempo_total); ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'> <?php echo  __('Period','dashboard'); ?> : </span> <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2); ?> </td> </table></div>",		     
+		                 extend: "print",
+		                 autoPrint: true,
+		                 text: "<?php echo __('All','dashboard'); ?>",
+		                 message: "<div id='print' class='info_box fluid span12' style='margin-bottom:35px; margin-left: -1px;'><table id='print_tb' class='fluid'  style='width: 80%; margin-left: 10%; font-size: 18px; font-weight:bold;' cellpadding = '1px'><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo __('Requester'); ?> : </span><?php echo $tech; ?> </td> <td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  _n('Task','Tasks',2); ?> : </span><?php echo $conta_cons ; ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'><?php echo __('Time'); ?></span> : <?php echo time_ext($tempo_total); ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'> <?php echo  __('Period','dashboard'); ?> : </span> <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2); ?> </td> </table></div>",		     
 		                }, 
 							  {               
-			                 extend: "print",
-			                 autoPrint: true,
-			                 text: "<?php echo __('Selected','dashboard'); ?>",
-			                 message: "<div id='print' class='info_box fluid span12' style='margin-bottom:35px; margin-left: -1px;'><table id='print_tb' class='fluid'  style='width: 80%; margin-left: 10%; font-size: 18px; font-weight:bold;' cellpadding = '1px'><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo __('Technician','dashboard'); ?> : </span><?php echo $tech; ?> </td> <td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  _n('Task','Tasks',2); ?> : </span><?php echo $conta_cons ; ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'><?php echo __('Time'); ?></span> : <?php echo time_ext($tempo_total); ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'> <?php echo  __('Period','dashboard'); ?> : </span> <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2); ?> </td> </table></div>",
-			                 exportOptions: {
-			                    modifier: {
-			                        selected: true
-			                    }
-			                }
+		                 extend: "print",
+		                 autoPrint: true,
+		                 text: "<?php echo __('Selected','dashboard'); ?>",
+		                 message: "<div id='print' class='info_box fluid span12' style='margin-bottom:35px; margin-left: -1px;'><table id='print_tb' class='fluid'  style='width: 80%; margin-left: 10%; font-size: 18px; font-weight:bold;' cellpadding = '1px'><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo __('Requester'); ?> : </span><?php echo $tech; ?> </td> <td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  _n('Task','Tasks',2); ?> : </span><?php echo $conta_cons ; ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'><?php echo __('Time'); ?></span> : <?php echo time_ext($tempo_total); ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'> <?php echo  __('Period','dashboard'); ?> : </span> <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2); ?> </td> </table></div>",
+		                 exportOptions: {
+		                    modifier: {
+		                        selected: true
+		                    }
+		                }
 		                }
 	                ]
              },
@@ -421,11 +418,11 @@ $(document).ready(function() {
                  extend: "collection",
                  text: "<?php echo _x('button', 'Export'); ?>",
                  buttons: [ "csvHtml5", "excelHtml5",
-	               {
-	              		extend: "pdfHtml5",
-	              		orientation: "landscape",
-	              		message: "<?php echo __('Technician','dashboard'); ?> : <?php echo $tech.'\n'; ?> <?php echo  __('Period','dashboard'); ?> : <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2).'\n'; ?> <?php echo __('Time'); ?> : <?php echo time_ext($tempo_total); ?>",
-	               } 
+                  {
+                 		extend: "pdfHtml5",
+                 		orientation: "landscape",
+                 		message: "<?php echo  __('Requester');?> : <?php echo $tech.'\n';?> <?php echo  __('Period','dashboard');?> : <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2).'\n'; ?> <?php echo __('Time'); ?> : <?php echo time_ext($tempo_total); ?>",
+                  } 
                   ]
              }
         ]

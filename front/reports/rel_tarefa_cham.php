@@ -102,7 +102,7 @@ else {
 <?php
 
 //seleciona técnico
-$sql_tec = "
+/*$sql_tec = "
 SELECT DISTINCT glpi_users.`id` AS id , glpi_users.`firstname` AS name, glpi_users.`realname` AS sname
 FROM `glpi_users` , glpi_tickets_users, glpi_profiles_users
 WHERE glpi_tickets_users.users_id = glpi_users.id
@@ -114,7 +114,7 @@ AND glpi_profiles_users.is_recursive = 1
 ORDER BY name ASC ";
 
 $result_tec = $DB->query($sql_tec);
-$tec = $DB->fetch_assoc($result_tec);
+$tec = $DB->fetch_assoc($result_tec);*/
 
 ?>
 <div id='content' >
@@ -149,24 +149,24 @@ a:hover {
 				$url2 = $arr_url[0];
 				
 				echo '
-							<table>
-								<tr>
-									<td>
-									   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-									    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >		    	
-									    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
-								    	</div>
-									</td>
-									<td>&nbsp;</td>
-									<td>
-								   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-									    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >		    	
-									    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
-								    	</div>
-									</td>
-									<td>&nbsp;</td>
-								</tr>
-							</table> ';
+						<table>
+							<tr>
+								<td>
+								   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+								    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >		    	
+								    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
+							    	</div>
+								</td>
+								<td>&nbsp;</td>
+								<td>
+							   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+								    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >		    	
+								    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
+							    	</div>
+								</td>
+								<td>&nbsp;</td>
+							</tr>
+						</table> ';
 				?>
 				
 				<script language="Javascript">
@@ -235,7 +235,6 @@ WHERE glpi_tickets.id = glpi_tickettasks.`tickets_id`
 AND glpi_tickets.is_deleted = 0
 AND glpi_tickettasks.date ". $datas2 ."
 ".$entidade."
-
 ORDER BY id DESC, begin ASC ";
 
 $result_cham = $DB->query($sql_cham);
@@ -276,7 +275,7 @@ while($row = $DB->fetch_assoc($result_cons1)){
 	</table>";
 
 	echo "
-	<table id='tarefa' class='display' style='font-size: 13px; font-weight:bold;' cellpadding = 2px>
+	<table id='tarefa' class='display' style='font-size: 12px; font-weight:bold;' cellpadding = 2px>
 		<thead>
 			<tr>
 				<th style='text-align:center; cursor:pointer;'> ". __('Ticket') ."  </th>
@@ -384,7 +383,7 @@ $(document).ready(function() {
                   {
                  		extend: "pdfHtml5",
                  		orientation: "landscape",
-							message: "<?php echo  _n('Task','Tasks',2); ?> : <?php echo $conta_cons ; ?>  -  <?php echo __('Time'); ?> : <?php echo time_ext($tempo_total); ?>  -  <?php echo  __('Period','dashboard'); ?> : <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2); ?> ",                 		
+							message: "<?php echo  _n('Task','Tasks',2); ?> : <?php echo $conta_cons.'\n'; ?>  <?php echo  __('Period','dashboard'); ?> : <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2).'\n'; ?> <?php echo __('Time'); ?> : <?php echo time_ext($tempo_total); ?>",                 		
                  		
                   } 
                   ]

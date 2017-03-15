@@ -339,6 +339,7 @@ else {
                 				<a tabindex="-1" href="#"><?php echo _sn('Task','Tasks',2); ?></a>
 				               <ul class="dropdown-menu">
 				                  <li><a href="./reports/rel_tarefa.php" target="iframe1" style="color:#000;"> <?php echo __('Technician'); ?> </a></li>
+                        		<li><a href="./reports/rel_task_req.php" target="iframe1" style="color:#000;"> <?php echo  __('Requester'); ?> </a></li>   
                         		<li><a href="./reports/rel_tarefa_cham.php" target="iframe1" style="color:#000;"> <?php echo  __('Tickets','dashboard'); ?> </a></li>   
                         		<li><a href="./reports/rel_task_ent.php" target="iframe1" style="color:#000;"> <?php echo  __('Entity','dashboard'); ?> </a></li>   
 				               </ul>

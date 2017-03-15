@@ -7,6 +7,7 @@ SELECT count( id ) AS chamados , DATEDIFF( solvedate, date ) AS days
 FROM glpi_tickets
 WHERE solvedate IS NOT NULL
 AND is_deleted = 0
+AND DATE_FORMAT( date, '%Y' ) IN (".$years.")     
 ".$entidade."
 GROUP BY days ";
 

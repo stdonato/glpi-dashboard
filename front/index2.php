@@ -456,6 +456,12 @@ else {
 	                                                <i class="fa fa-angle-right"></i>
 	                                                <span class='hidden-minibar'> <?php echo __('Technician'); ?> </span>
 	                                            </a>
+	                                        </li>
+	                                        <li>
+	                                            <a href="#" onclick="window.open('./reports/rel_task_req.php','iframe1'); scrollWin();" data-original-title=' Tarefas'>
+	                                                <i class="fa fa-angle-right"></i>
+	                                                <span class='hidden-minibar'> <?php echo __('Requester'); ?> </span>
+	                                            </a>
 	                                        </li> 
 					        							 <li>
 	                                            <a href="#" onclick="window.open('./reports/rel_tarefa_cham.php','iframe1'); scrollWin();" data-original-title=' Tarefas'>
