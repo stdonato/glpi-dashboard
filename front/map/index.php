@@ -61,7 +61,7 @@ src="https://maps.googleapis.com/maps/api/js?sensor=false">
 
 <style type="text/css">
 	html { margin-top: 3px;}
-	a, a:visited { color: #0776cc;}
+	a, a:visited, a:focus, a:hover { color: #0776cc;}	
 </style>
 
 </head>
@@ -181,8 +181,8 @@ while ($row = $DB->fetch_assoc($result_loc))
 {
  
   $id = $row['entities_id'];
-  $title = $row['location'];  
-  $url = $CFG_GLPI['root_doc']."/front/ticket.php?is_deleted=0&field[0]=view&searchtype[0]=contains&contains[0]=notold&link[1]=AND&field[1]=80&searchtype[1]=equals&contains[1]=".$row['entities_id']."&itemtype=Ticket&start=0";   	
+  $title = $row['location'];       	
+  $url = $CFG_GLPI['root_doc']."/front/ticket.php?is_deleted=0&criteria[0][field]=12&criteria[0][searchtype]=equals&criteria[0][value]=notold&criteria[1][link]=AND&criteria[1][field]=80&criteria[1][searchtype]=equals&criteria[1][value]=".$row['entities_id']."&itemtype=Ticket&start=0";   	
   $host = "<a href=". $url ." target=_blank >" . $title . " (".$id.")</a>";  
   $status = $row['conta'];  
   $local = $row['location']; 

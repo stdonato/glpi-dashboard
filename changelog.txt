@@ -1,14 +1,15 @@
-Versão 0.8.2:
+Versão 0.8.3:
 
-- Correção na exibição de Solucionados tela de métricas;
-- Correção de gráficos na tela de Ativos;
+- Correção nos links dos mapas;
+- Correção na tela de Ativos;
+
 - Relatório de Tarefas por Requerente;
 - Requerente e técnico nos relatórios de Tarefas;
 - Correções de bugs diversos;
 - Você agora pode me comprar uma cerveja pelo paypal; :)
 
 
-Version 0.8.2:
+Version 0.8.3:
 
 - Fix Solved tickets in Metrics page;
 - Fix graphs in Assets page;

@@ -1882,21 +1882,15 @@ left: 90%;
 }
 
 #tabela_assets {
-	width: 950px;
+	/*width: 950px;
 	margin-left: -500px;
 	left: 52%;
-	position: relative;
-	/*color: #fff;	*/
+	position: relative;*/
+	float: none;
+	margin-left: auto;
+	margin-right: auto;	
+	width: 70%;
 }
-
-/*
-#computers, #monitors, #printers, #net, #global, #peripheral, #phone, #soft, #cart {
-	width: 950px;
-	margin-left: -500px;
-	left: 0%;
-	position: relative;
-}
-*/
 
 .form_skin {
 	width: 900px;
@@ -1910,7 +1904,6 @@ left: 90%;
 	margin-right: auto;
 	margin-top: 25px;
 }
-
 
 
 .blink_me {

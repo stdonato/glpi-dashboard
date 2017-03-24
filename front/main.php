@@ -23,20 +23,18 @@ else {
 	$result = $DB->query($query);
 	$ent_name1 = $DB->result($result,0,'name');
 	$ent_name = __('Tickets Statistics','dashboard')." :  ". $ent_name1 ;	
-	}	
+}	
 
 if($sel_ent != '') {			
 	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.")";
-	$entidade_u = "AND gpu.entities_id IN (".$sel_ent.")";
-
+	$entidade_u = "AND glpi_profiles_users.entities_id IN (".$sel_ent.")";	
 }
 
-else {
-	
+else {	
 	$entities = $_SESSION['glpiactiveentities'];	
 	$ent = implode(",",$entities);	
 	$entidade = "AND glpi_tickets.entities_id IN (".$ent.")";
-	$entidade_u = "AND gpu.entities_id IN (".$ent.")";			
+	$entidade_u = "AND glpi_profiles_users.entities_id IN (".$ent.")";				
 }
 
 
@@ -247,10 +245,9 @@ $conta_y = $DB->numrows($result_y);
 
 $arr_years = array();
 
-while ($row_y = $DB->fetch_assoc($result_y))		
-	{ 
-		$arr_years[] = $row_y['year'];			
-	} 
+while ($row_y = $DB->fetch_assoc($result_y))	{ 
+	$arr_years[] = $row_y['year'];			
+} 
 
 
 if($num_years > 1) {
@@ -296,11 +293,12 @@ $result_hoje = $DB->query($sql_hoje);
 $total_hoje = $DB->fetch_assoc($result_hoje);
 
 // total users
-$sql_users = "SELECT COUNT(DISTINCT gu.id) AS total
-				FROM glpi_users gu, glpi_profiles_users gpu 
-				WHERE gu.id = gpu.users_id 
-				AND gu.is_deleted = 0							
-				".$entidade_u." ";
+$sql_users = " SELECT COUNT(DISTINCT `glpi_users`.id) AS total
+               FROM glpi_profiles_users
+               LEFT JOIN `glpi_users`
+                  ON (`glpi_users`.`id` = `glpi_profiles_users`.`users_id`)
+               WHERE `glpi_users`.`is_deleted` = '0'  
+     				".$entidade_u." ";
 
 $result_users = $DB->query($sql_users);
 $total_users = $DB->fetch_assoc($result_users);

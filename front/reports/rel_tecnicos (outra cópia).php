@@ -248,13 +248,14 @@ else {
 if(isset($_REQUEST['con'])) {
 
 	$con = $_REQUEST['con'];
-	
+
+	//$con = 1;
 	if($con == "1") {
 
 	if(!isset($_REQUEST['date1']))
 		{
-		  $data_ini2 = $data_ini; 
-		  $data_fin2 = $data_fin; 
+		  $data_ini2 = $data_ini; //$_REQUEST['date1'];
+		  $data_fin2 = $data_fin; //$_REQUEST['date2'];
 		  $grupo = "";
 		  $grupo1 = "";
 		}
@@ -468,8 +469,10 @@ $sql_due = "
 SELECT count( glpi_tickets.id ) AS total, glpi_tickets.id as ID
 FROM glpi_tickets_users, glpi_tickets, glpi_users". $glpi_techs ."
 WHERE glpi_tickets.id = glpi_tickets_users.tickets_id
-AND `glpi_tickets`.`due_date` IS NOT NULL 
-AND `glpi_tickets`.`status` <> 4
+AND
+(
+  `glpi_tickets`.`due_date` IS NOT NULL AND `glpi_tickets`.`status` <> 4
+)
 
 AND 
 (
@@ -497,18 +500,17 @@ $atrasados = $data_due['total'];
 //barra de porcentagem - Chamados no prazo
 if($conta_cons > 0) {
 
-/*	if($status == $status_closed ) {
+	if($status == $status_closed ) {
 	    $barra_due = 100;
 	    $cor_due = "progress-bar-success";
 	}
 	
 	else {
-	*/
+	
 		//porcentagem
-		$perc_due = round(($atrasados*100)/($solucionados+$fechados+$abertos),1);
-		//$perc_due = round(($atrasados*100)/($solucionados+$fechados),1);
-		$barra_due = $perc_due;
-		//$barra_due = 100 - $perc;		
+		$perc = round(($atrasados*100)/($solucionados+$fechados),1);
+		$barra_due = $perc;
+		#$barra_due = 100 - $perc;
 		
 	/**
 	* To-do: Turn values below configurable
@@ -517,11 +519,11 @@ if($conta_cons > 0) {
 		//if($barra_due == 100) { $cor_due = "progress-bar-danger"; }
 		if($barra_due > 80 and $barra_due <= 100) { $cor_due = "progress-bar-danger"; $text_color_due = "#fff"; }
 		if($barra_due > 51 and $barra_due <= 80) { $cor_due = "progress-bar-warning"; $text_color_due = "#fff"; }
-		if($barra_due > 20 and $barra_due <= 50) { $cor_due = " ";  $text_color_due = "#fff";}
+		if($barra_due > 20 and $barra_due <= 50) { $cor_due = " ";  $text_color_due = "#000";}
 		if($barra_due > 0 and $barra_due <= 20) { $cor_due = "progress-bar-success"; $text_color_due = "#000"; }
 		if($barra_due <= 0) { $cor_due = "progress-bar-success"; $barra_due = 0; $text_color_due = "#000";}
 		
-	//}
+	}
 }
 
 else { $barra_due = 0;}

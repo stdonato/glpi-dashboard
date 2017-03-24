@@ -85,9 +85,7 @@ else {
 	<style type="text/css">
 		select { width: 60px; }
 		table.dataTable { empty-cells: show; }
-	   a:link, a:visited, a:active { text-decoration: none;}
-	
-		a:link, a:visited, a:active {text-decoration: none;}
+	   a:link, a:visited, a:active { text-decoration: none;}			
 		a:hover {color: #000099;}
 		.carregando {display: none;}
 		.sel_fab .sel_mod {display: block;}
@@ -109,89 +107,89 @@ else {
 	<div id="titulo_rel"> <?php echo __('Assets') ?> </div>
 		<div id="datas-tec" class="col-md-12 fluid" >
 		<form id="form1" name="form1" class="form_rel" method="post" action="rel_assets.php?con=1" style="margin-left: 26%;">
-		<table border="0" cellspacing="0" cellpadding="10" bgcolor="#efefef" class="tab_tickets">
-		<tr>
-			<td style="margin-top:2px; width:100px;"><?php echo __('Period'); ?>: </td>
-			<td style="width: 200px;">
-
+			<table border="0" cellspacing="0" cellpadding="10" bgcolor="#efefef" class="tab_tickets">
+			<tr>
+				<td style="margin-top:2px; width:100px;"><?php echo __('Period'); ?>: </td>
+				<td style="width: 200px;">
+	
+					<?php
+			
+					$url = $_SERVER['REQUEST_URI'];
+					$arr_url = explode("?", $url);
+					$url2 = $arr_url[0];
+			
+						echo'
+						<table style="margin-top:0px;" border=0>
+							<tr>
+								<td>
+								   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+								    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
+								    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+							    	</div>
+								</td>
+								<td>&nbsp;</td>
+								<td>
+							   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+								    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
+								    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+							    	</div>
+								</td>
+								<td>&nbsp;</td>
+							</tr>
+						</table> ';
+						?>
+				</td>
+			</tr>
+			<tr><td height="12px"></td></tr>
+			<tr>
+				<td style="margin-top:2px; width:100px;"><?php echo __('Type'); ?>: </td>
+				<td style="margin-top:2px;">
 				<?php
-		
-				$url = $_SERVER['REQUEST_URI'];
-				$arr_url = explode("?", $url);
-				$url2 = $arr_url[0];
-		
-					echo'
-					<table style="margin-top:0px;" border=0>
-						<tr>
-							<td>
-							   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-							    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
-							    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-						    	</div>
-							</td>
-							<td>&nbsp;</td>
-							<td>
-						   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-							    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
-							    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-						    	</div>
-							</td>
-							<td>&nbsp;</td>
-						</tr>
-					</table> ';
-					?>
-		</td>
-		</tr>
-		<tr><td height="12px"></td></tr>
-		<tr>
-		<td style="margin-top:2px; width:100px;"><?php echo __('Type'); ?>: </td>
-			<td style="margin-top:2px;">
-			<?php
-
-			// lista de tipos
-			echo "
-			<select id='sel_item' name='sel_item' style='width: 300px; height: 27px;' autofocus onChange=\"ajaxComboBox('manufac.php','sel_fab');\">
-				<option value='0'> ---- </option>
-				<option value='1'>".__('Computer')."</option>
-				<option value='2'>".__('Monitor')."</option>
-				<option value='3'>".__('Software')."</option>
-				<option value='4'>".__('Network')."</option>
-				<option value='5'>".__('Device')."</option>
-				<option value='6'>".__('Printer')."</option>
-				<option value='7'>".__('Phone')."</option>
-			</select> ";
-			?>
-			</td>
-		</tr>
-		<tr><td height="12px"></td></tr>
-		<tr>
-			<td style="margin-top:2px; width:100px;"><?php echo __('Manufacturer'); ?>:  </td>
-			<td style="margin-top:5px;">
-			<span class="carregando">Wait, loading...</span>
-				<select name="sel_fab" id="sel_fab" class="sel_fab" style="width: 300px; height: 27px;" autofocus onChange="ajaxComboBox2('model.php','sel_mod');">
-					<option value="0"><?php echo __('Select a type','dashboard'); ?></option>
-				</select>
-			</td>
-		</tr>
-		<tr><td height="12px"></td></tr>
-		<tr>
-			<td style="margin-top:2px; width:165px;"><?php echo __('Model')."/". __('Version'); ?>: </td>
-			<td style="margin-top:2px;">
-				<select name="sel_mod" id="sel_mod" class="sel_mod" style="width: 300px; height: 27px;" autofocus>
-					<option value="0"><?php echo __('Select a manufacturer','dashboard'); ?></option>
-				</select>
-			</td>
-		</tr>
-
-		<tr><td height="20px"></td></tr>
-		<tr>
-		<td colspan="2" align="center">
-			<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult', 'dashboard'); ?></button>
-			<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2 ?>'" > <i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean', 'dashboard'); ?> </button></td>
-		</td>
-		</tr>
-	</table>
-<?php Html::closeForm(); ?>
+	
+				// lista de tipos
+				echo "
+				<select id='sel_item' name='sel_item' style='width: 300px; height: 27px;' autofocus onChange=\"ajaxComboBox('manufac.php','sel_fab');\">
+					<option value='0'> ---- </option>
+					<option value='1'>".__('Computer')."</option>
+					<option value='2'>".__('Monitor')."</option>
+					<option value='3'>".__('Software')."</option>
+					<option value='4'>".__('Network')."</option>
+					<option value='5'>".__('Device')."</option>
+					<option value='6'>".__('Printer')."</option>
+					<option value='7'>".__('Phone')."</option>
+				</select> ";
+				?>
+				</td>
+			</tr>
+			<tr><td height="12px"></td></tr>
+			<tr>
+				<td style="margin-top:2px; width:100px;"><?php echo __('Manufacturer'); ?>:  </td>
+				<td style="margin-top:5px;">
+				<span class="carregando">Wait, loading...</span>
+					<select name="sel_fab" id="sel_fab" class="sel_fab" style="width: 300px; height: 27px;" autofocus onChange="ajaxComboBox2('model.php','sel_mod');">
+						<option value="0"><?php echo __('Select a type','dashboard'); ?></option>
+					</select>
+				</td>
+			</tr>
+			<tr><td height="12px"></td></tr>
+			<tr>
+				<td style="margin-top:2px; width:165px;"><?php echo __('Model')."/". __('Version'); ?>: </td>
+				<td style="margin-top:2px;">
+					<select name="sel_mod" id="sel_mod" class="sel_mod" style="width: 300px; height: 27px;" autofocus>
+						<option value="0"><?php echo __('Select a manufacturer','dashboard'); ?></option>
+					</select>
+				</td>
+			</tr>
+	
+			<tr><td height="20px"></td></tr>
+			<tr>
+				<td colspan="2" align="center">
+					<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult', 'dashboard'); ?></button>
+					<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2 ?>'" > <i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean', 'dashboard'); ?> </button></td>
+				</td>
+			</tr>
+		</table>
+	<?php Html::closeForm(); ?>
 
 	</div>
 	</div>
@@ -230,7 +228,7 @@ else { $id_item = $_REQUEST["sel_item"]; }
 
 if(isset($_POST['itemtype'])) {
 	$type = $_REQUEST['itemtype'];
-	}
+}
 
 else {
 

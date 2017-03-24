@@ -397,7 +397,7 @@ else {
 												<li><a href="./reports/rel_sltsr.php" target="iframe1" style="color:#000;">'. __('Time to resolve').'</a></li>										
 						               </ul>
 						             </li>';
-				             }
+				             	}
 				             ?>
 				              	     							
                       </ul>

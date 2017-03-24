@@ -25,7 +25,6 @@ if($sel_ent == '' || $sel_ent == -1) {
 	$ent_peri = "AND glpi_peripherals.entities_id IN (".$ent.")";
 	$ent_phone = "AND glpi_phones.entities_id IN (".$ent.")";
 	$ent_soft = "AND glpi_softwares.entities_id IN (".$ent.")";
-	$ent_cons = "WHERE entities_id IN (".$ent.")";
 	$ent_global = "AND glpi_". strtolower($asset)."s.entities_id IN (".$ent.")";
 	$ent_global1 = "AND glpi_tickets.entities_id IN (".$ent.")";
 	$ent = "AND entities_id IN (".$ent.")";
@@ -41,7 +40,6 @@ else {
 	$ent_peri = "AND glpi_peripherals.entities_id IN (".$sel_ent.")";
 	$ent_phone = "AND glpi_phones.entities_id IN (".$sel_ent.")";
 	$ent_soft = "AND glpi_softwares.entities_id IN (".$sel_ent.")";
-	$ent_cons = "WHERE entities_id IN (".$sel_ent.")";
 	$ent_global = "AND glpi_". strtolower($asset)."s.entities_id IN (".$sel_ent.")";
 	$ent_global1 = "AND glpi_tickets.entities_id IN (".$sel_ent.")";
 	$ent = "AND entities_id IN (".$sel_ent.")";
@@ -111,7 +109,7 @@ function conta1($asset,$sel_ent) {
 	
 	else {
 		return "0";
-	    }	
+	}	
 }	
 
 //all assets - global
@@ -161,6 +159,8 @@ foreach($arr_assets as $asset) {
 <script src="../js/jquery.min.js" type="text/javascript"></script>
 <script src="../js/highcharts.js"></script>
 <script src="../js/modules/exporting.js"></script>
+<!--<script src="../js/themes/grid-light.js"></script>  -->
+<?php echo '<script src="../js/themes/'.$_SESSION['charts_colors'].'"></script>'; ?>
 
 <script src="../js/media/js/jquery.dataTables.min.js"></script>
 <link href="../js/media/css/dataTables.bootstrap.css" type="text/css" rel="stylesheet" />
@@ -176,8 +176,6 @@ foreach($arr_assets as $asset) {
 
 <script src="../js/extensions/Select/js/dataTables.select.min.js"></script>
 <link href="../js/extensions/Select/css/select.bootstrap.css" type="text/css" rel="stylesheet" />
-
-<?php echo '<script src="../js/themes/'.$_SESSION['charts_colors'].'"></script>'; ?>
 
 <style type="text/css">		
 	select { width: 60px; }
@@ -205,16 +203,18 @@ foreach($arr_assets as $asset) {
 
 </head>
 
-<body style=" margin-left:0%; background:#E5E5E5;">
-<div id='content' style="margin: 20px 0% 0% 0%; float:none;">	
+<body style="background:#E5E5E5;">
+<div id='content'>	
 	  	 	
 		<div id="head" class="fluid head-asset" style="min-height: 100px;">
-			<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
-			<div id="titulo_graf" style="margin-bottom: 20px;"> <?php echo __('Assets'); ?> </div> 	 
-		<!--</div>-->
+			<!--<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:0px;"></i><span></span></a>-->
+			<div id="titulo_graf" class="col-md-12" style="margin-bottom: 20px;"> <?php echo __('Assets'); ?> </div> 	 
+		<!--</div>  style="margin: 20px 2% 1% 2%; float:none;"  -->
+		
       
-         <div id="tabela_assets" class="tab_assets">  
-	        <table id="assets" class="assets" border="0" cellpadding="3" style="font-size:14px;">
+         <div id="tabela_assetsx" class="tab_assetsx col-md-12" style="float:none; margin-left:auto; margin-right:auto; margin-top:-50px;">
+           
+	        <table id="assets" class="assets col-md-6" border="0" cellpadding="3" style="width:75%; font-size:14px; float:none; margin-left:auto; margin-right:auto; ">
 	          <tbody>	         
 	            <tr>
 	            <?php echo "
@@ -289,7 +289,7 @@ foreach($arr_assets as $asset) {
 		</div>
 	</div>	  
 
-<div id='container-fluid' style="margin: 0; float:none;"> 
+<div id='container-fluid' style="margin: 0 2% 0 0; float:none;"> 
 	<div id='charts_assets' style="col-md-12 fluid">		    	    	   		 	      		 	
 	
 				<div id="computers" class="col-md-12" style="display:none; margin:auto; float:none; color:#000;"> 										
@@ -371,7 +371,8 @@ foreach($arr_assets as $asset) {
 						</div>							
 					</div>							
 				
-					<div id="cart" style="display:none; margin: auto;" class="col-md-12"> 					
+					<div id="cart" style="display:none; margin: auto;" class="col-md-12"> 
+					<!-- <a href="assets.php#"><img src="../img/close.png" alt="close" onclick="showDivC('cart')" style="position:absolute; float:right;"></a> -->
 						<div id="graf_cart1" class="col-md-12" style="margin-top: 0; min-height:500px; width: 98%;">
 							<?php  include('./cart_manuf.php'); ?>		
 						</div>
@@ -380,8 +381,9 @@ foreach($arr_assets as $asset) {
 						</div>							
 					</div>
 					
-					<div id="consum" style="display:none; margin: auto;" class="col-md-12"> 					
-						<div id="graf_consum1" class="well col-md-12" style="margin-top: 0; min-height:500px; width: 98%;">
+					<div id="consum" style="display:none; margin: auto;" class="col-md-12"> 
+					<!-- <a href="assets.php#"><img src="../img/close.png" alt="close" onclick="showDivC('cart')" style="position:absolute; float:right;"></a> -->
+						<div id="graf_consum1" class="col-md-12" style="margin-top: 0; min-height:700px; width: 98%;">
 							<?php  include('./consumables.php'); ?>		
 						</div>						
 					</div>
@@ -394,7 +396,7 @@ foreach($arr_assets as $asset) {
 						<div id="asset_tickets" class="well col-md-12" style="margin-top: 25px; margin-left: 1%;">
 							<?php  include('./global_tickets.php'); ?>		
 						</div>							
-					</div>	 
+					</div>		 
 		<!--</div>-->	
 	</div>
 </div>		
