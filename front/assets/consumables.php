@@ -51,7 +51,7 @@ $('#consumables')
 $(document).ready(function() {
     $('#consumables').DataTable( {    	
 
-		  select: true,	    	    	
+		  select: false,	    	    	
         dom: 'Blfrtip',
         filter: false,        
         pagingType: "full_numbers",

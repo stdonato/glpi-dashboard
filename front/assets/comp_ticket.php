@@ -48,7 +48,7 @@ $('#comp_ticket')
 $(document).ready(function() {
    $('#comp_ticket').DataTable({    	
 
-		  select: true,	    	    	
+		  select: false,	    	    	
         dom: 'Blfrtip',
         filter: false,        
         pagingType: "full_numbers",

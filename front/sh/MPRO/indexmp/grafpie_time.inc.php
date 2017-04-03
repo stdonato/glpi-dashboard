@@ -1,35 +1,22 @@
 <?php
 
-if(!empty($_POST['submit']))
-{	
-	$data_ini =  $_POST['date1'];	
-	$data_fin = $_POST['date2'];
-}
-
-else {
-	$data_ini = date("Y-m-01");
-	$data_fin = date("Y-m-d");
-}    
-
-$month = date("Y-m");
-$datahoje = date("Y-m-d"); 
-
 $query2 = "
-SELECT COUNT(glpi_tickets.id) as tick, glpi_tickets.status as stat
+SELECT count( id ) AS chamados , DATEDIFF( solvedate, date ) AS days
 FROM glpi_tickets
-WHERE glpi_tickets.is_deleted = 0  
-AND DATE_FORMAT( date, '%Y' ) IN (".$years.")             
-GROUP BY glpi_tickets.status
-ORDER BY stat  ASC ";
+WHERE solvedate IS NOT NULL
+AND is_deleted = 0
+".$entidade."
+GROUP BY days ";
 		
 $result2 = $DB->query($query2) or die('erro');
 
+
 $arr_grf2 = array();
 while ($row_result = $DB->fetch_assoc($result2))		
-{ 
-   $v_row_result = $row_result['stat'];
-   $arr_grf2[$v_row_result] = $row_result['tick'];			
-} 
+	{ 
+		$v_row_result = $row_result['days'];
+		$arr_grf2[$v_row_result] = $row_result['chamados'];			
+	} 
 	
 $grf2 = array_keys($arr_grf2);
 $quant2 = array_values($arr_grf2);
@@ -37,15 +24,29 @@ $quant2 = array_values($arr_grf2);
 $conta = count($arr_grf2);
 
 
+for($i=0; $i < 7; $i++) {
+
+	if($quant2[$i] != 0) {
+		$till[$i] = $quant2[$i];
+	}
+	else {
+		$till[$i] = 0;
+	}	
+	
+	$arr_days[] += $till[$i];
+
+}
+
 echo "
 <script type='text/javascript'>
 
 $(function () {		
     	   		
 		// Build the chart
-        $('#pie2').highcharts({
+        $('#time').highcharts({
             chart: {
-            type: 'pie',
+            type: 'pie', 
+            height: 350,          
             options3d: {
 				enabled: true,
                 alpha: 45,
@@ -56,25 +57,23 @@ $(function () {
                 plotShadow: false
             },
             title: {
-                text: '".__('Tickets by Status','dashboard')."'
+                //text: ''
+                text: ''
             },
              legend: {
                 layout: 'vertical',
                 align: 'right',
                 verticalAlign: 'middle',
-                x: -30,
+                x: 0,
                 y: 0,
-                floating: false,
+                floating: true,
                 borderWidth: 0,
-               // backgroundColor: '#FFFFFF',
+                backgroundColor: '#FFFFFF',
                 adjustChartSize: true,
                 format: '{series.name}: <b>{point.percentage:.1f}%</b>'
             },
-             credits: {
-                enabled: false
-            },
             tooltip: {
-        	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        	    pointFormat: '{series.name}: <b>{point.y} - ( {point.percentage:.1f}% )</b>'
             },
             plotOptions: {
                 pie: {
@@ -95,19 +94,14 @@ $(function () {
             series: [{
                 type: 'pie',
                 name: '".__('Tickets','dashboard')."',
-                data: [
-                    {
-                        name: '" . Ticket::getStatus($grf2[0]) . "',
-                        y: ".$quant2[0].",
+                data: [  {
+                        name: '< 1 " .__('day','dashboard')."',
+                        y: ".$arr_days[0].",
                         sliced: true,
                         selected: true
-                    },";
-                    
-				for($i = 1; $i < $conta; $i++) {    
-				     echo '[ "' . Ticket::getStatus($grf2[$i]) . '", '.$quant2[$i].'],';
-				        }                    
-				                                                         
-				echo "  ]
+                    }, ['1 - 2 " .__('days','dashboard')."',  ".$arr_days[1]." ], ['2 - 3 " .__('days','dashboard')."',  ".$arr_days[2]." ],
+                			['3 - 4 " .__('days','dashboard')."', ".$arr_days[3]." ], ['4 - 5 " .__('days','dashboard')."',  ".$arr_days[4]." ], 
+                			['5 - 6 " .__('days','dashboard')."',  ".$arr_days[5]." ], ['6 - 7 " .__('days','dashboard')."',  ".$arr_days[6]." ]		]
             }]
         });
     });

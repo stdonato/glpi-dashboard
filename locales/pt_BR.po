@@ -271,7 +271,7 @@ msgid "Last Events"
 msgstr "Últimos Eventos"
 
 msgid "Logged Users"
-msgstr "Requerentes Conectados"
+msgstr "Usuários Conectados"
 
 msgid "Computers by Operating System"
 msgstr "Computadores por Sistema Operacional"

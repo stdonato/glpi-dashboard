@@ -92,12 +92,6 @@ else {
 	select { width: 60px; }
 	table.dataTable { empty-cells: show; }
    a:link, a:visited, a:active { text-decoration: none;}
-
-	tr.group,
-	tr.group:hover {
-	    background-color: #ddd !important;
-	}   
-   
 </style>
 
 <?php echo '<link rel="stylesheet" type="text/css" href="../css/style-'.$_SESSION['style'].'">';  ?> 
@@ -121,12 +115,12 @@ else {
 	a, a:visited, a:focus, a:hover { color: #0076CC;}
 </style>
 
-<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:70px !important;"></i><span></span></a>
+<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 
     <div id="titulo_rel"> <?php echo _n('Task','Tasks',2) .' - '. __('Tickets','dashboard') ?>  </div>
 
     <div id="datas-tec3" class="span12 fluid" >
-    <form id="form1" name="form1" class="form_rel" method="post" action="./rel_tarefa_cham.php?con=1" style="margin-left: 37%;">
+    <form id="form1" name="form1" class="form_rel" method="post" action="./rel_tarefa_cham_group.php?con=1" style="margin-left: 37%;">
 	    <table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef">
 		    <tr>
 					<td style="width: 310px;">
@@ -211,21 +205,30 @@ else {
 }
 
 // Chamados
-$sql_cham =
-"SELECT glpi_tickets.id AS id, glpi_tickettasks.taskcategories_id AS tipo, glpi_tickettasks.date AS date, glpi_tickettasks.content,
+/*$sql_cham =
+"SELECT glpi_tickets.id AS id, glpi_tickettasks.id AS taskid, glpi_tickettasks.taskcategories_id AS tipo, glpi_tickettasks.date AS date, glpi_tickettasks.content,
 glpi_tickettasks.users_id AS uid, glpi_tickettasks.actiontime, glpi_tickettasks.begin AS begin, glpi_tickettasks.end
 FROM `glpi_tickets` , glpi_tickettasks
 WHERE glpi_tickets.id = glpi_tickettasks.`tickets_id`
 AND glpi_tickets.is_deleted = 0
 AND glpi_tickettasks.date ". $datas2 ."
 ".$entidade."
-ORDER BY id DESC, begin ASC ";
+ORDER BY id DESC, begin ASC ";*/
+
+$sql_cham =
+"SELECT DISTINCT glpi_tickets.id AS id
+FROM `glpi_tickets` , glpi_tickettasks
+WHERE glpi_tickets.id = glpi_tickettasks.`tickets_id`
+AND glpi_tickets.is_deleted = 0
+AND glpi_tickettasks.date ". $datas2 ."
+".$entidade."
+ORDER BY id DESC ";
 
 $result_cham = $DB->query($sql_cham);
 
 
 $consulta1 =
-"SELECT glpi_tickets.id AS id, glpi_tickettasks.taskcategories_id AS tipo, glpi_tickettasks.date AS date, glpi_tickettasks.content,
+"SELECT glpi_tickets.id AS id, glpi_tickettasks.id AS taskid, glpi_tickettasks.taskcategories_id AS tipo, glpi_tickettasks.date AS date, glpi_tickettasks.content,
 glpi_tickettasks.users_id AS uid, glpi_tickettasks.actiontime, glpi_tickettasks.begin, glpi_tickettasks.end
 FROM `glpi_tickets` , glpi_tickettasks
 WHERE glpi_tickets.id = glpi_tickettasks.`tickets_id`
@@ -276,39 +279,59 @@ while($row = $DB->fetch_assoc($result_cons1)){
 //listar chamados
 
 while($row = $DB->fetch_assoc($result_cham)){
-	
-	//nome e total
-	$sql_nome = "
-	SELECT glpi_users.id, glpi_users.firstname , glpi_users.realname, glpi_users.name
-	FROM glpi_users, glpi_tickettasks
-	WHERE glpi_tickettasks.users_id = glpi_users.id
-	AND glpi_users.id = ".$row['uid']." ";
-	
-	$result_nome = $DB->query($sql_nome) ;
-	$row_nome = $DB->fetch_assoc($result_nome);
-	
-	//Requester
-	$sql_req = "SELECT gu.firstname AS name, gu.realname AS sname
-					FROM glpi_users gu, glpi_tickets_users gtu
-					WHERE gtu.tickets_id = ".$row['id']."
-					AND gtu.users_id = gu.id
-					AND gtu.type = 1 ";
-	
-	$result_req = $DB->query($sql_req) ;
-	$req = $DB->fetch_assoc($result_req);
-	
-	
-	echo "
+
+	echo "	
 	<tr>
-		<td style='text-align:center; vertical-align:middle;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
-		<td style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
-		<td style='vertical-align:middle;'> ". $row_nome['firstname'] ." ".$row_nome['realname']." </td>
-		<td style='vertical-align:middle;'> ". $req['name']." ".$req['sname']." </td>
-		<td style='max-width:400px; vertical-align:middle;'> ". $row['content'] ." </td>
-		<td style='text-align:center; vertical-align:middle;'> ". time_ext($row['actiontime']) ."</td>
-		<td style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['begin']) ."</td>
-		<td style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['end']) ."</td>
+		<td colspan='9' style='text-align:left; vertical-align:middle; background:#ddd;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
 	</tr>";
+
+
+$sql_data =
+"SELECT glpi_tickets.id AS id, glpi_tickettasks.id AS taskid, glpi_tickettasks.taskcategories_id AS tipo, glpi_tickettasks.date AS date, glpi_tickettasks.content,
+glpi_tickettasks.users_id AS uid, glpi_tickettasks.actiontime, glpi_tickettasks.begin, glpi_tickettasks.end
+FROM `glpi_tickets` , glpi_tickettasks
+WHERE glpi_tickets.id = glpi_tickettasks.`tickets_id`
+AND glpi_tickets.is_deleted =0
+AND glpi_tickets.id = ".$row['id']."
+ORDER BY id DESC ";
+
+$res_data = $DB->query($sql_data);
+
+
+	while($row = $DB->fetch_assoc($res_data)){
+			
+		//nome e total
+		$sql_nome = "
+		SELECT glpi_users.id, glpi_users.firstname , glpi_users.realname, glpi_users.name
+		FROM glpi_users, glpi_tickettasks
+		WHERE glpi_tickettasks.users_id = glpi_users.id
+		AND glpi_users.id = ".$row['uid']." ";
+		
+		$result_nome = $DB->query($sql_nome) ;
+		$row_nome = $DB->fetch_assoc($result_nome);
+		
+		//Requester
+		$sql_req = "SELECT gu.firstname AS name, gu.realname AS sname
+						FROM glpi_users gu, glpi_tickets_users gtu
+						WHERE gtu.tickets_id = ".$row['id']."
+						AND gtu.users_id = gu.id
+						AND gtu.type = 1 ";
+		
+		$result_req = $DB->query($sql_req) ;
+		$req = $DB->fetch_assoc($result_req);
+				
+	echo"
+		<tr>	
+			<td colspan='2' style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
+			<td style='vertical-align:middle;'> ". $row_nome['firstname'] ." ".$row_nome['realname']." </td>
+			<td style='vertical-align:middle;'> ". $req['name']." ".$req['sname']." </td>
+			<td style='max-width:400px; vertical-align:middle;'> ". $row['content'] ." </td>
+			<td style='text-align:center; vertical-align:middle;'> ". time_ext($row['actiontime']) ."</td>
+			<td style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['begin']) ."</td>
+			<td style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['end']) ."</td>
+		</tr>";
+	}
+
 }
 
 echo "</tbody>
@@ -319,61 +342,18 @@ echo "</tbody>
 
 $('#tarefa')
 	.removeClass( 'display' )
-	.addClass('table table-striped table-bordered table-hover table-condensed dataTable');
+	.addClass('table table-bordered table-hover table-condensed dataTable');
 
 $(document).ready(function() {
-    var table = $('#tarefa').DataTable({
-        "columnDefs": [
-            { "visible": false, "targets": 0 }
-        ],
-        "order": [[ 0, 'asc' ]],
-        "displayLength": 25,
-		  "select": true,	    	    	
-        "filter": true,                
-        
-        "drawCallback": function ( settings ) {
-            var api = this.api();
-            var rows = api.rows( {page:'current'} ).nodes();
-            var last=null;
- 
-            api.column(0, {page:'current'} ).data().each( function ( group, i ) {
-                if ( last !== group ) {
-                    $(rows).eq( i ).before(
-                        '<tr class="group"><td colspan="8">'+group+'</td></tr>'
-                    );
- 
-                    last = group;
-                }
-            } );
-        }
-    } );
- 
-    // Order by the grouping
-    $('#tarefa tbody').on( 'click', 'tr.group', function () {
-        var currentOrder = table.order()[0];
-        if ( currentOrder[0] === 0 && currentOrder[1] === 'asc' ) {
-            table.order( [ 0, 'desc' ] ).draw();
-        }
-        else {
-            table.order( [ 0, 'asc' ] ).draw();
-        }
-    } );
-    
-} );
+    $('#tarefa').DataTable( {    	
 
-
-
-$(document).ready(function() {
-    $('#tarefax').DataTable( {    	
-
-//		  select: true,	    	    	
-//        dom: 'Blfrtip',
-//        filter: false,        
-//        pagingType: "full_numbers",
-//        sorting: [[0,'desc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc']],
-//		  displayLength: 25,
-//        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],        
-
+		  select: true,	    	    	
+        dom: 'Blfrtip',
+        filter: false,        
+        pagingType: "full_numbers",
+        sorting: [[0,'desc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc']],
+		  displayLength: 25,
+        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],        
         buttons: [
         	    {
                  extend: "copyHtml5",
@@ -414,7 +394,7 @@ $(document).ready(function() {
                   } 
                   ]
              }
-        ],                 
+        ]
         
     } );
 } );

@@ -92,12 +92,6 @@ else {
 	select { width: 60px; }
 	table.dataTable { empty-cells: show; }
    a:link, a:visited, a:active { text-decoration: none;}
-
-	tr.group,
-	tr.group:hover {
-	    background-color: #ddd !important;
-	}   
-   
 </style>
 
 <?php echo '<link rel="stylesheet" type="text/css" href="../css/style-'.$_SESSION['style'].'">';  ?> 
@@ -106,6 +100,21 @@ else {
 
 <body style="background-color: #e5e5e5; margin-left:0%;">
 <?php
+
+//seleciona técnico
+/*$sql_tec = "
+SELECT DISTINCT glpi_users.`id` AS id , glpi_users.`firstname` AS name, glpi_users.`realname` AS sname
+FROM `glpi_users` , glpi_tickets_users, glpi_profiles_users
+WHERE glpi_tickets_users.users_id = glpi_users.id
+AND glpi_tickets_users.type = 2
+AND glpi_users.is_deleted = 0
+AND glpi_users.is_active = 1
+AND glpi_profiles_users.is_recursive = 1
+".$entidade_u."
+ORDER BY name ASC ";
+
+$result_tec = $DB->query($sql_tec);
+$tec = $DB->fetch_assoc($result_tec);*/
 
 ?>
 <div id='content' >
@@ -117,64 +126,71 @@ else {
 <div id="head-rel" class="fluid">
 
 <style type="text/css">
-	a:link, a:visited, a:active {text-decoration: none;}
-	a, a:visited, a:focus, a:hover { color: #0076CC;}
+a:link, a:visited, a:active {
+    text-decoration: none
+    }
+a:hover {
+    color: #000099;
+    }
 </style>
 
-<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:70px !important;"></i><span></span></a>
+<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 
     <div id="titulo_rel"> <?php echo _n('Task','Tasks',2) .' - '. __('Tickets','dashboard') ?>  </div>
 
     <div id="datas-tec3" class="span12 fluid" >
     <form id="form1" name="form1" class="form_rel" method="post" action="./rel_tarefa_cham.php?con=1" style="margin-left: 37%;">
 	    <table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef">
-		    <tr>
-					<td style="width: 310px;">
-					<?php
-					$url = $_SERVER['REQUEST_URI'];
-					$arr_url = explode("?", $url);
-					$url2 = $arr_url[0];
-					
-					echo '
-							<table>
-								<tr>
-									<td>
-									   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-									    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >		    	
-									    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
-								    	</div>
-									</td>
-									<td>&nbsp;</td>
-									<td>
-								   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-									    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >		    	
-									    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
-								    	</div>
-									</td>
-									<td>&nbsp;</td>
-								</tr>
-							</table> ';
-					?>
-					
-					<script language="Javascript">
-						$('#dp1').datepicker('update');
-						$('#dp2').datepicker('update');
-					</script>
-					
-					</td>
-					
-				<td style="margin-top:2px;"></td>
-			</tr>
-			<tr><td height="15px"></td></tr>
-			<tr>
-				<td colspan="2" align="center">
-					<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult', 'dashboard'); ?></button>
-					<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2 ?>'" > <i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean', 'dashboard'); ?> </button></td>
+	    <tr>
+				<td style="width: 310px;">
+				<?php
+				$url = $_SERVER['REQUEST_URI'];
+				$arr_url = explode("?", $url);
+				$url2 = $arr_url[0];
+				
+				echo '
+						<table>
+							<tr>
+								<td>
+								   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+								    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >		    	
+								    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
+							    	</div>
+								</td>
+								<td>&nbsp;</td>
+								<td>
+							   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+								    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >		    	
+								    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
+							    	</div>
+								</td>
+								<td>&nbsp;</td>
+							</tr>
+						</table> ';
+				?>
+				
+				<script language="Javascript">
+					$('#dp1').datepicker('update');
+					$('#dp2').datepicker('update');
+				</script>
+				
 				</td>
-			</tr>	
+				
+				<td style="margin-top:2px;">
+		</td>
+		</tr>
+		<tr><td height="15px"></td></tr>
+		<tr>
+			<td colspan="2" align="center">
+				<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult', 'dashboard'); ?></button>
+				<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2 ?>'" > <i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean', 'dashboard'); ?> </button></td>
+			</td>
+		</tr>
+	
 	    </table>
-	<?php Html::closeForm(); ?>
-	<!-- </form> -->
+<?php Html::closeForm(); ?>
+<!-- </form> -->
+
         </div>
     </div>
 </div>
@@ -232,6 +248,7 @@ WHERE glpi_tickets.id = glpi_tickettasks.`tickets_id`
 AND glpi_tickets.is_deleted =0
 AND glpi_tickettasks.date ". $datas2 ."
 ".$entidade."
+
 ORDER BY id DESC ";
 
 $result_cons1 = $DB->query($consulta1);
@@ -261,14 +278,14 @@ while($row = $DB->fetch_assoc($result_cons1)){
 	<table id='tarefa' class='display' style='font-size: 12px; font-weight:bold;' cellpadding = 2px>
 		<thead>
 			<tr>
-				<th style='text-align:center;'> ". __('Ticket') ."  </th>
-				<th style='text-align:center;'> ". __('Date') ." </th>
-				<th style='text-align:center;'> ". __('Technician') ." </th>
-				<th style='text-align:center;'> ". __('Requester') ." </th>
-				<th style='text-align:center;'> ". __('Description') ."</th>
-				<th style='text-align:center;'> ". __('Duration') ." </th>
-				<th style='text-align:center;'> ". __('Begin') ." </th>
-				<th style='text-align:center;'> ". __('End') ."  </th>
+				<th style='text-align:center; cursor:pointer;'> ". __('Ticket') ."  </th>
+				<th style='text-align:center; cursor:pointer;'> ". __('Date') ." </th>
+				<th style='text-align:center; cursor:pointer;'> ". __('Technician') ." </th>
+				<th style='text-align:center; cursor:pointer;'> ". __('Requester') ." </th>
+				<th style='text-align:center; cursor:pointer;'> ". __('Description') ."</th>
+				<th style='text-align:center; cursor:pointer;'> ". __('Duration') ." </th>
+				<th style='text-align:center; cursor:pointer;'> ". __('Begin') ." </th>
+				<th style='text-align:center; cursor:pointer;'> ". __('End') ."  </th>
 			</tr>
 		</thead>
 	<tbody> ";
@@ -319,61 +336,18 @@ echo "</tbody>
 
 $('#tarefa')
 	.removeClass( 'display' )
-	.addClass('table table-striped table-bordered table-hover table-condensed dataTable');
+	.addClass('table table-striped table-bordered table-hover dataTable');
 
 $(document).ready(function() {
-    var table = $('#tarefa').DataTable({
-        "columnDefs": [
-            { "visible": false, "targets": 0 }
-        ],
-        "order": [[ 0, 'asc' ]],
-        "displayLength": 25,
-		  "select": true,	    	    	
-        "filter": true,                
-        
-        "drawCallback": function ( settings ) {
-            var api = this.api();
-            var rows = api.rows( {page:'current'} ).nodes();
-            var last=null;
- 
-            api.column(0, {page:'current'} ).data().each( function ( group, i ) {
-                if ( last !== group ) {
-                    $(rows).eq( i ).before(
-                        '<tr class="group"><td colspan="8">'+group+'</td></tr>'
-                    );
- 
-                    last = group;
-                }
-            } );
-        }
-    } );
- 
-    // Order by the grouping
-    $('#tarefa tbody').on( 'click', 'tr.group', function () {
-        var currentOrder = table.order()[0];
-        if ( currentOrder[0] === 0 && currentOrder[1] === 'asc' ) {
-            table.order( [ 0, 'desc' ] ).draw();
-        }
-        else {
-            table.order( [ 0, 'asc' ] ).draw();
-        }
-    } );
-    
-} );
+    $('#tarefa').DataTable( {    	
 
-
-
-$(document).ready(function() {
-    $('#tarefax').DataTable( {    	
-
-//		  select: true,	    	    	
-//        dom: 'Blfrtip',
-//        filter: false,        
-//        pagingType: "full_numbers",
-//        sorting: [[0,'desc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc']],
-//		  displayLength: 25,
-//        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],        
-
+		  select: true,	    	    	
+        dom: 'Blfrtip',
+        filter: false,        
+        pagingType: "full_numbers",
+        sorting: [[0,'desc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc']],
+		  displayLength: 25,
+        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],        
         buttons: [
         	    {
                  extend: "copyHtml5",
@@ -414,7 +388,7 @@ $(document).ready(function() {
                   } 
                   ]
              }
-        ],                 
+        ]
         
     } );
 } );

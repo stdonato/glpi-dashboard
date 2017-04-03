@@ -9,9 +9,9 @@ global $DB;
 Session::checkLoginUser();
 Session::checkRight("profile", READ);
 
-if(!empty($_POST['submit']))
+if(isset($_POST['date1']))
 {
-    $data_ini =  $_POST['date1'];
+    $data_ini = $_POST['date1'];
     $data_fin = $_POST['date2'];
 }
 
@@ -20,12 +20,37 @@ else {
     $data_fin = date("Y-m-d");
 }
 
-if(!isset($_POST["sel_date"])) {
+/*if(!isset($_POST["sel_date"])) {
 	$id_date = $_GET["date"];
 }
 
 else {
 	$id_date = $_POST["sel_date"];
+}*/
+
+//get date from form post
+$con = $_GET['con'];
+
+if($con == "1") {
+
+		if(isset($_POST['date1']))
+		{
+		    $data_ini = $_POST['date1'];
+		    $data_fin = $_POST['date2'];
+		}
+
+		else {
+		    $data_ini = $_GET['date1'];
+		    $data_fin = $_GET['date2'];
+		}
+
+		if($data_ini == $data_fin) {
+			$datas2 = "LIKE '".$data_ini."%'";
+		}
+
+		else {
+			$datas2 = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";
+		}
 }
 
 
@@ -200,28 +225,29 @@ else {
 
 		<?php
 
-		$con = $_GET['con'];
+		//$con = $_GET['con'];
+		
 		if($con == "1") {
 
-		if(!empty($_POST['date1']))
+	/*	if(!isset($_POST['submit']))
 		{
-		    $data_ini2 = $_POST['date1'];
-		    $data_fin2 = $_POST['date2'];
+		    $data_ini = $_GET['date1'];
+		    $data_fin = $_GET['date2'];
 		}
 
 		else {
-		    $data_ini2 = $_GET['date1'];
-		    $data_fin2 = $_GET['date2'];
+		    $data_ini = $_POST['date1'];
+		    $data_fin = $_POST['date2'];
 		}
 
-		if($data_ini2 == $data_fin2) {
-			$datas2 = "LIKE '".$data_ini2."%'";
+		if($data_ini == $data_fin) {
+			$datas2 = "LIKE '".$data_ini."%'";
 		}
 
 		else {
-			$datas2 = "BETWEEN '".$data_ini2." 00:00:00' AND '".$data_fin2." 23:59:59'";
+			$datas2 = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";
 		}
-
+*/
 		// do select
 		$post_date = $_POST["sel_date"];
 
@@ -236,30 +262,30 @@ else {
 		switch($post_date) {
 
 			 case ("1") :
-             $data_ini2 = date('Y-m-d');
-             $data_fin2 = date('Y-m-d');
-              $sel_date = "BETWEEN '" . $data_ini2 ." 00:00:00' AND '". $data_fin2 ." 23:59:59'";
+             $data_ini = date('Y-m-d');
+             $data_fin = date('Y-m-d');
+             $sel_date = "BETWEEN '" . $data_ini ." 00:00:00' AND '". $data_fin ." 23:59:59'";
           break;
           case ("2") :
-             $data_ini2 = date('Y-m-d', strtotime('-1 day'));
-             $data_fin2 = date('Y-m-d', strtotime('-1 day'));
-              $sel_date = "BETWEEN '" . $data_ini2 ." 00:00:00' AND '". $data_fin2 ." 23:59:59'";
+             $data_ini = date('Y-m-d', strtotime('-1 day'));
+             $data_fin = date('Y-m-d', strtotime('-1 day'));
+             $sel_date = "BETWEEN '" . $data_ini ." 00:00:00' AND '". $data_fin ." 23:59:59'";
           break;
           case ("3") :
-             $data_ini2 = date('Y-m-d', strtotime('-1 week'));
-              $sel_date = "BETWEEN '" . $data_ini2 ." 00:00:00' AND '".$data_fin2." 23:59:59'";
+             $data_ini = date('Y-m-d', strtotime('-1 week'));
+             $sel_date = "BETWEEN '" . $data_ini ." 00:00:00' AND '".$data_fin." 23:59:59'";
           break;
           case ("4") :
-             $data_ini2 = date('Y-m-d', strtotime('-15 day'));
-              $sel_date = "BETWEEN '" . $data_ini2 ." 00:00:00' AND '".$data_fin2." 23:59:59'";
+             $data_ini = date('Y-m-d', strtotime('-15 day'));
+             $sel_date = "BETWEEN '" . $data_ini ." 00:00:00' AND '".$data_fin." 23:59:59'";
           break;
           case ("5") :
-              $data_ini2 = date('Y-m-d', strtotime('-1 month'));
-              $sel_date = "BETWEEN '" . $data_ini2 ." 00:00:00' AND '".$data_fin2." 23:59:59'";
+             $data_ini = date('Y-m-d', strtotime('-1 month'));
+             $sel_date = "BETWEEN '" . $data_ini ." 00:00:00' AND '".$data_fin." 23:59:59'";
           break;
           case ("6") :
-              $data_ini2 = date('Y-m-d', strtotime('-3 month'));
-              $sel_date = "BETWEEN '" . $data_ini2 ." 00:00:00' AND '".$data_fin2." 23:59:59'";
+             $data_ini = date('Y-m-d', strtotime('-3 month'));
+             $sel_date = "BETWEEN '" . $data_ini ." 00:00:00' AND '".$data_fin." 23:59:59'";
           break;
 
 		}
@@ -387,7 +413,7 @@ else {
 		<table class='col-md-12 col-sm-12 fluid'  style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
 			<td colspan='2' style='font-size: 18px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ". __('Tickets','dashboard').":</span> ".$total_cham." </td>
 			<td colspan='2' style='font-size: 18px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'>
-			". __('Period','dashboard') .": </span>" . conv_data($data_ini2) ." a ". conv_data($data_fin2)."
+			". __('Period','dashboard') .": </span>" . conv_data($data_ini) ." a ". conv_data($data_fin)."
 			</td>
 				<td style='vertical-align:middle; width: 190px; '>
 				<div class='progress' style='margin-top: 19px;'>
@@ -401,9 +427,9 @@ else {
 		<table align='right' style='margin-bottom:10px;'>
 			<tr>
 				<td colspan='3'>
-				<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_data.php?con=1&stat=open&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ". __('Opened','dashboard'). "</button>
-				<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_data.php?con=1&stat=close&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".  __('Closed','dashboard') ." </button>
-				<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_data.php?con=1&stat=all&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ". __('All','dashboard') ." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_data.php?con=1&stat=open&date1=".$data_ini."&date2=".$data_fin."\"' <i class='icon-white icon-trash'></i> ". __('Opened','dashboard'). "</button>
+				<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_data.php?con=1&stat=close&date1=".$data_ini."&date2=".$data_fin."\"' <i class='icon-white icon-trash'></i> ".  __('Closed','dashboard') ." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_data.php?con=1&stat=all&date1=".$data_ini."&date2=".$data_fin."\"' <i class='icon-white icon-trash'></i> ". __('All','dashboard') ." </button>
 			</tr>
 		</table>
 
@@ -517,13 +543,13 @@ else {
 				                 extend: "print",
 				                 autoPrint: true,
 				                 text: "<?php echo __('All','dashboard'); ?>",
-				                 message: "<div id='print' class='info_box fluid span12' style='margin-bottom:25px; margin-left: -1px;'><table id='print_tb' class='fluid'  style='width: 80%; margin-left: 20%; font-size: 18px; font-weight:bold;' cellpadding = '1px'><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  __('Tickets','dashboard'); ?> : </span><?php echo $total_cham ; ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'> <?php echo  __('Period','dashboard'); ?> : </span> <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2); ?> </td> </table></div>",
+				                 message: "<div id='print' class='info_box fluid span12' style='margin-bottom:25px; margin-left: -1px;'><table id='print_tb' class='fluid'  style='width: 80%; margin-left: 20%; font-size: 18px; font-weight:bold;' cellpadding = '1px'><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  __('Tickets','dashboard'); ?> : </span><?php echo $total_cham ; ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'> <?php echo  __('Period','dashboard'); ?> : </span> <?php echo conv_data($data_ini); ?> a <?php echo conv_data($data_fin); ?> </td> </table></div>",
 				                },
 									  {
 				                 extend: "print",
 				                 autoPrint: true,
 				                 text: "<?php echo __('Selected','dashboard'); ?>",
-				                 message: "<div id='print' class='info_box fluid span12' style='margin-bottom:25px; margin-left: -1px;'><table id='print_tb' class='fluid'  style='width: 80%; margin-left: 20%; font-size: 18px; font-weight:bold;' cellpadding = '1px'><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  __('Tickets','dashboard'); ?> : </span><?php echo $total_cham ; ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'> <?php echo  __('Period','dashboard'); ?> : </span> <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2); ?> </td> </table></div>",
+				                 message: "<div id='print' class='info_box fluid span12' style='margin-bottom:25px; margin-left: -1px;'><table id='print_tb' class='fluid'  style='width: 80%; margin-left: 20%; font-size: 18px; font-weight:bold;' cellpadding = '1px'><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  __('Tickets','dashboard'); ?> : </span><?php echo $total_cham ; ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'> <?php echo  __('Period','dashboard'); ?> : </span> <?php echo conv_data($data_ini); ?> a <?php echo conv_data($data_fin); ?> </td> </table></div>",
 				                 exportOptions: {
 				                    modifier: {
 				                        selected: true

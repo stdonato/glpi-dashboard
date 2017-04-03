@@ -45,7 +45,7 @@ $('#manufac')
 $(document).ready(function() {
     $('#manufac').DataTable( {    	
 
-		  select: true,	    	    	
+		  select: false,	    	    	
         dom: 'Blfrtip',
         filter: false,        
         pagingType: "full_numbers",

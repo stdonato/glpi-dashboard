@@ -177,40 +177,40 @@ else {
 					$total = $DB->fetch_assoc($result_total);
 					
 				 
-				echo '<div id="entidade" class="col-md-12 fluid" style="margin-left:-5px;">';
+				echo '<div id="entidade" class="col-md-12 col-sm-12 fluid" style="margin-left:-5px;">';
 				echo "<span class='tit-ent'> ".$total['total']." ".__('Tickets','dashboard')."</span>";
 				echo "</div>";
 				?>
 				
-				<div id="graf_linhas" class="col-md-12" style="height: 450px;">
+				<div id="graf_linhas" class="col-md-12 col-sm-12" style="height: 450px;">
 					<?php  include ("./inc/graflinhas_sat_geral_mes.inc.php"); ?>
 				</div>
 				
-				<div id="graf2" class="col-md-6" style="height:450px; margin-top:35px;">
+				<div id="graf2" class="col-md-6 col-sm-6" style="height:450px; margin-top:35px;">
 					<?php include ("./inc/grafpie_stat_geral_mes.inc.php"); ?>
 				</div>
 				
-				<div id="graf4" class="col-md-6" style="height:450px; margin-top:35px;">
+				<div id="graf4" class="col-md-6 col-sm-6" style="height:450px; margin-top:35px;">
 					<?php  include ("./inc/grafpie_origem_mes.inc.php");  ?>
 				</div>
 				
-				<div id="graf_tipo" class="col-md-12" style="margin-top: 35px;">
+				<div id="graf_tipo" class="col-md-12 col-sm-12" style="margin-top: 35px;">
 					<?php include ("./inc/grafcol_tipo_geral_mes.inc.php");  ?>
 				</div>
 				
-				<div id="grafent" class="col-md-12" style="height: 450px; margin-top:40px;">
+				<div id="grafent" class="col-md-12 col-sm-12" style="height: 450px; margin-top:40px;">
 					<?php include ("./inc/grafent_geral_mes.inc.php"); ?>
 				</div>
 				
-				<div id="graftime" class="col-md-6" style="height:450px; margin-top:35px;">
+				<div id="graftime" class="col-md-6 col-sm-6" style="height:450px; margin-top:35px;">
 				<?php include ("./inc/grafpie_time_geral_mes.inc.php");?>
 				</div>
 				
-				<div id="grafgrp" class="col-md-6 fluid" style="height:450px; margin-top:35px; ">
+				<div id="grafgrp" class="col-md-6 col-sm-6 fluid" style="height:450px; margin-top:35px; ">
 					<?php  include ("./inc/grafbar_grupo_geral_mes.inc.php"); ?>
 				</div>
 				
-				<div id="grafcat"  class="col-md-12 fluid" style="margin-top:35px;">
+				<div id="grafcat"  class="col-md-12 col-sm-12 fluid" style="margin-top:35px;">
 					<?php include ("./inc/grafcat_geral_mes.inc.php"); ?>
 				</div>
 			

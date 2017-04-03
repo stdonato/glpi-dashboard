@@ -272,7 +272,6 @@ msgstr "Last Events"
 msgid "Logged Users"
 msgstr "Logged Users"
 
-
 msgid "Computers by Operating System"
 msgstr "Computers by Operating System"
 

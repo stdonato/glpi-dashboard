@@ -150,7 +150,7 @@ a:hover { color: #000099; }
 
 
 		$sql_ent = "
-		SELECT id, name
+		SELECT id, completename AS name
 		FROM `glpi_entities`
 		WHERE id IN (".$ents.")
 		ORDER BY `name` ASC ";

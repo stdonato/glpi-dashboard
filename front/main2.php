@@ -482,13 +482,44 @@ setTimeout(function(){
       	 <span  class="fa fa-times hide-widget"></span>             
       </div> 
       <!-- /widget-header -->
-			<div id="graf8"> 
+		<div id="graf8"> 
+			<?php
+				include ("graphs/inc/index/grafpie_time.inc.php");
+			?> 	 				              
+		</div> 
+  	</div>      
+</div>
+
+<div class="col-sm-6 col-md-6"> 	 				              
+	<div id="tickets_time" class="widget widget-table action-table striped card1" >
+   <div class="widget-header wpurple">                
+   	<h3><i class="fa fa-bar-chart-o" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo __('Open Tickets Age','dashboard'); ?></h3>
+   	 <span  class="fa fa-times hide-widget"></span>             
+   </div> 
+   <!-- /widget-header -->
+		<div id="graf8"> 
+			<?php
+				include ("graphs/inc/index/grafpie_time.inc.php");
+			?> 	 				              
+		</div> 
+  	</div>      
+</div>
+
+<div class="col-sm-12 col-md-12 align2" style="display:none;"> 	 				              
+	<div id="tickets_status" class="widget widget-table action-table striped card1" >
+	   <div class="widget-header wred">                 
+	   	<h3><i class="fa fa-bar-chart-o" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo __('Tickets by Category','dashboard'); ?></h3>
+	   	 <span  class="fa fa-times hide-widget"></span>               
+	   </div> 
+	   <!-- /widget-header -->      
+	   <div id="grafcat">	 			
 				<?php
-					include ("graphs/inc/index/grafpie_time.inc.php");
-				?> 	 				              
-			</div> 
-  		</div>      
-</div> 
+					//include("graphs/inc/index/grafbar_cat_mes_index.inc.php");
+				?> 	 						            
+		</div> 
+	</div>
+</div>
+  
 	
 <div class="col-sm-6 col-md-6" > 	 				              
       <div id="last_tickets" class="widget widget-table action-table striped card1">
@@ -539,36 +570,36 @@ setTimeout(function(){
             <!-- /widget-header -->
             
             <div class="widget-content" style="height:322px;">
-            <?php
-                                
-            $query_tec = "
-            SELECT DISTINCT glpi_users.id AS id, glpi_users.`firstname` AS name, glpi_users.`realname` AS sname, count(glpi_tickets_users.tickets_id) AS tick
-				FROM `glpi_users` , glpi_tickets_users, glpi_tickets
-				WHERE glpi_tickets_users.users_id = glpi_users.id
-				AND glpi_tickets_users.type = 2
-				AND glpi_tickets.is_deleted = 0
-				AND glpi_tickets.id = glpi_tickets_users.tickets_id
-				AND glpi_tickets.status NOT IN ".$status."
-				".$entidade."
-				GROUP BY `glpi_users`.`firstname` ASC
-				ORDER BY tick DESC
-				LIMIT 10 ";
-            
-            $result_tec = $DB->query($query_tec);			                        
-            ?>    
-           <table id="open_tickets" class="table table-hover table-bordered table-condensed" >
-           <th style="text-align: center;"><?php echo __('Technician','dashboard'); ?></th><th style="text-align: center;">
-          	<?php echo __('Open Tickets','dashboard'); ?>
-           </th>
-              
-				<?php
-					while($row = $DB->fetch_assoc($result_tec)) 
-					{					
-						echo "<tr><td><a href=./reports/rel_tecnico.php?con=1&tec=".$row['id']."&stat=open target=_blank style='color: #526273;'>
-						".$row['name']." ".$row['sname']."</a></td><td style='text-align: center;' >".$row['tick']."</td></tr>";											
-					}				
-				?>                                       
-              </table>              
+	            <?php
+	                                
+	            $query_tec = "
+	            SELECT DISTINCT glpi_users.id AS id, glpi_users.`firstname` AS name, glpi_users.`realname` AS sname, count(glpi_tickets_users.tickets_id) AS tick
+					FROM `glpi_users` , glpi_tickets_users, glpi_tickets
+					WHERE glpi_tickets_users.users_id = glpi_users.id
+					AND glpi_tickets_users.type = 2
+					AND glpi_tickets.is_deleted = 0
+					AND glpi_tickets.id = glpi_tickets_users.tickets_id
+					AND glpi_tickets.status NOT IN ".$status."
+					".$entidade."
+					GROUP BY `glpi_users`.`firstname` ASC
+					ORDER BY tick DESC
+					LIMIT 10 ";
+	            
+	            $result_tec = $DB->query($query_tec);			                        
+	            ?>    
+	           <table id="open_tickets" class="table table-hover table-bordered table-condensed" >
+		           <th style="text-align: center;"><?php echo __('Technician','dashboard'); ?></th><th style="text-align: center;">
+		          	<?php echo __('Open Tickets','dashboard'); ?>
+		           </th>
+		              
+						<?php
+							while($row = $DB->fetch_assoc($result_tec)) 
+							{					
+								echo "<tr><td><a href=./reports/rel_tecnico.php?con=1&tec=".$row['id']."&stat=open target=_blank style='color: #526273;'>
+								".$row['name']." ".$row['sname']."</a></td><td style='text-align: center;' >".$row['tick']."</td></tr>";											
+							}				
+						?>                                       
+	            </table>              
             </div>
             <!-- /widget-content --> 
           </div>
@@ -582,82 +613,82 @@ setTimeout(function(){
             </div>
             <!-- /widget-header -->
             <div class="widget-content">   
-				<?php				
-				$query_evt = "
-				SELECT *
-				FROM `glpi_events`
-				ORDER BY `glpi_events`.id DESC
-				LIMIT 10 ";   
+					<?php				
+					$query_evt = "
+					SELECT *
+					FROM `glpi_events`
+					ORDER BY `glpi_events`.id DESC
+					LIMIT 10 ";   
+						
+					$result_evt = $DB->query($query_evt);
+					$number = $DB->numrows($result_evt);
 					
-				$result_evt = $DB->query($query_evt);
-				$number = $DB->numrows($result_evt);
-				
-				function tipo($type) {
-				
-				    switch ($type) {
-				    case "system": $type 	  = __('System'); break;
-				    case "ticket": $type 	  = __('Ticket'); break;
-				    case "devices": $type 	  = _sn('Component', 'Components', 2); break;
-				    case "planning": $type 	  = __('Planning'); break;
-				    case "reservation": $type = _sn('Reservation', 'Reservations', 2); break;
-				    case "dropdown": $type 	  = _sn('Dropdown', 'Dropdowns', 2); break;
-				    case "rules": $type 	  = _sn('Rule', 'Rules', 2); break;
-				   };
-					return $type;
-					}
-				
-				
-				function servico($service) {
-				
-				    switch ($service) {
-				    case "inventory": $service 	  = __('Assets'); break;
-				    case "tracking": $service 	  = __('Ticket'); break;
-				    case "maintain": $service 	  = __('Assistance'); break;
-				    case "planning": $service  	  = __('Planning'); break;
-				    case "tools": $service 	  	  = __('Tools'); break;
-				    case "financial": $service 	  = __('Management'); break;
-				    case "login": $service 	         = __('Connection'); break;
-				    case "setup": $service 	  	  = __('Setup'); break;
-				    case "security": $service 	  = __('Security'); break;
-				    case "reservation": $service     = _sn('Reservation', 'Reservations', 2); break;
-				    case "cron": $service 	  	  = _sn('Automatic action', 'Automatic actions', 2); break;
-				    case "document": $service 	  = _sn('Document', 'Documents', 2); break;
-				    case "notification": $service    = _sn('Notification', 'Notifications', 2); break;
-				    case "plugin": $service 	  = __('Plugin'); break;
-				   }
-				
-					return $service;
-					}
-					     ?>    
-				          <table id="lastevents" class="table table-hover table-bordered table-condensed" >
-				            <th style="text-align: center;"><?php echo __('Type'); ?></th>
-								<th style="text-align: center;"><?php echo __('Date'); ?></th>
-								<!-- <th style="text-align: center;"><?php echo __('Service'); ?></th>  -->
-								<th style="text-align: center;"><?php echo __('Message'); ?></th>                 
-								<?php
-								
-									 switch ($_SESSION['glpidate_format']) {
-								    case "0": $dataf = 'Y-m-d'; break;
-								    case "1": $dataf = 'd-m-Y'; break;
-								    case "2": $dataf = 'm-d-Y'; break;    
-								    } 								
-								
-							   $i = 0;	
-							   while ($i < $number) {
-							   
-								  $type     = $DB->result($result_evt, $i, "type");
-			       			  $date     = date_create($DB->result($result_evt, $i, "date"));
-						        // $service  = $DB->result($result_evt, $i, "service");         							        
-						        $message  = $DB->result($result_evt, $i, "message");
-								
-								echo "<tr><td style='text-align: left;'>". tipo($type) ."</td>
-										<td style='text-align: left;'>" . date_format($date, $dataf.' H:i:s') . "</td>					
-										<td style='text-align: left;'>". substr($message,0,50) ."</td></tr>
-								";
-								++$i;													
-								}												
+					function tipo($type) {
+					
+					    switch ($type) {
+					    case "system": $type 	  = __('System'); break;
+					    case "ticket": $type 	  = __('Ticket'); break;
+					    case "devices": $type 	  = _sn('Component', 'Components', 2); break;
+					    case "planning": $type 	  = __('Planning'); break;
+					    case "reservation": $type = _sn('Reservation', 'Reservations', 2); break;
+					    case "dropdown": $type 	  = _sn('Dropdown', 'Dropdowns', 2); break;
+					    case "rules": $type 	  = _sn('Rule', 'Rules', 2); break;
+					   };
+						return $type;
+						}
+					
+					
+					function servico($service) {
+					
+					    switch ($service) {
+					    case "inventory": $service 	  = __('Assets'); break;
+					    case "tracking": $service 	  = __('Ticket'); break;
+					    case "maintain": $service 	  = __('Assistance'); break;
+					    case "planning": $service  	  = __('Planning'); break;
+					    case "tools": $service 	  	  = __('Tools'); break;
+					    case "financial": $service 	  = __('Management'); break;
+					    case "login": $service 	         = __('Connection'); break;
+					    case "setup": $service 	  	  = __('Setup'); break;
+					    case "security": $service 	  = __('Security'); break;
+					    case "reservation": $service     = _sn('Reservation', 'Reservations', 2); break;
+					    case "cron": $service 	  	  = _sn('Automatic action', 'Automatic actions', 2); break;
+					    case "document": $service 	  = _sn('Document', 'Documents', 2); break;
+					    case "notification": $service    = _sn('Notification', 'Notifications', 2); break;
+					    case "plugin": $service 	  = __('Plugin'); break;
+					   }
+					
+						return $service;
+						}
+					    ?>    
+		          <table id="lastevents" class="table table-hover table-bordered table-condensed" >
+		            <th style="text-align: center;"><?php echo __('Type'); ?></th>
+						<th style="text-align: center;"><?php echo __('Date'); ?></th>
+						<!-- <th style="text-align: center;"><?php echo __('Service'); ?></th>  -->
+						<th style="text-align: center;"><?php echo __('Message'); ?></th>                 
+						<?php
+						
+							 switch ($_SESSION['glpidate_format']) {
+						    case "0": $dataf = 'Y-m-d'; break;
+						    case "1": $dataf = 'd-m-Y'; break;
+						    case "2": $dataf = 'm-d-Y'; break;    
+						    } 								
+						
+					   $i = 0;	
+					   while ($i < $number) {
+					   
+						  $type     = $DB->result($result_evt, $i, "type");
+	       			  $date     = date_create($DB->result($result_evt, $i, "date"));
+				        // $service  = $DB->result($result_evt, $i, "service");         							        
+				        $message  = $DB->result($result_evt, $i, "message");
+						
+						echo "<tr><td style='text-align: left;'>". tipo($type) ."</td>
+								<td style='text-align: left;'>" . date_format($date, $dataf.' H:i:s') . "</td>					
+								<td style='text-align: left;'>". substr($message,0,50) ."</td></tr>
+						";
+						++$i;													
+						}												
 						?>                                       
-              </table>  
+              		</table>  
               
             </div>
             <!-- /widget-content --> 

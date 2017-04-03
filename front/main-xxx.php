@@ -494,7 +494,7 @@ setTimeout(function(){
 
 </div>
 
-<div id="widgets" class="row">	
+<div id="widgets" class="row" style="margin-top: 0px; margin-left:-15px;">	
 	
 	<div class="col-sm-6 col-md-6 align2" style="margin-leftx:-15px;"> 	 				              
    <div id="tickets_status" class="widget widget-table action-table striped card1" >
@@ -511,7 +511,7 @@ setTimeout(function(){
 	</div>
 	</div>
 
-	<div class="col-sm-6 col-md-6 align2"> 	 				              
+	<div class="col-sm-6 col-md-6 align2" style="margin-rightx: -24px;"> 	 				              
    <div id="last_week" class="widget widget-table action-table striped card1" >
       <div class="widget-header wred">                
       	<h3><i class="fa fa-bar-chart-o" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo __('Tickets')." - ". __('Last 7 days','dashboard') ; ?></h3>
@@ -526,7 +526,7 @@ setTimeout(function(){
   		</div>      
   </div>   
   	
-	<div class="col-sm-6 col-md-6"> 	 				              
+	<div class="col-sm-6 col-md-6" style="margin-rightx:-15px;"> 	 				              
    <div id="tickets_age" class="widget widget-table action-table striped card1" >
       <div class="widget-header wpurple">                
       	<h3><i class="fa fa-pie-chart" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo __('Ticket Solving Period','dashboard'); ?></h3>
@@ -539,40 +539,24 @@ setTimeout(function(){
 				?> 	 						            
 			</div> 
 	</div>
-	</div>		
+</div>		
 
-	<div class="col-sm-6 col-md-6"> 	 				              
-   	<div id="tickets_time" class="widget widget-table action-table striped card1" >
-	      <div class="widget-header wpurple">                
-	      	<h3><i class="fa fa-bar-chart-o" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo __('Open Tickets Age','dashboard'); ?></h3>
-	      	 <span  class="fa fa-times hide-widget"></span>             
-	      </div> 
-	      <!-- /widget-header -->
+	<div class="col-sm-6 col-md-6" style="margin-rightx:-15px;"> 	 				              
+   <div id="tickets_time" class="widget widget-table action-table striped card1" >
+      <div class="widget-header wpurple">                
+      	<h3><i class="fa fa-bar-chart-o" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo __('Open Tickets Age','dashboard'); ?></h3>
+      	 <span  class="fa fa-times hide-widget"></span>             
+      </div> 
+      <!-- /widget-header -->
 			<div id="graf8"> 
 				<?php
 					include ("graphs/inc/index/grafpie_time.inc.php");
 				?> 	 				              
 			</div> 
   		</div>      
-	</div> 
-
-	<div class="col-sm-12 col-md-12 align2" style="display:none;"> 	 				              
-	   <div id="tickets_status" class="widget widget-table action-table striped card1" >
-	      <div class="widget-header wred">                 
-	      	<h3><i class="fa fa-bar-chart-o" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo __('Tickets by Category','dashboard'); ?></h3>
-	      	 <span  class="fa fa-times hide-widget"></span>               
-	      </div> 
-	      <!-- /widget-header -->      
-	      <div id="grafcat">	 			
-					<?php
-						//include("graphs/inc/index/grafbar_cat_mes_index.inc.php");
-					?> 	 						            
-			</div> 
-		</div>
-	</div>
-
+</div> 
 	
-	<div class="col-sm-6 col-md-6">	 				              
+	<div class="col-sm-6 col-md-6" style="margin-rightx:-15px;">	 				              
       <div id="last_tickets" class="widget widget-table action-table striped card1">
       <div class="widget-header wyellow">                
       	<h3><i class="fa fa-list-alt" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><a href="../../../front/ticket.php" target="_blank" style="color: #525252;"><?php echo __('Last Tickets','dashboard'); ?></a></h3>
@@ -611,7 +595,7 @@ setTimeout(function(){
        </div>
 	</div> 
 <!--  open tickets by tech-->
-	<div class="col-sm-6 col-md-6"> 	
+	<div class="col-sm-6 col-md-6" style="margin-rightx:-15px;"> 	
 		<div id="open_tickets" class="widget widget-table action-table striped card1">
             <div class="widget-header wyellow">
            		<h3><i class="fa fa-list-alt" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><a href="../../../front/ticket.php" target="_blank" style="color: #525252;"><?php echo __('Open Tickets','dashboard'). " " .__('by Technician','dashboard') ?></a></h3>
@@ -655,90 +639,18 @@ setTimeout(function(){
           </div>
        </div>
 
-	<div class="col-sm-6 col-md-6">  	 				              
+	<div class="col-sm-6 col-md-6" style="margin-rightx:-15px;">  	 				              
 		 <div id="events" class="widget widget-table action-table striped card1">
             <div class="widget-header wblue">
               <h3><i class="fa fa-list-alt" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><a href="../../../front/event.php" target="_blank" style="color: #525252;"><?php echo __('Last Events','dashboard'); ?></a></h3>
                <span  class="fa fa-times hide-widget"></span>
             </div>
             <!-- /widget-header -->
-            <div class="widget-content">   
-				<?php				
-				$query_evt = "
-				SELECT *
-				FROM `glpi_events`
-				ORDER BY `glpi_events`.id DESC
-				LIMIT 10 ";   
-					
-				$result_evt = $DB->query($query_evt);
-				$number = $DB->numrows($result_evt);
-				
-				function tipo($type) {
-				
-				    switch ($type) {
-				    case "system": $type 	  = __('System'); break;
-				    case "ticket": $type 	  = __('Ticket'); break;
-				    case "devices": $type 	  = _sn('Component', 'Components', 2); break;
-				    case "planning": $type 	  = __('Planning'); break;
-				    case "reservation": $type = _sn('Reservation', 'Reservations', 2); break;
-				    case "dropdown": $type 	  = _sn('Dropdown', 'Dropdowns', 2); break;
-				    case "rules": $type 	  = _sn('Rule', 'Rules', 2); break;
-				   };
-					return $type;
-					}
-				
-				
-				function servico($service) {
-				
-				    switch ($service) {
-				    case "inventory": $service 	  = __('Assets'); break;
-				    case "tracking": $service 	  = __('Ticket'); break;
-				    case "maintain": $service 	  = __('Assistance'); break;
-				    case "planning": $service  	  = __('Planning'); break;
-				    case "tools": $service 	  	  = __('Tools'); break;
-				    case "financial": $service 	  = __('Management'); break;
-				    case "login": $service 	         = __('Connection'); break;
-				    case "setup": $service 	  	  = __('Setup'); break;
-				    case "security": $service 	  = __('Security'); break;
-				    case "reservation": $service     = _sn('Reservation', 'Reservations', 2); break;
-				    case "cron": $service 	  	  = _sn('Automatic action', 'Automatic actions', 2); break;
-				    case "document": $service 	  = _sn('Document', 'Documents', 2); break;
-				    case "notification": $service    = _sn('Notification', 'Notifications', 2); break;
-				    case "plugin": $service 	  = __('Plugin'); break;
-				   }
-				
-					return $service;
-					}
-					     ?>    
-				          <table id="lastevents" class="table table-hover table-bordered table-condensed" >
-				            <th style="text-align: center;"><?php echo __('Type'); ?></th>
-								<th style="text-align: center;"><?php echo __('Date'); ?></th>
-								<!-- <th style="text-align: center;"><?php echo __('Service'); ?></th>  -->
-								<th style="text-align: center;"><?php echo __('Message'); ?></th>                 
-								<?php
-								
-									 switch ($_SESSION['glpidate_format']) {
-								    case "0": $dataf = 'Y-m-d'; break;
-								    case "1": $dataf = 'd-m-Y'; break;
-								    case "2": $dataf = 'm-d-Y'; break;    
-								    } 								
-								
-							   $i = 0;	
-							   while ($i < $number) {
-							   
-								  $type     = $DB->result($result_evt, $i, "type");
-			       			  $date     = date_create($DB->result($result_evt, $i, "date"));
-						        // $service  = $DB->result($result_evt, $i, "service");         							        
-						        $message  = $DB->result($result_evt, $i, "message");
-								
-								echo "<tr><td style='text-align: left;'>". tipo($type) ."</td>
-										<td style='text-align: left;'>" . date_format($date, $dataf.' H:i:s') . "</td>					
-										<td style='text-align: left;'>". substr($message,0,50) ."</td></tr>
-								";
-								++$i;													
-								}												
-						?>                                       
-              </table>  
+            <div id="grafcat" class="widget-content">   
+				  
+				  <?php
+				  	 include("graphs/inc/index/grafbar_cat_mes_index.inc.php");  
+				  ?>				     
               
             </div>
             <!-- /widget-content --> 
@@ -780,14 +692,10 @@ setTimeout(function(){
 						$string = file_get_contents( $file ); 
 						//poderia ser um string ao invés de file_get_contents().
 						
-						$list = preg_match( '/glpiID\|s:[0-9]:"(.+)/', $string, $matches);
-						
-						$arr = isset($matches[0]) ? $matches[0] : '';
-						
-						$posicao = strpos($arr, 'glpiID|s:');
-						
-						$string2 = substr($arr, $posicao, 25);
-						
+						$list = preg_match( '/glpiID\|s:[0-9]:"(.+)/', $string, $matches);						
+						$arr = isset($matches[0]) ? $matches[0] : '';						
+						$posicao = strpos($arr, 'glpiID|s:');						
+						$string2 = substr($arr, $posicao, 25);						
 						$string3 = explode("\"", $string2);
 						
 						$arr_ids[] = isset($string3[1]) ? $string3[1] : '';						
@@ -814,10 +722,8 @@ setTimeout(function(){
             <!-- /widget-header -->
             
 				<?php
-	          if($num_users <= 10) {
-	          	echo '<div class="widget-content striped" style="min-height:318px;">'; }
-	          else {
-	          	echo '<div class="widget-content striped" style="min-height:318px;">'; }	          		          	
+	          if($num_users <= 10) { echo '<div class="widget-content striped" style="min-height:318px;">'; }
+	          else { echo '<div class="widget-content striped" style="min-height:318px;">'; }	          		          	
 				?>        
               <table id="logged_users" class="table table-hover table-bordered table-condensed" >                         
 				<?php
@@ -892,7 +798,7 @@ setTimeout(function(){
 <script src="js/bootstrap-switch.js"></script> 
 <script src="js/highcharts.js" type="text/javascript" ></script>
 <script src="js/highcharts-3d.js" type="text/javascript" ></script>
-<script src="./js/themes/<?php echo $_SESSION['charts_colors'] ?>"></script>';
+<script src="./js/themes/<?php echo $_SESSION['charts_colors'] ?>"></script>
 
 <script src="js/modules/exporting.js" type="text/javascript" ></script>
 <script src="js/modules/no-data-to-display.js" type="text/javascript" ></script>

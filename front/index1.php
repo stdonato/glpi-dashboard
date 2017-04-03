@@ -21,7 +21,7 @@ else {
 	$result = $DB->query($query);
 	$ent_name1 = $DB->result($result,0,'name');
 	$ent_name = __('Tickets Statistics','dashboard')." :  ". $ent_name1 ;
-	}
+}
 
 # years in index
 $sql_y = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'num_years' AND users_id = ".$_SESSION['glpiID']."";

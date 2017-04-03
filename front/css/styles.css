@@ -1,3 +1,9 @@
+@media print {
+    a:after { content:''; }
+    a[href]:after { content: none !important; }
+
+}
+
 #head {
 	background-color: #fff;
 	color: #fff;

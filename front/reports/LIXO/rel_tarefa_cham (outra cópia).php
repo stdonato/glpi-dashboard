@@ -92,12 +92,6 @@ else {
 	select { width: 60px; }
 	table.dataTable { empty-cells: show; }
    a:link, a:visited, a:active { text-decoration: none;}
-
-	tr.group,
-	tr.group:hover {
-	    background-color: #ddd !important;
-	}   
-   
 </style>
 
 <?php echo '<link rel="stylesheet" type="text/css" href="../css/style-'.$_SESSION['style'].'">';  ?> 
@@ -121,7 +115,7 @@ else {
 	a, a:visited, a:focus, a:hover { color: #0076CC;}
 </style>
 
-<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:70px !important;"></i><span></span></a>
+<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 
     <div id="titulo_rel"> <?php echo _n('Task','Tasks',2) .' - '. __('Tickets','dashboard') ?>  </div>
 
@@ -322,58 +316,15 @@ $('#tarefa')
 	.addClass('table table-striped table-bordered table-hover table-condensed dataTable');
 
 $(document).ready(function() {
-    var table = $('#tarefa').DataTable({
-        "columnDefs": [
-            { "visible": false, "targets": 0 }
-        ],
-        "order": [[ 0, 'asc' ]],
-        "displayLength": 25,
-		  "select": true,	    	    	
-        "filter": true,                
-        
-        "drawCallback": function ( settings ) {
-            var api = this.api();
-            var rows = api.rows( {page:'current'} ).nodes();
-            var last=null;
- 
-            api.column(0, {page:'current'} ).data().each( function ( group, i ) {
-                if ( last !== group ) {
-                    $(rows).eq( i ).before(
-                        '<tr class="group"><td colspan="8">'+group+'</td></tr>'
-                    );
- 
-                    last = group;
-                }
-            } );
-        }
-    } );
- 
-    // Order by the grouping
-    $('#tarefa tbody').on( 'click', 'tr.group', function () {
-        var currentOrder = table.order()[0];
-        if ( currentOrder[0] === 0 && currentOrder[1] === 'asc' ) {
-            table.order( [ 0, 'desc' ] ).draw();
-        }
-        else {
-            table.order( [ 0, 'asc' ] ).draw();
-        }
-    } );
-    
-} );
-
-
-
-$(document).ready(function() {
     $('#tarefax').DataTable( {    	
 
-//		  select: true,	    	    	
-//        dom: 'Blfrtip',
-//        filter: false,        
-//        pagingType: "full_numbers",
-//        sorting: [[0,'desc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc']],
-//		  displayLength: 25,
-//        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],        
-
+		  select: true,	    	    	
+        dom: 'Blfrtip',
+        filter: false,        
+        pagingType: "full_numbers",
+        sorting: [[0,'desc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc']],
+		  displayLength: 25,
+        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],        
         buttons: [
         	    {
                  extend: "copyHtml5",
@@ -414,7 +365,7 @@ $(document).ready(function() {
                   } 
                   ]
              }
-        ],                 
+        ]
         
     } );
 } );

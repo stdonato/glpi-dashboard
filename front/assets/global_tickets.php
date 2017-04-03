@@ -65,6 +65,7 @@ while ($row = $DB->fetch_assoc($result))
 			<td>'. $row_result['conta'].'</td>
 			</tr>';		
 }
+
 }
 
 echo '		
@@ -80,7 +81,7 @@ $('#a_tickets')
 $(document).ready(function() {
    $('#a_tickets').DataTable({    	
 
-		  select: true,	    	    	
+		  select: false,	    	    	
         dom: 'Blfrtip',
         filter: false,        
         pagingType: "full_numbers",
