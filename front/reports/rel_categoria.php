@@ -108,88 +108,86 @@ else {
 		<div id="charts" class="fluid chart">
 			<div id="pad-wrapper" >
 			<div id="head-lg" class="fluid">
-
 			<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 
 				<div id="titulo_rel"> <?php echo __('Tickets', 'dashboard') .'  '. __('by Category', 'dashboard') ?> </div>
-
 					<div id="datas-tec" class="col-md-12 col-sm-12 fluid" >
-
-				<form id="form1" name="form1" class="form_rel" method="post" action="rel_categoria.php?con=1">
-				<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
-				<tr>
-					<td style="width: 310px;">
-					<?php
-					$url = $_SERVER['REQUEST_URI'];
-					$arr_url = explode("?", $url);
-					$url2 = $arr_url[0];
-
-					echo'
-								<table>
-									<tr>
-										<td>
-										   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-										    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
-										    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-									    	</div>
-										</td>
-										<td>&nbsp;</td>
-										<td>
-									   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-										    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
-										    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-									    	</div>
-										</td>
-										<td>&nbsp;</td>
-									</tr>
-								</table> ';
-					?>
-
-					<script language="Javascript">
-						$('#dp1').datepicker('update');
-						$('#dp2').datepicker('update');
-					</script>
-					</td>
-					<td style="margin-top:2px;">
-					<?php
-
-					// lista de categorias
-					$sql_cat = "
-					SELECT id, completename AS name
-					FROM `glpi_itilcategories`
-					".$entidade_cw."
-					ORDER BY `name` ASC ";
-
-					$result_cat = $DB->query($sql_cat);
-
-					$arr_cat = array();
-					$arr_cat[0] = "-- ". __('Select a category', 'dashboard') . " --" ;
-
-					while ($row_result = $DB->fetch_assoc($result_cat))
-						{
-						$v_row_result = $row_result['id'];
-						$arr_cat[$v_row_result] = $row_result['name'] ;
-						}
-
-					$name = 'sel_cat';
-					$options = $arr_cat;
-					$selected = $id_cat;
-
-					echo dropdown( $name, $options, $selected );
-
-					?>
-					</td>
-			</tr>
-			<tr><td height="15px"></td></tr>
-			<tr>
-				<td colspan="2" align="center">
-					<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult','dashboard'); ?> </button>
-					<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2 ?>'" ><i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean','dashboard'); ?> </button>
-				</td>
-			</tr>
-			</table>
-			<?php Html::closeForm(); ?>
-			<!-- </form> -->
+		
+						<form id="form1" name="form1" class="form_rel" method="post" action="rel_categoria.php?con=1">
+							<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
+								<tr>
+									<td style="width: 310px;">
+									<?php
+									$url = $_SERVER['REQUEST_URI'];
+									$arr_url = explode("?", $url);
+									$url2 = $arr_url[0];
+				
+									echo'
+												<table>
+													<tr>
+														<td>
+														   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+														    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
+														    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+													    	</div>
+														</td>
+														<td>&nbsp;</td>
+														<td>
+													   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+														    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
+														    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+													    	</div>
+														</td>
+														<td>&nbsp;</td>
+													</tr>
+												</table> ';
+									?>
+				
+									<script language="Javascript">
+										$('#dp1').datepicker('update');
+										$('#dp2').datepicker('update');
+									</script>
+									</td>
+									<td style="margin-top:2px;">
+									<?php
+				
+									// lista de categorias
+									$sql_cat = "
+									SELECT id, completename AS name
+									FROM `glpi_itilcategories`
+									".$entidade_cw."
+									ORDER BY `name` ASC ";
+				
+									$result_cat = $DB->query($sql_cat);
+				
+									$arr_cat = array();
+									$arr_cat[0] = "-- ". __('Select a category', 'dashboard') . " --" ;
+				
+									while ($row_result = $DB->fetch_assoc($result_cat))
+									{
+										$v_row_result = $row_result['id'];
+										$arr_cat[$v_row_result] = $row_result['name'] ;
+									}
+				
+									$name = 'sel_cat';
+									$options = $arr_cat;
+									$selected = $id_cat;
+				
+									echo dropdown( $name, $options, $selected );
+				
+									?>
+									</td>
+							</tr>
+							<tr><td height="15px"></td></tr>
+							<tr>
+								<td colspan="2" align="center">
+									<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult','dashboard'); ?> </button>
+									<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2 ?>'" ><i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean','dashboard'); ?> </button>
+								</td>
+							</tr>
+						</table>
+					<?php Html::closeForm(); ?>
+					<!-- </form> -->
 					</div>
 				</div>
 
@@ -559,7 +557,7 @@ echo "
 			?>
 
 			<script type="text/javascript" >
-				$(document).ready(function() { $("#sel1").select2(); });
+				$(document).ready(function() { $("#sel1").select2({dropdownAutoWidth : true}); });
 			</script>
 			</div>
 		</div>

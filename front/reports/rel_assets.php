@@ -632,9 +632,9 @@ echo "
 ?>
 
 <script type="text/javascript" >
-	$(document).ready(function() { $("#sel_item").select2(); });
-	$(document).ready(function() { $("#sel_fab").select2(); });
-	$(document).ready(function() { $("#sel_mod").select2(); });
+	$(document).ready(function() { $("#sel_item").select2({dropdownAutoWidth : true}); });
+	$(document).ready(function() { $("#sel_fab").select2({dropdownAutoWidth : true}); });
+	$(document).ready(function() { $("#sel_mod").select2({dropdownAutoWidth : true}); });
 </script>
 
 			</div>

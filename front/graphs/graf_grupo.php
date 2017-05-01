@@ -237,7 +237,7 @@ $selected = $id_grp;
 <!-- DIV's -->
 
 <script type="text/javascript" >
-	$(document).ready(function() { $("#sel_grp").select2();});
+	$(document).ready(function() { $("#sel_grp").select2({dropdownAutoWidth : true});});
 				
 	$('#dp1').datepicker('update');
 	$('#dp2').datepicker('update');

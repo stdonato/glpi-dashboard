@@ -668,8 +668,8 @@ echo $content;
    ?>
 				
 	<script type="text/javascript" charset="utf-8">
-		$(document).ready(function() { $("#sel_tec").select2(); });
-		$(document).ready(function() { $("#sel_date").select2(); });					
+		$(document).ready(function() { $("#sel_tec").select2({dropdownAutoWidth : true}); });
+		$(document).ready(function() { $("#sel_date").select2({dropdownAutoWidth : true}); });					
 	</script>
 	
 		</div>

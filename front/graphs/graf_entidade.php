@@ -229,7 +229,7 @@ $selected = $id_ent;
 			<!-- DIV's -->
 
 			<script type="text/javascript" >
-				$(document).ready(function() { $("#sel_ent").select2(); });
+				$(document).ready(function() { $("#sel_ent").select2({dropdownAutoWidth : true}); });
 			</script>
 
 			<?php

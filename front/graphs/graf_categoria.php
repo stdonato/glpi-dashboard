@@ -233,7 +233,7 @@ $selected = $id_cat;
 	</div>
 <!-- DIV's -->
 <script type="text/javascript" >
-	$(document).ready(function() { $("#sel_cat").select2(); });
+	$(document).ready(function() { $("#sel_cat").select2({dropdownAutoWidth : true}); });
 </script>
 
 <?php

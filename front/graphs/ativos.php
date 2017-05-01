@@ -71,7 +71,7 @@ $datahoje = date("Y-m-d");
 	<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 
 	<div id="titulo_graf"> <?php echo __('Tickets') .'  '. __('by Assets','dashboard');  ?></div>
-		<div id="datas-tec" class="col-md-12 fluid" > 
+		<div id="datas-tec" class="col-md-12 fluid" >
 			<form id="form1" name="form1" class="form2" method="post" action="?con=1&date1=<?php echo $data_ini ?>&date2=<?php echo $data_fin ?>">
 				<table border="0" cellspacing="0" cellpadding="1" bgcolor="#efefef">
 				<tr>
@@ -96,7 +96,7 @@ $datahoje = date("Y-m-d");
 							<td>&nbsp;</td>
 						</tr>
 					</table> ';
-				?>	
+				?>
 				</td>
 				<td style="margin-top:2px;">
 					<?php echo "
@@ -112,16 +112,16 @@ $datahoje = date("Y-m-d");
 					</select> ";
 					?>
 				</td>
-				</tr>				
+				</tr>
 				<tr><td height="15px"></td></tr>
 				<tr>
 					<td colspan="2" align="center">
 						<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult','dashboard'); ?> </button>
 						<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='ativos.php'" ><i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean','dashboard'); ?> </button>
-					</td>				
+					</td>
 				</tr>
 				</table>
-			<?php Html::closeForm(); ?>		
+			<?php Html::closeForm(); ?>
 	</div>
 </div>
 
@@ -166,7 +166,7 @@ include ("./inc/grafbar_ativo_mes.inc.php");
 </div>
 
 <script type="text/javascript" >
-	$(document).ready(function() { $("#sel_item").select2(); });
+	$(document).ready(function() { $("#sel_item").select2({dropdownAutoWidth : true}); });
 </script>
 
 </div>

@@ -218,7 +218,7 @@ echo dropdown( $name, $options, $selected );
 </div>
 
 <script type="text/javascript" >
-	$(document).ready(function() { $("#sel1").select2(); });
+	$(document).ready(function() { $("#sel1").select2({dropdownAutoWidth : true}); });
 </script>
 
 <?php

@@ -427,7 +427,7 @@ else {
 	</script>
 	
 	<script type="text/javascript" >
-		$(document).ready(function() { $("#sel1").select2(); });
+		$(document).ready(function() { $("#sel1").select2({dropdownAutoWidth : true}); });
 	</script>
 			</div>
 		</div>

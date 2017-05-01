@@ -656,7 +656,7 @@ $(document).ready(function() {
 
 } );
 
-	$(document).ready(function() { $("#sel_techs").select2(); });
+	$(document).ready(function() { $("#sel_techs").select2({dropdownAutoWidth : true}); });
 </script>
 
 </div>

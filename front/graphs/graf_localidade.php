@@ -233,7 +233,7 @@ $selected = $id_loc;
 		<!-- DIV's -->
 		
 		<script type="text/javascript" >
-			$(document).ready(function() { $("#sel_loc").select2(); });
+			$(document).ready(function() { $("#sel_loc").select2({dropdownAutoWidth : true}); });
 		</script>
 		
 		<?php

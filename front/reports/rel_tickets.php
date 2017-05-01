@@ -830,13 +830,13 @@ else {
 ?>
 
 <script type='text/javascript' >
-	$(document).ready(function() { $("#sel_ent").select2(); });
-	$(document).ready(function() { $("#sel_sta").select2(); });
-	$(document).ready(function() { $("#sel_req").select2(); });
-	$(document).ready(function() { $("#sel_pri").select2(); });
-	$(document).ready(function() { $("#sel_cat").select2(); });
-	$(document).ready(function() { $("#sel_tip").select2(); });
-	$(document).ready(function() { $("#sel_due").select2(); });
+	$(document).ready(function() { $("#sel_ent").select2({dropdownAutoWidth : true}); });
+	$(document).ready(function() { $("#sel_sta").select2({dropdownAutoWidth : true}); });
+	$(document).ready(function() { $("#sel_req").select2({dropdownAutoWidth : true}); });
+	$(document).ready(function() { $("#sel_pri").select2({dropdownAutoWidth : true}); });
+	$(document).ready(function() { $("#sel_cat").select2({dropdownAutoWidth : true}); });
+	$(document).ready(function() { $("#sel_tip").select2({dropdownAutoWidth : true}); });
+	$(document).ready(function() { $("#sel_due").select2({dropdownAutoWidth : true}); });
 </script>	
 
 </div>

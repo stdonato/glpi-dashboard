@@ -246,7 +246,7 @@ $selected = 0;
 <!-- DIV's -->
 
 <script type="text/javascript" >
-	$(document).ready(function() { $("#sel_tec").select2(); });
+	$(document).ready(function() { $("#sel_tec").select2({dropdownAutoWidth : true}); });
 </script>
 
 <?php
