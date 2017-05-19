@@ -243,7 +243,7 @@ foreach($arr_assets as $asset) {
 	      			background-size: 70px 70px; background-position: center; background-color: ffffff; cursor:pointer;' onclick=showDiv('cart')></div> </td>
 	      			
 	      			<td style='width:100px; text-align:center;'><div id='asset_img' style='background: url(../img/consumables.jpg) repeat-x; 
-	      			background-size: 70px 70px; background-position: center; background-color: ffffff;'></div> </td>
+	      			background-size: 70px 70px; background-position: center; background-color: ffffff; cursor:pointer;' onclick=showDiv('consum')></div> </td>
 	              
 	              <td style='width:100px; text-align:center;'><div id='asset_img' style='background: url(../img/global.jpg) repeat-x; 
 	      			background-size: 70px 70px; background-position: center; background-color: ffffff; cursor:pointer;' onclick=showDiv('global')></div> </td>              

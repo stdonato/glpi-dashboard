@@ -172,22 +172,20 @@ function chart(theme) {
 					echo '<select name="sel_ent[]" id="sel_ent" multiple style="width: 600px; height: 250px;"';
 					
 					foreach( $arr_ent as $key=>$option )
-						{
+					{
 						
 						if(in_array($key,$formated_arr)) { $select = 'selected'; }	
 						else {$select = '';}						
-							echo '<option value="'.$key.'" '.$select.'>'.$option.'</option>'."\n";
-						}					
-							echo "</select>"."\n";
+						echo '<option value="'.$key.'" '.$select.'>'.$option.'</option>'."\n";
+					}					
+						echo "</select>"."\n";
 										
 					echo "<tr><td align='center'><button type='button' class='btn btn-primary' onclick='javascript:this.form.submit();' > ".__('Save')."</button></td></tr>";
 					Html::closeForm(); 										
-				echo "</td>";		
-			echo "</tr>";
+				echo "</td>\n";		
+			echo "</tr>\n";
 
-				   if(isset($_REQUEST['conf']) && $_REQUEST['conf'] == 1 ) {	
-				         	
-					//	if($_REQUEST['sel_ent'] != -1) {				
+				   if(isset($_REQUEST['conf']) && $_REQUEST['conf'] == 1 ) {					         					
 								
 							$ents_sel = $_REQUEST['sel_ent'];	
 								
@@ -334,12 +332,11 @@ function chart(theme) {
 				else { $active_stat[$i] = ''; }
 			}
 					
-			echo "<tr>";
-				echo "<td>";			                                		 
-			 		echo '<form id="formstatus" name="formstatus" method="post" action="config.php?status=1">';   					
+			echo "<tr>\n";
+				echo "<td>\n";			                                		 
+			 		echo '<form id="formstatus" name="formstatus" method="post" action="config.php?status=1" style="margin-left:15%;">';   					
 					echo " -- ".__('Status in Tickets page','dashboard').": ";														
-					echo '<select name="sel_stat[]" id="sel_stat" multiple="multiple" style="width: 600px; height: 250px;"';
-					
+					echo '<select name="sel_stat[]" id="sel_stat" multiple="multiple" style="width: 600px; height: 250px;"';					
 					echo "<option value='0'>". __('All')."</option>\n";
 					echo "<option value='1' ".$active_stat[1].">". _x('status', 'New')."</option>\n";
 					echo "<option value='2' ".$active_stat[2].">". _x('status', 'Processing (assigned)')."</option>\n"; 
@@ -349,8 +346,8 @@ function chart(theme) {
 										
 					echo "<tr><td align='center'><button type='button' class='btn btn-primary' onclick='javascript:this.form.submit();' > ".__('Save')."</button></td></tr>";
 					Html::closeForm(); 										
-				echo "</td>";		
-			echo "</tr>";
+				echo "</td>\n";		
+			echo "</tr>\n";
 			
 
 				if(isset($_REQUEST['status']) && $_REQUEST['status'] == 1 ) {	
@@ -362,30 +359,29 @@ function chart(theme) {
 								$result = $DB->query($query);	
 								
 								//reload page
-								echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=config.php'>";																						
+								echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=config.php'>\n";																						
 											
 					}										
 																							 
 					                               
-		echo "<tr>";
-		echo "<td>";					
+		echo "<tr>\n";
+		echo "<td>\n";					
 				
 		 		echo '<form id="form1" name="form1" method="post" action="config.php?conf=1">';   						
 				echo "-- ".__('Period in index page','dashboard').":&nbsp; ";  
 				echo "<select id='num' name='num' style='width: 130px;' onChange='reload(\"form1\")'> 
 							<option value=''>".__('Select','dashboard')."</option>
 							<option value='0'>".__('All')."</option>
-							<option value='1'>".__('Current year','dashboard')."</option>";
+							<option value='1'>".__('Current year','dashboard')."</option>\n";
 						
 						$year = date("Y");		
 						for($i=2; $i <= $conta_y; $i++) {	
-							echo "<option value='".$i."'>".$year." - ".($arr_years[0]-($i-1))."</option>";
+							echo "<option value='".$i."'>".$year." - ".($arr_years[0]-($i-1))."</option>\n";
 					   }							   			
 				Html::closeForm(); 
 
-		echo "</td>";					 	
-		echo "</tr>";	
-		
+		echo "</td>\n";					 	
+		echo "</tr>\n";			
 
 		// metric period
 		$query_met = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'metric' AND users_id = ".$_SESSION['glpiID']." ";																
@@ -432,11 +428,11 @@ function chart(theme) {
 		}
 
 					
-		echo "<tr>";
-		echo "<td>";									
+		echo "<tr>\n";
+		echo "<td>\n";									
 				echo '<form id="form_met" name="form_met" class="form_met" method="post" action="config.php?met=1">';   						
 				echo "-- ".__('Period for Metrics','dashboard').":&nbsp; ";
-				echo "<select id='metric' name='metric' style='width: 160px;' onChange='reload(\"form_met\")'> ";												
+				echo "<select id='metric' name='metric' style='width: 160px;' onChange='reload(\"form_met\")'>\n";												
 								echo "					
 									<option value='0' ".$period0.">".__('Total')."</option>
 									<option value='1' ".$period1.">".__('Current year','dashboard')."</option>
@@ -446,12 +442,12 @@ function chart(theme) {
 									<option value='5' ".$period5.">".__('Last 30 days','dashboard')."</option>
 									<option value='6' ".$period6.">".__('Last 90 days','dashboard')."</option>
 									<option value='7' ".$period7.">".__('Last 180 days','dashboard')."</option>
-								</select>";						   			
+								</select>\n";						   			
 
 				Html::closeForm();	
 			
-			echo "</td>";
-			echo "</tr>";				
+			echo "</td>\n";
+			echo "</tr>\n";				
 
 		
 		//get update option
@@ -460,8 +456,8 @@ function chart(theme) {
 		
 		$up_option = $DB->result($result_up,0,'value');	
 					
-		echo "<tr>";
-		echo "<td>";									
+		echo "<tr>\n";
+		echo "<td>\n";									
 				echo '<form id="form3" name="form3" class="form3" method="post" action="config.php?up=1">';   						
 				echo "-- ".__('Check for new updates').":&nbsp; 
 						<select id='up' name='up' style='width: 130px;' onChange='reload(\"form3\")'> ";
@@ -469,18 +465,18 @@ function chart(theme) {
 								echo "					
 									<option value='0'>".__('No')."</option>
 									<option value='1' selected>".__('Yes')."</option>
-								</select>";						   			
+								</select>\n";						   			
 								}
 							else 	{							
 								echo "					
 									<option value='0' selected>".__('No')."</option>
 									<option value='1'>".__('Yes')."</option>
-								</select>";						   			
+								</select>\n";						   			
 								}
 				Html::closeForm();	
 			
-			echo "</td>";
-			echo "</tr>";				
+			echo "</td>\n";
+			echo "</tr>\n";				
 			
 			if(isset($_POST['up']))  {	      	
 				
@@ -498,8 +494,8 @@ function chart(theme) {
 			
 			$layout = $DB->result($result_lay,0,'value');	
 			
-			echo "<tr>";
-			echo "<td>";								
+			echo "<tr>\n";
+			echo "<td>\n";								
 					echo '<form id="form4" name="form4" class="form4" method="post" action="config.php?layout=1">';   						
 					echo "-- ".__('Layout','dashboard').":&nbsp; 
 							<select id='layout' name='layout' style='width: 170px;' onChange='reload(\"form4\")'> ";
@@ -507,17 +503,17 @@ function chart(theme) {
 									echo "					
 										<option value='0'>".__('Left side menu','dashboard')."</option>
 										<option value='1' selected>".__('Top menu','dashboard')."</option>
-									</select>";						   			
+									</select>\n";						   			
 									}
 								else 	{							
 									echo "					
 										<option value='0' selected>".__('Left side menu','dashboard')."</option>
 										<option value='1' >".__('Top menu','dashboard')."</option>
-									</select>";						   			
+									</select>\n";						   			
 									}
 							Html::closeForm();	
-			echo "</td>";			
-			echo "</tr>";				
+			echo "</td>\n";			
+			echo "</tr>\n";				
 			
 			if(isset($_POST['layout']))  {	      	
 							
@@ -533,8 +529,8 @@ function chart(theme) {
 			$result_info = $DB->query($query_info);			
 			$info = $DB->result($result_info,0,'value');	
 			
-			echo "<tr>";
-			echo "<td>";								
+			echo "<tr>\n";
+			echo "<td>\n";								
 					echo '<form id="form5" name="form5" class="form5" method="post" action="config.php?info=1">';   						
 					echo "-- ".__('Show Server info','dashboard').":&nbsp; 
 							<select id='info' name='info' style='width: 130px;' onChange='reload(\"form5\")'> ";
@@ -542,17 +538,17 @@ function chart(theme) {
 									echo "					
 										<option value='0'>".__('No')."</option>
 										<option value='1' selected>".__('Yes')."</option>
-									</select>";						   			
+									</select>\n";						   			
 									}
 								else 	{							
 									echo "					
 										<option value='0' selected>".__('No')."</option>
 										<option value='1'>".__('Yes')."</option>
-									</select>";						   			
+									</select>\n";						   			
 									}
 					Html::closeForm();	
-			echo "</td>";			
-			echo "</tr>";				
+			echo "</td>\n";			
+			echo "</tr>\n";				
 			
 			if(isset($_POST['info']))  {	      	
 							
@@ -585,8 +581,8 @@ function chart(theme) {
 			$tit = $DB->result($result_tit,0,'value');				
 						
 			
-			echo "<tr>";
-			echo "<td>";								
+			echo "<tr>\n";
+			echo "<td>\n";								
 					echo '<form id="form6" name="form6" class="form6" method="post" action="config.php?due=1&loc=1&entity=1">';
 					
 					echo "-- ".__('Tickets Page','dashboard').":&nbsp; <br><p>";
@@ -598,15 +594,15 @@ function chart(theme) {
 									echo "					
 										<option value='0'>".__('No')."</option>
 										<option value='1' selected>".__('Yes')."</option>
-									</select>";						   			
+									</select>\n";						   			
 									}
 								else 	{							
 									echo "					
 										<option value='0' selected>".__('No')."</option>
 										<option value='1'>".__('Yes')."</option>
-									</select>";						   			
+									</select>\n";						   			
 									}
-					echo "</td><td>";			
+					echo "</td><td>\n";			
 														
 						echo _sx('button', 'Show')." ".__('Location').":&nbsp;&nbsp; 
 							<select id='loc' name='loc' style='width: 130px;' onChange='reload(\"form6\")'> ";			
@@ -614,18 +610,18 @@ function chart(theme) {
 									echo "					
 										<option value='0'>".__('No')."</option>
 										<option value='1' selected>".__('Yes')."</option>
-									</select>";						   			
+									</select>\n";						   			
 									}
 								else 	{							
 									echo "					
 										<option value='0' selected>".__('No')."</option>
 										<option value='1'>".__('Yes')."</option>
-									</select>";						   			
+									</select>\n";						   			
 									}				
 					
-					echo "</td><td>";
+					echo "</td><td>\n";
 						echo _sx('button', 'Show')." ".__('Due Date', 'dashboard').":&nbsp; 
-							<select id='due' name='due' style='width: 130px;' onChange='reload(\"form6\")'> ";
+							<select id='due' name='due' style='width: 130px;' onChange='reload(\"form6\")'>\n ";
 								if($due == 1) {							
 									echo "					
 										<option value='0'>".__('No')."</option>
@@ -639,49 +635,48 @@ function chart(theme) {
 									</select><br></p>";						   			
 									}				
 		
-					echo "</td><td>";				
+					echo "</td><td>\n";				
 					echo _sx('button', 'Show')." ".__('Popup','dashboard').":&nbsp;&nbsp; 
-							<select id='pop' name='pop' style='width: 130px;' onChange='reload(\"form6\")'> ";
+							<select id='pop' name='pop' style='width: 130px;' onChange='reload(\"form6\")'>\n";
 								if($pop == 1) {							
 									echo "					
 										<option value='0'>".__('No')."</option>
 										<option value='1' selected>".__('Yes')."</option>
-									</select>";						   			
+									</select>\n";						   			
 									}
 								else 	{							
 									echo "					
 										<option value='0' selected>".__('No')."</option>
 										<option value='1'>".__('Yes')."</option>
-									</select>";						   			
+									</select>\n";						   			
 									}		
 									
-					echo "</td><td>";				
+					echo "</td><td>\n";				
 					echo _sx('button', 'Show')." ".__('Title').":&nbsp;&nbsp; 
-							<select id='tit' name='tit' style='width: 130px;' onChange='reload(\"form6\")'> ";
+							<select id='tit' name='tit' style='width: 130px;' onChange='reload(\"form6\")'>\n";
 								if($tit == 1) {							
 									echo "					
 										<option value='0'>".__('No')."</option>
 										<option value='1' selected>".__('Yes')."</option>
-									</select>";						   			
+									</select>\n";						   			
 									}
 								else 	{							
 									echo "					
 										<option value='0' selected>".__('No')."</option>
 										<option value='1'>".__('Yes')."</option>
-									</select>";						   			
+									</select>\n";						   			
 									}
 
 																																					
 					Html::closeForm();
-					echo "</td></tr></table>";	
-			echo "</td>";			
-			echo "</tr>";				
+					echo "</td></tr></table>\n";	
+			echo "</td>\n";			
+			echo "</tr>\n";				
 			
 			if(isset($_POST['due']))  {	      	
 							
 								//Update duedate value
-								$up_due = $_POST['due'];												
-								
+								$up_due = $_POST['due'];																				
 								$query_due = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
 											  VALUES ('duedate', '".$up_due."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$up_due."' ";																
 								$result_due = $DB->query($query_due);																																																			
@@ -690,8 +685,7 @@ function chart(theme) {
 			if(isset($_POST['entity']))  {	      	
 														
 								//Update entity value
-								$up_ent = $_POST['entity'];												
-								
+								$up_ent = $_POST['entity'];																				
 								$query_ent = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
 											  VALUES ('entity_cham', '".$up_ent."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$up_ent."' ";																
 								$result_ent = $DB->query($query_ent);																																																				
@@ -700,8 +694,7 @@ function chart(theme) {
 			if(isset($_POST['loc']))  {	      	
 														
 								//Update location value
-								$up_loc = $_POST['loc'];												
-								
+								$up_loc = $_POST['loc'];																				
 								$query_loc = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
 											  VALUES ('location', '".$up_loc."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$up_loc."' ";																
 								$result_loc = $DB->query($query_loc);																																																				
@@ -710,8 +703,7 @@ function chart(theme) {
 			if(isset($_POST['pop']))  {	      	
 														
 								//Update popup value
-								$up_pop = $_POST['pop'];												
-								
+								$up_pop = $_POST['pop'];																				
 								$query_pop = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
 											  VALUES ('popup', '".$up_pop."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$up_pop."' ";																
 								$result_pop = $DB->query($query_pop);																																																				
@@ -720,31 +712,30 @@ function chart(theme) {
 			if(isset($_POST['tit']))  {	      	
 														
 								//Update title value
-								$up_tit = $_POST['tit'];												
-								
+								$up_tit = $_POST['tit'];																				
 								$query_tit = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
 											  VALUES ('title', '".$up_tit."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$up_tit."' ";																
 								$result_tit = $DB->query($query_tit);																																																				
 					}										
 			
 			//index widgets
-			echo "<tr>";
-			echo "<td>";		
+			echo "<tr>\n";
+			echo "<td>\n";		
 			echo "-- ". __('Widgets settings','dashboard').":  &nbsp; &nbsp;  <button class='btn btn-sm btn-primary' onclick='window.localStorage.clear();'>". __('Clear')." ". __('Settings')."</button>";
-			echo "</td>";
-			echo "</tr>";	
+			echo "</td>\n";
+			echo "</tr>\n";	
 			
 			// google maps API key
-			echo "<tr>";
-			echo "<td>";		
+			echo "<tr>\n";
+			echo "<td>\n";		
 			echo "-- ". __('Google maps API key','dashboard').":  &nbsp; &nbsp;  <button class='btn btn-sm btn-primary' onclick='window.open(\"./map/map_key.php\");'>". __('Edit')."</button>";
-			echo "</td>";
-			echo "</tr>";	
+			echo "</td>\n";
+			echo "</tr>\n";	
 					
 			/*		
 			//file upload				
-			echo "<tr>";
-			echo "<td>";
+			echo "<tr>\n";
+			echo "<td>\n";
 			echo '
 			<form action="upload.php" method="post" enctype="multipart/form-data">
    		 Select sound to upload:
@@ -756,8 +747,8 @@ function chart(theme) {
 			Html::closeForm();	
 			
 			
-			echo "</td>";
-			echo "</tr>";				
+			echo "</td>\n";
+			echo "</tr>\n";				
 			*/						
 			echo "</table>";
 			//end table configs
@@ -794,8 +785,7 @@ function chart(theme) {
 														
 								</tr>																
 								</table>
-								
-								
+																
 								<table border='0' style='width: 40%; margin:auto; margin-bottom: 5px; margin-top:20px;'>									
 								<tr style='text-align:center;'>									
 									<td><div id='darkt-t' style='cursor:pointer;' ><img src='./img/darkt-t.png' alt='dark'/></div></td>	
@@ -833,14 +823,13 @@ function chart(theme) {
 									</td>
 								</tr>
 								</table>																	
-												
-			
+														
 								<div id='skins' class='form1'>
 									<table border='0' width=420px>	
 										<tr style='text-align:center;'></tr>								
 									</table>				
 								</div> 
-								</div>";
+								</div>\n";
 							
 						 echo '<div id="gcolors"  style="left: -14%; ">';  
 						 echo "<table border='0' style='width: 460px; margin-left: auto; margin-right: auto; margin-bottom: 20px; margin-top:20px;'>									
@@ -858,17 +847,17 @@ function chart(theme) {
 								</tr>
 								<tr><td height='10px'></td></tr>
 								<tr style='text-align:center;'>				
-									<td><button class='btn btn-primary btn-sm' type='button' id='default' name='gcolor' value=\"Default\" onclick=\"chart('grid_light.js')\"> Default </button></td>
+									<td><button class='btn btn-primary btn-sm' type='button' id='default' name='gcolor' value=\"Default\" onclick=\"chart('default.js')\"> Default </button></td>
 									<td>&nbsp;&nbsp;</td>						
 									<td><button class='btn btn-primary btn-sm' type='button' id='dark' name='gcolor' value=\"Dark Unica\" onclick=\"chart('dark-unica.js')\">Dark Unica</button></td>
 									<td>&nbsp;&nbsp;</td>
 									<td><button class='btn btn-primary btn-sm' type='button' name='gcolor' value=\"Sand Signika\" id='sand' onclick=\"chart('sand-signika.js')\">Sand Signika</button></td>
 									<td>&nbsp;&nbsp;</td>
-									<td><button class='btn btn-primary btn-sm' type='button' name='gcolor' value=\"Clean\" id='clean' onclick=\"chart('grid-light.js')\">Grid</button></td>
+									<td><button class='btn btn-primary btn-sm' type='button' name='gcolor' value=\"Clean\" id='clean' onclick=\"chart('grid-light.js')\">Grid-light</button></td>
 								</tr>															
-							</table>	";									
+							</table>\n";									
 							
-					echo "</div> "; 	
+					echo "</div>\n"; 	
 																														  
 			?>
 					<style type="text/css">

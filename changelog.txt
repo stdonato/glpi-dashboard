@@ -1,4 +1,4 @@
-Versão 0.8.3:
+Versão 0.8.4:
 
 - Correção nos links dos mapas;
 - Correção na tela de Ativos;
@@ -6,10 +6,10 @@ Versão 0.8.3:
 - Você agora pode me comprar uma cerveja pelo paypal; :)
 
 
-Version 0.8.3:
+Version 0.8.4:
 
 - Fix links on maps;
-- Fix assets page;
+- Fix Assets page;
 - Fix minor bugs;
 - Now you can buy me a beer in Paypal; :)
 

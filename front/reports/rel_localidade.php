@@ -436,14 +436,14 @@ while($row = $DB->fetch_assoc($result_cham)){
 
 	echo "
 
-	<tr>
-	<td style='vertical-align:middle; text-align:center;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
-	<td style='vertical-align:middle;' align='left' ><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/>&nbsp; ".Ticket::getStatus($row['status'])."  </td>
-	<td style='vertical-align:middle;'> ". substr($row['descr'],0,55) ." </td>
-	<td style='vertical-align:middle;'> ". $row_user['name'] ." ".$row_user['sname'] ." </td>
-	<td style='vertical-align:middle;'> ". $row_tec['name'] ." ".$row_tec['sname'] ." </td>
-	<td style='vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
-	<td style='vertical-align:middle;'> ". conv_data_hora($row['solvedate']) ." </td>
+	<tr style='font-weight:normal;'>
+		<td style='vertical-align:middle; text-align:center; font-weight:bold;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
+		<td style='vertical-align:middle;' align='left' ><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/>&nbsp; ".Ticket::getStatus($row['status'])."  </td>
+		<td style='vertical-align:middle;'> ". substr($row['descr'],0,55) ." </td>
+		<td style='vertical-align:middle;'> ". $row_user['name'] ." ".$row_user['sname'] ." </td>
+		<td style='vertical-align:middle;'> ". $row_tec['name'] ." ".$row_tec['sname'] ." </td>
+		<td style='vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
+		<td style='vertical-align:middle;'> ". conv_data_hora($row['solvedate']) ." </td>
 	</tr>";
 }
 
@@ -521,10 +521,11 @@ else {
 
 	echo "
 	<div id='nada_rel' class='well info_box fluid col-md-12'>
-	<table class='table' style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
-	<tr><td style='vertical-align:middle; text-align:center;'> <span style='color: #000;'>" . __('No ticket found', 'dashboard') . "</td></tr>
-	<tr></tr>
-	</table></div>";
+		<table class='table' style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
+			<tr>
+				<td style='vertical-align:middle; text-align:center;'> <span style='color: #000;'>" . __('No ticket found', 'dashboard') . "</td></tr>
+			<tr></tr>
+	</table></div>\n";
 
 }
 

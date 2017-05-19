@@ -304,8 +304,7 @@ AND glpi_tickets.date ".$datas2."
 ".$entidade."
 AND glpi_tickets.status IN ".$status."
 GROUP BY id
-ORDER BY id DESC
-";
+ORDER BY id DESC ";
 
 $result_cons1 = $DB->query($consulta1);
 $conta_cons = $DB->numrows($result_cons1);
@@ -472,14 +471,14 @@ while($row = $DB->fetch_assoc($result_cham)){
     if($status1 == "6" ) { $status1 = "closed";}
 
     echo "
-<tr>
-	<td style='vertical-align:middle; text-align:center;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a> </td>
-	<td style='vertical-align:middle;'><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/> &nbsp; ".Ticket::getStatus($row['status'])."</td>
-	<td> ". substr($row['name'],0,75) ." </td>
-	<td> ". conv_data_hora($row['date']) ." </td>
-	<td> ". conv_data_hora($row['solvedate']) ." </td>
-	<td> ". time_ext($row['time']) ."</td>
-</tr>";
+		<tr style='font-weight:normal;'>
+			<td style='vertical-align:middle; text-align:center; font-weight:bold;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a> </td>
+			<td style='vertical-align:middle;'><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/> &nbsp; ".Ticket::getStatus($row['status'])."</td>
+			<td> ". substr($row['name'],0,75) ." </td>
+			<td> ". conv_data_hora($row['date']) ." </td>
+			<td> ". conv_data_hora($row['solvedate']) ." </td>
+			<td> ". time_ext($row['time']) ."</td>
+		</tr>";
 }
 
 echo "</tbody>

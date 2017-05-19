@@ -93,11 +93,11 @@ $(function () {
                         selected: true
                     },";
                     
-for($i = 1; $i < $conta; $i++) {    
-     echo '[ "' . Ticket::getStatus($grf2[$i]) . '", '.$quant2[$i].'],';
-        }                    
+				for($i = 1; $i < $conta; $i++) {    
+				     echo '[ "' . Ticket::getStatus($grf2[$i]) . '", '.$quant2[$i].'],';
+				        }                    
                                                          
-echo "                ]
+echo "        ]
             }]
         });
     });

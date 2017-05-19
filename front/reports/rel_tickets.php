@@ -592,19 +592,19 @@ echo "
 <table id='ticket' class='display'  style='font-size: 11px; font-weight:bold;' cellpadding = 2px>
 	<thead>
 		<tr>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('ID')." </th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Status')." </th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Type')." </th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Source')." </th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Priority')." </th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Category')." </th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Title')." </th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Content')." </th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Requester')." </th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Technician')." </th>			
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Opened','dashboard')."</th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Closed')." </th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Due Date','dashboard')." </th>
+			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('ID')." </th>
+			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Status')." </th>
+			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Type')." </th>
+			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Source')." </th>
+			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Priority')." </th>
+			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Category')." </th>
+			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Title')." </th>
+			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Content')." </th>
+			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Requester')." </th>
+			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Technician')." </th>			
+			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Opened','dashboard')."</th>
+			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Closed')." </th>
+			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Due Date','dashboard')." </th>
 		</tr>
 	</thead>
 <tbody>";
@@ -689,8 +689,8 @@ while($row = $DB->fetch_assoc($result_cham)){
 
 		
 echo "	
-	<tr>
-		<td style='vertical-align:middle; text-align:center;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
+	<tr style='font-weight:normal;'>
+		<td style='vertical-align:middle; text-align:center; font-weight:bold;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
 		<td style='vertical-align:middle;'><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/>&nbsp; ".Ticket::getStatus($row['status'])."</td>
 		<td style='vertical-align:middle;'> ". $type ." </td>
 		<td style='vertical-align:middle;'> ". $row_req['name'] ." </td>

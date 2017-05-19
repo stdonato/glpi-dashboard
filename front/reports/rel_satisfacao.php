@@ -262,8 +262,8 @@ else {
 		$row_tec = $DB->fetch_assoc($result_tec);
 	
 	echo "
-		<tr>
-			<td style='vertical-align:middle; text-align:center;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
+		<tr style='font-weight:normal;'>
+			<td style='vertical-align:middle; text-align:center; font-weight:bold;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
 			<td style='vertical-align:middle;'> ". substr($row_user['descr'],0,55) ." </td>
 			<td style='vertical-align:middle;'> ". $row_user['name'] ." ".$row_user['sname'] ." </td>
 			<td style='vertical-align:middle;'> ". $row_tec['name'] ." ".$row_tec['sname'] ." </td>

@@ -33,27 +33,26 @@ ORDER BY type  ASC ";
 $result2 = $DB->query($query2) or die('erro');
 
 $arr_grft2 = array();
+
 while ($row_result = $DB->fetch_assoc($result2))		
-	{ 
+{ 
 	$v_row_result = $row_result['tipo'];
 	$arr_grft2[$v_row_result] = $row_result['tick'];			
-	} 
+} 
 	
 $grft2 = array_keys($arr_grft2);
-
 $quantt2 = array_values($arr_grft2);
-
 $conta = count($arr_grft2);
+
 
 if($conta == 1) {
 
 	if($grft2[0] == 1) {		
 		$grft2[0] = __('Incident'); 
-		}
-		
+	}		
 	if($grft2[0] == 2) {		
 		$grft2[0] = __('Request'); 
-		}	
+	}	
 	if($problems['total'] != 0) {	
 		$grft2[1] = __('Problem'); 
 		$quantt2[1] = $problems['total'];
@@ -62,11 +61,14 @@ if($conta == 1) {
 
 
 if($conta > 1) {
+	
 	$grft2[0] = __('Incident'); 
 	$grft2[1] = __('Request');
 	
+	//if($problems['total'] != 0) {		
 	$grft2[2] = __('Problem'); 
-	$quantt2[2] = $problems['total']; 		
+	$quantt2[2] = $problems['total']; 	
+	//}	
 }
 
 	
@@ -140,19 +142,19 @@ $(function () {
                         sliced: true,
                         selected: true
                     },";
-if($conta == 1) {                                      
-	for($i = 1; $i < $conta; $i++) {    
-	     echo '[ "' . $grft2[$i] . '", '.$quantt2[$i].'],';
-	        }
-        }  
-        
-if($conta > 1) {                                      
-	for($i = 1; $i <= $conta; $i++) {    
-	     echo '[ "' . $grft2[$i] . '", '.$quantt2[$i].'],';
-	        }
-        }                           
-                                                         
-echo "                ],
+					if($conta == 1) {                                      
+						for($i = 1; $i < $conta; $i++) {    
+						     echo '[ "' . $grft2[$i] . '", '.$quantt2[$i].'],';
+						        }
+					        }  
+					        
+					if($conta > 1) {                                      
+						for($i = 1; $i <= $conta; $i++) {    
+						     echo '[ "' . $grft2[$i] . '", '.$quantt2[$i].'],';
+						        }
+					        }                           
+					                                                         
+					echo "],
             }]
         });
     });

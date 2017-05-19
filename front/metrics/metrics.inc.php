@@ -217,10 +217,10 @@ $arr_day = array();
 $arr_days = array();
 
 while ($row_result = $DB->fetch_assoc($resultd))		
-	{ 
-		$v_row_result = $row_result['day_l'];
-		$arr_day[$v_row_result] = $row_result['nb'];			
-	} 
+{ 
+	$v_row_result = $row_result['day_l'];
+	$arr_day[$v_row_result] = $row_result['nb'];			
+} 
 	
 $grfd = array_keys($arr_day) ;
 $quantd = array_values($arr_day) ;
@@ -247,10 +247,10 @@ $result2 = $DB->query($query2) or die('erro');
 
 $arr_grf2 = array();
 while ($row_result = $DB->fetch_assoc($result2))		
-	{ 
-		$v_row_result = $row_result['days'];
-		$arr_grf2[$v_row_result] = $row_result['chamados'];			
-	} 
+{ 
+	$v_row_result = $row_result['days'];
+	$arr_grf2[$v_row_result] = $row_result['chamados'];			
+} 
 	
 $grf2 = array_keys($arr_grf2);
 $quant2 = array_values($arr_grf2);
@@ -322,10 +322,10 @@ $result_sta = $DB->query($query_sta) or die('erro_stat');
 
 $arr_sta = array();
 while ($row_result = $DB->fetch_assoc($result_sta))		
-	{ 
-	   $v_row_result = Ticket::getStatus($row_result['stat']);
-	   $arr_sta[$v_row_result] = $row_result['tick'];			
-	} 
+{ 
+   $v_row_result = Ticket::getStatus($row_result['stat']);
+   $arr_sta[$v_row_result] = $row_result['tick'];			
+} 
 	
 $grf_sta = array_keys($arr_sta);
 $quant_sta = array_values($arr_sta);
@@ -374,7 +374,6 @@ $res_prob = $DB->query($query_prob);
 
 $prob = $DB->result($res_prob,0,'quant');
 $prob_label = __('Problem');
-
 
 $types = array();
 

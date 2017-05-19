@@ -414,15 +414,10 @@ if($con == "1") {
 	</table>
 
 <table style='font-size: 16px; font-weight:bold; width: 50%;' border=0>
-	<!-- <tr>
-		  <td><span style='color: #000;'>". _x('status','New').": </span><b>".$new." </b></td>
-        <td><span style='color: #000;'>". __('Assigned'). ": </span><b>". ($assig + $plan) ."</b></td>
-        <td><span style='color: #000;'>". __('Pending').": </span><b>".$pend." </b></td>
-        <td><span style='color: #000;'>". __('Solved','dashboard').": </span><b>".$solve." </b></td>
-        <td><span style='color: #000;'>". __('Closed').": </span><b>".$close." </b></td>
-	</tr> -->
-	<tr><td><span style='color: #000;'>". __('Total cost').":  </span><b>". number_format($total_cost, 2, ',', ' ') ." </b></td></tr>	 
-	<tr><td>&nbsp;</td></tr>
+	<tr>
+		<td><span style='color: #000;'>". __('Total cost').":  </span><b>". number_format($total_cost, 2, ',', ' ') ." </b></td></tr>	 
+	<tr>
+		<td>&nbsp;</td></tr>
 	<tr><td>&nbsp;</td></tr>
 </table>
 
@@ -487,8 +482,8 @@ while($row = $DB->fetch_assoc($result_cham)){
 		$row_tec = $DB->fetch_assoc($result_tec);
 
 		echo "
-		<tr>
-			<td style='vertical-align:middle; text-align:center;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
+		<tr style='font-weight:normal;'>
+			<td style='vertical-align:middle; text-align:center; font-weight:bold;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
 			<td style='vertical-align:middle;'><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/>&nbsp; ".Ticket::getStatus($row['status'])." </td>		
 			<td style='vertical-align:middle;'> ". substr($row['name'],0,75) ." </td>
 			<td style='vertical-align:middle;'> ". $row_tec['name'] ." ". $row_tec['sname'] ." </td>	

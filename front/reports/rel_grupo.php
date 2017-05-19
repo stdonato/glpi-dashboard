@@ -468,25 +468,25 @@ AND glpi_groups_tickets.type = 2
 ".$entidade." ";
 
 $result_tec = $DB->query($sql_tec);
-
-    $row_tec = $DB->fetch_assoc($result_tec);
+$row_tec = $DB->fetch_assoc($result_tec);
 
 echo "
-<tr>
-<td style='text-align:center; vertical-align:middle;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
-<td style='vertical-align:middle; text-align: left;'><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/>&nbsp; ".Ticket::getStatus($row['status'])."  </td>
-<td style='vertical-align:middle;'> ". $type ." </td>
-<td style='vertical-align:middle;'> ". substr($row['name'],0,55) ." </td>
-<td style='vertical-align:middle;'> ". $row_user['name'] ." ".$row_user['sname'] ." </td>
-<td style='vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
-<td style='vertical-align:middle;'> ". conv_data_hora($row['closedate']) ." </td>
-<td style='vertical-align:middle; text-align:center;'> ". time_ext($row['time']) ."</td>
+<tr style='font-weight:normal;'>
+	<td style='text-align:center; vertical-align:middle; font-weight:bold'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
+	<td style='vertical-align:middle; text-align: left;'><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/>&nbsp; ".Ticket::getStatus($row['status'])."  </td>
+	<td style='vertical-align:middle;'> ". $type ." </td>
+	<td style='vertical-align:middle;'> ". substr($row['name'],0,55) ." </td>
+	<td style='vertical-align:middle;'> ". $row_user['name'] ." ".$row_user['sname'] ." </td>
+	<td style='vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
+	<td style='vertical-align:middle;'> ". conv_data_hora($row['closedate']) ." </td>
+	<td style='vertical-align:middle; text-align:center;'> ". time_ext($row['time']) ."</td>
 </tr>";
+
 }
 
 echo "</tbody>
 		</table>
-		</div>"; ?>
+		</div>\n"; ?>
 
 
 <script type="text/javascript" charset="utf-8">

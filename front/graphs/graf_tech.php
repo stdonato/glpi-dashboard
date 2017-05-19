@@ -148,11 +148,7 @@ while ($row_result = $DB->fetch_assoc($result_tec))
 	$v_row_result = $row_result['id'];
 	$arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname'] ;
 }
-/*
-$name = 'sel_tec';
-$options = $arr_tec;
-$selected = 0;
-*/
+
 ?>
 
 <div id='content' >
@@ -172,7 +168,6 @@ $selected = 0;
 <?php
 
 // lista de técnicos
-
 $res_tec = $DB->query($sql_tec);
 $arr_tec = array();
 $arr_tec[0] = "-- ". __('Select a technician','dashboard') . " --" ;
@@ -309,6 +304,7 @@ WHERE glpi_tickets.is_deleted = '0'
 AND glpi_tickets.date ".$datas."
 AND glpi_tickets_users.users_id = ".$id_tec."
 AND glpi_tickets_users.type = 2
+".$entidade_age."
 AND glpi_tickets_users.tickets_id = glpi_tickets.id ";
 
 $result_total = $DB->query($query_total);
@@ -328,6 +324,7 @@ WHERE glpi_tickets.is_deleted = '0'
 AND glpi_tickets.date ".$datas."
 AND glpi_tickets_users.users_id = ".$id_tec."
 AND glpi_tickets_users.type = 2
+".$entidade_age."
 AND glpi_tickets_users.tickets_id = glpi_tickets.id ";
 
 $result_stat = $DB->query($query_stat);

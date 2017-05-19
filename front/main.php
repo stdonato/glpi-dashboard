@@ -892,7 +892,7 @@ setTimeout(function(){
 <script src="js/bootstrap-switch.js"></script> 
 <script src="js/highcharts.js" type="text/javascript" ></script>
 <script src="js/highcharts-3d.js" type="text/javascript" ></script>
-<script src="./js/themes/<?php echo $_SESSION['charts_colors'] ?>"></script>';
+<script src="./js/themes/<?php echo $_SESSION['charts_colors']; ?>"></script>
 
 <script src="js/modules/exporting.js" type="text/javascript" ></script>
 <script src="js/modules/no-data-to-display.js" type="text/javascript" ></script>

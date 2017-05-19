@@ -16,6 +16,7 @@ SELECT glpi_networkequipmentmodels.name AS name, count( glpi_networkequipments.i
 FROM glpi_networkequipmentmodels, glpi_networkequipments
 WHERE glpi_networkequipments.is_deleted =0
 AND glpi_networkequipmentmodels.id = glpi_networkequipments.networkequipmentmodels_id
+".$ent_net."
 GROUP BY glpi_networkequipmentmodels.name
 ORDER BY count( glpi_networkequipments.id ) DESC ";
 

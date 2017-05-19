@@ -374,7 +374,7 @@ else {
 		<table class='fluid'  style='width:100%; font-size: 18px; font-weight:bold;' cellpadding = '1px'>
 			<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Entity', 'dashboard').": </span>".$ent_name['name']." </td>
 			<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Tickets', 'dashboard').": </span>".$consulta." </td>
-			<td colspan='3' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'>
+			<td colspan='3' style='font-size: 16px vertical-align:middle; width:200px;'><span style='color:#000;'>
 			".__('Period', 'dashboard') .": </span> " . conv_data($data_ini2) ." a ". conv_data($data_fin2)."
 			</td>
 			<td style='vertical-align:middle; width: 190px;'>
@@ -396,19 +396,19 @@ else {
 			</tr>
 		</table>
 
-		<table style='font-size: 16px; font-weight:bold; width: 50%;' border=0>
+		<table style='font-size: 16px; width: 50%;' border=0>
 			<tr>
-				<td><span style='color: #000;'>". _x('status','New').": </span>".$new." </td>
-				<td><span style='color: #000;'>". __('Assigned'). ": </span>". ($assig + $plan) ."</td>
-				<td><span style='color: #000;'>". __('Pending').": </span>".$pend." </td>
-				<td><span style='color: #000;'>". __('Solved','dashboard').": </span>".$solve." </td>
-				<td><span style='color: #000;'>". __('Closed').": </span>".$close." </td>
+				<td style='font-weight:bold;'><span style='color: #000;'>". _x('status','New').": </span>".$new." </td>
+				<td style='font-weight:bold;'><span style='color: #000;'>". __('Assigned'). ": </span>". ($assig + $plan) ."</td>
+				<td style='font-weight:bold;'><span style='color: #000;'>". __('Pending').": </span>".$pend." </td>
+				<td style='font-weight:bold;'><span style='color: #000;'>". __('Solved','dashboard').": </span>".$solve." </td>
+				<td style='font-weight:bold;'><span style='color: #000;'>". __('Closed').": </span>".$close." </td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr><td>&nbsp;</td></tr>
 		</table>
 
-		<table id='t_ent' class='display' style='font-size: 11px; font-weight:bold;' >
+		<table id='t_ent' class='display' style='font-size: 11px;' >
 			<thead>
 				<tr>
 					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Tickets', 'dashboard')." </th>
@@ -499,7 +499,7 @@ else {
 
 		echo "
 		<tr>
-			<td style='vertical-align:middle; text-align:center;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
+			<td style='vertical-align:middle; text-align:center; font-weight:bold;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
 			<td style='vertical-align:middle; font-size:10px;'><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/>&nbsp; ".Ticket::getStatus($row['status'])." </td>
 			<td style='vertical-align:middle;'> ". Ticket::getTicketTypeName($row['TYPE']) ." </td>
 			<td style='vertical-align:middle;'> ". substr($row['descr'],0,55) ." </td>
@@ -605,10 +605,12 @@ else {
 
 			echo "
 			<div id='nada_rel' class='well info_box fluid col-md-12'>
-			<table class='table' style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
-			<tr><td style='vertical-align:middle; text-align:center;'> <span style='color: #000;'>" . __('No ticket found', 'dashboard') . "</td></tr>
-			<tr></tr>
-			</table></div>";
+				<table class='table' style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
+					<tr>
+						<td style='vertical-align:middle; text-align:center;'> <span style='color: #000;'>" . __('No ticket found', 'dashboard') . "</td></tr>
+					<tr></tr>
+				</table>
+			</div>\n";
 		}
 		}
 		?>

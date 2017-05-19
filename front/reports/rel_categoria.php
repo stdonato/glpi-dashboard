@@ -42,13 +42,13 @@ if($sel_ent == '' || $sel_ent == -1) {
 
 	$entidade = "AND glpi_tickets.entities_id IN (".$ent.") ";
 	$entidade_c = "AND entities_id IN (".$ent.") ";
-	$entidade_cw = "WHERE entities_id IN (".$ent.") OR is_recursive = 1";	
+	$entidade_cw = "WHERE (entities_id IN (".$ent.") OR is_recursive = 1)";	
 }
 
 else {
 	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.") ";
 	$entidade_c = "AND entities_id IN (".$sel_ent.") ";
-	$entidade_cw = "WHERE entities_id IN (".$sel_ent.") OR is_recursive = 1";
+	$entidade_cw = "WHERE (entities_id IN (".$sel_ent.") OR is_recursive = 1)";
 }
 
 ?>
@@ -123,24 +123,24 @@ else {
 									$url2 = $arr_url[0];
 				
 									echo'
-												<table>
-													<tr>
-														<td>
-														   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-														    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
-														    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-													    	</div>
-														</td>
-														<td>&nbsp;</td>
-														<td>
-													   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-														    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
-														    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-													    	</div>
-														</td>
-														<td>&nbsp;</td>
-													</tr>
-												</table> ';
+										<table>
+											<tr>
+												<td>
+												   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+												    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
+												    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+											    	</div>
+												</td>
+												<td>&nbsp;</td>
+												<td>
+											   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+												    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
+												    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+											    	</div>
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+										</table> ';
 									?>
 				
 									<script language="Javascript">
@@ -155,8 +155,9 @@ else {
 									$sql_cat = "
 									SELECT id, completename AS name
 									FROM `glpi_itilcategories`
-									".$entidade_cw."
+									". $entidade_cw ."								
 									ORDER BY `name` ASC ";
+									//AND (SELECT is_incident = 1 OR is_request = 1)
 				
 									$result_cat = $DB->query($sql_cat);
 				
@@ -406,7 +407,7 @@ echo "
 				<tr><td>&nbsp;</td></tr>
 			</table>
 
-			<table id='cat' class='display'  style='font-size: 12px; font-weight:bold;' cellpadding = 2px>
+			<table id='cat' class='display'  style='font-size: 12px; font-weight:normal;' cellpadding = 2px>
 				<thead>
 					<tr>
 						<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> ".__('Tickets', 'dashboard')." </th>
@@ -460,14 +461,14 @@ echo "
 
 			echo "
 			<tr>
-			<td style='vertical-align:middle; text-align:center;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
-			<td style='vertical-align:middle;'><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/>&nbsp; ".Ticket::getStatus($row['status'])."  </td>
-			<td style='vertical-align:middle;'> ". substr($row['name'],0,55) ." </td>
-			<td style='vertical-align:middle;'> ". $row_user['name'] ." ".$row_user['sname'] ." </td>
-			<td style='vertical-align:middle;'> ". $row_tec['name'] ." ".$row_tec['sname'] ." </td>
-			<td style='vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
-			<td style='vertical-align:middle;'> ". conv_data_hora($row['closedate']) ." </td>
-			<td style='vertical-align:middle; text-align:center;'> ". time_ext($row['time']) ."</td>
+				<td style='vertical-align:middle; text-align:center; font-weight:bold;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
+				<td style='vertical-align:middle;'><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/>&nbsp; ".Ticket::getStatus($row['status'])."  </td>
+				<td style='vertical-align:middle;'> ". substr($row['name'],0,55) ." </td>
+				<td style='vertical-align:middle;'> ". $row_user['name'] ." ".$row_user['sname'] ." </td>
+				<td style='vertical-align:middle;'> ". $row_tec['name'] ." ".$row_tec['sname'] ." </td>
+				<td style='vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
+				<td style='vertical-align:middle;'> ". conv_data_hora($row['closedate']) ." </td>
+				<td style='vertical-align:middle; text-align:center;'> ". time_ext($row['time']) ."</td>
 			</tr>";
 			}
 

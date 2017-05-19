@@ -34,10 +34,10 @@ $result3 = $DB->query($query3) or die('erro');
 
 $arr_grf3 = array();
 while ($row_result = $DB->fetch_assoc($result3))		
-	{ 
+{ 
 	$v_row_result = $row_result['name']. " ".$row_result['sname'];
 	$arr_grf3[$v_row_result] = $row_result['conta'];			
-	} 
+} 
 	
 $grf3 = array_keys($arr_grf3) ;
 $quant3 = array_values($arr_grf3) ;

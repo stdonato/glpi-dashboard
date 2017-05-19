@@ -104,7 +104,7 @@ else {
 <body style="background-color: #e5e5e5;">
 
 <div id='content' >
-	<div id='container-fluid' style="margin: 0px 5% 0px 5%;">
+	<div id='container-fluid' style="margin: 0px 2% 0px 2%;">
 		<div id="charts" class="fluid chart">
 			<div id="pad-wrapper" >
 
@@ -472,14 +472,14 @@ else {
 			    $row_tec = $DB->fetch_assoc($result_tec);
 
 			echo "
-			<tr>
-			<td style='vertical-align:middle; text-align:center;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
-			<td style='vertical-align:middle;'><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/>&nbsp; ".Ticket::getStatus($row['status'])."  </td>
-			<td style='vertical-align:middle;'> ". substr($row['descr'],0,55) ." </td>
-			<td style='vertical-align:middle;'> ". $row_user['name'] ." ".$row_user['sname'] ." </td>
-			<td style='vertical-align:middle;'> ". $row_tec['name'] ." ".$row_tec['sname'] ." </td>
-			<td style='vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
-			<td style='vertical-align:middle;'> ". conv_data_hora($row['solvedate']) ." </td>
+			<tr style='font-weight:normal;'>
+				<td style='vertical-align:middle; text-align:center; font-weight:bold;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
+				<td style='vertical-align:middle;'><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/>&nbsp; ".Ticket::getStatus($row['status'])."  </td>
+				<td style='vertical-align:middle;'> ". substr($row['descr'],0,55) ." </td>
+				<td style='vertical-align:middle;'> ". $row_user['name'] ." ".$row_user['sname'] ." </td>
+				<td style='vertical-align:middle;'> ". $row_tec['name'] ." ".$row_tec['sname'] ." </td>
+				<td style='vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
+				<td style='vertical-align:middle;'> ". conv_data_hora($row['solvedate']) ." </td>
 			</tr>";
 		}
 

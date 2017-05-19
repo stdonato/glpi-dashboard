@@ -48,9 +48,14 @@ Session::checkRight("profile", READ);
 </script>
 
 <style>
-	table.dataTable thead .sorting::after {
-		content: "" !important;
-	}
+	table.dataTable thead .sorting::after { content: "" !important; }
+	
+	.sorting {
+   	color: #fff;
+    	background-color: #555 !important;
+ 	}
+ 	.sorting > a { color: #fff !important;}
+    
 </style>
 
 <?php echo '<link rel="stylesheet" type="text/css" href="../css/style-'.$_SESSION['style'].'">';  
@@ -203,6 +208,7 @@ AND glpi_tickets.entities_id IN (".$ent.")" ;
 $result = $DB->query($sql);
 $ontem = $DB->fetch_assoc($result);
 
+
 //$cham_ontem = "'Chamados de ontem: " . $ontem['total'] . "'";
 if ($ontem['total'] > $hoje['total']) { $up_down = "../img/down.png"; }
 if ($ontem['total'] < $hoje['total']) { $up_down = "../img/up.png"; }
@@ -231,9 +237,13 @@ $ent_name = $DB->result($result_n, 0, 'cname');
 					</tr>
 					<tr><td></td></tr>
 					
-					<table style="font-size:25pt; font-weight:bold; width: 100%; margin-left: auto; margin-right: auto;"><tr><td align="center"><span class="today"><a href="chamados.php" style="font-family: 'RobotoDraft',sans-serif;"> <?php echo __('Today Tickets','dashboard'); ?>: </a> 
-						<a href="../../../../front/ticket.php" target="_blank" class="total" style="font-size: 32pt;"> <?php echo "&nbsp; ".$hoje['total'] ; ?> </a>
-						<img src= <?php echo $up_down ;?>  class="up_down" alt="" style="margin-top: -10px;" title= <?php echo __('Yesterday','dashboard'). ':';  echo $ontem['total'] ;?>  > </span> </td></tr>
+					<table style="font-size:25pt; font-weight:bold; width: 100%; margin-left: auto; margin-right: auto;">
+						<tr>
+							<td align="center"><span class="today"><a href="chamados.php" style="font-family: 'RobotoDraft',sans-serif;"> <?php echo __('Today Tickets','dashboard'); ?>: </a> 
+								<a href="../../../../front/ticket.php" target="_blank" class="total" style="font-size: 32pt;"> <?php echo "&nbsp; ".$hoje['total'] ; ?> </a>
+								<img src= <?php echo $up_down ;?>  class="up_down" alt="" style="margin-top: -10px;" title= <?php echo __('Yesterday','dashboard'). ':';  echo $ontem['total'] ;?>  > </span> 
+							</td>
+						</tr>
 					</table>
 				</table>
 			<p></p>
@@ -313,16 +323,15 @@ $ent_name = $DB->result($result_n, 0, 'cname');
 				
 				if($show_due != 0) {
 					if($count_due > 0) {
-						$th_due = "<th style='text-align:center;'><a href='chamados.php?order=da'>&nbsp<font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('Due Date','dashboard')."<a href='chamados.php?order=dd'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>";
+						$th_due = "<th style='text-align:center; color:#fff;'><a href='chamados.php?order=da'>&nbsp<font size=2.5pt; font-family='webdings'style='color:#fff;'>&#x25BE;&nbsp;</font></a>". __('Due Date','dashboard')."<a href='chamados.php?order=dd'><font size=2.5pt; font-family='webdings'style='color:#fff;'>&nbsp;&#x25B4;</font></a></th>";
 					}			
-				}
-					
+				}					
 					
 				echo "<table id='tickets' class='display' style='font-size: 20px; font-weight:bold;' cellpadding = 2px >				
 				<thead>
 					<tr class='up-down'>
-						<th style='text-align:center;'><a href='chamados.php?&order=ta'>&nbsp<font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('ID','dashboard')."<a href='chamados.php?&order=td'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>
-						<th style='text-align:center;'><a href='chamados.php?&order=sa'><font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('Status')."<a href='chamados.php?&order=sd'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>";
+						<th style='text-align:center;'><a href='chamados.php?&order=ta'>&nbsp<font size=2.5pt; font-family='webdings' style='color:#fff;'style='color:#fff;'>&#x25BE;&nbsp;</font></a>". __('ID','dashboard')."<a href='chamados.php?&order=td'><font size=2.5pt; font-family='webdings'style='color:#fff;'>&nbsp;&#x25B4;</font></a></th>
+						<th style='text-align:center;'><a href='chamados.php?&order=sa'><font size=2.5pt; font-family='webdings'style='color:#fff;'>&#x25BE;&nbsp;</font></a>". __('Status')."<a href='chamados.php?&order=sd'><font size=2.5pt; font-family='webdings'style='color:#fff;'>&nbsp;&#x25B4;</font></a></th>";
 
 				if($show_tit != 0 || $show_tit == '') {	
 					echo	"<th style='text-align:center;'>". __('Title')."</th>";
@@ -340,7 +349,7 @@ $ent_name = $DB->result($result_n, 0, 'cname');
 					}	
 					
 				echo $th_due."									
-						<th style='text-align:center;'><a href='chamados.php?&order=pa'>&nbsp<font size=2.5pt; font-family='webdings'>&#x25BE;&nbsp;</font></a>". __('Priority')."<a href='chamados.php?&order=pd'><font size=2.5pt; font-family='webdings'>&nbsp;&#x25B4;</font></a></th>
+						<th style='text-align:center;'><a href='chamados.php?&order=pa'>&nbsp<font size=2.5pt; font-family='webdings'style='color:#fff;'>&#x25BE;&nbsp;</font></a>". __('Priority')."<a href='chamados.php?&order=pd'><font size=2.5pt; font-family='webdings'style='color:#fff;'>&nbsp;&#x25B4;</font></a></th>
 					</tr>
 				</thead>
 				<tbody>";
@@ -429,9 +438,9 @@ $ent_name = $DB->result($result_n, 0, 'cname');
 				$row_ent = $DB->fetch_assoc($result_ent);					
 		
 				echo "
-				<tr class='title'>
-					<td style='text-align:center; vertical-align:middle;'> <a href=../../../../front/ticket.form.php?id=". $row['id'] ." target=_blank > <span >" . $row['id'] . "</span> </a></td>
-					<td style='vertical-align:middle;'><span style='color:#000099';><img src=../../../../pics/".$status1.".png />  ".Ticket::getStatus($row['status'])."</span ></td>";
+				<tr class='title' style='font-weight:normal;'>
+					<td style='text-align:center; vertical-align:middle; font-weight:bold;'> <a href=../../../../front/ticket.form.php?id=". $row['id'] ." target=_blank > <span >" . $row['id'] . "</span> </a></td>
+					<td style='vertical-align:middle;'><span style='';><img src=../../../../pics/".$status1.".png />  ".Ticket::getStatus($row['status'])."</span ></td>";
 				
 				if($show_tit != 0 || $show_tit == '') {	
 					echo "<td style='vertical-align:middle;'><a href=../../../../front/ticket.form.php?id=". $row['id'] ." target=_blank > <span >" . $row['descri'] . "</span> </a></td>";
@@ -486,16 +495,20 @@ $('#tickets')
 	.removeClass( 'display' )
 	.addClass('table table-striped table-bordered table-hover');
 
-$(document).ready(function() {
-    table = $('#tickets').dataTable({
+
+$(document).ready(function() {	
+   
+    $('#tickets').dataTable({
         "bJQueryUI": false,
-        "sPaginationType": "full_numbers",
+        //"sPaginationType": "full_numbers",
         "bFilter": false,         
          sorting: false,
         "bLengthChange": false,
         "bPaginate": false, 
-        "iDisplayLength": 15,
-    	  "aLengthMenu": [[15, 25, 50, 100, -1], [15, 25, 50, 100, "All"]],     	    	  
+        "scrollY":        "65vh",
+        "scrollCollapse": true,
+        //"iDisplayLength": 15,
+    	  //"aLengthMenu": [[15, 25, 50, 100, -1], [15, 25, 50, 100, "All"]],     	    	  
     	   
         "sDom": 'T<"clear">lfrtip', 
 

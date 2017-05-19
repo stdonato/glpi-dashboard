@@ -71,17 +71,17 @@ $(function () {
             xAxis: {
             categories: ";
 
-$DB->data_seek($query_tec, 0) ;
-$categories = array();
-while ($tecnico = $DB->fetch_assoc($query_tec)) {
-    $categories[] = $tecnico['name'];
-}
-echo json_encode($categories);
-
-//zerar rows para segundo while
-$DB->data_seek($query_tec, 0) ;
-
-echo ",
+				$DB->data_seek($query_tec, 0) ;
+				$categories = array();
+				while ($tecnico = $DB->fetch_assoc($query_tec)) {
+				    $categories[] = $tecnico['name'];
+				}
+				echo json_encode($categories);
+				
+				//zerar rows para segundo while
+				$DB->data_seek($query_tec, 0) ;
+				
+				echo ",
                 title: {
                     text: null
                 },
@@ -143,14 +143,14 @@ echo ",
             	 	},
                 name: '". __('Tickets','dashboard')."',
                 data: [
-";
-
-while ($tecnico = $DB->fetch_assoc($query_tec)) {
- 
- echo $tecnico['conta'].",";
-}
-
-echo "]
+					";
+					
+					while ($tecnico = $DB->fetch_assoc($query_tec)) {
+					 
+					 echo $tecnico['conta'].",";
+					}
+					
+					echo "]
             }]
         });
     });

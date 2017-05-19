@@ -351,8 +351,7 @@ $abertos = $data_ab;
 $sql_nm = "
 SELECT id , name AS name
 FROM `glpi_slts`
-WHERE id = ".$id_sla."
-";
+WHERE id = ".$id_sla." ";
 
 $result_nm = $DB->query($sql_nm);
 $ent_name = $DB->fetch_assoc($result_nm);
@@ -510,9 +509,8 @@ while($row = $DB->fetch_assoc($result_cham)){
 	else { $type = "Request";}
 
 	echo "
-
-	<tr>
-		<td style='vertical-align:middle; text-align:center;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
+	<tr style='font-weight:normal;'>
+		<td style='vertical-align:middle; text-align:center; font-weight:bold;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
 		<td style='vertical-align:middle; text-align:left;'><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/>&nbsp; ".Ticket::getStatus($row['status'])."  </td>
 		<td style='vertical-align:middle;'> ". __($type) ." </td>
 		<td style='vertical-align:middle;'> ". substr($row['descr'],0,55) ." </td>

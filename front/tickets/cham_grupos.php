@@ -50,6 +50,11 @@ Session::checkRight("profile", READ);
 
 <style>
 	table.dataTable thead .sorting::after { content: "" !important; }
+	  .sorting {
+   	color: #fff;
+    	background-color: #555 !important;
+ 	}
+    .sorting > a { color: #fff !important;}
 </style>
 
 <?php echo '<link rel="stylesheet" type="text/css" href="../css/style-'.$_SESSION['style'].'">'; 
@@ -421,8 +426,8 @@ else {
 		$row_loc = $DB->fetch_assoc($result_loc);		 			 				 		
 
 	echo "
-	<tr class='title'>
-		<td style='text-align:center; vertical-align:middle;'> <a href=../../../../front/ticket.form.php?id=". $row['id'] ." target=_blank > <span >" . $row['id'] . "</span> </a></td>
+	<tr class='title' style='font-weight:normal;'>
+		<td style='text-align:center; vertical-align:middle; font-weight:bold;'> <a href=../../../../front/ticket.form.php?id=". $row['id'] ." target=_blank > <span >" . $row['id'] . "</span> </a></td>
 		<td style='vertical-align:middle;'><span style='color:#000099';><img src=../../../../pics/".$status1.".png />  ".Ticket::getStatus($row['status'])."</span ></td>";		
 
 	if($show_tit != 0 || $show_tit == '') {	
@@ -482,8 +487,11 @@ $(document).ready(function() {
         "aaSorting": false,
         "bLengthChange": false,
         "bPaginate": false, 
-        "iDisplayLength": 15,
-    	  "aLengthMenu": [[15, 25, 50, 100, -1], [15, 25, 50, 100, "All"]],
+        "scrollY":        "62vh",
+        "scrollCollapse": true,
+        "paging":         false,
+        //"iDisplayLength": 15,
+    	  //"aLengthMenu": [[15, 25, 50, 100, -1], [15, 25, 50, 100, "All"]],
     	  
     	   
         "sDom": 'T<"clear">lfrtip', 

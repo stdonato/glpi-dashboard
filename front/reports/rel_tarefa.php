@@ -358,8 +358,8 @@ while($row = $DB->fetch_assoc($result_cham)){
 	$req = $DB->fetch_assoc($result_req);
 	
 	echo "
-	<tr>
-		<td style='text-align:center; vertical-align:middle;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
+	<tr style='font-weight:normal;'>
+		<td style='text-align:center; vertical-align:middle; font-weight:bold;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
 		<td style='text-align:center; vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
 		<td style='text-align:left; vertical-align:middle;'> ". $req['name']." ".$req['sname']." </td>
 		<td style='max-width:400px; vertical-align:middle;'> ". $row['content'] ." </td>

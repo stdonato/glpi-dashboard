@@ -188,10 +188,10 @@ $arr_tec[0] = "-- ". __('Select a technician','dashboard') . " --" ;
 $DB->data_seek($result_tec, 0) ;
 
 while ($row_result = $DB->fetch_assoc($result_tec))		
-	{ 
+{ 
 	$v_row_result = $row_result['id'];
 	$arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;			
-	} 
+} 
 	
 $name = 'sel_tec';
 $options = $arr_tec;
@@ -306,6 +306,7 @@ WHERE glpi_tickets.is_deleted = '0'
 AND glpi_tickets.date ".$datas."
 AND glpi_tickets_users.users_id = ".$id_tec."
 AND glpi_tickets_users.type = 2
+".$entidade_age."
 AND glpi_tickets_users.tickets_id = glpi_tickets.id ";
 
 $result_total = $DB->query($query_total);

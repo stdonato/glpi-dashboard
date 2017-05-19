@@ -2047,4 +2047,9 @@ background-color: #fff;
 
 }
 
+.pickList {
+	margin-left: 15% !important;
+	margin-right: auto !important;
+	float: none !important;
+}
 

@@ -16,6 +16,7 @@ SELECT glpi_manufacturers.name AS name, count( glpi_networkequipments.id ) AS co
 FROM glpi_manufacturers, glpi_networkequipments
 WHERE glpi_networkequipments.is_deleted =0
 AND glpi_manufacturers.id = glpi_networkequipments.manufacturers_id
+".$ent_net."
 GROUP BY glpi_manufacturers.name
 ORDER BY count( glpi_networkequipments.id ) DESC ";
 
@@ -25,14 +26,14 @@ $result_os = $DB->query($query_os) or die('erro');
 $arr_grf_os = array();
 
 if($unk != 0) {
-$arr_grf_os[__('Unknow','dashboard')] = $unk;
+	$arr_grf_os[__('Unknow','dashboard')] = $unk;
 }
 
 while ($row_result = $DB->fetch_assoc($result_os))		
-	{ 
+{ 
 	$v_row_result = $row_result['name'];
 	$arr_grf_os[$v_row_result] = $row_result['conta'];			
-	} 
+} 
 	
 $grf_os2 = array_keys($arr_grf_os);
 $quant_os2 = array_values($arr_grf_os);

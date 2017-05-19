@@ -13,7 +13,6 @@ $result_e = $DB->query($sql_e);
 $sel_ent = $DB->result($result_e,0,'value');
 
 if($sel_ent == '' OR strstr($sel_ent,",")) { 
-	//$sel_ent = 0;
 	$ent_name = __('Tickets Statistics','dashboard');
 }
 
@@ -64,8 +63,9 @@ $result_colors = $DB->query($sql_colors);
 $colors = $DB->result($result_colors,0,'value');
 
 if($colors == '') {
-	$colors = 'grid-light.js';	
+	$colors = 'default.js';	
 }
+
 $_SESSION['charts_colors'] = $colors;
 
     switch (date("m")) {
@@ -103,7 +103,7 @@ $pic = $DB->result($res_photo,0,'picture');
 $photo_url = User::getURLForPicture($pic);
 
 
-# charts colors 
+/*# charts colors 
 $sql_colors = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'charts_colors' AND users_id = ".$_SESSION['glpiID']."";
 $result_colors = $DB->query($sql_colors);
 $colors = $DB->result($result_colors,0,'value');
@@ -113,7 +113,7 @@ if($colors == '') {
 }
 	
 $_SESSION['charts_colors'] = $colors;
-
+*/
 
 //redirect tech profile
 if(Session::haveRight("profile", READ))
@@ -123,8 +123,7 @@ if(Session::haveRight("profile", READ))
 	}
 else {		
 		$redir = '<meta http-equiv="refresh" content="0; url=graphs/graf_tech.php?con=1" />'; 
-	}
-    
+	}   
 ?>
 
 <!DOCTYPE html>

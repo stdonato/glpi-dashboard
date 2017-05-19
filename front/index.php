@@ -9,8 +9,7 @@ Session::checkLoginUser();
 
 
 $query_lay = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'layout' AND users_id = ".$_SESSION['glpiID']." ";																
-					$result_lay = $DB->query($query_lay);
-					
+					$result_lay = $DB->query($query_lay);					
 					$layout = $DB->result($result_lay,0,'value');
 					
 //redirect to index

@@ -192,7 +192,6 @@
 			</div>
 			</div> <!-- //end cf-item -->
 
-
 		<div style="" class="col-lg-3 cf-item">
 				<header>
 					<p><span></span><?php echo __('Tickets Total','dashboard');?></p>
@@ -217,7 +216,6 @@
 					</div>					
 				</div>
 			</div> <!-- //end cf-item -->
-		
 			
 			<div style="min-height: 0px;" class="col-lg-3 cf-item">
 				<header>
@@ -242,8 +240,7 @@
 						</div>
 					</div>					
 				</div>
-			</div> <!-- //end cf-item -->
-								
+			</div> <!-- //end cf-item -->								
 
 			<div style="" class="col-lg-3 cf-item">
 				<header>
