@@ -7,7 +7,8 @@ function plugin_init_dashboard() {
    Plugin::registerClass('PluginDashboardConfig', [
       'addtabon' => ['Entity']
    ]);
-  
+
+	 //$PLUGIN_HOOKS['config_page']['dashboard'] = '../../front/config.form.php?forcetab=PluginDashboardConfig$1';   
     $PLUGIN_HOOKS['csrf_compliant']['dashboard'] = true;   
     $PLUGIN_HOOKS["menu_toadd"]['dashboard'] = array('plugins'  => 'PluginDashboardConfig');
     $PLUGIN_HOOKS['config_page']['dashboard'] = 'front/index.php';

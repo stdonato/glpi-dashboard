@@ -505,7 +505,7 @@ $(document).ready(function() {
          sorting: false,
         "bLengthChange": false,
         "bPaginate": false, 
-        "scrollY":        "65vh",
+        "scrollY":        "66vh",
         "scrollCollapse": true,
         //"iDisplayLength": 15,
     	  //"aLengthMenu": [[15, 25, 50, 100, -1], [15, 25, 50, 100, "All"]],     	    	  

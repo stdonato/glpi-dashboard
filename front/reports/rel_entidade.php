@@ -57,6 +57,9 @@ else {
 <script src="../js/media/js/dataTables.bootstrap.js"></script>
 <link href="../js/media/css/dataTables.bootstrap.css" type="text/css" rel="stylesheet" />
 
+<script src="../js/extensions/Select/js/dataTables.select.min.js"></script>
+<link href="../js/extensions/Select/css/select.bootstrap.css" type="text/css" rel="stylesheet" />
+
 <script src="../js/extensions/Buttons/js/dataTables.buttons.min.js"></script>
 <script src="../js/extensions/Buttons/js/buttons.html5.min.js"></script>
 <script src="../js/extensions/Buttons/js/buttons.bootstrap.min.js"></script>
@@ -66,8 +69,6 @@ else {
 <script src="../js/media/vfs_fonts.js"></script>
 <script src="../js/media/jszip.min.js"></script>
 
-<script src="../js/extensions/Select/js/dataTables.select.min.js"></script>
-<link href="../js/extensions/Select/css/select.bootstrap.css" type="text/css" rel="stylesheet" />
 
 <style type="text/css">
 	select { width: 60px; }
@@ -155,11 +156,10 @@ else {
 										$arr_ent[0] = "-- ". __('Select a entity', 'dashboard') . " --" ;
 
 										//$DB->data_seek($result_ent, 0) ;
-										while ($row_result = $DB->fetch_assoc($result_ent))
-										    {
-										    	$v_row_result = $row_result['id'];
-										    	$arr_ent[$v_row_result] = $row_result['cname'] ;
-										    }
+										while ($row_result = $DB->fetch_assoc($result_ent)) {
+										   $v_row_result = $row_result['id'];
+										   $arr_ent[$v_row_result] = $row_result['cname'] ;
+										}
 
 										$name = 'sel_ent';
 										$options = $arr_ent;
@@ -265,13 +265,11 @@ else {
 		WHERE glpi_tickets.entities_id = ".$id_ent."
 		AND glpi_tickets.is_deleted = 0
 		AND glpi_tickets.date ".$datas2."
-		AND glpi_tickets.status IN ".$status."
-		";
+		AND glpi_tickets.status IN ".$status." ";
 
 		$result_cons1 = $DB->query($consulta1);
 
 		$conta_cons = $DB->numrows($result_cons1);
-
 		$consulta = $conta_cons;
 
 		if($consulta > 0) {
@@ -528,13 +526,14 @@ else {
 
 				  select: true,
 		        dom: 'Blfrtip',
-		        //stateSave: true,
+		        stateSave: true,
 		        filter: false,
 		        pagingType: "full_numbers",
 		        deferRender: true,
 		        sorting: [[0,'desc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc'],[7,'desc'],[8,'desc'],[9,'desc'],[10,'desc']],
 				  displayLength: 25,
 		        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],
+		        //select: { style: "multi" },
 		        buttons: [
 		        	    {
 		                 extend: "copyHtml5",
@@ -561,7 +560,7 @@ else {
 				                 exportOptions: {
 				                 	  columns: ':visible',
 				                    modifier: {
-				                        selected: true,
+				                        selected: true
 				                    }
 				                }
 				                }

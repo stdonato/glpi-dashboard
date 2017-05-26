@@ -105,14 +105,14 @@ $_SESSION['charts_colors'] = $colors;
 	$photo_url = User::getURLForPicture($pic);      
 
 //redirect tech profile
-if(Session::haveRight("profile", READ)){				
+if(Session::haveRight("profile", READ)){
+	//$redir = '<meta http-equiv="refresh" content= "180"/>';				
 	$redir = '';
 }
 else {		
 	$redir = '<meta http-equiv="refresh" content="0; url=graphs/graf_tech.php?con=1" />'; 
 }
-	
-	
+		
 //version check	              								              								
 	$query_up = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'update'";																
 	$result_up = $DB->query($query_up);
@@ -126,11 +126,11 @@ else {
 		$headers = get_headers($urlv, 1);										
 		
 		if($headers[0] != '') {
-		//if ($headers[0] == 'HTTP/1.1 200 OK') { }
-		if ($headers[0] == 'HTTP/1.0 404 Not Found') {
-			$newversion = "<a href='https://forge.glpi-project.org/projects/dashboard/files' target='_blank' style='margin-right: 12px; color:#fff;' class='blink_me'><i class='fa fa-refresh'></i><span>&nbsp;&nbsp;".  __('New version','dashboard'). " ". __( 'avaliable','dashboard'). " </span></a>";		
-				}
-			}     
+			//if ($headers[0] == 'HTTP/1.1 200 OK') { }
+			if ($headers[0] == 'HTTP/1.0 404 Not Found') {
+				$newversion = "<a href='https://forge.glpi-project.org/projects/dashboard/files' target='_blank' style='margin-right: 12px; color:#fff;' class='blink_me'><i class='fa fa-refresh'></i><span>&nbsp;&nbsp;".  __('New version','dashboard'). " ". __( 'avaliable','dashboard'). " </span></a>";		
+			}
+		}     
 	}	
 	      
 ?>

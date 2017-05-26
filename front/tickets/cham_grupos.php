@@ -487,7 +487,7 @@ $(document).ready(function() {
         "aaSorting": false,
         "bLengthChange": false,
         "bPaginate": false, 
-        "scrollY":        "62vh",
+        "scrollY":        "67vh",
         "scrollCollapse": true,
         "paging":         false,
         //"iDisplayLength": 15,

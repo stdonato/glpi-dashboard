@@ -102,28 +102,13 @@ $res_photo = $DB->query($sql_photo);
 $pic = $DB->result($res_photo,0,'picture');
 $photo_url = User::getURLForPicture($pic);
 
-
-/*# charts colors 
-$sql_colors = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'charts_colors' AND users_id = ".$_SESSION['glpiID']."";
-$result_colors = $DB->query($sql_colors);
-$colors = $DB->result($result_colors,0,'value');
-
-if($colors == '') {
-	$colors = 'grid-light.js';	
-}
-	
-$_SESSION['charts_colors'] = $colors;
-*/
-
 //redirect tech profile
-if(Session::haveRight("profile", READ))
-	{
-		//$redir = '<meta http-equiv="refresh" content= "120"/>';
-		$redir = '';
-	}
+if(Session::haveRight("profile", READ)) {		
+	$redir = '';
+}
 else {		
-		$redir = '<meta http-equiv="refresh" content="0; url=graphs/graf_tech.php?con=1" />'; 
-	}   
+	$redir = '<meta http-equiv="refresh" content="0; url=graphs/graf_tech.php?con=1" />'; 
+}   
 ?>
 
 <!DOCTYPE html>

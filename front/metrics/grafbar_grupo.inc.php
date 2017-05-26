@@ -85,12 +85,12 @@ $(function () {
                     align: 'center',
                     x: 25,
                     y: 0,
-                    color: '#A0A0A0',                     
+                    //color: '#A0A0A0',                     
                     style: {
                     	//font: 'Trebuchet MS, Verdana, sans-serif',
-                    	fontSize: '13px',                 
+                    	//fontSize: '13px',                 
    	              	//fontWeight: 'bold',
-   	              	textShadow: false
+   	              	//textShadow: false
                     },
                     formatter: function () {
                     return Highcharts.numberFormat(this.y, 0, '', ''); // Remove the thousands sep?

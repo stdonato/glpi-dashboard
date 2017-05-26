@@ -324,7 +324,8 @@
 				
 				<div class="content cf-svp clearfix" id="svp-1">				
 					<?php 
-					//satisfaction, or not					
+					//satisfaction, or not	
+						//$sat = 0;				
 						if($sat != 0) {
 							echo '<div class="chart" data-percent="' . $satisf .'" > <span class="percent">' . $satisf . '</span><sup></sup> </div>';	
 							}
