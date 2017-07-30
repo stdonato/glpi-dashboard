@@ -164,8 +164,7 @@ else {
 									$arr_cat = array();
 									$arr_cat[0] = "-- ". __('Select a category', 'dashboard') . " --" ;
 				
-									while ($row_result = $DB->fetch_assoc($result_cat))
-									{
+									while ($row_result = $DB->fetch_assoc($result_cat)) {
 										$v_row_result = $row_result['id'];
 										$arr_cat[$v_row_result] = $row_result['name'] ;
 									}

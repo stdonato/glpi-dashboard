@@ -315,7 +315,7 @@ else {
                         <li><a href="./reports/rel_localidades.php?con=1" target="iframe1" > <?php echo _n('Location', 'Locations', 2); ?> </a></li>
                         <li><a href="./reports/rel_projects.php?con=1" target="iframe1" > <?php echo _sn('Project','Projects',2); ?> </a></li>                       
                         <li><a href="./reports/rel_satisfacao.php" target="iframe1" > <?php echo __('Satisfaction'); ?> </a></li>
-                        <li><a href="./reports/rel_tecnicos.php?con=1" target="iframe1" > <?php echo _n('Technician','Technicians',2,'dashboard'); ?> </a></li>
+                        <li><a href="./reports/rel_tecnicos.php?con=1" target="iframe1" > <?php echo _sn('Technician','Technicians',2,'dashboard'); ?> </a></li>
                         <?php
                         // distinguish between 0.90.x and 9.1 version
 								if (GLPI_VERSION <= intval('9.1')){
