@@ -29,11 +29,11 @@ else {
 }
 
 if(!isset($_REQUEST["sel_tec"])) {
-    $id_tec = $_GET["tec"];
+    $id_req = $_GET["tec"];
 }
 
 else {
-    $id_tec = $_REQUEST["sel_tec"];
+    $id_req = $_REQUEST["sel_tec"];
 }
 
 
@@ -48,6 +48,7 @@ if($sel_ent == '' || $sel_ent == -1) {
 	$ent = implode(",",$entities);
 	$entidade = "AND glpi_tickets.entities_id IN (".$ent.") ";
 	$entidade_u = "AND glpi_profiles_users.entities_id IN (".$ent.") ";
+	#$entidade_u = "";
 }
 
 else {
@@ -59,7 +60,6 @@ else {
 <html>
 <head>
 <title> GLPI - <?php echo  __('Summary Report','dashboard')." - ". __('Requester') ?> </title>
-<!-- <base href= "<?php $_SERVER['SERVER_NAME'] ?>" > -->
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
@@ -187,14 +187,14 @@ else {
 										$DB->data_seek($result_tec, 0) ;
 										
 										while ($row_result = $DB->fetch_assoc($result_tec))
-										    {
-											    $v_row_result = $row_result['id'];
-										   	 $arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;
-										    }
+									    {
+										    $v_row_result = $row_result['id'];
+									   	 $arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;
+									    }
 										    										
 										$name = 'sel_tec';
 										$options = $arr_tec;
-										$selected = $id_tec;
+										$selected = $id_req;
 										
 										echo dropdown2( $name, $options, $selected );
 										?>
@@ -278,12 +278,12 @@ else {
 		}		
 		
 		// Chamados
-		$sql_cham = 
+/*		$sql_cham = 
 		"SELECT glpi_tickets.id AS id, COUNT(glpi_tickets.id) AS conta_id, glpi_tickets.name AS name, glpi_tickets.date AS date	
 		FROM `glpi_tickets_users` , glpi_tickets
 		WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
 		AND glpi_tickets_users.type = 1
-		AND glpi_tickets_users.users_id = ". $id_tec ."
+		AND glpi_tickets_users.users_id = ". $id_req ."
 		AND glpi_tickets.is_deleted = 0
 		AND glpi_tickets.date ".$sel_date."
 		".$entidade."
@@ -291,7 +291,7 @@ else {
 		ORDER BY id DESC ";
 		
 		$result_cham = $DB->query($sql_cham);
-		$chamados = $DB->fetch_assoc($result_cham) ;
+		$chamados = $DB->fetch_assoc($result_cham) ;*/
 		
 				
 		//quant de chamados
@@ -300,7 +300,7 @@ else {
 		FROM glpi_tickets, glpi_tickets_users
 		WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
 		AND glpi_tickets_users.type = 1
-		AND glpi_tickets_users.users_id = ". $id_tec ."
+		AND glpi_tickets_users.users_id = ". $id_req ."
 		AND glpi_tickets.is_deleted = 0
 		AND glpi_tickets.date ".$sel_date."
 		".$entidade." ";
@@ -318,7 +318,7 @@ else {
 			$sql_nome = "
 			SELECT firstname , realname, name
 			FROM glpi_users
-			WHERE id = ".$id_tec." ";
+			WHERE id = ".$id_req." ";
 			
 			$result_nome = $DB->query($sql_nome);
 			$tec_name = $DB->fetch_assoc($result_nome);
@@ -335,7 +335,7 @@ else {
 			AND glpi_tickets_users.type = 2
 			AND glpi_tickets.date ".$sel_date."	
 			".$entidade."						
-			AND glpi_tickets_users.tickets_id IN (SELECT id FROM glpi_tickets_users gtu WHERE gtu.users_id = ". $id_tec ." AND gtu.type = 1)
+			AND glpi_tickets_users.tickets_id IN (SELECT id FROM glpi_tickets_users gtu WHERE gtu.users_id = ". $id_req ." AND gtu.type = 1)
 			GROUP BY name
 			ORDER BY conta DESC
 			LIMIT 5";
@@ -349,7 +349,7 @@ else {
 			FROM glpi_tickets, glpi_tickets_users
 			WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
 			AND glpi_tickets_users.type = 1
-			AND glpi_tickets_users.users_id = ". $id_tec ."
+			AND glpi_tickets_users.users_id = ". $id_req ."
 			AND glpi_tickets.is_deleted = 0
 			AND glpi_tickets.date ".$sel_date."			
 			".$entidade." ";
@@ -373,7 +373,7 @@ else {
 			WHERE glpi_tickets.is_deleted = '0'
 			AND glpi_tickets.date ".$sel_date."			
 			AND glpi_tickets.id = glpi_tickets_users.`tickets_id`			
-			AND glpi_tickets_users.users_id = ".$id_tec."
+			AND glpi_tickets_users.users_id = ".$id_req."
 			AND glpi_tickets_users.type = 1			
 			".$entidade."";
 		
@@ -396,7 +396,7 @@ else {
 			WHERE glpi_tickets.is_deleted = '0'
 			AND glpi_tickets.date ".$sel_date."			
 			AND glpi_tickets.id = glpi_tickets_users.`tickets_id`			
-			AND glpi_tickets_users.users_id = ".$id_tec."
+			AND glpi_tickets_users.users_id = ".$id_req."
 			AND glpi_tickets_users.type = 1		
 			".$entidade."";
 		
@@ -412,7 +412,7 @@ else {
 			WHERE glpi_itilcategories.id = glpi_tickets.itilcategories_id
 			AND glpi_tickets.is_deleted = '0'
 			AND glpi_tickets.date ".$sel_date."
-			AND glpi_tickets_users.users_id = ".$id_tec."
+			AND glpi_tickets_users.users_id = ".$id_req."
 			AND glpi_tickets_users.tickets_id = glpi_tickets.id
 			AND glpi_tickets_users.type = 1
 			".$entidade."
@@ -458,7 +458,7 @@ else {
 									
 $content = "
 		<div class='well info_box fluid col-md-12 report-tic' style='margin-left: -1px;'>	
- 			<div class='btn-right'> <button class='btn btn-primary btn-sm' type='button' onclick=window.open(\"./rel_sint_req_pdf.php?con=1&date1=".$data_ini2."&date2=".$data_fin2."&sel_tec=".$id_tec."\",\"_blank\")>Export PDF</button>  </div>	
+ 			<div class='btn-right'> <button class='btn btn-primary btn-sm' type='button' onclick=window.open(\"./rel_sint_req_pdf.php?con=1&date1=".$data_ini2."&date2=".$data_fin2."&sel_tec=".$id_req."\",\"_blank\")>Export PDF</button>  </div>	
 			
 			 <div id='logo' class='fluid'>
 				 <div class='col-md-2' ><img src='".$logo."' alt='GLPI' style='".$imgsize."'> </div>

@@ -26,12 +26,13 @@ class PluginDashboardConfig extends CommonDBTM {
       $menu['page']    = '/plugins/dashboard/front/index.php';
    	return $menu;
    }	
-	
+
+// Entity Tab	
 
    function getTabNameForItem(CommonGLPI $item, $withtemplate = 0) {
       switch (get_class($item)) {
          case 'Entity':
-            return array(1 => __('Dashboard Map'));
+            return array(1 => __('Dashboard map','dashboard'));
          default:
             return '';
       }

@@ -92,14 +92,14 @@ else {
 <body style="background-color: #e5e5e5; margin-left:0%;">
 
 <div id='content' >
-	<div id='container-fluid' style="margin: 0px 2.5% 0px 2.5%;"> 
+	<div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
 		<div id="charts" class="fluid chart"> 
 			<div id="pad-wrapper" >
 			<div id="head-rel" class="fluid">			
 			
 			<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 			
-				<div id="titulo_graf"> 
+				<div id="titulo_rel"> 
 					<?php echo __('Tickets', 'dashboard') .'  '. __('by SLA', 'dashboard') ?> - <?php echo __('Time to own'); ?> 				
 				</div>				
 				<div id="datas-tec" class="col-md-12 fluid" >			 
@@ -376,7 +376,7 @@ if($conta_cons > 0) {
 			        pagingType: "full_numbers",
 			        "aaSorting": [[1,'desc'],[0,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc']],
 					  displayLength: 25,
-			        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],        
+			        lengthMenu: [[25, 50, 75, 100], [25, 50, 75, 100]],        
 			        buttons: [
 			        	    {
 			                 extend: "copyHtml5",

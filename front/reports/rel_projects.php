@@ -11,22 +11,22 @@ Session::checkRight("profile", READ);
 
 if(!empty($_POST['submit']))
 {
-    $data_ini =  $_POST['date1'];
-    $data_fin = $_POST['date2'];
+   $data_ini =  $_POST['date1'];
+   $data_fin = $_POST['date2'];
 }
 
 else {
-    $data_ini = date("Y-01-01");
-    $data_fin = date("Y-m-d");
-    }
+	$data_ini = date("Y-01-01");
+   $data_fin = date("Y-m-d");
+}
 
-if(!isset($_POST["sel_pro"])) {
+/*if(!isset($_POST["sel_pro"])) {
     $id_pro = $_REQUEST["pro"];
 }
 
 else {
     $id_pro = $_POST["sel_pro"];
-}
+}*/
 
 # entity
 $sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
@@ -101,7 +101,7 @@ else {
 <body style="background-color: #e5e5e5; margin-left:0%;">
 
 <div id='content' >
-<div id='container-fluid' style="margin: 0px 5% 0px 5%;">
+<div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
 <div id="charts" class="fluid chart" >
 <div id="pad-wrapper" >
 	<div id="head-rel" class="fluid">	
@@ -175,10 +175,9 @@ $con = $_GET['con'];
 
 if($con == "1") {
 
-if(!isset($_POST['date1']))
-{
-    $data_ini2 = $_GET['date1'];
-    $data_fin2 = $_GET['date2'];
+if(!isset($_POST['date1'])) {
+	 $data_ini2 = $data_ini;
+	 $data_fin2 = $data_fin; 
 }
 
 else {
@@ -307,28 +306,28 @@ while($row = $DB->fetch_assoc($result_cham)){
 	else { $cor = ""; }
 
 	echo "
-	<tr>
-	<td style='text-align:center; vertical-align:middle'><a href=".$CFG_GLPI['url_base']."/front/project.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
-	<td style='vertical-align:middle'> ". $row['name'] ." </td>
-	<td style='text-align:center; vertical-align:middle; color:".$row_stat['color'].";'> ". $row_stat['name'] ." </td>
-	<td style='text-align:center; vertical-align:middle'> ". conv_data_hora($row['plan_start_date']) ."</td>
-	<td style='text-align:center; vertical-align:middle'> ". conv_data_hora($row['plan_end_date']) ."</td>
-	<td style='text-align:center; vertical-align:middle;'> ". getUserName($row['users_id']) ." </td>
-	<td style='text-align:center; vertical-align:middle'><a href='./rel_projecttasks.php?sel_pro=". $row['id'] ."' target=_self >" . $row_task['tasks'] . "</a></td>
-	<td style='text-align:center; vertical-align:middle;'>
-		<div class='progress' style='margin-top: 5px; margin-bottom: 5px;'>
-			<div class='progress-bar " . $cor . " progress-bar-striped active' role='progressbar' aria-valuenow='".$row['percent_done']."' aria-valuemin='0' aria-valuemax='100' style='width: ".$row['percent_done']."%;'>
-			 			".$row['percent_done']." %
+	<tr style='font-weight:normal;'>
+		<td style='text-align:center; vertical-align:middle'><a href=".$CFG_GLPI['url_base']."/front/project.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
+		<td style='vertical-align:middle'> ". $row['name'] ." </td>
+		<td style='text-align:center; vertical-align:middle; color:".$row_stat['color'].";'> ". $row_stat['name'] ." </td>
+		<td style='text-align:center; vertical-align:middle'> ". conv_data_hora($row['plan_start_date']) ."</td>
+		<td style='text-align:center; vertical-align:middle'> ". conv_data_hora($row['plan_end_date']) ."</td>
+		<td style='text-align:center; vertical-align:middle;'> ". getUserName($row['users_id']) ." </td>
+		<td style='text-align:center; vertical-align:middle'><a href='./rel_projecttasks.php?sel_pro=". $row['id'] ."' target=_self >" . $row_task['tasks'] . "</a></td>
+		<td style='text-align:center; vertical-align:middle;'>
+			<div class='progress' style='margin-top: 5px; margin-bottom: 5px;'>
+				<div class='progress-bar " . $cor . " progress-bar-striped active' role='progressbar' aria-valuenow='".$row['percent_done']."' aria-valuemin='0' aria-valuemax='100' style='width: ".$row['percent_done']."%;'>
+				 			".$row['percent_done']." %
+				</div>
 			</div>
-		</div>
-	</td>
-	<td style='text-align:center; vertical-align:middle;'>
-	<div class='progress' style='margin-top: 19px;'>
-		<div class='progress-bar ". $cor_due ." progress-bar-striped active' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
- 				 		" . $message . "
- 			</div>
- 		</div>
-	</td>
+		</td>
+		<td style='text-align:center; vertical-align:middle;'>
+		<div class='progress' style='margin-top: 19px;'>
+			<div class='progress-bar ". $cor_due ." progress-bar-striped active' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
+	 				 		" . $message . "
+	 			</div>
+	 		</div>
+		</td>
 	</tr>";
 }
 
@@ -351,7 +350,7 @@ $(document).ready(function() {
         pagingType: "full_numbers",
         "aaSorting": [[0,'asc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc'],[7,'desc'],[8,'desc']],
 		  displayLength: 25,
-        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],        
+        lengthMenu: [[25, 50, 75, 100], [25, 50, 75, 100]],        
         buttons: [
         	    {
                  extend: "copyHtml5",

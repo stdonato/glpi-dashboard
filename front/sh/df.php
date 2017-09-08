@@ -9,27 +9,27 @@ if($count == 1) {
 
 	$size = explode(',',$disk);
 	
-if($size[2] >= 1024) {
+	if($size[2] >= 1024) {
+		
+		echo round($size[2] / '1024',2)." / ". round($size[1] / '1024',2)." GB";
+		$percd = round(($size[2]*100)/$size[1] ,1);
+		$udisk = $percd;
+		$dname = $size[5];
+		$usedd = round($size[2] / '1024',1);
+		$totald = round($size[1] / '1024',1);
+		$titled = "DISK - $totald GB";
+	}
 	
-	echo round($size[2] / '1024',2)." / ". round($size[1] / '1024',2)." GB";
-	$percd = round(($size[2]*100)/$size[1] ,1);
-	$udisk = $percd;
-	$dname = $size[5];
-	$usedd = round($size[2] / '1024',1);
-	$totald = round($size[1] / '1024',1);
-	$titled = "DISK - GB";
-	}
-
-else {
-
-	echo $size[2] . " / " . $size[1] . " MB";	
-	$percd = round(($size[2]*100)/$size[1] ,1);
-	$udisk = $percd;
-	$dname = $size[5];
-	$usedd = $size[2] ;
-	$totald = $size[1] ;
-	$titled = "DISK - MB";
-	}
+	else {
+	
+		echo $size[2] . " / " . $size[1] . " MB";	
+		$percd = round(($size[2]*100)/$size[1] ,1);
+		$udisk = $percd;
+		$dname = $size[5];
+		$usedd = $size[2] ;
+		$totald = $size[1] ;
+		$titled = "DISK - $totald MB";
+		}
 
 }
 
@@ -38,35 +38,36 @@ else {
 
 if($count > 1) {
 
-foreach($result as $a) {
-	
-	$a1 = explode(',', $a);
-	
-	$size1+=$a1[1];
-	$size2+=$a1[2];
+	foreach($result as $a) {
 		
+		$a1 = explode(',', $a);
+		
+		$size1+=$a1[1];
+		$size2+=$a1[2];
+			
 	}
-
-if($size2 >= 1024) {
 	
-	echo round($size2 / '1024',2)." / ". round($size1 / '1024',2)." GB";
-	$percd = round(($size2*100)/$size1 ,1);
-	$udisk = $percd;
-	
-	$usedd = round($size2 / '1024',1);
-	$totald = round($size1 / '1024',1);
-	$titled = "DISK - GB";
+	if($size2 >= 1024) {
+		
+		echo round($size2 / '1024',2)." / ". round($size1 / '1024',2)." GB";
+		$percd = round(($size2*100)/$size1 ,1);
+		$udisk = $percd;
+		
+		$usedd = round($size2 / '1024',1);
+		$totald = round($size1 / '1024',1);
+	#	$titled = "DISK - GB";
+		$titled = $totald;
 	}
-
-else {
-
-	echo $size2 . " / " . $size1 . " MB";
-	$percd = round(($size2*100)/$size1 ,1);
-	$udisk = $percd;	
 	
-	$usedd = $size2;
-	$totald = $size1 ;
-	$titled = "DISK - MB";
+	else {
+	
+		echo $size2 . " / " . $size1 . " MB";
+		$percd = round(($size2*100)/$size1 ,1);
+		$udisk = $percd;	
+		
+		$usedd = $size2;
+		$totald = $size1 ;
+		$titled = "DISK - MB";
 	}
 
 }

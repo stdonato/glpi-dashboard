@@ -105,7 +105,7 @@ else {
 <body style="background-color: #e5e5e5; margin-left:0%;">
 
 <div id='content' >
-	<div id='container-fluid' style="margin: 0px 2% 0px 2%;">
+	<div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
 
 	<div id="charts" class="fluid chart">
 		<div id="pad-wrapper" >
@@ -116,81 +116,81 @@ else {
 			 <div id="datas-tec" class="span12 fluid" >
 			    <form id="form1" name="form1" class="form_rel" method="post" action="rel_grupo.php?con=1">
 				    <table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
-				    <tr>
-					<td style="width: 310px;">
-					<?php
-					$url = $_SERVER['REQUEST_URI'];
-					$arr_url = explode("?", $url);
-					$url2 = $arr_url[0];
-
-							echo'
-							<table>
-								<tr>
-									<td>
-									   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-									    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
-									    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-								    	</div>
-									</td>
-									<td>&nbsp;</td>
-									<td>
-								   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-									    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
-									    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-								    	</div>
-									</td>
-									<td>&nbsp;</td>
-								</tr>
-							</table> ';
-					?>
-
-					<script language="Javascript">
-						$('#dp1').datepicker('update');
-						$('#dp2').datepicker('update');
-					</script>
-					</td>
-
-					<td style="margin-top:2px;">
-					<?php
-
-					// lista de grupos
-					$sql_grp = "
-					SELECT id , name
-					FROM `glpi_groups`
-					".$entidade_g."
-					ORDER BY `name` ASC";
-
-					$result_grp = $DB->query($sql_grp);
-					$grp = $DB->fetch_assoc($result_grp);
-
-					$res_grp = $DB->query($sql_grp);
-					$arr_grp = array();
-					$arr_grp[0] = "-- ". __('Select a group', 'dashboard') . " --" ;
-
-					$DB->data_seek($result_grp, 0) ;
-
-					while ($row_result = $DB->fetch_assoc($result_grp))
-					    {
-					   	$v_row_result = $row_result['id'];
-					    	$arr_grp[$v_row_result] = $row_result['name'] ." (". $row_result['id'] .")" ;
-					    }
-
-					$name = 'sel_grp';
-					$options = $arr_grp;
-					$selected = $id_grp;
-
-					echo dropdown( $name, $options, $selected );
-					?>
-					</td>
-				</tr>
-				<tr><td height="15px"></td></tr>
-				<tr>
-					<td colspan="2" align="center">
-						<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult','dashboard'); ?> </button>
-						<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2 ?>'" ><i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean','dashboard'); ?> </button>
-					</td>
-				</tr>
-			</table>
+					   <tr>
+							<td style="width: 310px;">
+							<?php
+							$url = $_SERVER['REQUEST_URI'];
+							$arr_url = explode("?", $url);
+							$url2 = $arr_url[0];
+		
+									echo'
+									<table>
+										<tr>
+											<td>
+											   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+											    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
+											    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+										    	</div>
+											</td>
+											<td>&nbsp;</td>
+											<td>
+										   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+											    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
+											    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+										    	</div>
+											</td>
+											<td>&nbsp;</td>
+										</tr>
+									</table> ';
+							?>
+		
+							<script language="Javascript">
+								$('#dp1').datepicker('update');
+								$('#dp2').datepicker('update');
+							</script>
+							</td>
+	
+							<td style="margin-top:2px;">
+							<?php
+		
+							// lista de grupos
+							$sql_grp = "
+							SELECT id , name
+							FROM `glpi_groups`
+							".$entidade_g."
+							ORDER BY `name` ASC";
+		
+							$result_grp = $DB->query($sql_grp);
+							$grp = $DB->fetch_assoc($result_grp);
+		
+							$res_grp = $DB->query($sql_grp);
+							$arr_grp = array();
+							$arr_grp[0] = "-- ". __('Select a group', 'dashboard') . " --" ;
+		
+							$DB->data_seek($result_grp, 0) ;
+		
+							while ($row_result = $DB->fetch_assoc($result_grp))
+							    {
+							   	$v_row_result = $row_result['id'];
+							    	$arr_grp[$v_row_result] = $row_result['name'] ." (". $row_result['id'] .")" ;
+							    }
+		
+							$name = 'sel_grp';
+							$options = $arr_grp;
+							$selected = $id_grp;
+		
+							echo dropdown( $name, $options, $selected );
+							?>
+							</td>
+					</tr>
+					<tr><td height="15px"></td></tr>
+					<tr>
+						<td colspan="2" align="center">
+							<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult','dashboard'); ?> </button>
+							<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2 ?>'" ><i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean','dashboard'); ?> </button>
+						</td>
+					</tr>
+				</table>
 			<?php Html::closeForm(); ?>
 			<!-- </form> -->
 		      </div>
@@ -471,14 +471,14 @@ $result_tec = $DB->query($sql_tec);
 $row_tec = $DB->fetch_assoc($result_tec);
 
 echo "
-<tr style='font-weight:normal;'>
+<tr style='font-weight:normal; font-size:11px;'>
 	<td style='text-align:center; vertical-align:middle; font-weight:bold'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
 	<td style='vertical-align:middle; text-align: left;'><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/>&nbsp; ".Ticket::getStatus($row['status'])."  </td>
-	<td style='vertical-align:middle;'> ". $type ." </td>
+	<td style='vertical-align:middle;text-align:center;'> ". $type ." </td>
 	<td style='vertical-align:middle;'> ". substr($row['name'],0,55) ." </td>
 	<td style='vertical-align:middle;'> ". $row_user['name'] ." ".$row_user['sname'] ." </td>
-	<td style='vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
-	<td style='vertical-align:middle;'> ". conv_data_hora($row['closedate']) ." </td>
+	<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['date']) ." </td>
+	<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['closedate']) ." </td>
 	<td style='vertical-align:middle; text-align:center;'> ". time_ext($row['time']) ."</td>
 </tr>";
 
@@ -504,7 +504,7 @@ $(document).ready(function() {
         pagingType: "full_numbers",
         sorting: [[0,'desc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc'],[7,'desc']],
 		  displayLength: 25,
-        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],        
+        lengthMenu: [[25, 50, 75, 100], [25, 50, 75, 100]],        
         buttons: [
         	    {
                  extend: "copyHtml5",

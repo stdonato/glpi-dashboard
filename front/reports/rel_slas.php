@@ -104,7 +104,7 @@ else {
 <body style="background-color: #e5e5e5; margin-left:0%;">
 
 <div id='content' >
-	<div id='container-fluid' style="margin: 0px 2% 0px 2%;"> 
+	<div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
 		<div id="charts" class="fluid chart"> 
 			<div id="pad-wrapper" >
 			<div id="head-rel" class="fluid">			
@@ -123,24 +123,24 @@ else {
 					$url2 = $arr_url[0];
 					    
 					echo'
-								<table>
-									<tr>
-										<td>
-										   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-										    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >		    	
-										    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
-									    	</div>
-										</td>
-										<td>&nbsp;</td>
-										<td>
-									   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-										    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >		    	
-										    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
-									    	</div>
-										</td>
-										<td>&nbsp;</td>
-									</tr>
-								</table> ';
+						<table>
+							<tr>
+								<td>
+								   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+								    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >		    	
+								    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
+							    	</div>
+								</td>
+								<td>&nbsp;</td>
+								<td>
+							   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+								    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >		    	
+								    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
+							    	</div>
+								</td>
+								<td>&nbsp;</td>
+							</tr>
+						</table> ';
 					?>
 					
 					<script language="Javascript">					
@@ -215,27 +215,27 @@ else {
 				$status = $status_all;
 				}
 	
-$sql_sla = 
-"SELECT COUNT(glpi_tickets.id) AS total, glpi_slas.name AS sla_name, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, 
-glpi_tickets.status, glpi_tickets.due_date AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
-FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time, glpi_slas.id AS sla_id
-FROM glpi_tickets, glpi_slas
-WHERE glpi_tickets.is_deleted = 0
-".$sla_comp."
-AND glpi_tickets.date ".$datas2."
-".$entidade."
-OR glpi_slas.is_recursive = 1
-GROUP BY sla_name DESC
-ORDER BY total DESC ";
-
-$result_sla = $DB->query($sql_sla);			
-$conta_cons = $DB->numrows($result_sla);	
-
-
-if($conta_cons > 0) {
-			
-echo "<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>";		
-echo "							
+		$sql_sla = 
+		"SELECT COUNT(glpi_tickets.id) AS total, glpi_slas.name AS sla_name, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, 
+		glpi_tickets.status, glpi_tickets.due_date AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
+		FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time, glpi_slas.id AS sla_id
+		FROM glpi_tickets, glpi_slas
+		WHERE glpi_tickets.is_deleted = 0
+		".$sla_comp."
+		AND glpi_tickets.date ".$datas2."
+		".$entidade."
+		OR glpi_slas.is_recursive = 1
+		GROUP BY sla_name DESC
+		ORDER BY total DESC ";
+		
+		$result_sla = $DB->query($sql_sla);			
+		$conta_cons = $DB->numrows($result_sla);	
+		
+		
+		if($conta_cons > 0) {
+					
+		echo "<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>";		
+		echo "							
 			<table id='sla' class='display'  style='font-size: 12px; font-weight:bold;' cellpadding = 2px>
 				<thead>
 					<tr>
@@ -244,8 +244,7 @@ echo "
 						<th style='text-align:center; cursor:pointer;'> ". __('Opened','dashboard') ."</th>
 						<th style='text-align:center; cursor:pointer;'> ". __('Solved','dashboard') ."</th>	
 						<th style='text-align:center; cursor:pointer;'> ". __('Closed','dashboard') ."</th>															
-						<th style='text-align:center; cursor:pointer;'> ". __('Within','dashboard') ."</th>	
-						
+						<th style='text-align:center; cursor:pointer;'> ". __('Within','dashboard') ."</th>							
 					</tr>
 				</thead>
 			<tbody> ";
@@ -384,7 +383,7 @@ echo "
 			        pagingType: "full_numbers",
 			        "aaSorting": [[1,'desc'],[0,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc']],
 					  displayLength: 25,
-			        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],        
+			        lengthMenu: [[25, 50, 75, 100], [25, 50, 75, 100]],        
 			        buttons: [
 			        	    {
 			                 extend: "copyHtml5",

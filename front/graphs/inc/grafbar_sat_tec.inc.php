@@ -1,12 +1,11 @@
 <?php
 
 if($data_ini == $data_fin) {
-$datas = "LIKE '".$data_ini."%'";
+	$datas = "LIKE '".$data_ini."%'";
 }
 
 else {
-$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";
-//$datas = "AND (`glpi_tickets`.`closedate` >= '".$data_ini."' AND `glpi_tickets`.`closedate` <= ADDDATE( '".$data_fin."', INTERVAL 1 DAY ))";
+	$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";
 }
 
 //satisfaction
@@ -30,11 +29,10 @@ $contador = $DB->numrows($result);
 //array with satisfaction average
 $arr_grfsat = array();
 
-while ($row_result = $DB->fetch_assoc($result))
-	{
+while ($row_result = $DB->fetch_assoc($result))	{
 	$v_row_result = $row_result['name']." ".$row_result['sname'];
 	$arr_grfsat[$v_row_result] = round(($row_result['media']*100)/5,1);
-	}
+}
 
 
 $grfsat = array_keys($arr_grfsat) ;
@@ -167,8 +165,7 @@ $(function () {
 
         });
     });
-  </script>
-";
+  </script> ";
 
 }
 		?>

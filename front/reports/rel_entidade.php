@@ -18,10 +18,11 @@ if(!empty($_POST['submit']))
 else {
     $data_ini = date("Y-m-01");
     $data_fin = date("Y-m-d");
-    }
+}
 
 if(!isset($_POST["sel_ent"])) {
-	$id_ent = $_GET["ent"];
+	//$id_ent = $_REQUEST["sel_ent"];	
+	$id_ent = '';
 }
 
 else {
@@ -83,7 +84,7 @@ else {
 <body style="background-color: #e5e5e5; margin-left:0%;">
 
 <div id='content' >
-<div id='container-fluid' style="margin: 0px 2% 0px 2%;">
+<div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
 	<div id="charts" class="fluid chart">
 		<div id="pad-wrapper" >
 
@@ -187,7 +188,10 @@ else {
 		<?php
 
 		//entidades
-		$con = $_GET['con'];
+		if(isset($_REQUEST['con'])) {
+			$con = $_REQUEST['con'];
+		}
+		else { $con = ''; }
 
 		if($con == "1") {
 
@@ -203,7 +207,8 @@ else {
 		}
 
 		if(!isset($_POST["sel_ent"])) {
-			$id_ent = $_GET["ent"];
+			//$id_ent = $_REQUEST["sel_ent"];	
+			$id_ent = '';	
 		}
 
 		else {
@@ -462,7 +467,7 @@ else {
 				$row_tec = $DB->fetch_assoc($result_tec);
 
 
-		//category
+				//category
 		    	$sql_cat = "SELECT name, completename
 				FROM glpi_itilcategories
 				WHERE id = ".$row['cat']." ";
@@ -471,7 +476,7 @@ else {
 				$row_cat = $DB->fetch_assoc($result_cat);
 
 
-		// associated element
+				// associated element
 			   $sql_item = "SELECT itemtype, items_id
 				FROM glpi_items_tickets
 				WHERE glpi_items_tickets.tickets_id = ". $row['id'] ."";
@@ -493,7 +498,7 @@ else {
 
 		if($result_ass != '') {
 			$row_item = $DB->fetch_assoc($result_ass);
-				}
+		}
 
 		echo "
 		<tr>
@@ -530,9 +535,11 @@ else {
 		        filter: false,
 		        pagingType: "full_numbers",
 		        deferRender: true,
+       		 //"scrollY":   "90vh",
+        		 //"scrollCollapse": true,
 		        sorting: [[0,'desc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc'],[7,'desc'],[8,'desc'],[9,'desc'],[10,'desc']],
 				  displayLength: 25,
-		        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],
+		        lengthMenu: [[25, 50, 75, 100], [25, 50, 75, 100]],
 		        //select: { style: "multi" },
 		        buttons: [
 		        	    {

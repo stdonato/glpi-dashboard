@@ -15,14 +15,11 @@ FROM `glpi_tickets_users`, glpi_tickets
 WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
 AND glpi_tickets.date ".$datas."
 AND glpi_tickets_users.type = 1
-
 AND glpi_tickets.is_deleted = 0
 ".$entidade."
 GROUP BY `users_id`
 ORDER BY conta DESC
 LIMIT 40 ";
-
-//AND glpi_tickets_users.`users_id` NOT IN (SELECT DISTINCT users_id FROM glpi_tickets_users WHERE glpi_tickets_users.type=2)
 
 $query_usu = $DB->query($sql_usu);
 

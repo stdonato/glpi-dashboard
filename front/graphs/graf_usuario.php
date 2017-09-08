@@ -172,10 +172,10 @@ $arr_tec[0] = "-- ". __('Select a requester','dashboard') . " --" ;
 $DB->data_seek($result_tec, 0) ;
 
 while ($row_result = $DB->fetch_assoc($result_tec))		
-	{ 
+{ 
 	$v_row_result = $row_result['id'];
 	$arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;			
-	} 
+} 
 	
 $name = 'sel_tec';
 $options = $arr_tec;

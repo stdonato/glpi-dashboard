@@ -23,20 +23,18 @@ else {
 	$result = $DB->query($query);
 	$ent_name1 = $DB->result($result,0,'name');
 	$ent_name = __('Tickets Statistics','dashboard')." :  ". $ent_name1 ;	
-	}	
+}	
 
 if($sel_ent != '') {			
 	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.")";
-	$entidade_u = "AND gpu.entities_id IN (".$sel_ent.")";
-
+	$entidade_u = "AND glpi_profiles_users.entities_id IN (".$sel_ent.")";	
 }
 
-else {
-	
+else {	
 	$entities = $_SESSION['glpiactiveentities'];	
 	$ent = implode(",",$entities);	
 	$entidade = "AND glpi_tickets.entities_id IN (".$ent.")";
-	$entidade_u = "AND gpu.entities_id IN (".$ent.")";	
+	$entidade_u = "AND glpi_profiles_users.entities_id IN (".$ent.")";				
 }
 
 
@@ -168,10 +166,10 @@ $_SESSION['back'] = $back;
 	<?php
 	if($theme == 'trans.css') {		
    	echo "<body style=\"background: url('./img/".$back."') no-repeat top center fixed; \">";
-   	}
+   }
    else {
-   	echo "<body>";
-   	}	 
+   	echo "<body style='baclground-color:#E5E5E5;'>";
+   }	 
    ?>
                                                
 <?php     

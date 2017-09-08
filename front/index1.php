@@ -179,7 +179,7 @@ else {
 	};
 	
 	$(window).load(function () {
-	    setIframeHeight(document.getElementById('iframe1'));
+		setIframeHeight(document.getElementById('iframe1'));
 	});	
 		
 
@@ -213,7 +213,7 @@ else {
 	   	echo "<body style=\"background: url('./img/".$back."') no-repeat top center fixed; \">";
    	}
 	else {
-   		echo "<body style='background-color: #FFF;'>";
+   		echo "<body style='background-color: #e5e5e5;'>";
    	}	 
    ?>
 
@@ -416,10 +416,10 @@ else {
                         <li><a href="./graphs/geral.php" target="iframe1" > <?php echo __('Overall','dashboard'); ?></a></li>
                         <li><a href="./graphs/grupos.php" target="iframe1" > <?php echo _sn('Group','Groups',2); ?> </a></li>
                         <li><a href="./graphs/local.php" target="iframe1" > <?php echo _n('Location', 'Locations', 2); ?> </a></li>
+                        <li><a href="./graphs/usuarios.php" target="iframe1" > <?php echo __('Requester','dashboard'); ?> </a></li>
                         <li><a href="./graphs/satisfacao.php" target="iframe1" > <?php echo __('Satisfaction','dashboard'); ?> </a></li>
                         <li><a href="./graphs/tecnicos.php" target="iframe1" > <?php echo __('Technician','dashboard'); ?> </a></li>
                         <li><a href="./graphs/times.php" target="iframe1" > <?php echo __('Time range'); ?> </a></li>
-                        <li><a href="./graphs/usuarios.php" target="iframe1" > <?php echo __('Requester','dashboard'); ?> </a></li>
                       </ul>
 
                       <ul class="col-sm-2 list-unstyled menu1" style="width:180px;">

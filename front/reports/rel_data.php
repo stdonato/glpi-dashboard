@@ -104,7 +104,7 @@ else {
 <body style="background-color: #e5e5e5;">
 
 <div id='content' >
-	<div id='container-fluid' style="margin: 0px 2% 0px 2%;">
+	<div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
 		<div id="charts" class="fluid chart">
 			<div id="pad-wrapper" >
 
@@ -121,7 +121,7 @@ else {
 					<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:20px;"></i><span></span></a>
 
 					<div id="titulo_rel"> <?php echo __('Tickets','dashboard') .'  '. __('by Date','dashboard') ?> </div>
-						<div id="datas-tec" class="span12 fluid" >
+						<div id="datas-tec" class="col-md-12 col-sm-12 fluid" >
 						    <form id="form1" name="form1" class="form_rel" method="post" action="rel_data.php?con=1">
 							    <table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
 								    <tr>
@@ -401,9 +401,9 @@ else {
 		<table align='right' style='margin-bottom:10px;'>
 			<tr>
 				<td colspan='3'>
-				<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_data.php?con=1&stat=open&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ". __('Opened','dashboard'). "</button>
-				<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_data.php?con=1&stat=close&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".  __('Closed','dashboard') ." </button>
-				<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_data.php?con=1&stat=all&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ". __('All','dashboard') ." </button>
+					<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_data.php?con=1&stat=open&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ". __('Opened','dashboard'). "</button>
+					<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_data.php?con=1&stat=close&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".  __('Closed','dashboard') ." </button>
+					<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_data.php?con=1&stat=all&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ". __('All','dashboard') ." </button>
 			</tr>
 		</table>
 
@@ -422,18 +422,16 @@ else {
 		<table id='data' class='display'  style='font-size: 12px; font-weight:bold;' cellpadding = 2px>
 			<thead>
 				<tr>
-				<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Tickets','dashboard')." </th>
-				<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Status')." </th>
-				<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Title')." </th>
-				<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Requester')." </th>
-				<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Technician')." </th>
-				<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Opened','dashboard')."</th>
-				<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Closed')." </th>
+					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Tickets','dashboard')." </th>
+					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Status')." </th>
+					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Title')." </th>
+					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Requester')." </th>
+					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Technician')." </th>
+					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Opened','dashboard')."</th>
+					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Closed')." </th>
 				</tr>
 			</thead>
-		<tbody>
-		";
-
+		<tbody>";
 
 		while($row = $DB->fetch_assoc($result_cham)){
 
@@ -478,8 +476,8 @@ else {
 				<td style='vertical-align:middle;'> ". substr($row['descr'],0,55) ." </td>
 				<td style='vertical-align:middle;'> ". $row_user['name'] ." ".$row_user['sname'] ." </td>
 				<td style='vertical-align:middle;'> ". $row_tec['name'] ." ".$row_tec['sname'] ." </td>
-				<td style='vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
-				<td style='vertical-align:middle;'> ". conv_data_hora($row['solvedate']) ." </td>
+				<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['date']) ." </td>
+				<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['solvedate']) ." </td>
 			</tr>";
 		}
 
@@ -503,7 +501,7 @@ else {
 		        pagingType: "full_numbers",
 		        sorting: [[0,'desc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc']],
 				  displayLength: 25,
-		        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],
+		        lengthMenu: [[25, 50, 75, 100], [25, 50, 75, 100]],
 		        buttons: [
 		        	    {
 		                 extend: "copyHtml5",

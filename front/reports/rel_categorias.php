@@ -89,10 +89,10 @@ else {
  
 </head>
 
-<body style="background-color: #e5e5e5; margin-left:0%;">
+<body style="background-color: #e5e5e5;">
 
 <div id='content' >
-	<div id='container-fluid' style="margin: 0px 2% 0px 2%;"> 
+	<div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
 		<div id="charts" class="fluid chart"> 
 			<div id="pad-wrapper" >
 			<div id="head-rel" class="fluid">			
@@ -100,7 +100,8 @@ else {
 			<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 			
 				<div id="titulo_rel"> <?php echo __('Tickets', 'dashboard') .'  '. __('by Category', 'dashboard') ?> </div>				
-				<div id="datas-tec" class="col-md-12 col-sm-12 fluid" >			 
+				<div id="datas-tec" class="col-md-12 col-sm-12 fluid" >		
+					 
 				<form id="form1" name="form1" class="form_rel" method="post" action="rel_categorias.php?con=1" style="margin-left: 37%;"> 
 				<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
 				<tr>
@@ -225,7 +226,6 @@ echo "
 						<th style='text-align:center; cursor:pointer;'> ". __('Opened','dashboard') ."</th>
 						<th style='text-align:center; cursor:pointer;'> ". __('Solved','dashboard') ."</th>	
 						<th style='text-align:center; cursor:pointer;'> ". __('Closed','dashboard') ."</th>															
-
 					</tr>
 				</thead>
 			<tbody> ";
@@ -318,7 +318,7 @@ echo "
 			        pagingType: "full_numbers",
 			        sorting: [[1,'desc'],[0,'desc'],[2,'desc'],[3,'desc'],[4,'desc']],
 					  displayLength: 25,
-			        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],        
+			        lengthMenu: [[25, 50, 75, 100], [25, 50, 75, 100]],        
 			        buttons: [
 			        	    {
 			                 extend: "copyHtml5",

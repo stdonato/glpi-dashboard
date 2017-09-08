@@ -1,6 +1,5 @@
 <?php
 
-//echo '<div id="graftime" class="span6" style="height:450px; margin-top:35px; margin-left: -5px;">';
 $query2 = "
 SELECT count(glpi_tickets.id) AS chamados , DATEDIFF( glpi_tickets.solvedate, glpi_tickets.date ) AS days
 FROM glpi_tickets, glpi_groups_tickets
@@ -15,20 +14,20 @@ GROUP BY days ";
 $result2 = $DB->query($query2) or die('erro');
 
 
-$arr_grf2 = array();
+$arr_keys = array();
 while ($row_result = $DB->fetch_assoc($result2))		
-	{ 
-		$v_row_result = $row_result['days'];
-		$arr_grf2[$v_row_result] = $row_result['chamados'];			
-	} 
+{ 
+	$v_row_result = $row_result['days'];
+	$arr_keys[$v_row_result] = $row_result['chamados'];			
+} 
 	
-$grf2 = array_keys($arr_grf2);
-$quant2 = array_values($arr_grf2);
+$keys = array_keys($arr_keys);
+$quant2 = array_values($arr_keys);
 
-$conta = count($arr_grf2);
+$conta = count($arr_keys);
 
 
-for($i=0; $i < 8; $i++) {
+/*for($i=0; $i <= $conta; $i++) {
 
 	if($quant2[$i] != 0) {
 		$till[$i] = $quant2[$i];
@@ -38,8 +37,10 @@ for($i=0; $i < 8; $i++) {
 	}	
 	
 	$arr_days[] += $till[$i];
+}*/
 
-}
+$arr_more8 = array_slice($arr_keys,8);
+$more8 = array_sum($arr_more8);
 
 echo "
 <script type='text/javascript'>
@@ -62,18 +63,7 @@ $(function () {
             title: {
                 text: '".__('Ticket Solving Period','dashboard')."'
             },
-             /* legend: {
-                layout: 'horizontal',
-                align: 'center',
-                verticalAlign: 'bottom',
-                x: 0,
-                y: 0,
-                //floating: true,
-                borderWidth: 0,
-                backgroundColor: '#FFFFFF',
-                adjustChartSize: true,
-                format: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            }, */
+
             tooltip: {
         	    pointFormat: '{series.name}: <b>{point.y} - ( {point.percentage:.1f}% )</b>'
             },
@@ -98,12 +88,13 @@ $(function () {
                 name: '".__('Tickets','dashboard')."',
                 data: [  {
                         name: '< 1 " .__('day','dashboard')."',
-                        y: ".$arr_days[0].",
+                        y: ".$arr_keys[0].",
                         sliced: true,
                         selected: true
-                    }, ['1 - 2 " .__('days','dashboard')."',  ".$arr_days[1]." ], ['2 - 3 " .__('days','dashboard')."',  ".$arr_days[2]." ],
-                			['3 - 4 " .__('days','dashboard')."', ".$arr_days[3]." ], ['4 - 5 " .__('days','dashboard')."',  ".$arr_days[4]." ], 
-                			['5 - 6 " .__('days','dashboard')."',  ".$arr_days[5]." ], ['6 - 7 " .__('days','dashboard')."',  ".$arr_days[6]." ]		]
+                    }, ['1 " .__('day','dashboard')."',  ".$arr_keys[1]." ], ['2 " .__('days','dashboard')."',  ".$arr_keys[2]." ],
+                			['3 " .__('days','dashboard')."', ".$arr_keys[3]." ], ['4 " .__('days','dashboard')."',  ".$arr_keys[4]." ],
+                			['5 " .__('days','dashboard')."',  ".$arr_keys[5]." ], ['6 " .__('days','dashboard')."',  ".$arr_keys[6]." ],
+                			['7 " .__('days','dashboard')."',  ".$arr_keys[7]." ], ['8+ " .__('days','dashboard')."',  ".$more8." ]		]
             }]
         });
     });

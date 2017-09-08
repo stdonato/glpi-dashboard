@@ -288,16 +288,18 @@ else {
 			$result_tec = $DB->query($sql_tec);	
 			
 			//requester
-			$sql_req = "SELECT count(glpi_tickets.id) AS conta, glpi_users.firstname AS name, glpi_users.realname AS sname
-			FROM `glpi_tickets_users` , glpi_tickets, glpi_users
+			$sql_req =			
+			"SELECT count( glpi_tickets.id ) AS conta, glpi_tickets_users.`users_id` AS id,  glpi_users.firstname AS name, glpi_users.realname AS sname
+			FROM `glpi_tickets_users`, glpi_tickets, glpi_users
 			WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
 			AND glpi_tickets.date ".$sel_date."
 			AND glpi_tickets_users.`users_id` = glpi_users.id
 			AND glpi_tickets_users.type = 1
-			".$entidade." 
-			GROUP BY name
+			AND glpi_tickets.is_deleted = 0
+			".$entidade."
+			GROUP BY `users_id`
 			ORDER BY conta DESC
-			LIMIT 5";
+			LIMIT 5 ";
 			
 			$result_req = $DB->query($sql_req);		
 											
@@ -331,12 +333,12 @@ else {
 		
 			$result_stat = $DB->query($query_stat);
 		
-                        $new = $DB->result($result_stat,0,'new') + 0;
-                        $assig = $DB->result($result_stat,0,'assig') + 0;
-                        $plan = $DB->result($result_stat,0,'plan') + 0;
-                        $pend = $DB->result($result_stat,0,'pend') + 0;
-                        $solve = $DB->result($result_stat,0,'solve') + 0;
-                        $close = $DB->result($result_stat,0,'close') + 0;
+         $new = $DB->result($result_stat,0,'new') + 0;
+         $assig = $DB->result($result_stat,0,'assig') + 0;
+         $plan = $DB->result($result_stat,0,'plan') + 0;
+         $pend = $DB->result($result_stat,0,'pend') + 0;
+         $solve = $DB->result($result_stat,0,'solve') + 0;
+         $close = $DB->result($result_stat,0,'close') + 0;
 			
 			
 			//count by type
@@ -545,10 +547,10 @@ $content .= "
 
 			 <tbody>";		
 			
-			while($row = $DB->fetch_assoc($result_req)) {
+			while($row_req = $DB->fetch_assoc($result_req)) {
 				$content .= "<tr>
-				 <td>".$row['name']." ".$row['sname']."</td>
-				 <td align='right'>".$row['conta']."</td>			
+				 <td>".$row_req['name']." ".$row_req['sname']."</td>
+				 <td align='right'>".$row_req['conta']."</td>			
 				 </tr> ";	
 			}		
 									

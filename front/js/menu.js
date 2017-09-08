@@ -1,10 +1,15 @@
 	$(function(){   
 		var nav = $('#menuHeader');   
+		var frame = $('#iframe1');
+		
 		$(window).scroll(function () { 
 			if ($(this).scrollTop() > 50) { 
-				nav.addClass("menu-fixo");				 
+				nav.addClass("menu-fixo");				 								 				
+				//frame.css("padding-top", "103px");		 
+	
 			} else { 
-				nav.removeClass("menu-fixo"); 				
+				nav.removeClass("menu-fixo"); 					
+				//frame.css("padding-top", "0");						 
 			} 
 		});  
 	});

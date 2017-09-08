@@ -38,8 +38,6 @@ function conv_data_hora($data) {
 }
 
 
-
-
 function time_ext($solvedate)
 {
 
@@ -161,6 +159,30 @@ function dropdown2( $name, array $options, $selected=null )
 
     /*** and return the completed dropdown ***/
     return $dropdown;
+}
+
+
+function margins() {
+
+	global $DB;
+	$query_lay = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'layout' AND users_id = ".$_SESSION['glpiID']." ";																
+						$result_lay = $DB->query($query_lay);					
+						$layout = $DB->result($result_lay,0,'value');
+						
+	//redirect to index
+	if($layout == '0')
+		{
+			// sidebar
+			$margin = '0px 3% 0px 5%';
+		}
+	
+	if($layout == 1 || $layout == '' )
+		{
+			//top menu
+			$margin = '0px 2% 0px 2%';
+		}
+		
+	return $margin;	
 }
 
 //segundos para h:m:s

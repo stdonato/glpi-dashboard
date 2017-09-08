@@ -18,10 +18,10 @@ if(!empty($_POST['submit']))
 else {
 	$data_ini = date("Y-m-01");
 	$data_fin = date("Y-m-d");
-	}
+}
 
 if(!isset($_POST["sel_cat"])) {
-	$id_cat = $_GET["cat"];
+	$id_cat = $_GET["sel_cat"];
 }
 
 else {
@@ -104,7 +104,7 @@ else {
 <body style="background-color: #e5e5e5; margin-left:0%;">
 
 <div id='content' >
-	<div id='container-fluid' style="margin: 0px 2% 0px 2%;">
+	<div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
 		<div id="charts" class="fluid chart">
 			<div id="pad-wrapper" >
 			<div id="head-lg" class="fluid">
@@ -153,9 +153,9 @@ else {
 				
 									// lista de categorias
 									$sql_cat = "
-									SELECT id, completename AS name
+									SELECT id, name AS name, level, sons_cache
 									FROM `glpi_itilcategories`
-									". $entidade_cw ."								
+									WHERE itilcategories_id = 320								
 									ORDER BY `name` ASC ";
 									//AND (SELECT is_incident = 1 OR is_request = 1)
 				
@@ -165,8 +165,22 @@ else {
 									$arr_cat[0] = "-- ". __('Select a category', 'dashboard') . " --" ;
 				
 									while ($row_result = $DB->fetch_assoc($result_cat)) {
+										if($row_result['level'] == 1) {
+											$sep = '';
+										}	
+										if($row_result['level'] == 2) {
+											$sep = '&#160;';
+										}
+										if($row_result['level'] == 3) {
+											$sep = '&#160;&#160;';
+										}
+										if($row_result['level'] == 4) {
+											$sep = '&#160;&#160;&#160;';
+										}										
+											
 										$v_row_result = $row_result['id'];
-										$arr_cat[$v_row_result] = $row_result['name'] ;
+										$arr_cat[$v_row_result] = $sep.$row_result['name'] ;
+									
 									}
 				
 									$name = 'sel_cat';
@@ -251,7 +265,7 @@ else {
 
 			else {
 				$status = $status_all;
-				}
+			}
 
 			// Chamados
 			$sql_cham =
@@ -359,7 +373,7 @@ else {
 				</tr>
 			</table>";
 
-		//count by status
+		   //count by status
 		   $query_stat =
 			"SELECT
 			SUM(case when glpi_tickets.status = 1 then 1 else 0 end) AS new,
@@ -376,20 +390,20 @@ else {
 
 		    $result_stat = $DB->query($query_stat);
 
-                    $new = $DB->result($result_stat,0,'new') + 0;
-                    $assig = $DB->result($result_stat,0,'assig') + 0;
-                    $plan = $DB->result($result_stat,0,'plan') + 0;
-                    $pend = $DB->result($result_stat,0,'pend') + 0;
-                    $solve = $DB->result($result_stat,0,'solve') + 0;
-                    $close = $DB->result($result_stat,0,'close') + 0;
+			$new = $DB->result($result_stat,0,'new') + 0;
+			$assig = $DB->result($result_stat,0,'assig') + 0;
+			$plan = $DB->result($result_stat,0,'plan') + 0;
+			$pend = $DB->result($result_stat,0,'pend') + 0;
+			$solve = $DB->result($result_stat,0,'solve') + 0;
+			$close = $DB->result($result_stat,0,'close') + 0;
 
 echo "
 			<table align='right' style='margin-bottom:10px; border=1'>
 				<tr>
 					<td colspan='3'>
-					<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_categoria.php?con=1&stat=open&cat=".$id_cat."&date1=".$data_ini2."&date2=".$data_fin2."&npage=".$num_por_pagina."\"' <i class='icon-white icon-trash'></i> ".__('Opened', 'dashboard')." </button>
-					<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_categoria.php?con=1&stat=close&cat=".$id_cat."&date1=".$data_ini2."&date2=".$data_fin2."&npage=".$num_por_pagina."\"' <i class='icon-white icon-trash'></i> ".__('Closed', 'dashboard')." </button>
-					<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_categoria.php?con=1&stat=all&cat=".$id_cat."&date1=".$data_ini2."&date2=".$data_fin2."&npage=".$num_por_pagina."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>
+						<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_categoria.php?con=1&stat=open&cat=".$id_cat."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened', 'dashboard')." </button>
+						<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_categoria.php?con=1&stat=close&cat=".$id_cat."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed', 'dashboard')." </button>
+						<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_categoria.php?con=1&stat=all&cat=".$id_cat."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>
 					</td>
 				</tr>
 			</table>
@@ -433,7 +447,7 @@ echo "
 				if($status1 == "6" ) { $status1 = "closed";}
 
 			//requerente
-				$sql_user = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
+			$sql_user = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
 			FROM `glpi_tickets_users` , glpi_tickets, glpi_users
 			WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
 			AND glpi_tickets.id = ". $row['id'] ."
@@ -442,7 +456,6 @@ echo "
 			".$entidade." ";
 
 			$result_user = $DB->query($sql_user);
-
 			$row_user = $DB->fetch_assoc($result_user);
 
 			//tecnico
@@ -455,18 +468,17 @@ echo "
 			".$entidade." ";
 
 			$result_tec = $DB->query($sql_tec);
-
-				$row_tec = $DB->fetch_assoc($result_tec);
+			$row_tec = $DB->fetch_assoc($result_tec);
 
 			echo "
-			<tr>
+			<tr style='font-size:11px;'>
 				<td style='vertical-align:middle; text-align:center; font-weight:bold;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
 				<td style='vertical-align:middle;'><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/>&nbsp; ".Ticket::getStatus($row['status'])."  </td>
 				<td style='vertical-align:middle;'> ". substr($row['name'],0,55) ." </td>
 				<td style='vertical-align:middle;'> ". $row_user['name'] ." ".$row_user['sname'] ." </td>
 				<td style='vertical-align:middle;'> ". $row_tec['name'] ." ".$row_tec['sname'] ." </td>
-				<td style='vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
-				<td style='vertical-align:middle;'> ". conv_data_hora($row['closedate']) ." </td>
+				<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['date']) ." </td>
+				<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['closedate']) ." </td>
 				<td style='vertical-align:middle; text-align:center;'> ". time_ext($row['time']) ."</td>
 			</tr>";
 			}
@@ -491,7 +503,7 @@ echo "
 			        pagingType: "full_numbers",
 			        sorting: [[1,'desc'],[0,'desc'],[2,'desc'],[3,'desc'],[4,'desc']],
 					  displayLength: 25,
-			        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],        
+			        lengthMenu: [[25, 50, 75, 100], [25, 50, 75, 100]],        
 			        buttons: [
 			        	    {
 			                 extend: "copyHtml5",
@@ -548,8 +560,8 @@ echo "
 			echo "
 				<div id='nada_rel' class='well info_box fluid col-md-12'>
 				<table class='table' style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
-				<tr><td style='vertical-align:middle; text-align:center;'> <span style='color: #000;'>" . __('No ticket found', 'dashboard') . "</td></tr>
-				<tr></tr>
+					<tr><td style='vertical-align:middle; text-align:center;'> <span style='color: #000;'>" . __('No ticket found', 'dashboard') . "</td></tr>
+					<tr></tr>
 				</table></div>";
 			}
 

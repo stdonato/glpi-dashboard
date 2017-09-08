@@ -18,7 +18,7 @@ if(!empty($_POST['submit']))
 else {
 	$data_ini = date("Y-01-01");
 	$data_fin = date("Y-m-d");
-	}
+}
 
 # entity
 $sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
@@ -88,10 +88,10 @@ else {
 
 </head>
 
-<body style="background-color: #e5e5e5; margin-left:0%;">
+<body style="background-color: #e5e5e5;">
 
 <div id='content' >
-	<div id='container-fluid' style="margin: 0px 5% 0px 5%;">
+	<div id='container-fluid' style="margin:  <?php echo margins(); ?> ;">
 		<div id="charts" class="fluid chart">
 		<div id="pad-wrapper" >
 		<div id="head-rel" class="fluid">
@@ -99,55 +99,54 @@ else {
 <a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 
 	<div id="titulo_rel"> <?php echo __('Tickets', 'dashboard') .'  '. __('by Location', 'dashboard') ?> </div>
-	<div id="datas-tec" class="span12 fluid" >
+	<div id="datas-tec" class="col-md-12 col-sm-12 fluid" >
 
 	<form id="form1" name="form1" class="form_rel" method="post" action="rel_localidades.php?con=1" style="margin-left: 37%;">
 	<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
-	<tr>
-	<td style="width: 310px;">
-	<?php
-	$url = $_SERVER['REQUEST_URI'];
-	$arr_url = explode("?", $url);
-	$url2 = $arr_url[0];
-
-	echo'
-			<table>
-				<tr>
-					<td>
-					   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-					    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
-					    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-				    	</div>
-					</td>
-					<td>&nbsp;</td>
-					<td>
-				   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-					    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
-					    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-				    	</div>
-					</td>
-					<td>&nbsp;</td>
-				</tr>
-			</table> ';
-	?>
-
-	<script language="Javascript">
-		$('#dp1').datepicker('update');
-		$('#dp2').datepicker('update');
-	</script>
-	</td>
-		<td style="margin-top:2px;">
-
-		</td>
-	</tr>
-	<tr><td height="15px"></td></tr>
-	<tr>
-		<td colspan="2" align="center">
-			<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult','dashboard'); ?> </button>
-			<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2 ?>'" ><i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean','dashboard'); ?> </button>
-		</td>
-	</tr>
-
+		<tr>
+			<td style="width: 310px;">
+			<?php
+			$url = $_SERVER['REQUEST_URI'];
+			$arr_url = explode("?", $url);
+			$url2 = $arr_url[0];
+		
+			echo'
+					<table>
+						<tr>
+							<td>
+							   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+							    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
+							    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+						    	</div>
+							</td>
+							<td>&nbsp;</td>
+							<td>
+						   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+							    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
+							    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+						    	</div>
+							</td>
+							<td>&nbsp;</td>
+						</tr>
+					</table> ';
+			?>
+		
+			<script language="Javascript">
+				$('#dp1').datepicker('update');
+				$('#dp2').datepicker('update');
+			</script>
+			</td>
+			<td style="margin-top:2px;">
+	
+			</td>
+		</tr>
+		<tr><td height="15px"></td></tr>
+		<tr>
+			<td colspan="2" align="center">
+				<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult','dashboard'); ?> </button>
+				<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2 ?>'" ><i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean','dashboard'); ?> </button>
+			</td>
+		</tr>
 	</table>
 <?php Html::closeForm(); ?>
 <!-- </form> -->
@@ -229,9 +228,8 @@ echo "
 				<th style='text-align:center; cursor:pointer;'> ". __('Opened','dashboard') ."</th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Solved','dashboard') ."</th>	
 				<th style='text-align:center; cursor:pointer;'> ". __('Closed','dashboard') ."</th>									
-				<th style='text-align:center; '> % ". __('Closed','dashboard') ."</th> ";
-
-				echo "</tr>
+				<th style='text-align:center; '> % ". __('Closed','dashboard') ."</th> 
+			</tr>
 		</thead>
 	<tbody>";
 
@@ -379,7 +377,7 @@ else {
 	        pagingType: "full_numbers",
 	        sorting: [[1,'desc'],[0,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc']],
 			  displayLength: 25,
-	        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],        
+	        lengthMenu: [[25, 50, 75, 100], [25, 50, 75, 100]],        
 	        buttons: [
 	        	    {
 	                 extend: "copyHtml5",

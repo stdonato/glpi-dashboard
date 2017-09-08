@@ -17,10 +17,11 @@ if(!empty($_POST['submit']))
 else {	
 	$data_ini = date("Y-01-01");
 	$data_fin = date("Y-m-d");	
-	}  
+}  
 
 if(!isset($_POST["sel_ent"])) {
-	$id_ent = $_GET["ent"];	
+	//$id_ent = $_REQUEST["sel_ent"];	
+	$id_ent = '';	
 }
 
 else {
@@ -47,8 +48,7 @@ function conv_data_hora($data) {
 	}
 }
 
-function dropdown( $name, array $options, $selected=null )
-{
+function dropdown( $name, array $options, $selected=null ) {
     /*** begin the select ***/
     $dropdown = '<select style="width: 300px; height: 27px;" autofocus name="'.$name.'" id="'.$name.'">'."\n";
 
@@ -66,6 +66,29 @@ function dropdown( $name, array $options, $selected=null )
 
     /*** and return the completed dropdown ***/
     return $dropdown;
+}
+
+function margins() {
+
+	global $DB;
+	$query_lay = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'layout' AND users_id = ".$_SESSION['glpiID']." ";																
+						$result_lay = $DB->query($query_lay);					
+						$layout = $DB->result($result_lay,0,'value');
+						
+	//redirect to index
+	if($layout == '0')
+		{
+			// sidebar
+			$margin = '0px 3% 0px 5%';
+		}
+	
+	if($layout == 1 || $layout == '' )
+		{
+			//top menu
+			$margin = '0px 2% 0px 2%';
+		}
+		
+	return $margin;	
 }
 ?>
 
@@ -116,10 +139,10 @@ function dropdown( $name, array $options, $selected=null )
    
 </head>
 
-<body style="background-color: #e5e5e5; margin-left:0%;">
+<body style="background-color: #e5e5e5;">
 
 <div id='content' >
-<div id='container-fluid' style="margin: 0px 2% 0px 2%;"> 
+<div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
 <div id="charts" class="fluid chart"> 
 <div id="head-lg" class="fluid" style="height: 450px;">
 
@@ -131,7 +154,7 @@ function dropdown( $name, array $options, $selected=null )
 <a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 
 	<div id="titulo_rel"> <?php echo __('Tickets', 'dashboard') ?> </div>	
-		<div id="datas-tec3" class="span12 fluid" > 
+		<div id="datas-tec3" class="col-md-12 fluid" > 
 		<form id="form1" name="form1" class="form_rel" method="post" action="rel_tickets.php?con=1" style="margin-left: 15%;"> 
 		<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" class="tab_tickets" width="550">
 		<tr>			
@@ -162,8 +185,7 @@ function dropdown( $name, array $options, $selected=null )
 					</tr>
 				</table> ';
 				?>	
-			</td>
-			
+			</td>			
 			<td class="separator">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 			<td style="margin-top:2px; width:100px;"><?php echo __('Entity'); ?>: </td>		
 			<td style="margin-top:2px;">
@@ -177,13 +199,16 @@ function dropdown( $name, array $options, $selected=null )
 			if($sel_ent == '' || $sel_ent == -1) {
 				
 				$entities = $_SESSION['glpiactiveentities'];
-				$ents = implode(",",$entities);
-			
+				$ents = implode(",",$entities);			
 			}
 			else {
 				$ents = $sel_ent;
 			}
-			
+
+			//echo "teste";
+			$user_ents = Profile_User::getUserEntities($_SESSION['glpiID'], true);
+			//var_dump($_SESSION['glpiactiveentities']);					
+				
 			// lista de entidades
 			$sql_ent = "
 			SELECT id, name, completename AS cname
@@ -195,10 +220,13 @@ function dropdown( $name, array $options, $selected=null )
 			
 			$arr_ent = array();
 			$arr_ent[-1] = "-----" ;
-			$arr_ent[0] = __('All') ;
 			
-			while ($row_ent = $DB->fetch_assoc($result_ent))		
-			{ 
+			//if(in_array(0,$user_ents)) {
+				$arr_ent[0] = __('All') ;
+			//}
+			//else { $arr_ent[0] = __('-----') ; }
+			
+			while ($row_ent = $DB->fetch_assoc($result_ent)) { 
 				$v_row_ent = $row_ent['id'];
 				$arr_ent[$v_row_ent] = $row_ent['cname'] ;			
 			} 
@@ -209,49 +237,51 @@ function dropdown( $name, array $options, $selected=null )
 			
 			echo dropdown( $name, $options, $selected );	
 			
-
-if(isset($_REQUEST["sel_sta"]) && $_REQUEST["sel_sta"] != '0') { 
-
-$id_sta1 = $_REQUEST["sel_sta"];
-
-	if($_REQUEST["sel_sta"] == 'notclosed') {
-		$id_sta = "AND glpi_tickets.status <> 6"; 
-	}
-	elseif($_REQUEST["sel_sta"] == 'notold') {
-		$id_sta = "AND glpi_tickets.status NOT IN ('5','6')"; 
-	}
-	else {
-		$id_sta = "AND glpi_tickets.status = ".$_REQUEST["sel_sta"] ;
-	}
-}
-else { $id_sta = ''; }
-
-//AND glpi_tickets.status LIKE '%".$id_sta."'
-
-if(isset($_REQUEST["sel_req"]) && $_REQUEST["sel_req"] != '0') { $id_req = $_REQUEST["sel_req"]; }
-else { $id_req = ''; }
-
-if(isset($_REQUEST["sel_pri"]) && $_REQUEST["sel_pri"] != '0') { $id_pri = $_REQUEST["sel_pri"]; }
-else { $id_pri = ''; }
-
-if(isset($_REQUEST["sel_cat"]) && $_REQUEST["sel_cat"] != '0') { $id_cat = $_REQUEST["sel_cat"]; }
-else { $id_cat = ''; }
-
-if(isset($_REQUEST["sel_tip"]) && $_REQUEST["sel_tip"] != '0') { $id_tip = $_REQUEST["sel_tip"]; }
-else { $id_tip = ''; }
-
-if(isset($_REQUEST["sel_due"]) && $_REQUEST["sel_due"] != '0') {
-	 
-	$id_due1 = $_REQUEST["sel_due"];
-	 
-	if($_REQUEST["sel_due"] == 1) {
-		$id_due = "AND due_date < solvedate";		
-		}
-	if($_REQUEST["sel_due"] == 2) {		
-		$id_due = "AND due_date >= solvedate"; 
-		}
-}
-else { $id_due = ''; }										
+			$id_sta1 = '';
+			$id_due1 = '';
+			
+			if(isset($_REQUEST["sel_sta"]) && $_REQUEST["sel_sta"] != '0') { 
+				
+				$id_sta1 = $_REQUEST["sel_sta"];
+			
+				if($_REQUEST["sel_sta"] == 'notclosed') {
+					$id_sta = "AND glpi_tickets.status <> 6"; 
+				}
+				elseif($_REQUEST["sel_sta"] == 'notold') {
+					$id_sta = "AND glpi_tickets.status NOT IN ('5','6')"; 
+				}
+				else {
+					$id_sta = "AND glpi_tickets.status = ".$_REQUEST["sel_sta"] ;
+				}
+			}
+			else { $id_sta = ''; }
+			
+			//AND glpi_tickets.status LIKE '%".$id_sta."'
+			
+			if(isset($_REQUEST["sel_req"]) && $_REQUEST["sel_req"] != '0') { $id_req = $_REQUEST["sel_req"]; }
+			else { $id_req = ''; }
+			
+			if(isset($_REQUEST["sel_pri"]) && $_REQUEST["sel_pri"] != '0') { $id_pri = $_REQUEST["sel_pri"]; }
+			else { $id_pri = ''; }
+			
+			if(isset($_REQUEST["sel_cat"]) && $_REQUEST["sel_cat"] != '0') { $id_cat = $_REQUEST["sel_cat"]; }
+			else { $id_cat = ''; }
+			
+			if(isset($_REQUEST["sel_tip"]) && $_REQUEST["sel_tip"] != '0') { $id_tip = $_REQUEST["sel_tip"]; }
+			else { $id_tip = ''; }
+			
+			if(isset($_REQUEST["sel_due"]) && $_REQUEST["sel_due"] != '0') {
+				 
+				$id_due1 = $_REQUEST["sel_due"];
+				 
+				if($_REQUEST["sel_due"] == 1) {
+					$id_due = "AND due_date < solvedate";		
+					}
+				if($_REQUEST["sel_due"] == 2) {		
+					$id_due = "AND due_date >= solvedate"; 
+					}
+			}
+			else { $id_due = ''; }										
 			?>
 			
 			</td>
@@ -274,10 +304,10 @@ else { $id_due = ''; }
 			$arr_sta[0] = "-----";
 			
 			while ($row_sta = $DB->fetch_assoc($result_sta))		
-				{ 
-					$v_row_sta = $row_sta['status'];
-					$arr_sta[$v_row_sta] = Ticket::getStatus($row_sta['status']) ;			
-				} 
+			{ 
+				$v_row_sta = $row_sta['status'];
+				$arr_sta[$v_row_sta] = Ticket::getStatus($row_sta['status']) ;			
+			} 
 				
 			$arr_sta['notold']    = _x('status', 'Not solved');
          $arr_sta['notclosed'] = _x('status', 'Not closed'); 	
@@ -331,10 +361,10 @@ else { $id_due = ''; }
 			$arr_cat[0] = "-----" ;
 			
 			while ($row_cat = $DB->fetch_assoc($result_cat))		
-				{ 
-					$v_row_cat = $row_cat['id'];
-					$arr_cat[$v_row_cat] = $row_cat['name'] ;			
-				} 
+			{ 
+				$v_row_cat = $row_cat['id'];
+				$arr_cat[$v_row_cat] = $row_cat['name'] ;			
+			} 
 				
 			$name = 'sel_cat';
 			$options = $arr_cat;
@@ -398,10 +428,10 @@ else { $id_due = ''; }
 			$arr_req[0] = "-----";
 			
 			while ($row_req = $DB->fetch_assoc($result_req))		
-				{ 
-					$v_row_req = $row_req['id'];
-					$arr_req[$v_row_req] = $row_req['name'] ;			
-				} 
+			{ 
+				$v_row_req = $row_req['id'];
+				$arr_req[$v_row_req] = $row_req['name'] ;			
+			} 
 				
 			$name = 'sel_req';
 			$options = $arr_req;
@@ -434,299 +464,313 @@ else { $id_due = ''; }
 <?php 
 
 //entidades
-$con = $_REQUEST['con'];
+if(isset($_REQUEST['con'])) {
+	$con = $_REQUEST['con'];
+}
+else { $con = ''; }
+
 
 if($con == "1") {
 
-if(!isset($_POST['date1']))
-{	
-	$data_ini2 = $_GET['date1'];	
-	$data_fin2 = $_GET['date2'];
-}
-
-else {	
-	$data_ini2 = $_POST['date1'];	
-	$data_fin2 = $_POST['date2'];	
-}  
-
-//entity
-if(!isset($_REQUEST["sel_ent"]) || $_REQUEST["sel_ent"] == 0 || $_REQUEST["sel_ent"] == "" ) 
-{ 
-	$id_ent = 0; 
-   $entidade = "";
-}
-
-else { 
-	$id_ent = $_REQUEST["sel_ent"]; 
-	$entidade = "AND glpi_tickets.entities_id = ".$id_ent." ";
-}
-
-$arr_param = array($id_ent, $id_sta, $id_req, $id_pri, $id_cat, $id_tip);
-
-//dates
-if($data_ini2 == $data_fin2) {
-	$datas2 = "LIKE '%".$data_ini2."%'";	
-}	
-
-else {
-	$datas2 = "BETWEEN '".$data_ini2." 00:00:00' AND '".$data_fin2." 23:59:59'";	
-}	
-
-if($id_sta == 5) {
-	$period = "AND glpi_tickets.solvedate ".$datas2." ";	
-}
-
-elseif($id_sta == 6) {
-	$period = "AND glpi_tickets.closedate ".$datas2." ";	
-}	
-
-else {
-	$period = "AND glpi_tickets.date ".$datas2." ";	 
-}
-
-
-// Chamados
-$sql_cham = 
-"SELECT id, entities_id, name, date, closedate, solvedate, status, users_id_recipient, requesttypes_id, priority, itilcategories_id, type, due_date 
-FROM glpi_tickets
-WHERE glpi_tickets.is_deleted = 0
-".$entidade."
-".$period."
-".$id_sta."
-".$id_due."
-AND glpi_tickets.requesttypes_id LIKE '%".$id_req."'
-AND glpi_tickets.priority LIKE '%".$id_pri."'
-AND glpi_tickets.itilcategories_id LIKE '%".$id_cat."'
-AND glpi_tickets.type LIKE '%".$id_tip."'
-ORDER BY id DESC ";
-
-$result_cham = $DB->query($sql_cham);
-
-
-$consulta1 = 
-"SELECT glpi_tickets.id AS total
-FROM glpi_tickets
-WHERE glpi_tickets.is_deleted = 0
-".$entidade."
-".$period."
-".$id_sta."
-".$id_due."
-AND glpi_tickets.requesttypes_id LIKE '%".$id_req."'
-AND glpi_tickets.priority LIKE '%".$id_pri."'
-AND glpi_tickets.itilcategories_id LIKE '%".$id_cat."'
-AND glpi_tickets.type LIKE '%".$id_tip."' ";
-
-$result_cons1 = $DB->query($consulta1);
-$conta_cons = $DB->numrows($result_cons1);
-
-$consulta = $conta_cons;
-
-
-if($consulta > 0) {
-
-// nome da entidade
-$sql_nm = "
-SELECT name, completename AS cname
-FROM `glpi_entities`
-WHERE id = ".$id_ent."";
-
-$result_nm = $DB->query($sql_nm);
-$ent_name = $DB->fetch_assoc($result_nm);
-
-
- //count by status
- $query_stat = "
-SELECT
-SUM(case when glpi_tickets.status = 1 then 1 else 0 end) AS new,
-SUM(case when glpi_tickets.status = 2 then 1 else 0 end) AS assig,
-SUM(case when glpi_tickets.status = 3 then 1 else 0 end) AS plan,
-SUM(case when glpi_tickets.status = 4 then 1 else 0 end) AS pend,
-SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve,
-SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
-FROM glpi_tickets
-WHERE glpi_tickets.is_deleted = 0
-".$entidade."
-".$period."
-".$id_sta."
-".$id_due."
-AND glpi_tickets.requesttypes_id LIKE '%".$id_req."'
-AND glpi_tickets.priority LIKE '%".$id_pri."'
-AND glpi_tickets.itilcategories_id LIKE '%".$id_cat."'
-AND glpi_tickets.type LIKE '%".$id_tip."' ";
-
- $result_stat = $DB->query($query_stat);
-
-$new = $DB->result($result_stat,0,'new') + 0;
-$assig = $DB->result($result_stat,0,'assig') + 0;
-$plan = $DB->result($result_stat,0,'plan') + 0;
-$pend = $DB->result($result_stat,0,'pend') + 0;
-$solve = $DB->result($result_stat,0,'solve') + 0;
-$close = $DB->result($result_stat,0,'close') + 0;
-
-
-//listar chamados
-echo "
-<div class='well info_box fluid col-md-12 report-tic' style='margin-left: -1px;'>
-
-<table class='fluid'  style=' width:100%; font-size: 18px; font-weight:bold;  margin-bottom:25px;  margin-top:20px; ' cellpadding = 1px>
-	<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Entity', 'dashboard').": </span>".$ent_name['cname']." </td>
-	<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Tickets', 'dashboard').": </span>".$consulta." </td>
-	<td colspan='3' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'>
-	".__('Period', 'dashboard') .": </span> " . conv_data($data_ini2) ." a ". conv_data($data_fin2)." 
-	</td>
-	<td>&nbsp;</td>
+	if(!isset($_POST['date1']))
+	{	
+		$data_ini2 = $_GET['date1'];	
+		$data_fin2 = $_GET['date2'];
+	}
 	
-</table>
-
-<table style='font-size: 16px; font-weight:bold; width: 50%;' border=0>
-	<tr>
-		  <td><span style='color: #000;'>". _x('status','New').": </span><b>".$new." </b></td>
-        <td><span style='color: #000;'>". __('Assigned'). ": </span><b>". ($assig + $plan) ."</b></td>
-        <td><span style='color: #000;'>". __('Pending').": </span><b>".$pend." </b></td>
-        <td><span style='color: #000;'>". __('Solved','dashboard').": </span><b>".$solve." </b></td>
-        <td><span style='color: #000;'>". __('Closed').": </span><b>".$close." </b></td>
-	</tr>
-	<tr><td>&nbsp;</td></tr>	
-</table>
-
-<table id='ticket' class='display'  style='font-size: 11px; font-weight:bold;' cellpadding = 2px>
-	<thead>
-		<tr>
-			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('ID')." </th>
-			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Status')." </th>
-			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Type')." </th>
-			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Source')." </th>
-			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Priority')." </th>
-			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Category')." </th>
-			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Title')." </th>
-			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Content')." </th>
-			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Requester')." </th>
-			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Technician')." </th>			
-			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Opened','dashboard')."</th>
-			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Closed')." </th>
-			<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Due Date','dashboard')." </th>
-		</tr>
-	</thead>
-<tbody>";
-
-
-while($row = $DB->fetch_assoc($result_cham)){
+	else {	
+		$data_ini2 = $_POST['date1'];	
+		$data_fin2 = $_POST['date2'];	
+	}  
 	
-	$status1 = $row['status']; 
-
-	if($status1 == "1" ) { $status1 = "new";} 
-	if($status1 == "2" ) { $status1 = "assign";} 
-	if($status1 == "3" ) { $status1 = "plan";} 
-	if($status1 == "4" ) { $status1 = "waiting";} 
-	if($status1 == "5" ) { $status1 = "solved";}  	            
-	if($status1 == "6" ) { $status1 = "closed";}	
+	//entity
+	if(!isset($_REQUEST["sel_ent"]) || $_REQUEST["sel_ent"] == 0 || $_REQUEST["sel_ent"] == "" ) 
+	{ 
+		if(in_array(0,$user_ents)) {
+			$id_ent = 0 ;
+			$entidade = '';
+		}
+		else {			
+			$id_ent = implode(',',$_SESSION['glpiactiveentities']); 
+	   	$entidade = "AND glpi_tickets.entities_id IN (".$id_ent.")";
+	   }	
+	}
 	
-	//type
-	if($row['type'] == 1) { $type = __('Incident'); }
-	else { $type = __('Request'); }
+	else { 
+		$id_ent = $_REQUEST["sel_ent"]; 
+		$entidade = "AND glpi_tickets.entities_id IN (".$id_ent.") ";
+	}
 	
-	//priority
-	$prio = $row['priority'];
+	$arr_param = array($id_ent, $id_sta, $id_req, $id_pri, $id_cat, $id_tip);
 	
-	if($prio == "1" ) { $pri = _x('priority', 'Very low');} 
-	if($prio == "2" ) { $pri = _x('priority', 'Low');} 
-	if($prio == "3" ) { $pri = _x('priority', 'Medium');} 
-	if($prio == "4" ) { $pri = _x('priority', 'High');} 
-	if($prio == "5" ) { $pri = _x('priority', 'Very high');} 
-	if($prio == "6" ) { $pri = _x('priority', 'Major');} 
+	//dates
+	if($data_ini2 == $data_fin2) {
+		$datas2 = "LIKE '%".$data_ini2."%'";			
+	}	
 	
-	//requerente	
-	$sql_user = "SELECT glpi_tickets.id AS id, glpi_tickets.name AS title, glpi_tickets.content AS content, glpi_users.firstname AS name, glpi_users.realname AS sname
-	FROM `glpi_tickets_users` , glpi_tickets, glpi_users
-	WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
-	AND glpi_tickets.id = ". $row['id'] ."
-	AND glpi_tickets_users.`users_id` = glpi_users.id
-	AND glpi_tickets_users.type = 1 ";
-
-	$result_user = $DB->query($sql_user);
-			
-	$row_user = $DB->fetch_assoc($result_user);
-				
-	//tecnico	
-	$sql_tec = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
-	FROM `glpi_tickets_users` , glpi_tickets, glpi_users
-	WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
-	AND glpi_tickets.id = ". $row['id'] ."
-	AND glpi_tickets_users.`users_id` = glpi_users.id
-	AND glpi_tickets_users.type = 2 ";
+	else {
+		$datas2 = "BETWEEN '".$data_ini2." 00:00:00' AND '".$data_fin2." 23:59:59'";	
+	}	
 	
-	$result_tec = $DB->query($sql_tec);	
-	$row_tec = $DB->fetch_assoc($result_tec);
-		
-		
-	//origem	
-	$sql_req = "SELECT glpi_tickets.id AS id, glpi_requesttypes.name AS name
-	FROM `glpi_tickets` , glpi_requesttypes
-	WHERE glpi_tickets.requesttypes_id = glpi_requesttypes.`id`
-	AND glpi_tickets.id = ". $row['id'] ." ";
+	if($id_sta == 5) {
+		$period = "AND glpi_tickets.solvedate ".$datas2." ";	
+	}
 	
-	$result_req = $DB->query($sql_req);	
-	$row_req = $DB->fetch_assoc($result_req);
-		
-		
-	//categoria	
-	$sql_cat = "SELECT glpi_tickets.id AS id, glpi_itilcategories.completename AS name
-	FROM `glpi_tickets` , glpi_itilcategories
-	WHERE glpi_tickets.itilcategories_id = glpi_itilcategories.`id`
-	AND glpi_tickets.id = ". $row['id'] ." ";
+	elseif($id_sta == 6) {
+		$period = "AND glpi_tickets.closedate ".$datas2." ";	
+	}	
 	
-	$result_cat = $DB->query($sql_cat);	
-	$row_cat = $DB->fetch_assoc($result_cat);
-			
-	//check due_date	
-	$sql_due = "SELECT due_date, closedate, solvedate 
+	else {
+		$period = "AND glpi_tickets.date ".$datas2." ";	 
+	}
+	
+	
+	// Chamados
+	$sql_cham = 
+	"SELECT id, entities_id, name, date, closedate, solvedate, status, users_id_recipient, requesttypes_id, priority, itilcategories_id, type, due_date 
 	FROM glpi_tickets
 	WHERE glpi_tickets.is_deleted = 0
-	AND glpi_tickets.id = ". $row['id'] ." ";
-			
-	$result_due = $DB->query($sql_due);
-	$row_due = $DB->fetch_assoc($result_due);
+	".$entidade."
+	".$period."
+	".$id_sta."
+	".$id_due."
+	AND glpi_tickets.requesttypes_id LIKE '%".$id_req."'
+	AND glpi_tickets.priority LIKE '%".$id_pri."'
+	AND glpi_tickets.itilcategories_id LIKE '%".$id_cat."'
+	AND glpi_tickets.type LIKE '%".$id_tip."'
+	ORDER BY id DESC ";
+	
+	$result_cham = $DB->query($sql_cham);
+	
+	$consulta1 = 
+	"SELECT glpi_tickets.id AS total
+	FROM glpi_tickets
+	WHERE glpi_tickets.is_deleted = 0
+	".$entidade."
+	".$period."
+	".$id_sta."
+	".$id_due."
+	AND glpi_tickets.requesttypes_id LIKE '%".$id_req."'
+	AND glpi_tickets.priority LIKE '%".$id_pri."'
+	AND glpi_tickets.itilcategories_id LIKE '%".$id_cat."'
+	AND glpi_tickets.type LIKE '%".$id_tip."' ";
+	
+	$result_cons1 = $DB->query($consulta1);
+	$conta_cons = $DB->numrows($result_cons1);
+	
+	$consulta = $conta_cons;
 
+if($consulta > 0) {
+	
+	// nome da entidade
+	
+	$chk_ent = explode(',',$id_ent);
+	$count_ent = count($chk_ent);
+	
+	if($count_ent == 1) {
+		$sql_nm = "
+		SELECT name, completename AS cname
+		FROM `glpi_entities`
+		WHERE id IN (".$id_ent.")";
 		
-echo "	
-	<tr style='font-weight:normal;'>
-		<td style='vertical-align:middle; text-align:center; font-weight:bold;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
-		<td style='vertical-align:middle;'><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/>&nbsp; ".Ticket::getStatus($row['status'])."</td>
-		<td style='vertical-align:middle;'> ". $type ." </td>
-		<td style='vertical-align:middle;'> ". $row_req['name'] ." </td>
-		<td style='vertical-align:middle;'> ". $pri ." </td>
-		<td style='vertical-align:middle; max-width:150px;'> ". $row_cat['name'] ." </td>		
-		<td style='vertical-align:middle;'> ". substr($row_user['title'],0,55) ." </td>
-		<td style='vertical-align:middle; max-width:550px;'> ". html_entity_decode($row_user['content']) ." </td>
-		<td style='vertical-align:middle;'> ". $row_user['name'] ." ".$row_user['sname'] ." </td>
-		<td style='vertical-align:middle;'> ". $row_tec['name'] ." ".$row_tec['sname'] ." </td>
-		<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['date']) ." </td>		
-		<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['solvedate']) ." </td>";		
-			
-			$today = date("Y-m-d H:i:s");
-			
-			if($row['solvedate'] > $row['due_date']) {
-					echo "<td style='vertical-align:middle; text-align:center; color:red;'> ". conv_data_hora($row['due_date']) ." </td>";
-				}	
-			
-				else {	
-					
-					if(!isset($row['solvedate']) AND $today > $row['duedate']) {
-						echo "<td style='vertical-align:middle; text-align:center; color:red;'> ". conv_data_hora($row['due_date']) ." </td>";
-					}
+		$result_nm = $DB->query($sql_nm);
+		$ent_name = $DB->fetch_assoc($result_nm);	
+	}
+	else { $ent_name['cname'] = __("All"); }
+	
+	//count by status
+	$query_stat = "
+	SELECT
+	SUM(case when glpi_tickets.status = 1 then 1 else 0 end) AS new,
+	SUM(case when glpi_tickets.status = 2 then 1 else 0 end) AS assig,
+	SUM(case when glpi_tickets.status = 3 then 1 else 0 end) AS plan,
+	SUM(case when glpi_tickets.status = 4 then 1 else 0 end) AS pend,
+	SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve,
+	SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
+	FROM glpi_tickets
+	WHERE glpi_tickets.is_deleted = 0
+	".$entidade."
+	".$period."
+	".$id_sta."
+	".$id_due."
+	AND glpi_tickets.requesttypes_id LIKE '%".$id_req."'
+	AND glpi_tickets.priority LIKE '%".$id_pri."'
+	AND glpi_tickets.itilcategories_id LIKE '%".$id_cat."'
+	AND glpi_tickets.type LIKE '%".$id_tip."' ";
+	
+	 $result_stat = $DB->query($query_stat);
+	
+	$new = $DB->result($result_stat,0,'new') + 0;
+	$assig = $DB->result($result_stat,0,'assig') + 0;
+	$plan = $DB->result($result_stat,0,'plan') + 0;
+	$pend = $DB->result($result_stat,0,'pend') + 0;
+	$solve = $DB->result($result_stat,0,'solve') + 0;
+	$close = $DB->result($result_stat,0,'close') + 0;	
+	
+	//listar chamados
+	echo "
+	<div class='well info_box fluid col-md-12 report-tic' style='margin-left: -1px;'>
+	
+	<table class='fluid'  style=' width:100%; font-size: 18px; font-weight:bold;  margin-bottom:25px;  margin-top:20px; ' cellpadding = 1px>
+		<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Entity', 'dashboard').": </span>".$ent_name['cname']." </td>
+		<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Tickets', 'dashboard').": </span>".$consulta." </td>
+		<td colspan='3' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'>
+		".__('Period', 'dashboard') .": </span> " . conv_data($data_ini2) ." a ". conv_data($data_fin2)." 
+		</td>
+		<td>&nbsp;</td>
+		
+	</table>
+	
+	<table style='font-size: 16px; font-weight:bold; width: 50%;' border=0>
+		<tr>
+			  <td><span style='color: #000;'>". _x('status','New').": </span><b>".$new." </b></td>
+	        <td><span style='color: #000;'>". __('Assigned'). ": </span><b>". ($assig + $plan) ."</b></td>
+	        <td><span style='color: #000;'>". __('Pending').": </span><b>".$pend." </b></td>
+	        <td><span style='color: #000;'>". __('Solved','dashboard').": </span><b>".$solve." </b></td>
+	        <td><span style='color: #000;'>". __('Closed').": </span><b>".$close." </b></td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>	
+	</table>
+	
+	<table id='ticket' class='display'  style='width: 99%; font-size: 11px; font-weight:bold;' cellpadding = 2px>
+		<thead>
+			<tr>
+				<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('ID')." </th>
+				<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Status')." </th>
+				<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Type')." </th>
+				<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Source')." </th>
+				<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Priority')." </th>
+				<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Category')." </th>
+				<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Title')." </th>
+				<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Content')." </th>
+				<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Requester')." </th>
+				<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Technician')." </th>			
+				<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Opened','dashboard')."</th>
+				<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Closed')." </th>
+				<th style='font-size: 12px; text-align: center; cursor:pointer;'> ".__('Due Date','dashboard')." </th>
+			</tr>
+		</thead>
+	<tbody>";
+	
+	
+	while($row = $DB->fetch_assoc($result_cham)){
+		
+		$status1 = $row['status']; 
+	
+		if($status1 == "1" ) { $status1 = "new";} 
+		if($status1 == "2" ) { $status1 = "assign";} 
+		if($status1 == "3" ) { $status1 = "plan";} 
+		if($status1 == "4" ) { $status1 = "waiting";} 
+		if($status1 == "5" ) { $status1 = "solved";}  	            
+		if($status1 == "6" ) { $status1 = "closed";}	
+		
+		//type
+		if($row['type'] == 1) { $type = __('Incident'); }
+		else { $type = __('Request'); }
+		
+		//priority
+		$prio = $row['priority'];
+		
+		if($prio == "1" ) { $pri = _x('priority', 'Very low');} 
+		if($prio == "2" ) { $pri = _x('priority', 'Low');} 
+		if($prio == "3" ) { $pri = _x('priority', 'Medium');} 
+		if($prio == "4" ) { $pri = _x('priority', 'High');} 
+		if($prio == "5" ) { $pri = _x('priority', 'Very high');} 
+		if($prio == "6" ) { $pri = _x('priority', 'Major');} 
+		
+		//requerente	
+		$sql_user = "SELECT glpi_tickets.id AS id, glpi_tickets.name AS title, glpi_tickets.content AS content, glpi_users.firstname AS name, glpi_users.realname AS sname
+		FROM `glpi_tickets_users` , glpi_tickets, glpi_users
+		WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
+		AND glpi_tickets.id = ". $row['id'] ."
+		AND glpi_tickets_users.`users_id` = glpi_users.id
+		AND glpi_tickets_users.type = 1 ";
+	
+		$result_user = $DB->query($sql_user);
 				
-					else {
-						echo "<td style='vertical-align:middle; text-align:center; color:green;'> ". conv_data_hora($row['due_date']) ." </td>";
-					}					
-			}
+		$row_user = $DB->fetch_assoc($result_user);
+					
+		//tecnico	
+		$sql_tec = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
+		FROM `glpi_tickets_users` , glpi_tickets, glpi_users
+		WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
+		AND glpi_tickets.id = ". $row['id'] ."
+		AND glpi_tickets_users.`users_id` = glpi_users.id
+		AND glpi_tickets_users.type = 2 ";
 		
-echo "		
-	</tr>";
+		$result_tec = $DB->query($sql_tec);	
+		$row_tec = $DB->fetch_assoc($result_tec);
+			
+			
+		//origem	
+		$sql_req = "SELECT glpi_tickets.id AS id, glpi_requesttypes.name AS name
+		FROM `glpi_tickets` , glpi_requesttypes
+		WHERE glpi_tickets.requesttypes_id = glpi_requesttypes.`id`
+		AND glpi_tickets.id = ". $row['id'] ." ";
+		
+		$result_req = $DB->query($sql_req);	
+		$row_req = $DB->fetch_assoc($result_req);
+			
+			
+		//categoria	
+		$sql_cat = "SELECT glpi_tickets.id AS id, glpi_itilcategories.completename AS name
+		FROM `glpi_tickets` , glpi_itilcategories
+		WHERE glpi_tickets.itilcategories_id = glpi_itilcategories.`id`
+		AND glpi_tickets.id = ". $row['id'] ." ";
+		
+		$result_cat = $DB->query($sql_cat);	
+		$row_cat = $DB->fetch_assoc($result_cat);
+				
+		//check due_date	
+		$sql_due = "SELECT due_date, closedate, solvedate 
+		FROM glpi_tickets
+		WHERE glpi_tickets.is_deleted = 0
+		AND glpi_tickets.id = ". $row['id'] ." ";
+				
+		$result_due = $DB->query($sql_due);
+		$row_due = $DB->fetch_assoc($result_due);
+	
+			
+	echo "	
+		<tr style='font-weight:normal;'>
+			<td style='vertical-align:middle; text-align:center; font-weight:bold;'><a href=".$CFG_GLPI['url_base']."/front/ticket.form.php?id=". $row['id'] ." target=_blank >" . $row['id'] . "</a></td>
+			<td style='vertical-align:middle;'><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/>&nbsp; ".Ticket::getStatus($row['status'])."</td>
+			<td style='vertical-align:middle;'> ". $type ." </td>
+			<td style='vertical-align:middle;'> ". $row_req['name'] ." </td>
+			<td style='vertical-align:middle;text-align:center;'> ". $pri ." </td>
+			<td style='vertical-align:middle; max-width:150px;'> ". $row_cat['name'] ." </td>		
+			<td style='vertical-align:middle;'> ". substr($row_user['title'],0,55) ." </td>
+			<td style='vertical-align:middle; max-width:550px;'> ". html_entity_decode($row_user['content']) ." </td>
+			<td style='vertical-align:middle;'> ". $row_user['name'] ." ".$row_user['sname'] ." </td>
+			<td style='vertical-align:middle;'> ". $row_tec['name'] ." ".$row_tec['sname'] ." </td>
+			<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['date']) ." </td>		
+			<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['solvedate']) ." </td>";		
+				
+				$today = date("Y-m-d H:i:s");
+				
+				if($row['solvedate'] > $row['due_date']) {
+						echo "<td style='vertical-align:middle; text-align:center; color:red;'> ". conv_data_hora($row['due_date']) ." </td>";
+					}	
+				
+					else {	
+						
+						if(!isset($row['solvedate']) AND $today > $row['duedate']) {
+							echo "<td style='vertical-align:middle; text-align:center; color:red;'> ". conv_data_hora($row['due_date']) ." </td>";
+						}
+					
+						else {
+							echo "<td style='vertical-align:middle; text-align:center; color:green;'> ". conv_data_hora($row['due_date']) ." </td>";
+						}					
+				}
+			
+	echo "		
+		</tr>";
 }
 
 echo "</tbody>
 		</table>
-		</div>";		 	
+		</div>";	
+				 	
 ?>
 
 <script type="text/javascript" charset="utf-8">
@@ -745,7 +789,7 @@ $(document).ready(function() {
         pagingType: "full_numbers",
         sorting: [[0,'desc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc'],[7,'desc'],[8,'desc'],[9,'desc'],[10,'desc'],[11,'desc']],
 		  displayLength: 25,
-        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],        
+        lengthMenu: [[25, 50, 75, 100], [25, 50, 75, 100]],        
         buttons: [
         	    {
                  extend: "copyHtml5",

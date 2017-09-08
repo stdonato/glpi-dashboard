@@ -12,7 +12,7 @@ Session::checkRight("profile", READ);
 function dropdown( $name, array $options, $selected=null )
 {
     /*** begin the select ***/
-    $dropdown = '<select id="sel_techs" style="width: 300px;" autofocus onChange="javascript: document.form1.submit.focus()" name="'.$name.'" id="'.$name.'">'."\n";
+    $dropdown = '<select id="sel_group" style="width: 300px;" autofocus onChange="javascript: document.form1.submit.focus()" name="'.$name.'" id="'.$name.'">'."\n";
 
     $selected = $selected;
     /*** loop over the options ***/
@@ -35,43 +35,39 @@ function dropdown( $name, array $options, $selected=null )
     return $dropdown;
 }
 
-function time_ext($solvedate)
-{
 
-$time = $solvedate; // time duration in seconds
-
- if ($time == 0){
-        return '';
-    }
-
-	$days = floor($time / (60 * 60 * 24));
-	$time -= $days * (60 * 60 * 24);
+function margins() {
 	
-	$hours = floor($time / (60 * 60));
-	$time -= $hours * (60 * 60);
+	$query_lay = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'layout' AND users_id = ".$_SESSION['glpiID']." ";																
+						$result_lay = $DB->query($query_lay);					
+						$layout = $DB->result($result_lay,0,'value');
+						
+	//redirect to index
+	if($layout == '0')
+		{
+			// sidebar
+			$margin = '0px 3% 0px 5%';
+		}
 	
-	$minutes = floor($time / 60);
-	$time -= $minutes * 60;
-	
-	$seconds = floor($time);
-	$time -= $seconds;
-	
-	$return = "{$days}d {$hours}h {$minutes}m {$seconds}s"; // 1d 6h 50m 31s
-	
-	return $return;
+	if($layout == 1 || $layout == '' )
+		{
+			//top menu
+			$margin = '0px 2% 0px 2%';
+		}
+		
+	return $margin;	
 }
 
 
-if(!empty($_POST['submit']))
-	{
-   	$data_ini = $_REQUEST['date1'];
-   	$data_fin = $_REQUEST['date2'];
-	}
+if(!empty($_POST['submit'])){
+  	$data_ini = $_REQUEST['date1'];
+  	$data_fin = $_REQUEST['date2'];
+}
 
 else {
-    	$data_ini = date("Y-01-01");
-    	$data_fin = date("Y-m-d");
-    }
+  	$data_ini = date("Y-01-01");
+  	$data_fin = date("Y-m-d");
+}
 
 # entity
 $sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
@@ -84,16 +80,14 @@ if($sel_ent == '' || $sel_ent == -1) {
 	$entities = $_SESSION['glpiactiveentities'];
 	$ent = implode(",",$entities);
 
-	$entidade = "AND glpi_tickets.entities_id IN (".$ent.") ";
-	//$entidade_u = "AND glpi_users.entities_id IN (".$ent.") ";
+	$entidade = "AND glpi_tickets.entities_id IN (".$ent.") ";	
 	$entidade_u = "AND glpi_profiles_users.entities_id IN (".$ent.") ";
 	$entidade_g = "WHERE entities_id IN (".$ent.") OR is_recursive = 1";
 	$entidade1 = "";
 
 }
 else {
-	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.") ";
-	//$entidade_u = "AND glpi_users.entities_id IN (".$sel_ent.") ";
+	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.") ";	
 	$entidade_u = "AND glpi_profiles_users.entities_id IN (".$sel_ent.") ";
 	$entidade_g = "WHERE entities_id IN (".$sel_ent.") OR is_recursive = 1";
 }
@@ -147,7 +141,7 @@ else {
 
 </head>
 
-<body style="background-color: #e5e5e5; margin-left:0%;" >
+<body style="background-color: #e5e5e5;" >
 
 <div id='content' >
 <div id='container-fluid' style="margin: 0px 5% 0px 5%;">
@@ -156,7 +150,7 @@ else {
 		<div id="head-rel" class="fluid">
 			<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 				<div id="titulo_rel" > <?php echo __('Tickets','dashboard') .'  '. __('by Technician','dashboard') ?> </div>
-					<div id="datas-tec" class="span12 fluid" >
+					<div id="datas-tec" class="col-md-12 col-sm-12 fluid" >
 					<form id="form1" name="form1" class="form_rel" method="post" action="rel_tecnicos.php?con=1">
 
 						<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
@@ -209,21 +203,19 @@ else {
 										$grp = $DB->fetch_assoc($result_techs);
 
 										$res_techs = $DB->query($sql_techs);
-										$arr_techs = array();
-										//$arr_techs[0] = "-- ". __('Select a group', 'dashboard') . " --" ;
+										$arr_techs = array();										
 										$arr_techs[0] = "". __('All') . "" ;
 
 										$DB->data_seek($result_techs, 0) ;
 
-										while ($row_result = $DB->fetch_assoc($result_techs))
-										    {
-										   	$v_row_result = $row_result['id'];
-										    	$arr_techs[$v_row_result] = $row_result['name'] ;										      
-										    }
+										while ($row_result = $DB->fetch_assoc($result_techs)) {										
+										   $v_row_result = $row_result['id'];
+										   $arr_techs[$v_row_result] = $row_result['name'] ;										      
+										}
 
-										$name = 'sel_techs';
+										$name = 'sel_group';
 										$options = $arr_techs;
-										$selected = -1;										
+										$selected = 0;										
 										echo dropdown( $name, $options, $selected );
 
 										?>
@@ -241,50 +233,51 @@ else {
 					<!-- </form> -->
 					</div>
 		</div>
-
 <?php
 
 //tecnico2
-if(isset($_REQUEST['con'])) {
+if(isset($_GET['con'])) {
 
-	$con = $_REQUEST['con'];
+	$con = $_GET['con'];
 	
 	if($con == "1") {
 
-	if(!isset($_REQUEST['date1']))
-		{
+	if(!isset($_POST['date1'])) {
 		  $data_ini2 = $data_ini; 
 		  $data_fin2 = $data_fin; 
 		  $grupo = "";
 		  $grupo1 = "";
-		}
+		  $glpi_techs = "";
+		  $id_techs = 0;
+	}
 
 	else {
-	    $data_ini2 = $_REQUEST['date1'];
-	    $data_fin2 = $_REQUEST['date2'];
-	    $sel_techs = $_REQUEST['sel_techs'];
-	    $id_techs = $_POST["sel_techs"];
+			$data_ini2 = $_REQUEST['date1'];
+	    	$data_fin2 = $_REQUEST['date2'];
+	    	//$sel_group = $_REQUEST['sel_group'];
+	    	$id_techs  = $_REQUEST["sel_group"];
 
 	    if($id_techs > 0) {
-	    	$glpi_techs = " , glpi_groups_users";
 		 	$grupo = "AND glpi_groups_users.users_id = glpi_tickets_users.users_id" ;
 		 	$grupo1 = "AND glpi_groups_users.groups_id = ". $id_techs ."" ;
-		 	}
+	    	$glpi_techs = " , glpi_groups_users";
+		 }
 		 if($id_techs == 0 || $id_techs == '') {
-		  $glpi_techs = "";
-		  $grupo = "";
-		  $grupo1 = "";
-		 	}
+		   $grupo = "";
+		   $grupo1 = "";
+		   $glpi_techs = "";
+		   $id_techs = 0;
+		 }
 
-		}
+	}
 
 	if($data_ini2 === $data_fin2) {
-			$datas2 = "LIKE '".$data_ini2."%'";
-		}
+		$datas2 = "LIKE '".$data_ini2."%'";
+	}
 
 	else {
-			$datas2 = "BETWEEN '".$data_ini2." 00:00:00' AND '".$data_fin2." 23:59:59'";
-		}
+		$datas2 = "BETWEEN '".$data_ini2." 00:00:00' AND '".$data_fin2." 23:59:59'";
+	}
 
 $sql_tec = "
 
@@ -317,18 +310,18 @@ $sats = $DB->fetch_assoc($result_sats);
 
 echo "<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>";
 
-if($id_techs != -1 && $id_techs != 0) {
+if( $id_techs != -1 && $id_techs != 0 ) {
 
-$query_gname = "SELECT name FROM glpi_groups WHERE id = ".$id_techs." ";
-$result_gname = $DB -> query($query_gname);
-$grp_name = $DB -> result($result_gname,0,'name');
-
-echo "
-<table class='fluid' style='font-size: 18px; font-weight:bold; margin-bottom: 30px;' cellpadding = 1px>
+	$query_gname = "SELECT name FROM glpi_groups WHERE id = ".$id_techs." ";
+	$result_gname = $DB -> query($query_gname);
+	$grp_name = $DB -> result($result_gname,0,'name');
+	
+	echo "
+	<table class='fluid' style='font-size: 18px; font-weight:bold; margin-bottom: 30px;' cellpadding = 1px>
 		<tr>
 			<td style='color: #000;'>". __('Group') .":  ". $grp_name ." </td>
 		</tr>
-</table>";
+	</table>";
 }
 
 echo "
@@ -497,13 +490,6 @@ $atrasados = $data_due['total'];
 //barra de porcentagem - Chamados no prazo
 if($conta_cons > 0) {
 
-/*	if($status == $status_closed ) {
-	    $barra_due = 100;
-	    $cor_due = "progress-bar-success";
-	}
-	
-	else {
-	*/
 		//porcentagem
 		$perc_due = round(($atrasados*100)/($solucionados+$fechados+$abertos),1);
 		//$perc_due = round(($atrasados*100)/($solucionados+$fechados),1);
@@ -519,14 +505,10 @@ if($conta_cons > 0) {
 		if($barra_due > 51 and $barra_due <= 80) { $cor_due = "progress-bar-warning"; $text_color_due = "#fff"; }
 		if($barra_due > 20 and $barra_due <= 50) { $cor_due = " ";  $text_color_due = "#fff";}
 		if($barra_due > 0 and $barra_due <= 20) { $cor_due = "progress-bar-success"; $text_color_due = "#000"; }
-		if($barra_due <= 0) { $cor_due = "progress-bar-success"; $barra_due = 0; $text_color_due = "#000";}
-		
-	//}
+		if($barra_due <= 0) { $cor_due = "progress-bar-success"; $barra_due = 0; $text_color_due = "#000";}		
 }
 
 else { $barra_due = 0;}
-
-
 
 $total_cham = $abertos + $solucionados + $fechados;
 
@@ -601,7 +583,7 @@ $(document).ready(function() {
         sorting: <?php echo $sort; ?>
         //sorting: [[1,'desc'],[0,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc']],
 		  displayLength: 25,
-        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],        
+        lengthMenu: [[25, 50, 75, 100], [25, 50, 75, 100]],        
         buttons: [
         	    {
                  extend: "copyHtml5",
@@ -656,7 +638,7 @@ $(document).ready(function() {
 
 } );
 
-	$(document).ready(function() { $("#sel_techs").select2({dropdownAutoWidth : true}); });
+	$(document).ready(function() { $("#sel_group").select2({dropdownAutoWidth : true}); });
 </script>
 
 </div>

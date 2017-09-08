@@ -13,20 +13,19 @@ GROUP BY days ";
 
 $result2 = $DB->query($query2) or die('erro');
 
+$arr_keys = array();
 
-$arr_grf2 = array();
-while ($row_result = $DB->fetch_assoc($result2))
-	{
-		$v_row_result = $row_result['days'];
-		$arr_grf2[$v_row_result] = $row_result['chamados'];
-	}
+while ($row_result = $DB->fetch_assoc($result2)) {
+	$v_row_result = $row_result['days'];
+	$arr_keys[$v_row_result] = $row_result['chamados'];
+}
 
-$grf2 = array_keys($arr_grf2);
-$quant2 = array_values($arr_grf2);
+$grf2 = array_keys($arr_keys);
+$quant2 = array_values($arr_keys);
 
-$conta = count($arr_grf2);
+$conta = count($arr_keys);
 
-for($i=0; $i < 7; $i++) {
+/*for($i=0; $i <= $conta; $i++) {
 
 	if($quant2[$i] != 0) {
 		$till[$i] = $quant2[$i];
@@ -36,7 +35,10 @@ for($i=0; $i < 7; $i++) {
 	}
 
 	$arr_days[] += $till[$i];
-}
+}*/
+
+$arr_more8 = array_slice($arr_keys,8);
+$more8 = array_sum($arr_more8);
 
 echo "
 <script type='text/javascript'>
@@ -98,12 +100,13 @@ $(function () {
                 name: '".__('Tickets','dashboard')."',
                 data: [  {
                         name: '< 1 " .__('day','dashboard')."',
-                        y: ".$arr_days[0].",
+                        y: ".$arr_keys[0].",
                         sliced: true,
                         selected: true
-                    }, ['1 - 2 " .__('days','dashboard')."',  ".$arr_days[1]." ], ['2 - 3 " .__('days','dashboard')."',  ".$arr_days[2]." ],
-                			['3 - 4 " .__('days','dashboard')."', ".$arr_days[3]." ], ['4 - 5 " .__('days','dashboard')."',  ".$arr_days[4]." ],
-                			['5 - 6 " .__('days','dashboard')."',  ".$arr_days[5]." ], ['6 - 7 " .__('days','dashboard')."',  ".$arr_days[6]." ]		]
+                    }, ['1 " .__('day','dashboard')."',  ".$arr_keys[1]." ], ['2 " .__('days','dashboard')."',  ".$arr_keys[2]." ],
+                			['3 " .__('days','dashboard')."', ".$arr_keys[3]." ], ['4 " .__('days','dashboard')."',  ".$arr_keys[4]." ],
+                			['5 " .__('days','dashboard')."',  ".$arr_keys[5]." ], ['6 " .__('days','dashboard')."',  ".$arr_keys[6]." ],
+                			['7 " .__('days','dashboard')."',  ".$arr_keys[7]." ], ['8+ " .__('days','dashboard')."',  ".$more8." ]		]
             }]
         });
     });

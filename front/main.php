@@ -166,10 +166,10 @@ $_SESSION['back'] = $back;
 	<?php
 	if($theme == 'trans.css') {		
    	echo "<body style=\"background: url('./img/".$back."') no-repeat top center fixed; \">";
-   	}
+   }
    else {
-   	echo "<body>";
-   	}	 
+   	echo "<body style='baclground-color:#E5E5E5;'>";
+   }	 
    ?>
    
 <!-- BEGIN Theme Setting -->

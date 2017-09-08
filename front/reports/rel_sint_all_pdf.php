@@ -9,10 +9,10 @@ global $DB;
 Session::checkLoginUser();
 Session::checkRight("profile", READ);
 
-if(!empty($_REQUEST['submit']))
+if(!empty($_POST['submit']))
 {
-    $data_ini =  $_REQUEST['date1'];
-    $data_fin = $_REQUEST['date2'];
+    $data_ini =  $_POST['date1'];
+    $data_fin = $_POST['date2'];
 }
 
 else {
@@ -20,12 +20,12 @@ else {
     $data_fin = date("Y-m-d");
     }
 
-if(!isset($_REQUEST["sel_date"])) {
-	$id_date = $_REQUEST["date"];
+if(!isset($_POST["sel_date"])) {
+	$id_date = $_GET["date"];
 }
 
 else {
-	$id_date = $_REQUEST["sel_date"];
+	$id_date = $_POST["sel_date"];
 }
 
 
@@ -152,10 +152,10 @@ else {
 				
 		//quant de chamados
 		$sql_cham2 =
-		"SELECT count(id) AS total, count(date) AS numdias, AVG(close_delay_stat) AS avgtime
+		"SELECT count(id) AS total, AVG(close_delay_stat) AS avgtime
 		FROM glpi_tickets
-		WHERE date ".$sel_date."		
-		AND glpi_tickets.is_deleted = 0
+		WHERE glpi_tickets.is_deleted = 0 		
+		AND date ".$sel_date."		
 		".$entidade." ";
 		
 		$result_cham2 = $DB->query($sql_cham2);		
@@ -169,12 +169,6 @@ else {
 			
 			//date diff
 			$numdias = round(abs(strtotime($data_fin2) - strtotime($data_ini2)) / 86400,0);
-			
-			/*$date1 = new DateTime($data_ini2);
-			$date2 = new DateTime($data_fin2);
-			$interval = $date1->diff($date2);
-			//echo "difference " . $interval->y . " years, " . $interval->m." months, ".$interval->d." days "; 
-			*/
 			
 			//tecnico
 			$sql_tec = "SELECT count(glpi_tickets.id) AS conta, glpi_users.firstname AS name, glpi_users.realname AS sname
@@ -191,16 +185,18 @@ else {
 			$result_tec = $DB->query($sql_tec);	
 			
 			//requester
-			$sql_req = "SELECT count(glpi_tickets.id) AS conta, glpi_users.firstname AS name, glpi_users.realname AS sname
-			FROM `glpi_tickets_users` , glpi_tickets, glpi_users
+			$sql_req =			
+			"SELECT count( glpi_tickets.id ) AS conta, glpi_tickets_users.`users_id` AS id,  glpi_users.firstname AS name, glpi_users.realname AS sname
+			FROM `glpi_tickets_users`, glpi_tickets, glpi_users
 			WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
 			AND glpi_tickets.date ".$sel_date."
 			AND glpi_tickets_users.`users_id` = glpi_users.id
 			AND glpi_tickets_users.type = 1
-			".$entidade." 
-			GROUP BY name
+			AND glpi_tickets.is_deleted = 0
+			".$entidade."
+			GROUP BY `users_id`
 			ORDER BY conta DESC
-			LIMIT 5";
+			LIMIT 5 ";
 			
 			$result_req = $DB->query($sql_req);		
 											

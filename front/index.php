@@ -15,11 +15,13 @@ $query_lay = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'layou
 //redirect to index
 if($layout == '0')
 	{
+		// sidebar
 		$redir = '<meta http-equiv="refresh" content="0; url=index2.php" />';
 	}
 
 if($layout == 1 || $layout == '' )
 	{
+		//top menu
 		$redir = '<meta http-equiv="refresh" content="0; url=index1.php" />';
 	}
 						

@@ -9,16 +9,15 @@ global $DB, $con;
 Session::checkLoginUser();
 Session::checkRight("profile", READ);
 
-if(!empty($_POST['submit']))
-	{
-   	$data_ini =  $_POST['date1'];
-   	$data_fin = $_POST['date2'];   	
-	}
+if(!empty($_POST['submit'])) {
+   $data_ini =  $_POST['date1'];
+   $data_fin = $_POST['date2'];   	
+}
 
 else {
-    	$data_ini = date("Y-01-01");
-    	$data_fin = date("Y-m-d");
-    }
+   $data_ini = date("Y-01-01");
+   $data_fin = date("Y-m-d");
+}
     
 # entity
 $sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
@@ -98,7 +97,7 @@ else {
 <body style="background-color: #e5e5e5; margin-left:0%;" >
 
 <div id='content' >
-<div id='container-fluid' style="margin: 0px 5% 0px 5%;">
+<div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
 <div id="charts" class="fluid chart" >
 	<div id="pad-wrapper" >
 		<div id="head-rel" class="fluid">
@@ -202,18 +201,18 @@ if(isset($_GET['con'])) {
 		if(isset($_GET['actor'])) {
 		
 		    if($_GET['actor'] == "req") {
-		        $actors = $actors_req;
+		      $actors = $actors_req;
 		    }
 		    elseif($_GET['actor'] == "tec") {
-		        $actors = $actors_tec;
+		      $actors = $actors_tec;
 		    }
 		    else {
-		    $actors = $actors_all;
+		    	$actors = $actors_all;
 		    }
 		}
 		else {
 		    $actors = $actors_all;
-		    }
+		}
 
 		
 //select groups with tickets
@@ -231,11 +230,8 @@ ORDER BY total DESC ";
 
 $result_tec = $DB->query($sql_tec);	
 $conta_cons = $DB->numrows($result_tec);
-//$chamados = $data_cham['total'];	
-
 		
 echo "<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>";
-
 echo "
 <table class='col-md-12 right' align='right' style='margin-bottom:20px;'>
 		<tr>			
@@ -272,99 +268,97 @@ echo "
 
 while($id_grp = $DB->fetch_assoc($result_tec)) {	
 
-//tickets
-$sql_cham = "SELECT count( glpi_tickets.id ) AS total, glpi_groups_tickets.groups_id AS id
-FROM glpi_groups_tickets, glpi_tickets
-WHERE glpi_tickets.id = glpi_groups_tickets.tickets_id
-AND glpi_groups_tickets.tickets_id = glpi_tickets.id
-AND glpi_tickets.is_deleted = 0
-AND glpi_groups_tickets.groups_id = ".$id_grp['id']."
-AND glpi_tickets.date ".$datas2."
-". $entidade ."  ";
-
-$result_cham = $DB->query($sql_cham) or die ("erro_cham");
-$data_cham = $DB->fetch_assoc($result_cham);
-
-$chamados = $data_cham['total'];
-
-
-//chamados abertos
-$sql_ab = "SELECT count( glpi_tickets.id ) AS total, glpi_groups_tickets.groups_id AS id
-FROM glpi_groups_tickets, glpi_tickets
-WHERE glpi_tickets.id = glpi_groups_tickets.tickets_id
-AND glpi_groups_tickets.tickets_id = glpi_tickets.id
-AND glpi_tickets.is_deleted = 0
-AND glpi_tickets.status NOT IN ".$status_closed."
-AND glpi_groups_tickets.groups_id = ".$id_grp['id']."
-AND glpi_tickets.date ".$datas2."
-". $entidade ."  ";
-
-$result_ab = $DB->query($sql_ab) or die ("erro_ab");
-$data_ab = $DB->fetch_assoc($result_ab);
-
-$abertos = $data_ab['total'];
-
-
-//chamados solucionados
-$sql_sol = "SELECT count( glpi_tickets.id ) AS total, glpi_groups_tickets.groups_id AS id
-FROM glpi_groups_tickets, glpi_tickets
-WHERE glpi_tickets.id = glpi_groups_tickets.tickets_id
-AND glpi_groups_tickets.tickets_id = glpi_tickets.id
-AND glpi_tickets.is_deleted = 0
-AND glpi_tickets.status = 5
-AND glpi_groups_tickets.groups_id = ".$id_grp['id']."
-AND glpi_tickets.date ".$datas2."
-". $entidade ." 
- " ;
-
-$result_sol = $DB->query($sql_sol) or die ("erro_ab");
-$data_sol = $DB->fetch_assoc($result_sol);
-
-$solucionados = $data_sol['total'];
-
-
-//chamados fechados
-$sql_clo = "SELECT count( glpi_tickets.id ) AS total, glpi_groups_tickets.groups_id AS id
-FROM glpi_groups_tickets, glpi_tickets
-WHERE glpi_tickets.id = glpi_groups_tickets.tickets_id
-AND glpi_groups_tickets.tickets_id = glpi_tickets.id
-AND glpi_tickets.is_deleted = 0
-AND glpi_tickets.status = 6
-AND glpi_groups_tickets.groups_id = ".$id_grp['id']."
-AND glpi_tickets.date ".$datas2."
-". $entidade ." 
- " ;
-
-$result_clo = $DB->query($sql_clo) or die ("erro_ab");
-$data_clo = $DB->fetch_assoc($result_clo);
-
-$fechados = $data_clo['total'];
-
-//barra de porcentagem
-if($conta_cons > 0) {
-
-if($status == $status_closed ) {
-    $barra = 100;
-    $cor = "progress-bar-success";
-	}
-
-else {
-
-	//porcentagem
-	$perc = round(($abertos*100)/$chamados,1);
-	$barra = 100 - $perc;
+	//tickets
+	$sql_cham = "SELECT count( glpi_tickets.id ) AS total, glpi_groups_tickets.groups_id AS id
+	FROM glpi_groups_tickets, glpi_tickets
+	WHERE glpi_tickets.id = glpi_groups_tickets.tickets_id
+	AND glpi_groups_tickets.tickets_id = glpi_tickets.id
+	AND glpi_tickets.is_deleted = 0
+	AND glpi_groups_tickets.groups_id = ".$id_grp['id']."
+	AND glpi_tickets.date ".$datas2."
+	". $entidade ." ";
 	
-	// cor barra
-	if($barra == 100) { $cor = "progress-bar-success"; }
-	if($barra >= 80 and $barra < 100) { $cor = " "; }
-	if($barra > 51 and $barra < 80) { $cor = "progress-bar-warning"; }
-	if($barra > 0 and $barra <= 50) { $cor = "progress-bar-danger"; }
-	if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }
-
+	$result_cham = $DB->query($sql_cham) or die ("erro_cham");
+	$data_cham = $DB->fetch_assoc($result_cham);
+	
+	$chamados = $data_cham['total'];
+	
+	
+	//chamados abertos
+	$sql_ab = "SELECT count( glpi_tickets.id ) AS total, glpi_groups_tickets.groups_id AS id
+	FROM glpi_groups_tickets, glpi_tickets
+	WHERE glpi_tickets.id = glpi_groups_tickets.tickets_id
+	AND glpi_groups_tickets.tickets_id = glpi_tickets.id
+	AND glpi_tickets.is_deleted = 0
+	AND glpi_tickets.status NOT IN ".$status_closed."
+	AND glpi_groups_tickets.groups_id = ".$id_grp['id']."
+	AND glpi_tickets.date ".$datas2."
+	". $entidade ."  ";
+	
+	$result_ab = $DB->query($sql_ab) or die ("erro_ab");
+	$data_ab = $DB->fetch_assoc($result_ab);
+	
+	$abertos = $data_ab['total'];
+	
+	
+	//chamados solucionados
+	$sql_sol = "SELECT count( glpi_tickets.id ) AS total, glpi_groups_tickets.groups_id AS id
+	FROM glpi_groups_tickets, glpi_tickets
+	WHERE glpi_tickets.id = glpi_groups_tickets.tickets_id
+	AND glpi_groups_tickets.tickets_id = glpi_tickets.id
+	AND glpi_tickets.is_deleted = 0
+	AND glpi_tickets.status = 5
+	AND glpi_groups_tickets.groups_id = ".$id_grp['id']."
+	AND glpi_tickets.date ".$datas2."
+	". $entidade ." " ;
+	
+	$result_sol = $DB->query($sql_sol) or die ("erro_ab");
+	$data_sol = $DB->fetch_assoc($result_sol);
+	
+	$solucionados = $data_sol['total'];
+	
+	
+	//chamados fechados
+	$sql_clo = "SELECT count( glpi_tickets.id ) AS total, glpi_groups_tickets.groups_id AS id
+	FROM glpi_groups_tickets, glpi_tickets
+	WHERE glpi_tickets.id = glpi_groups_tickets.tickets_id
+	AND glpi_groups_tickets.tickets_id = glpi_tickets.id
+	AND glpi_tickets.is_deleted = 0
+	AND glpi_tickets.status = 6
+	AND glpi_groups_tickets.groups_id = ".$id_grp['id']."
+	AND glpi_tickets.date ".$datas2."
+	". $entidade ." " ;
+	
+	$result_clo = $DB->query($sql_clo) or die ("erro_ab");
+	$data_clo = $DB->fetch_assoc($result_clo);
+	
+	$fechados = $data_clo['total'];
+	
+	//barra de porcentagem
+	if($conta_cons > 0) {
+	
+	if($status == $status_closed ) {
+	    $barra = 100;
+	    $cor = "progress-bar-success";
+		}
+	
+	else {
+	
+		//porcentagem
+		$perc = round(($abertos*100)/$chamados,1);
+		$barra = 100 - $perc;
+		
+		// cor barra
+		if($barra == 100) { $cor = "progress-bar-success"; }
+		if($barra >= 80 and $barra < 100) { $cor = " "; }
+		if($barra > 51 and $barra < 80) { $cor = "progress-bar-warning"; }
+		if($barra > 0 and $barra <= 50) { $cor = "progress-bar-danger"; }
+		if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }
+	
+		}
 	}
-}
-
-else { $barra = 0;}
+	
+	else { $barra = 0;}
 
 		echo "
 		<tr>
@@ -410,7 +404,7 @@ var table = $('#tec').dataTable({
         pagingType: "full_numbers",
         sorting: [[1,'desc'],[0,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc']],
 		  displayLength: 25,
-        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],        
+        lengthMenu: [[25, 50, 75, 100], [25, 50, 75, 100]],        
         buttons: [
         	    {
                  extend: "copyHtml5",

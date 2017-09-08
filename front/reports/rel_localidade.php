@@ -104,7 +104,7 @@ else {
 <body style="background-color: #e5e5e5; margin-left:0%;">
 
 <div id='content' >
-	<div id='container-fluid' style="margin: 0px 5% 0px 5%;">
+	<div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
 	<div id="charts" class="fluid chart">
 	<div id="pad-wrapper" >
 	<div id="head-rel" class="fluid">
@@ -466,7 +466,7 @@ $(document).ready(function() {
         pagingType: "full_numbers",
         sorting: [[0,'desc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc']],
 		  displayLength: 25,
-        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],        
+        lengthMenu: [[25, 50, 75, 100], [25, 50, 75, 100]],        
         buttons: [
         	    {
                  extend: "copyHtml5",
