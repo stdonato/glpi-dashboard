@@ -1,6 +1,6 @@
 <?php
 include ("../../../../inc/includes.php");
-include ("../../../../config/config.php");
+include ("../../../../inc/config.php");
 
 Session::checkLoginUser();
 Session::checkRight("profile", READ);

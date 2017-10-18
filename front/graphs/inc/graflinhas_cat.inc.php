@@ -2,7 +2,7 @@
 <?php
 
 if($data_ini == $data_fin) {
-$datas = "LIKE '".$data_ini."%'";
+	$datas = "LIKE '".$data_ini."%'";
 }
 
 $data1 = $data_ini;
@@ -48,11 +48,10 @@ $resultm = $DB->query($querym) or die('erro1');
 $contador = $DB->numrows($resultm);
 
 $arr_grfm = array();
-while ($row_result = $DB->fetch_assoc($resultm))
-	{
+while ($row_result = $DB->fetch_assoc($resultm)){
 	$v_row_result = $row_result['day_l'];
 	$arr_grfm[$v_row_result] = $row_result['nb'];
-	}
+}
 
 $grfm = array_keys($arr_grfm) ;
 $quantm = array_values($arr_grfm) ;
@@ -102,11 +101,10 @@ if($interval >= "31") {
 $resultf = $DB->query($queryf) or die('erro');
 
 $arr_grff = array();
-while ($row_result = $DB->fetch_assoc($resultf))
-	{
+while ($row_result = $DB->fetch_assoc($resultf)){
 	$v_row_result = $row_result['day_l'];
 	$arr_grff[$v_row_result] = $row_result['nb'];
-	}
+}
 
 $grff = array_keys($arr_grff) ;
 $quantf = array_values($arr_grff) ;
@@ -119,7 +117,7 @@ $(function ()
 {
         $('#graf_linhas').highcharts({
             chart: {
-                type: 'areaspline'
+                type: 'column'
             },
             title: {
                 text: '".__('Tickets','dashboard')."'
@@ -160,20 +158,18 @@ $(function ()
                 enabled: false
             },
             plotOptions: {
-                areaspline: {
-                    fillOpacity: 0.5
-                }
+                column: {
+                    fillOpacity: 0.5,
+                    borderWidth: 1,
+                	  borderColor: 'white',
+                	  shadow:true,
+                    dataLabels: {
+	                 	enabled: true
+	                 },
+                },
             },
           series: [{
-       	        dataLabels: {
-                 enabled: true,
-                 //color: '#000000',
-                 style: {
-                     //fontSize: '11px',
-                     //fontFamily: 'Verdana, sans-serif',
-                     //fontWeight: 'bold'
-                 }
-                 },
+
                 name: '".__('Opened','dashboard')."',
                 data: [$quantm2] },
 

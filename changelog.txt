@@ -1,20 +1,15 @@
-Versão 0.8.6:
+Versão 0.8.8:
 
-- Correção da inserção de coordenadas do mapa;
-- Correção Relatório de Chamados;
-- Correção Relatório de Entidades;
-- Correção Relatório Sintético Geral;
-- Correção gráfico de tempo de solução;
-- Correções de bugs diversos;
+- GLPI 9.2 apenas;
+- Correção na página de ativos;
+- Correeção dos relatórios e gráficos de SLA;
+- Correção de bugs diversos;
 
 
+Version 0.8.8:
 
-Version 0.8.6:
-
-- Fix of the map coordinate insertion;
-- Fix Tickets report;
-- Fix Entities report;
-- Fix Overall summary report;
-- Fix solution time chart;
+- Only for GLPI 9.2;
+- Fix assets page;
+- Fix SLA reports and charts;
 - Fix minor bugs;
 

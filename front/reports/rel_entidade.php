@@ -1,7 +1,7 @@
 <?php
 
 include ("../../../../inc/includes.php");
-include ("../../../../config/config.php");
+include ("../../../../inc/config.php");
 include "../inc/functions.php";
 
 global $DB;
@@ -61,6 +61,10 @@ else {
 <script src="../js/extensions/Select/js/dataTables.select.min.js"></script>
 <link href="../js/extensions/Select/css/select.bootstrap.css" type="text/css" rel="stylesheet" />
 
+<script src="../js/extensions/FixedHeader/js/dataTables.fixedHeader.min.js"></script>
+<link href="../js/extensions/FixedHeader/css/fixedHeader.dataTables.min.css" type="text/css" rel="stylesheet" />
+<link href="../js/extensions/FixedHeader/css/fixedHeader.bootstrap.min.css" type="text/css" rel="stylesheet" />
+
 <script src="../js/extensions/Buttons/js/dataTables.buttons.min.js"></script>
 <script src="../js/extensions/Buttons/js/buttons.html5.min.js"></script>
 <script src="../js/extensions/Buttons/js/buttons.bootstrap.min.js"></script>
@@ -91,7 +95,7 @@ else {
 			<div id="head-lg" class="fluid">
 				<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 				    <div id="titulo_rel"> <?php echo __('Tickets', 'dashboard') .'  '. __('by Entity', 'dashboard') ?> </div>
-						    <div id="datas-tec" class="col-md-12 fluid" >
+						    <div id="datas-tec" class="col-md-12 col-sm-12 fluid" >
 							    <form id="form1" name="form1" class="form_rel" method="post" action="rel_entidade.php?con=1">
 								    <table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
 								    <tr>
@@ -535,6 +539,7 @@ else {
 		        filter: false,
 		        pagingType: "full_numbers",
 		        deferRender: true,
+				  fixedHeader: true,
        		 //"scrollY":   "90vh",
         		 //"scrollCollapse": true,
 		        sorting: [[0,'desc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc'],[7,'desc'],[8,'desc'],[9,'desc'],[10,'desc']],

@@ -9,8 +9,8 @@ WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
 AND glpi_tickets_users.`users_id` = glpi_users.id
 AND glpi_tickets.is_deleted = 0
 AND glpi_tickets_users.type = 2
-$period
-$entidade
+".$period."
+".$entidade."
 GROUP BY glpi_users.name
 ORDER BY conta DESC
 LIMIT 5";
@@ -18,11 +18,10 @@ LIMIT 5";
 $result3 = $DB->query($query3) or die('erro');
 
 $arr_grf3 = array();
-while ($row_result = $DB->fetch_assoc($result3))
-	{
+while ($row_result = $DB->fetch_assoc($result3)){
 	$v_row_result = $row_result['name'] ." ".$row_result['sname'];
 	$arr_grf3[$v_row_result] = $row_result['conta'];
-	}
+}
 
 $grf3 = array_keys($arr_grf3) ;
 $quant3 = array_values($arr_grf3) ;

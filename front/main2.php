@@ -1,7 +1,7 @@
 <?php
 
 include ("../../../inc/includes.php");
-include ("../../../config/config.php");
+include ("../../../inc/config.php");
 
 global $DB;
 
@@ -269,6 +269,7 @@ $sql_users = " SELECT COUNT(DISTINCT `glpi_users`.id) AS total
                LEFT JOIN `glpi_users`
                   ON (`glpi_users`.`id` = `glpi_profiles_users`.`users_id`)
                WHERE `glpi_users`.`is_deleted` = '0'  
+               AND is_active = 1 
      				".$entidade_u." ";
 				
 $result_users = $DB->query($sql_users);

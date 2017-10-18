@@ -1,11 +1,11 @@
 <?php
 
 if($data_ini == $data_fin) {
-$datas = "LIKE '".$data_ini."%'";	
+	$datas = "LIKE '".$data_ini."%'";	
 }	
 
 else {
-$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";	
+	$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";	
 }
 
 
@@ -25,22 +25,14 @@ else {
 	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.")";
 }
 
-// distinguish between 0.90.x and 9.1 version
-//if (GLPI_VERSION >= 9.1){
-$slaid = "slts_tto_id";		
-//}
 
-/*else {
-	$slaid = "slas_id";	
-}
-*/
+$slaid = "slas_tto_id";		
 
 $query3 = "
-SELECT count( glpi_tickets.id ) AS conta, glpi_tickets.".$slaid." AS id, glpi_slts.name
-FROM glpi_tickets, glpi_slts
-WHERE glpi_tickets.".$slaid." = glpi_slts.id
+SELECT count( glpi_tickets.id ) AS conta, glpi_tickets.".$slaid." AS id, glpi_slms.name
+FROM glpi_tickets, glpi_slms
+WHERE glpi_tickets.".$slaid." = glpi_slms.id
 AND glpi_tickets.is_deleted = 0
-AND glpi_slts.type = 1
 AND glpi_tickets.date ".$datas."
 ".$entidade."
 GROUP BY ".$slaid."
@@ -49,8 +41,7 @@ ORDER BY conta DESC ";
 $result3 = $DB->query($query3) or die('erro');
 
 $arr_grf3 = array();
-while ($row_result = $DB->fetch_assoc($result3))		
-	{ 
+while ($row_result = $DB->fetch_assoc($result3)) { 
 	$v_row_result = $row_result['name'];
 	$arr_grf3[$v_row_result] = $row_result['conta'];			
 	} 

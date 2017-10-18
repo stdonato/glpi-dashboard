@@ -1,7 +1,7 @@
 <?php
 
 include ("../../../../inc/includes.php");
-include ("../../../../config/config.php");
+include ("../../../../inc/config.php");
 include "../inc/functions.php";
 
 global $DB;

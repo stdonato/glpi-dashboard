@@ -1,7 +1,7 @@
 <?php
 
 if($data_ini == $data_fin) {
-$datas = "LIKE '".$data_ini."%'";
+	$datas = "LIKE '".$data_ini."%'";
 }
 
 $data1 = $data_ini;
@@ -16,8 +16,7 @@ $interval = ($unix_data2 - $unix_data1) / 86400;
 // if exists satisfaction
 $query_if = "
 SELECT COUNT(id) AS id
-FROM glpi_ticketsatisfactions
-";
+FROM glpi_ticketsatisfactions ";
 
 $result_if = $DB->query($query_if) or die('erro');
 $sat_if = $DB->fetch_assoc($result_if);
@@ -45,11 +44,10 @@ if($interval >= "31") {
 	$contador = $DB->numrows($resultm);
 
 	$arr_grfm = array();
-	while ($row_result = $DB->fetch_assoc($resultm))
-		{
+	while ($row_result = $DB->fetch_assoc($resultm)){
 		$v_row_result = $row_result['month_l'];
 		$arr_grfm[$v_row_result] = $row_result['nb'];
-		}
+	}
 
 }
 
@@ -71,11 +69,10 @@ else {
 	$contador = $DB->numrows($resultm);
 
 	$arr_grfm = array();
-	while ($row_result = $DB->fetch_assoc($resultm))
-		{
+	while ($row_result = $DB->fetch_assoc($resultm)){
 		$v_row_result = $row_result['month'];
 		$arr_grfm[$v_row_result] = $row_result['nb'];
-		}
+	}
 
 	}
 
@@ -85,10 +82,7 @@ $quantm = array_values($arr_grfm) ;
 $grfm3 = json_encode($grfm);
 $quantm2 = implode(',',$quantm);
 
-
-//$status = "('2','1','3','4')"	;
 $status = "('5','6')"	;
-
 
 //array to compare months
 $DB->data_seek($resultm, 0);
@@ -132,11 +126,10 @@ if($interval >= "31") {
 	$resulta = $DB->query($querya) or die('erro');
 
 	$arr_grfa = array();
-	while ($row_result = $DB->fetch_assoc($resulta))
-		{
-			$v_row_result = $row_result['month_l'];
-			$arr_grfa[$v_row_result] = $row_result['nb'];
-		}
+	while ($row_result = $DB->fetch_assoc($resulta)){
+		$v_row_result = $row_result['month_l'];
+		$arr_grfa[$v_row_result] = $row_result['nb'];
+	}
 
 }
 
@@ -157,12 +150,10 @@ else {
 	$resulta = $DB->query($querya) or die('erro');
 
 	$arr_grfa = array();
-	while ($row_result = $DB->fetch_assoc($resulta))
-		{
-			$v_row_result = $row_result['month'];
-			$arr_grfa[$v_row_result] = $row_result['nb'];
-		}
-
+	while ($row_result = $DB->fetch_assoc($resulta)){
+		$v_row_result = $row_result['month'];
+		$arr_grfa[$v_row_result] = $row_result['nb'];
+	}
 }
 
 $arr_open = array_merge($arr_month, $arr_grfa);
@@ -192,11 +183,10 @@ if($interval >= "31") {
 	$resultf = $DB->query($queryf) or die('erro');
 
 	$arr_grff = array();
-	while ($row_result = $DB->fetch_assoc($resultf))
-		{
-			$v_row_result = $row_result['month_l'];
-			$arr_grff[$v_row_result] = $row_result['nb'];
-		}
+	while ($row_result = $DB->fetch_assoc($resultf)){
+		$v_row_result = $row_result['month_l'];
+		$arr_grff[$v_row_result] = $row_result['nb'];
+	}
 
 }
 else {
@@ -217,11 +207,10 @@ else {
 	$resultf = $DB->query($queryf) or die('erro');
 
 	$arr_grff = array();
-	while ($row_result = $DB->fetch_assoc($resultf))
-		{
-			$v_row_result = $row_result['month'];
-			$arr_grff[$v_row_result] = $row_result['nb'];
-		}
+	while ($row_result = $DB->fetch_assoc($resultf)) {
+		$v_row_result = $row_result['month'];
+		$arr_grff[$v_row_result] = $row_result['nb'];
+	}
 
 	}
 

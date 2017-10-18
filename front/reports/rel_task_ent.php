@@ -1,7 +1,7 @@
 <?php
 
 include ("../../../../inc/includes.php");
-include ("../../../../config/config.php");
+include ("../../../../inc/config.php");
 include "../inc/functions.php";
 
 global $DB;
@@ -99,7 +99,7 @@ a:hover {
 
     <div id="titulo_rel"> <?php echo _n('Task','Tasks',2) .'  '. __('by Entity','dashboard') ?>  </div>
 
-    <div id="datas-tec" class="span12 fluid" >
+    <div id="datas-tec" class="col-md-12 col-sm-12 fluid" >
     <form id="form1" name="form1" class="form_rel" method="post" action="rel_task_ent.php?con=1">
     <table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef">
 	   <tr>

@@ -4,7 +4,7 @@ print '<?xml version="1.0" encoding="utf-8"?>';
 
 //define('GLPI_ROOT', '../../../..');
 include ("../../../../inc/includes.php");
-include ("../../../../config/config.php");
+include ("../../../../inc/config.php");
 
 global $DB, $sql, $res;
 ?>

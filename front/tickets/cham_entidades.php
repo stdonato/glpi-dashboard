@@ -245,8 +245,8 @@ if(isset($_REQUEST['order'])) {
 		 case "tea": $order = "ORDER BY glpi_tickets.id ASC"; break;
 		 case "pd": $order = "ORDER BY glpi_tickets.priority DESC, glpi_tickets.date ASC"; break;
 		 case "pa": $order = "ORDER BY glpi_tickets.priority ASC, glpi_tickets.date ASC"; break;	
-  		 case "dd": $order = "ORDER BY glpi_tickets.due_date DESC"; break;
-		 case "da": $order = "ORDER BY glpi_tickets.due_date ASC"; break;	  	
+  		 case "dd": $order = "ORDER BY glpi_tickets.time_to_resolve DESC"; break;
+		 case "da": $order = "ORDER BY glpi_tickets.time_to_resolve ASC"; break;	  	
 		}	
 	}
 	
@@ -257,7 +257,7 @@ else {
 
 		//select tickets				
 		$sql_cham = "SELECT DISTINCT glpi_tickets.id AS id, glpi_tickets.name AS descri, glpi_tickets.status AS status, 
-		glpi_tickets.date_mod, glpi_tickets.priority, glpi_tickets.due_date AS duedate, glpi_tickets.locations_id AS lid
+		glpi_tickets.date_mod, glpi_tickets.priority, glpi_tickets.time_to_resolve AS duedate, glpi_tickets.locations_id AS lid
 		FROM glpi_tickets_users, glpi_tickets, glpi_users
 		WHERE glpi_tickets.is_deleted = 0
 		".$status1."
@@ -269,12 +269,12 @@ else {
 
 		$result_cham = $DB->query($sql_cham);
 		
-		//check due_date	
+		//check time_to_resolve	
 		$sql_due = "SELECT COUNT(glpi_tickets.id) AS count_due
 		FROM glpi_tickets
 		WHERE  glpi_tickets.status NOT IN (4,5,6) 
 		AND glpi_tickets.is_deleted = 0
-		AND glpi_tickets.due_date IS NOT NULL
+		AND glpi_tickets.time_to_resolve IS NOT NULL
 		AND glpi_tickets.entities_id = ".$ent."";
 				
 		$result_due = $DB->query($sql_due);

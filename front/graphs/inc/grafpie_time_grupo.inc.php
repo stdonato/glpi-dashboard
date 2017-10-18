@@ -26,19 +26,6 @@ $quant2 = array_values($arr_keys);
 
 $conta = count($arr_keys);
 
-
-/*for($i=0; $i <= $conta; $i++) {
-
-	if($quant2[$i] != 0) {
-		$till[$i] = $quant2[$i];
-	}
-	else {
-		$till[$i] = 0;
-	}	
-	
-	$arr_days[] += $till[$i];
-}*/
-
 $arr_more8 = array_slice($arr_keys,8);
 $more8 = array_sum($arr_more8);
 

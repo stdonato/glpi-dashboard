@@ -1,7 +1,7 @@
 <?php
 
 include ("../../../../inc/includes.php");
-include ("../../../../config/config.php");
+include ("../../../../inc/config.php");
 
 Session::checkLoginUser();
 Session::checkRight("profile", READ);
@@ -104,7 +104,7 @@ else {
 				
 				<?php echo __('Tickets','dashboard') ." ". __('by Date','dashboard');  ?> 
 				
-				<div id="datas" class="col-md-12 fluid" > 
+				<div id="datas" class="col-md-12 col-sm-12 fluid" > 
 				<form id="form1" name="form1" class="form1" method="post" action="?date1=<?php echo $data_ini ?>&date2=<?php echo $data_fin ?>"> 
 					<table border="0" cellspacing="0" cellpadding="2">
 						<tr>
@@ -143,7 +143,7 @@ else {
 						<tr align="center">			
 							<td>
 								<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult','dashboard'); ?> </button>
-								<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2 ?>'" ><i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean','dashboard'); ?> </button>
+								<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='geral_mes.php" ><i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean','dashboard'); ?> </button>
 							</td>
 						</tr>
 					</table>

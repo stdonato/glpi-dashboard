@@ -1,7 +1,7 @@
 
 <?php
 
-$query_unk = "SELECT count(*) AS total
+/*$query_unk = "SELECT count(*) AS total
 FROM `glpi_computers`
 WHERE `is_deleted` = 0
 AND `operatingsystems_id` = 0
@@ -10,24 +10,24 @@ AND `operatingsystems_id` = 0
 $result = $DB->query($query_unk) or die('erro');
 $unk = $DB->result($result,0,'total');
 
-
+*/
 $query_os = "
 SELECT glpi_operatingsystems.name AS so, count( glpi_computers.id ) AS conta
-FROM glpi_operatingsystems, glpi_computers
+FROM glpi_operatingsystems, glpi_computers, glpi_items_operatingsystems
 WHERE glpi_computers.is_deleted =0
-AND glpi_operatingsystems.id = glpi_computers.operatingsystems_id
+AND glpi_items_operatingsystems.items_id = glpi_computers.id
+AND glpi_operatingsystems.id = glpi_items_operatingsystems.operatingsystems_id
 ".$ent_comp."
 GROUP BY glpi_operatingsystems.name
 ORDER BY count( glpi_computers.id ) DESC ";
-
 		
 $result_os = $DB->query($query_os) or die('erro');
 
 $arr_grf_os = array();
 
-if($unk != 0) {
-	$arr_grf_os[__('Unknown','dashboard')] = $unk;
-}
+//if($unk != 0) {
+//	$arr_grf_os[__('Unknown','dashboard')] = $unk;
+//}
 
 
 while ($row_result = $DB->fetch_assoc($result_os))	{ 

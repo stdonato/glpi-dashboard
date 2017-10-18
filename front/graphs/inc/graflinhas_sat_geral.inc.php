@@ -51,8 +51,8 @@ while ($row_result = $DB->fetch_assoc($resultm))
 	SELECT DISTINCT DATE_FORMAT( date, '%b-%y' ) AS month_l, DATE_FORMAT( date, '%y-%m' ) AS month, count(id) AS nb
 	FROM glpi_tickets
 	WHERE solvedate IS NOT NULL
-	AND due_date IS NOT NULL
-	AND solvedate > due_date
+	AND time_to_resolve IS NOT NULL
+	AND solvedate > time_to_resolve
 	AND DATE_FORMAT( date, '%b-%y' ) = '".$row_result['month_l']."'
 	".$entidade."
 	GROUP BY month
@@ -62,12 +62,12 @@ while ($row_result = $DB->fetch_assoc($resultm))
 	$row_result2 = $DB->fetch_assoc($resulta2);
 
 		$v_row_result = $row_result['month_l'];
-			if($row_result2['nb'] != '') {
+		if($row_result2['nb'] != '') {
 			$arr_grfa[$v_row_result] = $row_result2['nb'];
-			}
+		}
 		else {
 			$arr_grfa[$v_row_result] = 0;
-			}
+		}
 }
 
 $arr_open = array_merge($arr_month, $arr_grfa);
@@ -101,12 +101,12 @@ while ($row_result = $DB->fetch_assoc($resultm))
 	$row_result2 = $DB->fetch_assoc($results2);
 
 		$v_row_result = $row_result['month_l'];
-			if($row_result2['nb'] != '') {
+		if($row_result2['nb'] != '') {
 			$arr_grfs[$v_row_result] = $row_result2['nb'];
-			}
+		}
 		else {
 			$arr_grfs[$v_row_result] = 0;
-			}
+		}
 }
 
 $grfs = array_keys($arr_grfs) ;
@@ -140,13 +140,12 @@ while ($row_result = $DB->fetch_assoc($resultm))
 	$row_resultf = $DB->fetch_assoc($resultf);
 
 		$v_row_result = $row_result['month_l'];
-			if($row_resultf['nb'] != '') {
+		if($row_resultf['nb'] != '') {
 			$arr_grff[$v_row_result] = $row_resultf['nb'];
-			}
+		}
 		else {
 			$arr_grff[$v_row_result] = 0;
-			}
-
+		}
 }
 
 $grff = array_keys($arr_grff) ;
@@ -174,11 +173,10 @@ $result_sat = $DB->query($query_sat) or die('erro');
 //array with satisfaction average
 
 $arr_grfsat = array();
-while ($row_result1 = $DB->fetch_assoc($result_sat))
-	{
-		$v_row_result1 = $row_result1['month_l'];
-		$arr_grfsat[$v_row_result1] = round(($row_result1['media']/5)*100,1);
-	}
+while ($row_result1 = $DB->fetch_assoc($result_sat)){
+	$v_row_result1 = $row_result1['month_l'];
+	$arr_grfsat[$v_row_result1] = round(($row_result1['media']/5)*100,1);
+}
 
 $arr_sat = array_merge($arr_month, $arr_grfsat);
 

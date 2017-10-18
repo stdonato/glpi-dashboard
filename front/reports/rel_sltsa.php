@@ -1,7 +1,7 @@
 <?php
 
 include ("../../../../inc/includes.php");
-include ("../../../../config/config.php");
+include ("../../../../inc/config.php");
 include "../inc/functions.php";
 
 global $DB;
@@ -42,13 +42,13 @@ if($sel_ent == '' || $sel_ent == -1) {
 	$ent = implode(",",$entities);
 
 	$entidade = "AND glpi_tickets.entities_id IN (".$ent.") ";
-	$entidade_s = "AND entities_id IN (".$ent.") ";
+	$entidade_s = "WHERE entities_id IN (".$ent.") ";
 	$entidade_sw = "WHERE entities_id IN (".$ent.") OR is_recursive = 1 ";
 	$entidade1 = "";
 }
 else {
 	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.") ";
-	$entidade_s = "AND entities_id IN (".$sel_ent.") ";
+	$entidade_s = "WHERE entities_id IN (".$sel_ent.") ";
 	$entidade_sw = "WHERE entities_id IN (".$sel_ent.") OR is_recursive = 1 ";
 }
 
@@ -117,12 +117,12 @@ else {
 				</style>
 				<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 
-				<div id="titulo_graf"> 
+				<div id="titulo_rel"> 
 					<?php echo __('Tickets', 'dashboard') .'  '. __('by SLA', 'dashboard') ?> - <?php echo __('Time to own'); ?> 				
 				</div>
 
-			<div id="datas-tec" class="span12 fluid" >
-			<form id="form1" name="form1" class="form_rel" method="post" action="rel_sltsa.php?con=1">
+			<div id="datas-tec" class="col-md-12 col-sm-12 fluid" >
+			<form id="form1" name="form1" class="form_rel" method="post" action="rel_sltsa.php?con=1" >
 				<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
 					<tr>
 						<td style="width: 310px;">
@@ -164,8 +164,7 @@ else {
 						// SLA list
 						$sql_loc = "
 						SELECT id, name AS name
-						FROM glpi_slts
-						WHERE type = 1
+						FROM glpi_slms
 						".$entidade_s."
 						ORDER BY `name` ASC ";
 			
@@ -175,10 +174,10 @@ else {
 						$arr_sla[0] = "-- ". __('Select a SLA', 'dashboard') . " --" ;
 			
 						while ($row_result = $DB->fetch_assoc($result_loc))
-							{
-								$v_row_result = $row_result['id'];
-								$arr_sla[$v_row_result] = $row_result['name'] ;
-							}
+						{
+							$v_row_result = $row_result['id'];
+							$arr_sla[$v_row_result] = $row_result['name'] ;
+						}
 			
 						$name = 'sel_sla';
 						$options = $arr_sla;
@@ -243,7 +242,7 @@ else {
 
 // distinguish between 0.90.x and 9.1 version
 if (GLPI_VERSION >= 9.1){
-	$slaid = "AND glpi_tickets.slts_tto_id = ".$id_sla."";	
+	$slaid = "AND glpi_tickets.slas_tto_id = ".$id_sla."";	
 }
 
 else {
@@ -275,7 +274,7 @@ else {
 
 // Chamados
 $sql_cham =
-"SELECT glpi_tickets.id AS id, glpi_tickets.name AS descr, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, glpi_tickets.status, glpi_tickets.due_date AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
+"SELECT glpi_tickets.id AS id, glpi_tickets.name AS descr, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, glpi_tickets.status, glpi_tickets.time_to_resolve AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
 FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.takeintoaccount_delay_stat ) AS time,
 glpi_tickets.time_to_own AS tto, glpi_tickets.takeintoaccount_delay_stat AS tia, glpi_tickets.date_creation AS aceite
 FROM glpi_tickets
@@ -350,7 +349,7 @@ $abertos = $data_ab;
 // sla name
 $sql_nm = "
 SELECT id , name AS name
-FROM `glpi_slts`
+FROM `glpi_slms`
 WHERE id = ".$id_sla."
 ";
 

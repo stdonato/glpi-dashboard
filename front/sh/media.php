@@ -1,7 +1,7 @@
 <?php
 define('GLPI_ROOT', '../../..');
 include (GLPI_ROOT . "/inc/includes.php");
-include (GLPI_ROOT . "/config/config.php");
+include (GLPI_ROOT . "/inc/config.php");
 
 global $DB;
 

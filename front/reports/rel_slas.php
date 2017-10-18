@@ -1,7 +1,7 @@
 <?php
 
 include ("../../../../inc/includes.php");
-include ("../../../../config/config.php");
+include ("../../../../inc/config.php");
 include "../inc/functions.php";
 
 global $DB;
@@ -217,7 +217,7 @@ else {
 	
 		$sql_sla = 
 		"SELECT COUNT(glpi_tickets.id) AS total, glpi_slas.name AS sla_name, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, 
-		glpi_tickets.status, glpi_tickets.due_date AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
+		glpi_tickets.status, glpi_tickets.time_to_resolve AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
 		FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time, glpi_slas.id AS sla_id
 		FROM glpi_tickets, glpi_slas
 		WHERE glpi_tickets.is_deleted = 0
@@ -253,7 +253,7 @@ else {
 											
 				 // Chamados
 				$sql_cham = 
-				"SELECT count( glpi_tickets.id ) AS total, glpi_tickets.solvedate as solvedate, glpi_tickets.due_date AS duedate, sla_waiting_duration AS slawait
+				"SELECT count( glpi_tickets.id ) AS total, glpi_tickets.solvedate as solvedate, glpi_tickets.time_to_resolve AS duedate, sla_waiting_duration AS slawait
 				FROM glpi_tickets
 				WHERE glpi_tickets.is_deleted = 0
 				AND glpi_tickets.date ".$datas2."

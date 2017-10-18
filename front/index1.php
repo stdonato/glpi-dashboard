@@ -1,7 +1,7 @@
 <?php
 
 include ("../../../inc/includes.php");
-include ("../../../config/config.php");
+include ("../../../inc/config.php");
 
 global $DB;
 
@@ -431,6 +431,7 @@ else {
 								<li><a href="./graphs/graf_localidade.php" target="iframe1" > <?php echo __('by Location','dashboard'); ?> </a></li>
                         <li><a href="./graphs/graf_usuario.php" target="iframe1" > <?php echo __('by Requester','dashboard'); ?> </a></li>
                         <li><a href="./graphs/graf_tecnico.php" target="iframe1" > <?php echo __('by Technician','dashboard'); ?> </a></li>
+                        <li><a href="./graphs/graf_tipo.php" target="iframe1" > <?php echo __('by Type','dashboard'); ?> </a></li>
 								
 								<?php
                         	// distinguish between 0.90.x and 9.1 version

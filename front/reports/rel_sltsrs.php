@@ -1,7 +1,7 @@
 <?php
 
 include ("../../../../inc/includes.php");
-include ("../../../../config/config.php");
+include ("../../../../inc/config.php");
 include "../inc/functions.php";
 
 global $DB;
@@ -92,7 +92,7 @@ else {
 <body style="background-color: #e5e5e5; margin-left:0%;">
 
 <div id='content' >
-	<div id='container-fluid' style="margin: <?php echo margins(); ?> ;"> 
+	<div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
 		<div id="charts" class="fluid chart"> 
 			<div id="pad-wrapper" >
 			<div id="head-rel" class="fluid">			
@@ -204,18 +204,15 @@ else {
 				}
 
 
-	$slaid = "AND glpi_tickets.slts_ttr_id = ";
-	$sla_comp = "AND glpi_tickets.slts_ttr_id = glpi_slts.id";	
-
+	$slaid = "AND glpi_tickets.slas_ttr_id = ";
+	$sla_comp = "AND glpi_tickets.slas_ttr_id = glpi_slas.id";	
 	
 $sql_sla = 
-"SELECT COUNT(glpi_tickets.id) AS total, glpi_slts.name AS sla_name, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, 
-glpi_tickets.status, glpi_tickets.due_date AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
-FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time, glpi_slts.id AS sla_id
-FROM glpi_tickets, glpi_slts
+"SELECT COUNT(glpi_tickets.id) AS total, glpi_slms.name AS sla_name, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, 
+glpi_tickets.status, glpi_tickets.time_to_resolve AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
+FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time, glpi_slms.id AS sla_id
+FROM glpi_tickets, glpi_slms
 WHERE glpi_tickets.is_deleted = 0
-AND glpi_slts.type = 0
-
 AND glpi_tickets.date ".$datas2."
 ".$entidade."
 
@@ -247,7 +244,7 @@ echo "
 											
 				 // Chamados
 				$sql_cham = 
-				"SELECT count( glpi_tickets.id ) AS total, glpi_tickets.solvedate as solvedate, glpi_tickets.due_date AS duedate, sla_waiting_duration AS slawait
+				"SELECT count( glpi_tickets.id ) AS total, glpi_tickets.solvedate as solvedate, glpi_tickets.time_to_resolve AS duedate, sla_waiting_duration AS slawait
 				FROM glpi_tickets
 				WHERE glpi_tickets.is_deleted = 0
 				AND glpi_tickets.date ".$datas2."
@@ -302,8 +299,7 @@ echo "
 								
 				//count by status
 				$query_stat = "
-				SELECT
-				SUM(case when glpi_tickets.solvedate IS NULL then 1 else 0 end) AS solve_sla				
+				SELECT SUM(case when glpi_tickets.solvedate IS NULL then 1 else 0 end) AS solve_sla				
 				FROM glpi_tickets
 				WHERE glpi_tickets.is_deleted = '0'				
 				AND glpi_tickets.date ".$datas2."
@@ -332,8 +328,7 @@ echo "
 						if($barra >= 80 and $barra < 100) { $cor = " "; }
 						if($barra > 51 and $barra < 80) { $cor = "progress-bar-warning"; }
 						if($barra > 0 and $barra <= 50) { $cor = "progress-bar-danger"; }
-						if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }
-					
+						if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }					
 					}
 				}
 				

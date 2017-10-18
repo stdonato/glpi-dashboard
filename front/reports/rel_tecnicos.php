@@ -1,7 +1,7 @@
 <?php
 
 include ("../../../../inc/includes.php");
-include ("../../../../config/config.php");
+include ("../../../../inc/config.php");
 
 global $DB, $con;
 
@@ -38,6 +38,7 @@ function dropdown( $name, array $options, $selected=null )
 
 function margins() {
 	
+	global $DB;
 	$query_lay = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'layout' AND users_id = ".$_SESSION['glpiID']." ";																
 						$result_lay = $DB->query($query_lay);					
 						$layout = $DB->result($result_lay,0,'value');
@@ -130,6 +131,10 @@ else {
 <link href="../js/extensions/Select/css/select.dataTables.min.css" type="text/css" rel="stylesheet" />
 <link href="../js/extensions/Select/css/select.bootstrap.css" type="text/css" rel="stylesheet" />
 
+<script src="../js/extensions/FixedHeader/js/dataTables.fixedHeader.min.js"></script>
+<link href="../js/extensions/FixedHeader/css/fixedHeader.dataTables.min.css" type="text/css" rel="stylesheet" />
+<link href="../js/extensions/FixedHeader/css/fixedHeader.bootstrap.min.css" type="text/css" rel="stylesheet" />
+
 <style type="text/css">
 	select { width: 60px; }
 	table.dataTable { empty-cells: show; }
@@ -144,7 +149,7 @@ else {
 <body style="background-color: #e5e5e5;" >
 
 <div id='content' >
-<div id='container-fluid' style="margin: 0px 5% 0px 5%;">
+<div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
 <div id="charts" class="fluid chart" >
 	<div id="pad-wrapper" >
 		<div id="head-rel" class="fluid">
@@ -461,14 +466,14 @@ $sql_due = "
 SELECT count( glpi_tickets.id ) AS total, glpi_tickets.id as ID
 FROM glpi_tickets_users, glpi_tickets, glpi_users". $glpi_techs ."
 WHERE glpi_tickets.id = glpi_tickets_users.tickets_id
-AND `glpi_tickets`.`due_date` IS NOT NULL 
+AND `glpi_tickets`.`time_to_resolve` IS NOT NULL 
 AND `glpi_tickets`.`status` <> 4
 
 AND 
 (
-  `glpi_tickets`.`solvedate` > `glpi_tickets`.`due_date`  
+  `glpi_tickets`.`solvedate` > `glpi_tickets`.`time_to_resolve`  
   OR (
-    `glpi_tickets`.`solvedate` IS NULL AND `glpi_tickets`.`due_date` < NOW()
+    `glpi_tickets`.`solvedate` IS NULL AND `glpi_tickets`.`time_to_resolve` < NOW()
   )
 )
 AND glpi_tickets_users.type = 2
@@ -580,6 +585,7 @@ $(document).ready(function() {
         filter: false,        
         pagingType: "full_numbers",
         deferRender: true,
+		  fixedHeader: true,
         sorting: <?php echo $sort; ?>
         //sorting: [[1,'desc'],[0,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc']],
 		  displayLength: 25,

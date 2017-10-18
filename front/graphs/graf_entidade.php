@@ -1,7 +1,7 @@
 <?php
 
 include ("../../../../inc/includes.php");
-include ("../../../../config/config.php");
+include ("../../../../inc/config.php");
 
 Session::checkLoginUser();
 Session::checkRight("profile", READ);
@@ -150,11 +150,10 @@ $arr_ent[0] = "-- ". __('Select a entity','dashboard') . " --" ;
 
 $DB->data_seek($result_ent, 0);
 
-while ($row_result = $DB->fetch_assoc($result_ent))
-	{
+while ($row_result = $DB->fetch_assoc($result_ent)) {
 	$v_row_result = $row_result['id'];
 	$arr_ent[$v_row_result] = $row_result['cname'] ;
-	}
+}
 
 $name = 'sel_ent';
 $options = $arr_ent;

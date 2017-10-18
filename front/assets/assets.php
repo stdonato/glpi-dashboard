@@ -1,7 +1,7 @@
 <?php
 
 include ("../../../../inc/includes.php");
-include ("../../../../config/config.php");
+include ("../../../../inc/config.php");
 include "../inc/functions.php";
 
 Session::checkLoginUser();
@@ -111,7 +111,7 @@ function conta1($asset,$sel_ent) {
 	
 	else {
 		return "0";
-	    }	
+	}	
 }	
 
 //all assets - global
@@ -274,10 +274,10 @@ foreach($arr_assets as $asset) {
 	            	'._n('Software','Softwares',2).'<br>'. conta(softwares,$sel_ent) .'</a></td>
 	            	
 	            	<td> <a href="assets.php#" onclick=showDiv(\'cart\') style="color: #fff;">
-	            	'._n('Cartridge','Cartridges',2).'<br>'. conta1(cartridges,$sel_ent) .'</a></td>
+	            	'._n('Cartridge','Cartridges',2).'<br>'. conta1(cartridgeitems,$sel_ent) .'</a></td>
 	            	
 	            	<td> <a href="assets.php#" onclick=showDiv(\'consum\') style="color: #fff;">
-	            	'._n('Consumable','Consumables',2).'<br>'. conta1(consumables,$sel_ent) .' </td>
+	            	'._n('Consumable','Consumables',2).'<br>'. conta1(consumableitems,$sel_ent) .' </td>
 	            	
 	            	<td> <a href="assets.php#" onclick=showDiv(\'global\') style="color: #fff;">
 	            	'.__('Global').'<br>'. $global .' </a></td> ';

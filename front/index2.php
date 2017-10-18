@@ -1,7 +1,7 @@
 <?php
 
 include ("../../../inc/includes.php");
-include ("../../../config/config.php");
+include ("../../../inc/config.php");
 
 global $DB;
 
@@ -724,7 +724,13 @@ else {
                                                 <i class="fa fa-angle-right"></i>
                                                 <span class='hidden-minibar'> <?php echo __('by Technician','dashboard'); ?></span>
                                             </a>
-                                        </li>                                        
+                                        </li>
+                                        <li>
+                                            <a href="#" onclick="window.open('./graphs/graf_tipo.php','iframe1'); scrollWin();" data-original-title=' por Tipo'>
+                                                <i class="fa fa-angle-right"></i>
+                                                <span class='hidden-minibar'> <?php echo __('by Type','dashboard'); ?></span>
+                                            </a>
+                                        </li>                                         
                                         
                                         <?php
 					                        	// distinguish between 0.90.x and 9.1 version

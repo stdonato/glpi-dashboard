@@ -1,7 +1,7 @@
 <?php
 
 include ("../../../../inc/includes.php");
-include ("../../../../config/config.php");
+include ("../../../../inc/config.php");
 
 Session::checkLoginUser();
 Session::checkRight("profile", READ);
@@ -174,11 +174,6 @@ $selected = $id_grp;
 <div id="pad-wrapper" >
 <div id="charts" class="fluid chart"> 
 <div id="head" class="fluid">
-
-
-
-
-
 
 
 <a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>

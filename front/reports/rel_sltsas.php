@@ -1,7 +1,7 @@
 <?php
 
 include ("../../../../inc/includes.php");
-include ("../../../../config/config.php");
+include ("../../../../inc/config.php");
 include "../inc/functions.php";
 
 global $DB;
@@ -44,7 +44,7 @@ else {
 <html> 
 <head>
 <title> GLPI - <?php echo __('Tickets', 'dashboard') .'  '. __('by SLAs', 'dashboard') ?> </title>
-<!-- <base href= "<?php $_SERVER['SERVER_NAME'] ?>" > -->
+
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
@@ -206,16 +206,15 @@ else {
 
 // distinguish between 0.90.x and 9.1 version
 //if (GLPI_VERSION >= 9.1){	
-$slaid = "AND glpi_tickets.slts_tto_id = ";
-$sla_comp = "AND glpi_tickets.slts_tto_id = glpi_slts.id";	
+$slaid = "AND glpi_tickets.slas_tto_id = ";
+$sla_comp = "AND glpi_tickets.slas_tto_id = glpi_slms.id";	
 
 $sql_sla = 
-"SELECT COUNT(glpi_tickets.id) AS total, glpi_slts.name AS sla_name, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, 
-glpi_tickets.status, glpi_tickets.due_date AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
-FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time, glpi_slts.id AS sla_id
-FROM glpi_tickets, glpi_slts
+"SELECT COUNT(glpi_tickets.id) AS total, glpi_slms.name AS sla_name, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, 
+glpi_tickets.status, glpi_tickets.time_to_resolve AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
+FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time, glpi_slms.id AS sla_id
+FROM glpi_tickets, glpi_slms
 WHERE glpi_tickets.is_deleted = 0
-AND glpi_slts.type = 1
 AND glpi_tickets.date ".$datas2."
 ".$entidade."
 
@@ -247,9 +246,9 @@ if($conta_cons > 0) {
 											
 				 // Chamados
 				$sql_cham = 
-				"SELECT count( glpi_tickets.id ) AS total, glpi_tickets.solvedate as solvedate, glpi_tickets.due_date AS duedate, sla_waiting_duration AS slawait
+				"SELECT count( glpi_tickets.id ) AS total, glpi_tickets.solvedate as solvedate, glpi_tickets.time_to_resolve AS duedate, sla_waiting_duration AS slawait
 				FROM glpi_tickets
-				WHERE glpi_tickets.is_deleted = 0				
+				WHERE glpi_tickets.is_deleted = 0
 				AND glpi_tickets.date ".$datas2."
 				".$slaid.$row['sla_id']."
 				".$entidade." ";

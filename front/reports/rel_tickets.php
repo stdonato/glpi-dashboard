@@ -1,7 +1,7 @@
 <?php
 
 include ("../../../../inc/includes.php");
-include ("../../../../config/config.php");
+include ("../../../../inc/config.php");
 
 global $DB;
 
@@ -275,10 +275,10 @@ function margins() {
 				$id_due1 = $_REQUEST["sel_due"];
 				 
 				if($_REQUEST["sel_due"] == 1) {
-					$id_due = "AND due_date < solvedate";		
+					$id_due = "AND time_to_resolve < solvedate";		
 					}
 				if($_REQUEST["sel_due"] == 2) {		
-					$id_due = "AND due_date >= solvedate"; 
+					$id_due = "AND time_to_resolve >= solvedate"; 
 					}
 			}
 			else { $id_due = ''; }										
@@ -527,7 +527,7 @@ if($con == "1") {
 	
 	// Chamados
 	$sql_cham = 
-	"SELECT id, entities_id, name, date, closedate, solvedate, status, users_id_recipient, requesttypes_id, priority, itilcategories_id, type, due_date 
+	"SELECT id, entities_id, name, date, closedate, solvedate, status, users_id_recipient, requesttypes_id, priority, itilcategories_id, type, time_to_resolve 
 	FROM glpi_tickets
 	WHERE glpi_tickets.is_deleted = 0
 	".$entidade."
@@ -721,8 +721,8 @@ if($consulta > 0) {
 		$result_cat = $DB->query($sql_cat);	
 		$row_cat = $DB->fetch_assoc($result_cat);
 				
-		//check due_date	
-		$sql_due = "SELECT due_date, closedate, solvedate 
+		//check time_to_resolve	
+		$sql_due = "SELECT time_to_resolve, closedate, solvedate 
 		FROM glpi_tickets
 		WHERE glpi_tickets.is_deleted = 0
 		AND glpi_tickets.id = ". $row['id'] ." ";
@@ -748,18 +748,18 @@ if($consulta > 0) {
 				
 				$today = date("Y-m-d H:i:s");
 				
-				if($row['solvedate'] > $row['due_date']) {
-						echo "<td style='vertical-align:middle; text-align:center; color:red;'> ". conv_data_hora($row['due_date']) ." </td>";
+				if($row['solvedate'] > $row['time_to_resolve']) {
+						echo "<td style='vertical-align:middle; text-align:center; color:red;'> ". conv_data_hora($row['time_to_resolve']) ." </td>";
 					}	
 				
 					else {	
 						
 						if(!isset($row['solvedate']) AND $today > $row['duedate']) {
-							echo "<td style='vertical-align:middle; text-align:center; color:red;'> ". conv_data_hora($row['due_date']) ." </td>";
+							echo "<td style='vertical-align:middle; text-align:center; color:red;'> ". conv_data_hora($row['time_to_resolve']) ." </td>";
 						}
 					
 						else {
-							echo "<td style='vertical-align:middle; text-align:center; color:green;'> ". conv_data_hora($row['due_date']) ." </td>";
+							echo "<td style='vertical-align:middle; text-align:center; color:green;'> ". conv_data_hora($row['time_to_resolve']) ." </td>";
 						}					
 				}
 			
