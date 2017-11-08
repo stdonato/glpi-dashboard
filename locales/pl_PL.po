@@ -1,0 +1,474 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# Stevenes Donato <stevenesdonato@gmail.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: GLPI Project\n"
+"Rebyt-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-08 15:21+0100\n"
+"PO-Revision-Date: 2017-10-24 11:21+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.4\n"
+"Last-Translator: \n"
+"Language: pl_PL\n"
+
+msgid "Dashboard"
+msgstr "Pulpit"
+
+msgid "Tickets"
+msgstr "Zgłoszenia"
+
+msgid "Reports"
+msgstr "Raporty"
+
+msgid "Charts"
+msgstr "Wykresy"
+
+msgid "Home"
+msgstr "Start"
+
+msgid "Tickets Statistics"
+msgstr "Statystyki zgłoszeń"
+
+msgid "by Technician"
+msgstr "wg. Technika"
+
+msgid "by Requester"
+msgstr "wg. Zgłaszającego"
+
+msgid "by Date"
+msgstr "wg. Daty"
+
+msgid "Overall"
+msgstr "Podsumowanie"
+
+msgid "Today"
+msgstr "Dzisiaj"
+
+msgid "Total"
+msgstr "Suma"
+
+msgid "users"
+msgstr "użytkownicy"
+
+msgid "active"
+msgstr "aktywny"
+
+msgid "Tickets Evolution"
+msgstr "Ewolucja Zgłoszeń"
+
+msgid "Tickets by Status"
+msgstr "Zgłoszenia wg. Statusu"
+
+msgid "Tickets by Entity"
+msgstr "Zgłoszenia wg. Jednostki"
+
+msgid "Tickets by Category"
+msgstr "Zgłoszenia wg. Kategorii"
+
+msgid "Daily Evolution"
+msgstr "Dzienna Ewolucja"
+
+msgid "Tickets Total"
+msgstr "Suma Zgłoszeń"
+
+msgid "by Entity"
+msgstr "wg. Jednostki"
+
+msgid "TOP 10 - Requester"
+msgstr "TOP 10 - Zgłaszający"
+
+msgid "Entity"
+msgstr "Jednostka"
+
+msgid "Open Tickets"
+msgstr "Otwarte Zgłoszenia"
+
+msgid "Today Tickets"
+msgstr "Dzisiejsze Zgłoszenia"
+
+msgid "by Group"
+msgstr "wg. Grupy"
+
+msgid "Group"
+msgstr "Grupa"
+
+msgid "Satisfaction"
+msgstr "Zadowolenie"
+
+msgid "Late"
+msgstr "Spóźnienie"
+
+msgid "Opened Tickets by Status"
+msgstr "Otwarte Zgłoszenia wg. Statusu"
+
+msgid "Last Tickets"
+msgstr "Ostatnie Zgłoszenia"
+
+msgid "All"
+msgstr "Wszystkie"
+
+msgid "New version"
+msgstr "Nowa wersja"
+
+msgid "avaliable"
+msgstr "dostępne"
+
+msgid "January"
+msgstr "Styczeń"
+
+msgid "February"
+msgstr "Luty"
+
+msgid "March"
+msgstr "Marzec"
+
+msgid "April"
+msgstr "Kwiecień"
+
+msgid "May"
+msgstr "Maj"
+
+msgid "June"
+msgstr "Czerwiec"
+
+msgid "July"
+msgstr "Lipiec"
+
+msgid "August"
+msgstr "Sierpień"
+
+msgid "September"
+msgstr "Wrzesień"
+
+msgid "October"
+msgstr "Październik"
+
+msgid "November"
+msgstr "Listopad"
+
+msgid "December"
+msgstr "Grudzień"
+
+msgid "Sunday"
+msgstr "Niedziela"
+
+msgid "Monday"
+msgstr "Poniedziałek"
+
+msgid "Tuesday"
+msgstr "Wtorek"
+
+msgid "Wednesday"
+msgstr "Środa"
+
+msgid "Thursday"
+msgstr "Czwartek"
+
+msgid "Friday"
+msgstr "Piątek"
+
+msgid "Saturday"
+msgstr "Sobota"
+
+msgid "Consult"
+msgstr "Wyślij"
+
+msgid "Clean"
+msgstr "Wyczyść"
+
+msgid "No ticket found"
+msgstr "Nie znaleziono zgłoszeń"
+
+msgid "Select a technician"
+msgstr "Wybierz technika"
+
+msgid "Select a requester"
+msgstr "Wybierz zgłaszającego"
+
+msgid "Title"
+msgstr "Tytuł"
+
+msgid "Opening date"
+msgstr "Data otwarcia"
+
+msgid "Close date"
+msgstr "Data zamknięcia"
+
+msgid "Technician"
+msgid_plural "Technicians"
+msgstr[0] "Technik"
+msgstr[1] "Technicy"
+msgstr[2] "Technicy"
+
+msgid "Closed"
+msgstr "Zamknięte"
+
+msgid "Previous"
+msgstr "Poprzednia"
+
+msgid "Next"
+msgstr "Następna"
+
+msgid "Requester"
+msgstr "Zgłaszający"
+
+msgid "Opened"
+msgstr "Otwarte"
+
+msgid "Period"
+msgstr "Okres"
+
+msgid "Yesterday"
+msgstr "Wczorajsze"
+
+msgid "Last 7 days"
+msgstr "Ostatnie 7 dni"
+
+msgid "Last 15 days"
+msgstr "Ostatnie 15 dni"
+
+msgid "Last 30 days"
+msgstr "Ostatnie 30 dni"
+
+msgid "Last 90 days"
+msgstr "Ostatnie 90 dni"
+
+msgid "Last 180 days"
+msgstr "Ostatnie 180 dni"
+
+msgid "Last 3 months"
+msgstr "Ostatnie 3 miesiące"
+
+msgid "Select a entity"
+msgstr "Wybierz Jednostkę"
+
+msgid "Select a group"
+msgstr "Wybierz Grupę"
+
+msgid "Version"
+msgstr "Wersja"
+
+msgid "Developed by"
+msgstr "Stworzone przez"
+
+msgid "User rights management"
+msgstr ""
+
+msgid "Tab display"
+msgstr "Zakładka"
+
+msgid "Tickets by Source"
+msgstr "Zgłoszenia wg. Źródła"
+
+msgid "Last Events"
+msgstr "Ostatnie zdarzenia"
+
+msgid "Logged Users"
+msgstr "Zalogowani użytkownicy"
+
+msgid "Computers by Operating System"
+msgstr "Komputery wg. Systemu Operacyjnego"
+
+msgid "Computers by Type"
+msgstr "Komputery wg. Typu"
+
+msgid "Quantity"
+msgstr ""
+
+msgid "Monitors by Manufacturer"
+msgstr "Monitory wg. Producenta"
+
+msgid "Monitors by Model"
+msgstr "Monitory wg. Modelu"
+
+msgid "Printers by Manufacturer"
+msgstr "Drukarki wg. Producenta"
+
+msgid "Printers by Model"
+msgstr "Drukarki wg. Modelu"
+
+msgid "Networkequipments by Manufacturer"
+msgstr "Sprzęt sieciowy wg. Producenta"
+
+msgid "Networkequipments by Model"
+msgstr "Sprzęt sieciowy wg. Modelu"
+
+msgid "Phones by Manufacturer"
+msgstr "Telefony wg. Producenta"
+
+msgid "Phones by Model"
+msgstr "Telefony wg. Modelu"
+
+msgid "Peripherals by Manufacturer"
+msgstr "Peryferia wg. Producenta"
+
+msgid "Peripherals by Model"
+msgstr "Peryferia wg. Modelu"
+
+msgid "Top 10 - Software Vendors"
+msgstr "TOP 10 - Producenci oprogramowania"
+
+msgid "Top 10 - Software Install"
+msgstr "TOP 10 - Instalacje oprogramowania"
+
+msgid "Cartridges by Manufacturer"
+msgstr "Kartridże wg. Producenta"
+
+msgid "Used"
+msgstr "Użyte"
+
+msgid "Assets by Type"
+msgstr ""
+
+msgid "Unknown"
+msgstr "Nieznane"
+
+msgid "Computer"
+msgstr "Komputer"
+
+msgid "Monitor"
+msgstr "Monitor"
+
+msgid "Printer"
+msgstr "Drukarka"
+
+msgid "Networkequipment"
+msgstr "Sprzęt sieciowy"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Peripheral"
+msgstr "Peryferia"
+
+msgid "Map"
+msgstr "Mapa"
+
+msgid "Tickets Map"
+msgstr "Mapa Zgłoszeń"
+
+msgid "Fill in entities: address, city, state and country."
+msgstr "Wypełnij dla jednostki: adres, miasto, województwo i kraj"
+
+msgid "Select"
+msgstr "Wybierz"
+
+msgid "by Category"
+msgstr "wg. Kategorii"
+
+msgid "Select a category"
+msgstr "Wybierz kategorię"
+
+msgid "by Location"
+msgstr "wg. Lokalizacji"
+
+msgid "Select a location"
+msgstr "Wybierz lokalizację"
+
+msgid "Welcome"
+msgstr "Witaj"
+
+msgid "Select a asset"
+msgstr ""
+
+msgid "by Assets"
+msgstr ""
+
+msgid "Print"
+msgstr "Drukuj"
+
+msgid "by SLA"
+msgstr "wg. SLA"
+
+msgid "Select a SLA"
+msgstr "Wybierz SLA"
+
+msgid "Current"
+msgstr "Bieżący"
+
+msgid "Current year"
+msgstr "Bieżący rok"
+
+msgid "Period in index page"
+msgstr "Okres na głównej stronie"
+
+msgid "Theme"
+msgstr "Motyw"
+
+msgid "by Type"
+msgstr "wg. Typu"
+
+msgid "Select a type"
+msgstr "Wybierz typ"
+
+msgid "Select a manufacturer"
+msgstr "Wybierz producenta"
+
+msgid "Weekly Tickets"
+msgstr "Zgłoszenia w tym tygodniu"
+
+msgid "Show/hide columns"
+msgstr "Pokaż/Ukryj kolumny"
+
+msgid "day"
+msgstr "dzień"
+
+msgid "days"
+msgstr "dni"
+
+msgid "Ticket Solving Period"
+msgstr "Czas rozwiązywania Zgłoszenia"
+
+msgid "Open Tickets Age"
+msgstr "Wiek Otwartych Zgłoszeń"
+
+msgid "My Dashboard"
+msgstr "Mój Pulpit"
+
+msgid "Tickets by Priority"
+msgstr "Zgłoszenia wg. Priorytetu"
+
+msgid "Solved"
+msgstr "Rozwiązane"
+
+msgid "Tickets across time"
+msgstr "Zgłoszenia w czasie"
+
+msgid "Tickets by hour"
+msgstr "Zgłoszenia wg. godziny"
+
+msgid "Tickets by week day"
+msgstr "Zgłoszenia wg. dnia tygodnia"
+
+msgid "Tickets by month"
+msgstr "Zgłoszenia wg. miesiąca"
+
+#, fuzzy
+msgid "Due Date"
+msgstr "W terminie"
+
+msgid "Overdue"
+msgstr "Przeterminowane"
+
+msgid "Within"
+msgstr "Trwające"
+
+msgid "Summary Report"
+msgstr "Raport sumaryczny"
+
+msgid "Summary"
+msgstr "Podsumowanie"
+
+msgid "Selected"
+msgstr "Wybrane"
+
+msgid "Popup"
+msgstr "Pupup"

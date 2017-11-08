@@ -9,165 +9,161 @@ Session::checkRight("profile", READ);
 ?>
 
 <html> 
-<head>
-<title> GLPI - <?php echo __('Open Tickets','dashboard'); ?> </title>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<meta http-equiv="content-language" content="en-us" />
-<meta http-equiv="refresh" content= "45"/>
-
-<link rel="icon" href="../img/dash.ico" type="image/x-icon" />
-<link rel="shortcut icon" href="../img/dash.ico" type="image/x-icon" />
-<link href="../css/styles.css" rel="stylesheet" type="text/css" />
-<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
-<link href="../css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
-
-<script src="../js/jquery.min.js" type="text/javascript" ></script>
-<script src="../js/jquery.jclock.js"></script>
-
-<script src="../js/media/js/jquery.dataTables.min.js"></script>
-<link href="../js/media/css/dataTables.bootstrap.css" type="text/css" rel="stylesheet" />  
-<script src="../js/media/js/dataTables.bootstrap.js"></script> 
-
-<script src="../js/extensions/ColVis/css/dataTables.colVis.min.css"></script>
-<script src="../js/extensions/ColVis/js/dataTables.colVis.min.js"></script>
-
-<script src="../lib/sweet-alert.min.js"></script>
-<link href="../lib/sweet-alert.css" type="text/css" rel="stylesheet" />
-
-<script type="text/javascript">
-    $(function($) {
-	    var options = {
-	    timeNotation: '24h',
-	    am_pm: true,
-	    //fontFamily: 'Open Sans',
-	    fontSize: '38px'
-    }
-    	$('#clock').jclock(options);
-    });
-    
-</script>
-
-<style>
-	table.dataTable thead .sorting::after { content: "" !important; }
-	  .sorting {
-   	color: #fff;
-    	background-color: #555 !important;
- 	}
-    .sorting > a { color: #fff !important;}
-</style>
-
-<?php echo '<link rel="stylesheet" type="text/css" href="../css/style-'.$_SESSION['style'].'">'; 
-
-$sql_s = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'status' AND users_id = ".$_SESSION['glpiID']."";
-$result_s = $DB->query($sql_s);
-$res_status = $DB->result($result_s,0,'value');
-
-if($res_status != '') {
-	$status = "(".$res_status.")";
-	$status1 = "AND glpi_tickets.status IN ".$status."";
-	
-}
-else {
-	$status = "('5','6')";
-	$status1 = "AND glpi_tickets.status NOT IN ".$status."";
-}
-
-
-$id_grp = $_REQUEST['grp'];
-$grp = $id_grp;
-
-$sql =
-"SELECT count(glpi_tickets.id) AS total
-FROM `glpi_groups_tickets` , glpi_tickets, glpi_groups
-WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
-AND glpi_groups_tickets.`groups_id` = glpi_groups.id
-AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
-AND glpi_tickets.is_deleted = 0
-AND glpi_groups_tickets.type = 2
-".$status1."";
-//AND glpi_tickets.status NOT IN ".$status." ";
-
-$result = $DB->query($sql);
-$data = $DB->fetch_assoc($result);
-
-$abertos = $data['total']; 
-
-//insert if not exist Group
-$query_i = "
-INSERT IGNORE INTO glpi_plugin_dashboard_count (type, id, quant) 
-VALUES ('3','". $id_grp ."', '" . $abertos ."')  ";
-
-$result_i = $DB->query($query_i);
-
-// get quantity
-$query = "SELECT quant 
-FROM glpi_plugin_dashboard_count
-WHERE id = ".$id_grp." 
-AND type = 3 ";
-
-$result = $DB->query($query);
-$quant = $DB->fetch_assoc($result);
-
-$atual = $quant['quant']; 
-
-//update tickets count
-$query_up = "UPDATE glpi_plugin_dashboard_count 
-SET quant=".$data['total']."
-WHERE id = ".$id_grp." 
-AND type = 3 ";
-
-$result_up = $DB->query($query_up);
-
-//contar chamados do dia 
-$datahoje = date("Y-m-d");
-
-$sql = "
-SELECT count(glpi_tickets.id) AS total
-FROM `glpi_groups_tickets` , glpi_tickets, glpi_groups
-WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
-AND glpi_groups_tickets.`groups_id` = glpi_groups.id
-AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
-AND glpi_tickets.is_deleted = 0
-AND glpi_groups_tickets.type = 2
-AND glpi_tickets.date LIKE '".$datahoje."%'
-" ;
-
-$result = $DB->query($sql);
-$hoje=$DB->fetch_assoc($result);
-
-// chamados de ontem - yesterday tickets
-$dataontem = date('Y-m-d', strtotime('-1 day'));
-
-$sql = "
-SELECT count(glpi_tickets.id) AS total
-FROM `glpi_groups_tickets` , glpi_tickets, glpi_groups
-WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
-AND glpi_groups_tickets.`groups_id` = glpi_groups.id
-AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
-AND glpi_tickets.is_deleted = 0
-AND glpi_groups_tickets.type = 2
-AND glpi_tickets.date LIKE '".$dataontem."%' ";
-
-$result = $DB->query($sql);
-$ontem = $DB->fetch_assoc($result);
-
-if ($ontem['total'] > $hoje['total']) { $up_down = "../img/down.png"; }
-if ($ontem['total'] < $hoje['total']) { $up_down = "../img/up.png"; }
-if ($ontem['total'] == $hoje['total']) { $up_down = "../img/blank.gif"; }
-
-
-//Group name
-$query_name = "
-SELECT name 
-FROM glpi_groups
-WHERE glpi_groups.id = ".$id_grp." " ;
-
-$result_n = $DB->query($query_name);
-$group_name = $DB->result($result_n, 0, 'name');
-
- ?> 
-</head>
+	<head>
+		<title> GLPI - <?php echo __('Open Tickets','dashboard'); ?> </title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+		<meta http-equiv="content-language" content="en-us" />
+		<meta http-equiv="refresh" content= "45"/>
+		
+		<link rel="icon" href="../img/dash.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="../img/dash.ico" type="image/x-icon" />
+		<link href="../css/styles.css" rel="stylesheet" type="text/css" />
+		<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
+		<link href="../css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+		
+		<script src="../js/jquery.min.js" type="text/javascript" ></script>
+		<script src="../js/jquery.jclock.js"></script>
+		
+		<script src="../js/media/js/jquery.dataTables.min.js"></script>
+		<link href="../js/media/css/dataTables.bootstrap.css" type="text/css" rel="stylesheet" />  
+		<script src="../js/media/js/dataTables.bootstrap.js"></script> 
+		
+		<script src="../js/extensions/ColVis/css/dataTables.colVis.min.css"></script>
+		<script src="../js/extensions/ColVis/js/dataTables.colVis.min.js"></script>
+		
+		<script src="../lib/sweet-alert.min.js"></script>
+		<link href="../lib/sweet-alert.css" type="text/css" rel="stylesheet" />
+		
+		<script type="text/javascript">
+		    $(function($) {
+			    var options = {
+			    timeNotation: '24h',
+			    am_pm: true,
+			    //fontFamily: 'Open Sans',
+			    fontSize: '38px'
+		    }
+		    	$('#clock').jclock(options);
+		    });
+		    
+		</script>
+		
+		<style>
+			table.dataTable thead .sorting::after { content: "" !important; }
+			  .sorting {
+		   	color: #fff;
+		    	background-color: #555 !important;
+		 	}
+		    .sorting > a { color: #fff !important;}
+		</style>
+		
+		<?php echo '<link rel="stylesheet" type="text/css" href="../css/style-'.$_SESSION['style'].'">'; 
+		
+		$sql_s = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'status' AND users_id = ".$_SESSION['glpiID']."";
+		$result_s = $DB->query($sql_s);
+		$res_status = $DB->result($result_s,0,'value');
+		
+		if($res_status != '') {
+			$status = "(".$res_status.")";
+			$status1 = "AND glpi_tickets.status IN ".$status."";	
+		}
+		
+		else {
+			$status = "('5','6')";
+			$status1 = "AND glpi_tickets.status NOT IN ".$status."";
+		}
+		
+		$id_grp = $_REQUEST['grp'];
+		$grp = $id_grp;
+		
+		$sql =
+		"SELECT count(glpi_tickets.id) AS total
+		FROM `glpi_groups_tickets` , glpi_tickets, glpi_groups
+		WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
+		AND glpi_groups_tickets.`groups_id` = glpi_groups.id
+		AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+		AND glpi_tickets.is_deleted = 0
+		AND glpi_groups_tickets.type = 2
+		".$status1."";
+		
+		$result = $DB->query($sql);
+		$data = $DB->fetch_assoc($result);
+		
+		$abertos = $data['total']; 
+		
+		//insert if not exist Group
+		$query_i = "
+		INSERT IGNORE INTO glpi_plugin_dashboard_count (type, id, quant) 
+		VALUES ('3','". $id_grp ."', '" . $abertos ."')  ";
+		
+		$result_i = $DB->query($query_i);
+		
+		// get quantity
+		$query = "SELECT quant 
+		FROM glpi_plugin_dashboard_count
+		WHERE id = ".$id_grp." 
+		AND type = 3 ";
+		
+		$result = $DB->query($query);
+		$quant = $DB->fetch_assoc($result);
+		
+		$atual = $quant['quant']; 
+		
+		//update tickets count
+		$query_up = "UPDATE glpi_plugin_dashboard_count 
+		SET quant=".$data['total']."
+		WHERE id = ".$id_grp." 
+		AND type = 3 ";
+		
+		$result_up = $DB->query($query_up);
+		
+		//contar chamados do dia 
+		$datahoje = date("Y-m-d");
+		
+		$sql = "
+		SELECT count(glpi_tickets.id) AS total
+		FROM `glpi_groups_tickets` , glpi_tickets, glpi_groups
+		WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
+		AND glpi_groups_tickets.`groups_id` = glpi_groups.id
+		AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+		AND glpi_tickets.is_deleted = 0
+		AND glpi_groups_tickets.type = 2
+		AND glpi_tickets.date LIKE '".$datahoje."%' " ;
+		
+		$result = $DB->query($sql);
+		$hoje=$DB->fetch_assoc($result);
+		
+		// chamados de ontem - yesterday tickets
+		$dataontem = date('Y-m-d', strtotime('-1 day'));
+		
+		$sql = "
+		SELECT count(glpi_tickets.id) AS total
+		FROM `glpi_groups_tickets` , glpi_tickets, glpi_groups
+		WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
+		AND glpi_groups_tickets.`groups_id` = glpi_groups.id
+		AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+		AND glpi_tickets.is_deleted = 0
+		AND glpi_groups_tickets.type = 2
+		AND glpi_tickets.date LIKE '".$dataontem."%' ";
+		
+		$result = $DB->query($sql);
+		$ontem = $DB->fetch_assoc($result);
+		
+		if ($ontem['total'] > $hoje['total']) { $up_down = "../img/down.png"; }
+		if ($ontem['total'] < $hoje['total']) { $up_down = "../img/up.png"; }
+		if ($ontem['total'] == $hoje['total']) { $up_down = "../img/blank.gif"; }		
+		
+		//Group name
+		$query_name = "
+		SELECT name 
+		FROM glpi_groups
+		WHERE glpi_groups.id = ".$id_grp." " ;
+		
+		$result_n = $DB->query($query_name);
+		$group_name = $DB->result($result_n, 0, 'name');
+		
+		?> 
+	</head>
 
 <?php
 
@@ -218,24 +214,24 @@ else {
 <div id='content'>
 	<div id='container-fluid' > 
 		<div id="head-cham" class="row-fluid">
-			<table style="width: 100%; margin-left: auto; margin-right: auto;">
-			<tr><td>&nbsp;</td></tr>
-			<tr>
-			<td align="center"><span class="titulo_cham"><?php echo  $group_name; ?></span> </td>
-			</tr>
-			
-			<tr>
-			<td align="center"><span class="titulo_cham"><?php echo __('Open Tickets','dashboard'); ?>:</span> 
-			<span class="total"> <?php echo "&nbsp; ".$data['total'] ; ?> </span> </td>
-			
-			</tr>
-			<tr><td></td></tr>
-			
-			<table style="font-size:25pt; font-weight:bold; width: 100%; margin-left: auto; margin-right: auto;"><tr><td align="center" ><span class="today"><a href="cham_grupos.php?grp=<?php echo $grp; ?>" > <?php echo __('Today Tickets','dashboard'); ?>: </a> 
-			<a href="../../../../front/ticket.php" target="_blank" class="total" style="font-size: 32pt;"> <?php echo "&nbsp; ".$hoje['total'] ; ?> </a>
-			<img src= <?php echo $up_down ;?> class="up_down" alt="" style="margin-top: -10px;" title= <?php echo __('Yesterday','dashboard'). ':';  echo $ontem['total'] ;?>  > </span> </td></tr>
-			</table>
-			
+			<table class="col-ms-12 col-sm-12" style="margin-left: auto; margin-right: auto;">
+				<tr><td>&nbsp;</td></tr>
+				<tr>
+					<td align="center"><span class="titulo_cham"><?php echo  $group_name; ?></span> </td>
+				</tr>				
+				<tr>
+					<td align="center">
+					</td>				
+				</tr>												
+				<tr>
+					<td align="center" >
+						<span class="titulo_cham"><?php echo __('Open Tickets','dashboard'); ?>:</span> 
+						<span class="total"> <?php echo " ".$data['total'] ; ?> </span> 
+						<span class="titulo_cham"><a href="cham_grupos.php?grp=<?php echo $grp; ?>" > <?php echo " / " . __('Today','dashboard'); ?>: </a> 
+						<a href="../../../../front/ticket.php" target="_blank" class="total" style="font-size: 32pt;"> <?php echo " ".$hoje['total'] ; ?> </a>
+						<img src= <?php echo $up_down ;?> class="up_down" alt="" style="margin-top: -10px;" title= <?php echo __('Yesterday','dashboard'). ':';  echo $ontem['total'] ;?>  > </span> 
+					</td>
+				</tr>							
 			</table>
 			<p></p>
 		</div>
@@ -266,9 +262,9 @@ if(isset($_REQUEST['order'])) {
 else {
 		$order = "ORDER BY glpi_tickets.date_mod DESC";
 }
-						
+			//select tickets			
 			$sql_cham = "SELECT glpi_tickets.id AS id, glpi_tickets.name AS descri, glpi_tickets.status AS status, glpi_tickets.date_mod, 
-			glpi_tickets.priority,  glpi_tickets.time_to_resolve AS duedate, glpi_tickets.locations_id AS lid
+			glpi_tickets.date AS initdate, glpi_tickets.priority,  glpi_tickets.time_to_resolve AS duedate, glpi_tickets.locations_id AS lid
 			FROM glpi_tickets, glpi_groups,`glpi_groups_tickets` 
 			WHERE glpi_tickets.is_deleted = 0
 			AND glpi_groups_tickets.`groups_id` = ".$id_grp."
@@ -425,39 +421,77 @@ else {
 		$result_loc = $DB->query($sql_loc);	
 		$row_loc = $DB->fetch_assoc($result_loc);		 			 				 		
 
-	echo "
-	<tr class='title' style='font-weight:normal;'>
-		<td style='text-align:center; vertical-align:middle; font-weight:bold;'> <a href=../../../../front/ticket.form.php?id=". $row['id'] ." target=_blank > <span >" . $row['id'] . "</span> </a></td>
-		<td style='vertical-align:middle;'><span style='color:#000099';><img src=../../../../pics/".$status1.".png />  ".Ticket::getStatus($row['status'])."</span ></td>";		
-
-	if($show_tit != 0 || $show_tit == '') {	
-		echo "<td style='vertical-align:middle;'><a href=../../../../front/ticket.form.php?id=". $row['id'] ." target=_blank > <span >" . $row['descri'] . "</span> </a></td>";
-	}
-
-	echo "<td style='vertical-align:middle;'><span >". $row_tec['name'] ." ".$row_tec['sname'] ."</span> </td>		
-		<td style='vertical-align:middle;'><span >". $row_req['name'] ." ".$row_req['sname'] ."</span> </td>";
-					
-				if($show_loc == 1) {
-					echo "<td style='vertical-align:middle; text-align:center; font-size:14pt;'>" . $row_loc['name'] . "</td>";
-				}
-				
-				if($show_due == 1) {
-					if($count_due > 0) {
-						$now = date("Y-m-d H:i");
+		echo "
+		<tr class='title' style='font-weight:normal;'>
+			<td style='text-align:center; vertical-align:middle; font-weight:bold;'> <a href=../../../../front/ticket.form.php?id=". $row['id'] ." target=_blank > <span >" . $row['id'] . "</span> </a></td>
+			<td style='vertical-align:middle;'><span style='color:#000099';><img src=../../../../pics/".$status1.".png />  ".Ticket::getStatus($row['status'])."</span ></td>";		
+	
+		if($show_tit != 0 || $show_tit == '') {	
+			echo "<td style='vertical-align:middle;'><a href=../../../../front/ticket.form.php?id=". $row['id'] ." target=_blank > <span >" . $row['descri'] . "</span> </a></td>";
+		}
+	
+		echo "<td style='vertical-align:middle;'><span >". $row_tec['name'] ." ".$row_tec['sname'] ."</span> </td>		
+			<td style='vertical-align:middle;'><span >". $row_req['name'] ." ".$row_req['sname'] ."</span> </td>";
 						
-						if($row['duedate'] < $now ) {
-							echo "<td style='vertical-align:middle; font-size:14pt; color:red;'><span>". conv_data_hora($row['duedate']) ."</span> </td>";
-							}
-						else {
-							echo "<td style='vertical-align:middle; font-size:14pt; color:green;'><span>". conv_data_hora($row['duedate']) ."</span> </td>";
-							}	
-					}
-				}
+		if($show_loc == 1) {
+			echo "<td style='vertical-align:middle; text-align:center; font-size:14pt;'>" . $row_loc['name'] . "</td>";
+		}
+					
+		if($show_due != 0) {
+			if($count_due > 0) {
+				$now = date("Y-m-d H:i");
+							
+				//barra de porcentagem
+				if($status == $status_close ) {
+				    $barra = 100;
+				    $cor = "progress-bar-success";
+				}	
+		
+				else {
+					//porcentagem
+					$time_total = strtotime($row['duedate']) - strtotime($row['initdate']);
+					$time_pass = strtotime($row['duedate']) - strtotime($now);
+					$perc = round(($time_pass*100)/$time_total,1);
+					$barra = round(100 - $perc,0);
 			
-		echo "			
-			<td style='vertical-align:middle; text-align:center; background-color:". $row_prio['value'] .";'>" . $prio_name . "</td>
-		</tr>"; 		 
-		 } 
+					// cor barra
+					if($barra == 100) { $cor = "progress-bar-danger"; }
+					if($barra > 95 and $barra < 100) { $cor = "progress-bar-danger"; }
+					if($barra > 70 and $barra < 95) { $cor = "progress-bar-warning"; }
+					if($barra > 50 and $barra <= 70) { $cor = "progress-bar-default"; }
+					if($barra > 0 and $barra <= 50) { $cor = "progress-bar-success"; }
+					if($barra < 0) { $cor = ""; $barra = 0; }					
+				}	
+					
+				if($row['duedate'] != ''  && $row['duedate'] < $now ) {
+					echo "<td style='text-align:center; vertical-align:middle; font-size:14pt; color:red;'><span>". conv_data_hora($row['duedate']) ."</span> 
+								<div class='progress' style='margin-top: 9px;'>
+									<div class='progress-bar progress-bar-danger progress-bar-striped' role='progressbar' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100' style='width: 100%;'>
+						    			<span style='font-weight:bold; color:#000;'> 100% </span>
+						    		</div>
+								</div>								
+							</td>";
+				}
+				else {
+					echo "<td style='text-align:center; vertical-align:middle; font-size:14pt; color:green;'><span>". conv_data_hora($row['duedate']) ."</span>";
+						if($barra != 0) { 
+						echo " 
+								<div class='progress' style='margin-top: 9px;'>
+									<div class='progress-bar ". $cor ." progress-bar-striped ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
+						    			<span style='font-weight:bold; color:#000;'>".$barra."% </span> 
+						    		</div>
+								</div>								
+							</td>";
+						}
+						else { echo "</td>";}
+				}	
+			}
+		}
+				
+			echo "			
+				<td style='vertical-align:middle; text-align:center; background-color:". $row_prio['value'] .";'>" . $prio_name . "</td>
+			</tr>"; 		 
+			 } 
  
 		echo "</tbody>
 				</table>"; ?>
@@ -487,7 +521,7 @@ $(document).ready(function() {
         "aaSorting": false,
         "bLengthChange": false,
         "bPaginate": false, 
-        "scrollY":        "67vh",
+        "scrollY":        "69vh",
         "scrollCollapse": true,
         "paging":         false,
         //"iDisplayLength": 15,

@@ -38,7 +38,7 @@ while ($row_result = $DB->fetch_assoc($result))	{
 $grfsat = array_keys($arr_grfsat) ;
 $quantsat = array_values($arr_grfsat);
 
-$grf_3 = json_encode($grf3);
+$grf_3 = json_encode($grfsat);
 $quantsat2 = implode(',',$quantsat);
 
 
@@ -152,13 +152,9 @@ $(function () {
                     x: 25,
                     y: 0,
                     format: '{y} %',
-                    style: {
-                     //   fontSize: '11px',
-                     //   fontFamily: 'Verdana, sans-serif'
-                    },
                     formatter: function () {
                     return Highcharts.numberFormat(this.y, 0, '','');
-                }
+                	  }
                 }
 
                 }]

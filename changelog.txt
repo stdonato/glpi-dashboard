@@ -1,15 +1,17 @@
-Versão 0.8.8:
+Versão 0.8.9:
 
 - GLPI 9.2 apenas;
-- Correção na página de ativos;
-- Correeção dos relatórios e gráficos de SLA;
+- Adicionada barra de progresso nas telas de chamados abertos;
+- Correção na página de Métricas;
+- Correção nos gráficos de satisfação;
 - Correção de bugs diversos;
 
 
-Version 0.8.8:
+Version 0.8.9:
 
 - Only for GLPI 9.2;
-- Fix assets page;
-- Fix SLA reports and charts;
+- Progress bar in open tickets pages;
+- Fix in metrics page;
+- Fix satisfaction graphs;
 - Fix minor bugs;
 

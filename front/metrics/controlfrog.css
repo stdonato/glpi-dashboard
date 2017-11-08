@@ -1,22 +1,9 @@
-/*
-html, body, .container-fluid {
-    height:100%;
-}
-.menusrow {
-    height: 80%;
-}
-
-.container-fluid .row {
-    height: 50%;
-}
-*/
-
 html, body, .container-fluid {
     height:100%;
 }
 
 body {
-  color: #f2f2f2; //#25394d;
+  color: #f2f2f2; 
   font-size: 12px; }
 
 a {
@@ -269,7 +256,7 @@ a:hover {
 
 /* Color definitions */
 body.black {
-  background-color: #2b2b2b;
+ background-color: #1f1d1d; /*#2b2b2b;*/
   color: darkgrey; }
   body.black .m-missing {
     color: #4f4f4f !important; }
