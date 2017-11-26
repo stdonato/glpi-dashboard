@@ -35,16 +35,14 @@ LIMIT 20
 $result4 = $DB->query($query3) or die('erro');
 
 $arr_grf4 = array();
-while ($row_result = $DB->fetch_assoc($result4))		
-	{ 
+while ($row_result = $DB->fetch_assoc($result4)) { 
 	$v_row_result = $row_result['name']. " ".$row_result['sname'];
 	$arr_grf4[$v_row_result] = $row_result['conta'];			
-	} 
+} 
 	
 $grf4 = array_keys($arr_grf4) ;
 $quant4 = array_values($arr_grf4) ;
 $soma4 = array_sum($arr_grf4);
-
 
 $grf_3 = json_encode($grf3);
 $quant_2 = implode(',',$quant4);

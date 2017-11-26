@@ -219,7 +219,9 @@ else {
 		
 		<?php
 		
-		$con = $_GET['con'];
+		if(isset($_GET['con'])){$con = $_GET['con'];}
+		else {$con = '';}
+		
 		if($con == "1") {
 		
 		if(!isset($_REQUEST['date1']))
@@ -623,6 +625,10 @@ $content .= "</tbody></table></div> ";
 			}		
 		}
 
+	else {
+		$content =''; 
+	}		
+		
 //output report
 echo $content;
 ?>

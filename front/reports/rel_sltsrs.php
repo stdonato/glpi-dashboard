@@ -320,8 +320,10 @@ echo "
 					else {
 					
 						//porcentagem
-						$perc = round(($solve_sla*100)/$chamados,2);
-						$barra = 100 - $perc;
+						if($chamados != 0) {
+							$perc = round(($solve_sla*100)/$chamados,2);
+							$barra = 100 - $perc;
+						}
 						
 						// cor barra
 						if($barra == 100) { $cor = "progress-bar-success"; }

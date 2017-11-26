@@ -323,19 +323,28 @@ if($conta_cons > 0) {
 					else {
 					
 						//porcentagem
-						$perc = round(($solve_sla*100)/$chamados,2);
-						$barra = 100 - $perc;
-						
+						if($chamados != 0) {
+							$perc = round(($solve_sla*100)/$chamados,2);
+							$barra = 100 - $perc;
+							$cor ='';
+						}
+						else {
+							$barra = '';
+							$cor ='';
+						}	
 						// cor barra
 						if($barra == 100) { $cor = "progress-bar-success"; }
-						if($barra >= 80 and $barra < 100) { $cor = " "; }
+						if($barra >= 80 and $barra < 100) { $cor = "progress-bar-default"; }
 						if($barra > 51 and $barra < 80) { $cor = "progress-bar-warning"; }
 						if($barra > 0 and $barra <= 50) { $cor = "progress-bar-danger"; }
 						if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }					
 					}
 				}
 				
-				else { $barra = 0;}	
+				else { 
+					$barra = 0;
+					$cor = '';
+				}	
 						
 				echo "	
 				<tr>

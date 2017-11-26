@@ -186,7 +186,9 @@ $result_ent = $DB->query($sql_ent);
 		
 		<?php
 		
-		$con = $_GET['con'];
+		if(isset($_GET['con'])){$con = $_GET['con'];}
+		else {$con = '';}
+		
 		if($con == "1") {
 		
 		if(!isset($_POST['date1']))
@@ -244,7 +246,7 @@ $result_ent = $DB->query($sql_ent);
           break;		
 		}
 		
-		//selected entity	
+		//selected entity
 		$id_ent = $_POST["sel_ent"];
 		$entidade = "AND glpi_tickets.entities_id = ".$id_ent."";
 		
@@ -589,6 +591,9 @@ $content .= "</tbody></table></div> ";
 			}		
 		}
 
+	else {
+		$content =''; 
+	}		
 //output report
 echo $content;
 		

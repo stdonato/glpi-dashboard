@@ -253,31 +253,31 @@ foreach($arr_assets as $asset) {
 	            <tr>
 	            <?php echo '
 	            	<td> <a href="assets.php#" onclick=showDiv(\'computers\') style="color: #fff;">
-	            	'._n('Computer','Computers',2).'<br>'. conta(computers,$sel_ent) .'</a></td>
+	            	'. _n('Computer', 'Computers',2).'<br>'. conta('computers',$sel_ent) .'</a></td>
 	            	
 	            	<td> <a href="assets.php#" onclick=showDiv(\'monitors\') style="color: #fff;">
-	            	'._n('Monitor','Monitors',2).'<br>'. conta(monitors,$sel_ent) .'</a></td>
+	            	'._n('Monitor','Monitors',2).'<br>'. conta('monitors',$sel_ent) .'</a></td>
 	            	
 	            	<td> <a href="assets.php#" onclick=showDiv(\'printers\') style="color: #fff;">
-	            	'._n('Printer','Printers',2).'<br>'. conta(printers,$sel_ent) .'</a></td>
+	            	'._n('Printer','Printers',2).'<br>'. conta('printers',$sel_ent) .'</a></td>
 	            	
 	            	<td> <a href="assets.php#" onclick=showDiv(\'net\') style="color: #fff;">
-	            	'._n('Network','Networks',2).'<br>'. conta(networkequipments,$sel_ent) .'</a></td>
+	            	'._n('Network','Networks',2).'<br>'. conta('networkequipments',$sel_ent) .'</a></td>
 	            	
 	            	<td> <a href="assets.php#" onclick=showDiv(\'phone\') style="color: #fff;">
-	            	'._n('Phone','Phones',2).'<br>'. conta(phones,$sel_ent) .' </a></td>
+	            	'._n('Phone','Phones',2).'<br>'. conta('phones',$sel_ent) .' </a></td>
 	            	
 	            	<td> <a href="assets.php#" onclick=showDiv(\'peripheral\') style="color: #fff;">
-	            	'._n('Device','Devices',2).'<br>'. conta(peripherals,$sel_ent) .' </a></td>
+	            	'._n('Device','Devices',2).'<br>'. conta('peripherals',$sel_ent) .' </a></td>
 	            	
 	            	<td> <a href="assets.php#" onclick=showDiv(\'soft\') style="color: #fff;">
-	            	'._n('Software','Softwares',2).'<br>'. conta(softwares,$sel_ent) .'</a></td>
+	            	'._n('Software','Softwares',2).'<br>'. conta('softwares',$sel_ent) .'</a></td>
 	            	
 	            	<td> <a href="assets.php#" onclick=showDiv(\'cart\') style="color: #fff;">
-	            	'._n('Cartridge','Cartridges',2).'<br>'. conta1(cartridgeitems,$sel_ent) .'</a></td>
+	            	'._n('Cartridge','Cartridges',2).'<br>'. conta1('cartridgeitems',$sel_ent) .'</a></td>
 	            	
 	            	<td> <a href="assets.php#" onclick=showDiv(\'consum\') style="color: #fff;">
-	            	'._n('Consumable','Consumables',2).'<br>'. conta1(consumableitems,$sel_ent) .' </td>
+	            	'._n('Consumable','Consumables',2).'<br>'. conta1('consumableitems',$sel_ent) .' </td>
 	            	
 	            	<td> <a href="assets.php#" onclick=showDiv(\'global\') style="color: #fff;">
 	            	'.__('Global').'<br>'. $global .' </a></td> ';

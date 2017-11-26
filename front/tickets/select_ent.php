@@ -141,13 +141,15 @@ $selected = "0";
 	</script>
 	
 	<?php
-	
-	$sel = $_GET['sel'];
+	if(isset($_REQUEST['sel'])){
+		$sel = $_REQUEST['sel'];
+	}
+	else {$sel = '';}
 	
 	if($sel == "1") {
 	 
 	if(!isset($_POST["sel_ent"])) {
-		$id_ent = $_GET["ent"];	
+		$id_ent = $_REQUEST["ent"];	
 	}
 	
 	else {

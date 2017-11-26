@@ -101,7 +101,7 @@ else {
 <div id="charts" class="fluid chart" >
 	<div id="pad-wrapper" >
 		<div id="head-rel" class="fluid">
-			<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
+			<a href="../index.php"><i class="fa fa-home home-rel" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 				<div id="titulo_rel" > <?php echo __('Tickets','dashboard') .'  '. __('by Group','dashboard').'s'; ?> </div>
 					<div id="datas-tec" class="span12 fluid" > 
 					<form id="form1" name="form1" class="form_rel" method="post" action="rel_grupos.php?con=1"  style="margin-left: 37%;"> 

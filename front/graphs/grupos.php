@@ -73,6 +73,9 @@ $datahoje = date("Y-m-d");
 									<tr>
 										<td style="width: 300px;">		
 										<?php
+										$url = $_SERVER['REQUEST_URI'];
+										$arr_url = explode("?", $url);
+										$url2 = $arr_url[0];
 										    
 										echo'
 											<table style="margin-top:6px;" border=0>

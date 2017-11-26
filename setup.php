@@ -21,7 +21,7 @@ function plugin_version_dashboard(){
 	global $DB, $LANG;
 
 	return array('name'			=> __('Dashboard','dashboard'),
-					'version' 			=> '0.8.8',
+					'version' 			=> '0.8.9',
 					'author'			   => '<a href="mailto:stevenesdonato@gmail.com"> Stevenes Donato </b> </a>',
 					'license'		 	=> 'GPLv2+',
 					'homepage'			=> 'https://forge.glpi-project.org/projects/dashboard',
@@ -31,10 +31,10 @@ function plugin_version_dashboard(){
 
 
 function plugin_dashboard_check_prerequisites(){
-     if (GLPI_VERSION >= 0.90){
-             return true;
+     if (GLPI_VERSION >= 9.2){
+        	return true;
      } else {
-             echo "GLPI version NOT compatible. Requires GLPI 9.2";
+        	echo "GLPI version NOT compatible. Requires GLPI >= 9.2";
      }
 }
 

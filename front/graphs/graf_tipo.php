@@ -251,8 +251,10 @@ $selected = $id_tip;*/
 
 <?php
 
-$con = $_REQUEST['con'];
-
+if(isset($_REQUEST['con'])) {
+	$con = $_REQUEST['con'];
+}
+else { $con = ''; }
 if($con == "1") {
 	
 if(!isset($_POST["sel_type"])) {

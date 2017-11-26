@@ -148,7 +148,10 @@ $selected = "0";
 	
 	<?php
 	
-	$sel = $_REQUEST['sel'];
+	if(isset($_REQUEST['sel'])){
+		$sel = $_REQUEST['sel'];
+	}
+	else {$sel = '';}
 	
 	if($sel == "1") {
 	 

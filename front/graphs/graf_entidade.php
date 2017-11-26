@@ -89,7 +89,6 @@ $ano = date("Y");
 $month = date("Y-m");
 $datahoje = date("Y-m-d");
 
-
 //seleciona entidade
 $sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
 $result_e = $DB->query($sql_e);
@@ -107,7 +106,6 @@ else {
 	//$entidade = "AND glpi_entities.id IN (".$sel_ent.")";
 	$ents = $sel_ent;
 }
-
 
 $sql_ent = "
 SELECT id, name, completename AS cname
@@ -233,10 +231,12 @@ $selected = $id_ent;
 
 			<?php
 
-			$con = $_GET['con'];
+			if(isset($_REQUEST['con'])) {
+				$con = $_REQUEST['con'];
+			}
+			else { $con = ''; }
 
 			if($con == "1") {
-
 
 			if(!isset($_POST['date1']))
 			{

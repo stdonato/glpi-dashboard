@@ -85,7 +85,7 @@ else {
 	<style type="text/css">
 		select { width: 60px; }
 		table.dataTable { empty-cells: show; }
-	   a:link, a:visited, a:active { text-decoration: none;}			
+	    a:link, a:visited, a:active { text-decoration: none;}			
 		a:hover {color: #000099;}
 		.carregando {display: none;}
 		.sel_fab .sel_mod {display: block;}
@@ -102,7 +102,7 @@ else {
 <div id="pad-wrapper" >
 <div id="head-rel" class="fluid" style="height:400px;">
 
-<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
+<a href="../index.php"><i class="fa fa-home home-rel" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 
 	<div id="titulo_rel"> <?php echo __('Assets') ?> </div>
 		<div id="datas-tec" class="col-md-12 fluid" >

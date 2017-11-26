@@ -234,7 +234,10 @@ $selected = $id_cat;
 </script>
 
 <?php
-$con = $_GET['con'];
+if(isset($_REQUEST['con'])) {
+	$con = $_REQUEST['con'];
+}
+else { $con = ''; }
 
 if($con == "1") {
 

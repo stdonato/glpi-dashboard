@@ -70,7 +70,10 @@ $datahoje = date("Y-m-d");
 <table border="0" cellspacing="0" cellpadding="2">
 	<tr>
 			<td style="width: 300px;">		
-			<?php			    
+			<?php	
+			$url = $_SERVER['REQUEST_URI'];
+			$arr_url = explode("?", $url);
+			$url2 = $arr_url[0];		    
 			echo'
 						<table style="margin-top:6px;" border=0>
 							<tr>

@@ -283,41 +283,40 @@ else {
 
 		if($consulta > 0) {
 
-			//montar barra
-			$sql_ab = "SELECT glpi_tickets.id AS total
-			FROM glpi_tickets
-			WHERE glpi_tickets.entities_id = ".$id_ent."
-			AND glpi_tickets.is_deleted = 0
-			AND glpi_tickets.date ".$datas2."
-			AND glpi_tickets.status IN ".$status_open ;
+		//montar barra
+		$sql_ab = "SELECT glpi_tickets.id AS total
+		FROM glpi_tickets
+		WHERE glpi_tickets.entities_id = ".$id_ent."
+		AND glpi_tickets.is_deleted = 0
+		AND glpi_tickets.date ".$datas2."
+		AND glpi_tickets.status IN ".$status_open ;
 
-			$result_ab = $DB->query($sql_ab) or die ("erro_ab");
-			$data_ab = $DB->numrows($result_ab);
+		$result_ab = $DB->query($sql_ab) or die ("erro_ab");
+		$data_ab = $DB->numrows($result_ab);
 
-			$abertos = $data_ab;
+		$abertos = $data_ab;
 
-			//barra de porcentagem
-			if($conta_cons > 0) {
-
+		//barra de porcentagem
+		if($conta_cons > 0) {
+	
 			//barra de porcentagem
 			if($status == $status_close ) {
 			    $barra = 100;
 			    $cor = "progress-bar-success";
-		}
-
-		else {
-			//porcentagem
-			$perc = round(($abertos*100)/$conta_cons,1);
-			$barra = 100 - $perc;
-
-			// cor barra
-			if($barra == 100) { $cor = "progress-bar-success"; }
-			if($barra >= 80 and $barra < 100) { $cor = " "; }
-			if($barra > 51 and $barra < 80) { $cor = "progress-bar-warning"; }
-			if($barra > 0 and $barra <= 50) { $cor = "progress-bar-danger"; }
-			if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }
-
-			}
+			}	
+	
+			else {
+				//porcentagem
+				$perc = round(($abertos*100)/$conta_cons,1);
+				$barra = 100 - $perc;
+		
+				// cor barra
+				if($barra == 100) { $cor = "progress-bar-success"; }
+				if($barra >= 80 and $barra < 100) { $cor = " "; }
+				if($barra > 51 and $barra < 80) { $cor = "progress-bar-warning"; }
+				if($barra > 0 and $barra <= 50) { $cor = "progress-bar-danger"; }
+				if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }		
+			}		
 		}
 		else { $barra = 0;}
 

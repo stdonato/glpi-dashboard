@@ -259,7 +259,10 @@ $selected = $id_tec;
 
 <?php
 
-$con = $_REQUEST['con'];
+if(isset($_REQUEST['con'])) {
+	$con = $_REQUEST['con'];
+}
+else { $con = ''; }
 
 if($con == "1") {
 

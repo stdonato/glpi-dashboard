@@ -208,7 +208,8 @@ else {
 			<?php
 
 			//categorias
-			$con = $_GET['con'];
+			if(isset($_GET['con'])){$con = $_GET['con'];}
+			else {$con = '';}
 
 			if($con == "1") {
 

@@ -489,9 +489,9 @@ if($con == "1") {
         <td><span style='color: #000;'>". __('Closed').": </span><b>".$close." </b></td>
 
 		<td colspan=3 align='right' style='vertical-align:middle;'>
-			<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_tecnico.php?con=1&stat=open&tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."&npage=".$num_por_pagina."\"' <i class='icon-white icon-trash'></i> ".__('Opened','dashboard'). " </button>
-			<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_tecnico.php?con=1&stat=close&tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."&npage=".$num_por_pagina."\"' <i class='icon-white icon-trash'></i> ".__('Closed','dashboard')." </button>
-			<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_tecnico.php?con=1&stat=all&tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."&npage=".$num_por_pagina."\"' <i class='icon-white icon-trash'></i> ".__('All','dashboard')." </button>
+			<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_tecnico.php?con=1&stat=open&tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened','dashboard'). " </button>
+			<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_tecnico.php?con=1&stat=close&tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed','dashboard')." </button>
+			<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_tecnico.php?con=1&stat=all&tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All','dashboard')." </button>
 		</td>
 	</tr>
 	</table>
@@ -586,7 +586,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 
 	if($satisfacao != '' || $satisfacao > 0) {
 
-		$query_satc = "SELECT `glpi_ticketsatisfactions`.satisfaction AS sat,  avg( glpi_ticketsatisfactions.satisfaction ) AS sat1
+		$query_satc = "SELECT `glpi_ticketsatisfactions`.satisfaction AS sat,  avg( glpi_ticketsatisfactions.satisfaction ) AS satavg
 		FROM `glpi_ticketsatisfactions`
 		WHERE glpi_ticketsatisfactions.tickets_id = ". $row['id'] ." ";
 
@@ -594,7 +594,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 		$satc = $DB->fetch_assoc($result_satc);
 
 		$satc1 = $satc['sat'];
-		$nota1 = round(($satc1['sat1']/5)*100,1);
+		$nota1 = round(($satc['satavg']/5)*100,1);
 
 		echo "
 		<tr style='font-size:11px;'>
@@ -612,7 +612,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 			</td>
 			
 		</tr>";
-	    }
+	}
 
 	else {
 

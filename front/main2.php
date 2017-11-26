@@ -168,7 +168,7 @@ $_SESSION['back'] = $back;
    	echo "<body style=\"background: url('./img/".$back."') no-repeat top center fixed; \">";
    }
    else {
-   	echo "<body style='baclground-color:#E5E5E5;'>";
+   	echo "<body style='background-color:#E5E5E5;'>";
    }	 
    ?>
                                                

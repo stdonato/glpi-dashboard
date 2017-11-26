@@ -160,9 +160,8 @@ else {
 										</td>
 
 										<td style="margin-top:2px;">
-										<?php
-
-										$res_date = $DB->query($sql_date);
+										<?php										
+										
 										$arr_date = array(
 											 __('----'),
 										    __('Today','dashboard'),
@@ -200,7 +199,9 @@ else {
 
 		<?php
 
-		$con = $_GET['con'];
+		if(isset($_GET['con'])){$con = $_GET['con'];}
+		else {$con = '';}
+		
 		if($con == "1") {
 
 		if(!empty($_POST['date1']))

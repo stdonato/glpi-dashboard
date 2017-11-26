@@ -442,12 +442,12 @@ else {
 				$now = date("Y-m-d H:i");
 							
 				//barra de porcentagem
-				if($status == $status_close ) {
+				/*if($status == $status_close ) {
 				    $barra = 100;
 				    $cor = "progress-bar-success";
-				}	
+				}	*/
 		
-				else {
+				//else {
 					//porcentagem
 					$time_total = strtotime($row['duedate']) - strtotime($row['initdate']);
 					$time_pass = strtotime($row['duedate']) - strtotime($now);
@@ -461,13 +461,13 @@ else {
 					if($barra > 50 and $barra <= 70) { $cor = "progress-bar-default"; }
 					if($barra > 0 and $barra <= 50) { $cor = "progress-bar-success"; }
 					if($barra < 0) { $cor = ""; $barra = 0; }					
-				}	
+				//}	
 					
 				if($row['duedate'] != ''  && $row['duedate'] < $now ) {
 					echo "<td style='text-align:center; vertical-align:middle; font-size:14pt; color:red;'><span>". conv_data_hora($row['duedate']) ."</span> 
 								<div class='progress' style='margin-top: 9px;'>
 									<div class='progress-bar progress-bar-danger progress-bar-striped' role='progressbar' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100' style='width: 100%;'>
-						    			<span style='font-weight:bold; color:#000;'> 100% </span>
+						    			<span style='font-weight:bold; color:#fff;'> 100% </span>
 						    		</div>
 								</div>								
 							</td>";
@@ -478,7 +478,7 @@ else {
 						echo " 
 								<div class='progress' style='margin-top: 9px;'>
 									<div class='progress-bar ". $cor ." progress-bar-striped ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
-						    			<span style='font-weight:bold; color:#000;'>".$barra."% </span> 
+						    			<span style='font-weight:bold; color:#fff;'>".$barra."% </span> 
 						    		</div>
 								</div>								
 							</td>";

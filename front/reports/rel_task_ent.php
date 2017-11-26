@@ -136,7 +136,11 @@ a:hover {
 			
 			<td style="margin-top:2px;">
 			<?php
-			
+
+				$url = $_SERVER['REQUEST_URI'];
+				$arr_url = explode("?", $url);
+				$url2 = $arr_url[0];		
+				
 				//seleciona entidade
 				$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
 				$result_e = $DB->query($sql_e);

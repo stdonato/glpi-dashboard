@@ -1525,3 +1525,26 @@ td > a:hover {
 	font-size:14pt;
 }
 
+.navbar-collapse.in {
+	background-color: #232B2D !important;
+}
+
+
+@media (max-width: 768px) {
+	.menu1 > li > a,
+	.menu1 > li > a:hover,
+	.dropdown-menu > li > a {
+		color: #fff !important;
+		text-decoration: none;
+	}
+	.list-unstyled > li > a {
+		color:#fff;
+	}
+	
+	#head {
+		width: 120%;
+		margin-left: -9.5%;
+		margin-top: -3%;
+	}
+}
+

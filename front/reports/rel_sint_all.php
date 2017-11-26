@@ -181,7 +181,9 @@ else {
 		
 		<?php
 		
-		$con = $_GET['con'];
+		if(isset($_GET['con'])){$con = $_GET['con'];}
+		else {$con = '';}
+
 		if($con == "1") {
 		
 		if(!isset($_POST['date1']))
@@ -389,7 +391,7 @@ else {
 			}
 
 
-$content = "
+		$content = "
 		<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>	
  			<div class='btn-right'> <button class='btn btn-primary btn-sm' type='button' onclick=window.open(\"./rel_sint_all_pdf.php?con=1&date1=".$data_ini2."&date2=".$data_fin2."\",\"_blank\")>Export PDF</button>  </div>	
 			
@@ -410,7 +412,7 @@ $content = "
 				$content .= "<td align='right'>".conv_data($data_ini2)." to ".conv_data($data_fin2)."</td>";
 			}	
 
-$content .= "					
+		$content .= "					
 			 </tr>
 			
 			 <tr>
@@ -517,7 +519,7 @@ $content .= "
 				 </tr> ";	
 			}		    
 
-$content .= "	 					
+		$content .= "	 					
  			 </tbody> </table> 			  			 
  			 
 			 <table class='fluid table table-striped table-condensed'  style='font-size: 16px; width:55%; margin:auto; margin-bottom:25px;'>
@@ -535,7 +537,7 @@ $content .= "
 				 <td align='right'>".$row_tec['conta']."</td>			
 				 </tr> ";	
 			}		
-$content .= "					
+		$content .= "					
 		    </tbody> </table>		   		    	
 		   
 			 <table class='fluid table table-striped table-condensed'  style='font-size: 16px; width:55%; margin:auto; margin-bottom:25px;'>
@@ -554,12 +556,12 @@ $content .= "
 				 </tr> ";	
 			}		
 									
-$content .= "</tbody></table></div> ";		   		   			
+		$content .= "</tbody></table></div> ";		   		   			
 										
 		}		
 		
 		else {
-		
+			$content ='';
 			echo "
 				<div id='nada_rel' class='well info_box fluid col-md-12'>
 				<table class='table' style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
@@ -568,6 +570,10 @@ $content .= "</tbody></table></div> ";
 				</table></div>";
 			}		
 		}
+		
+	else {
+		$content =''; 
+	}
 
 //output report
 echo $content;		
