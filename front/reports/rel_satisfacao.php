@@ -16,14 +16,39 @@ if(!empty($_POST['submit']))
 else {
 	$data_ini = date("Y-m-01");
 	$data_fin = date("Y-m-d");	
-	}
+}
 
-if(!isset($_POST["sel_ent"])) {
-	$id_ent = $_REQUEST["ent"];
+/*if(!isset($_POST["sel_ent"])) {
+	$id_ent = $_GET["sel_ent"];
 }
 
 else {
 	$id_ent = $_POST["sel_ent"];
+}*/
+
+# entity
+$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
+$result_e = $DB->query($sql_e);
+$sel_ent = $DB->result($result_e,0,'value');
+
+//select entity
+if($sel_ent == '' || $sel_ent == -1) {
+
+	$entities = $_SESSION['glpiactiveentities'];	
+	$ent = implode(",",$entities);
+
+	$entidade = "AND glpi_tickets.entities_id IN (".$ent.") ";
+	$entidade_w = "WHERE id IN (".$ent.") ";
+	/*$entidade_l = "AND glpi_locations.entities_id IN (".$ent.") ";
+	$entidade_lw = "WHERE glpi_locations.entities_id IN (".$ent.") OR glpi_locations.is_recursive = 1";
+	$entidade1 = "";*/
+
+}
+else {
+	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.") ";
+	$entidade_w = "WHERE id IN (".$sel_ent.") ";
+	/*$entidade_l = "AND glpi_locations.entities_id IN (".$sel_ent.") ";
+	$entidade_lw = "WHERE glpi_locations.entities_id IN (".$sel_ent.") OR glpi_locations.is_recursive = 1";*/
 }
 
 ?>
@@ -139,7 +164,8 @@ else {
 	<?php
 	
 	//entidades
-	$con = $_REQUEST['con'];
+	if(isset($_GET['con'])){$con = $_GET['con'];}
+	else {$con = '';}
 	
 	if($con == "1") {
 	
@@ -177,8 +203,7 @@ else {
 		$datas2 = "AND glpi_tickets.date BETWEEN '".$data_ini2." 00:00:00' AND '".$data_fin2." 23:59:59'";
 	}
 	
-	// Chamados
-	
+	// Chamados	
 	$sql_cham =
 	"SELECT glpi_tickets.id, glpi_tickets.name as titulo, glpi_tickets.closedate as fechamento,
 	glpi_ticketsatisfactions.satisfaction as nota, glpi_ticketsatisfactions.comment as comentarios,
@@ -191,8 +216,7 @@ else {
 	AND glpi_ticketsatisfactions.satisfaction <> 'NULL'
 	ORDER BY glpi_tickets.id ASC ";
 	
-	$result_cham = $DB->query($sql_cham);
-	
+	$result_cham = $DB->query($sql_cham);	
 	$consulta = $DB->numrows($result_cham);
 	
 	if($consulta > 0) {
@@ -201,7 +225,7 @@ else {
 	$sql_nm = "
 	SELECT name
 	FROM `glpi_entities`
-	WHERE id = ".$id_ent."";
+	".$entidade_w."";
 	
 	$result_nm = $DB->query($sql_nm);
 	$ent_name = $DB->fetch_assoc($result_nm);
@@ -243,8 +267,7 @@ else {
 		WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
 		AND glpi_tickets.id = ". $row['id'] ."
 		AND glpi_tickets_users.`users_id` = glpi_users.id
-		AND glpi_tickets_users.type = 1
-		";
+		AND glpi_tickets_users.type = 1 ";
 		$result_user = $DB->query($sql_user);
 	
 		$row_user = $DB->fetch_assoc($result_user);

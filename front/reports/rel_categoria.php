@@ -153,11 +153,10 @@ else {
 				
 									// lista de categorias
 									$sql_cat = "
-									SELECT id, name AS name, level, sons_cache
+									SELECT id, completename AS name
 									FROM `glpi_itilcategories`
-									WHERE itilcategories_id = 320								
+									". $entidade_cw ."								
 									ORDER BY `name` ASC ";
-									//AND (SELECT is_incident = 1 OR is_request = 1)
 				
 									$result_cat = $DB->query($sql_cat);
 				
@@ -165,22 +164,8 @@ else {
 									$arr_cat[0] = "-- ". __('Select a category', 'dashboard') . " --" ;
 				
 									while ($row_result = $DB->fetch_assoc($result_cat)) {
-										if($row_result['level'] == 1) {
-											$sep = '';
-										}	
-										if($row_result['level'] == 2) {
-											$sep = '&#160;';
-										}
-										if($row_result['level'] == 3) {
-											$sep = '&#160;&#160;';
-										}
-										if($row_result['level'] == 4) {
-											$sep = '&#160;&#160;&#160;';
-										}										
-											
 										$v_row_result = $row_result['id'];
-										$arr_cat[$v_row_result] = $sep.$row_result['name'] ;
-									
+										$arr_cat[$v_row_result] = $row_result['name'] ;
 									}
 				
 									$name = 'sel_cat';

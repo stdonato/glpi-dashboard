@@ -46,10 +46,9 @@ $quinz = $DB->result($query_q,0,'conta');
 //mes
 $sql_m = "
 SELECT DATE_FORMAT(date, '%b-%d') as data, COUNT(glpi_tickets.id) as conta
-FROM glpi_tickets, glpi_groups_tickets
+FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = 0
-AND glpi_groups_tickets.tickets_id = glpi_tickets.id
-AND glpi_groups_tickets.groups_id = ".$id_grp."
+AND glpi_tickets.type = ".$id_tip."
 AND glpi_tickets.date BETWEEN '" . $dataf_m ." 00:00:00' AND '".$datai_m." 23:59:59'
 ". $entidade_age ."
 AND status NOT IN ('5','6') ";
@@ -61,10 +60,9 @@ $month = $DB->result($query_m,0,'conta');
 // > 30 e <60
 $sql_m1 = "
 SELECT DATE_FORMAT(date, '%b-%d') as data, COUNT(glpi_tickets.id) as conta
-FROM glpi_tickets, glpi_groups_tickets
+FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = 0
-AND glpi_groups_tickets.tickets_id = glpi_tickets.id
-AND glpi_groups_tickets.groups_id = ".$id_grp."
+AND glpi_tickets.type = ".$id_tip."
 AND glpi_tickets.date BETWEEN '" . $dataf_m1 ." 00:00:00' AND '".$datai_m1." 23:59:59'
 ". $entidade_age ."
 AND status NOT IN ('5','6') ";
@@ -75,10 +73,9 @@ $month1 = $DB->result($query_m1,0,'conta');
 
 $sql_m2 = "
 SELECT DATE_FORMAT(date, '%b-%d') as data, COUNT(glpi_tickets.id) as conta
-FROM glpi_tickets, glpi_groups_tickets
+FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = 0
-AND glpi_groups_tickets.tickets_id = glpi_tickets.id
-AND glpi_groups_tickets.groups_id = ".$id_grp."
+AND glpi_tickets.type = ".$id_tip."
 AND glpi_tickets.date BETWEEN '" . $dataf_m2 ." 00:00:00' AND '".$datai_m2." 23:59:59'
 ". $entidade_age ."
 AND status NOT IN ('5','6') ";

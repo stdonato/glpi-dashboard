@@ -49,7 +49,6 @@ else {
 <html>
 <head>
 <title> GLPI - <?php echo __('Tickets','dashboard') .'  '. __('by Group','dashboard').'s'; ?> </title>
-<!-- <base href= "<?php $_SERVER['SERVER_NAME'] ?>" > -->
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
@@ -362,7 +361,7 @@ while($id_grp = $DB->fetch_assoc($result_tec)) {
 
 		echo "
 		<tr>
-			<td style='vertical-align:middle; text-align:left;'><a href='rel_grupo.php?con=1&grp=". $id_grp['id'] ."&date1=".$data_ini."&date2=".$data_fin."' target='_blank' >" . $id_grp['name'].' ('.$id_grp['id'].")</a></td>
+			<td style='vertical-align:middle; text-align:left;'><a href='rel_grupo.php?con=1&sel_grp=". $id_grp['id'] ."&date1=".$data_ini."&date2=".$data_fin."' target='_blank' >" . $id_grp['name'].' ('.$id_grp['id'].")</a></td>
 			<td style='vertical-align:middle; text-align:center;'> ". $chamados ." </td>
 			<td style='vertical-align:middle; text-align:center;'> ". $abertos ." </td>
 			<td style='vertical-align:middle; text-align:center;'> ". $solucionados ." </td>

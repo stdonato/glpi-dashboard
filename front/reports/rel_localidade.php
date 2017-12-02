@@ -10,21 +10,21 @@ Session::checkRight("profile", READ);
 
 if(!empty($_POST['submit']))
 {
-	$data_ini =  $_POST['date1'];
-	$data_fin = $_POST['date2'];
+	$data_ini = $_REQUEST['date1'];
+	$data_fin = $_REQUEST['date2'];
 }
 
 else {
 	$data_ini = date("Y-m-01");
 	$data_fin = date("Y-m-d");
-	}
+}
 
-if(!isset($_REQUEST["sel_loc"])) {
-	$id_loc = $_GET["loc"];
+if(!isset($_POST["sel_loc"])) {
+	$id_loc = $_REQUEST["sel_loc"];
 }
 
 else {
-	$id_loc = $_REQUEST["sel_loc"];
+	$id_loc = $_POST["sel_loc"];
 }
 
 
@@ -221,7 +221,7 @@ else {
 }
 
 if(!isset($_POST["sel_loc"])) {
-	$id_loc = $_GET["loc"];
+	$id_loc = $_REQUEST["sel_loc"];
 }
 
 else {

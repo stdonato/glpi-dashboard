@@ -1,8 +1,6 @@
-
 <?php
 
 //chamados abertos (opened)
-
 $querym = "
 SELECT DISTINCT DATE_FORMAT( date, '%b-%y' ) AS month_l, COUNT( id ) AS nb, DATE_FORMAT( date, '%y-%m' ) AS
 MONTH
@@ -16,10 +14,10 @@ $resultm = $DB->query($querym) or die('erro');
 
 $arr_grfm = array();
 while ($row_result = $DB->fetch_assoc($resultm))
-	{
-		$v_row_result = $row_result['month_l'];
-		$arr_grfm[$v_row_result] = $row_result['nb'];
-	}
+{
+	$v_row_result = $row_result['month_l'];
+	$arr_grfm[$v_row_result] = $row_result['nb'];
+}
 
 $grfm = array_keys($arr_grfm) ;
 $quantm = array_values($arr_grfm) ;
@@ -34,11 +32,10 @@ $DB->data_seek($resultm, 0);
 
 $arr_month = array();
 while ($row_result = $DB->fetch_assoc($resultm))
-	{
-		$v_row_result = $row_result['month_l'];
-		$arr_month[$v_row_result] = 0;
-	}
-
+{
+	$v_row_result = $row_result['month_l'];
+	$arr_month[$v_row_result] = 0;
+}
 
 // late tickets
 $arr_grfa = array();
@@ -61,13 +58,13 @@ while ($row_result = $DB->fetch_assoc($resultm))
 	$resulta2 = $DB->query($querya2) or die('erronb');
 	$row_result2 = $DB->fetch_assoc($resulta2);
 
-		$v_row_result = $row_result['month_l'];
-		if($row_result2['nb'] != '') {
-			$arr_grfa[$v_row_result] = $row_result2['nb'];
-		}
-		else {
-			$arr_grfa[$v_row_result] = 0;
-		}
+	$v_row_result = $row_result['month_l'];
+	if($row_result2['nb'] != '') {
+		$arr_grfa[$v_row_result] = $row_result2['nb'];
+	}
+	else {
+		$arr_grfa[$v_row_result] = 0;
+	}
 }
 
 $arr_open = array_merge($arr_month, $arr_grfa);
@@ -86,7 +83,6 @@ $arr_grfs = array();
 $DB->data_seek($resultm, 0);
 while ($row_result = $DB->fetch_assoc($resultm))
 {
-
 	$querys2 = "
 	SELECT DISTINCT DATE_FORMAT( date, '%b-%y' ) AS month_l, DATE_FORMAT( date, '%y-%m' ) AS month, count(id) AS nb
 	FROM glpi_tickets
@@ -100,13 +96,13 @@ while ($row_result = $DB->fetch_assoc($resultm))
 	$results2 = $DB->query($querys2) or die('erronb');
 	$row_result2 = $DB->fetch_assoc($results2);
 
-		$v_row_result = $row_result['month_l'];
-		if($row_result2['nb'] != '') {
-			$arr_grfs[$v_row_result] = $row_result2['nb'];
-		}
-		else {
-			$arr_grfs[$v_row_result] = 0;
-		}
+	$v_row_result = $row_result['month_l'];
+	if($row_result2['nb'] != '') {
+		$arr_grfs[$v_row_result] = $row_result2['nb'];
+	}
+	else {
+		$arr_grfs[$v_row_result] = 0;
+	}
 }
 
 $grfs = array_keys($arr_grfs) ;
@@ -124,7 +120,6 @@ $arr_grff = array();
 $DB->data_seek($resultm, 0);
 while ($row_result = $DB->fetch_assoc($resultm))
 {
-
 	$queryf = "
 	SELECT DISTINCT DATE_FORMAT(date, '%b-%y') as month_l, DATE_FORMAT(date, '%y-%m') as month, COUNT(id) as nb
 	FROM glpi_tickets
@@ -136,16 +131,15 @@ while ($row_result = $DB->fetch_assoc($resultm))
 	ORDER BY month ";
 
 	$resultf = $DB->query($queryf) or die('errof');
-
 	$row_resultf = $DB->fetch_assoc($resultf);
 
-		$v_row_result = $row_result['month_l'];
-		if($row_resultf['nb'] != '') {
-			$arr_grff[$v_row_result] = $row_resultf['nb'];
-		}
-		else {
-			$arr_grff[$v_row_result] = 0;
-		}
+	$v_row_result = $row_result['month_l'];
+	if($row_resultf['nb'] != '') {
+		$arr_grff[$v_row_result] = $row_resultf['nb'];
+	}
+	else {
+		$arr_grff[$v_row_result] = 0;
+	}
 }
 
 $grff = array_keys($arr_grff) ;
@@ -230,7 +224,6 @@ echo           "height: 460
                         //fontFamily: 'Verdana, sans-serif'
                     }
                 }
-
             },
           		 ";
 
@@ -380,11 +373,11 @@ echo "
                         //fontWeight: 'bold'
                     },
                     },
-                data: [$quanta2]
+                	data: [$quanta2]
                 },
 					 {
-                name: '".__('Closed','dashboard')." (".$closed.")',
-                data: [$quantf2]
+                	name: '".__('Closed','dashboard')." (".$closed.")',
+                	data: [$quantf2]
                 },
                 ]
         });

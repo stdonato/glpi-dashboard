@@ -9,19 +9,6 @@ global $DB;
 Session::checkLoginUser();
 Session::checkRight("profile", READ);
 
-/*//check if exists google maps api key
-$query_key = "SELECT * FROM glpi_plugin_dashboard_config WHERE name = 'map_key'"; 
-$res_key = $DB->query($query_key);
-$api_key = $DB->result($res_key,0,'value'); 
-
-if($api_key != '') {
-	$key = $api_key;
-}
-else {
-	$key = '';
-	echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=\"map_key.php\"'>";
-}
-*/
 ?>
 
 <html> 
@@ -238,6 +225,7 @@ while ($row_id = $DB->fetch_assoc($res_coo)) {
 if ($quant == 0) {
 	$quant = 0;
 	//$color = $icon_green.$quant."";
+	$color = "";
 	$num_up = 1;	
 	$num_down = 0;
 	
@@ -245,6 +233,7 @@ if ($quant == 0) {
 
 else {
 	//$color = $icon_red.$quant."";
+	$color = "";
 	$num_up = 0;	
 	$num_down = 1;
 }

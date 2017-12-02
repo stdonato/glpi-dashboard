@@ -21,7 +21,8 @@ else {
     }
 
 if(!isset($_POST["sel_tec"])) {
-    $id_tec = $_GET["tec"];
+    //$id_tec = $_GET["sel_tec"];
+    $id_tec = 0;
 }
 
 else {
@@ -186,10 +187,10 @@ a:hover { color: #000099; }
 		$DB->data_seek($result_tec, 0) ;
 		
 		while ($row_result = $DB->fetch_assoc($result_tec))
-		    {
-			    $v_row_result = $row_result['id'];
-		   	 $arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;
-		    }
+	    {
+		    $v_row_result = $row_result['id'];
+	   	 $arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;
+	    }
 		
 		$name = 'sel_tec';
 		$options = $arr_tec;
@@ -234,7 +235,7 @@ if($con == "1") {
 	}
 	
 	if(!isset($_POST["sel_tec"])) {
-		$id_tec = $_GET["tec"];
+		$id_tec = $_GET["sel_tec"];
 	}
 	
 	else {

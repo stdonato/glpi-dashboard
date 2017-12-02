@@ -30,16 +30,15 @@ $arr_grf_os[__('Unknow','dashboard')] = $unk;
 }
 
 while ($row_result = $DB->fetch_assoc($result_os))		
-	{ 
+{ 
 	$v_row_result = $row_result['name'];
 	$arr_grf_os[$v_row_result] = $row_result['conta'];			
-	} 
+} 
 	
 $grf_os2 = array_keys($arr_grf_os);
 $quant_os2 = array_values($arr_grf_os);
 
 $conta_os = count($arr_grf_os);
-
 
 echo "
 <script type='text/javascript'>
@@ -85,11 +84,11 @@ $(function () {
                         selected: true
                     },";
                     
-for($i = 1; $i < $conta_os; $i++) {    
-     echo '[ "' . $grf_os2[$i] . '", '.$quant_os2[$i].'],';
-        }                    
+			for($i = 1; $i < $conta_os; $i++) {    
+			     echo '[ "' . $grf_os2[$i] . '", '.$quant_os2[$i].'],';
+			}                    
                                                          
-echo "                ]
+			echo "   ]
             }]
         });
     });

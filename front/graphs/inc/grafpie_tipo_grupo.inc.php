@@ -2,11 +2,11 @@
 <?php
 
 if($data_ini == $data_fin) {
-$datas = "LIKE '".$data_ini."%'";	
+	$datas = "LIKE '".$data_ini."%'";	
 }	
 
 else {
-$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";	
+	$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";	
 }
 
 //problems
@@ -39,17 +39,14 @@ $result2 = $DB->query($query2) or die('erro');
 
 $arr_grft2 = array();
 while ($row_result = $DB->fetch_assoc($result2))		
-	{ 			
+{ 			
 	$v_row_result = $row_result['tipo'];
 	$arr_grft2[$v_row_result] = $row_result['tick'];			
-	} 
+} 
 	
 $grft2 = array_keys($arr_grft2);
-
 $quantt2 = array_values($arr_grft2);
-
 $conta = count($arr_grft2);
-
 
 if($conta == 1) {
 
@@ -73,7 +70,6 @@ if($conta > 1) {
 	$grft2[2] = __('Problem'); 
 	$quantt2[2] = $problems['total']; 		
 }
-
 	
 echo "
 <script type='text/javascript'>

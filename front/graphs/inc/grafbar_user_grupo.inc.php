@@ -1,11 +1,11 @@
 <?php
 
 if($data_ini == $data_fin) {
-$datas = "LIKE '".$data_ini."%'";
+	$datas = "LIKE '".$data_ini."%'";
 }
 
 else {
-$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";
+	$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";
 }
 
 $sql_grpb = "
@@ -42,13 +42,13 @@ $(function () {
             xAxis: {
             categories: ";
 
-$categories = array();
-while ($grupo = $DB->fetch_assoc($query_grp_b)) {
-    $categories[] = $grupo['name']." ".$grupo['sname'];
-}
-echo json_encode($categories);
-
-echo ",
+				$categories = array();
+				while ($grupo = $DB->fetch_assoc($query_grp_b)) {
+				    $categories[] = $grupo['name']." ".$grupo['sname'];
+				}
+				echo json_encode($categories);
+				
+				echo ",
                 title: {
                     text: null
                 },

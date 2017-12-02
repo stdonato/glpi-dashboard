@@ -12,6 +12,8 @@ $sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' A
 $result_e = $DB->query($sql_e);
 $sel_ent = $DB->result($result_e,0,'value');
 
+$asset = '';
+
 //select entity
 if($sel_ent == '' || $sel_ent == -1) {	
 
@@ -292,13 +294,13 @@ foreach($arr_assets as $asset) {
 <div id='container-fluid' style="margin: 0; float:none;"> 
 	<div id='charts_assets' style="col-md-12 fluid">		    	    	   		 	      		 	
 	
-				<div id="computers" class="col-md-12" style="display:none; margin:auto; float:none; color:#000;"> 										
+				<div id="computers" class="col-md-12 col-sm-12" style="display:none; margin:auto; float:none; color:#000;"> 										
 					
-					<div id="graf_os" class="col-md-6" style="min-height:500px;">
+					<div id="graf_os" class="col-md-6 col-sm-6" style="min-height:500px;">
 						<?php  include('./comp_os.php'); ?>		
 					</div>
 				
-					<div id="graf_cat" class="col-md-6" style="min-height:500px;">
+					<div id="graf_cat" class="col-md-6 col-sm-6" style="min-height:500px;">
 						<?php  include('./comp_cat.php'); ?>		
 					</div>
 					
@@ -312,86 +314,86 @@ foreach($arr_assets as $asset) {
 														
 				</div>
 						
-					<div id="monitors" style="display:none; margin:auto; float:none;" class="col-md-12"> 							
-						<div id="graf_mon1" class="col-md-6" style="margin-top: 0; min-height:500px;">
+					<div id="monitors" style="display:none; margin:auto; float:none;" class="col-md-12 col-sm-12"> 							
+						<div id="graf_mon1" class="col-md-6 col-sm-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./mon_manuf.php'); ?>		
 						</div>
-						<div id="graf_mon2" class="col-md-6" style="margin-top: 0; min-height:500px;">
+						<div id="graf_mon2" class="col-md-6 col-sm-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./mon_model.php'); ?>		
 						</div>						
 					</div>
 			
-					<div id="printers" style="display:none; margin: auto;" class="col-md-12"> 				
-						<div id="graf_printer1" class="col-md-6" style="margin-top: 0; min-height:500px;">
+					<div id="printers" style="display:none; margin: auto;" class="col-md-12 col-sm-12"> 				
+						<div id="graf_printer1" class="col-md-6 col-sm-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./printer_manuf.php'); ?>		
 						</div>
-						<div id="graf_printer2" class="col-md-6" style="margin-top: 0; min-height:500px;">
+						<div id="graf_printer2" class="col-md-6 col-sm-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./printer_model.php'); ?>		
 						</div>							
 					</div>	
 
 		
-					<div id="net" style="display:none; margin: auto; float:none;" class="col-md-12"> 						
-						<div id="graf_net1" class="col-md-6 " style="margin-top: 0; min-height:500px;">
+					<div id="net" style="display:none; margin: auto; float:none;" class="col-md-12 col-sm-12"> 						
+						<div id="graf_net1" class="col-md-6 col-sm-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./net_manuf.php'); ?>		
 						</div>
-						<div id="graf_net2" class="col-md-6 " style="margin-top: 0; min-height:500px;">
+						<div id="graf_net2" class="col-md-6 col-sm-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./net_model.php'); ?>		
 						</div>							
 					</div>				
 	
-					<div id="phone" style="display:none; margin: auto;" class="col-md-12"> 							
-						<div id="graf_phone1" class="col-md-6" style="margin-top: 0; min-height:500px;">
+					<div id="phone" style="display:none; margin: auto;" class="col-md-12 col-sm-12"> 							
+						<div id="graf_phone1" class="col-md-6 col-sm-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./phone_manuf.php'); ?>		
 						</div>
-						<div id="graf_phone2" class="col-md-6" style="margin-top: 0; min-height:500px;">
+						<div id="graf_phone2" class="col-md-6 col-sm-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./phone_model.php'); ?>		
 						</div>
-						<div id="phones_report" class="col-md-12 well" style="margin-top:25px; margin-left: 1%;">
+						<div id="phones_report" class="col-md-12 col-sm-12 well" style="margin-top:25px; margin-left: 1%;">
 							<?php  include('./phone_report.php'); ?>		
 						</div>							
 					</div>				
 						
-					<div id="peripheral" style="display:none; margin: auto;" class="col-md-12"> 					
-						<div id="graf_perip1" class="col-md-6" style="margin-top: 0; min-height:500px;">
+					<div id="peripheral" style="display:none; margin: auto;" class="col-md-12 col-sm-12"> 					
+						<div id="graf_perip1" class="col-md-6 col-sm-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./perip_manuf.php'); ?>		
 						</div>
-						<div id="graf_perip2" class="col-md-6" style="margin-top: 0; min-height:500px;">
+						<div id="graf_perip2" class="col-md-6 col-sm-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./perip_model.php'); ?>		
 						</div>							
 					</div>			
 					
-					<div id="soft" style="display:none; margin: auto;" class="col-md-12">
+					<div id="soft" style="display:none; margin: auto;" class="col-md-12 col-sm-12">
 					<!--<a href="assets.php#"><img src="../img/close.png" alt="close" onclick="showDivS('soft')" style="position:absolute; float:right;"></a>-->
-						<div id="graf_soft1" class="col-md-6" style="margin-top: 0; min-height:500px;">
+						<div id="graf_soft1" class="col-md-6 col-sm-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./soft_manuf.php'); ?>		
 						</div>
-						<div id="graf_soft2" class="col-md-6" style="margin-top: 0; min-height:500px;">
+						<div id="graf_soft2" class="col-md-6 col-sm-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./soft_install.php'); ?>		
 						</div>							
 					</div>							
 				
-					<div id="cart" style="display:none; margin: auto;" class="col-md-12"> 					
-						<div id="graf_cart1" class="col-md-12" style="margin-top: 0; min-height:500px; width: 98%;">
+					<div id="cart" style="display:none; margin: auto;" class="col-md-12 col-sm-12"> 					
+						<div id="graf_cart1" class="col-md-12 col-sm-12" style="margin-top: 0; min-height:500px; width: 98%;">
 							<?php  include('./cart_manuf.php'); ?>		
 						</div>
-						<div id="graf_cart2" class="col-md-12 well" style="margin-top: 25px; margin-left: 1%;">
+						<div id="graf_cart2" class="col-md-12 col-sm-12 well" style="margin-top: 25px; margin-left: 1%;">
 							<?php  include('./cart_quant.php'); ?>		
 						</div>							
 					</div>
 					
-					<div id="consum" style="display:none; margin: auto;" class="col-md-12"> 					
+					<div id="consum" style="display:none; margin: auto;" class="col-md-12 col-sm-12"> 					
 						<div id="graf_consum1" class="well col-md-12" style="margin-top: 0; min-height:500px; width: 98%;">
 							<?php  include('./consumables.php'); ?>		
 						</div>						
 					</div>
 				
-					<div id="global" style="display:none; margin: auto;" class="col-md-12">
+					<div id="global" style="display:none; margin: auto;" class="col-md-12 col-sm-12">
 					<!--<a href="assets.php#"><img src="../img/close.png" alt="close" onclick="showDivG('global')" style="position:absolute; float:right;"></a>-->			
-						<div id="graf_global1" class="col-md-12" style="margin-top: 0; min-height:500px; width: 98%;">
+						<div id="graf_global1" class="col-md-12 col-sm-12" style="margin-top: 0; min-height:500px; width: 98%;">
 							<?php  include('./global_assets.php'); ?>		
 						</div>
-						<div id="asset_tickets" class="well col-md-12" style="margin-top: 25px; margin-left: 1%;">
+						<div id="asset_tickets" class="col-md-12 col-sm-12 well" style="margin-top: 25px; margin-left: 1%;">
 							<?php  include('./global_tickets.php'); ?>		
 						</div>							
 					</div>	 

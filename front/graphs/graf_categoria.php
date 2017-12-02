@@ -28,7 +28,6 @@ global $DB;
 <html>
 <head>
 <title>GLPI - <?php echo __('Charts','dashboard'). " " . __('by Category','dashboard'); ?></title>
-<!-- <base href= "<?php $_SERVER['SERVER_NAME'] ?>" > -->
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
@@ -79,7 +78,7 @@ $datahoje = date("Y-m-d");
 
 //cat
 if(!isset($_POST["sel_cat"])) {
-	$id_cat = $_GET["sel_cat"];
+	$id_cat = $_REQUEST["sel_cat"];
 }
 
 else {
@@ -89,7 +88,7 @@ else {
 # entity
 $sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
 $result_e = $DB->query($sql_e);
-$sel_cat = $DB->result($result_e,0,'value');
+$sel_ent = $DB->result($result_e,0,'value');
 
 //select entity
 if($sel_ent == '' || $sel_ent == -1) {
@@ -151,10 +150,10 @@ $arr_cat = array();
 $arr_cat[0] = "-- ". __('Select a category', 'dashboard') . " --" ;
 
 while ($row_result = $DB->fetch_assoc($result_cat))
-	{
+{
 	$v_row_result = $row_result['id'];
 	$arr_cat[$v_row_result] = $row_result['name'] ;
-	}
+}
 
 $name = 'sel_cat';
 $options = $arr_cat;
@@ -174,7 +173,7 @@ $selected = $id_cat;
 			<span style="color:#8b1a1a; font-size:35pt; font-weight:bold;"> </span>
 		</div>
 
-		<div id="datas-tec" class="col-md-12 fluid" >
+		<div id="datas-tec" class="col-md-12 col-sm-12 fluid" >
 			<form id="form1" name="form1" class="form2" method="post" action="?date1=<?php echo $data_ini ?>&date2=<?php echo $data_fin ?>&con=1">
 				<table border="0" cellspacing="0" cellpadding="1" bgcolor="#efefef">
 					<tr>
@@ -291,24 +290,23 @@ echo $ent_name['name']." - <span> ".$total['total']." ".__('Tickets','dashboard'
 </div>";
  ?>
 
-<div id="graf_linhas" class="col-md-12" style="height: 450px; margin-left: -5px;">
+<div id="graf_linhas" class="col-md-12 col-sm-12" style="height: 450px; margin-left: -5px;">
 	<?php include ("./inc/graflinhas_cat.inc.php"); ?>
 </div>
 
-
-<div id="graf2" class="col-md-6" >
+<div id="graf2" class="col-md-6 col-sm-6" >
 	<?php include ("./inc/grafpie_stat_cat.inc.php"); ?>
 </div>
 
-<div id="graf_tipo" class="col-md-6" style="margin-left: 0%;">
+<div id="graf_tipo" class="col-md-6 col-sm-6" style="margin-left: 0%;">
 	<?php include ("./inc/grafpie_tipo_cat.inc.php");  ?>
 </div>
 
-<div id="graf3" class="col-md-12" >
+<div id="graf3" class="col-md-12 col-sm-12" >
 	<?php  include ("./inc/grafbar_cat_user.inc.php");  ?>
 </div>
 
-<div id="grafcat_tec" class="col-md-12" style="height: 450px; margin-top: 240px; margin-left: 0px;">
+<div id="grafcat_tec" class="col-md-12 col-sm-12" style="height: 450px; margin-top: 240px; margin-left: 0px;">
 	<?php  include ("./inc/grafbar_cat_tec.inc.php");
 		}
 	?>

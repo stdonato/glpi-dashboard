@@ -2,11 +2,11 @@
 <?php
 
 if($data_ini == $data_fin) {
-$datas = "LIKE '".$data_ini."%'";	
+	$datas = "LIKE '".$data_ini."%'";	
 }	
 
 else {
-$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";	
+	$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";	
 }
 
 //problems
@@ -16,7 +16,7 @@ FROM glpi_problems
 WHERE glpi_problems.is_deleted = 0     
 AND glpi_problems.date ".$datas."
 AND glpi_problems.itilcategories_id = ".$id_cat." 
-". $entidade_c ."   
+ 
  ";		
  
 $result_p = $DB->query($query_p) or die('erro');

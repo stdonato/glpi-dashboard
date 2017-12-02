@@ -77,16 +77,16 @@ function margins() {
 						
 	//redirect to index
 	if($layout == '0')
-		{
-			// sidebar
-			$margin = '0px 3% 0px 5%';
-		}
+	{
+		// sidebar
+		$margin = '0px 3% 0px 5%';
+	}
 	
 	if($layout == 1 || $layout == '' )
-		{
-			//top menu
-			$margin = '0px 2% 0px 2%';
-		}
+	{
+		//top menu
+		$margin = '0px 2% 0px 2%';
+	}
 		
 	return $margin;	
 }
@@ -221,10 +221,7 @@ function margins() {
 			$arr_ent = array();
 			$arr_ent[-1] = "-----" ;
 			
-			//if(in_array(0,$user_ents)) {
-				$arr_ent[0] = __('All') ;
-			//}
-			//else { $arr_ent[0] = __('-----') ; }
+			$arr_ent[0] = __('All') ;
 			
 			while ($row_ent = $DB->fetch_assoc($result_ent)) { 
 				$v_row_ent = $row_ent['id'];
@@ -754,7 +751,7 @@ if($consulta > 0) {
 				
 					else {	
 						
-						if(!isset($row['solvedate']) AND $today > $row['duedate']) {
+						if(!isset($row['solvedate']) AND $today > $row['time_to_resolve']) {
 							echo "<td style='vertical-align:middle; text-align:center; color:red;'> ". conv_data_hora($row['time_to_resolve']) ." </td>";
 						}
 					

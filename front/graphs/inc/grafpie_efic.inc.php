@@ -2,11 +2,11 @@
 <?php
 
 if($data_ini == $data_fin) {
-$datas = "LIKE '".$data_ini."%'";	
+	$datas = "LIKE '".$data_ini."%'";	
 }	
 
 else {
-$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";	
+	$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";	
 }
 
 //problems
@@ -35,10 +35,10 @@ $result2 = $DB->query($query2) or die('erro');
 
 $arr_grf2 = array();
 while ($row_result = $DB->fetch_assoc($result2))		
-	{ 
+{ 
 	$v_row_result = $row_result['tipo'];
 	$arr_grf2[$v_row_result] = $row_result['tick'];			
-	} 
+} 
 	
 //$grf2 = array_keys($arr_grf2);
 $grf2 = array(__('Incident'),__('Request'),__('Problem'));

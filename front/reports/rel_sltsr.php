@@ -21,7 +21,7 @@ else {
 }
 
 if(!isset($_POST["sel_sla"])) {
-	$id_sla = $_GET["sla"];
+	$id_sla = $_REQUEST["sel_sla"];
 }
 
 else {
@@ -130,7 +130,7 @@ else {
 					<?php echo __('Tickets', 'dashboard') .'  '. __('by SLA', 'dashboard') ?> - <?php echo __('Time to resolve'); ?> 
 				</div>
 				
-			<div id="datas-tec" class="col-md-12 fluid" >
+			<div id="datas-tec" class="col-md-12 col-sm-12 fluid" >
 			<form id="form1" name="form1" class="form_rel" method="post" action="rel_sltsr.php?con=1">
 				<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
 					<tr>
@@ -230,7 +230,7 @@ else {
 }
 
 if(!isset($_POST["sel_sla"])) {
-	$id_sla = $_GET["sla"];
+	$id_sla = $_GET["sel_sla"];
 }
 
 else {

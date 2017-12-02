@@ -306,6 +306,7 @@ WHERE glpi_tickets.is_deleted = '0'
 AND glpi_tickets.date ".$datas."
 AND glpi_tickets_users.users_id = ".$id_tec."
 AND glpi_tickets_users.type = 1
+".$entidade_age."
 AND glpi_tickets_users.tickets_id = glpi_tickets.id ";
 
 $result_total = $DB->query($query_total);
@@ -421,19 +422,19 @@ echo '<div id="name"  style="margin-top: 15px;">
 			}, 1000);
 		</script> 
 		
-			<div id="graf_linhas" class="col-md-12" style="height: 450px; margin-top: 25px;">
+			<div id="graf_linhas" class="col-md-12 col-sm12" style="height: 450px; margin-top: 25px;">
 				<?php include ("./inc/graflinhas_user.inc.php"); ?>
 			</div>
 			
-			<div id="graf2" class="col-md-6" >
+			<div id="graf2" class="col-md-6 col-sm-6" >
 				<?php include ("./inc/grafpie_stat_user.inc.php"); ?>
 			</div>
 			
-			<div id="graf_tipo" class="col-md-6" style="margin-left: 0%;">
+			<div id="graf_tipo" class="col-md-6 col-sm-6" style="margin-left: 0%;">
 				<?php include ("./inc/grafpie_tipo_user.inc.php");  ?>
 			</div>
 			
-			<div id="graf4" class="col-md-12" style="height: 450px; margin-left: 0px;">
+			<div id="graf4" class="col-md-12 col-sm-12" style="height: 450px; margin-left: 0px;">
 				<?php include ("./inc/grafcat_user.inc.php"); ?>
 			</div>
 		

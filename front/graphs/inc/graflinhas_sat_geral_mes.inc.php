@@ -1,7 +1,7 @@
 <?php
 
 if($data_ini == $data_fin) {
-$datas = "LIKE '".$data_ini."%'";
+	$datas = "LIKE '".$data_ini."%'";
 }
 
 $data1 = $data_ini;
@@ -15,6 +15,7 @@ $interval = ($unix_data2 - $unix_data1) / 86400;
 $datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";
 
 if($interval <= "31") {
+	
 	$queryd = "
 	SELECT DISTINCT   DATE_FORMAT(date, '%b-%d') AS day_l,  COUNT(id) AS nb, DATE_FORMAT(date, '%Y-%m-%d') AS day
 	FROM glpi_tickets
@@ -28,10 +29,10 @@ if($interval <= "31") {
 
 	$arr_days = array();
 	while ($row_result = $DB->fetch_assoc($resultd))
-		{
-			$v_row_result = $row_result['day'];
-			$arr_days[$v_row_result] = $row_result['nb'];
-		}
+	{
+		$v_row_result = $row_result['day'];
+		$arr_days[$v_row_result] = $row_result['nb'];
+	}
 
 	$days = array_keys($arr_days) ;
 	$quantd = array_values($arr_days) ;
@@ -136,66 +137,65 @@ else {
 	$resulta = $DB->query($querya) or die('erro');
 }
 
-	if($interval >= "31") {
+if($interval >= "31") {
 
-		while ($row_result = $DB->fetch_assoc($resulta))
-		{
-			$querya2 = "
-			SELECT DISTINCT DATE_FORMAT( date, '%b-%y' ) AS day_l, DATE_FORMAT( date, '%y-%m' ) AS day, count(id) AS nb
-			FROM glpi_tickets
-			WHERE solvedate IS NOT NULL
-			AND time_to_resolve IS NOT NULL
-			AND solvedate > time_to_resolve
-			AND is_deleted = 0
-			AND glpi_tickets.date ".$datas."
-			AND DATE_FORMAT( date, '%b-%y' ) = '".$row_result['day_l']."'
-			".$entidade."
-			GROUP BY day
-			ORDER BY day";
+	while ($row_result = $DB->fetch_assoc($resulta))
+	{
+		$querya2 = "
+		SELECT DISTINCT DATE_FORMAT( date, '%b-%y' ) AS day_l, DATE_FORMAT( date, '%y-%m' ) AS day, count(id) AS nb
+		FROM glpi_tickets
+		WHERE solvedate IS NOT NULL
+		AND time_to_resolve IS NOT NULL
+		AND solvedate > time_to_resolve
+		AND is_deleted = 0
+		AND glpi_tickets.date ".$datas."
+		AND DATE_FORMAT( date, '%b-%y' ) = '".$row_result['day_l']."'
+		".$entidade."
+		GROUP BY day
+		ORDER BY day";
 
-			$resulta2 = $DB->query($querya2) or die('erro a');
-			$row_result2 = $DB->fetch_assoc($resulta2);
+		$resulta2 = $DB->query($querya2) or die('erro a');
+		$row_result2 = $DB->fetch_assoc($resulta2);
 
-				$v_row_result = $row_result['day_l'];
-			if($row_result2['nb'] != '') {
-				$arr_grfa[$v_row_result] = $row_result2['nb'];
-			}
-		   else {
-				$arr_grfa[$v_row_result] = 0;
-			}
+		$v_row_result = $row_result['day_l'];
+		if($row_result2['nb'] != '') {
+			$arr_grfa[$v_row_result] = $row_result2['nb'];
+		}
+	   else {
+			$arr_grfa[$v_row_result] = 0;
 		}
 	}
+}
 
-	else {
+else {
 
-			$DB->data_seek($resultd, 0);
-			while ($row_result = $DB->fetch_assoc($resulta))
-			{
-	
-			$querya2 = "
-			SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(`solvedate`),'%Y-%m-%d') AS day, COUNT(id) AS nb
-			FROM glpi_tickets
-			WHERE solvedate IS NOT NULL
-			AND time_to_resolve IS NOT NULL
-			AND solvedate > time_to_resolve
-			AND glpi_tickets.date ".$datas."
-			AND DATE_FORMAT( solvedate, '%Y-%m-%d' ) = '".$row_result['day']."'
-			".$entidade."
-			GROUP BY day
-			ORDER BY day";
-	
-			$resulta2 = $DB->query($querya2) or die('erro a');
-			$row_result2 = $DB->fetch_assoc($resulta2);
-	
-			$v_row_result = $row_result['day'];
-			if($row_result2['nb'] != '') {
-				$arr_grfa[$v_row_result] = $row_result2['nb'];
-			}
-			else {
-				$arr_grfa[$v_row_result] = 0;
-			}
+		$DB->data_seek($resultd, 0);
+		while ($row_result = $DB->fetch_assoc($resulta)) {
+
+		$querya2 = "
+		SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(`solvedate`),'%Y-%m-%d') AS day, COUNT(id) AS nb
+		FROM glpi_tickets
+		WHERE solvedate IS NOT NULL
+		AND time_to_resolve IS NOT NULL
+		AND solvedate > time_to_resolve
+		AND glpi_tickets.date ".$datas."
+		AND DATE_FORMAT( solvedate, '%Y-%m-%d' ) = '".$row_result['day']."'
+		".$entidade."
+		GROUP BY day
+		ORDER BY day";
+
+		$resulta2 = $DB->query($querya2) or die('erro a');
+		$row_result2 = $DB->fetch_assoc($resulta2);
+
+		$v_row_result = $row_result['day'];
+		if($row_result2['nb'] != '') {
+			$arr_grfa[$v_row_result] = $row_result2['nb'];
+		}
+		else {
+			$arr_grfa[$v_row_result] = 0;
 		}
 	}
+}
 
 $grfa = array_keys($arr_grfa) ;
 $quanta = array_values($arr_grfa) ;
@@ -239,19 +239,19 @@ else {
 	$DB->data_seek($resultd, 0);
 	while ($row_result = $DB->fetch_assoc($resultd)) {
 	
-	$querys = "
-	SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(`solvedate`),'%Y-%m-%d') AS day, COUNT(id) AS nb
-	FROM glpi_tickets
-	WHERE glpi_tickets.is_deleted = '0'
-	AND glpi_tickets.solvedate ".$datas."
-	AND DATE_FORMAT( solvedate, '%Y-%m-%d' ) = '".$row_result['day']."'
-	AND glpi_tickets.solvedate IS NOT NULL
-	".$entidade."
-	GROUP BY day
-	ORDER BY day  ";
-	
-	$results = $DB->query($querys) or die('erro s' . $DB->error());
-	$row_result2 = $DB->fetch_assoc($results);
+		$querys = "
+		SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(`solvedate`),'%Y-%m-%d') AS day, COUNT(id) AS nb
+		FROM glpi_tickets
+		WHERE glpi_tickets.is_deleted = '0'
+		AND glpi_tickets.solvedate ".$datas."
+		AND DATE_FORMAT( solvedate, '%Y-%m-%d' ) = '".$row_result['day']."'
+		AND glpi_tickets.solvedate IS NOT NULL
+		".$entidade."
+		GROUP BY day
+		ORDER BY day  ";
+		
+		$results = $DB->query($querys) or die('erro s' . $DB->error());
+		$row_result2 = $DB->fetch_assoc($results);
 	
 		$v_row_result = $row_result['day'];
 		if($row_result2['nb'] != '') {
@@ -307,18 +307,18 @@ else {
 	$DB->data_seek($resultd, 0);
 	while ($row_result = $DB->fetch_assoc($resultd)) {
 	
-	$queryf = "
-	SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(`closedate`),'%Y-%m-%d') AS day, COUNT(id) AS nb
-	FROM glpi_tickets
-	WHERE glpi_tickets.closedate ".$datas."
-	AND DATE_FORMAT( closedate, '%Y-%m-%d' ) = '".$row_result['day']."'
-	AND glpi_tickets.closedate IS NOT NULL
-	".$entidade."
-	GROUP BY day
-	ORDER BY day  ";
-	
-	$resultf = $DB->query($queryf) or die('erro f' . $DB->error());
-	$row_result2 = $DB->fetch_assoc($resultf);
+		$queryf = "
+		SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(`closedate`),'%Y-%m-%d') AS day, COUNT(id) AS nb
+		FROM glpi_tickets
+		WHERE glpi_tickets.closedate ".$datas."
+		AND DATE_FORMAT( closedate, '%Y-%m-%d' ) = '".$row_result['day']."'
+		AND glpi_tickets.closedate IS NOT NULL
+		".$entidade."
+		GROUP BY day
+		ORDER BY day  ";
+		
+		$resultf = $DB->query($queryf) or die('erro f' . $DB->error());
+		$row_result2 = $DB->fetch_assoc($resultf);
 	
 		$v_row_result = $row_result['day'];
 		if($row_result2['nb'] != '') {
@@ -331,10 +331,9 @@ else {
 }
 
 $grff = array_keys($arr_grff) ;
-$quantf = array_values($arr_grff) ;
-
 $grff = implode("','",$grff);
-//$grff3 = "'$grff2'";
+
+$quantf = array_values($arr_grff) ;
 $quantf2 = implode(',',$quantf);
 
 $closed = array_sum($quantf);

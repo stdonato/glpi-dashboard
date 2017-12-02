@@ -13,10 +13,10 @@ $result_os = $DB->query($query_os) or die('erro');
 $arr_grf_os = array();
 
 while ($row_result = $DB->fetch_assoc($result_os))	
-	{ 
+{ 
 	$v_row_result = $row_result['name'];
 	$arr_grf_os[$v_row_result] = $row_result['conta'];			
-	} 
+} 
 	
 $grf_os2 = array_keys($arr_grf_os);
 $quant_os2 = array_values($arr_grf_os);
@@ -41,30 +41,30 @@ $DB->data_seek($result_os,0);
 while ($row_result = $DB->fetch_assoc($result_os))	
 {		
 
-$id = $row_result['id'];
-
-$query = "
-SELECT glpi_cartridgeitems.id, glpi_cartridgeitems.name AS name, COUNT( glpi_cartridges.cartridgeitems_id ) AS conta
-FROM `glpi_cartridges` , glpi_cartridgeitems
-WHERE glpi_cartridgeitems.is_deleted =0
-AND glpi_cartridgeitems.id = glpi_cartridges.cartridgeitems_id
-AND glpi_cartridges.printers_id <>0
-AND glpi_cartridges.cartridgeitems_id = ".$id."
-GROUP BY glpi_cartridges.cartridgeitems_id
-ORDER BY `conta` DESC ";
-
-		
-$result = $DB->query($query) or die('erro');
-
-while ($row = $DB->fetch_assoc($result))
-{
-	echo '<tr>
-			<td><a href=../../../../front/cartridgeitem.form.php?id='.$id.' target="_blank"  style="color:#555555;" >'. $row['name'].'</a></td>
-			<td>'. $row_result['ref'].'</td>
-			<td>'. $row_result['conta'].'</td>
-			<td>'. $row['conta'].'</td>
-			</tr>';		
-}
+	$id = $row_result['id'];
+	
+	$query = "
+	SELECT glpi_cartridgeitems.id, glpi_cartridgeitems.name AS name, COUNT( glpi_cartridges.cartridgeitems_id ) AS conta
+	FROM `glpi_cartridges` , glpi_cartridgeitems
+	WHERE glpi_cartridgeitems.is_deleted =0
+	AND glpi_cartridgeitems.id = glpi_cartridges.cartridgeitems_id
+	AND glpi_cartridges.printers_id <>0
+	AND glpi_cartridges.cartridgeitems_id = ".$id."
+	GROUP BY glpi_cartridges.cartridgeitems_id
+	ORDER BY `conta` DESC ";
+	
+			
+	$result = $DB->query($query) or die('erro');
+	
+	while ($row = $DB->fetch_assoc($result))
+	{
+		echo '<tr>
+				<td><a href=../../../../front/cartridgeitem.form.php?id='.$id.' target="_blank"  style="color:#555555;" >'. $row['name'].'</a></td>
+				<td>'. $row_result['ref'].'</td>
+				<td>'. $row_result['conta'].'</td>
+				<td>'. $row['conta'].'</td>
+				</tr>';		
+	}
 }
 
 echo '		

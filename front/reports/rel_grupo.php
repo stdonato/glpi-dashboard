@@ -21,7 +21,7 @@ else {
 }
 
 if(!isset($_POST["sel_grp"])) {
-	$id_grp = $_GET["grp"];
+	$id_grp = $_REQUEST["sel_grp"];
 }
 
 else {
@@ -169,11 +169,10 @@ else {
 		
 							$DB->data_seek($result_grp, 0) ;
 		
-							while ($row_result = $DB->fetch_assoc($result_grp))
-							    {
-							   	$v_row_result = $row_result['id'];
-							    	$arr_grp[$v_row_result] = $row_result['name'] ." (". $row_result['id'] .")" ;
-							    }
+							while ($row_result = $DB->fetch_assoc($result_grp)){
+							   $v_row_result = $row_result['id'];
+							    $arr_grp[$v_row_result] = $row_result['name'] ." (". $row_result['id'] .")" ;
+							 }
 		
 							$name = 'sel_grp';
 							$options = $arr_grp;
@@ -340,24 +339,23 @@ $abertos = $data_ab;
 //barra de porcentagem
 if($conta_cons > 0) {
 
-if($status == $status_close ) {
-    $barra = 100;
-    $cor = "progress-bar-success";
-}
-
-else {
-
-	//porcentagem
-	$perc = round(($abertos*100)/$conta_cons,1);
-	$barra = 100 - $perc;
-
-	// cor barra
-	if($barra == 100) { $cor = "progress-bar-success"; }
-	if($barra >= 80 and $barra < 100) { $cor = " "; }
-	if($barra > 51 and $barra < 80) { $cor = "progress-bar-warning"; }
-	if($barra > 0 and $barra <= 50) { $cor = "progress-bar-danger"; }
-	if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }
-
+	if($status == $status_close ) {
+	    $barra = 100;
+	    $cor = "progress-bar-success";
+	}
+	
+	else {
+	
+		//porcentagem
+		$perc = round(($abertos*100)/$conta_cons,1);
+		$barra = 100 - $perc;
+	
+		// cor barra
+		if($barra == 100) { $cor = "progress-bar-success"; }
+		if($barra >= 80 and $barra < 100) { $cor = " "; }
+		if($barra > 51 and $barra < 80) { $cor = "progress-bar-warning"; }
+		if($barra > 0 and $barra <= 50) { $cor = "progress-bar-danger"; }
+		if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }	
 	}
 }
 else { $barra = 0;}

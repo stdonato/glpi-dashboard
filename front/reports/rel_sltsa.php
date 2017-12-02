@@ -21,7 +21,7 @@ else {
 }
 
 if(!isset($_POST["sel_sla"])) {
-	$id_sla = $_GET["sla"];
+	$id_sla = $_REQUEST["sel_sla"];
 }
 
 else {
@@ -220,7 +220,7 @@ else {
 }
 
 if(!isset($_POST["sel_sla"])) {
-	$id_sla = $_GET["sla"];
+	$id_sla = $_GET["sel_sla"];
 }
 
 else {

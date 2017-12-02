@@ -21,7 +21,8 @@ else {
 }
 
 if(!isset($_POST["sel_tec"])) {
-    $id_tec = $_GET["tec"];
+    //$id_tec = $_GET["tec"];
+    $id_tec = 0;
 }
 
 else {

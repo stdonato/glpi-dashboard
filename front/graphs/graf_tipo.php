@@ -28,7 +28,6 @@ global $DB;
 <html> 
 <head>
 <title>GLPI - <?php echo __('Charts','dashboard'). " " . __('by Type','dashboard'); ?></title>
-<!-- <base href= "<?php $_SERVER['SERVER_NAME'] ?>" > -->
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
@@ -109,6 +108,7 @@ if($sel_ent == '' || $sel_ent == -1) {
 
 	$entidade = "WHERE entities_id IN (".$ent.")  ";
 	$entidade_a = "AND glpi_tickets.entities_id IN (".$ent.")";
+	$entidade_age = "AND glpi_tickets.entities_id IN (".$ent.")";
 	$entidade1 = "";
 	
 }
@@ -116,6 +116,7 @@ if($sel_ent == '' || $sel_ent == -1) {
 else {
 	$entidade = "WHERE entities_id IN (".$sel_ent.") ";
 	$entidade_a = "AND glpi_tickets.entities_id IN (".$sel_ent.")";
+		$entidade_age = "AND glpi_tickets.entities_id IN (".$sel_ent.")";
 }
 
 /*//seleciona grupo
@@ -243,8 +244,7 @@ $selected = $id_tip;*/
 <!-- DIV's -->
 
 <script type="text/javascript" >
-	$(document).ready(function() { $("#sel_type").select2({dropdownAutoWidth : true});});
-				
+	$(document).ready(function() { $("#sel_type").select2({dropdownAutoWidth : true});});				
 	$('#dp1').datepicker('update');
 	$('#dp2').datepicker('update');
 </script>
@@ -290,18 +290,6 @@ else {
 	$datas = "BETWEEN '".$data_ini2." 00:00:00' AND '".$data_fin2." 23:59:59'";	
 }
 
-// nome do grupo
-
-/*$sql_nm = "
-SELECT id, name
-FROM `glpi_groups`
-WHERE id = ".$id_tip."
-";
-
-$result_nm = $DB->query($sql_nm);
-$grp_name = $DB->fetch_assoc($result_nm);
-*/
-
 //type
 if($id_tip == 1) { 
 	$type = __('Incident');	 
@@ -314,11 +302,11 @@ else {
 //quant de chamados
 $query_quant = "
 SELECT count(glpi_tickets.id) AS total
-	FROM glpi_tickets	
-	".$entidade."
-	AND glpi_tickets.date ".$datas."
-	AND glpi_tickets.is_deleted = 0
-	AND glpi_tickets.type =".$id_tip." ";
+FROM glpi_tickets	
+".$entidade."
+AND glpi_tickets.date ".$datas."
+AND glpi_tickets.is_deleted = 0
+AND glpi_tickets.type =".$id_tip." ";
 
 $result_quant = $DB->query($query_quant);
 $total = $DB->fetch_assoc($result_quant);
@@ -326,8 +314,6 @@ $total = $DB->fetch_assoc($result_quant);
 echo '<div id="entidade" class="col-md-12 col-sm-12 fluid" >';
 echo $type." - <span> ".$total['total']." ".__('Tickets','dashboard')."</span>";
 echo "</div>";
-
-//var_dump($query_quant);
 
 ?>
 
@@ -359,9 +345,7 @@ echo "</div>";
 	<?php  include ("./inc/grafbar_user_tipo.inc.php"); ?>
 </div>
 
-
 <?php 
-
 }
 ?>
 

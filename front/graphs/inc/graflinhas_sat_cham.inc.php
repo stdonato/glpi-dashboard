@@ -74,7 +74,7 @@ else {
 		$arr_grfm[$v_row_result] = $row_result['nb'];
 	}
 
-	}
+}
 
 $grfm = array_keys($arr_grfm) ;
 $quantm = array_values($arr_grfm) ;
@@ -105,7 +105,7 @@ else {
 			$v_row_result = $row_result['month'];
 			$arr_month[$v_row_result] = 0;
 		}
-	}
+}
 
 
 if($interval >= "31") {
@@ -212,7 +212,7 @@ else {
 		$arr_grff[$v_row_result] = $row_result['nb'];
 	}
 
-	}
+}
 
 $grff = array_keys($arr_grff) ;
 $quantf = array_values($arr_grff) ;

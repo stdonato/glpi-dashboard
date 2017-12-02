@@ -18,10 +18,11 @@ if(!empty($_POST['submit']))
 else {
     $data_ini = date("Y-m-01");
     $data_fin = date("Y-m-d");
-    }
+}
 
 if(!isset($_POST["sel_ent"])) {
-    $id_ent = $_GET["ent"];
+    //$id_ent = $_GET["sel_ent"];
+    $id_ent = 0;
 }
 
 else {
@@ -162,10 +163,10 @@ a:hover { color: #000099; }
 
 		//$DB->data_seek($result_ent, 0) ;
 		while ($row_result = $DB->fetch_assoc($result_ent))
-		    {
-		    	$v_row_result = $row_result['id'];
-		    	$arr_ent[$v_row_result] = $row_result['name'] ;
-		    }
+	    {
+	    	$v_row_result = $row_result['id'];
+	    	$arr_ent[$v_row_result] = $row_result['name'] ;
+	    }
 
 		$name = 'sel_ent';
 		$options = $arr_ent;
@@ -280,7 +281,7 @@ if($con == "1") {
 	AND glpi_tickets.id = glpi_ticketcosts.`tickets_id`
 	AND glpi_tickets.date ".$datas2."
 	AND glpi_tickets.status IN ".$status."
-	".$entidade."
+	AND glpi_tickets.entities_id IN (".$ents.")
 	GROUP BY id
 	ORDER BY id DESC ";
 	
@@ -298,7 +299,7 @@ if($con == "1") {
 	AND glpi_tickets.is_deleted = 0
 	AND glpi_tickets.date ".$datas2."
 	AND glpi_tickets.status IN ".$status."
-	".$entidade."
+	AND glpi_tickets.entities_id IN (".$ents.")
 	GROUP BY id
 	ORDER BY id DESC ";
 	
@@ -319,7 +320,7 @@ if($con == "1") {
 	AND glpi_tickets.status IN ".$status_open."
 	AND glpi_tickets.is_deleted = 0
 	AND glpi_tickets.id = glpi_ticketcosts.`tickets_id`
-	".$entidade." " ;
+	AND glpi_tickets.entities_id IN (".$ents.") " ;
 	
 	$result_ab = $DB->query($sql_ab) or die ("erro_ab");
 	$data_ab = $DB->fetch_assoc($result_ab);

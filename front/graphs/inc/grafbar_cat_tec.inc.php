@@ -7,7 +7,6 @@ $sql_ent = "SELECT COUNT(id) AS id FROM glpi_itilcategories ";
 $result_ent = $DB->query($sql_ent) or die('erro');
 $num_ent = $DB->fetch_assoc($result_ent);
 
-
 if($data_ini == $data_fin) {
 	$datas = "LIKE '".$data_ini."%'";	
 }	

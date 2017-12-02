@@ -21,7 +21,8 @@ else {
     }
 
 if(!isset($_POST["sel_loc"])) {
-	$id_loc = $_GET["loc"];
+	//$id_loc = $_GET["sel_loc"];
+	$id_loc = 0;
 }
 
 else {
@@ -231,7 +232,7 @@ if($con == "1") {
 	}
 	
 	if(!isset($_POST["sel_loc"])) {
-		$id_loc = $_GET["loc"];
+		$id_loc = $_GET["sel_loc"];
 	}
 	
 	else {

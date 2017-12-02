@@ -219,6 +219,7 @@ while ($row = $DB->fetch_assoc($result_loc))
 
 	if ($quant == 0) {
 		//$color = $icon_green.$quant."";
+		$color = "";
 		$num_up = 1;	
 		$num_down = 0;
 		
@@ -226,6 +227,7 @@ while ($row = $DB->fetch_assoc($result_loc))
 	
 	else {
 		//$color = $icon_red.$quant."";
+		$color = "";
 		$num_up = 0;	
 		$num_down = 1;
 	}

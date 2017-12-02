@@ -21,7 +21,8 @@ else {
 }
 
 if(!isset($_POST["sel_date"])) {
-	$id_date = $_GET["date"];
+	//$id_date = $_GET["sel_date"];
+	$id_date = 0;
 }
 
 else {

@@ -11,7 +11,7 @@ Session::checkRight("profile", READ);
 
 if(!empty($_POST['submit']))
 {
-    $data_ini =  $_POST['date1'];
+    $data_ini = $_POST['date1'];
     $data_fin = $_POST['date2'];
 }
 
@@ -21,7 +21,7 @@ else {
     }
 
 if(!isset($_POST["sel_tec"])) {
-    $id_tec = $_GET["tec"];
+    $id_tec = $_GET["sel_tec"];
 }
 
 else {
@@ -32,7 +32,6 @@ else {
 <html>
 <head>
 <title> GLPI - <?php echo _n('Task','Tasks',2) .'  '. __('by Technician', 'dashboard') ?> </title>
-<!-- <base href= "<?php $_SERVER['SERVER_NAME'] ?>" > -->
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
@@ -87,12 +86,12 @@ else {
 <div id="head-rel" class="fluid">
 
 <style type="text/css">
-a:link, a:visited, a:active {
-    text-decoration: none
-    }
-a:hover {
-    color: #000099;
-    }
+	a:link, a:visited, a:active {
+	    text-decoration: none
+	}
+	a:hover {
+	    color: #000099;
+	}
 </style>
 
 <a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
@@ -241,7 +240,7 @@ else {
 }
 
 if(!isset($_POST["sel_tec"])) {
-    $id_tec = $_GET["tec"];
+    $id_tec = $_GET["sel_tec"];
 }
 
 else {

@@ -61,7 +61,6 @@ global $DB;
 </head>
 
 <body style="background-color: #e5e5e5; margin-left:0%;">
-
 <?php
 
 global $DB;
@@ -123,7 +122,6 @@ else {
 }
 
 //seleciona técnico
-
 $sql_tec = "
 
 SELECT DISTINCT glpi_users.`id` AS id , glpi_users.`firstname` AS name, glpi_users.`realname` AS sname									        										       										        
@@ -199,7 +197,7 @@ $selected = $id_tec;
 
 ?>
 
-<div id="datas-tec" class="col-md-12 fluid" > 
+<div id="datas-tec" class="col-md-12 col-sm-12 fluid" > 
 <form id="form1" name="form1" class="form2" method="post" action="?date1=<?php echo $data_ini ?>&date2=<?php echo $data_fin ?>&con=1"> 
 	<table border="0" cellspacing="0" cellpadding="1" bgcolor="#efefef">
 		<tr>

@@ -331,8 +331,10 @@ else {
 
 
 		//total time
+		
+		$total_time = '';
 		while($row = $DB->fetch_assoc($result_cham)){
-		//    $total_time += $row['time_sec'];
+		//  $total_time += $row['time_sec'];
 
 		$sql = "SELECT ( TIMESTAMPDIFF(SECOND , date, solvedate ) ) AS time FROM glpi_tickets WHERE id = ".$row['id']." ";
 		$result = $DB->query($sql);
@@ -499,7 +501,7 @@ else {
 				}
 
 
-		if($result_ass != '') {
+		if(isset($result_ass) AND $result_ass != '') {
 			$row_item = $DB->fetch_assoc($result_ass);
 		}
 
