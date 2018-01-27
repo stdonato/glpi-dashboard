@@ -289,12 +289,13 @@ WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
 AND glpi_groups_tickets.`groups_id` = glpi_groups.id
 AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
 AND glpi_tickets.is_deleted = 0
-AND glpi_tickets.date ".$datas." ";
+AND glpi_tickets.date ".$datas."
+". $entidade_age ." ";
 
 $result_quant = $DB->query($query_quant);
 $total = $DB->fetch_assoc($result_quant);
 
-echo '<div id="entidade" class="col-md-12 fluid" >';
+echo '<div id="entidade" class="col-md-12 col-sm-12 fluid" >';
 echo $grp_name['name']." - <span> ".$total['total']." ".__('Tickets','dashboard')."</span>";
 echo "</div>";
  ?>

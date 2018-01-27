@@ -21,8 +21,7 @@ else {
 }
 
 if(!isset($_POST["sel_tec"])) {
-    //$id_tec = $_GET["sel_tec"];
-    $id_tec = 0;
+    $id_tec = $_GET["sel_tec"];
 }
 
 else {
@@ -180,10 +179,10 @@ a:hover { color: #000099; }
 		$DB->data_seek($result_tec, 0) ;
 
 		while ($row_result = $DB->fetch_assoc($result_tec))
-	    {
-		    $v_row_result = $row_result['id'];
-	   	 $arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;
-	    }
+		    {
+			 $v_row_result = $row_result['id'];
+		   	 $arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;
+		    }
 
 		$name = 'sel_tec';
 		$options = $arr_tec;
@@ -423,19 +422,18 @@ if($con == "1") {
 	<table align='right' style='margin-bottom:10px;'>
 		<tr>
 			<td colspan=3 style='vertical-align:bottom;'>
-				<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_custo_req.php?con=1&stat=open&tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened','dashboard'). " </button>
-				<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_custo_req.php?con=1&stat=close&tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed','dashboard')." </button>
-				<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_custo_req.php?con=1&stat=all&tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All','dashboard')." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_custo_req.php?con=1&stat=open&sel_tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened','dashboard'). " </button>
+				<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_custo_req.php?con=1&stat=close&sel_tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed','dashboard')." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_custo_req.php?con=1&stat=all&sel_tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All','dashboard')." </button>
 			</td>
 		</tr>
 	</table>
 
-<table style='font-size: 16px; font-weight:bold; width: 50%;' border=0>
-
-	<tr><td><span style='color: #000;'>". __('Total cost').":  </span><b>". number_format($total_cost, 2, ',', ' ') ." </b></td></tr>
-	<tr><td>&nbsp;</td></tr>
-	<tr><td>&nbsp;</td></tr>
-</table>
+	<table style='font-size: 16px; font-weight:bold; width: 50%;' border=0>
+		<tr><td><span style='color: #000;'>". __('Total cost').":  </span><b>". number_format($total_cost, 2, ',', ' ') ." </b></td></tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td></tr>
+	</table>
 
 	<table id='tec' class='display' style='font-size: 13px; font-weight:bold;' cellpadding = 2px >
 		<thead>

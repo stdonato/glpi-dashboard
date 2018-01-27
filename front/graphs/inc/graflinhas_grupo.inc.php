@@ -35,7 +35,14 @@ if($interval <= "31") {
 	}
 
 	$days = array_keys($arr_days) ;
-	$quantd = array_values($arr_days) ;
+	$quantd = array_values($arr_days);
+	
+	$DB->data_seek($resultd, 0);
+	while ($row_result = $DB->fetch_assoc($resultd))
+	{
+		$v_row_result = $row_result['day_l'];
+		$arr_daysn[$v_row_result] = 0;		
+	}	
 }
 
 else {
@@ -56,8 +63,16 @@ else {
 		$arr_months[$v_row_result] = 0;		
 	}
 
-	$months = array_keys($arr_months) ;
-	$monthsq = array_values($arr_months) ;
+	$months = array_keys($arr_months);
+	$monthsq = array_values($arr_months);
+	
+	
+	$DB->data_seek($resultd, 0);	
+	while ($row_result = $DB->fetch_assoc($resultd))
+	{
+		$v_row_result = $row_result['day_l'];
+		$arr_monthsn[$v_row_result] = 0;		
+	}
 }
 
 //chamados mensais
@@ -76,6 +91,8 @@ if($interval >= "31") {
 			AND DATE_FORMAT(glpi_tickets.date, '%Y-%m' ) = '".$row_result['day']."'
 			AND glpi_tickets.id = glpi_groups_tickets.tickets_id
 			AND glpi_groups_tickets.groups_id = ".$id_grp."
+			AND glpi_tickets.date ".$datas."
+			". $entidade_age ."
 			GROUP BY day
 			ORDER BY day ";
 
@@ -92,6 +109,7 @@ if($interval >= "31") {
 		}
 
 		$arr_opened = $arr_grfm;
+		$label = json_encode(array_keys($arr_monthsn));
 }
 
 else {
@@ -105,7 +123,8 @@ else {
 			AND DATE_FORMAT(glpi_tickets.date, '%Y-%m-%d' ) = '".$row_result['day']."'
 			AND glpi_tickets.id = glpi_groups_tickets.tickets_id
 			AND glpi_groups_tickets.groups_id = ".$id_grp."
-
+			AND glpi_tickets.date ".$datas."
+			". $entidade_age ."
 			GROUP BY day
 			ORDER BY day ";
 
@@ -122,21 +141,11 @@ else {
 		}
 
 		$arr_opened = $arr_grfm;
+		$label = json_encode(array_keys($arr_daysn));
 }
 
-
-/*$resultm = $DB->query($querym) or die('errol');
-$contador = $DB->numrows($resultm);
-$arr_grfm = array();
-
-while ($row_result = $DB->fetch_assoc($resultm)){
-	$v_row_result = $row_result['day_l'];
-	$arr_grfm[$v_row_result] = $row_result['nb'];
-}
-*/
-
-$grfm = array_keys($arr_opened) ;
-$grfm3 = json_encode($grfm);
+/*$grfm = array_keys($arr_opened) ;
+$grfm3 = json_encode($grfm);*/
 
 $quantm = array_values($arr_opened) ;
 $quantm2 = implode(',',$quantm);
@@ -158,6 +167,7 @@ if($interval >= "31") {
 	AND glpi_tickets.status = 6	
 	AND glpi_tickets.id = glpi_groups_tickets.tickets_id
 	AND glpi_groups_tickets.groups_id = ".$id_grp."
+	". $entidade_age ."
 	GROUP BY day
 	ORDER BY day";
 	
@@ -175,7 +185,7 @@ if($interval >= "31") {
 	}
 	
 	$arr_closed = array_unique(array_merge($arr_months,$arr_grff));
-
+	$label = json_encode(array_keys($arr_monthsn));
  }
 
 else {
@@ -189,8 +199,9 @@ else {
 			WHERE glpi_tickets.is_deleted = '0'
 			AND DATE_FORMAT(glpi_tickets.closedate, '%Y-%m-%d' ) = '".$row_result['day']."'
 			AND glpi_tickets.id = glpi_groups_tickets.tickets_id
+			AND glpi_tickets.date ".$datas."
 			AND glpi_groups_tickets.groups_id = ".$id_grp."
-
+			". $entidade_age ."
 			GROUP BY day
 			ORDER BY day ";
 
@@ -207,22 +218,17 @@ else {
 			}
 		}
 		$arr_closed = $arr_grff;
+		$label = json_encode(array_keys($arr_daysn));
 }
 
-
+/*
 $grff = array_keys($arr_closed) ;
-$grff3 = json_encode($grff);
+$grff3 = json_encode($grff);*/
 
 $quantf = array_values($arr_closed) ;
 $quantf2 = implode(',',$quantf);
 
 $closed = array_sum($quantf);
-
-/*var_dump($arr_months);
-var_dump($arr_grfm);
-var_dump($arr_grff);
-var_dump($arr_opened);
-var_dump($arr_closed);*/
 
 echo "
 <script type='text/javascript'>
@@ -249,7 +255,7 @@ $(function () {
                 adjustChartSize: true
             },
             xAxis: {
-                categories: $grfm3,
+                categories: $label,
                 labels: {
                     rotation: -55,
                     align: 'right',

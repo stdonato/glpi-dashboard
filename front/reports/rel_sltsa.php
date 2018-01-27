@@ -21,7 +21,7 @@ else {
 }
 
 if(!isset($_POST["sel_sla"])) {
-	$id_sla = $_REQUEST["sel_sla"];
+	$id_sla = $_GET["sel_sla"];
 }
 
 else {
@@ -270,8 +270,8 @@ if(isset($_GET['stat'])) {
 }
 
 else {
-		$status = $status_all;
-	}
+	$status = $status_all;
+}
 
 // Chamados
 $sql_cham =
@@ -388,12 +388,12 @@ $w = $conta_cons - $v;
 
 	$result_stat = $DB->query($query_stat);
 
-        $new = $DB->result($result_stat,0,'new') + 0;
-        $assig = $DB->result($result_stat,0,'assig') + 0;
-        $plan = $DB->result($result_stat,0,'plan') + 0;
-        $pend = $DB->result($result_stat,0,'pend') + 0;
-        $solve = $DB->result($result_stat,0,'solve') + 0;
-        $close = $DB->result($result_stat,0,'close') + 0;
+  $new = $DB->result($result_stat,0,'new') + 0;
+  $assig = $DB->result($result_stat,0,'assig') + 0;
+  $plan = $DB->result($result_stat,0,'plan') + 0;
+  $pend = $DB->result($result_stat,0,'pend') + 0;
+  $solve = $DB->result($result_stat,0,'solve') + 0;
+  $close = $DB->result($result_stat,0,'close') + 0;
 	
 //list tickets
 echo "
@@ -419,9 +419,9 @@ echo "
 <table align='right' style='margin-bottom:10px;'>
 	<tr>
 		<td>
-			<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_sltsa.php?con=1&stat=open&sla=".$id_sla."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened', 'dashboard')." </button>
-			<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_sltsa.php?con=1&stat=close&sla=".$id_sla."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed', 'dashboard')." </button>
-			<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_sltsa.php?con=1&stat=all&sla=".$id_sla."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>
+			<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_sltsa.php?con=1&stat=open&sel_sla=".$id_sla."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened', 'dashboard')." </button>
+			<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_sltsa.php?con=1&stat=close&sel_sla=".$id_sla."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed', 'dashboard')." </button>
+			<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_sltsa.php?con=1&stat=all&sel_sla=".$id_sla."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>
 		</td>
 	</tr>
 	<tr>

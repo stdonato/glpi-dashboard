@@ -1,21 +1,13 @@
-Versão 0.8.9:
+Versão 0.9.0:
 
-- GLPI 9.2 apenas;
-- Adicionada barra de progresso nas telas de chamados abertos;
-- Correção na página de Métricas;
-- Mapas agora usam OpenStreetMaps. Não é mais necessária chave de API do Google Maps;
-- Correção nos gráficos de satisfação (nome do técnico);
-- Atualização do highcharts (gráficos);
+- GLPI 9.2.x apenas;
+- Correção do dropdown no Relatório por Categorias;
 - Correção de bugs diversos;
 
 
-Version 0.8.9:
+Version 0.9.0:
 
-- Only for GLPI 9.2;
-- Progress bar in open tickets pages;
-- Fix in metrics page;
-- New maps with OpenStreetMap. No need Google Maps API key;
-- Fix satisfaction graphs (technician name);
-- Highcharts update;
+- Only for GLPI 9.2.x;
+- Fix dropdown in Report by Category;
 - Fix minor bugs;
 

@@ -283,11 +283,10 @@
 						<p><span></span><?php echo _n('Ticket','Tickets',2)." ". __('by Type','dashboard') ;?></p>
 					</header>
 					<div class="content" >					
-						<div id="cf-rag-1" class="cf-rag">
-						<?php //include ("grafpie_tipo.inc.php");  ?>
-						<div class="cf-bars"></div>
-							<div class="cf-figs "></div>
-								<div class="cf-txts"></div> 
+						<div id="cf-rag-1" class="cf-rag">						
+							<div class="cf-bars"></div>
+								<div class="cf-figs "></div>
+									<div class="cf-txts"></div> 
 						</div>
 					</div>				
 			</div> 	<!-- //end cf-item -->	

@@ -58,7 +58,7 @@ $quant_2 = implode(',',$quant3);
 
 if($soma3 != 0) {
 
-	echo "
+echo "
 	<script type='text/javascript'>
 		$(function () {
         $('#graf1').highcharts({

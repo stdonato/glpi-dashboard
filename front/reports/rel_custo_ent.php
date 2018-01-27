@@ -21,8 +21,7 @@ else {
 }
 
 if(!isset($_POST["sel_ent"])) {
-    //$id_ent = $_GET["sel_ent"];
-    $id_ent = 0;
+    $id_ent = $_GET["sel_ent"];
 }
 
 else {
@@ -211,7 +210,7 @@ if($con == "1") {
 	}
 	
 	if(!isset($_POST["sel_ent"])) {
-		$id_ent = $_GET["ent"];
+		$id_ent = $_GET["sel_ent"];
 	}
 	
 	else {
@@ -368,7 +367,7 @@ if($con == "1") {
 	$ent_name = $row['name'] ;
 
 	echo "
-	<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>
+	<div class='well info_box fluid col-md-12 col-sm-12 report' style='margin-left: -1px;'>
 	<table class='fluid'  style='font-size: 18px; font-weight:bold; width:100%;' cellpadding = 1px>
 		<tr style='width: 450px;'>
 			<td style='vertical-align:middle;'> <span style='color: #000;'>".__('Entity','dashboard').": </span>". $row['name'] . "</td>
@@ -407,20 +406,20 @@ if($con == "1") {
 	<table align='right' style='margin-bottom:10px;'>
 		<tr>
 			<td colspan=3 style='vertical-align:bottom;'>
-				<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_custo_ent.php?con=1&stat=open&tec=".$id_ent."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened','dashboard'). " </button>
-				<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_custo_ent.php?con=1&stat=close&tec=".$id_ent."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed','dashboard')." </button>
-				<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_custo_ent.php?con=1&stat=all&tec=".$id_ent."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All','dashboard')." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_custo_ent.php?con=1&stat=open&sel_ent=".$id_ent."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened','dashboard'). " </button>
+				<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_custo_ent.php?con=1&stat=close&sel_ent=".$id_ent."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed','dashboard')." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_custo_ent.php?con=1&stat=all&sel_ent=".$id_ent."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All','dashboard')." </button>
 			</td>
 		</tr>
 	</table>
 
-<table style='font-size: 16px; font-weight:bold; width: 50%;' border=0>
-	<tr>
-		<td><span style='color: #000;'>". __('Total cost').":  </span><b>". number_format($total_cost, 2, ',', ' ') ." </b></td></tr>	 
-	<tr>
-		<td>&nbsp;</td></tr>
-	<tr><td>&nbsp;</td></tr>
-</table>
+	<table style='font-size: 16px; font-weight:bold; width: 50%;' border=0>
+		<tr>
+			<td><span style='color: #000;'>". __('Total cost').":  </span><b>". number_format($total_cost, 2, ',', ' ') ." </b></td></tr>	 
+		<tr>
+			<td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td></tr>
+	</table>
 
 	<table id='tec' class='display' style='font-size: 13px; font-weight:bold;' cellpadding = 2px >
 		<thead>

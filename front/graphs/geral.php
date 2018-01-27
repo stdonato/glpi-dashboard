@@ -103,19 +103,19 @@ $total_mes = $DB->fetch_assoc($result);
 
 			<!-- DIV's -->
 			
-			<div id="graf_linhas" class="col-md-12 geral_linhas" style="margin-left: 0px;" >
+			<div id="graf_linhas" class="col-md-12 col-sm-12 geral_linhas" style="margin-left: 0px;" >
 				<?php include ("./inc/graflinhas_sat_geral.inc.php"); ?>
 			</div>
 			
-			<div id="graf2" class="col-md-6" style="margin-top:45px;" >
+			<div id="graf2" class="col-md-6 col-sm-6" style="margin-top:45px;" >
 			 <?php include ("./inc/grafpie_stat_geral.inc.php"); ?>
 			</div>
 			
-			<div id="graf4" class="col-md-6" style="margin-top:45px;">
+			<div id="graf4" class="col-md-6 col-sm-6" style="margin-top:45px;">
 			 <?php include ("./inc/grafpie_origem.inc.php");  ?>
 			</div>
 			
-			<div id="graf_tipo" class="col-md-12" style="margin-top: 35px;">
+			<div id="graf_tipo" class="col-md-12 col-sm-12 fluid" style="margin-top: 35px;">
 			 <?php include ("./inc/grafcol_tipo_geral.inc.php");  ?>
 			</div>
 			
@@ -123,15 +123,15 @@ $total_mes = $DB->fetch_assoc($result);
 			 <?php include ("./inc/grafent_geral.inc.php");  ?>
 			</div>
 			
-			<div id="graftime" class="col-md-6" style="height:450px; margin-top:35px; margin-left: 0px;">
+			<div id="graftime" class="col-md-6 col-sm-6" style="height:450px; margin-top:35px; margin-left: 0px;">
 			 <?php include ("./inc/grafpie_time_geral.inc.php");?>
 			</div>
 			
-			<div id="grafgrp" class="col-md-6 fluid" style="height: 450px; margin-top:35px; margin-left: 0px;">
+			<div id="grafgrp" class="col-md-6 col-sm-6 fluid" style="height: 450px; margin-top:35px; margin-left: 0px;">
 			 <?php include ("./inc/grafbar_grupo_geral.inc.php");?>
 			</div>			
 						
-			<div id="grafcat"  class="col-md-12 fluid" style="margin-top:35px; margin-left: 0px;">
+			<div id="grafcat"  class="col-md-12 col-sm-12 fluid" style="margin-top:35px; margin-left: 0px;">
 			 <?php include ("./inc/grafcat_geral.inc.php"); ?>
 			</div>
 			

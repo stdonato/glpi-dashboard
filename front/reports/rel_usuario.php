@@ -21,8 +21,7 @@ else {
     }
 
 if(!isset($_POST["sel_tec"])) {
-    //$id_tec = $_GET["sel_tec"];
-    $id_tec = 0;
+    $id_tec = $_GET["sel_tec"];
 }
 
 else {
@@ -169,10 +168,10 @@ $tec = $DB->fetch_assoc($result_tec);
 				$DB->data_seek($result_tec, 0) ;
 
 				while ($row_result = $DB->fetch_assoc($result_tec))
-			    {
-			    	$v_row_result = $row_result['id'];
-			    	$arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;
-			    }
+				    {
+				    	$v_row_result = $row_result['id'];
+				    	$arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;
+				    }
 
 				$name = 'sel_tec';
 				$options = $arr_tec;
@@ -225,7 +224,7 @@ else {
 }
 
 if(!isset($_POST["sel_tec"])) {
-	$id_tec = $_GET["tec"];
+	$id_tec = $_GET["sel_tec"];
 }
 
 else {
@@ -400,7 +399,7 @@ $user = $row['firstname'] ." ". $row['realname'];
 
 	echo "
 
-	<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>
+	<div class='well info_box fluid col-md-12 col-sm-12 report' style='margin-left: -1px;'>
 
 	<table class='fluid' style='width:100%; font-size: 18px; font-weight:bold;' cellpadding = 1px>
 	<tr>
@@ -423,9 +422,9 @@ $user = $row['firstname'] ." ". $row['realname'];
 	<table align='right' style='margin-bottom:10px;'>
 		<tr>
 			<td>
-				<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_usuario.php?con=1&stat=open&tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened', 'dashboard') ." </button>
-				<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_usuario.php?con=1&stat=close&tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed', 'dashboard')." </button>
-				<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_usuario.php?con=1&stat=all&tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_usuario.php?con=1&stat=open&sel_tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened', 'dashboard') ." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_usuario.php?con=1&stat=close&sel_tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed', 'dashboard')." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_usuario.php?con=1&stat=all&sel_tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>
 			</td>
 		</tr>
 	</table>
@@ -556,7 +555,7 @@ echo '</div><br>';
 	else {
 	
 		echo "
-			<div id='nada_rel' class='well info_box fluid col-md-12'>
+			<div id='nada_rel' class='well info_box fluid col-md-12 col-sm-12'>
 			<table class='table' style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
 			<tr><td style='vertical-align:middle; text-align:center;'> <span style='color: #000;'>" . __('No ticket found', 'dashboard') . "</td></tr>
 			<tr></tr>

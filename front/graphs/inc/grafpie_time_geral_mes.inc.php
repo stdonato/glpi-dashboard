@@ -8,6 +8,31 @@ else {
 	$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";	
 }
 
+$querydays = "
+SELECT count( id ) AS chamados , DATEDIFF(solvedate,date) AS days
+FROM glpi_tickets
+WHERE solvedate IS NOT NULL
+AND is_deleted = 0
+GROUP BY days ";
+		
+$resultdays = $DB->query($querydays) or die('erro');
+
+$arr_keys = array();
+$arr_days = array();
+
+while ($row_result = $DB->fetch_assoc($resultdays)) { 
+	$v_row_result = $row_result['days'];
+	$arr_days[$v_row_result] = 0;						
+}
+
+$conta = count($arr_days);
+
+if( $conta < 9) {
+	for($i=$conta; $i < 9; $i++) {		
+		$arr_days[$i] = 0;			
+	}	
+}	
+
 
 $query2 = "
 SELECT count( id ) AS chamados , DATEDIFF(solvedate,date) AS days
@@ -20,47 +45,24 @@ GROUP BY days ";
 		
 $result2 = $DB->query($query2) or die('erro');
 
-$arr_keys = array();
-
-while ($row_result = $DB->fetch_assoc($result2)) { 
+while ($row_result = $DB->fetch_assoc($result2)){ 	
 	$v_row_result = $row_result['days'];
 	$arr_keys[$v_row_result] = $row_result['chamados'];			
-} 
+}
+
+$arr_tick = array_merge($arr_keys,$arr_days);
 	
-$keys = array_keys($arr_keys);
-$quant2 = array_values($arr_keys);
-
-$conta = count($arr_keys);
-
-/*for($i=0; $i <= $conta; $i++) {
-
-	if($quant2[$i] != 0) {
-		$till[$i] = $quant2[$i];
-	}
-	else {
-		$till[$i] = 0;
-	}	
-	
-	$arr_days[] += $till[$i];
-}*/
+$days = array_keys($arr_tick);
+$keys = array_keys($arr_tick);
 
 $arr_more8 = array_slice($arr_keys,8);
 $more8 = array_sum($arr_more8);
 
+$quant2 = array_values($arr_tick);
 
-/*echo "teste";
-var_dump($query2);
-echo $conta;
+array_push($quant2,$more8);
 
-echo "<br>keys";
-print_r($arr_keys);
-
-echo "<br>quant";
-print_r($quant2);
-
-echo "<br>days";
-print_r($arr_days);
-*/
+$conta_q = count($quant2)-1;
 
 echo "
 <script type='text/javascript'>
@@ -83,20 +85,9 @@ $(function () {
             title: {
                 text: '".__('Ticket Solving Period','dashboard')."'
             },
-            /* legend: {
-                layout: 'horizontal',
-                align: 'center',
-                verticalAlign: 'bottom',
-                x: 0,
-                y: 0,
-                //floating: true,
-                borderWidth: 0,
-                backgroundColor: '#FFFFFF',
-                adjustChartSize: true,
-                format: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            }, */
+
             tooltip: {
-        	    pointFormat: '{series.name}: <b>{point.y} - ( {point.percentage:.1f}% )</b>'
+        	    pointFormat: '{series.name}: <b>{point.y} - ({point.percentage:.1f}%)</b>'
             },
             plotOptions: {
                 pie: {
@@ -106,7 +97,7 @@ $(function () {
                     innerSize: 90,
                     depth: 40,
                     dataLabels: {
-									format: '{point.y} - ( {point.percentage:.1f}% )',
+									format: '{point.y} - ({point.percentage:.1f}%)',
                    		   style: {
                         			color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                         				}
@@ -117,18 +108,13 @@ $(function () {
             series: [{
                 type: 'pie',
                 name: '".__('Tickets','dashboard')."',
-                data: [  {
-                        name: '< 1 " .__('day','dashboard')."',
-                        y: ".$arr_keys[0].",
-                        sliced: true,
-                        selected: true
-                    }, ['1 " .__('day','dashboard')."',  ".$arr_keys[1]." ], ['2 " .__('days','dashboard')."',  ".$arr_keys[2]." ],
-                			['3 " .__('days','dashboard')."', ".$arr_keys[3]." ], ['4 " .__('days','dashboard')."',  ".$arr_keys[4]." ],
-                			['5 " .__('days','dashboard')."',  ".$arr_keys[5]." ], ['6 " .__('days','dashboard')."',  ".$arr_keys[6]." ],
-                			['7 " .__('days','dashboard')."',  ".$arr_keys[7]." ], ['8+ " .__('days','dashboard')."',  ".$more8." ]		]
+ 					 data: [ ['< 1 " .__('day','dashboard')."',  ".$quant2[0]." ], ['1 " .__('day','dashboard')."',  ".$quant2[1]." ], ['2 " .__('days','dashboard')."',  ".$quant2[2]." ],
+                	['3 " .__('days','dashboard')."', ".$quant2[3]." ], ['4 " .__('days','dashboard')."',  ".$quant2[4]." ],
+                	['5 " .__('days','dashboard')."',  ".$quant2[5]." ], ['6 " .__('days','dashboard')."',  ".$quant2[6]." ],
+                	['7 " .__('days','dashboard')."',  ".$quant2[7]." ], ['8+ " .__('days','dashboard')."', ".$quant2[$conta_q]." ]		
+                  ].filter(function(d) {return d[1] > 0})
             }]
         });
     });
-
 		</script>"; 
-		?>
+?>

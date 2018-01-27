@@ -18,11 +18,10 @@ if(!empty($_POST['submit']))
 else {
     $data_ini = date("Y-m-01");
     $data_fin = date("Y-m-d");
-    }
+}
 
 if(!isset($_POST["sel_loc"])) {
-	//$id_loc = $_GET["sel_loc"];
-	$id_loc = 0;
+	$id_loc = $_GET["sel_loc"];
 }
 
 else {
@@ -429,19 +428,18 @@ if($con == "1") {
 	<table align='right' style='margin-bottom:10px;'>
 		<tr>
 			<td colspan=3 style='vertical-align:bottom;'>
-				<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_custo_loc.php?con=1&stat=open&loc=".$id_loc."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened','dashboard'). " </button>
-				<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_custo_loc.php?con=1&stat=close&loc=".$id_loc."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed','dashboard')." </button>
-				<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_custo_loc.php?con=1&stat=all&loc=".$id_loc."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All','dashboard')." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_custo_loc.php?con=1&stat=open&sel_loc=".$id_loc."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened','dashboard'). " </button>
+				<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_custo_loc.php?con=1&stat=close&sel_loc=".$id_loc."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed','dashboard')." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_custo_loc.php?con=1&stat=all&sel_loc=".$id_loc."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All','dashboard')." </button>
 			</td>
 		</tr>
 	</table>
 
-<table style='font-size: 16px; font-weight:bold; width: 50%;' border=0>
-
-	<tr><td><span style='color: #000;'>". __('Total cost').":  </span><b>". number_format($total_cost, 2, ',', ' ') ." </b></td></tr>	 
-	<tr><td>&nbsp;</td></tr>
-	<tr><td>&nbsp;</td></tr>
-</table>
+	<table style='font-size: 16px; font-weight:bold; width: 50%;' border=0>
+		<tr><td><span style='color: #000;'>". __('Total cost').":  </span><b>". number_format($total_cost, 2, ',', ' ') ." </b></td></tr>	 
+		<tr><td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td></tr>
+	</table>
 
 	<table id='tec' class='display' style='font-size: 13px; font-weight:bold;' cellpadding = 2px >
 		<thead>

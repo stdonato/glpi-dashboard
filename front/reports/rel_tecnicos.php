@@ -520,8 +520,8 @@ $total_cham = $abertos + $solucionados + $fechados;
 		echo "
 		<tr>
 			<td style='vertical-align:middle; text-align:left;'><i class='del fa fa-times' style='cursor:pointer;' title='". __('Hide') ."'>&nbsp;&nbsp;&nbsp; </i>
-			<img class='avatar2' width='40px' height='43px' src='".User::getURLForPicture($id_tec['picture'])."'></img>&nbsp;&nbsp;
-			<a href='rel_tecnico.php?con=1&tec=". $id_tec['id'] ."&date1=".$data_ini."&date2=".$data_fin."' target='_blank' >" . $id_tec['fname'].' '.$id_tec['rname']. ' ('.$id_tec['id'].")</a>
+				<img class='avatar2' width='40px' height='43px' src='".User::getURLForPicture($id_tec['picture'])."'></img>&nbsp;&nbsp;
+				<a href='rel_tecnico.php?con=1&sel_tec=". $id_tec['id'] ."&date1=".$data_ini."&date2=".$data_fin."' target='_blank' >" . $id_tec['fname'].' '.$id_tec['rname']. ' ('.$id_tec['id'].")</a>
 			</td>
 			<td style='vertical-align:middle; text-align:center;'> ". $total_cham ." </td>
 			<td style='vertical-align:middle; text-align:center;'> ". $abertos ." </td>
@@ -585,7 +585,7 @@ $(document).ready(function() {
         filter: false,        
         pagingType: "full_numbers",
         deferRender: true,
-		  fixedHeader: true,
+	fixedHeader: true,
         sorting: <?php echo $sort; ?>
         //sorting: [[1,'desc'],[0,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc']],
 		  displayLength: 25,

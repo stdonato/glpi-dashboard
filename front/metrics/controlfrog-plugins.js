@@ -24,7 +24,7 @@ function RagChart(id, data, labels, options){
 	var rt = new Number;
 	var rgaLength = new Number;	
 	var rda = [];
-	var rga = ['m-red','m-amber','m-green'];
+	var rga = ['m-green','m-amber','m-red'];
 	var rgaLi = '';
 	
 	this.init = function(){

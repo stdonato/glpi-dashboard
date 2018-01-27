@@ -18,11 +18,10 @@ if(!empty($_POST['submit']))
 else {
     $data_ini = date("Y-m-01");
     $data_fin = date("Y-m-d");
-    }
+}
 
 if(!isset($_POST["sel_tec"])) {
-    //$id_tec = $_GET["sel_tec"];
-    $id_tec = 0;
+    $id_tec = $_GET["sel_tec"];
 }
 
 else {
@@ -187,10 +186,10 @@ a:hover { color: #000099; }
 		$DB->data_seek($result_tec, 0) ;
 		
 		while ($row_result = $DB->fetch_assoc($result_tec))
-	    {
-		    $v_row_result = $row_result['id'];
-	   	 $arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;
-	    }
+		    {
+			 $v_row_result = $row_result['id'];
+		   	 $arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;
+		    }
 		
 		$name = 'sel_tec';
 		$options = $arr_tec;
@@ -407,33 +406,6 @@ if($con == "1") {
 		</tr>
 	</table> ";
 
- /*   //count by status
-   $query_stat = "
-	SELECT
-	SUM(case when glpi_tickets.status = 1 then 1 else 0 end) AS new,
-	SUM(case when glpi_tickets.status = 2 then 1 else 0 end) AS assig,
-	SUM(case when glpi_tickets.status = 3 then 1 else 0 end) AS plan,
-	SUM(case when glpi_tickets.status = 4 then 1 else 0 end) AS pend,
-	SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve,
-	SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
-	FROM glpi_tickets_users, glpi_tickets, glpi_ticketcosts
-	WHERE glpi_tickets.is_deleted = '0'
-	AND glpi_tickets.date ".$datas2."
-	AND glpi_tickets_users.users_id = ".$id_tec."
-	AND glpi_tickets_users.type = 2
-	AND glpi_tickets_users.tickets_id = glpi_tickets.id
-	AND glpi_tickets.id = glpi_ticketcosts.`tickets_id` ";
-
-    $result_stat = $DB->query($query_stat);
-
-    $new = $DB->result($result_stat,0,'new') + 0;
-    $assig = $DB->result($result_stat,0,'assig') + 0;
-    $plan = $DB->result($result_stat,0,'plan') + 0;
-    $pend = $DB->result($result_stat,0,'pend') + 0;
-    $solve = $DB->result($result_stat,0,'solve') + 0;
-    $close = $DB->result($result_stat,0,'close') + 0;
-*/
-
 	//total costs
 	$DB->data_seek($result_cham, 0);
 	while($row = $DB->fetch_assoc($result_cham)){
@@ -456,25 +428,18 @@ if($con == "1") {
 	<table align='right' style='margin-bottom:10px;'>
 		<tr>
 			<td colspan=3 style='vertical-align:bottom;'>
-				<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_custo_tec.php?con=1&stat=open&tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened','dashboard'). " </button>
-				<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_custo_tec.php?con=1&stat=close&tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed','dashboard')." </button>
-				<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_custo_tec.php?con=1&stat=all&tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All','dashboard')." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_custo_tec.php?con=1&stat=open&sel_tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened','dashboard'). " </button>
+				<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_custo_tec.php?con=1&stat=close&sel_tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed','dashboard')." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_custo_tec.php?con=1&stat=all&sel_tec=".$id_tec."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All','dashboard')." </button>
 			</td>
 		</tr>
 	</table>
 
-<table style='font-size: 16px; font-weight:bold; width: 50%;' border=0>
-	<!-- <tr>
-		  <td><span style='color: #000;'>". _x('status','New').": </span><b>".$new." </b></td>
-        <td><span style='color: #000;'>". __('Assigned'). ": </span><b>". ($assig + $plan) ."</b></td>
-        <td><span style='color: #000;'>". __('Pending').": </span><b>".$pend." </b></td>
-        <td><span style='color: #000;'>". __('Solved','dashboard').": </span><b>".$solve." </b></td>
-        <td><span style='color: #000;'>". __('Closed').": </span><b>".$close." </b></td>
-	</tr> -->
-	<tr><td><span style='color: #000;'>". __('Total cost').":  </span><b>". number_format($total_cost, 2, ',', ' ') ." </b></td></tr>	 
-	<tr><td>&nbsp;</td></tr>
-	<tr><td>&nbsp;</td></tr>
-</table>
+	<table style='font-size: 16px; font-weight:bold; width: 50%;' border=0>
+		<tr><td><span style='color: #000;'>". __('Total cost').":  </span><b>". number_format($total_cost, 2, ',', ' ') ." </b></td></tr>	 
+		<tr><td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td></tr>
+	</table>
 
 	<table id='tec' class='display' style='font-size: 13px; font-weight:bold;' cellpadding = 2px >
 		<thead>

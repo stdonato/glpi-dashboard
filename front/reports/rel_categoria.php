@@ -339,7 +339,7 @@ else {
 
 			//listar chamados
 			echo "
-			<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>
+			<div class='well info_box fluid col-md-12 col-sm-12 report' style='margin-left: -1px;'>
 
 			<table class='col-md-12 col-sm-12 fluid'  style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
 				<tr>

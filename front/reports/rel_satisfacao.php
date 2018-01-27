@@ -216,7 +216,7 @@ else {
 	AND glpi_ticketsatisfactions.satisfaction <> 'NULL'
 	ORDER BY glpi_tickets.id ASC ";
 	
-	$result_cham = $DB->query($sql_cham);	
+	$result_cham = $DB->query($sql_cham);
 	$consulta = $DB->numrows($result_cham);
 	
 	if($consulta > 0) {

@@ -36,6 +36,13 @@ if($interval <= "31") {
 
 	$days = array_keys($arr_days) ;
 	$quantd = array_values($arr_days) ;
+	
+	$DB->data_seek($resultd, 0);
+	while ($row_result = $DB->fetch_assoc($resultd))
+	{
+		$v_row_result = $row_result['day_l'];
+		$arr_daysn[$v_row_result] = 0;		
+	}
 }
 
 else {
@@ -58,6 +65,13 @@ else {
 
 	$months = array_keys($arr_months) ;
 	$monthsq = array_values($arr_months) ;
+	
+	$DB->data_seek($resultd, 0);	
+	while ($row_result = $DB->fetch_assoc($resultd))
+	{
+		$v_row_result = $row_result['day_l'];
+		$arr_monthsn[$v_row_result] = 0;		
+	}
 }
 
 //chamados mensais
@@ -95,6 +109,7 @@ if($interval >= "31") {
 		}
 	}	
 		$arr_opened = $arr_grfm;
+		$label = json_encode(array_keys($arr_monthsn));
 }
 
 else {
@@ -127,33 +142,14 @@ else {
 		}
 	}	
 		$arr_opened = $arr_grfm;
+		$label = json_encode(array_keys($arr_daysn));
 }
 
-//$resultm = $DB->query($querym) or die('errot');
-//$contador = $DB->numrows($resultm);
-
-/*$arr_grfm = array();
-
-while ($row_result = $DB->fetch_assoc($resultm)){
-	$v_row_result = $row_result['day'];
-	$arr_grfm[$v_row_result] = $row_result['nb'];
-}*/
-
-$grfm = array_keys($arr_opened) ;
-$grfm3 = json_encode($grfm);
+/*$grfm = array_keys($arr_opened) ;
+$grfm3 = json_encode($grfm);*/
 
 $quantm = array_values($arr_opened) ;
 $quantm2 = implode(',',$quantm);
-
-//array to compare months
-/*$DB->data_seek($resultm, 0);
-
-$arr_month = array();
-
-while ($row_result = $DB->fetch_assoc($resultm)){
-	$v_row_result = $row_result['day'];
-	$arr_month[$v_row_result] = 0;
-}*/
 
 // closed
 $status = "('5','6')";
@@ -189,7 +185,7 @@ if($interval >= "31") {
 		}
 	}
 	$arr_closed = array_unique(array_merge($arr_months,$arr_grff));
-
+	$label = json_encode(array_keys($arr_monthsn));
  }
 
 else {
@@ -222,28 +218,14 @@ else {
 		}
 	}
 		$arr_closed = $arr_grff;
-
+		$label = json_encode(array_keys($arr_daysn));
  }
 
-/*$resultf = $DB->query($queryf) or die('errof');
-
-$arr_grff = array();
-while ($row_result = $DB->fetch_assoc($resultf)){
-	$v_row_result = $row_result['day'];
-	$arr_grff[$v_row_result] = $row_result['nb'];
-}
-*/
-
-$grff = array_keys($arr_closed) ;
-$grff3 = json_encode($grff);
+/*$grff = array_keys($arr_closed) ;
+$grff3 = json_encode($grff);*/
 
 $quantf = array_values($arr_closed) ;
 $quantf2 = implode(',',$quantf);
-
-/*var_dump($arr_months);
-var_dump($arr_closed);
-var_dump($arr_opened);
-var_dump($querym);*/
 
 echo "
 <script type='text/javascript'>
@@ -268,7 +250,7 @@ $(function ()
                 //backgroundColor: '#FFFFFF'
             },
             xAxis: {
-                categories: $grfm3,
+                categories: $label,
 						  labels: {
                     rotation: -45,
                     align: 'right',

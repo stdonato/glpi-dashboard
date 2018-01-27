@@ -20,8 +20,7 @@ else {
 }  
 
 if(!isset($_POST["sel_ent"])) {
-	//$id_ent = $_REQUEST["sel_ent"];	
-	$id_ent = '';	
+	$id_ent = $_REQUEST["sel_ent"];	
 }
 
 else {

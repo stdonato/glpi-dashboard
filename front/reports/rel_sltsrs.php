@@ -102,7 +102,7 @@ else {
 				<div id="titulo_rel"> 
 					<?php echo __('Tickets', 'dashboard') .'  '. __('by SLA', 'dashboard') ?> - <?php echo __('Time to resolve'); ?> 
 				</div>				
-				<div id="datas-tec" class="col-md-12 fluid" >			 
+				<div id="datas-tec" class="col-md-12 col-sm-12 fluid" >			 
 				<form id="form1" name="form1" class="form_rel" method="post" action="rel_sltsrs.php?con=1" style="margin-left: 37%;"> 
 					<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
 						<tr>
@@ -157,7 +157,8 @@ else {
 			<?php 
 			
 			//SLAs			
-			$con = $_GET['con'];
+			if(isset($_GET['con'])){$con = $_GET['con'];}
+			else {$con = '';}
 			
 			if($con == "1") {
 			
@@ -201,7 +202,7 @@ else {
 			
 			else {
 				$status = $status_all;
-				}
+			}
 
 
 	$slaid = "AND glpi_tickets.slas_ttr_id = ";
@@ -225,7 +226,7 @@ $conta_cons = $DB->numrows($result_sla);
 
 if($conta_cons > 0) {
 			
-echo "<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>";		
+echo "<div class='well info_box fluid col-md-12 col-sm-12 report' style='margin-left: -1px;'>";		
 echo "							
 			<table id='sla' class='display'  style='font-size: 12px; font-weight:bold;' cellpadding = 2px>
 				<thead>
@@ -338,7 +339,7 @@ echo "
 						
 				echo "	
 				<tr>
-					<td style='vertical-align:middle; text-align:left;'><a href='rel_sltsr.php?con=1&sla=". $row['sla_id'] ."&date1=".$data_ini2."&date2=".$data_fin2."' target='_blank' >".$row['sla_name']." </a></td>
+					<td style='vertical-align:middle; text-align:left;'><a href='rel_sltsr.php?con=1&sel_sla=". $row['sla_id'] ."&date1=".$data_ini2."&date2=".$data_fin2."' target='_blank' >".$row['sla_name']." </a></td>
 					<td style='vertical-align:middle; text-align:center;'> ". $chamados ." </td>
 					<td style='vertical-align:middle; text-align:center;'> ". $abertos ." </td>
 					<td style='vertical-align:middle; text-align:center;'> ". $solucionados ." </td>
@@ -430,7 +431,7 @@ echo "
 			else {
 				
 			echo "
-				<div id='nada_rel' class='well info_box fluid col-md-12'>
+				<div id='nada_rel' class='well info_box fluid col-md-12 col-sm-12'>
 				<table class='table' style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
 				<tr><td style='vertical-align:middle; text-align:center;'> <span style='color: #000;'>" . __('No ticket found', 'dashboard') . "</td></tr>
 				<tr></tr>

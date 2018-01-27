@@ -262,7 +262,7 @@ if(isset($_GET['stat'])) {
 
 else {
 	$status = $status_all;
-	}
+}
 
 // Chamados
 $sql_cham =
@@ -373,9 +373,9 @@ echo "
 <table align='right' style='margin-bottom:3px;'>
 		<tr>
 			<td colspan=3>
-				<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_localidade.php?con=1&stat=open&loc=".$id_loc."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened', 'dashboard') ." </button>
-				<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_localidade.php?con=1&stat=close&loc=".$id_loc."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed', 'dashboard')." </button>
-				<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_localidade.php?con=1&stat=all&loc=".$id_loc."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_localidade.php?con=1&stat=open&sel_loc=".$id_loc."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened', 'dashboard') ." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_localidade.php?con=1&stat=close&sel_loc=".$id_loc."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed', 'dashboard')." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_localidade.php?con=1&stat=all&sel_loc=".$id_loc."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>
 			</td>
 		</tr>
 </table>
@@ -464,7 +464,7 @@ $('#local')
 $(document).ready(function() {
     $('#local').DataTable( {    	
 
-		select: true,	    	    	
+	select: true,	    	    	
         dom: 'Blfrtip',
         filter: false,        
         pagingType: "full_numbers",

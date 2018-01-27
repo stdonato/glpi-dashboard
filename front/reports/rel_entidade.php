@@ -21,8 +21,7 @@ else {
 }
 
 if(!isset($_POST["sel_ent"])) {
-	//$id_ent = $_REQUEST["sel_ent"];	
-	$id_ent = '';
+	$id_ent = $_REQUEST["sel_ent"];	
 }
 
 else {
@@ -211,8 +210,8 @@ else {
 		}
 
 		if(!isset($_POST["sel_ent"])) {
-			//$id_ent = $_REQUEST["sel_ent"];	
-			$id_ent = '';	
+			$id_ent = $_REQUEST["sel_ent"];	
+			//$id_ent = '';	
 		}
 
 		else {
@@ -377,7 +376,7 @@ else {
 
 		//listar chamados
 		echo "
-		<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>
+		<div class='well info_box fluid col-md-12 col-sm-12 report' style='margin-left: -1px;'>
 
 		<table class='fluid'  style='width:100%; font-size: 18px; font-weight:bold;' cellpadding = '1px'>
 			<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Entity', 'dashboard').": </span>".$ent_name['name']." </td>
@@ -397,9 +396,9 @@ else {
 		<table align='right' style='margin-bottom:10px;'>
 			<tr>
 				<td>
-					<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_entidade.php?con=1&stat=open&ent=".$id_ent."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened', 'dashboard') ." </button>
-					<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_entidade.php?con=1&stat=close&ent=".$id_ent."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed', 'dashboard')." </button>
-					<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_entidade.php?con=1&stat=all&ent=".$id_ent."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>
+					<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_entidade.php?con=1&stat=open&sel_ent=".$id_ent."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened', 'dashboard') ." </button>
+					<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_entidade.php?con=1&stat=close&sel_ent=".$id_ent."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed', 'dashboard')." </button>
+					<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_entidade.php?con=1&stat=all&sel_ent=".$id_ent."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>
 				</td>
 			</tr>
 		</table>
@@ -435,7 +434,6 @@ else {
 		<tbody>
 		";
 
-
 		$DB->data_seek($result_cham,0);
 
 		while($row = $DB->fetch_assoc($result_cham)){
@@ -450,7 +448,7 @@ else {
 		    if($status1 == "6" ) { $status1 = "closed";}
 
 		//requerente
-		    $sql_user = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
+		      $sql_user = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
 				FROM `glpi_tickets_users` , glpi_tickets, glpi_users
 				WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
 				AND glpi_tickets.id = ". $row['id'] ."
@@ -461,7 +459,7 @@ else {
 				    $row_user = $DB->fetch_assoc($result_user);
 
 		//tecnico
-		    $sql_tec = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
+		      $sql_tec = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
 				FROM `glpi_tickets_users` , glpi_tickets, glpi_users
 				WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
 				AND glpi_tickets.id = ". $row['id'] ."
@@ -540,8 +538,8 @@ else {
 		        filter: false,
 		        pagingType: "full_numbers",
 		        deferRender: true,
-				  fixedHeader: true,
-       		 //"scrollY":   "90vh",
+			fixedHeader: true,
+       		 	//"scrollY":   "90vh",
         		 //"scrollCollapse": true,
 		        sorting: [[0,'desc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc'],[7,'desc'],[8,'desc'],[9,'desc'],[10,'desc']],
 				  displayLength: 25,
@@ -576,8 +574,7 @@ else {
 				                        selected: true
 				                    }
 				                }
-				                }
-			                ]
+				                }]
 		             },
 		             {
 		                 extend: "collection",
@@ -590,8 +587,7 @@ else {
 		                 		exportOptions: {
 				                  columns: ':visible'
 				                }
-		                  }
-		                  ]
+		                  }]
 		             },
 		             {
                 		extend: 'colvis',
@@ -624,7 +620,7 @@ else {
 				</table>
 			</div>\n";
 		}
-		}
+	}
 		?>
 
 		<script type="text/javascript" >

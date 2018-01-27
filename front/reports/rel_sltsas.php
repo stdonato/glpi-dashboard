@@ -157,7 +157,8 @@ else {
 			<?php 
 			
 			//SLAs			
-			$con = $_GET['con'];
+			if(isset($_GET['con'])){$con = $_GET['con'];}
+			else {$con = '';}
 			
 			if($con == "1") {
 			
@@ -348,7 +349,7 @@ if($conta_cons > 0) {
 						
 				echo "	
 				<tr>
-					<td style='vertical-align:middle; text-align:left;'><a href='rel_sltsa.php?con=1&sla=". $row['sla_id'] ."&date1=".$data_ini2."&date2=".$data_fin2."' target='_blank' >".$row['sla_name']." </a></td>
+					<td style='vertical-align:middle; text-align:left;'><a href='rel_sltsa.php?con=1&sel_sla=". $row['sla_id'] ."&date1=".$data_ini2."&date2=".$data_fin2."' target='_blank' >".$row['sla_name']." </a></td>
 					<td style='vertical-align:middle; text-align:center;'> ". $chamados ." </td>
 					<td style='vertical-align:middle; text-align:center;'> ". $abertos ." </td>
 					<td style='vertical-align:middle; text-align:center;'> ". $solucionados ." </td>

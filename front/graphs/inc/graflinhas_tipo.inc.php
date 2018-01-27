@@ -17,7 +17,7 @@ $arr_months = array();
 if($interval <= "31") {
 	
 	$queryd = "
-	SELECT DISTINCT   DATE_FORMAT(date, '%b-%d') AS day_l,  COUNT(id) AS nb, DATE_FORMAT(date, '%Y-%m-%d') AS day
+	SELECT DISTINCT DATE_FORMAT(date, '%b-%d') AS day_l,  COUNT(id) AS nb, DATE_FORMAT(date, '%Y-%m-%d') AS day
 	FROM glpi_tickets
 	WHERE glpi_tickets.is_deleted = '0'
 	AND date ".$datas."
@@ -41,7 +41,7 @@ if($interval <= "31") {
 else {
 	
 	$queryd = "
-	SELECT DISTINCT   DATE_FORMAT(date, '%b-%Y') AS day_l,  COUNT(id) AS nb, DATE_FORMAT(date, '%Y-%m') AS day
+	SELECT DISTINCT DATE_FORMAT(date, '%b-%Y') AS day_l,  COUNT(id) AS nb, DATE_FORMAT(date, '%Y-%m') AS day
 	FROM glpi_tickets
 	WHERE glpi_tickets.is_deleted = '0'
 	AND date ".$datas."
