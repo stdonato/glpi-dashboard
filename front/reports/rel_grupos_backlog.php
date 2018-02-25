@@ -356,8 +356,7 @@ if(isset($_GET['con'])) {
 			$data_clo = $DB->fetch_assoc($result_clo);
 			
 			$fechados = $data_clo['total'];
-			
-//var_dump($sql_cham);			
+						
 			//solved
 			//$solucionados = round(($fechados*100)/$chamados,1);
 			

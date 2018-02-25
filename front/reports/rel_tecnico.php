@@ -463,7 +463,6 @@ if($con == "1") {
    $solve = $DB->result($result_stat_s,0,'solve') + 0; 	
 		
 	$tech = $row['firstname'] ." ". $row['realname'];
-	//$conta_cons = ($new+$assig+$plan+$pend+$solve+$close);
 
 	echo "
 	<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>
