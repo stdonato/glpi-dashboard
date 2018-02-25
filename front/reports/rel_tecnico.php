@@ -460,7 +460,7 @@ if($con == "1") {
 	AND glpi_tickets_users.tickets_id = glpi_tickets.id ";
 
    $result_stat_s = $DB->query($query_stat_s);
-   $solve = $DB->result($result_stat,0,'solve') + 0; 	
+   $solve = $DB->result($result_stat_s,0,'solve') + 0; 	
 		
 	$tech = $row['firstname'] ." ". $row['realname'];
 	//$conta_cons = ($new+$assig+$plan+$pend+$solve+$close);
