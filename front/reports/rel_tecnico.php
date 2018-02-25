@@ -328,9 +328,8 @@ if($con == "1") {
 	
 	$result_cons1 = $DB->query($consulta1);
 	
-	$conta_cons = $DB->numrows($result_cons1);
-	$consulta = $conta_cons;
-	
+	$conta_cons = $DB->numrows($result_cham);
+	$consulta = $conta_cons;	
 	
 	if($consulta > 0) {
 	
@@ -339,6 +338,7 @@ if($con == "1") {
 	FROM `glpi_tickets_users`, glpi_tickets
 	WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
 	AND glpi_tickets.date ".$datas2."
+	AND glpi_tickets_users.type = 2
 	AND glpi_tickets_users.users_id = ".$id_tec."
 	AND glpi_tickets.status IN ".$status_open."
 	AND glpi_tickets.is_deleted = 0
@@ -431,7 +431,7 @@ if($con == "1") {
    
 
    $query_stat_c = "
-	SELECT SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
+	SELECT count( glpi_tickets.id ) AS close, glpi_tickets_users.users_id AS id
 	FROM glpi_tickets_users, glpi_tickets
 	WHERE glpi_tickets.is_deleted = '0'
 	AND glpi_tickets.closedate ".$datas2." 
@@ -448,7 +448,7 @@ if($con == "1") {
 	SELECT SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve
 	FROM glpi_tickets_users, glpi_tickets
 	WHERE glpi_tickets.is_deleted = '0'
-	AND glpi_tickets.solvedate ".$datas2." 
+	AND (glpi_tickets.solvedate ".$datas2." OR glpi_tickets.closedate ".$datas2.") 
 	AND glpi_tickets_users.users_id = ".$id_tec."
 	AND glpi_tickets_users.type = 2
 	".$entidade_age."
@@ -459,6 +459,7 @@ if($con == "1") {
 		
 
 	$tech = $row['firstname'] ." ". $row['realname'];
+	$conta_cons = ($new+$assig+$plan+$pend+$solve+$close);
 
 	echo "
 	<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>
@@ -466,7 +467,7 @@ if($con == "1") {
 		<tr style='width: 450px;'>
 			<td><img class='avatar2' width='40px' height='43px' src='".User::getURLForPicture($row['picture'])."'></img></td>
 			<td style='vertical-align:middle;'> <span style='color: #000;'>".__('Technician','dashboard').": </span>". $row['firstname'] ." ". $row['realname']. "</td>
-			<td style='vertical-align:middle; ' colspan=2> <span style='color: #000;'>".__('Tickets','dashboard').": </span>". ($new+$assig+$pend+$plan+$solve+$close) ."</td>
+			<td style='vertical-align:middle; ' colspan=2> <span style='color: #000;'>".__('Tickets','dashboard').": </span>". $conta_cons ."</td>
 			<td colspan='3' style='font-size: 18px; font-weight:bold; vertical-align:middle; width:200px;'><span style='font-size: 18px; color:#000;'>".__('Period', 'dashboard') .": </span> " . conv_data($data_ini2) ." a ". conv_data($data_fin2)."
 
 			<td style='vertical-align:middle; width: 190px; '>
@@ -478,8 +479,6 @@ if($con == "1") {
 			</td>
 		</tr>
 	</table> ";
-
-  
 
 
 	if($satisfacao != '' || $satisfacao > 0) {
@@ -748,6 +747,9 @@ else {
 		}
 }
 }
+
+//var_dump($sql_cham);	
+var_dump($query_stat_c);
 ?>
 
 <script type="text/javascript" >

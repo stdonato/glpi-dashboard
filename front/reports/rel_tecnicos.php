@@ -422,7 +422,7 @@ AND glpi_ticketsatisfactions.tickets_id = glpi_tickets.id
 AND glpi_ticketsatisfactions.tickets_id = glpi_tickets_users.tickets_id
 AND glpi_users.id = glpi_tickets_users.users_id
 AND glpi_tickets_users.type = 2
-AND ( glpi_tickets.date ".$datas2." OR glpi_tickets.closedate ".$datas2." )
+AND glpi_tickets.closedate ".$datas2." 
 AND glpi_tickets_users.users_id = ".$id_tec['id']."
 ".$entidade."
 ".$grupo."
