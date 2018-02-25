@@ -334,15 +334,19 @@ if($con == "1") {
 	if($consulta > 0) {
 	
 	//abertos
-	$sql_ab = "SELECT count( glpi_tickets.id ) AS total, glpi_tickets_users.`users_id` AS id
+	$sql_ab = "SELECT glpi_tickets.id AS id, glpi_tickets.name AS name, glpi_tickets.date AS date, glpi_tickets.closedate as closedate,
+	glpi_tickets.type, glpi_tickets.status, FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`closedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time,
+	glpi_tickets.solve_delay_stat AS time_sec
 	FROM `glpi_tickets_users`, glpi_tickets
 	WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
-	AND glpi_tickets.date ".$datas2."
-	AND glpi_tickets_users.type = 2
-	AND glpi_tickets_users.users_id = ".$id_tec."
-	AND glpi_tickets.status IN ".$status_open."
+	AND glpi_tickets_users.type =2
+	AND glpi_tickets_users.users_id = ". $id_tec ."
 	AND glpi_tickets.is_deleted = 0
-	".$entidade." " ;
+	AND glpi_tickets.date ".$datas2."
+	AND glpi_tickets.status IN ".$status_open."
+	".$entidade."
+	GROUP BY id
+	ORDER BY id DESC  " ;
 	
 	$result_ab = $DB->query($sql_ab) or die ("erro_ab");
 	$data_ab = $DB->fetch_assoc($result_ab);
@@ -359,7 +363,7 @@ if($con == "1") {
 	AND `glpi_ticketsatisfactions`.tickets_id = glpi_tickets_users.tickets_id
 	AND `glpi_users`.id = glpi_tickets_users.users_id
 	AND glpi_tickets_users.type = 2
-	AND ( glpi_tickets.date ".$datas2." OR glpi_tickets.closedate ".$datas2." )
+	AND ( glpi_tickets.solvedate ".$datas2." OR glpi_tickets.closedate ".$datas2." )
 	AND glpi_tickets_users.users_id = ".$id_tec."
 	".$entidade." ";
 	
@@ -437,11 +441,12 @@ if($con == "1") {
 	AND glpi_tickets.closedate ".$datas2." 
 	AND glpi_tickets_users.users_id = ".$id_tec."
 	AND glpi_tickets_users.type = 2
+	AND glpi_tickets.status = 6
 	".$entidade_age."
 	AND glpi_tickets_users.tickets_id = glpi_tickets.id ";
 
    $result_stat_c = $DB->query($query_stat_c);
-   $close = $DB->result($result_stat_c,0,'close') + 0;
+   $close = $DB->result($result_stat_c,0,'close');
    
    
    $query_stat_s = "
@@ -457,9 +462,8 @@ if($con == "1") {
    $result_stat_s = $DB->query($query_stat_s);
    $solve = $DB->result($result_stat,0,'solve') + 0; 	
 		
-
 	$tech = $row['firstname'] ." ". $row['realname'];
-	$conta_cons = ($new+$assig+$plan+$pend+$solve+$close);
+	//$conta_cons = ($new+$assig+$plan+$pend+$solve+$close);
 
 	echo "
 	<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>
@@ -749,7 +753,7 @@ else {
 }
 
 //var_dump($sql_cham);	
-var_dump($query_stat_c);
+//var_dump($query_stat_c);
 ?>
 
 <script type="text/javascript" >
