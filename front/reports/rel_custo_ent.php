@@ -367,7 +367,7 @@ if($con == "1") {
 	$ent_name = $row['name'] ;
 
 	echo "
-	<div class='well info_box fluid col-md-12 col-sm-12 report' style='margin-left: -1px;'>
+	<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>
 	<table class='fluid'  style='font-size: 18px; font-weight:bold; width:100%;' cellpadding = 1px>
 		<tr style='width: 450px;'>
 			<td style='vertical-align:middle;'> <span style='color: #000;'>".__('Entity','dashboard').": </span>". $row['name'] . "</td>

@@ -7,29 +7,27 @@ Session::checkLoginUser();
 
 global $DB;
     switch (date("m")) {
-    case "01": $mes = __('January','dashboard'); break;
-    case "02": $mes = __('February','dashboard'); break;
-    case "03": $mes = __('March','dashboard'); break;
-    case "04": $mes = __('April','dashboard'); break;
-    case "05": $mes = __('May','dashboard'); break;
-    case "06": $mes = __('June','dashboard'); break;
-    case "07": $mes = __('July','dashboard'); break;
-    case "08": $mes = __('August','dashboard'); break;
-    case "09": $mes = __('September','dashboard'); break;
-    case "10": $mes = __('October','dashboard'); break;
-    case "11": $mes = __('November','dashboard'); break;
-    case "12": $mes = __('December','dashboard'); break;
+	    case "01": $mes = __('January','dashboard'); break;
+	    case "02": $mes = __('February','dashboard'); break;
+	    case "03": $mes = __('March','dashboard'); break;
+	    case "04": $mes = __('April','dashboard'); break;
+	    case "05": $mes = __('May','dashboard'); break;
+	    case "06": $mes = __('June','dashboard'); break;
+	    case "07": $mes = __('July','dashboard'); break;
+	    case "08": $mes = __('August','dashboard'); break;
+	    case "09": $mes = __('September','dashboard'); break;
+	    case "10": $mes = __('October','dashboard'); break;
+	    case "11": $mes = __('November','dashboard'); break;
+	    case "12": $mes = __('December','dashboard'); break;
     }
 ?>
 
 <html>
 <head>
 <title>GLPI - <?php echo __('My Dashboard','dashboard'); ?></title>
-<!-- <base href= "<?php $_SERVER['SERVER_NAME'] ?>" > -->
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
-<!--  <meta http-equiv="refresh" content= "120"/> -->
 
 <link rel="icon" href="../img/dash.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="../img/dash.ico" type="image/x-icon" />
@@ -48,7 +46,6 @@ global $DB;
 <script src="../js/bootstrap-datepicker.js"></script>
 
 <link href="../css/datepicker.css" rel="stylesheet" type="text/css">
-<!-- <link href="../css/style-dash.css" rel="stylesheet" type="text/css" /> -->
 
 <?php echo '<link rel="stylesheet" type="text/css" href="../css/style-'.$_SESSION['style'].'">';  ?>
 <?php echo '<script src="../js/themes/'.$_SESSION['charts_colors'].'"></script>'; ?>
@@ -175,10 +172,10 @@ $arr_tec[0] = "-- ". __('Select a technician','dashboard') . " --" ;
 $DB->data_seek($result_tec, 0);
 
 while ($row_result = $DB->fetch_assoc($result_tec))
-	{
-		$v_row_result = $row_result['id'];
-		$arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname'] ;
-	}
+{
+	$v_row_result = $row_result['id'];
+	$arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname'] ;
+}
 
 $name = 'sel_tec';
 $options = $arr_tec;
@@ -188,58 +185,52 @@ $selected = 0;
 <div id="datas-tec" class="fluid" >
 <form id="form1" name="form1" class="form1" method="post" action="?date1=<?php echo $data_ini ?>&date2=<?php echo $data_fin ?>&con=1">
 
-<table border="0" cellspacing="0" cellpadding="1" bgcolor="#efefef">
-
-<tr>
-<td>
-<?php
-	echo'
-			<table>
-				<tr>
-					<td>
-					   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-					    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
-					    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-				    	</div>
-					</td>
-					<td>&nbsp;</td>
-					<td>
-				   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-					    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
-					    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-				    	</div>
-					</td>
-					<td>&nbsp;</td>
-				</tr>
-			</table> ';
-	?>
-
-<script language="Javascript">
-	$('#dp1').datepicker('update');
-	$('#dp2').datepicker('update');
-</script>
-</td>
-
-<td style="margin-top:2px;">
-
-</td>
-</tr>
-<tr><td height="15px"></td></tr>
-<tr>
-<td colspan="2" align="center" style="">
-<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult','dashboard'); ?></button>
-<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='graf_tech.php'" > <i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean','dashboard'); ?> </button></td>
-</td>
-</tr>
-
-</table>
+	<table border="0" cellspacing="0" cellpadding="1" bgcolor="#efefef">
+		<tr>
+			<td>
+			<?php
+				echo'
+						<table>
+							<tr>
+								<td>
+								   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+								    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
+								    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+							    	</div>
+								</td>
+								<td>&nbsp;</td>
+								<td>
+							   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+								    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
+								    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+							    	</div>
+								</td>
+								<td>&nbsp;</td>
+							</tr>
+						</table> ';
+				?>
+			
+			<script language="Javascript">
+				$('#dp1').datepicker('update');
+				$('#dp2').datepicker('update');
+			</script>
+			</td>
+			<td style="margin-top:2px;"></td>
+		</tr>
+		<tr><td height="15px"></td></tr>
+		<tr>
+			<td colspan="2" align="center" style="">
+			<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult','dashboard'); ?></button>
+			<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='graf_tech.php'" > <i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean','dashboard'); ?> </button></td>
+			</td>
+		</tr>
+	</table>
 <?php Html::closeForm(); ?>
-<!-- </form> -->
+
 </div>
 </div>
 
 <!-- DIV's -->
-
 <script type="text/javascript" >
 	$(document).ready(function() { $("#sel_tec").select2({dropdownAutoWidth : true}); });
 </script>
@@ -359,9 +350,9 @@ echo '<div id="name"  style="margin-top: 15px;">
 								  </div>
 
 								  <div class="col-sm-3 col-md-3">
-									 <div class="dashbox shad panel panel-default db-yellow">
+									 <div class="dashbox shad panel panel-default db-orange">
 										<div class="panel-body_2">
-										   <div class="panel-left yellow" style = "margin-top: -5px; margin-left: -5px;">
+										   <div class="panel-left orange" style = "margin-top: -5px; margin-left: -5px;">
 												<i class="fa fa-clock-o fa-3x fa2"></i>
 										   </div>
 										   <div class="panel-right">
@@ -388,7 +379,7 @@ echo '<div id="name"  style="margin-top: 15px;">
 									 </div>
 								  </div>
 								  <div class="col-sm-3 col-md-3">
-									 <div class="dashbox shad panel panel-default db-orange">
+									 <div class="dashbox shad panel panel-default db-yellow">
 										<div class="panel-body_2">
 										   <div class="panel-left green" style = "margin-top: -5px; margin-left: -5px;">
 												<i class="fa fa-times-circle fa-3x fa2"></i>
@@ -402,8 +393,8 @@ echo '<div id="name"  style="margin-top: 15px;">
 									 </div>
 								  </div>
 						</div>
-</div>
-</div>';
+				</div>
+				</div>';
 ?>
 
 				<script type="text/javascript" >
@@ -418,7 +409,6 @@ echo '<div id="name"  style="margin-top: 15px;">
 					    odometer4.innerHTML = <?php echo $close; ?>;
 					}, 1000);
 				</script>
-				
 				
 					<div id="graf_linhas" class="col-md-12 col-sm-12" style="height: 450px; margin-top: 20px !important; margin-left: 0px;">
 						<?php  include ("./inc/graflinhas_tec.inc.php"); ?>
@@ -456,9 +446,8 @@ echo '<div id="name"  style="margin-top: 15px;">
 						<?php include ("./inc/grafcol_sat_tec.inc.php"); ?>
 					</div>
 				
-					<?php
-				
-					}
+					<?php				
+						}
 					?>
 
 				</div>

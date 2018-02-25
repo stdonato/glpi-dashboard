@@ -166,32 +166,31 @@
 			<header>
 				<p><span></span><?php echo __('Time')." &amp; ". __('Date'); ?> </p>
 			</header>
-			<div class="content">
-				<div class="cf-td">
-				<!-- <div class="cf-td cf-td-12"> -->
-					<div class="cf-version metric"><?php echo 'GLPI '.$CFG_GLPI['version']; ?></div>
-					<div class="cf-td-time metric hora"></div>
-					<div class="cf-td-dd">
-						<!--<p class="cf-td-day metric-small" ></p>
-						<p class="cf-td-date metric-small" ></p>						
-						-->
-						<script type="text/javascript">
+				<div class="content">
+					<div class="cf-td">
+					<!-- <div class="cf-td cf-td-12"> -->
+						<div class="cf-version metric-small" style="font-size:32px !important;"><?php echo $actent; ?></div>
+						<div class="cf-td-time metric hora"></div>
+						<div class="cf-td-dd">
+							<!--<p class="cf-td-day metric-small" ></p>
+							<p class="cf-td-date metric-small" ></p>						
+							-->
+							<script type="text/javascript">
 								var d_names = <?php echo '"'.$dia.'"' ; ?>;
-		var m_names = <?php echo '"'.$mes.'"' ; ?>;
-		
-		var d = new Date();
-		var curr_day = d.getDay();
-		var curr_date = d.getDate();
-		var curr_month = d.getMonth();
-		var curr_year = d.getFullYear();
-		
-		document.write("<span style='font-size:32px; margin-top: -6px !important;'>" + d_names + "</span><br> <span style='font-size:32px;'>" + curr_date + " " + m_names + " " + curr_year + "</span><br>" );
-		
-						</script>
-						<span style="font-size:20px;"><?php echo __('Period'). ": ".$period_name ?></span>
-					</div>					
+								var m_names = <?php echo '"'.$mes.'"' ; ?>;
+								
+								var d = new Date();
+								var curr_day = d.getDay();
+								var curr_date = d.getDate();
+								var curr_month = d.getMonth();
+								var curr_year = d.getFullYear();
+			
+								document.write("<span style='font-size:28px; margin-top: -6px !important;'>" + d_names + "</span><br> <span style='font-size:28px;'>" + curr_date + " " + m_names + " " + curr_year + "</span><br>" );		
+							</script>
+							<span style="font-size:20px;"><?php echo __('Period'). ": ".$period_name ?></span>
+						</div>					
+					</div>
 				</div>
-			</div>
 			</div> <!-- //end cf-item -->
 
 

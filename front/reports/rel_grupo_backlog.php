@@ -114,7 +114,7 @@ else {
 			<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
    		 <div id="titulo_rel"> <?php echo __('Tickets', 'dashboard').'  '. __('by Group', 'dashboard') ?>  </div>
 			 <div id="datas-tec" class="span12 fluid" >
-			    <form id="form1" name="form1" class="form_rel" method="post" action="rel_grupo.php?con=1">
+			    <form id="form1" name="form1" class="form_rel" method="post" action="rel_grupo_backlog.php?con=1">
 				    <table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
 					   <tr>
 							<td style="width: 310px;">
@@ -218,7 +218,7 @@ else {
 
 if($id_grp == 0) {
 	echo '<script language="javascript"> alert(" ' . __('Select a group', 'dashboard') . ' "); </script>';
-	echo '<script language="javascript"> location.href="rel_grupo.php"; </script>';
+	echo '<script language="javascript"> location.href="rel_grupo_backlog.php"; </script>';
 }
 
 if($data_ini2 == $data_fin2) {
@@ -238,13 +238,13 @@ $status_all = "('1','2','3','4','5','6')";
 if(isset($_GET['stat'])) {
 
     if($_GET['stat'] == "open") {
-      $status = $status_open;
+        $status = $status_open;
     }
     elseif($_GET['stat'] == "close") {
-      $status = $status_close;
+        $status = $status_close;
     }
     else {
-    	$status = $status_all;
+    $status = $status_all;
     }
 }
 else {
@@ -394,9 +394,9 @@ echo "
 <table align='right' style='margin-bottom:10px;'>
 		<tr>
 			<td>
-				<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_grupo.php?con=1&stat=open&sel_grp=".$id_grp."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened', 'dashboard') ." </button>
-				<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_grupo.php?con=1&stat=close&sel_grp=".$id_grp."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed', 'dashboard')." </button>
-				<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_grupo.php?con=1&stat=all&sel_grp=".$id_grp."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_grupo_backlog.php?con=1&stat=open&sel_grp=".$id_grp."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened', 'dashboard') ." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_grupo_backlog.php?con=1&stat=close&sel_grp=".$id_grp."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed', 'dashboard')." </button>
+				<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_grupo_backlog.php?con=1&stat=all&sel_grp=".$id_grp."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>
 			</td>
 		</tr>
 </table>

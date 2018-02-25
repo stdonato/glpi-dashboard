@@ -18,10 +18,10 @@ if(!empty($_POST['submit']))
 else {
     $data_ini = date("Y-m-01");
     $data_fin = date("Y-m-d");
-}
+    }
 
 if(!isset($_POST["sel_tec"])) {
-    $id_tec = $_GET["sel_tec"];
+    $id_tec = $_GET["sel_tec"];  
 }
 
 else {
@@ -186,10 +186,10 @@ a:hover { color: #000099; }
 		$DB->data_seek($result_tec, 0) ;
 		
 		while ($row_result = $DB->fetch_assoc($result_tec))
-		    {
-			 $v_row_result = $row_result['id'];
-		   	 $arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;
-		    }
+	    {
+		    $v_row_result = $row_result['id'];
+	   	 $arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;
+	    }
 		
 		$name = 'sel_tec';
 		$options = $arr_tec;

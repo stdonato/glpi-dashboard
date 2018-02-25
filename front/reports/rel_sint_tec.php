@@ -192,10 +192,10 @@ else {
 										$DB->data_seek($result_tec, 0) ;
 										
 										while ($row_result = $DB->fetch_assoc($result_tec))
-										    {
-											    $v_row_result = $row_result['id'];
-										   	 $arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;
-										    }
+									    {
+										    $v_row_result = $row_result['id'];
+									   	 $arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;
+									    }
 										    										
 										$name = 'sel_tec';
 										$options = $arr_tec;
@@ -331,23 +331,7 @@ else {
 			$tec_name = $DB->fetch_assoc($result_nome);
 			
 			//date diff
-			$numdias = round(abs(strtotime($data_fin2) - strtotime($data_ini2)) / 86400,0);			
-			
-/*			//tecnico
-			$sql_tec = "SELECT count(glpi_tickets.id) AS conta, glpi_users.firstname AS name, glpi_users.realname AS sname
-			FROM `glpi_tickets_users` , glpi_tickets, glpi_users
-			WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
-			AND glpi_tickets.date ".$sel_date."
-			AND glpi_tickets_users.`users_id` = glpi_users.id
-			AND glpi_tickets_users.type = 2
-			".$entidade." 
-			GROUP BY name
-			ORDER BY conta DESC
-			LIMIT 5";
-			
-			$result_tec = $DB->query($sql_tec);	
-			
-*/					
+			$numdias = round(abs(strtotime($data_fin2) - strtotime($data_ini2)) / 86400,0);							
 			
 			//requester
 				$sql_req = "SELECT count(glpi_tickets.id) AS conta, glpi_users.firstname AS name, glpi_users.realname AS sname
@@ -532,7 +516,7 @@ $content .= "
 			 </tr>				
 			 <tr>
 			 <td>". __('Tickets','dashboard')." ". __('By day')." - ". __('Average')."</td>
-			 <td align='right'>".round($total_cham / $numdias,1)."</td>
+			 <td align='right'>".round($total_cham / $numdias,0)."</td>
 			 </tr>			
 			 <tr>
 			 <td>". __('Average time to closure')."</td>
@@ -610,26 +594,7 @@ $content .= "
 				 <td align='right'>".$row['cat_conta']."</td>			
 				 </tr> ";	
 			}		    
-/*
-$content .= "	 					
- 			 </tbody> </table> 			  			 
- 			 
-			 <table class='fluid table table-striped table-condensed'  style='font-size: 16px; width:55%; margin:auto; margin-bottom:25px;'>
-			 <thead>
-			 <tr>
-			 <th colspan='2' style='text-align:center; background:#286090; color:#fff;'>Top 5 - ". __('Tickets','dashboard')." ". __('by Technician','dashboard')."</th>						
-			 </tr>
-			 </thead>	
 
-			 <tbody>	";		
-			
-			while($row_tec = $DB->fetch_assoc($result_tec)) {
-				 $content .= "<tr>
-				 <td>".$row_tec['name']." ".$row_tec['sname']."</td>
-				 <td align='right'>".$row_tec['conta']."</td>			
-				 </tr> ";	
-			}		
-*/
 $content .= "					
 		    </tbody> </table>		   		    	
 		   

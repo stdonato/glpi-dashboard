@@ -102,7 +102,7 @@ else {
 				<div id="titulo_rel"> 
 					<?php echo __('Tickets', 'dashboard') .'  '. __('by SLA', 'dashboard') ?> - <?php echo __('Time to own'); ?> 				
 				</div>				
-				<div id="datas-tec" class="col-md-12 fluid" >			 
+				<div id="datas-tec" class="col-md-12 col-sm-12 fluid" >			 
 				<form id="form1" name="form1" class="form_rel" method="post" action="rel_sltsas.php?con=1" style="margin-left: 37%;"> 
 					<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
 						<tr>

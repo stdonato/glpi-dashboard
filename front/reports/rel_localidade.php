@@ -464,7 +464,7 @@ $('#local')
 $(document).ready(function() {
     $('#local').DataTable( {    	
 
-	select: true,	    	    	
+		select: true,	    	    	
         dom: 'Blfrtip',
         filter: false,        
         pagingType: "full_numbers",

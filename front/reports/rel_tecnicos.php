@@ -60,7 +60,8 @@ function margins() {
 }
 
 
-if(!empty($_POST['submit'])){
+//if(!empty($_POST['submit'])){
+if(!empty($_REQUEST['date1'])) {	
   	$data_ini = $_REQUEST['date1'];
   	$data_fin = $_REQUEST['date2'];
 }
@@ -247,7 +248,7 @@ if(isset($_GET['con'])) {
 	
 	if($con == "1") {
 
-	if(!isset($_POST['date1'])) {
+	if(!isset($_REQUEST['date1'])) {
 		  $data_ini2 = $data_ini; 
 		  $data_fin2 = $data_fin; 
 		  $grupo = "";
@@ -376,7 +377,7 @@ $abertos = $data_ab['total'];
 $sql_sol = "SELECT count( glpi_tickets.id ) AS total, glpi_tickets_users.users_id AS id
 FROM glpi_tickets_users, glpi_tickets, glpi_users". $glpi_techs ."
 WHERE glpi_tickets.id = glpi_tickets_users.tickets_id
-AND glpi_tickets.date ".$datas2."
+AND glpi_tickets.solvedate ".$datas2."
 AND glpi_tickets_users.users_id = ".$id_tec['id']."
 AND glpi_tickets.status = 5
 AND glpi_tickets_users.users_id = glpi_users.id
@@ -396,7 +397,7 @@ $solucionados = $data_sol['total'];
 $sql_clo = "SELECT count( glpi_tickets.id ) AS total, glpi_tickets_users.users_id AS id
 FROM glpi_tickets_users, glpi_tickets, glpi_users". $glpi_techs ."
 WHERE glpi_tickets.id = glpi_tickets_users.tickets_id
-AND glpi_tickets.date ".$datas2."
+AND glpi_tickets.closedate ".$datas2."
 AND glpi_tickets_users.users_id = ".$id_tec['id']."
 AND glpi_tickets.status = 6
 AND glpi_tickets_users.users_id = glpi_users.id
@@ -421,7 +422,7 @@ AND glpi_ticketsatisfactions.tickets_id = glpi_tickets.id
 AND glpi_ticketsatisfactions.tickets_id = glpi_tickets_users.tickets_id
 AND glpi_users.id = glpi_tickets_users.users_id
 AND glpi_tickets_users.type = 2
-AND glpi_tickets.date ".$datas2."
+AND ( glpi_tickets.date ".$datas2." OR glpi_tickets.closedate ".$datas2." )
 AND glpi_tickets_users.users_id = ".$id_tec['id']."
 ".$entidade."
 ".$grupo."
@@ -432,7 +433,6 @@ $media = $DB->fetch_assoc($result_sat);
 
 $satisfacao = round(($media['media']/5)*100,1);
 $nota = round($media['media'],0);
-
 
 
 //barra de porcentagem
@@ -468,7 +468,6 @@ FROM glpi_tickets_users, glpi_tickets, glpi_users". $glpi_techs ."
 WHERE glpi_tickets.id = glpi_tickets_users.tickets_id
 AND `glpi_tickets`.`time_to_resolve` IS NOT NULL 
 AND `glpi_tickets`.`status` <> 4
-
 AND 
 (
   `glpi_tickets`.`solvedate` > `glpi_tickets`.`time_to_resolve`  
@@ -486,7 +485,6 @@ AND glpi_tickets.solvedate ".$datas2."
 ". $grupo1 ." " ;
 
 $result_due = $DB->query($sql_due) or die ("erro_ab");
-
 $data_due = $DB->fetch_assoc($result_due);
  
 $atrasados = $data_due['total'];
@@ -561,6 +559,7 @@ echo "</tbody>
 }
 }
 
+//var_dump($sql_clo);
 
 if($sats != '') {
 	$sort = "[[1,'desc'],[0,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc']],";
@@ -585,7 +584,7 @@ $(document).ready(function() {
         filter: false,        
         pagingType: "full_numbers",
         deferRender: true,
-	fixedHeader: true,
+		  fixedHeader: true,
         sorting: <?php echo $sort; ?>
         //sorting: [[1,'desc'],[0,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc']],
 		  displayLength: 25,

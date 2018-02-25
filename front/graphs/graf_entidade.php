@@ -328,9 +328,9 @@ echo '<div id="name"  style="margin-top: 15px;"><span>'.$ent_name['name'].'</spa
 								  </div>
 
 								  <div class="col-sm-3 col-md-3">
-									 <div class="dashbox shad panel panel-default db-yellow">
+									 <div class="dashbox shad panel panel-default db-orange">
 										<div class="panel-body_2">
-										   <div class="panel-left yellow" style = "margin-top: -5px; margin-left: -5px;">
+										   <div class="panel-left orange" style = "margin-top: -5px; margin-left: -5px;">
 												<i class="fa fa-clock-o fa-3x fa2"></i>
 										   </div>
 										   <div class="panel-right">
@@ -356,10 +356,11 @@ echo '<div id="name"  style="margin-top: 15px;"><span>'.$ent_name['name'].'</spa
 										</div>
 									 </div>
 								  </div>
+								  
 								  <div class="col-sm-3 col-md-3">
-									 <div class="dashbox shad panel panel-default db-orange">
+									 <div class="dashbox shad panel panel-default db-yellow">
 										<div class="panel-body_2">
-										   <div class="panel-left green" style = "margin-top: -5px; margin-left: -5px;">
+										   <div class="panel-left yellow" style = "margin-top: -5px; margin-left: -5px;">
 												<i class="fa fa-times-circle fa-3x fa2"></i>
 										   </div>
 								   		<div class="panel-right">

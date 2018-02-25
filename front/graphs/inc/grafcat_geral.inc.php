@@ -1,6 +1,8 @@
 
 <?php
 
+//echo '<div id="grafcat" class="span12" style="height: 460px; margin-top:40px;">';
+
 $query4 = "
 SELECT glpi_itilcategories.completename as cat_name, COUNT(glpi_tickets.id) as cat_tick
 FROM glpi_tickets,  glpi_itilcategories
@@ -16,10 +18,10 @@ $result4 = $DB->query($query4) or die('erro');
 
 $arr_grf4 = array();
 while ($row_result = $DB->fetch_assoc($result4))
-{
+	{
 	$v_row_result = $row_result['cat_name'];
 	$arr_grf4[$v_row_result] = $row_result['cat_tick'];
-}
+	}
 
 $grf4 = array_keys($arr_grf4) ;
 $quant4 = array_values($arr_grf4) ;

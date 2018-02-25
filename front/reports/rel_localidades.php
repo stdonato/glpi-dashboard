@@ -360,7 +360,7 @@ echo "</tbody>
 	$(document).ready(function() {
 	    $('#local').DataTable( {    	
 	
-		select: false,	    	    	
+			select: false,	    	    	
 	        dom: 'Blfrtip',
 	        filter: false,        
 	        pagingType: "full_numbers",

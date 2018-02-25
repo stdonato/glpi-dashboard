@@ -9,7 +9,8 @@ global $DB;
 Session::checkLoginUser();
 Session::checkRight("profile", READ);
 
-if(!empty($_POST['submit']))
+//if(!empty($_POST['submit']))
+if(!empty($_REQUEST['date1']))
 {
     $data_ini = $_REQUEST['date1'];
     $data_fin = $_REQUEST['date2'];
@@ -302,7 +303,7 @@ if($con == "1") {
 	AND glpi_tickets_users.type =2
 	AND glpi_tickets_users.users_id = ". $id_tec ."
 	AND glpi_tickets.is_deleted = 0
-	AND glpi_tickets.date ".$datas2."
+	AND ( glpi_tickets.date ".$datas2." OR glpi_tickets.closedate ".$datas2." )
 	AND glpi_tickets.status IN ".$status."
 	".$entidade."
 	GROUP BY id
@@ -319,7 +320,7 @@ if($con == "1") {
 	AND glpi_tickets_users.type = 2
 	AND glpi_tickets_users.users_id = ". $id_tec ."
 	AND glpi_tickets.is_deleted = 0
-	AND glpi_tickets.date ".$datas2."
+	AND ( glpi_tickets.date ".$datas2." OR glpi_tickets.closedate ".$datas2." )
 	AND glpi_tickets.status IN ".$status."
 	".$entidade."
 	GROUP BY id
@@ -358,7 +359,7 @@ if($con == "1") {
 	AND `glpi_ticketsatisfactions`.tickets_id = glpi_tickets_users.tickets_id
 	AND `glpi_users`.id = glpi_tickets_users.users_id
 	AND glpi_tickets_users.type = 2
-	AND glpi_tickets.date ".$datas2."
+	AND ( glpi_tickets.date ".$datas2." OR glpi_tickets.closedate ".$datas2." )
 	AND glpi_tickets_users.users_id = ".$id_tec."
 	".$entidade." ";
 	
@@ -405,6 +406,57 @@ if($con == "1") {
 	
 	$DB->data_seek($result_cham, 0);
 	while($row = $DB->fetch_assoc($result_nome)) {
+		
+	  //count by status
+   $query_stat = "
+	SELECT
+	SUM(case when glpi_tickets.status = 1 then 1 else 0 end) AS new,
+	SUM(case when glpi_tickets.status = 2 then 1 else 0 end) AS assig,
+	SUM(case when glpi_tickets.status = 3 then 1 else 0 end) AS plan,
+	SUM(case when glpi_tickets.status = 4 then 1 else 0 end) AS pend
+	FROM glpi_tickets_users, glpi_tickets
+	WHERE glpi_tickets.is_deleted = '0'
+	AND glpi_tickets.date ".$datas2." 
+	AND glpi_tickets_users.users_id = ".$id_tec."
+	AND glpi_tickets_users.type = 2
+	".$entidade_age."
+	AND glpi_tickets_users.tickets_id = glpi_tickets.id ";
+
+   $result_stat = $DB->query($query_stat);
+
+ 	$new = $DB->result($result_stat,0,'new') + 0;
+ 	$assig = $DB->result($result_stat,0,'assig') + 0;
+ 	$plan = $DB->result($result_stat,0,'plan') + 0;
+ 	$pend = $DB->result($result_stat,0,'pend') + 0;
+   
+
+   $query_stat_c = "
+	SELECT SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
+	FROM glpi_tickets_users, glpi_tickets
+	WHERE glpi_tickets.is_deleted = '0'
+	AND glpi_tickets.closedate ".$datas2." 
+	AND glpi_tickets_users.users_id = ".$id_tec."
+	AND glpi_tickets_users.type = 2
+	".$entidade_age."
+	AND glpi_tickets_users.tickets_id = glpi_tickets.id ";
+
+   $result_stat_c = $DB->query($query_stat_c);
+   $close = $DB->result($result_stat_c,0,'close') + 0;
+   
+   
+   $query_stat_s = "
+	SELECT SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve
+	FROM glpi_tickets_users, glpi_tickets
+	WHERE glpi_tickets.is_deleted = '0'
+	AND glpi_tickets.solvedate ".$datas2." 
+	AND glpi_tickets_users.users_id = ".$id_tec."
+	AND glpi_tickets_users.type = 2
+	".$entidade_age."
+	AND glpi_tickets_users.tickets_id = glpi_tickets.id ";
+
+   $result_stat_s = $DB->query($query_stat_s);
+   $solve = $DB->result($result_stat,0,'solve') + 0; 	
+		
 
 	$tech = $row['firstname'] ." ". $row['realname'];
 
@@ -414,7 +466,7 @@ if($con == "1") {
 		<tr style='width: 450px;'>
 			<td><img class='avatar2' width='40px' height='43px' src='".User::getURLForPicture($row['picture'])."'></img></td>
 			<td style='vertical-align:middle;'> <span style='color: #000;'>".__('Technician','dashboard').": </span>". $row['firstname'] ." ". $row['realname']. "</td>
-			<td style='vertical-align:middle; ' colspan=2> <span style='color: #000;'>".__('Tickets','dashboard').": </span>". $conta_cons ."</td>
+			<td style='vertical-align:middle; ' colspan=2> <span style='color: #000;'>".__('Tickets','dashboard').": </span>". ($new+$assig+$pend+$plan+$solve+$close) ."</td>
 			<td colspan='3' style='font-size: 18px; font-weight:bold; vertical-align:middle; width:200px;'><span style='font-size: 18px; color:#000;'>".__('Period', 'dashboard') .": </span> " . conv_data($data_ini2) ." a ". conv_data($data_fin2)."
 
 			<td style='vertical-align:middle; width: 190px; '>
@@ -427,31 +479,7 @@ if($con == "1") {
 		</tr>
 	</table> ";
 
-    //count by status
-    $query_stat = "
-	SELECT
-	SUM(case when glpi_tickets.status = 1 then 1 else 0 end) AS new,
-	SUM(case when glpi_tickets.status = 2 then 1 else 0 end) AS assig,
-	SUM(case when glpi_tickets.status = 3 then 1 else 0 end) AS plan,
-	SUM(case when glpi_tickets.status = 4 then 1 else 0 end) AS pend,
-	SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve,
-	SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
-	FROM glpi_tickets_users, glpi_tickets
-	WHERE glpi_tickets.is_deleted = '0'
-	AND glpi_tickets.date ".$datas2."
-	AND glpi_tickets_users.users_id = ".$id_tec."
-	AND glpi_tickets_users.type = 2
-	".$entidade_age."
-	AND glpi_tickets_users.tickets_id = glpi_tickets.id ";
-
-    $result_stat = $DB->query($query_stat);
-
-    $new = $DB->result($result_stat,0,'new') + 0;
-    $assig = $DB->result($result_stat,0,'assig') + 0;
-    $plan = $DB->result($result_stat,0,'plan') + 0;
-    $pend = $DB->result($result_stat,0,'pend') + 0;
-    $solve = $DB->result($result_stat,0,'solve') + 0;
-    $close = $DB->result($result_stat,0,'close') + 0;
+  
 
 
 	if($satisfacao != '' || $satisfacao > 0) {

@@ -18,7 +18,7 @@ if(!empty($_POST['submit']))
 else {
     $data_ini = date("Y-m-01");
     $data_fin = date("Y-m-d");
-}
+    }
 
 if(!isset($_POST["sel_loc"])) {
 	$id_loc = $_GET["sel_loc"];
@@ -435,7 +435,7 @@ if($con == "1") {
 		</tr>
 	</table>
 
-	<table style='font-size: 16px; font-weight:bold; width: 50%;' border=0>
+	<table style='font-size: 16px; font-weight:bold; width: 50%;' border=0>	
 		<tr><td><span style='color: #000;'>". __('Total cost').":  </span><b>". number_format($total_cost, 2, ',', ' ') ." </b></td></tr>	 
 		<tr><td>&nbsp;</td></tr>
 		<tr><td>&nbsp;</td></tr>

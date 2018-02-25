@@ -18,7 +18,7 @@ if(!empty($_POST['submit']))
 else {	
 	$data_ini = date("Y-01-01");
 	$data_fin = date("Y-m-d");	
-	}  
+}  
 
 # entity
 $sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
@@ -102,7 +102,7 @@ else {
 				<div id="titulo_rel"> 
 					<?php echo __('Tickets', 'dashboard') .'  '. __('by SLA', 'dashboard') ?> - <?php echo __('Time to resolve'); ?> 
 				</div>				
-				<div id="datas-tec" class="col-md-12 col-sm-12 fluid" >			 
+				<div id="datas-tec" class="col-md-12 fluid" >			 
 				<form id="form1" name="form1" class="form_rel" method="post" action="rel_sltsrs.php?con=1" style="margin-left: 37%;"> 
 					<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
 						<tr>
@@ -226,7 +226,7 @@ $conta_cons = $DB->numrows($result_sla);
 
 if($conta_cons > 0) {
 			
-echo "<div class='well info_box fluid col-md-12 col-sm-12 report' style='margin-left: -1px;'>";		
+echo "<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>";		
 echo "							
 			<table id='sla' class='display'  style='font-size: 12px; font-weight:bold;' cellpadding = 2px>
 				<thead>
@@ -431,7 +431,7 @@ echo "
 			else {
 				
 			echo "
-				<div id='nada_rel' class='well info_box fluid col-md-12 col-sm-12'>
+				<div id='nada_rel' class='well info_box fluid col-md-12'>
 				<table class='table' style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
 				<tr><td style='vertical-align:middle; text-align:center;'> <span style='color: #000;'>" . __('No ticket found', 'dashboard') . "</td></tr>
 				<tr></tr>

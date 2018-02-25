@@ -18,7 +18,7 @@ if(!empty($_POST['submit']))
 else {
 	$data_ini = date("Y-m-01");
 	$data_fin = date("Y-m-d");
-}
+	}
 
 # entity
 $sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
@@ -85,7 +85,7 @@ else {
 	<style type="text/css">
 		select { width: 60px; }
 		table.dataTable { empty-cells: show; }
-	    	a:link, a:visited, a:active { text-decoration: none;}			
+	    a:link, a:visited, a:active { text-decoration: none;}			
 		a:hover {color: #000099;}
 		.carregando {display: none;}
 		.sel_fab .sel_mod {display: block;}
@@ -105,7 +105,7 @@ else {
 <a href="../index.php"><i class="fa fa-home home-rel" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 
 	<div id="titulo_rel"> <?php echo __('Assets') ?> </div>
-		<div id="datas-tec" class="col-md-12 col-sm-12 fluid" >
+		<div id="datas-tec" class="col-md-12 fluid" >
 		<form id="form1" name="form1" class="form_rel" method="post" action="rel_assets.php?con=1" style="margin-left: 26%;">
 			<table border="0" cellspacing="0" cellpadding="10" bgcolor="#efefef" class="tab_tickets">
 			<tr>
@@ -401,7 +401,9 @@ if($id_fab != '' && $id_mod != '') {
 
 if($consulta > 0) {
 
+
 //listar chamados
+
 echo "
 
 <div class='well info_box fluid col-md-12 report-lg' style='margin-left: -1px;'>
@@ -610,7 +612,7 @@ echo "</div><br>";
 else {
 
 echo "
-	<div id='nada_rel' class='well info_box fluid col-md-12 col-sm-12'>
+	<div id='nada_rel' class='well info_box fluid col-md-12'>
 	<table class='table' style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
 	<tr><td style='vertical-align:middle; text-align:center;'> <span style='color: #000;'>" . __('No ticket found', 'dashboard') . "</td></tr>
 	<tr></tr>

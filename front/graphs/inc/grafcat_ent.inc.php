@@ -37,6 +37,7 @@ $soma4 = array_sum($arr_grf4);
 $grf_3 = json_encode($grf4);
 $quant_2a = implode(',',$quant4);
 
+
 echo "
 <script type='text/javascript'>
 

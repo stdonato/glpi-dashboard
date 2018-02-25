@@ -48,7 +48,7 @@ else {
 
 <html>
 <head>
-<title> GLPI - <?php echo __('Tickets','dashboard') .'  '. __('by Group','dashboard').'s'; ?> </title>
+<title> GLPI - <?php echo __('Backlog','dashboard') .'  '. __('by Group','dashboard').'s'; ?> </title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
@@ -101,9 +101,9 @@ else {
 	<div id="pad-wrapper" >
 		<div id="head-rel" class="fluid">
 			<a href="../index.php"><i class="fa fa-home home-rel" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
-				<div id="titulo_rel" > <?php echo __('Tickets','dashboard') .'  '. __('by Group','dashboard').'s'; ?> </div>
-					<div id="datas-tec" class="span12 fluid" > 
-					<form id="form1" name="form1" class="form_rel" method="post" action="rel_grupos.php?con=1"  style="margin-left: 37%;"> 
+				<div id="titulo_rel" > <?php echo __('Backlog','dashboard') .'  '. __('by Group','dashboard').'s'; ?> </div>
+					<div id="datas-tec" class="col-md-12 col-sm-12 fluid" > 
+					<form id="form1" name="form1" class="form_rel" method="post" action="rel_grupos_backlog.php?con=1"  style="margin-left: 37%;"> 
 					
 						<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef">
 						    		<tr>
@@ -114,24 +114,24 @@ else {
 										$url2 = $arr_url[0];
 										
 										echo'
-												<table>
-													<tr>
-														<td>
-														   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-														    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >		    	
-														    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
-													    	</div>
-														</td>
-														<td>&nbsp;</td>
-														<td>
-													   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-														    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >		    	
-														    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
-													    	</div>
-														</td>
-														<td>&nbsp;</td>
-													</tr>
-												</table> ';
+											<table>
+												<tr>
+													<td>
+													   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+													    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >		    	
+													    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
+												    	</div>
+													</td>
+													<td>&nbsp;</td>
+													<td>
+												   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+													    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >		    	
+													    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
+												    	</div>
+													</td>
+													<td>&nbsp;</td>
+												</tr>
+											</table> ';
 										?>
 										
 										<script language="Javascript">	
@@ -154,7 +154,7 @@ else {
 					   		 </table>	
 					<?php Html::closeForm(); ?>
 					<!-- </form> -->
-					</div>
+				</div>
 		</div>
 
 <?php
@@ -166,7 +166,7 @@ if(isset($_GET['con'])) {
 
 	if($con == "1") {
 	
-		if(!isset($_REQUEST['date1']))
+		if(!isset($_POST['date1']))
 		{	
 			$data_ini2 = $data_ini;
 			$data_fin2 = $data_fin; 
@@ -197,7 +197,7 @@ if(isset($_GET['con'])) {
 		$actors_tec = "('2')";
 		$actors_all = "('1','2','3')";
 		
-		if(isset($_GET['actor'])) {
+/*		if(isset($_GET['actor'])) {
 		
 		    if($_GET['actor'] == "req") {
 		      $actors = $actors_req;
@@ -211,8 +211,9 @@ if(isset($_GET['con'])) {
 		}
 		else {
 		    $actors = $actors_all;
-		}
+		}*/
 
+		$actors = $actors_tec;
 				
 		//select groups with tickets
 		$sql_tec = 
@@ -231,43 +232,84 @@ if(isset($_GET['con'])) {
 		$conta_cons = $DB->numrows($result_tec);
 				
 		echo "<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>";
-		echo "
+/*		echo "
 		<table class='col-md-12 right' align='right' style='margin-bottom:20px;'>
 				<tr>			
 					<td> 
 						". __('Actor')." : &nbsp;
-						<button class='btn btn-primary btn-sm' type='button' name='requerente' value='Requerentes' onclick='location.href=\"rel_grupos.php?con=1&actor=req&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Requester', 'dashboard') ." </button>
-						<button class='btn btn-primary btn-sm' type='button' name='tecnico' value='Técnicos' onclick='location.href=\"rel_grupos.php?con=1&actor=tec&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Technician', 'dashboard')." </button>
-						<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_grupos.php?con=1&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>				
+						<button class='btn btn-primary btn-sm' type='button' name='requerente' value='Requerentes' onclick='location.href=\"rel_grupos_backlog.php?con=1&actor=req&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Requester', 'dashboard') ." </button>
+						<button class='btn btn-primary btn-sm' type='button' name='tecnico' value='Técnicos' onclick='location.href=\"rel_grupos_backlog.php?con=1&actor=tec&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Technician', 'dashboard')." </button>
+						<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_grupos_backlog.php?con=1&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>				
 					</td>
 				</tr>
-		</table> ";
+		</table> ";*/
 		
 		echo "
 			<table id='tec' class='display' style='font-size: 13px; font-weight:bold;' cellpadding = 2px >
 				<thead>
 					<tr>
-						<th style='text-align:center; cursor:pointer;'> ". _n('Group','Groups',2) ." </th>
+						<th style='text-align:center; cursor:pointer;'> ". _n('Group','Groups',1) ." </th>
 						<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Tickets')." </th>
-						<th style='text-align:center; cursor:pointer;'> ". __('Opened','dashboard') ."</th>
-						<th style='text-align:center; cursor:pointer;'> ". __('Solved','dashboard') ."</th>	
 						<th style='text-align:center; cursor:pointer;'> ". __('Closed','dashboard') ."</th>									
-						<th style='text-align:center; '> % ". __('Closed','dashboard') ."</th> ";
+						<th style='text-align:center; cursor:pointer;'> % ". __('Closed','dashboard') ."</th>							
+						<th style='text-align:center; '> ". __('Backlog','dashboard') ."</th> ";
 		
 						echo "</tr>
 				</thead>
-				<!--<tfoot>
-		         <tr>
-		             <th colspan='1' style='text-align:right'>Total:</th>
-		             <th></th>
-		         </tr>
-		     </tfoot> -->
 			<tbody>";
 			
 		
-		while($id_grp = $DB->fetch_assoc($result_tec)) {	
-		
-			//tickets
+//		while($id_grp = $DB->fetch_assoc($result_tec)) {					
+			
+/*			//chamados abertos
+			$sql_ab = "SELECT count( glpi_tickets.id ) AS total, glpi_groups_tickets.groups_id AS id
+			FROM glpi_groups_tickets, glpi_tickets
+			WHERE glpi_tickets.id = glpi_groups_tickets.tickets_id
+			AND glpi_groups_tickets.tickets_id = glpi_tickets.id
+			AND glpi_tickets.is_deleted = 0
+			AND glpi_tickets.status NOT IN ".$status_closed."
+			AND glpi_groups_tickets.groups_id = ".$id_grp['id']."
+			AND glpi_tickets.date ".$datas2."
+			". $entidade ."  ";
+			
+			$result_ab = $DB->query($sql_ab) or die ("erro_ab");
+			$data_ab = $DB->fetch_assoc($result_ab);
+			
+			$abertos = $data_ab['total'];
+		*/	
+			
+/*			//chamados solucionados
+			$sql_sol = "SELECT count( glpi_tickets.id ) AS total, glpi_groups_tickets.groups_id AS id
+			FROM glpi_groups_tickets, glpi_tickets
+			WHERE glpi_tickets.id = glpi_groups_tickets.tickets_id
+			AND glpi_groups_tickets.tickets_id = glpi_tickets.id
+			AND glpi_tickets.is_deleted = 0
+			AND glpi_tickets.status = 5
+			AND glpi_groups_tickets.groups_id = ".$id_grp['id']."
+			AND glpi_tickets.date ".$datas2."
+			". $entidade ." " ;
+			
+			$result_sol = $DB->query($sql_sol) or die ("erro_ab");
+			$data_sol = $DB->fetch_assoc($result_sol);
+			
+			$solucionados = $data_sol['total'];
+			
+			SELECT DISTINCT DATE_FORMAT(glpi_tickets.date, '%b-%d') as day_l,  COUNT(glpi_tickets.id) as nb, DATE_FORMAT(glpi_tickets.date, '%Y-%m-%d') as day
+			FROM glpi_tickets, glpi_groups_tickets
+			WHERE glpi_tickets.is_deleted = '0'
+			AND DATE_FORMAT(glpi_tickets.date, '%Y-%m-%d' ) = '".$row_result['day']."'
+			AND glpi_tickets.id = glpi_groups_tickets.tickets_id
+			AND glpi_groups_tickets.groups_id = ".$id_grp."
+			AND glpi_tickets.date ".$datas."
+			". $entidade_age ."
+			GROUP BY day
+			ORDER BY day ";			
+			
+			
+			*/
+		while($id_grp = $DB->fetch_assoc($result_tec)) {
+			
+		//tickets
 			$sql_cham = "SELECT count( glpi_tickets.id ) AS total, glpi_groups_tickets.groups_id AS id
 			FROM glpi_groups_tickets, glpi_tickets
 			WHERE glpi_tickets.id = glpi_groups_tickets.tickets_id
@@ -299,24 +341,6 @@ if(isset($_GET['con'])) {
 			
 			$abertos = $data_ab['total'];
 			
-			
-			//chamados solucionados
-			$sql_sol = "SELECT count( glpi_tickets.id ) AS total, glpi_groups_tickets.groups_id AS id
-			FROM glpi_groups_tickets, glpi_tickets
-			WHERE glpi_tickets.id = glpi_groups_tickets.tickets_id
-			AND glpi_groups_tickets.tickets_id = glpi_tickets.id
-			AND glpi_tickets.is_deleted = 0
-			AND glpi_tickets.status = 5
-			AND glpi_groups_tickets.groups_id = ".$id_grp['id']."
-			AND glpi_tickets.date ".$datas2."
-			". $entidade ." " ;
-			
-			$result_sol = $DB->query($sql_sol) or die ("erro_ab");
-			$data_sol = $DB->fetch_assoc($result_sol);
-			
-			$solucionados = $data_sol['total'];
-			
-			
 			//chamados fechados
 			$sql_clo = "SELECT count( glpi_tickets.id ) AS total, glpi_groups_tickets.groups_id AS id
 			FROM glpi_groups_tickets, glpi_tickets
@@ -333,21 +357,19 @@ if(isset($_GET['con'])) {
 			
 			$fechados = $data_clo['total'];
 			
-		
+//var_dump($sql_cham);			
 			//solved
 			//$solucionados = round(($fechados*100)/$chamados,1);
 			
-			//opened		
-			$cont_abertos = ($chamados - $fechados);
-			if($cont_abertos < 0) { $abertos = 0; }
-			else { $abertos = $cont_abertos; }
+			//opened
+			$abertos = ($chamados - $fechados);
 			
 			//barra de porcentagem
 			if($conta_cons > 0) {
-						
+				
 				//porcentagem
-				$perc = round(($fechados*100)/$chamados,0);
-				$barra = $perc;
+				$perc = round(($abertos*100)/$chamados,0);
+				$barra = 100 - $perc;
 				$width = $barra;
 				
 				// cor barra
@@ -357,29 +379,33 @@ if(isset($_GET['con'])) {
 				if($barra > 0 and $barra <= 50) { $cor = "progress-bar-danger";  }
 				if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0;  }
 			
-				}
-			
+			}			
 			else { $barra = 0;}
-		
+			
+/*			//backlog color
+			//$back_cor = '';
+			if($abertos >= 1) { $back_cor = "label label-danger";}
+			if($abertos = 0) { $back_cor = "label label-primary";}
+			if($abertos <= -1) { $back_cor = "label label-success";}
+			//else { $back_cor = "label label-primary";}*/
+					
 				echo "
 				<tr>
 					<td style='vertical-align:middle; text-align:left;'><a href='rel_tecnicos.php?con=1&sel_group=". $id_grp['id'] ."&date1=".$data_ini."&date2=".$data_fin."' target='_blank' >" . $id_grp['name'] .' ('.$id_grp['id'].")</a></td>
 					<td style='vertical-align:middle; text-align:center;'><a href='rel_grupo.php?con=1&sel_group=". $id_grp['id'] ."&date1=".$data_ini."&date2=".$data_fin."' target='_blank' >" . $chamados ."</a></td>
-					<td style='vertical-align:middle; text-align:center;'> ". $abertos ." </td>
-					<td style='vertical-align:middle; text-align:center;'> ". $solucionados ." </td>
-					<td style='vertical-align:middle; text-align:center;'> ". $fechados ." </td>			
+					<td style='vertical-align:middle; text-align:center;'> ". $fechados ." </td>	
 					<td style='vertical-align:middle; text-align:center;'> 
 						<div class='progress' style='margin-top: 5px; margin-bottom: 5px;'>
 							<div class='progress-bar ". $cor ." progress-bar-striped active' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$width."%;'>
 					 			".$barra." % 	
 					 		</div>		
 						</div>			
-				   </td>";	
+				   </td>		
+					<td style='vertical-align:middle; text-align:center;'><span class='".$back_cor."'>&nbsp;&nbsp;&nbsp;". $abertos ."&nbsp;&nbsp;&nbsp;</span></td>";	
 						
 			echo "</tr>";
 				
-		//fim while1
-		}	
+		} //fim while1	
 		
 		echo "</tbody>
 				</table>
@@ -419,13 +445,13 @@ var table = $('#tec').dataTable({
 		                 extend: "print",
 		                 autoPrint: true,
 		                 text: "<?php echo __('All','dashboard'); ?>",
-		                 message: "<div id='print' class='info_box fluid span12' style='margin-bottom:12px; margin-left: -1px;'></div>"		     
+		                 message: "<div id='print' class='info_box fluid col-md-12 col-sm-12' style='margin-bottom:12px; margin-left: -1px;'></div>"		     
 		                }, 
 							  {               
 		                 extend: "print",
 		                 autoPrint: true,
 		                 text: "<?php echo __('Selected','dashboard'); ?>",
-		                 message: "<div id='print' class='info_box fluid span12' style='margin-bottom:12px; margin-left: -1px;'></div>",
+		                 message: "<div id='print' class='info_box fluid col-md-12 col-sm-12' style='margin-bottom:12px; margin-left: -1px;'></div>",
 		                 exportOptions: {
 		                    modifier: {
 		                        selected: true

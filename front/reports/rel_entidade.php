@@ -425,6 +425,7 @@ else {
 					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; max-width:120px;'> ".__('Requester')." </th>
 					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Technician')." </th>
 					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; max-width:120px;'> ".__('Category')." </th>
+					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Source')." </th>
 					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Assets')." </th>
 					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Opened', 'dashboard')."</th>
 					<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Closed', 'dashboard')." </th>
@@ -497,6 +498,17 @@ else {
 	
 					$result_ass = $DB->query($sql_ass);
 				}
+				
+				//ticket source
+				$sql_source = "
+				SELECT glpi_requesttypes.name AS source
+				FROM `glpi_tickets` , glpi_requesttypes
+				WHERE glpi_tickets.is_deleted =0
+				AND glpi_tickets.id = ". $row['id'] ."
+				AND glpi_tickets.`requesttypes_id` = glpi_requesttypes.id";
+				
+				$result_source = $DB->query($sql_source);
+				$row_source = $DB->fetch_assoc($result_source);
 
 
 		if(isset($result_ass) AND $result_ass != '') {
@@ -512,6 +524,7 @@ else {
 			<td style='vertical-align:middle;'> ". $row_user['name'] ." ". $row_user['sname'] ." </td>
 			<td style='vertical-align:middle;'> ". $row_tec['name'] ." ". $row_tec['sname'] ." </td>
 			<td style='vertical-align:middle;'> ". $row_cat['completename'] ." </td>
+			<td style='vertical-align:middle;'> ". $row_source['source'] ." </td>
 			<td style='vertical-align:middle;'> <a href=". $url_type.$row_item['id'] ." target=_blank >". $row_item['name'] ." </a></td>
 			<td style='vertical-align:middle;'> ". conv_data_hora($row['date']) ." </td>
 			<td style='vertical-align:middle;'> ". conv_data_hora($row['closedate']) ." </td>
@@ -538,10 +551,10 @@ else {
 		        filter: false,
 		        pagingType: "full_numbers",
 		        deferRender: true,
-			fixedHeader: true,
-       		 	//"scrollY":   "90vh",
+				  fixedHeader: true,
+       		 //"scrollY":   "90vh",
         		 //"scrollCollapse": true,
-		        sorting: [[0,'desc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc'],[7,'desc'],[8,'desc'],[9,'desc'],[10,'desc']],
+		        sorting: [[0,'desc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc'],[7,'desc'],[8,'desc'],[9,'desc'],[10,'desc'],[11,'desc']],
 				  displayLength: 25,
 		        lengthMenu: [[25, 50, 75, 100], [25, 50, 75, 100]],
 		        //select: { style: "multi" },

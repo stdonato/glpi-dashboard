@@ -4,7 +4,7 @@ function plugin_dashboard_install(){
 	
 	global $DB, $LANG;
 	
-	if (! TableExists("glpi_plugin_dashboard_count")) {
+	if (! $DB->TableExists("glpi_plugin_dashboard_count")) {
         $query = "CREATE TABLE `glpi_plugin_dashboard_count` 
         (`type` INTEGER , `id` INTEGER, `quant` INTEGER, PRIMARY KEY (`id`))
 						ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; ";
@@ -16,7 +16,7 @@ function plugin_dashboard_install(){
      } 	
     
 //map
-   if (! TableExists("glpi_plugin_dashboard_map")) {
+   if (! $DB->TableExists("glpi_plugin_dashboard_map")) {
 		$query_map = "CREATE TABLE IF NOT EXISTS `glpi_plugin_dashboard_map` (
 	  `id` int(4) NOT NULL AUTO_INCREMENT,
 	  `entities_id` int(4) NOT NULL,
@@ -33,7 +33,7 @@ function plugin_dashboard_install(){
 	
 	//configs
 	
-	if (! TableExists("glpi_plugin_dashboard_config")) {
+	if (! $DB->TableExists("glpi_plugin_dashboard_config")) {
 		
 		$query_conf = "CREATE TABLE IF NOT EXISTS `glpi_plugin_dashboard_config` (
 	  `id` int(4) NOT NULL AUTO_INCREMENT,
@@ -50,14 +50,14 @@ function plugin_dashboard_install(){
 	}	
 
 
-	if (TableExists("glpi_plugin_dashboard_count")) {
+	if ($DB->TableExists("glpi_plugin_dashboard_count")) {
 		
 		$query_alt = "ALTER TABLE `glpi_plugin_dashboard_count` DROP PRIMARY KEY, ADD PRIMARY KEY(`type`,`id`); ";		
 		$DB->query($query_alt) or die("error update table glpi_plugin_dashboard_count primary key " . $DB->error());	
 	}
 	
 	
-	if (TableExists("glpi_plugin_dashboard_config")) {
+	if ($DB->TableExists("glpi_plugin_dashboard_config")) {
 		
 		$query_alt = "ALTER TABLE glpi_plugin_dashboard_config MODIFY value varchar(125); ";				
 		$DB->query($query_alt) or die("error alter table glpi_plugin_dashboard_config value size" . $DB->error());
@@ -72,7 +72,7 @@ function plugin_dashboard_install(){
 		}				
 	}
 	
-	if (TableExists("glpi_plugin_dashboard_map")) {	
+	if ($DB->TableExists("glpi_plugin_dashboard_map")) {	
 		$query_alt = "ALTER TABLE `glpi_plugin_dashboard_map` ADD UNIQUE (`location`); ";		
 		$DB->query($query_alt) or die("error update table glpi_plugin_dashboard_map primary key " . $DB->error());	
 	}	

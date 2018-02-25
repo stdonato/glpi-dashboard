@@ -135,6 +135,19 @@ if($sel_ent == '') {
 	}
 }
 
+
+if($_SESSION['glpiactive_entity'] != '') {
+	
+	$sql_e = "SELECT name FROM glpi_entities WHERE id = ".$_SESSION['glpiactive_entity']."";
+	$result_e = $DB->query($sql_e);
+	$actent = $DB->result($result_e,0,'name');
+	
+}
+
+else {
+	$actent = 'GLPI '.$CFG_GLPI['version'];
+}	
+
 //chamados ano
 $sql_ano =	"SELECT COUNT(glpi_tickets.id) as total        
       FROM glpi_tickets
@@ -174,10 +187,10 @@ $resultm = $DB->query($querym) or die('erro');
 
 $arr_grfm = array();
 while ($row_result = $DB->fetch_assoc($resultm))		
-	{ 
-		$v_row_result = $row_result['month_l'];
-		$arr_grfm[$v_row_result] = $row_result['nb'];			
-	} 
+{ 
+	$v_row_result = $row_result['month_l'];
+	$arr_grfm[$v_row_result] = $row_result['nb'];			
+} 
 	
 $grfm = array_keys($arr_grfm) ;
 $quantm = array_values($arr_grfm) ;
@@ -199,7 +212,6 @@ $sql_hoje =	"SELECT COUNT(glpi_tickets.id) as total
 
 $result_hoje = $DB->query($sql_hoje);
 $today_tickets = $DB->result($result_hoje,0,'total');
-//((V2-V1)/V1 × 100)
 
 //Ticktes by day
 $queryd = "
@@ -269,7 +281,6 @@ for($i=0; $i < 7; $i++) {
 	$arr_days[] += $till[$i];
 }
 
-//$res_days = implode(',',$arr_days);
 $res_days = 0;
 
 // SLA time

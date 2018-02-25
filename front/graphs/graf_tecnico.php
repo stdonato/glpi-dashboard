@@ -30,7 +30,6 @@ global $DB;
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
-<!--  <meta http-equiv="refresh" content= "120"/> -->
 
 <link rel="icon" href="../img/dash.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="../img/dash.ico" type="image/x-icon" />
@@ -50,7 +49,6 @@ global $DB;
     
 <link href="../css/datepicker.css" rel="stylesheet" type="text/css">
 
-<!-- <link href="../css/style-dash.css" rel="stylesheet" type="text/css" /> -->
 <?php echo '<link rel="stylesheet" type="text/css" href="../css/style-'.$_SESSION['style'].'">';  ?>
 <?php echo '<script src="../js/themes/'.$_SESSION['charts_colors'].'"></script>'; ?>
 

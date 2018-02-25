@@ -384,7 +384,7 @@ $content .= "
 			 </tr>				
 			 <tr>
 			 <td>". __('Tickets','dashboard')." ". __('By day')." - ". __('Average')."</td>
-			 <td align='right'>".round($total_cham / $numdias,1)."</td>
+			 <td align='right'>".round($total_cham / $numdias,0)."</td>
 			 </tr>			
 			 <tr>
 			 <td>". __('Average time to closure')."</td>

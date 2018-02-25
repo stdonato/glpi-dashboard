@@ -274,19 +274,7 @@ $sql_ano =	"SELECT COUNT(glpi_tickets.id) as total
 
 $result_ano = $DB->query($sql_ano);
 $total_ano = $DB->fetch_assoc($result_ano);
-
-$sql_ano_ab =	"SELECT COUNT(glpi_tickets.id) as total        
-      FROM glpi_tickets
-      LEFT JOIN glpi_entities ON glpi_tickets.entities_id = glpi_entities.id
-      WHERE glpi_tickets.is_deleted = '0' 
-      AND glpi_tickets.status IN (5,6)
-      AND DATE_FORMAT( glpi_tickets.date, '%Y' ) IN (".$years.") 
-      ".$entidade." ";
-
-$result_ano_ab = $DB->query($sql_ano_ab);
-$total_ano_ab = $DB->fetch_assoc($result_ano_ab);
- 
-   
+      
 //chamados mes
 $sql_mes =	"SELECT COUNT(glpi_tickets.id) as total        
       FROM glpi_tickets
@@ -362,9 +350,9 @@ $total_users = $DB->fetch_assoc($result_users);
 					  </div>																		
             								
 					  <div class="col-xs-2 col-xs-15">
-						 <div class="dashbox shad panel panel-default db-purple">
+						 <div class="dashbox shad panel panel-default db-yellow">
 							<div class="panel-body">
-							   <div class="panel-left purple purplebg">
+							   <div class="panel-left yellow yellowbg">
 									<i class="fa fa-plus-square fa-3x"></i>
 							   </div>
 							   <div class="panel-right right">
@@ -375,16 +363,15 @@ $total_users = $DB->fetch_assoc($result_users);
 							</div>
 						 </div>
 					  </div>
-					  
 					  <div class="col-xs-2 col-xs-15">
-						 <div class="dashbox shad panel panel-default db-dred">
+						 <div class="dashbox shad panel panel-default db-orange">
 							<div class="panel-body">
-							   <div class="panel-left dredbg">
-									<i class="fa fa-tag fa-3x"></i>
+							   <div class="panel-left green orangebg">
+									<i class="fa fa-users fa-3x"></i>
 							   </div>
 					   		<div class="panel-right right">
 									<div id="odometer4" class="odometer" style="font-size: 25px;">   </div><p></p>
-               				<span class="chamado"><?php echo __('Backlog','dashboard'); ?></span><br>                        				
+               				<span class="chamado"><?php echo __('users','dashboard'); ?></span><br>                        				
 							   </div>
 							</div>
 						 </div>
@@ -393,11 +380,11 @@ $total_users = $DB->fetch_assoc($result_users);
 					  <div class="col-xs-2 col-xs-15">
 						 <div class="dashbox shad panel panel-default db-orange">
 							<div class="panel-body">
-							   <div class="panel-left orangebg">
+							   <div class="panel-left green orangebg">
 									<i class="fa fa-users fa-3x"></i>
 							   </div>
 					   		<div class="panel-right right">
-									<div id="odometer5" class="odometer" style="font-size: 25px;">   </div><p></p>
+									<div id="odometer4" class="odometer" style="font-size: 25px;">   </div><p></p>
                				<span class="chamado"><?php echo __('users','dashboard'); ?></span><br>                        				
 							   </div>
 							</div>
@@ -409,17 +396,17 @@ $total_users = $DB->fetch_assoc($result_users);
 <!--<div class="container-fluid">  -->
       
 <script type="text/javascript" >
-	window.odometerOptions = {
-	   format: '( ddd).dd'
-	};
-	
-	setTimeout(function(){
-	    odometer1.innerHTML = <?php echo $total_hoje['total']; ?>;
-	    odometer2.innerHTML = <?php echo $total_mes['total']; ?>;
-	    odometer3.innerHTML = <?php echo $total_ano['total']; ?>;
-	    odometer4.innerHTML = <?php echo ($total_ano['total']-$total_ano_ab['total']); ?>;
-	    odometer5.innerHTML = <?php echo $total_users['total']; ?>;
-	}, 1000);
+window.odometerOptions = {
+   format: '( ddd).dd'
+};
+
+setTimeout(function(){
+    odometer1.innerHTML = <?php echo $total_hoje['total']; ?>;
+    odometer2.innerHTML = <?php echo $total_mes['total']; ?>;
+    odometer3.innerHTML = <?php echo $total_ano['total']; ?>;
+    odometer4.innerHTML = <?php echo $total_users['total']; ?>;
+}, 1000);
+
 </script> 
 
 <div id='content-main' class="container-fluid1 align col-md-12 row" style="">  
