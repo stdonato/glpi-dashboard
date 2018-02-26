@@ -191,29 +191,6 @@ if(isset($_GET['con'])) {
 		$status_closed = "('5','6')";	
 		$status_all = "('2','1','3','4','5','6')";
 
-		//actors - 1 - req, 2 - tec, 3 - observer
-/*		$actors = "";
-		$actors_req = "('1')";
-		$actors_tec = "('2')";
-		$actors_all = "('1','2','3')";
-		
-		if(isset($_GET['actor'])) {
-		
-		    if($_GET['actor'] == "req") {
-		      $actors = $actors_req;
-		    }
-		    elseif($_GET['actor'] == "tec") {
-		      $actors = $actors_tec;
-		    }
-		    else {
-		    	$actors = $actors_all;
-		    }
-		}
-		else {
-		    $actors = $actors_all;
-		}
-
-			*/	
 		//select entities with tickets
 		$sql_tec = "
 		SELECT count(glpi_tickets.id) AS total, glpi_entities.id AS id, glpi_entities.name AS name, glpi_entities.completename AS cname
@@ -229,17 +206,6 @@ if(isset($_GET['con'])) {
 		$conta_cons = $DB->numrows($result_tec);
 				
 		echo "<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>";
-/*		echo "
-		<table class='col-md-12 right' align='right' style='margin-bottom:20px;'>
-				<tr>			
-					<td> 
-						". __('Actor')." : &nbsp;
-						<button class='btn btn-primary btn-sm' type='button' name='requerente' value='Requerentes' onclick='location.href=\"rel_entidades.php?con=1&actor=req&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Requester', 'dashboard') ." </button>
-						<button class='btn btn-primary btn-sm' type='button' name='tecnico' value='Técnicos' onclick='location.href=\"rel_entidades.php?con=1&actor=tec&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Technician', 'dashboard')." </button>
-						<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_entidades.php?con=1&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>				
-					</td>
-				</tr>
-		</table> ";*/
 		
 		echo "
 			<table id='tec' class='display' style='font-size: 13px; font-weight:bold;' cellpadding = 2px >
@@ -255,12 +221,6 @@ if(isset($_GET['con'])) {
 		
 						echo "</tr>
 				</thead>
-				<!--<tfoot>
-		         <tr>
-		             <th colspan='1' style='text-align:right'>Total:</th>
-		             <th></th>
-		         </tr>
-		     </tfoot> -->
 			<tbody>";
 			
 		
@@ -386,7 +346,7 @@ if(isset($_GET['con'])) {
 		//fim $con
 		}
 }
-var_dump($sql_tec);
+
 ?>
 
 <script type="text/javascript" charset="utf-8">
@@ -402,7 +362,7 @@ var table = $('#tec').dataTable({
         dom: 'Blfrtip',
         filter: false,        
         pagingType: "full_numbers",
-        sorting: [[1,'desc'],[0,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc']],
+        sorting: [[1,'desc'],[0,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc']],
 		  displayLength: 25,
         lengthMenu: [[25, 50, 75, 100], [25, 50, 75, 100]],        
         buttons: [

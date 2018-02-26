@@ -402,7 +402,7 @@ var table = $('#tec').dataTable({
         dom: 'Blfrtip',
         filter: false,        
         pagingType: "full_numbers",
-        sorting: [[1,'desc'],[0,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc']],
+        sorting: [[1,'desc'],[0,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc']],
 		  displayLength: 25,
         lengthMenu: [[25, 50, 75, 100], [25, 50, 75, 100]],        
         buttons: [
