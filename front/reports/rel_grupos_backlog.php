@@ -361,13 +361,13 @@ if(isset($_GET['con'])) {
 			//$solucionados = round(($fechados*100)/$chamados,1);
 			
 			//opened
-			$abertos = ($chamados - $fechados);
+			$backlog = ($chamados - $fechados);
 			
 			//barra de porcentagem
 			if($conta_cons > 0) {
 				
 				//porcentagem
-				$perc = round(($abertos*100)/$chamados,0);
+				$perc = round(($backlog*100)/$chamados,0);
 				$barra = 100 - $perc;
 				$width = $barra;
 				
@@ -400,7 +400,7 @@ if(isset($_GET['con'])) {
 					 		</div>		
 						</div>			
 				   </td>		
-					<td style='vertical-align:middle; text-align:center;'><span class='".$back_cor."'>&nbsp;&nbsp;&nbsp;". $abertos ."&nbsp;&nbsp;&nbsp;</span></td>";	
+					<td style='vertical-align:middle; text-align:center;'><span class='".$back_cor."'>&nbsp;&nbsp;&nbsp;". $backlog ."&nbsp;&nbsp;&nbsp;</span></td>";	
 						
 			echo "</tr>";
 				

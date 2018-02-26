@@ -48,7 +48,7 @@ else {
 
 <html>
 <head>
-<title> GLPI - <?php echo __('Tickets','dashboard') .'  '. __('by Group','dashboard').'s'; ?> </title>
+<title> GLPI - <?php echo __('Tickets','dashboard') .'  '. __('by Entity','dashboard'); ?> </title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
@@ -101,9 +101,9 @@ else {
 	<div id="pad-wrapper" >
 		<div id="head-rel" class="fluid">
 			<a href="../index.php"><i class="fa fa-home home-rel" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
-				<div id="titulo_rel" > <?php echo __('Tickets','dashboard') .'  '. __('by Group','dashboard').'s'; ?> </div>
+				<div id="titulo_rel" > <?php echo __('Tickets','dashboard') .'  '. __('by Entity','dashboard'); ?> </div>
 					<div id="datas-tec" class="span12 fluid" > 
-					<form id="form1" name="form1" class="form_rel" method="post" action="rel_grupos.php?con=1"  style="margin-left: 37%;"> 
+					<form id="form1" name="form1" class="form_rel" method="post" action="rel_entidades.php?con=1"  style="margin-left: 37%;"> 
 					
 						<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef">
 						    		<tr>
@@ -114,24 +114,24 @@ else {
 										$url2 = $arr_url[0];
 										
 										echo'
-												<table>
-													<tr>
-														<td>
-														   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-														    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >		    	
-														    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
-													    	</div>
-														</td>
-														<td>&nbsp;</td>
-														<td>
-													   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-														    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >		    	
-														    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
-													    	</div>
-														</td>
-														<td>&nbsp;</td>
-													</tr>
-												</table> ';
+											<table>
+												<tr>
+													<td>
+													   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+													    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >		    	
+													    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
+												    	</div>
+													</td>
+													<td>&nbsp;</td>
+													<td>
+												   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+													    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >		    	
+													    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
+												    	</div>
+													</td>
+													<td>&nbsp;</td>
+												</tr>
+											</table> ';
 										?>
 										
 										<script language="Javascript">	
@@ -192,7 +192,7 @@ if(isset($_GET['con'])) {
 		$status_all = "('2','1','3','4','5','6')";
 
 		//actors - 1 - req, 2 - tec, 3 - observer
-		$actors = "";
+/*		$actors = "";
 		$actors_req = "('1')";
 		$actors_tec = "('2')";
 		$actors_all = "('1','2','3')";
@@ -213,64 +213,67 @@ if(isset($_GET['con'])) {
 		    $actors = $actors_all;
 		}
 
-				
-		//select groups with tickets
-		$sql_tec = 
-		"SELECT count(glpi_tickets.id) AS total, glpi_groups.name AS name, glpi_groups.id AS id
-		FROM `glpi_groups_tickets`, glpi_tickets, glpi_groups
-		WHERE glpi_groups_tickets.`groups_id` = glpi_groups.id
-		AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+			*/	
+		//select entities with tickets
+		$sql_tec = "
+		SELECT count(glpi_tickets.id) AS total, glpi_entities.id AS id, glpi_entities.name AS name, glpi_entities.completename AS cname
+		FROM glpi_entities, glpi_tickets
+		WHERE glpi_tickets.entities_id = glpi_entities.id
 		AND glpi_tickets.is_deleted = 0
-		AND glpi_tickets.date ".$datas2."
 		".$entidade."
-		AND glpi_groups_tickets.type IN ".$actors."
+		AND glpi_tickets.date ".$datas2."
 		GROUP BY name
-		ORDER BY total DESC ";			
+		ORDER BY total DESC";
 		
 		$result_tec = $DB->query($sql_tec);	
 		$conta_cons = $DB->numrows($result_tec);
 				
 		echo "<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>";
-		echo "
+/*		echo "
 		<table class='col-md-12 right' align='right' style='margin-bottom:20px;'>
 				<tr>			
 					<td> 
 						". __('Actor')." : &nbsp;
-						<button class='btn btn-primary btn-sm' type='button' name='requerente' value='Requerentes' onclick='location.href=\"rel_grupos.php?con=1&actor=req&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Requester', 'dashboard') ." </button>
-						<button class='btn btn-primary btn-sm' type='button' name='tecnico' value='Técnicos' onclick='location.href=\"rel_grupos.php?con=1&actor=tec&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Technician', 'dashboard')." </button>
-						<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_grupos.php?con=1&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>				
+						<button class='btn btn-primary btn-sm' type='button' name='requerente' value='Requerentes' onclick='location.href=\"rel_entidades.php?con=1&actor=req&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Requester', 'dashboard') ." </button>
+						<button class='btn btn-primary btn-sm' type='button' name='tecnico' value='Técnicos' onclick='location.href=\"rel_entidades.php?con=1&actor=tec&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Technician', 'dashboard')." </button>
+						<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_entidades.php?con=1&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>				
 					</td>
 				</tr>
-		</table> ";
+		</table> ";*/
 		
 		echo "
 			<table id='tec' class='display' style='font-size: 13px; font-weight:bold;' cellpadding = 2px >
 				<thead>
 					<tr>
-						<th style='text-align:center; cursor:pointer;'> ". _n('Group','Groups',2) ." </th>
+						<th style='text-align:center; cursor:pointer;'> ". _n('Entity','Entities',2) ." </th>
 						<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Tickets')." </th>
 						<th style='text-align:center; cursor:pointer;'> ". __('Opened','dashboard') ."</th>
 						<th style='text-align:center; cursor:pointer;'> ". __('Solved','dashboard') ."</th>	
 						<th style='text-align:center; cursor:pointer;'> ". __('Closed','dashboard') ."</th>									
-						<th style='text-align:center; '> % ". __('Closed','dashboard') ."</th> 
+						<th style='text-align:center; '> % ". __('Closed','dashboard') ."</th>
 						<th style='text-align:center; '>". __('Backlog','dashboard') ."</th> ";
 		
 						echo "</tr>
 				</thead>
+				<!--<tfoot>
+		         <tr>
+		             <th colspan='1' style='text-align:right'>Total:</th>
+		             <th></th>
+		         </tr>
+		     </tfoot> -->
 			<tbody>";
 			
 		
-		while($id_grp = $DB->fetch_assoc($result_tec)) {	
+		while($id_ent = $DB->fetch_assoc($result_tec)) {	
 		
 			//tickets
-			$sql_cham = "SELECT count( glpi_tickets.id ) AS total, glpi_groups_tickets.groups_id AS id
-			FROM glpi_groups_tickets, glpi_tickets
-			WHERE glpi_tickets.id = glpi_groups_tickets.tickets_id
-			AND glpi_groups_tickets.tickets_id = glpi_tickets.id
+			$sql_cham = "SELECT count(glpi_tickets.id) AS total, glpi_entities.name AS name, glpi_entities.completename AS cname
+			FROM glpi_entities, glpi_tickets
+			WHERE glpi_tickets.entities_id = glpi_entities.id
+			AND glpi_entities.id = ".$id_ent['id']."
 			AND glpi_tickets.is_deleted = 0
-			AND glpi_groups_tickets.groups_id = ".$id_grp['id']."
-			AND glpi_tickets.date ".$datas2."
-			". $entidade ." ";
+			".$entidade."
+			AND glpi_tickets.date ".$datas2." ";
 			
 			$result_cham = $DB->query($sql_cham) or die ("erro_cham");
 			$data_cham = $DB->fetch_assoc($result_cham);
@@ -279,15 +282,14 @@ if(isset($_GET['con'])) {
 			
 			
 			//chamados abertos
-			$sql_ab = "SELECT count( glpi_tickets.id ) AS total, glpi_groups_tickets.groups_id AS id
-			FROM glpi_groups_tickets, glpi_tickets
-			WHERE glpi_tickets.id = glpi_groups_tickets.tickets_id
-			AND glpi_groups_tickets.tickets_id = glpi_tickets.id
+			$sql_ab = "SELECT count(glpi_tickets.id) AS total, glpi_entities.name AS name, glpi_entities.completename AS cname
+			FROM glpi_entities, glpi_tickets
+			WHERE glpi_tickets.entities_id = glpi_entities.id
+			AND glpi_entities.id = ".$id_ent['id']."
 			AND glpi_tickets.is_deleted = 0
 			AND glpi_tickets.status NOT IN ".$status_closed."
-			AND glpi_groups_tickets.groups_id = ".$id_grp['id']."
-			AND glpi_tickets.date ".$datas2."
-			". $entidade ."  ";
+			".$entidade."
+			AND glpi_tickets.date ".$datas2." ";
 			
 			$result_ab = $DB->query($sql_ab) or die ("erro_ab");
 			$data_ab = $DB->fetch_assoc($result_ab);
@@ -296,15 +298,14 @@ if(isset($_GET['con'])) {
 			
 			
 			//chamados solucionados
-			$sql_sol = "SELECT count( glpi_tickets.id ) AS total, glpi_groups_tickets.groups_id AS id
-			FROM glpi_groups_tickets, glpi_tickets
-			WHERE glpi_tickets.id = glpi_groups_tickets.tickets_id
-			AND glpi_groups_tickets.tickets_id = glpi_tickets.id
+			$sql_sol = "SELECT count(glpi_tickets.id) AS total, glpi_entities.name AS name, glpi_entities.completename AS cname
+			FROM glpi_entities, glpi_tickets
+			WHERE glpi_tickets.entities_id = glpi_entities.id
+			AND glpi_entities.id = ".$id_ent['id']."
 			AND glpi_tickets.is_deleted = 0
 			AND glpi_tickets.status = 5
-			AND glpi_groups_tickets.groups_id = ".$id_grp['id']."
-			AND glpi_tickets.date ".$datas2."
-			". $entidade ." " ;
+			".$entidade."
+			AND glpi_tickets.solvedate ".$datas2." ";
 			
 			$result_sol = $DB->query($sql_sol) or die ("erro_ab");
 			$data_sol = $DB->fetch_assoc($result_sol);
@@ -313,15 +314,14 @@ if(isset($_GET['con'])) {
 			
 			
 			//chamados fechados
-			$sql_clo = "SELECT count( glpi_tickets.id ) AS total, glpi_groups_tickets.groups_id AS id
-			FROM glpi_groups_tickets, glpi_tickets
-			WHERE glpi_tickets.id = glpi_groups_tickets.tickets_id
-			AND glpi_groups_tickets.tickets_id = glpi_tickets.id
+			$sql_clo = "SELECT count(glpi_tickets.id) AS total, glpi_entities.name AS name, glpi_entities.completename AS cname
+			FROM glpi_entities, glpi_tickets
+			WHERE glpi_tickets.entities_id = glpi_entities.id
+			AND glpi_entities.id = ".$id_ent['id']."
 			AND glpi_tickets.is_deleted = 0
 			AND glpi_tickets.status = 6
-			AND glpi_groups_tickets.groups_id = ".$id_grp['id']."
-			AND glpi_tickets.closedate ".$datas2."
-			". $entidade ." " ;
+			".$entidade."
+			AND glpi_tickets.closedate ".$datas2." ";
 			
 			$result_clo = $DB->query($sql_clo) or die ("erro_ab");
 			$data_clo = $DB->fetch_assoc($result_clo);
@@ -336,7 +336,7 @@ if(isset($_GET['con'])) {
 			$cont_abertos = ($chamados - $fechados);
 			if($cont_abertos < 0) { $abertos = 0; }
 			else { $abertos = $cont_abertos; }
-			
+
 			//opened
 			$backlog = ($chamados - $fechados);
 			
@@ -361,8 +361,8 @@ if(isset($_GET['con'])) {
 		
 				echo "
 				<tr>
-					<td style='vertical-align:middle; text-align:left;'><a href='rel_tecnicos.php?con=1&sel_group=". $id_grp['id'] ."&date1=".$data_ini."&date2=".$data_fin."' target='_blank' >" . $id_grp['name'] .' ('.$id_grp['id'].")</a></td>
-					<td style='vertical-align:middle; text-align:center;'><a href='rel_grupo.php?con=1&sel_group=". $id_grp['id'] ."&date1=".$data_ini."&date2=".$data_fin."' target='_blank' >" . $chamados ."</a></td>
+					<td style='vertical-align:middle; text-align:left;'><a href='rel_entidade.php?con=1&sel_ent=". $id_ent['id'] ."&date1=".$data_ini."&date2=".$data_fin."' target='_blank' >" . $id_ent['name'] ."</a></td>
+					<td style='vertical-align:middle; text-align:center;'> ". $chamados ." </td>
 					<td style='vertical-align:middle; text-align:center;'> ". $abertos ." </td>
 					<td style='vertical-align:middle; text-align:center;'> ". $solucionados ." </td>
 					<td style='vertical-align:middle; text-align:center;'> ". $fechados ." </td>			
@@ -372,7 +372,7 @@ if(isset($_GET['con'])) {
 					 			".$barra." % 	
 					 		</div>		
 						</div>			
-				   </td>					
+				   </td>
 				   <td style='vertical-align:middle; text-align:center;'><span class='".$back_cor."'>&nbsp;&nbsp;&nbsp;". $backlog ."&nbsp;&nbsp;&nbsp;</span></td>";	
 						
 			echo "</tr>";
@@ -386,7 +386,7 @@ if(isset($_GET['con'])) {
 		//fim $con
 		}
 }
-
+var_dump($sql_tec);
 ?>
 
 <script type="text/javascript" charset="utf-8">
