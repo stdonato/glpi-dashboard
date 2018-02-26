@@ -87,6 +87,10 @@ else {
 	table.dataTable { empty-cells: show; }
    a:link, a:visited, a:active { text-decoration: none;}
 	a:hover { color: #000099; }
+	.label {
+  		min-width: 45px !important;
+ 		display: inline-block !important
+	}
 </style>
 
 <?php echo '<link rel="stylesheet" type="text/css" href="../css/style-'.$_SESSION['style'].'">';  ?> 
@@ -338,11 +342,15 @@ if(isset($_GET['con'])) {
 			else { $abertos = $cont_abertos; }
 			
 			//opened
-			$backlog = ($chamados - $fechados);
+			$backlog = ($chamados - $fechados);			
 			
+			if($backlog >= 1) { $back_cor = 'label label-md label-danger'; }
+			if($backlog == 0) { $back_cor = 'label label-md label-primary'; }
+			if($backlog <= -1) { $back_cor = 'label label-md label-success'; }
+									
 			//barra de porcentagem
 			if($conta_cons > 0) {
-						
+
 				//porcentagem
 				$perc = round(($backlog*100)/$chamados,0);
 				$barra = 100 - $perc;
@@ -353,9 +361,8 @@ if(isset($_GET['con'])) {
 				if($barra >= 80 and $barra < 100) { $cor = " ";  }
 				if($barra > 51 and $barra < 80) { $cor = "progress-bar-warning";  }
 				if($barra > 0 and $barra <= 50) { $cor = "progress-bar-danger";  }
-				if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0;  }
-			
-				}
+				if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0;  }			
+			}
 			
 			else { $barra = 0;}
 		
@@ -373,7 +380,7 @@ if(isset($_GET['con'])) {
 					 		</div>		
 						</div>			
 				   </td>					
-				   <td style='vertical-align:middle; text-align:center;'><span class='".$back_cor."'>&nbsp;&nbsp;&nbsp;". $backlog ."&nbsp;&nbsp;&nbsp;</span></td>";	
+				   <td style='vertical-align:middle; text-align:center;'><h4><span class='".$back_cor."'>". $backlog ."</span></h4></td>";	
 						
 			echo "</tr>";
 				

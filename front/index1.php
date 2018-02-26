@@ -312,6 +312,7 @@ else {
                         <li><a href="./reports/rel_assets.php" target="iframe1" > <?php echo __('Assets'); ?> </a></li>                        
                         <li><a href="./reports/rel_categorias.php?con=1" target="iframe1" > <?php echo __('Category'); ?> </a></li>
                         <li><a href="./reports/rel_tickets.php" target="iframe1" > <?php echo _sn('Ticket','Tickets',2); ?> </a></li>                                                						                                                                                                                       
+                        <li><a href="./reports/rel_entidades.php?con=1" target="iframe1" > <?php echo _sn('Entity','Entities',2); ?> </a></li>
                         <li><a href="./reports/rel_grupos.php?con=1" target="iframe1" > <?php echo _sn('Group','Groups',2); ?> </a></li>
                         <li><a href="./reports/rel_localidades.php?con=1" target="iframe1" > <?php echo _n('Location', 'Locations', 2); ?> </a></li>
                         <li><a href="./reports/rel_projects.php?con=1" target="iframe1" > <?php echo _sn('Project','Projects',2); ?> </a></li>                       

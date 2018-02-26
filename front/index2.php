@@ -356,11 +356,17 @@ else {
                                             </a>
                                         </li>
                                        <li>
+                                            <a href="#" onclick="window.open('./reports/rel_entidades.php?con=1','iframe1'); scrollWin();" data-original-title=' Categorias'>
+                                                <i class="fa fa-angle-right"></i>
+                                                <span class='hidden-minibar'> <?php echo _sn('Entity','Entities',2); ?> </span>
+                                            </a>
+                                        </li>  
+                                        <li>
                                             <a href="#" onclick="window.open('./reports/rel_grupos.php?con=1','iframe1'); scrollWin();" data-original-title=' Categorias'>
                                                 <i class="fa fa-angle-right"></i>
                                                 <span class='hidden-minibar'> <?php echo _sn('Group','Groups',2); ?> </span>
                                             </a>
-                                        </li>                                        
+                                        </li>                                         
                                         <li>
 	                                         <a href="#" onclick="window.open('./reports/rel_localidades.php?con=1','iframe1'); scrollWin();" data-original-title=' Location' >
                                                 <i class="fa fa-angle-right"></i>
