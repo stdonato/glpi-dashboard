@@ -372,8 +372,6 @@ if($con == "1") {
 	
 	$satisfacao = round(($media['media']/5)*100,1);
 	$nota = round($media['media'],0);
-	//$nota = $media['media'];
-	
 	
 	//barra de porcentagem
 	if($conta_cons > 0) {
@@ -639,8 +637,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 			<td style='vertical-align:middle; text-align:center;'>		
 				<span class='label' style=\"background:url('../img/stars/star". $satc1."_22.png') no-repeat;  
 				color:#000 !important; padding-left: 8px !important; padding-top: 4px; font-size:11px; \">".$satc1. "</span> 
-			</td>
-			
+			</td>		
 		</tr>";
 	}
 

@@ -62,7 +62,6 @@ $sel_ent = $DB->result($result_e,0,'value');
 
 if($sel_ent == '' || $sel_ent == -1) {
 	//get user entities
-	//$entities = Profile_User::getUserEntities($_SESSION['glpiID'], true);
 	$entities = $_SESSION['glpiactiveentities'];
 	$ent = implode(",",$entities);
 
@@ -130,9 +129,8 @@ else {
 			<?php Html::closeForm(); ?>
 			<!-- </form> -->
 			</div>
-
-</div>
-</div>
+	</div>
+	</div>
 </div>
 
 <div id="graf1" class="fluid">

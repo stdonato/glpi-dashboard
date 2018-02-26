@@ -52,7 +52,7 @@ $(function () {
 
 $categories = array();
 while ($entity = $DB->fetch_assoc($query_tec)) {
-$categories[] = $entity['cname'];
+	$categories[] = $entity['cname'];
 }
 echo json_encode($categories);
 
@@ -123,10 +123,8 @@ echo ",
                 data: [
 ";
 
-while ($entity = $DB->fetch_assoc($query_tec))
-
-{
-echo $entity['conta'].",";
+while ($entity = $DB->fetch_assoc($query_tec)){
+	echo $entity['conta'].",";
 }
 
 echo "]

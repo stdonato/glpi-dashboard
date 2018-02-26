@@ -8,7 +8,6 @@ global $DB, $con;
 Session::checkLoginUser();
 Session::checkRight("profile", READ);
 
-
 function dropdown( $name, array $options, $selected=null )
 {
     /*** begin the select ***/
@@ -44,17 +43,11 @@ function margins() {
 						$layout = $DB->result($result_lay,0,'value');
 						
 	//redirect to index
-	if($layout == '0')
-		{
-			// sidebar
-			$margin = '0px 3% 0px 5%';
-		}
+	// sidebar
+	if($layout == '0') {$margin = '0px 2% 0px 4%';}
 	
-	if($layout == 1 || $layout == '' )
-		{
-			//top menu
-			$margin = '0px 2% 0px 2%';
-		}
+	//top menu
+	if($layout == 1 || $layout == '' ) {$margin = '0px 1% 0px 1%';}
 		
 	return $margin;	
 }
@@ -94,12 +87,11 @@ else {
 	$entidade_u = "AND glpi_profiles_users.entities_id IN (".$sel_ent.") ";
 	$entidade_g = "WHERE entities_id IN (".$sel_ent.") OR is_recursive = 1";
 }
-
 ?>
 
 <html>
 <head>
-<title> GLPI - <?php echo __('Tickets','dashboard') .'  '. __('by Technician','dashboard') ?> </title>
+<title> GLPI - <?php echo __('Tickets','dashboard') .'  '. __('Technician group') ?> </title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
@@ -142,21 +134,23 @@ else {
 	table.dataTable { empty-cells: show; }
    a:link, a:visited, a:active { text-decoration: none;}
 	a:hover { color: #000099;}
+	.label-md {
+  		min-width: 45px !important;
+ 		display: inline-block !important
+	}
 </style>
 
 <?php echo '<link rel="stylesheet" type="text/css" href="../css/style-'.$_SESSION['style'].'">';  ?>
-
 </head>
 
 <body style="background-color: #e5e5e5;" >
-
 <div id='content' >
 <div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
 <div id="charts" class="fluid chart" >
 	<div id="pad-wrapper" >
 		<div id="head-rel" class="fluid">
 			<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
-				<div id="titulo_rel" > <?php echo __('Tickets','dashboard') .'  '. __('by Technician','dashboard') ?> </div>
+				<div id="titulo_rel" > <?php echo __('Tickets','dashboard') .'  '. __('Technician group') ?> </div>
 					<div id="datas-tec" class="col-md-12 col-sm-12 fluid" >
 					<form id="form1" name="form1" class="form_rel" method="post" action="rel_tecnicos.php?con=1">
 
@@ -238,10 +232,10 @@ else {
 									<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2 ?>'" ><i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean','dashboard'); ?> </button>
 								</td>
 							</tr>
-			   		 </table>
+			   	</table>
 					<?php Html::closeForm(); ?>
 					<!-- </form> -->
-					</div>
+				</div>
 		</div>
 <?php
 
@@ -356,7 +350,7 @@ echo "
 				<th style='text-align:center; '> % ". __('Closed','dashboard') ."</th> 
 				<th style='text-align:center; cursor:pointer;'> ". __('Late') ."</th>
 				<th style='text-align:center; '> % ". __('Late') . "</th> 
-				<!--<th style='text-align:center; cursor:pointer;'> ". __('Tasks sum','dashboard') ."</th>-->";
+				<th style='text-align:center; cursor:pointer;'> ". __('Backlog','dashboard') ."</th>";
 				if($sats != '') {
 					echo "<th style='text-align:center; '> ". __('Satisfaction','dashboard') ."</th>";
 				}
@@ -525,6 +519,13 @@ $data_due = $DB->fetch_assoc($result_due);
  
 $atrasados = $data_due['total'];
 
+//opened
+$backlog = ($total - $fechados);
+			
+if($backlog >= 1) { $back_cor = 'label label-md label-danger'; }
+if($backlog == 0) { $back_cor = 'label label-md label-primary'; }
+if($backlog <= -1) { $back_cor = 'label label-md label-success'; }
+
 
 //barra de porcentagem - Chamados no prazo
 if($conta_cons > 0) {
@@ -574,11 +575,14 @@ else { $barra_due = 0;}
 			 			".$barra_due."%
 			 		</div>
 				</div>
-		   </td> ";
+		   </td> 
+		   </td>
+		   <td style='vertical-align:middle; text-align:center;'><h4><span class='".$back_cor."'>". $backlog ."</span></h4></td>";
 		   
 if($sats != '') {
-		echo "<td style='vertical-align:middle; text-align:center;'>
-					<img src='../img/s". $nota .".png' alt='".$satisfacao." %' title='".$satisfacao." %'>
+		echo "<td style='vertical-align:middle; text-align:center;'>		
+					<span class='label' style=\"background:url('../img/stars/star". $nota."_22.png') no-repeat;  
+					color:#000 !important; padding-left: 8px !important; padding-top: 4px; font-size:11px; \">".$nota. "</span> 
 				</td>";
 			}
 

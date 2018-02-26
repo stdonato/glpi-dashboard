@@ -95,15 +95,11 @@ $result_e = $DB->query($sql_e);
 $sel_ent = $DB->result($result_e,0,'value');
 
 if($sel_ent == '' || $sel_ent == -1) {
-	//get user entities
-	//$entities = Profile_User::getUserEntities($_SESSION['glpiID'], true);
+
 	$entities = $_SESSION['glpiactiveentities'];
 	$ents = implode(",",$entities);
-
-	//$entidade = "AND glpi_entities.id IN (".$ent.")";
 }
 else {
-	//$entidade = "AND glpi_entities.id IN (".$sel_ent.")";
 	$ents = $sel_ent;
 }
 
@@ -140,7 +136,6 @@ function dropdown( $name, array $options, $selected=null )
     /*** and return the completed dropdown ***/
     return $dropdown;
 }
-
 
 $res_ent = $DB->query($sql_ent);
 $arr_ent = array();

@@ -87,7 +87,7 @@ else {
 	table.dataTable { empty-cells: show; }
    a:link, a:visited, a:active { text-decoration: none;}
 	a:hover { color: #000099; }
-	.label {
+	.label-md {
   		min-width: 45px !important;
  		display: inline-block !important
 	}
