@@ -12,7 +12,7 @@ $query3 = "
 SELECT DISTINCT DATE_FORMAT( glpi_tickets.date, '%w' ) AS day_l, COUNT( glpi_tickets.id ) AS conta
 FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = '0'
-AND glpi_tickets.date ".$datas."
+AND (glpi_tickets.date ".$datas." OR glpi_tickets.closedate ".$datas." )
 ". $entidade ."
 GROUP BY day_l
 ORDER BY `day_l` ASC

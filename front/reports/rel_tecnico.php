@@ -748,8 +748,6 @@ else {
 }
 }
 
-//var_dump($sql_cham);	
-//var_dump($query_stat_c);
 ?>
 
 <script type="text/javascript" >

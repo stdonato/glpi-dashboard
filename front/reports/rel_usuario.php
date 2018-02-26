@@ -18,7 +18,7 @@ if(!empty($_POST['submit']))
 else {
     $data_ini = date("Y-m-01");
     $data_fin = date("Y-m-d");
-    }
+}
 
 if(!isset($_POST["sel_tec"])) {
     $id_tec = $_GET["sel_tec"];
@@ -282,7 +282,7 @@ WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
 AND glpi_tickets_users.type = 1
 AND glpi_tickets_users.users_id = ". $id_tec ."
 AND glpi_tickets.is_deleted = 0
-AND glpi_tickets.date ".$datas2."
+AND (glpi_tickets.date ".$datas2." OR glpi_tickets.closedate ".$datas2." )
 ".$entidade."
 AND glpi_tickets.status IN ".$status."
 GROUP BY id
@@ -299,7 +299,7 @@ WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
 AND glpi_tickets_users.type = 1
 AND glpi_tickets_users.users_id = ". $id_tec ."
 AND glpi_tickets.is_deleted = 0
-AND glpi_tickets.date ".$datas2."
+AND (glpi_tickets.date ".$datas2." OR glpi_tickets.closedate ".$datas2." )
 ".$entidade."
 AND glpi_tickets.status IN ".$status."
 GROUP BY id
@@ -314,7 +314,6 @@ $consulta = $conta_cons;
 if($consulta > 0) {
 
 //abertos
-
 $sql_ab = "SELECT count( glpi_tickets.id ) AS total, glpi_tickets_users.`users_id` AS id
 FROM `glpi_tickets_users`, glpi_tickets
 WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
@@ -377,24 +376,51 @@ $user = $row['firstname'] ." ". $row['realname'];
 	SUM(case when glpi_tickets.status = 1 then 1 else 0 end) AS new,
 	SUM(case when glpi_tickets.status = 2 then 1 else 0 end) AS assig,
 	SUM(case when glpi_tickets.status = 3 then 1 else 0 end) AS plan,
-	SUM(case when glpi_tickets.status = 4 then 1 else 0 end) AS pend,
-	SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve,
-	SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
+	SUM(case when glpi_tickets.status = 4 then 1 else 0 end) AS pend
 	FROM glpi_tickets_users, glpi_tickets
 	WHERE glpi_tickets.is_deleted = '0'
-	AND glpi_tickets.date ".$datas2."
+   AND glpi_tickets.date ".$datas2." 
 	AND glpi_tickets_users.users_id = ".$id_tec."
 	AND glpi_tickets_users.type = 1
 	AND glpi_tickets_users.tickets_id = glpi_tickets.id ";
 
 	$result_stat = $DB->query($query_stat);
+	
+	
+	$query_stat_c = "
+	SELECT count( glpi_tickets.id ) AS close, glpi_tickets_users.users_id AS id
+	FROM glpi_tickets_users, glpi_tickets
+	WHERE glpi_tickets.is_deleted = '0'
+	AND glpi_tickets.closedate ".$datas2." 
+	AND glpi_tickets_users.users_id = ".$id_tec."
+	AND glpi_tickets_users.type = 1
+	AND glpi_tickets.status = 6
+	".$entidade_age."
+	AND glpi_tickets_users.tickets_id = glpi_tickets.id ";
+
+   $result_stat_c = $DB->query($query_stat_c);
+   $close = $DB->result($result_stat_c,0,'close');
+   
+   
+   $query_stat_s = "
+	SELECT SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve
+	FROM glpi_tickets_users, glpi_tickets
+	WHERE glpi_tickets.is_deleted = '0'
+	AND (glpi_tickets.solvedate ".$datas2." OR glpi_tickets.closedate ".$datas2.") 
+	AND glpi_tickets_users.users_id = ".$id_tec."
+	AND glpi_tickets_users.type = 1
+	".$entidade_age."
+	AND glpi_tickets_users.tickets_id = glpi_tickets.id ";
+
+   $result_stat_s = $DB->query($query_stat_s);
+   $solve = $DB->result($result_stat_s,0,'solve') + 0; 	
 
         $new = $DB->result($result_stat,0,'new') + 0;
         $assig = $DB->result($result_stat,0,'assig') + 0;
         $plan = $DB->result($result_stat,0,'plan') + 0;
         $pend = $DB->result($result_stat,0,'pend') + 0;
-        $solve = $DB->result($result_stat,0,'solve') + 0;
-        $close = $DB->result($result_stat,0,'close') + 0;
+/*        $solve = $DB->result($result_stat,0,'solve') + 0;
+        $close = $DB->result($result_stat,0,'close') + 0;*/
 
 
 	echo "

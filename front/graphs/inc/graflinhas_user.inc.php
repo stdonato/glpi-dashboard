@@ -35,7 +35,7 @@ if($interval <= "31") {
 	}
 
 	$days = array_keys($arr_days) ;
-	$quantd = array_values($arr_days) ;
+	$quantd = array_values($arr_days);
 	
 	$DB->data_seek($resultd, 0);
 	while ($row_result = $DB->fetch_assoc($resultd))
@@ -48,7 +48,7 @@ if($interval <= "31") {
 else {
 	
 	$queryd = "
-	SELECT DISTINCT   DATE_FORMAT(date, '%b-%Y') AS day_l,  COUNT(id) AS nb, DATE_FORMAT(date, '%Y-%m') AS day
+	SELECT DISTINCT DATE_FORMAT(date, '%b-%Y') AS day_l,  COUNT(id) AS nb, DATE_FORMAT(date, '%Y-%m') AS day
 	FROM glpi_tickets
 	WHERE glpi_tickets.is_deleted = '0'
 	AND date ".$datas."
@@ -64,7 +64,7 @@ else {
 	}
 
 	$months = array_keys($arr_months) ;
-	$monthsq = array_values($arr_months) ;
+	$monthsq = array_values($arr_months);
 	
 	$DB->data_seek($resultd, 0);	
 	while ($row_result = $DB->fetch_assoc($resultd))
@@ -81,8 +81,7 @@ $arr_opened = array();
 if($interval >= "31") {
 	
 	$DB->data_seek($resultd, 0);
-	while ($row_result = $DB->fetch_assoc($resultd))
-	{
+	while ($row_result = $DB->fetch_assoc($resultd)) {
 	
 		$querym = "
 		SELECT DISTINCT DATE_FORMAT(glpi_tickets.date, '%b-%Y') as day_l,  COUNT(glpi_tickets.id) as nb, DATE_FORMAT(glpi_tickets.date, '%Y-%m') as day
@@ -140,9 +139,10 @@ else {
 		else {
 			$arr_grfm[$v_row_result] = 0;
 		}
-	}	
-		$arr_opened = $arr_grfm;
-		$label = json_encode(array_keys($arr_daysn));
+	}
+	
+	$arr_opened = $arr_grfm;
+	$label = json_encode(array_keys($arr_daysn));
 }
 
 /*$grfm = array_keys($arr_opened) ;

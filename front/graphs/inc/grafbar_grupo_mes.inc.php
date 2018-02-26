@@ -33,7 +33,7 @@ FROM `glpi_groups_tickets` , glpi_tickets, glpi_groups
 WHERE glpi_groups_tickets.`groups_id` = glpi_groups.id
 AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
 AND glpi_tickets.is_deleted = 0
-AND glpi_tickets.date ".$datas."
+AND (glpi_tickets.date ".$datas." OR glpi_tickets.closedate ".$datas." )
 ".$entidade."
 GROUP BY gid
 ORDER BY conta DESC ";

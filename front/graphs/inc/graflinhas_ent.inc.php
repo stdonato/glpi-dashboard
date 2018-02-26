@@ -66,7 +66,6 @@ else {
 	$months = array_keys($arr_months) ;
 	$monthsq = array_values($arr_months);
 	
-	
 	$DB->data_seek($resultd, 0);	
 	while ($row_result = $DB->fetch_assoc($resultd))
 	{
@@ -75,7 +74,6 @@ else {
 	}
 }
 
-
 //chamados mensais
 $arr_grfm = array();
 $arr_opened = array();
@@ -83,28 +81,28 @@ $arr_opened = array();
 if($interval >= "31") {
 	
 	$DB->data_seek($resultd, 0);
-	while ($row_result = $DB->fetch_assoc($resultd))
-	{
+	while ($row_result = $DB->fetch_assoc($resultd)) {
 	
-   $querym = "
-	SELECT DISTINCT DATE_FORMAT(date, '%b-%Y') as day_l,  COUNT(id) as nb, DATE_FORMAT(date, '%Y-%m') as day
-	FROM glpi_tickets
-	WHERE glpi_tickets.is_deleted = '0'
-	AND glpi_tickets.date ".$datas."
-	AND glpi_tickets.entities_id = ".$id_ent."
-	GROUP BY day
-	ORDER BY day ";
+	   $querym = "
+		SELECT DISTINCT DATE_FORMAT(date, '%b-%Y') as day_l,  COUNT(id) as nb, DATE_FORMAT(date, '%Y-%m') as day
+		FROM glpi_tickets
+		WHERE glpi_tickets.is_deleted = '0'
+		AND glpi_tickets.date ".$datas."
+		AND glpi_tickets.entities_id = ".$id_ent."
+		AND DATE_FORMAT(glpi_tickets.date, '%Y-%m' ) = '".$row_result['day']."'
+		GROUP BY day
+		ORDER BY day ";
+		
+		$resultm = $DB->query($querym) or die('erro m');
+		$row_result2 = $DB->fetch_assoc($resultm);
 	
-	$resultm = $DB->query($querym) or die('erro m');
-	$row_result2 = $DB->fetch_assoc($resultm);
-
-	$v_row_result = $row_result['day'];
-	if($row_result2['nb'] != '') {
-		$arr_grfm[$v_row_result] = $row_result2['nb'];
-	}
-	else {
-		$arr_grfm[$v_row_result] = 0;
-	}
+		$v_row_result = $row_result['day'];
+		if($row_result2['nb'] != '') {
+			$arr_grfm[$v_row_result] = $row_result2['nb'];
+		}
+		else {
+			$arr_grfm[$v_row_result] = 0;
+		}
 }	
 	$arr_opened = $arr_grfm;
 	$label = json_encode(array_keys($arr_monthsn));
@@ -182,7 +180,6 @@ if($interval >= "31") {
 	}
 	$arr_closed = array_unique(array_merge($arr_months,$arr_grff));
 	$label = json_encode(array_keys($arr_monthsn));
-
  }
 
  else {

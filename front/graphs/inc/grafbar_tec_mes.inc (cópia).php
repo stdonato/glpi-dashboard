@@ -26,11 +26,10 @@ else {
 }
 
 $sql_tec = "
-SELECT count( glpi_tickets.id ) AS conta, glpi_tickets_users.`users_id` AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
-FROM `glpi_tickets_users`, glpi_tickets, glpi_users
+SELECT count( glpi_tickets.id ) AS conta, glpi_tickets_users.`users_id` AS id
+FROM `glpi_tickets_users`, glpi_tickets
 WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
 AND glpi_tickets.date ".$datas."
-AND glpi_tickets_users.users_id = glpi_users.id
 AND glpi_tickets_users.type = 2
 AND glpi_tickets.is_deleted = 0
 ".$entidade."
@@ -68,9 +67,42 @@ $(function () {
             subtitle: {
                 text: ''
             },
-		    xAxis: {
-		        type: 'category'
-		    },
+            xAxis: {
+            categories: ";
+            $categories = array();
+				$DB->data_seek($query_tec, 0) ;
+				
+				while ($tecnico = $DB->fetch_assoc($query_tec)) {
+
+					$sqlC = "SELECT glpi_users.firstname AS name, glpi_users.realname AS sname
+					FROM glpi_tickets_users, glpi_users
+					WHERE glpi_tickets_users.users_id = glpi_users.id
+					AND glpi_tickets_users.users_id = ".$tecnico['id']."
+					GROUP BY glpi_users.firstname ";
+
+					$queryC = $DB->query($sqlC);
+					$chamado = $DB->fetch_assoc($queryC);
+
+					$user_name = str_replace("'","`",$chamado['name']." ". $chamado['sname']);
+               $categories[] = $user_name;
+
+				}
+            echo json_encode($categories);
+
+			//zerar rows para segundo while
+			$DB->data_seek($query_tec, 0) ;
+
+			echo ",
+                title: {
+                    text: null
+                },
+                labels: {
+                	style: {
+                        fontSize: '12px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
+            },
             yAxis: {
                 min: 0,
                 title: {
@@ -98,15 +130,7 @@ $(function () {
                 	  animation: {
                     duration: 2000,
                     easing: 'easeOutBounce'
-                	  },
-                	  cursor: 'pointer',
-		          		point: {
-		                events: {
-		                    click: function () {
-		                        window.open('../reports/rel_tecnico.php?con=1&sel_tec=' + this.options.key + '&date1=$data_ini&date2=$data_fin','_blank');
-		                    		}
-		                		}
-		            		}
+                	  }
             }
 
             },
@@ -135,8 +159,7 @@ $(function () {
 
 				while ($tecnico = $DB->fetch_assoc($query_tec))
 				{
-					$user_name = str_replace("'","`",$tecnico['name']." ". $tecnico['sname']);				 	
-				 	echo "{y:".$tecnico['conta'].",name:'".$user_name."',key:".$tecnico['id']."},";
+				 	echo $tecnico['conta'].",";
 				}
 
 				echo "]

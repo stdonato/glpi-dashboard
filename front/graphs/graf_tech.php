@@ -292,7 +292,7 @@ else {
 $query_total = "SELECT COUNT(glpi_tickets.id) AS total
 FROM glpi_tickets_users, glpi_tickets
 WHERE glpi_tickets.is_deleted = '0'
-AND glpi_tickets.date ".$datas."
+AND (glpi_tickets.date ".$datas." OR glpi_tickets.closedate ".$datas." )
 AND glpi_tickets_users.users_id = ".$id_tec."
 AND glpi_tickets_users.type = 2
 ".$entidade_age."
@@ -312,7 +312,7 @@ SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve,
 SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
 FROM glpi_tickets_users, glpi_tickets
 WHERE glpi_tickets.is_deleted = '0'
-AND glpi_tickets.date ".$datas."
+AND (glpi_tickets.date ".$datas." OR glpi_tickets.closedate ".$datas." )
 AND glpi_tickets_users.users_id = ".$id_tec."
 AND glpi_tickets_users.type = 2
 ".$entidade_age."

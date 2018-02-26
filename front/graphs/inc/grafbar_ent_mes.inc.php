@@ -10,17 +10,16 @@ else {
 }
 
 $sql_tec = "
-SELECT count(glpi_tickets.id) AS conta, glpi_entities.name AS name, glpi_entities.completename AS cname
+SELECT count(glpi_tickets.id) AS conta, glpi_entities.name AS name, glpi_entities.completename AS cname, glpi_entities.id AS id
 FROM `glpi_entities`, glpi_tickets
 WHERE glpi_tickets.entities_id = glpi_entities.id
 AND glpi_tickets.is_deleted = 0
 ".$entidade."
-AND glpi_tickets.date ".$datas."
+AND glpi_tickets.date ".$datas." 
 GROUP BY cname
 ORDER BY conta DESC";
 
 $query_tec = $DB->query($sql_tec);
-
 $contador = $DB->numrows($query_tec);
 
 //chart height
@@ -31,6 +30,7 @@ else {
 	$height = '450';
 }
 
+var_dump($sql_tec);
 
 echo "
 <script type='text/javascript'>
@@ -47,29 +47,11 @@ $(function () {
             subtitle: {
                 text: ''
             },
-            xAxis: {
-            categories: ";
-
-$categories = array();
-while ($entity = $DB->fetch_assoc($query_tec)) {
-	$categories[] = $entity['cname'];
-}
-echo json_encode($categories);
-
-//zerar rows para segundo while
-$DB->data_seek($query_tec, 0) ;
-
-echo ",
-                title: {
-                    text: null
-                },
-                labels: {
-                	style: {
-                        fontSize: '12px',
-                        fontFamily: 'Verdana, sans-serif'
-                    }
-                }
-            },
+            
+		    xAxis: {
+		        type: 'category'
+		    },
+    
             yAxis: {
                 min: 0,
                 title: {
@@ -97,7 +79,16 @@ echo ",
 			    	  animation: {
 			        duration: 2000,
 			        easing: 'easeOutBounce'
-			    	  }
+			    	  },
+				    cursor: 'pointer',
+		          point: {
+		                events: {
+		                    click: function () {
+		                        window.open('../reports/rel_entidade.php?con=1&sel_ent=' + this.options.key + '&date1=$data_ini&date2=$data_fin','_blank');
+		                    		}
+		                		}
+		            		}
+	            
 					}
             },
             legend: {
@@ -120,15 +111,15 @@ echo ",
             	 	//color: '#000099'
             	 	},
                 name: '". __('Tickets','dashboard') ."',
-                data: [
-";
-
-while ($entity = $DB->fetch_assoc($query_tec)){
-	echo $entity['conta'].",";
-}
-
-echo "]
-            }]
+                data: [";
+                
+                		//{ y: 29.9, name: 'USA', key: 'United_States'}, 
+							while ($entity = $DB->fetch_assoc($query_tec)){
+								echo "{y:".$entity['conta'].",name:'".$entity['cname']."',key:".$entity['id']."},";
+							}                			
+                			
+                echo "]
+	         }]
         });
     });
 

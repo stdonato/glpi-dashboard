@@ -1,3 +1,4 @@
+
 <?php
 
 if($data_ini == $data_fin) {
@@ -8,49 +9,56 @@ else {
 	$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";
 }
 
-$sql_grpb = "
-SELECT `glpi_users`.`id` AS uid, `glpi_users`.`firstname` AS name ,`glpi_users`.`realname` AS sname, count(glpi_tickets_users.id) AS conta
-FROM glpi_tickets_users, glpi_users, glpi_tickets
-WHERE glpi_tickets_users.users_id = glpi_users.id
-AND glpi_tickets.id = glpi_tickets_users.tickets_id
-AND glpi_tickets.type = ".$id_tip."
-AND (glpi_tickets.date ".$datas." OR glpi_tickets.closedate ".$datas.")
-AND glpi_tickets_users.type = 2
+$sql_tec = "
+SELECT count(glpi_tickets.id) AS conta, glpi_entities.name AS name, glpi_entities.completename AS cname
+FROM `glpi_entities`, glpi_tickets
+WHERE glpi_tickets.entities_id = glpi_entities.id
 AND glpi_tickets.is_deleted = 0
-".$entidade_a."
-GROUP BY uid
-ORDER BY conta DESC
-LIMIT 10 ";
+".$entidade."
+AND glpi_tickets.date ".$datas."
+GROUP BY cname
+ORDER BY conta DESC";
 
-$query_grp_b = $DB->query($sql_grpb);
+$query_tec = $DB->query($sql_tec);
 
-//var_dump($sql_grpb);
+$contador = $DB->numrows($query_tec);
+
+//chart height
+if($contador > 9) {	
+	$height = '800';	
+}
+else {
+	$height = '450';
+}
+
 
 echo "
 <script type='text/javascript'>
 
 $(function () {
-        $('#graf_user').highcharts({
+        $('#graf1').highcharts({
             chart: {
                 type: 'bar',
-                height: 550
+                height: ".$height."
             },
             title: {
-                text: '".__('Tickets','dashboard')." ".__('by Technician','dashboard')."'
+                text: ''
             },
             subtitle: {
                 text: ''
             },
             xAxis: {
             categories: ";
-
-$categories = array();
-while ($grupo = $DB->fetch_assoc($query_grp_b)) {
-    $categories[] = $grupo['name']." ".$grupo['sname'];
-}
-echo json_encode($categories);
-
-echo ",
+				$categories = array();
+				while ($entity = $DB->fetch_assoc($query_tec)) {
+					$categories[] = $entity['cname'];
+				}
+				echo json_encode($categories);
+				
+				//zerar rows para segundo while
+				$DB->data_seek($query_tec, 0) ;
+			
+			echo ",
                 title: {
                     text: null
                 },
@@ -83,7 +91,23 @@ echo ",
                 	borderColor: 'white',
                 	shadow:true,
                 	showInLegend: false
-                }
+                },
+               series: {
+			    	  animation: {
+			        duration: 2000,
+			        easing: 'easeOutBounce'
+			    	  },
+				    cursor: 'pointer',
+		          point: {
+		                events: {
+		                    click: function () {
+		                        location.href = 'https://en.wikipedia.org/wiki/' +
+		                            this.options.key;
+		                    		}
+		                		}
+		            		}
+	            
+					}
             },
             legend: {
                 layout: 'vertical',
@@ -93,7 +117,7 @@ echo ",
                 y: 100,
                 floating: true,
                 borderWidth: 0,
-               // backgroundColor: '#FFFFFF',
+                backgroundColor: '#FFFFFF',
                 shadow: true,
                 enabled: false
             },
@@ -104,21 +128,16 @@ echo ",
             	 dataLabels: {
             	 	//color: '#000099'
             	 	},
-                name: '". __('Tickets','dashboard')."',
+                name: '". __('Tickets','dashboard') ."',
                 data: [
-";
-
-//zerar rows para segundo while
-
-$DB->data_seek($query_grp_b, 0) ;
-
-while ($grupo = $DB->fetch_assoc($query_grp_b))
-{
-	echo $grupo['conta'].",";
-}
-
-echo "]
-            }]
+					";
+					
+					while ($entity = $DB->fetch_assoc($query_tec)){
+						echo $entity['conta'].",";
+					}
+					
+					echo "]
+	            }]
         });
     });
 

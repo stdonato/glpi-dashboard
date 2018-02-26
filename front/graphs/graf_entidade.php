@@ -31,7 +31,6 @@ global $DB;
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
-<!--  <meta http-equiv="refresh" content= "120"/> -->
 
 <link rel="icon" href="../img/dash.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="../img/dash.ico" type="image/x-icon" />
@@ -271,8 +270,8 @@ $selected = $id_ent;
 			$query2 = "
 			SELECT COUNT(glpi_tickets.id) as total
 			FROM glpi_tickets
-			WHERE glpi_tickets.date ".$datas."
-			AND glpi_tickets.is_deleted = 0
+			WHERE glpi_tickets.is_deleted = 0
+			AND glpi_tickets.date ".$datas." 
 			AND glpi_tickets.entities_id = ".$id_ent." ";
 
 			$result2 = $DB->query($query2) or die('erro');
@@ -300,6 +299,29 @@ $plan = $DB->result($result_stat,0,'plan') + 0;
 $pend = $DB->result($result_stat,0,'pend') + 0;
 $solve = $DB->result($result_stat,0,'solve') + 0;
 $close = $DB->result($result_stat,0,'close') + 0;
+
+/*$query_stat_c = "
+SELECT count( glpi_tickets.id ) AS close
+FROM glpi_tickets
+WHERE glpi_tickets.is_deleted = '0'
+AND glpi_tickets.date ".$datas." 
+AND glpi_tickets.status = 6
+AND glpi_tickets.entities_id = ".$id_ent." ";
+
+$result_stat_c = $DB->query($query_stat_c);
+$close = $DB->result($result_stat_c,0,'close');
+
+
+$query_stat_s = "
+SELECT count( glpi_tickets.id ) AS solve
+FROM glpi_tickets
+WHERE glpi_tickets.is_deleted = '0'
+AND glpi_tickets.solvedate ".$datas." 
+AND glpi_tickets.status = 5
+AND glpi_tickets.entities_id = ".$id_ent." ";
+
+$result_stat_s = $DB->query($query_stat_s);
+$solve = $DB->result($result_stat_s,0,'solve') + 0;*/ 	
 
 echo '<div id="entidade2" class="col-md-12 fluid" style="margin-bottom: 15px;">';
 echo '<div id="name"  style="margin-top: 15px;"><span>'.$ent_name['name'].'</span> - <span class="total_tech"> '.$total['total'].' '.__('Tickets','dashboard').'</span></div>

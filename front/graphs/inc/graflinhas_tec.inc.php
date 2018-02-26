@@ -20,7 +20,7 @@ if($interval <= "31") {
 	SELECT DISTINCT   DATE_FORMAT(date, '%b-%d') AS day_l,  COUNT(id) AS nb, DATE_FORMAT(date, '%Y-%m-%d') AS day
 	FROM glpi_tickets
 	WHERE glpi_tickets.is_deleted = '0'
-	AND date ".$datas."
+	AND glpi_tickets.date ".$datas." 
 	GROUP BY day
 	ORDER BY day ";
 
@@ -51,7 +51,7 @@ else {
 	SELECT DISTINCT   DATE_FORMAT(date, '%b-%Y') AS day_l,  COUNT(id) AS nb, DATE_FORMAT(date, '%Y-%m') AS day
 	FROM glpi_tickets
 	WHERE glpi_tickets.is_deleted = '0'
-	AND date ".$datas."
+	AND glpi_tickets.date ".$datas." 
 	GROUP BY day
 	ORDER BY day ";
 
@@ -88,7 +88,7 @@ if($interval >= "31") {
 		SELECT DISTINCT DATE_FORMAT(glpi_tickets.date, '%b-%Y') as day_l,  COUNT(glpi_tickets.id) as nb, DATE_FORMAT(glpi_tickets.date, '%Y-%m') as day
 		FROM glpi_tickets_users, glpi_tickets
 		WHERE glpi_tickets.is_deleted = '0'
-		AND glpi_tickets.date ".$datas."
+		AND glpi_tickets.date ".$datas." 
 		AND glpi_tickets_users.users_id = ".$id_tec."
 		AND glpi_tickets_users.type = 2
 		".$entidade_age."
@@ -121,7 +121,7 @@ else {
 		SELECT DISTINCT DATE_FORMAT(glpi_tickets.date, '%b-%d') as day_l,  COUNT(glpi_tickets.id) as nb, DATE_FORMAT(glpi_tickets.date, '%Y-%m-%d') as day
 		FROM glpi_tickets_users, glpi_tickets
 		WHERE glpi_tickets.is_deleted = '0'
-		AND glpi_tickets.date ".$datas."
+		AND glpi_tickets.date ".$datas." 
 		AND glpi_tickets_users.users_id = ".$id_tec."
 		AND glpi_tickets_users.type = 2
 		".$entidade_age."
@@ -164,7 +164,7 @@ if($interval >= "31") {
 	SELECT DISTINCT DATE_FORMAT(glpi_tickets.closedate, '%b-%Y') as day_l,  COUNT(glpi_tickets.id) as nb, DATE_FORMAT(glpi_tickets.closedate, '%Y-%m') as day
 	FROM glpi_tickets_users, glpi_tickets
 	WHERE glpi_tickets.is_deleted = '0'
-	AND glpi_tickets.closedate ".$datas."
+	AND glpi_tickets.closedate ".$datas." 
 	AND glpi_tickets_users.users_id = ".$id_tec."
 	AND glpi_tickets_users.type = 2
 	".$entidade_age."
@@ -220,9 +220,6 @@ else {
 		$arr_closed = $arr_grff;
 		$label = json_encode(array_keys($arr_daysn));
  }
-
-/*$grff = array_keys($arr_closed) ;
-$grff3 = json_encode($grff);*/
 
 $quantf = array_values($arr_closed) ;
 $quantf2 = implode(',',$quantf);
