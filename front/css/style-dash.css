@@ -26,7 +26,7 @@ textarea {
 
 .dropdown .dropdown-menu {
 	border-radius: 6px;
-	-moz-border-radius: 6px;
+	border-radius: 6px;
 	border-radius: 6px;
 }
 
@@ -41,7 +41,7 @@ textarea {
 
 .table-bordered th {
 	background: #E9E9E9;
-	background:-moz-linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%); /* FF3.6+ */
+	background:linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%); /* FF3.6+ */
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#FAFAFA), color-stop(100%,#E9E9E9)); /* Chrome,Safari4+ */
 	background:-webkit-linear-gradient(top, #FAFAFA 0%,#E9E9E9 100%); /* Chrome10+,Safari5.1+ */
 	background:-o-linear-gradient(top, #FAFAFA 0%,#E9E9E9 100%); /* Opera11.10+ */
@@ -125,8 +125,8 @@ textarea {
     text-align: left;
 	border-top-left-radius: 0;
 	-webkit-border-top-right-radius: 0;
-	-moz-border-radius-topleft: 0;
-	-moz-border-radius-topright: 0;
+	border-radius-topleft: 0;
+	border-radius-topright: 0;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 }

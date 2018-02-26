@@ -49,7 +49,7 @@ body {
 
 #head-lg {
 	width: 115%;
-	background-color: #009688; //#606CC4; //#3E4EB8;
+	background-color: #009688;
 	color: #fff;
 	padding-top: 15px;
 	padding-bottom: 20px;
@@ -122,7 +122,7 @@ body {
 
 #head-map {
 	width: 102%;
-	background-color: #9c27b0; //#FF8611;  //#009688; 
+	background-color: #9c27b0; 
 	color: #fff;
 	padding-top: 15px;
 	padding-bottom: 20px;
@@ -140,7 +140,7 @@ body {
 
 #head-map2x {
 	width: 102%;
-	background-color: #9c27b0; //#FF8611;  //#009688; 
+	background-color: #9c27b0; 
 	color: #fff;
 	padding-top: 15px;
 	padding-bottom: 20px;
@@ -316,7 +316,7 @@ body {
 	color: #fff;
 	font-size:30pt; 
 	font-weight:bold;
-	font-family: 'RobotoDraft',sans-serif; //"Lucida Grande","Lucida Sans Unicode",Verdana,Arial,Helvetica,sans-serif;
+	font-family: 'RobotoDraft',sans-serif;
 	/* text-shadow:0.0em 0.09em 0.09em #cecece;*/
 }
 
@@ -659,7 +659,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6db3f2', end
 	font-size:22px;
 }
 
-//pagination
+/* pagination */
    
    .button {	
     cursor: pointer;
@@ -667,7 +667,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6db3f2', end
     font: bold 12px Arial,Helvetica;
     color: white;    
     /* color: #58a7eb; */
-    background-color: #247495 //rgb(255, 185, 75);
+    background-color: #247495;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#247495), to(#58a7eb));    
     background-image: -moz-linear-gradient(center top , #247495, #58a7eb);
     background-image: -webkit-linear-gradient(center top , #247495, #58a7eb);
@@ -1590,16 +1590,16 @@ tr.search:nth-child(odd)        { background: #ffffff; }
 }
 
 .chamado {
-    color: #fff; //#29323A;
+    color: #fff;
     font-size: 14px;
     font-weight: 600;       
     text-transform: uppercase;
 }
 
 .date {
-    color: #fff; //#B4B8BB;
+    color: #fff; 
     font-weight: lighter;
-    font-family: 'RobotoDraft',sans-serif; //'Lato','Open Sans';
+    font-family: 'RobotoDraft',sans-serif; 
     font-style: italic;
     font-size: 13pt;           
 }
@@ -1746,14 +1746,14 @@ fieldset[disabled] .btn-primary.active {
 
 .pinkbg  { background-color: #ffbbbb; }
 .redbg   { background-color: #303f9f !important; }
-.bluebg  { background-color: #008376 !important; //#aaaaff; }
+.bluebg  { background-color: #008376 !important; }
 .orangebg { background-color: #E58900 !important; }
-.yellowbg  { background-color: #7b1fa2; //#8e24aa; }
+.yellowbg  { background-color: #7b1fa2; }
 .greenbg  { background-color: #009688; }
 .greybg  { background-color: #dddddd; }
 
 .db-blue {
-	background-color: #009688; //#606CC4;
+	background-color: #009688; 
 	color: #fff;
 }
 
@@ -1768,7 +1768,7 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .db-red {
-	background-color: #3f51b5; //#E91E63; //#d54230;
+	background-color: #3f51b5; 
 	color: #fff;
 }
 
@@ -1782,7 +1782,7 @@ fieldset[disabled] .btn-primary.active {
 }
 */
 #odometer1, #odometer2, #odometer3, #odometer4  {
-	color: #fff; //#32a0ee; 
+	color: #fff;
 }
 
 .dashbox .panel-left {
@@ -1819,11 +1819,11 @@ fieldset[disabled] .btn-primary.active {
 #menuHeader {
 	width: 100%;
 	height: 50px;
-	background-color: #3F51B5; //#2D3F50;
+	background-color: #3F51B5; 
 }
 
 #menuHeader ul li a:hover {
-	background-color: #4184f3; //4aa6e0;
+	background-color: #4184f3; 
 }
 
 #menuHeader ul {
@@ -2173,7 +2173,7 @@ td > a:hover {
 }
 
 .wred {
-	border-topx: 3px solid #DB4437 !important; //#D2D6DE;
+	border-topx: 3px solid #DB4437 !important; 
 }
 
 .wyellow {
@@ -2232,7 +2232,7 @@ margin-bottom: 30px;*/
 .mdl-menu > li:hover, .mdl-menu__item > li:focus {
   color: #fff;
   text-decoration: none;	
-  background-color: #4184f3; //#428bca; 
+  background-color: #4184f3; 
 }
 
 .mdl-menu > li > a, .mdl-menu__item > li > a {

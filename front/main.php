@@ -116,7 +116,7 @@ $_SESSION['back'] = $back;
     
     <?php     		 
     	$redir = '<meta http-equiv="refresh" content= "120"/>'; 
-    	echo $redir;    	
+    	echo $redir;
     ?>        
     
     <link rel="icon" href="img/dash.ico" type="image/x-icon" />
@@ -204,7 +204,6 @@ $_SESSION['back'] = $back;
            
     </ul>
 </div>
-
 <!-- END Theme Setting  -->     
                                                
 <?php     
@@ -331,7 +330,7 @@ $total_users = $DB->fetch_assoc($result_users);
       
 			<div id="panels" class="row">
 				<!-- COLUMN 1 -->															
-					  <div class="col-xs-2 col-xs-15 statxx">
+					  <div class="col-xs-2 col-xs-15">
 						 <div class="dashbox shad panel panel-default db-red">
 							<div class="panel-body">
 							   <div class="panel-left red redbg">
@@ -446,8 +445,7 @@ $total_users = $DB->fetch_assoc($result_users);
 	<div id="grfrow" class="row-fluid col-sm-11 col-md-11 card" style="width:100%;">	
       
       <p id="choices" style=" margin-right: 20px; margin-top: 5px; text-align:right; width:<?php echo $width_os; ?>;"></p>	  	
-		<div class="demo-container" style="margin-bottom:10px;">						
-		
+		<div class="demo-container" style="margin-bottom:10px;">								
 			<div id="graflinhas1" class="demo-placeholder" style="float:left; width: <?php echo $width_os; ?> ;"></div>
 				
 				<div id="srvinfo">					
@@ -541,7 +539,7 @@ $total_users = $DB->fetch_assoc($result_users);
 				?> 	 						            
 		</div> 
 	</div>
-	</div>
+</div>
 
 	<div class="col-sm-6 col-md-6 align2"> 	 				              
    <div id="last_week" class="widget widget-table action-table striped card1" >
@@ -558,7 +556,7 @@ $total_users = $DB->fetch_assoc($result_users);
   		</div>      
   </div>   
   	
-	<div class="col-sm-6 col-md-6"> 	 				              
+<div class="col-sm-6 col-md-6" > 	 				              
    <div id="tickets_age" class="widget widget-table action-table striped card1" >
       <div class="widget-header wpurple">                
       	<h3><i class="fa fa-pie-chart" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo __('Ticket Solving Period','dashboard'); ?></h3>
@@ -642,6 +640,7 @@ $total_users = $DB->fetch_assoc($result_users);
          <!-- /widget-content --> 
        </div>
 	</div> 
+
 <!--  open tickets by tech-->
 	<div class="col-sm-6 col-md-6"> 	
 		<div id="open_tickets" class="widget widget-table action-table striped card1">
@@ -687,7 +686,7 @@ $total_users = $DB->fetch_assoc($result_users);
           </div>
        </div>
 
-	<div class="col-sm-6 col-md-6">  	 				              
+<div class="col-sm-6 col-md-6" >  	 				              
 		 <div id="events" class="widget widget-table action-table striped card1">
             <div class="widget-header wblue">
               <h3><i class="fa fa-list-alt" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><a href="../../../front/event.php" target="_blank" style="color: #525252;"><?php echo __('Last Events','dashboard'); ?></a></h3>
@@ -884,7 +883,6 @@ $total_users = $DB->fetch_assoc($result_users);
 	<div id="go-top" class="go-top" onclick="scrollWin()">
 	   <i class="fa fa-chevron-up"></i>&nbsp; Top     							    
 	</div> 
-
 	 	
 </div> <!-- end content -->   
  <!--</div>-->		
