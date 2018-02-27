@@ -151,7 +151,7 @@
 
 		<div style="min-height: 100px;" class="col-lg-5 cf-item-status tickets all">				
 			<header>
-				<p><span></span><?php echo __('Total');?></p>
+					<p><span></span><?php echo __('Total')." / ". __('Backlog');?></p>
 			</header>
 			<div class="content">
 				<div class="metric5"><?php echo $total;?></div>

@@ -150,7 +150,7 @@
 
 		<div style="min-height: 100px;" class="col-lg-5 cf-item-status tickets all">				
 			<header>
-				<p><span></span><?php echo __('Total');?></p>
+				<p><span></span><?php echo __('Total')." / ". __('Backlog');?></p>
 			</header>
 			<div class="content">
 				<div class="metric5"><?php echo $total;?></div>
@@ -202,7 +202,7 @@
 						<div class="metric total"></div>
 						<div class="change metric-small">
 							<div id="arrow"></div>
-							<span class="large"></span><!-- <span class="small">.45%</span> -->
+							<span class="large"></span>
 						</div>
 					</div>
 					<div class="cf-sparkline clearfix" style="margin-top:15px;">
@@ -227,7 +227,7 @@
 							<div class="metric total-month"><?php echo $today_tickets; ?></div>
 							<div class="change metric-small daily">
 								<div id="arrow-2"></div>
-								<span class="large large-2"></span><!-- <span class="small">.45%</span> ((V2-V1)/V1 × 100) -->
+								<span class="large large-2"></span>
 							</div>
 						</div>
 						<div class="cf-sparkline clearfix" style="margin-top:15px;">
