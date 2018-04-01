@@ -256,7 +256,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 	<td style='text-align:center; vertical-align:middle;'> ". time_ext($row['effective_duration']) ."</td>
 	<td style='text-align:center; vertical-align:middle;'> 
 		<div class='progress' style='margin-top: 5px; margin-bottom: 5px;'>
-			<div class='progress-bar ". $cor ." progress-bar-striped active' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
+			<div class='progress-bar ". $cor ." ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
 			 			".$barra." % 	
 			 </div>		
 		</div>			

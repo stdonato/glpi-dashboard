@@ -122,7 +122,7 @@
 /******************* CSS Code *********************/
 body {
   background-color: #f1f1f1;
-  font-family: 'RobotoDraft',sans-serif;
+  font-family: 'RobotoDraft',sans-serif !important;
   min-height: 100%;
 }
 .site-holder {
@@ -578,15 +578,11 @@ a {
   padding: 0px;
   border-top: 1px solid #4184f3;
   box-shadow: 0px 0px 2px 0px #cec8c8;
-  -moz-box-shadow: 0px 0px 2px 0px #cec8c8;
-  box-shadow: 0px 0px 2px 0px #cec8c8;
   border-radius: 0px;
 }
 .panel.bg-none {
   background-color: none !important;
   border-top: 0px solid #4184f3;
-  box-shadow: none;
-  -moz-box-shadow: none;
   box-shadow: none;
   border-radius: 0px;
 }
@@ -1323,7 +1319,7 @@ ANIMATIONS
     background-color: #FFFFFF;
     border: 1px solid #DBDBDB;
     border-radius: 4px;
-    box-shadow: 0 1px 1px #f9f9f9;
+    box-shadow: 0 2px 2px #f9f9f9;
     margin-bottom: 20px;
 }
 

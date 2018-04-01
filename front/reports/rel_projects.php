@@ -316,14 +316,14 @@ while($row = $DB->fetch_assoc($result_cham)){
 		<td style='text-align:center; vertical-align:middle'><a href='./rel_projecttasks.php?sel_pro=". $row['id'] ."' target=_self >" . $row_task['tasks'] . "</a></td>
 		<td style='text-align:center; vertical-align:middle;'>
 			<div class='progress' style='margin-top: 5px; margin-bottom: 5px;'>
-				<div class='progress-bar " . $cor . " progress-bar-striped active' role='progressbar' aria-valuenow='".$row['percent_done']."' aria-valuemin='0' aria-valuemax='100' style='width: ".$row['percent_done']."%;'>
+				<div class='progress-bar " . $cor . " ' role='progressbar' aria-valuenow='".$row['percent_done']."' aria-valuemin='0' aria-valuemax='100' style='width: ".$row['percent_done']."%;'>
 				 			".$row['percent_done']." %
 				</div>
 			</div>
 		</td>
 		<td style='text-align:center; vertical-align:middle;'>
 		<div class='progress' style='margin-top: 19px;'>
-			<div class='progress-bar ". $cor_due ." progress-bar-striped active' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
+			<div class='progress-bar ". $cor_due ." ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
 	 				 		" . $message . "
 	 			</div>
 	 		</div>

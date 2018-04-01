@@ -173,7 +173,7 @@ $_SESSION['back'] = $back;
    	echo "<body style=\"background: url('./img/".$back."') no-repeat top center fixed; \">";
    }
    else {
-   	echo "<body style='background-color:#E5E5E5;'>";
+   	echo "<body style='background-color:#e5e5e5;'>";
    }	 
    ?>
    
@@ -320,8 +320,19 @@ $sql_users = " SELECT COUNT(DISTINCT `glpi_users`.id) AS total
 $result_users = $DB->query($sql_users);
 $total_users = $DB->fetch_assoc($result_users);
 
-?>
+//count due tickets
+$sql_due = "SELECT DISTINCT COUNT(glpi_tickets.id) AS total
+FROM glpi_tickets
+WHERE glpi_tickets.status NOT IN (5,6)
+AND glpi_tickets.is_deleted = 0
+AND glpi_tickets.time_to_resolve IS NOT NULL
+AND glpi_tickets.time_to_resolve < NOW()
+".$entidade." ";
 
+$result_due = $DB->query($sql_due);
+$total_due = $DB->fetch_assoc($result_due);
+
+?>
 <div class="site-holder">
 <!-- top -->
 <!-- .box-holder -->
@@ -330,7 +341,7 @@ $total_users = $DB->fetch_assoc($result_users);
       
 			<div id="panels" class="row">
 				<!-- COLUMN 1 -->															
-					  <div class="col-md-3 col-sm-3">
+					  <div class="col-md-2 col-sm-2">
 						 <div class="dashbox shad panel panel-default db-red">
 							<div class="panel-body">
 							   <div class="panel-left red redbg">
@@ -345,7 +356,7 @@ $total_users = $DB->fetch_assoc($result_users);
 						 </div>
 					  </div>
 					  
-					  <div class="col-md-3 col-sm-3">
+					  <div class="col-md-2 col-sm-2">
 						 <div class="dashbox shad panel panel-default db-blue">
 							<div class="panel-body">
 							   <div class="panel-left blue bluebg">
@@ -360,7 +371,7 @@ $total_users = $DB->fetch_assoc($result_users);
 						 </div>
 					  </div>																		
             								
-					  <div class="col-md-3 col-sm-3">
+					  <div class="col-md-2 col-sm-2">
 						 <div class="dashbox shad panel panel-default db-purple">
 							<div class="panel-body">
 							   <div class="panel-left purple purplebg">
@@ -373,21 +384,50 @@ $total_users = $DB->fetch_assoc($result_users);
 							   </div>										   
 							</div>
 						 </div>
-					  </div>
+					  </div>					 
 					  
-					  <div class="col-md-3 col-sm-3">
+					 <div class="col-md-2 col-sm-2">
 						 <div class="dashbox shad panel panel-default db-dred">
 							<div class="panel-body">
 							   <div class="panel-left dredbg">
-									<i class="fa fa-tag fa-3x"></i>
+									<i class="fa fa-clock-o fa-clock-o-index fa-3x"></i>
 							   </div>
 					   		<div class="panel-right right">
 									<div id="odometer4" class="odometer" style="font-size: 25px;">   </div><p></p>
+               				<span class="chamado"><?php echo __('Tickets','dashboard'); ?></span><br>
+               				<span class="date"><b><?php echo __('Late','dashboard'); ?></b></span>                      				
+							   </div>
+							</div>
+						 </div>
+					 </div>	  
+
+					  <div class="col-md-2 col-sm-2">
+						 <div class="dashbox shad panel panel-default db-brown">
+							<div class="panel-body">
+							   <div class="panel-left brownbg">
+									<i class="fa fa-tag fa-tag-index fa-3x"></i>
+							   </div>
+					   		<div class="panel-right right">
+									<div id="odometer5" class="odometer" style="font-size: 25px;">   </div><p></p>
                				<span class="chamado"><?php echo __('Backlog','dashboard'); ?></span><br>                        				
 							   </div>
 							</div>
 						 </div>
-					  </div>								  	
+					  </div>						 					 
+					  
+					 <div class="col-md-2 col-sm-2">
+						 <div class="dashbox shad panel panel-default db-orange">
+							<div class="panel-body">
+							   <div class="panel-left orangebg">
+									<i class="fa fa-users fa-3x"></i>
+							   </div>
+					   		<div class="panel-right right">
+									<div id="odometer6" class="odometer" style="font-size: 25px;">   </div><p></p>
+               				<span class="chamado"><?php echo __('users','dashboard'); ?></span><br>                        				
+							   </div>
+							</div>
+						 </div>
+					</div>						 							  	
 					  														                          				                           							
 			</div>                       
                 
@@ -402,8 +442,9 @@ $total_users = $DB->fetch_assoc($result_users);
 	    odometer1.innerHTML = <?php echo $total_hoje['total']; ?>;
 	    odometer2.innerHTML = <?php echo $total_mes['total']; ?>;
 	    odometer3.innerHTML = <?php echo $total_ano['total']; ?>;
-	    odometer4.innerHTML = <?php echo $total_ano_ab['total']; ?>;
-//	    odometer5.innerHTML = <?php echo $total_users['total']; ?>;
+	    odometer4.innerHTML = <?php echo $total_due['total']; ?>;
+	    odometer5.innerHTML = <?php echo $total_ano_ab['total']; ?>;
+	    odometer6.innerHTML = <?php echo $total_users['total']; ?>;
 	}, 1000);
 </script> 
 
@@ -763,7 +804,7 @@ $total_users = $DB->fetch_assoc($result_users);
 	</div>
 
 	<div class="col-sm-6 col-md-6" style="margin-rightx:-15px;">  	 				              
-		 <div id="logged_users" class="widget widget-table action-table">
+		 <div id="logged_users" class="widget widget-table action-table card1">
             <div class="widget-header wblue">
 				<?php
 				//logged users								

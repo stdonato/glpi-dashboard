@@ -294,7 +294,6 @@ if(isset($_GET['con'])) {
 	}
 
 $sql_tec = "
-
 SELECT DISTINCT glpi_users.id AS id , glpi_users.firstname AS fname, glpi_users.realname AS rname, COUNT(glpi_tickets.id) AS chamados, glpi_users.picture
 FROM glpi_users , glpi_tickets_users, glpi_profiles_users, glpi_tickets". $glpi_techs ."
 WHERE glpi_tickets_users.users_id = glpi_users.id
@@ -345,12 +344,12 @@ echo "
 				<th style='text-align:center; cursor:pointer;'> ". __('Technician','dashboard') ." </th>
 				<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Tickets')." </th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Opened','dashboard') ."</th>
+				<th style='text-align:center; cursor:pointer;'> ". __('Late') ."</th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Solved','dashboard') ."</th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Closed','dashboard') ."</th>				
 				<th style='text-align:center; '> % ". __('Closed','dashboard') ."</th> 
-				<th style='text-align:center; cursor:pointer;'> ". __('Late') ."</th>
-				<th style='text-align:center; '> % ". __('Late') . "</th> 
-				<th style='text-align:center; cursor:pointer;'> ". __('Backlog','dashboard') ."</th>";
+				<th style='text-align:center; cursor:pointer;'> ". __('Backlog','dashboard') ."</th>
+				<th style='text-align:center; cursor:pointer;'> ". __('Backlog (Acumulado)','dashboard') ."</th>";
 				if($sats != '') {
 					echo "<th style='text-align:center; '> ". __('Satisfaction','dashboard') ."</th>";
 				}
@@ -358,10 +357,11 @@ echo "
 		</thead>
 	<tbody>";
 
+//				<th style='text-align:center; '> % ". __('Late') . "</th> 
 
 while($id_tec = $DB->fetch_assoc($result_tec)) {
 
-//chamados abertos
+//chamados total
 $sql_total = "SELECT count( glpi_tickets.id ) AS total, glpi_tickets_users.users_id AS id
 FROM glpi_tickets_users, glpi_tickets, glpi_users". $glpi_groups ."
 WHERE glpi_tickets.id = glpi_tickets_users.tickets_id
@@ -519,13 +519,39 @@ $data_due = $DB->fetch_assoc($result_due);
  
 $atrasados = $data_due['total'];
 
-//opened
+
+// backlog acumulado
+$sql_bac = "SELECT count( glpi_tickets.id ) AS total, glpi_tickets_users.users_id AS id
+FROM glpi_tickets_users, glpi_tickets, glpi_users". $glpi_groups ."
+WHERE glpi_tickets.id = glpi_tickets_users.tickets_id
+AND glpi_tickets.date < '".$data_ini." 00:00:00' 
+AND glpi_tickets_users.users_id = ".$id_tec['id']."
+AND glpi_tickets.status <> 6
+AND glpi_tickets_users.users_id = glpi_users.id
+AND glpi_tickets.is_deleted = 0
+AND glpi_tickets_users.type = 2
+". $entidade ."
+". $grupo_tic ."
+". $grupo_tic1 ." " ;			
+
+$result_bac = $DB->query($sql_bac) or die ("erro_ab");
+$data_bac = $DB->fetch_assoc($result_bac);
+
+$back_ac = $data_bac['total'];		
+
+
+//backlog
 $backlog = ($total - $fechados);
 			
 if($backlog >= 1) { $back_cor = 'label label-md label-danger'; }
 if($backlog == 0) { $back_cor = 'label label-md label-primary'; }
 if($backlog <= -1) { $back_cor = 'label label-md label-success'; }
 
+$backlog_ac = ($back_ac + $backlog);		
+				
+if($backlog_ac >= 1) { $back_cor_ac = 'label label-md label-danger'; }
+if($backlog_ac == 0) { $back_cor_ac = 'label label-md label-primary'; }
+if($backlog_ac <= -1) { $back_cor_ac = 'label label-md label-success'; }
 
 //barra de porcentagem - Chamados no prazo
 if($conta_cons > 0) {
@@ -559,25 +585,32 @@ else { $barra_due = 0;}
 			</td>
 			<td style='vertical-align:middle; text-align:center;'> ". $total ." </td>
 			<td style='vertical-align:middle; text-align:center;'> ". $abertos ." </td>
+		   <td style='vertical-align:middle; text-align:center;'> ". $atrasados ." </td>
 			<td style='vertical-align:middle; text-align:center;'> ". $solucionados ." </td>
 			<td style='vertical-align:middle; text-align:center;'> ". $fechados ." </td>			
 			<td style='vertical-align:middle; text-align:center;'>
 				<div class='progress' style='margin-top: 5px; margin-bottom: 5px;'>
-					<div class='progress-bar ". $cor ." progress-bar-striped active' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='color:".$text_color."; width: ".$width."%;'>
+					<div class='progress-bar ". $cor ." ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='color:".$text_color."; width: ".$width."%;'>
 			 			".$barra."%
 			 		</div>
 				</div>
 		   </td>
-		   <td style='vertical-align:middle; text-align:center;'> ". $atrasados ." </td>
-		   <td style='vertical-align:middle; text-align:center;'>
+		   
+		   </td>
+			<td style='vertical-align:middle; text-align:center;'><h4><span class='".$back_cor."'>". $backlog ."</span></h4></td>
+			<td style='vertical-align:middle; text-align:center;'><h4><span class='".$back_cor_ac."'>". $backlog_ac ."</span></h4></td> ";			
+
+/*
+<td style='vertical-align:middle; text-align:center;'>
 				<div class='progress' style='margin-top: 5px; margin-bottom: 5px;'>
-					<div class='progress-bar ". $cor_due ." progress-bar-striped active' role='progressbar' aria-valuenow='".$barra_due."' aria-valuemin='0' aria-valuemax='100' style='color:".$text_color_due."; width: ".$barra_due."%;'>
+					<div class='progress-bar ". $cor_due ." ' role='progressbar' aria-valuenow='".$barra_due."' aria-valuemin='0' aria-valuemax='100' style='color:".$text_color_due."; width: ".$barra_due."%;'>
 			 			".$barra_due."%
 			 		</div>
 				</div>
 		   </td> 
-		   </td>
-		   <td style='vertical-align:middle; text-align:center;'><h4><span class='".$back_cor."'>". $backlog ."</span></h4></td>";
+
+*/
+
 		   
 if($sats != '') {
 		echo "<td style='vertical-align:middle; text-align:center;'>		

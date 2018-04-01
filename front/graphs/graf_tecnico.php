@@ -344,66 +344,66 @@ echo '<div id="name"  style="margin-top: 15px;">
 	
 <div class="row" style="margin: 10px 0px 0 0;" >	
 <div style="margin-top: 20px; height: 45px;">
-							<!-- COLUMN 1 -->															
-								  <div class="col-sm-3 col-md-3 stat" >
-									 <div class="dashbox shad panel panel-default db-blue">
-										<div class="panel-body_2">
-										   <div class="panel-left red" style = "margin-top: -5px; margin-left: -5px;">
-												<i class="fa fa-tags fa-3x fa2"></i>
-										   </div>
-										   <div class="panel-right">
-										     <div id="odometer1" class="odometer" style="font-size: 22px; margin-top: 1px;">  </div><p></p>
-                        				<span class="chamado">'. __('Tickets','dashboard').'</span><br>
-                        				<span class="date" style="font-size: 16px;"><b>'. _x('status', 'New').' + '.__('Assigned').'</b></span>												
-										   </div>
-										</div>
-									 </div>
-								  </div>
-								  
-								  <div class="col-sm-3 col-md-3">
-									 <div class="dashbox shad panel panel-default db-yellow">
-										<div class="panel-body_2">
-										   <div class="panel-left yellow" style = "margin-top: -5px; margin-left: -5px;">
-												<i class="fa fa-clock-o fa-3x fa2"></i>
-										   </div>
-										   <div class="panel-right">										 
-											<div id="odometer2" class="odometer" style="font-size: 22px; margin-top: 1px;">   </div><p></p>
-                        				<span class="chamado">'. __('Tickets','dashboard').'</span><br>
-                        				<span class="date"><b>'. __('Pending').'</b></span>
-										   </div>
-										</div>
-									 </div>
-								  </div>																		
-                     								
-								  <div class="col-sm-3 col-md-3">
-									 <div class="dashbox shad panel panel-default db-red">
-										<div class="panel-body_2">
-										   <div class="panel-left yellow" style = "margin-top: -5px; margin-left: -5px;">
-												<i class="fa fa-check-square fa-3x fa2"></i>
-										   </div>
-										   <div class="panel-right">
-												<div id="odometer3" class="odometer" style="font-size: 22px; margin-top: 1px;">   </div><p></p>
-                        				<span class="chamado">'. __('Tickets','dashboard').'</span><br>
-                        				<span class="date"><b>'. __('Solved','dashboard').'</b></span>
-										   </div>										   
-										</div>
-									 </div>
-								  </div>
-								  <div class="col-sm-3 col-md-3">
-									 <div class="dashbox shad panel panel-default db-orange">
-										<div class="panel-body_2">
-										   <div class="panel-left green" style = "margin-top: -5px; margin-left: -5px;">
-												<i class="fa fa-times-circle fa-3x fa2"></i>
-										   </div>
-								   		<div class="panel-right">
-												<div id="odometer4" class="odometer" style="font-size: 22px; margin-top: 1px;">   </div><p></p>
-                        				<span class="chamado">'. __('Tickets','dashboard').'</span><br>
-                        				<span class="date"><b>'. __('Closed','dashboard').'</b></span>
-										   </div>
-										</div>
-									 </div>
-								  </div>																	                          				                           							
-						</div>   		
+		<!-- COLUMN 1 -->															
+			  <div class="col-sm-3 col-md-3 stat" >
+				 <div class="dashbox shad panel panel-default db-blue">
+					<div class="panel-body_2">
+					   <div class="panel-left red bluebg" style = "margin-top: -5px; margin-left: -5px;">
+							<i class="fa fa-tags fa-3x fa2"></i>
+					   </div>
+					   <div class="panel-right">
+					     <div id="odometer1" class="odometer" style="font-size: 22px; margin-top: 1px;">  </div><p></p>
+         				<span class="chamado">'. __('Tickets','dashboard').'</span><br>
+         				<span class="date" style="font-size: 16px;"><b>'. _x('status', 'New').' + '.__('Assigned').'</b></span>												
+					   </div>
+					</div>
+				 </div>
+			  </div>
+			  
+			  <div class="col-sm-3 col-md-3">
+				 <div class="dashbox shad panel panel-default db-orange">
+					<div class="panel-body_2">
+					   <div class="panel-left orange orangebg " style = "margin-top: -5px; margin-left: -5px;">
+							<i class="fa fa-clock-o fa-3x fa2"></i>
+					   </div>
+					   <div class="panel-right">										 
+						<div id="odometer2" class="odometer" style="font-size: 22px; margin-top: 1px;">   </div><p></p>
+         				<span class="chamado">'. __('Tickets','dashboard').'</span><br>
+         				<span class="date"><b>'. __('Pending').'</b></span>
+					   </div>
+					</div>
+				 </div>
+			  </div>																		
+      								
+			  <div class="col-sm-3 col-md-3">
+				 <div class="dashbox shad panel panel-default db-red">
+					<div class="panel-body_2">
+					   <div class="panel-left yellow redbg" style = "margin-top: -5px; margin-left: -5px;">
+							<i class="fa fa-check-square fa-3x fa2"></i>
+					   </div>
+					   <div class="panel-right">
+							<div id="odometer3" class="odometer" style="font-size: 22px; margin-top: 1px;">   </div><p></p>
+         				<span class="chamado">'. __('Tickets','dashboard').'</span><br>
+         				<span class="date"><b>'. __('Solved','dashboard').'</b></span>
+					   </div>										   
+					</div>
+				 </div>
+			  </div>
+			  <div class="col-sm-3 col-md-3">
+				 <div class="dashbox shad panel panel-default db-yellow">
+					<div class="panel-body_2">
+					   <div class="panel-left yellow yellowbg" style = "margin-top: -5px; margin-left: -5px;">
+							<i class="fa fa-times-circle fa-3x fa2"></i>
+					   </div>
+			   		<div class="panel-right">
+							<div id="odometer4" class="odometer" style="font-size: 22px; margin-top: 1px;">   </div><p></p>
+         				<span class="chamado">'. __('Tickets','dashboard').'</span><br>
+         				<span class="date"><b>'. __('Closed','dashboard').'</b></span>
+					   </div>
+					</div>
+				 </div>
+			  </div>																	                          				                           							
+	</div>   		
 </div>
 </div>';
 ?>

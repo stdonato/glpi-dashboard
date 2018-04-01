@@ -508,11 +508,12 @@ if($con == "1") {
 		$datas2 = "BETWEEN '".$data_ini2." 00:00:00' AND '".$data_fin2." 23:59:59'";	
 	}	
 	
-	if($id_sta == 5) {
+	//date type
+	if($id_sta1 == 5) {
 		$period = "AND glpi_tickets.solvedate ".$datas2." ";	
 	}
 	
-	elseif($id_sta == 6) {
+	elseif($id_sta1 == 6) {
 		$period = "AND glpi_tickets.closedate ".$datas2." ";	
 	}	
 	
@@ -539,7 +540,7 @@ if($con == "1") {
 	$result_cham = $DB->query($sql_cham);
 	
 	$consulta1 = 
-	"SELECT glpi_tickets.id AS total
+	"SELECT COUNT(glpi_tickets.id) AS total
 	FROM glpi_tickets
 	WHERE glpi_tickets.is_deleted = 0
 	".$entidade."
@@ -552,7 +553,8 @@ if($con == "1") {
 	AND glpi_tickets.type LIKE '%".$id_tip."' ";
 	
 	$result_cons1 = $DB->query($consulta1);
-	$conta_cons = $DB->numrows($result_cons1);
+	//$conta_cons = $DB->numrows($result_cons1);
+	$conta_cons = $DB->result($result_cons1,0,'total');
 	
 	$consulta = $conta_cons;
 
@@ -710,7 +712,7 @@ if($consulta > 0) {
 			
 		//categoria	
 		$sql_cat = "SELECT glpi_tickets.id AS id, glpi_itilcategories.completename AS name
-		FROM `glpi_tickets` , glpi_itilcategories
+		FROM `glpi_tickets`, glpi_itilcategories
 		WHERE glpi_tickets.itilcategories_id = glpi_itilcategories.`id`
 		AND glpi_tickets.id = ". $row['id'] ." ";
 		

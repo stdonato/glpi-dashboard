@@ -375,7 +375,7 @@ if($con == "1") {
 			<td colspan='3' style='font-size: 18px; font-weight:bold; vertical-align:middle; width:200px;'><span style='font-size: 18px; color:#000;'>".__('Period', 'dashboard') .": </span> " . conv_data($data_ini2) ." a ". conv_data($data_fin2)."
 			<td style='vertical-align:middle; width: 190px; '>
 				<div class='progress' style='margin-top: 19px;'>
-					<div class='progress-bar ". $cor ." progress-bar-striped active' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
+					<div class='progress-bar ". $cor ." ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
 			 			".$barra." % ".__('Closed', 'dashboard') ."
 			 		</div>
 				</div>

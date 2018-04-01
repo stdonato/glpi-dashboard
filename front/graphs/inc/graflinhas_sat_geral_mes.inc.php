@@ -415,9 +415,7 @@ echo           "height: 460
                 verticalAlign: 'bottom',
                 x: 0,
                 y: 0,
-                //floating: true,
                 borderWidth: 0,
-                //backgroundColor: '#FFFFFF',
                 adjustChartSize: true
             },
             xAxis: {
@@ -441,9 +439,7 @@ if(array_sum($quantsat) != 0) {
 	 						minPadding: 0,
    	 					maxPadding: 0,
     						min: 0,
-    						//max:1,
    						showLastLabel:false,
-    						//tickInterval:1,
 
                 title: { // Primary yAxis
                     text: '".__('Tickets','dashboard')."'
@@ -475,9 +471,7 @@ echo "      yAxis: {
 	 						minPadding: 0,
    	 					maxPadding: 0,
     						min: 0,
-    						//max:1,
    						showLastLabel:false,
-    						//tickInterval:1,
 
                 title: { // Primary yAxis
                     text: '".__('Tickets','dashboard')."'
@@ -522,14 +516,11 @@ if(array_sum($quantsat) != 0) {
                 },
                     dataLabels: {
                     enabled: true,
-                    //color: '#000099',
                     align: 'center',
                     x: 1,
                     y: 1,
                     format: '{y} %',
                     style: {
-                        //fontSize: '11px',
-                        //fontFamily: 'Verdana, sans-serif'
                     },
                     formatter: function () {
                     return Highcharts.numberFormat(this.y, 0, '','');
@@ -544,13 +535,8 @@ echo "
                 name: '".__('Opened','dashboard')." (".$opened.")',
 
                  dataLabels: {
-                    enabled: true,
-                    //color: '#000',
-                    style: {
-                        //fontSize: '11px',
-                        //fontFamily: 'Verdana, sans-serif',
-                        //fontWeight: 'bold'
-                    },
+                    enabled: true
+
                     },
                 data: [$quantm2]
                 },
@@ -558,14 +544,8 @@ echo "
     				{
                 name: '" . __('Solved','dashboard')." (".$solved.")',
                 dataLabels: {
-                    enabled: false,
-                    //color: '#000',
-                    style: {
-                        //fontSize: '11px',
-                        //fontFamily: 'Verdana, sans-serif',
-                        //fontWeight: 'bold'
-                    },
-                    },
+                    enabled: false
+                },
                 data: [$quants2]
                 },
 
@@ -573,13 +553,7 @@ echo "
                 name: '".__('Late','dashboard')." (".$late.")',
 
                 dataLabels: {
-                    enabled: true,
-                    //color: '#800000',
-                    style: {
-                        //fontSize: '11px',
-                        //fontFamily: 'Verdana, sans-serif',
-                        //fontWeight: 'bold'
-                    },
+                    enabled: true
                     },
                 data: [$quanta2]
                 },
@@ -587,13 +561,7 @@ echo "
                 {
                 name: '".__('Closed','dashboard')." (".$closed.")',
                 dataLabels: {
-                    enabled: false,
-                    //color: '#000',
-                    style: {
-                        //fontSize: '11px',
-                        //fontFamily: 'Verdana, sans-serif',
-                        //fontWeight: 'bold'
-                    },
+                    enabled: false
                     },
                 data: [$quantf2]
                 },

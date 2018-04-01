@@ -354,7 +354,7 @@ else {
 					<td style='vertical-align:middle; text-align:center;'> ". $fechados ." </td>						
 					<td style='vertical-align:middle; text-align:center;'> 
 						<div class='progress' style='margin-top: 5px; margin-bottom: 5px;'>
-							<div class='progress-bar ". $cor ." progress-bar-striped active' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
+							<div class='progress-bar ". $cor ." ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
 					 			".$barra." % 	
 					 		</div>		
 						</div>			

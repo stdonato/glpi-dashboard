@@ -880,6 +880,14 @@ table.sortable thead {
 	color:#298EE3;
 }
 
+.fa-clock-o-index {
+	color:#D9534F;
+}
+
+.fa-tag-index {
+	color:#5b3837;
+}
+
 .fa-plus-square, .fa-check-square {
 	color:#F1B119;
 }

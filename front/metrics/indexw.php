@@ -151,7 +151,7 @@
 
 		<div style="min-height: 100px;" class="col-lg-5 cf-item-status tickets all">				
 			<header>
-					<p><span></span><?php echo __('Total')." / ". __('Backlog');?></p>
+					<p><span></span><?php echo __('Total');?></p>
 			</header>
 			<div class="content">
 				<div class="metric5"><?php echo $total;?></div>
@@ -169,7 +169,7 @@
 				<div class="content">
 					<div class="cf-td">
 					<!-- <div class="cf-td cf-td-12"> -->
-						<div class="cf-version metric-small" style="font-size:32px !important;"><?php echo $actent; ?></div>
+						<div class="cf-version metric-small" style="font-size:30px !important;"><?php echo $actent; ?></div>
 						<div class="cf-td-time metric hora"></div>
 						<div class="cf-td-dd">
 							<!--<p class="cf-td-day metric-small" ></p>
@@ -185,7 +185,7 @@
 								var curr_month = d.getMonth();
 								var curr_year = d.getFullYear();
 			
-								document.write("<span style='font-size:28px; margin-top: -6px !important;'>" + d_names + "</span><br> <span style='font-size:28px;'>" + curr_date + " " + m_names + " " + curr_year + "</span><br>" );		
+							document.write("<span style='font-size:26px; margin-top: -6px !important;'>" + d_names + "</span><br> <span style='font-size:26px;'>" + curr_date + " " + m_names + " " + curr_year + "</span><br>" );		
 							</script>
 							<span style="font-size:20px;"><?php echo __('Period'). ": ".$period_name ?></span>
 						</div>					

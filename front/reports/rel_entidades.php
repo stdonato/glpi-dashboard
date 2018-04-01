@@ -218,10 +218,12 @@ if(isset($_GET['con'])) {
 						<th style='text-align:center; cursor:pointer;'> ". _n('Entity','Entities',2) ." </th>
 						<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer;'> ".__('Tickets')." </th>
 						<th style='text-align:center; cursor:pointer;'> ". __('Opened','dashboard') ."</th>
+						<th style='text-align:center; cursor:pointer;'> ". __('Late','dashboard') ."</th>
 						<th style='text-align:center; cursor:pointer;'> ". __('Solved','dashboard') ."</th>	
 						<th style='text-align:center; cursor:pointer;'> ". __('Closed','dashboard') ."</th>									
 						<th style='text-align:center; '> % ". __('Closed','dashboard') ."</th>
-						<th style='text-align:center; '>". __('Backlog','dashboard') ."</th> ";
+						<th style='text-align:center; '>". __('Backlog','dashboard') ."</th>
+						<th style='text-align:center; '>". __('Backlog (Acumulado)','dashboard') ."</th> ";
 		
 						echo "</tr>
 				</thead>
@@ -236,7 +238,7 @@ if(isset($_GET['con'])) {
 			WHERE glpi_tickets.entities_id = glpi_entities.id
 			AND glpi_entities.id = ".$id_ent['id']."
 			AND glpi_tickets.is_deleted = 0
-			".$entidade."
+
 			AND glpi_tickets.date ".$datas2." ";
 			
 			$result_cham = $DB->query($sql_cham) or die ("erro_cham");
@@ -252,7 +254,7 @@ if(isset($_GET['con'])) {
 			AND glpi_entities.id = ".$id_ent['id']."
 			AND glpi_tickets.is_deleted = 0
 			AND glpi_tickets.status NOT IN ".$status_closed."
-			".$entidade."
+
 			AND glpi_tickets.date ".$datas2." ";
 			
 			$result_ab = $DB->query($sql_ab) or die ("erro_ab");
@@ -268,7 +270,7 @@ if(isset($_GET['con'])) {
 			AND glpi_entities.id = ".$id_ent['id']."
 			AND glpi_tickets.is_deleted = 0
 			AND glpi_tickets.status = 5
-			".$entidade."
+
 			AND glpi_tickets.solvedate ".$datas2." ";
 			
 			$result_sol = $DB->query($sql_sol) or die ("erro_ab");
@@ -284,29 +286,68 @@ if(isset($_GET['con'])) {
 			AND glpi_entities.id = ".$id_ent['id']."
 			AND glpi_tickets.is_deleted = 0
 			AND glpi_tickets.status = 6
-			".$entidade."
 			AND glpi_tickets.closedate ".$datas2." ";
 			
 			$result_clo = $DB->query($sql_clo) or die ("erro_ab");
 			$data_clo = $DB->fetch_assoc($result_clo);
 			
 			$fechados = $data_clo['total'];
+
+
+			//chamados atrasados
+			$sql_due = "
+			SELECT count( glpi_tickets.id ) AS total, glpi_tickets.id as ID
+			FROM glpi_entities, glpi_tickets
+			WHERE glpi_tickets.entities_id = glpi_entities.id
+			AND `glpi_tickets`.`time_to_resolve` IS NOT NULL 
+			AND  `glpi_tickets`.is_deleted = 0
+			AND `glpi_tickets`.`status` <> 4
+			AND glpi_tickets.date ".$datas2." 
+			AND 
+			(
+			  `glpi_tickets`.`solvedate` > `glpi_tickets`.`time_to_resolve`  
+			  OR (
+			    `glpi_tickets`.`solvedate` IS NULL AND `glpi_tickets`.`time_to_resolve` < NOW()
+			  )
+			)
+			AND glpi_entities.id = ".$id_ent['id']."  " ;
 			
-		
-			//solved
-			//$solucionados = round(($fechados*100)/$chamados,1);
+			$result_due = $DB->query($sql_due) or die ("erro_late");
+			$data_due = $DB->fetch_assoc($result_due);
+			 
+			$atrasados = $data_due['total'];
+					
+			// backlog acumulado
+			$sql_bac = "SELECT count(glpi_tickets.id) AS total
+			FROM glpi_entities, glpi_tickets
+			WHERE glpi_tickets.entities_id = glpi_entities.id
+			AND glpi_entities.id = ".$id_ent['id']."
+			AND glpi_tickets.is_deleted = 0
+			AND glpi_tickets.status <> 6			
+			AND glpi_tickets.date < '".$data_ini." 00:00:00' ";
 			
+			$result_bac = $DB->query($sql_bac) or die ("erro_ab");
+			$data_bac = $DB->fetch_assoc($result_bac);
+			
+			$back_ac = $data_bac['total'];		
+				
 			//opened		
 			$cont_abertos = ($chamados - $fechados);
 			if($cont_abertos < 0) { $abertos = 0; }
 			else { $abertos = $cont_abertos; }
 
-			//opened
+			//backlog
 			$backlog = ($chamados - $fechados);
 						
 			if($backlog >= 1) { $back_cor = 'label label-md label-danger'; }
 			if($backlog == 0) { $back_cor = 'label label-md label-primary'; }
-			if($backlog <= -1) { $back_cor = 'label label-md label-success'; }
+			if($backlog <= -1) { $back_cor = 'label label-md label-success'; }		
+
+			$backlog_ac = ($back_ac + $backlog);	
+							
+			if($backlog_ac >= 1) { $back_cor_ac = 'label label-md label-danger'; }
+			if($backlog_ac == 0) { $back_cor_ac = 'label label-md label-primary'; }
+			if($backlog_ac <= -1) { $back_cor_ac = 'label label-md label-success'; }
 			
 			//barra de porcentagem
 			if($conta_cons > 0) {
@@ -331,16 +372,18 @@ if(isset($_GET['con'])) {
 					<td style='vertical-align:middle; text-align:left;'><a href='rel_entidade.php?con=1&sel_ent=". $id_ent['id'] ."&date1=".$data_ini."&date2=".$data_fin."' target='_blank' >" . $id_ent['name'] ."</a></td>
 					<td style='vertical-align:middle; text-align:center;'> ". $chamados ." </td>
 					<td style='vertical-align:middle; text-align:center;'> ". $abertos ." </td>
+					<td style='vertical-align:middle; text-align:center;'> ". $atrasados ." </td>
 					<td style='vertical-align:middle; text-align:center;'> ". $solucionados ." </td>
 					<td style='vertical-align:middle; text-align:center;'> ". $fechados ." </td>			
 					<td style='vertical-align:middle; text-align:center;'> 
 						<div class='progress' style='margin-top: 5px; margin-bottom: 5px;'>
-							<div class='progress-bar ". $cor ." progress-bar-striped active' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$width."%;'>
+							<div class='progress-bar ". $cor ." ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$width."%;'>
 					 			".$barra." % 	
 					 		</div>		
 						</div>			
 				   </td>
-				   <td style='vertical-align:middle; text-align:center;'><h4><span class='".$back_cor."'>". $backlog ."</span></h4></td>";	
+				   <td style='vertical-align:middle; text-align:center;'><h4><span class='".$back_cor."'>". $backlog ."</span></h4></td>
+				   <td style='vertical-align:middle; text-align:center;'><h4><span class='".$back_cor_ac."'>". $backlog_ac ."</span></h4></td> ";			
 						
 			echo "</tr>";
 				

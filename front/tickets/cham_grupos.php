@@ -214,7 +214,7 @@ else {
 <div id='content'>
 	<div id='container-fluid' > 
 		<div id="head-cham" class="row-fluid">
-			<table class="col-ms-12 col-sm-12" style="margin-left: auto; margin-right: auto;">
+			<table class="col-lg-12 col-md-12 col-sm-12" style="margin-left: auto; margin-right: auto;">
 				<tr><td>&nbsp;</td></tr>
 				<tr>
 					<td align="center"><span class="titulo_cham"><?php echo  $group_name; ?></span> </td>
@@ -452,7 +452,7 @@ else {
 					$time_total = strtotime($row['duedate']) - strtotime($row['initdate']);
 					$time_pass = strtotime($row['duedate']) - strtotime($now);
 					$perc = round(($time_pass*100)/$time_total,1);
-					$barra = round(100 - $perc,0);
+					$barra = round(100 - $perc,1);
 			
 					// cor barra
 					if($barra == 100) { $cor = "progress-bar-danger"; }
@@ -466,7 +466,7 @@ else {
 				if($row['duedate'] != ''  && $row['duedate'] < $now ) {
 					echo "<td style='text-align:center; vertical-align:middle; font-size:14pt; color:red;'><span>". conv_data_hora($row['duedate']) ."</span> 
 								<div class='progress' style='margin-top: 9px;'>
-									<div class='progress-bar progress-bar-danger progress-bar-striped' role='progressbar' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100' style='width: 100%;'>
+									<div class='progress-bar progress-bar-danger ' role='progressbar' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100' style='width: 100%;'>
 						    			<span style='font-weight:bold; color:#fff;'> 100% </span>
 						    		</div>
 								</div>								
@@ -477,7 +477,7 @@ else {
 						if($barra != 0) { 
 						echo " 
 								<div class='progress' style='margin-top: 9px;'>
-									<div class='progress-bar ". $cor ." progress-bar-striped ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
+									<div class='progress-bar ". $cor ."  ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
 						    			<span style='font-weight:bold; color:#fff;'>".$barra."% </span> 
 						    		</div>
 								</div>								

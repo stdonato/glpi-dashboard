@@ -840,6 +840,14 @@ table.sortable thead {
 	color:#298EE3;
 }
 
+.fa-clock-o-index {
+	color:#D9534F;
+}
+
+.fa-tag-index {
+	color:#5b3837;
+}
+
 .fa-plus-square, .fa-check-square {
 	color:#F1B119;
 }
@@ -851,7 +859,9 @@ table.sortable thead {
 .dashbox .panel-left {
     width: 30%;
     float: left;
-    padding: 20px;
+    padding-left: 2px;
+    padding-top: 25px;
+    padding-bottom: 25px;
     border-radius: 4px 0px 0px 4px;
     color: #FFF;
     text-align: center;

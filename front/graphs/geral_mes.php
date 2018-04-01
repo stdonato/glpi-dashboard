@@ -22,7 +22,6 @@ global $DB;
     case "11": $mes = __('November','dashboard'); break;
     case "12": $mes = __('December','dashboard'); break;
     }
-
 ?>
 
 <html> 

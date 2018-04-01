@@ -392,7 +392,7 @@ else {
 			</td>
 				<td style='vertical-align:middle; width: 190px; '>
 				<div class='progress' style='margin-top: 19px;'>
-					<div class='progress-bar ". $cor ." progress-bar-striped active' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
+					<div class='progress-bar ". $cor ." ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
 		    			".$barra." % ".__('Closed', 'dashboard') ."
 		    		</div>
 				</div>
@@ -445,17 +445,25 @@ else {
 		    if($status1 == "6" ) { $status1 = "closed";}
 
 			//requerente
-			$sql_user = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
+/*			$sql_user = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
 			FROM `glpi_tickets_users` , glpi_tickets, glpi_users
 			WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
 			AND glpi_tickets.id = ". $row['id'] ."
 			AND glpi_tickets_users.`users_id` = glpi_users.id
 			AND glpi_tickets_users.type = 1
+			".$entidade." ";*/
+			
+			//requerente
+			$sql_user = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname, glpi_tickets_users.alternative_email AS amail
+			FROM glpi_tickets, glpi_tickets_users
+			LEFT OUTER JOIN glpi_users on glpi_tickets_users.users_id = glpi_users.id
+			WHERE glpi_tickets.id = glpi_tickets_users.tickets_id
+			AND glpi_tickets.id = ". $row['id'] ."
+			AND glpi_tickets_users.type = 1
 			".$entidade." ";
 
 			$result_user = $DB->query($sql_user);
-
-			    $row_user = $DB->fetch_assoc($result_user);
+			$row_user = $DB->fetch_assoc($result_user);
 
 			//tecnico
 			$sql_tec = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
@@ -467,8 +475,7 @@ else {
 			".$entidade." ";
 
 			$result_tec = $DB->query($sql_tec);
-
-			    $row_tec = $DB->fetch_assoc($result_tec);
+			$row_tec = $DB->fetch_assoc($result_tec);
 
 			echo "
 			<tr style='font-weight:normal;'>

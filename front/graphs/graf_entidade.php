@@ -170,24 +170,24 @@ $selected = $id_ent;
 						<td>
 						<?php
 							echo'
-									<table>
-										<tr>
-											<td>
-											   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-											    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
-											    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-										    	</div>
-											</td>
-											<td>&nbsp;</td>
-											<td>
-										   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-											    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
-											    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-										    	</div>
-											</td>
-											<td>&nbsp;</td>
-										</tr>
-									</table> ';
+								<table>
+									<tr>
+										<td>
+										   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+										    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
+										    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+									    	</div>
+										</td>
+										<td>&nbsp;</td>
+										<td>
+									   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+										    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
+										    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+									    	</div>
+										</td>
+										<td>&nbsp;</td>
+									</tr>
+								</table> ';
 							?>
 
 						<script language="Javascript">
@@ -277,135 +277,113 @@ $selected = $id_ent;
 			$result2 = $DB->query($query2) or die('erro');
 			$total = $DB->fetch_assoc($result2);
 
-//count by status
-$query_stat = "
-SELECT
-SUM(case when glpi_tickets.status = 1 then 1 else 0 end) AS new,
-SUM(case when glpi_tickets.status = 2 then 1 else 0 end) AS assig,
-SUM(case when glpi_tickets.status = 3 then 1 else 0 end) AS plan,
-SUM(case when glpi_tickets.status = 4 then 1 else 0 end) AS pend,
-SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve,
-SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
-FROM glpi_tickets
-WHERE glpi_tickets.is_deleted = 0
-AND glpi_tickets.date ".$datas."
-AND glpi_tickets.entities_id = ".$id_ent." ";
-
-$result_stat = $DB->query($query_stat);
-
-$new = $DB->result($result_stat,0,'new') + 0;
-$assig = $DB->result($result_stat,0,'assig') + 0;
-$plan = $DB->result($result_stat,0,'plan') + 0;
-$pend = $DB->result($result_stat,0,'pend') + 0;
-$solve = $DB->result($result_stat,0,'solve') + 0;
-$close = $DB->result($result_stat,0,'close') + 0;
-
-/*$query_stat_c = "
-SELECT count( glpi_tickets.id ) AS close
-FROM glpi_tickets
-WHERE glpi_tickets.is_deleted = '0'
-AND glpi_tickets.date ".$datas." 
-AND glpi_tickets.status = 6
-AND glpi_tickets.entities_id = ".$id_ent." ";
-
-$result_stat_c = $DB->query($query_stat_c);
-$close = $DB->result($result_stat_c,0,'close');
-
-
-$query_stat_s = "
-SELECT count( glpi_tickets.id ) AS solve
-FROM glpi_tickets
-WHERE glpi_tickets.is_deleted = '0'
-AND glpi_tickets.solvedate ".$datas." 
-AND glpi_tickets.status = 5
-AND glpi_tickets.entities_id = ".$id_ent." ";
-
-$result_stat_s = $DB->query($query_stat_s);
-$solve = $DB->result($result_stat_s,0,'solve') + 0;*/ 	
-
-echo '<div id="entidade2" class="col-md-12 fluid" style="margin-bottom: 15px;">';
-echo '<div id="name"  style="margin-top: 15px;"><span>'.$ent_name['name'].'</span> - <span class="total_tech"> '.$total['total'].' '.__('Tickets','dashboard').'</span></div>
-
-<div class="row" style="margin: 10px 0px 0 0;" >
-<div style="margin-top: 20px; height: 45px;">
-							<!-- COLUMN 1 -->
-								  <div class="col-sm-3 col-md-3 stat" >
-									 <div class="dashbox shad panel panel-default db-blue">
-										<div class="panel-body_2">
-										   <div class="panel-left red" style = "margin-top: -5px; margin-left: -5px;">
-												<i class="fa fa-tags fa-3x fa2"></i>
-										   </div>
-										   <div class="panel-right">
-										     <div id="odometer1" class="odometer" style="font-size: 20px; margin-top: 1px;">  </div><p></p>
-                        				<span class="chamado">'. __('Tickets','dashboard').'</span><br>
-                        				<span class="date" style="font-size: 16px;"><b>'. _x('status', 'New').' + '.__('Assigned').'</b></span>
-										   </div>
-										</div>
-									 </div>
-								  </div>
-
-								  <div class="col-sm-3 col-md-3">
-									 <div class="dashbox shad panel panel-default db-orange">
-										<div class="panel-body_2">
-										   <div class="panel-left orange" style = "margin-top: -5px; margin-left: -5px;">
-												<i class="fa fa-clock-o fa-3x fa2"></i>
-										   </div>
-										   <div class="panel-right">
-											<div id="odometer2" class="odometer" style="font-size: 20px; margin-top: 1px;">   </div><p></p>
-                        				<span class="chamado">'. __('Tickets','dashboard').'</span><br>
-                        				<span class="date"><b>'. __('Pending').'</b></span>
-										   </div>
-										</div>
-									 </div>
-								  </div>
-
-								  <div class="col-sm-3 col-md-3">
-									 <div class="dashbox shad panel panel-default db-red">
-										<div class="panel-body_2">
-										   <div class="panel-left yellow" style = "margin-top: -5px; margin-left: -5px;">
-												<i class="fa fa-check-square fa-3x fa2"></i>
-										   </div>
-										   <div class="panel-right">
-												<div id="odometer3" class="odometer" style="font-size: 20px; margin-top: 1px;">   </div><p></p>
-                        				<span class="chamado">'. __('Tickets','dashboard').'</span><br>
-                        				<span class="date"><b>'. __('Solved','dashboard').'</b></span>
-										   </div>
-										</div>
-									 </div>
-								  </div>
-								  
-								  <div class="col-sm-3 col-md-3">
-									 <div class="dashbox shad panel panel-default db-yellow">
-										<div class="panel-body_2">
-										   <div class="panel-left yellow" style = "margin-top: -5px; margin-left: -5px;">
-												<i class="fa fa-times-circle fa-3x fa2"></i>
-										   </div>
-								   		<div class="panel-right">
-												<div id="odometer4" class="odometer" style="font-size: 20px; margin-top: 1px;">   </div><p></p>
-                        				<span class="chamado">'. __('Tickets','dashboard').'</span><br>
-                        				<span class="date"><b>'. __('Closed','dashboard').'</b></span>
-										   </div>
-										</div>
-									 </div>
-								  </div>
-						</div>
-
-</div>
-</div>';
-?>
-
-<script type="text/javascript" >
-	window.odometerOptions = {
-	   format: '( ddd).dd'
-	};
-
-	setTimeout(function(){
-	    odometer1.innerHTML = <?php echo $new + $assig + $plan; ?>;
-	    odometer2.innerHTML = <?php echo $pend; ?>;
-	    odometer3.innerHTML = <?php echo $solve; ?>;
-	    odometer4.innerHTML = <?php echo $close; ?>;
-	}, 1000);
-</script>
+			//count by status
+			$query_stat = "
+			SELECT
+			SUM(case when glpi_tickets.status = 1 then 1 else 0 end) AS new,
+			SUM(case when glpi_tickets.status = 2 then 1 else 0 end) AS assig,
+			SUM(case when glpi_tickets.status = 3 then 1 else 0 end) AS plan,
+			SUM(case when glpi_tickets.status = 4 then 1 else 0 end) AS pend,
+			SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve,
+			SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
+			FROM glpi_tickets
+			WHERE glpi_tickets.is_deleted = 0
+			AND glpi_tickets.date ".$datas."
+			AND glpi_tickets.entities_id = ".$id_ent." ";
+			
+			$result_stat = $DB->query($query_stat);
+			
+			$new = $DB->result($result_stat,0,'new') + 0;
+			$assig = $DB->result($result_stat,0,'assig') + 0;
+			$plan = $DB->result($result_stat,0,'plan') + 0;
+			$pend = $DB->result($result_stat,0,'pend') + 0;
+			$solve = $DB->result($result_stat,0,'solve') + 0;
+			$close = $DB->result($result_stat,0,'close') + 0;
+				
+			
+			echo '<div id="entidade2" class="col-md-12 fluid" style="margin-bottom: 15px;">';
+			echo '<div id="name"  style="margin-top: 15px;"><span>'.$ent_name['name'].'</span> - <span class="total_tech"> '.$total['total'].' '.__('Tickets','dashboard').'</span></div>
+			
+			<div class="row" style="margin: 10px 0px 0 0;" >
+			<div style="margin-top: 20px; height: 45px;">
+					<!-- COLUMN 1 -->
+						  <div class="col-sm-3 col-md-3 stat" >
+							 <div class="dashbox shad panel panel-default db-blue">
+								<div class="panel-body_2">
+								   <div class="panel-left red bluebg" style = "margin-top: -5px; margin-left: -5px;">
+										<i class="fa fa-tags fa-3x fa2"></i>
+								   </div>
+								   <div class="panel-right">
+								     <div id="odometer1" class="odometer" style="font-size: 20px; margin-top: 1px;">  </div><p></p>
+		            				<span class="chamado">'. __('Tickets','dashboard').'</span><br>
+		            				<span class="date" style="font-size: 16px;"><b>'. _x('status', 'New').' + '.__('Assigned').'</b></span>
+								   </div>
+								</div>
+							 </div>
+						  </div>
+		
+						  <div class="col-sm-3 col-md-3">
+							 <div class="dashbox shad panel panel-default db-orange">
+								<div class="panel-body_2">
+								   <div class="panel-left orange orangebg" style = "margin-top: -5px; margin-left: -5px;">
+										<i class="fa fa-clock-o fa-3x fa2"></i>
+								   </div>
+								   <div class="panel-right">
+									<div id="odometer2" class="odometer" style="font-size: 20px; margin-top: 1px;">   </div><p></p>
+		            				<span class="chamado">'. __('Tickets','dashboard').'</span><br>
+		            				<span class="date"><b>'. __('Pending').'</b></span>
+								   </div>
+								</div>
+							 </div>
+						  </div>
+		
+						  <div class="col-sm-3 col-md-3">
+							 <div class="dashbox shad panel panel-default db-red">
+								<div class="panel-body_2">
+								   <div class="panel-left yellow redbg" style = "margin-top: -5px; margin-left: -5px;">
+										<i class="fa fa-check-square fa-3x fa2"></i>
+								   </div>
+								   <div class="panel-right">
+										<div id="odometer3" class="odometer" style="font-size: 20px; margin-top: 1px;">   </div><p></p>
+		            				<span class="chamado">'. __('Tickets','dashboard').'</span><br>
+		            				<span class="date"><b>'. __('Solved','dashboard').'</b></span>
+								   </div>
+								</div>
+							 </div>
+						  </div>
+						  
+						  <div class="col-sm-3 col-md-3">
+							 <div class="dashbox shad panel panel-default db-yellow">
+								<div class="panel-body_2">
+								   <div class="panel-left yellow yellowbg" style = "margin-top: -5px; margin-left: -5px;">
+										<i class="fa fa-times-circle fa-3x fa2"></i>
+								   </div>
+						   		<div class="panel-right">
+										<div id="odometer4" class="odometer" style="font-size: 20px; margin-top: 1px;">   </div><p></p>
+		            				<span class="chamado">'. __('Tickets','dashboard').'</span><br>
+		            				<span class="date"><b>'. __('Closed','dashboard').'</b></span>
+								   </div>
+								</div>
+							 </div>
+						  </div>
+				</div>
+			
+			</div>
+			</div>';
+			?>
+			
+			<script type="text/javascript" >
+				window.odometerOptions = {
+				   format: '( ddd).dd'
+				};
+			
+				setTimeout(function(){
+				    odometer1.innerHTML = <?php echo $new + $assig + $plan; ?>;
+				    odometer2.innerHTML = <?php echo $pend; ?>;
+				    odometer3.innerHTML = <?php echo $solve; ?>;
+				    odometer4.innerHTML = <?php echo $close; ?>;
+				}, 1000);
+			</script>
 
 			<div id="graf_linhas" class="col-md-12" style="height: 450px; margin-top: 20px !important; margin-left: 0px;">
 				<?php include ("./inc/graflinhas_ent.inc.php"); ?>
@@ -427,11 +405,7 @@ echo '<div id="name"  style="margin-top: 15px;"><span>'.$ent_name['name'].'</spa
 				<?php
 					include ("./inc/grafbar_ent.inc.php");
 				?>
-			</div>
-			
-			<!--<div id="graf_time" class="col-md-12" style="height: 450px; margin-top: 25px; margin-left: -5px;">
-				<?php //include ("./inc/grafpie_time_grupo.inc.php"); ?>
-			</div> -->
+			</div>	
 
 			<div id="graf_time1" class="col-md-12" style="height: 450px; margin-top: 25px; margin-left: -5px;">
 				<?php include ("./inc/grafcol_time_grupo.inc.php");

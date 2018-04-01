@@ -419,7 +419,7 @@ echo "
 		</td>
 		<td style='vertical-align:middle; width: 190px; '>
 			<div class='progress' style='margin-top: 19px;'>
-				<div class='progress-bar ". $cor ." progress-bar-striped active' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
+				<div class='progress-bar ". $cor ." ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
 	    			".$barra." % ".__('Closed', 'dashboard') ."
 	    		</div>
 			</div>

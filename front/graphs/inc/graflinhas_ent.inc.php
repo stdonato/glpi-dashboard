@@ -139,12 +139,8 @@ else {
 	$label = json_encode(array_keys($arr_daysn));
 }
 
-
-//$grfm = array_keys($arr_opened);
-//$grfm3 = json_encode($grfm);
-
-$quantm = array_values($arr_opened);
-$quantm2 = implode(',',$quantm);
+$quant_o = array_values($arr_opened);
+$quant_o2 = implode(',',$quant_o);
 
 $version = substr($CFG_GLPI["version"],0,5);
 
@@ -161,7 +157,6 @@ if($interval >= "31") {
 	FROM glpi_tickets
 	WHERE glpi_tickets.is_deleted = '0'
 	AND glpi_tickets.closedate ".$datas."
-
 	AND glpi_tickets.entities_id = ".$id_ent."
 	GROUP BY day
 	ORDER BY day ";
@@ -188,14 +183,14 @@ if($interval >= "31") {
 	while ($row_result = $DB->fetch_assoc($resultd))
 	{
 	
-		// fechados mensais
+		// fechados diarios
 		$queryf = "
 		SELECT DISTINCT DATE_FORMAT(closedate, '%b-%d') as day_l,  COUNT(id) as nb, DATE_FORMAT(closedate, '%Y-%m-%d') as day
 		FROM glpi_tickets
 		WHERE glpi_tickets.is_deleted = '0'
 		AND glpi_tickets.closedate ".$datas."
-		AND DATE_FORMAT(glpi_tickets.closedate, '%Y-%m-%d' ) = '".$row_result['day']."'
 		AND glpi_tickets.entities_id = ".$id_ent."
+		AND DATE_FORMAT(glpi_tickets.closedate, '%Y-%m-%d' ) = '".$row_result['day']."'
 		GROUP BY day
 		ORDER BY day ";
 		
@@ -213,16 +208,82 @@ if($interval >= "31") {
 	}
 		$arr_closed = $arr_grff;
 		$label = json_encode(array_keys($arr_daysn));
+}
 
- }
-
-//$grff = array_keys($arr_closed) ;
-//$grff3 = json_encode($grff);
-
-$quantf = array_values($arr_closed) ;
-$quantf2 = implode(',',$quantf);
+$quant_c = array_values($arr_closed) ;
+$quant_c2 = implode(',',$quant_c);
 
 
+//backlog
+if($interval >= "31") {
+	
+	//$DB->data_seek($resultd, 0);
+	//primeiro dia do mes
+	//$data_ini = date('Y-m-01', strtotime($data_ini));
+		
+   $queryb = "
+	SELECT COUNT(id) as nb, DATE_FORMAT(date, '%Y-%m') as day
+	FROM glpi_tickets
+	WHERE glpi_tickets.is_deleted = '0'
+	AND glpi_tickets.date < '".$data_ini." 00:00:00'
+	AND glpi_tickets.entities_id = ".$id_ent."
+	AND glpi_tickets.status <> 6 ";
+	
+	$resultb = $DB->query($queryb) or die('erro b');
+	$row_result2 = $DB->fetch_assoc($resultb);
+
+	//$arr_bak[] = $row_result2['nb'];	
+	//$back_ini = array_sum($arr_bak);
+	$back_ini = $row_result2['nb'];	
+
+	$conta = count($quant_o);
+	$arr_bk[0] = $back_ini + ($quant_o[0] - $quant_c[0]);
+	
+	for ($i=1; $i < ($conta); $i++) {
+		$j = $i-1;
+		$arr_bk[$i] = $arr_bk[$j] + ($quant_o[$i] - $quant_c[$i]);	
+	}		
+}
+
+else {
+
+	$queryb = "
+		SELECT COUNT(id) as nb
+		FROM glpi_tickets
+		WHERE glpi_tickets.is_deleted = '0'
+		AND glpi_tickets.date < '".$data_ini." 00:00:00'
+		AND glpi_tickets.entities_id = ".$id_ent."
+		AND glpi_tickets.status <> 6 ";
+	
+	$resultb = $DB->query($queryb) or die('erro b');
+	$row_result2 = $DB->fetch_assoc($resultb);
+
+	//$arr_bak[] = $row_result2['nb'];	
+	//$back_ini = array_sum($arr_bak);
+	$back_ini = $row_result2['nb'];
+	
+	$conta = count($quant_o);
+	//$arr_bk[0] = ($quant_o[0] - $quant_c[0]);
+	$arr_bk[0] = $back_ini + ($quant_o[0] - $quant_c[0]);
+	
+	for ($i=1; $i < ($conta); $i++) {
+		$j = $i-1;
+		$arr_bk[$i] = $arr_bk[$j] + ($quant_o[$i] - $quant_c[$i]);	
+	}		
+}
+
+
+$back = implode(',',$arr_bk);
+
+/*	$arr_bk = array();
+	$conta = count($quant_c);
+	$arr_bk[0] = $back_ini;
+	
+	for ($i=1; $i < ($conta); $i++) {
+		$j = $i-1;
+		$arr_bk[$i] = $arr_bk[$j] + ($quant_o[$j] - $quant_c[$j]);	
+	}*/
+	
 echo "
 <script type='text/javascript'>
 $(function ()
@@ -243,17 +304,12 @@ $(function ()
                 //floating: true,
                 borderWidth: 0,
                 adjustChartSize: true
-                //backgroundColor: '#FFFFFF'
             },
             xAxis: {
                 categories: $label,
 						  labels: {
                     rotation: -45,
-                    align: 'right',
-                    style: {
-                        //fontSize: '11px',
-                        //fontFamily: 'Verdana, sans-serif'
-                    }
+                    align: 'right'
                 }
 
             },
@@ -278,15 +334,33 @@ $(function ()
 	                 	enabled: true
 	                 },
                 },
+		        spline: {
+		            lineWidth: 4,
+		            states: {
+		                hover: {
+		                    lineWidth: 5
+		                }
+		            },
+		            marker: {
+		                enabled: false
+		            },
+		        },
             },
           series: [{
 
-                name: '".__('Opened','dashboard')." (".array_sum($quantm).")',
-                data: [$quantm2] },
+                name: '".__('Opened','dashboard')." (".array_sum($quant_o).")',
+                data: [$quant_o2] },
 
                 {
-                name: '".__('Closed','dashboard')." (".array_sum($quantf).")',
-                data: [$quantf2]
+                name: '".__('Closed','dashboard')." (".array_sum($quant_c).")',
+                data: [$quant_c2] },
+                
+                {
+                name: '".__('Backlog','dashboard')." (".end($arr_bk).")',
+                type: 'spline',
+                dataLabels: { enabled: false },
+                color: '#db5e5e',
+                data: [$back]
             }]
         });
     });

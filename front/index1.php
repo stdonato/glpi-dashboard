@@ -105,8 +105,7 @@ $_SESSION['charts_colors'] = $colors;
 	$photo_url = User::getURLForPicture($pic);      
 
 //redirect tech profile
-if(Session::haveRight("profile", READ)){
-	//$redir = '<meta http-equiv="refresh" content= "180"/>';				
+if(Session::haveRight("profile", READ)){		
 	$redir = '';
 }
 else {		

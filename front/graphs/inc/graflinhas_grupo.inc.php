@@ -144,13 +144,10 @@ else {
 		$label = json_encode(array_keys($arr_daysn));
 }
 
-/*$grfm = array_keys($arr_opened) ;
-$grfm3 = json_encode($grfm);*/
+$quant_o = array_values($arr_opened) ;
+$quant_o2 = implode(',',$quant_o);
 
-$quantm = array_values($arr_opened) ;
-$quantm2 = implode(',',$quantm);
-
-$opened = array_sum($quantm);
+$opened = array_sum($quant_o);
 
 // closed
 $status = "('5','6')";
@@ -221,14 +218,81 @@ else {
 		$label = json_encode(array_keys($arr_daysn));
 }
 
-/*
-$grff = array_keys($arr_closed) ;
-$grff3 = json_encode($grff);*/
+$quant_c = array_values($arr_closed) ;
+$quant_c2 = implode(',',$quant_c);
 
-$quantf = array_values($arr_closed) ;
-$quantf2 = implode(',',$quantf);
+$closed = array_sum($quant_c);
 
-$closed = array_sum($quantf);
+
+//backlog
+if($interval >= "31") {
+	
+   $queryb = "
+	SELECT COUNT(glpi_tickets.id) as nb
+	FROM glpi_tickets, glpi_groups_tickets
+	WHERE glpi_tickets.is_deleted = '0'
+	AND glpi_tickets.date < '".$data_ini." 00:00:00'
+	". $entidade_age ."
+   AND glpi_groups_tickets.groups_id = ".$id_grp."
+   AND glpi_tickets.id = glpi_groups_tickets.tickets_id
+	AND glpi_tickets.status <> 6 ";
+	
+	$resultb = $DB->query($queryb) or die('erro b');
+	$row_result2 = $DB->fetch_assoc($resultb);
+	
+	//$arr_bak[] = $row_result2['nb'];	
+	//$back_ini = array_sum($arr_bak);
+	$back_ini = $row_result2['nb'];
+
+	$conta = count($quant_o);
+	$arr_bk[0] = $back_ini + ($quant_o[0] - $quant_c[0]);
+	
+	for ($i=1; $i < ($conta); $i++) {
+		$j = $i-1;
+		$arr_bk[$i] = $arr_bk[$j] + ($quant_o[$i] - $quant_c[$i]);	
+	}
+
+}
+
+else {
+	
+	$queryb = "
+	SELECT COUNT(glpi_tickets.id) as nb
+	FROM glpi_tickets, glpi_groups_tickets
+	WHERE glpi_tickets.is_deleted = '0'
+	AND glpi_tickets.date < '".$data_ini." 00:00:00'
+	". $entidade_age ."
+	AND glpi_groups_tickets.groups_id = ".$id_grp."
+   AND glpi_tickets.id = glpi_groups_tickets.tickets_id
+	AND glpi_tickets.status <> 6 ";
+
+	$resultb = $DB->query($queryb) or die('erro b');
+	$row_result2 = $DB->fetch_assoc($resultb);
+
+	//$arr_bak[] = $row_result2['nb'];	
+	//$back_ini = array_sum($arr_bak);
+	$back_ini = $row_result2['nb'];
+	
+	$conta = count($quant_o);
+	//$arr_bk[0] = ($quant_o[0] - $quant_c[0]);
+	$arr_bk[0] = $back_ini + ($quant_o[0] - $quant_c[0]);
+	
+	for ($i=1; $i < ($conta); $i++) {
+		$j = $i-1;
+		$arr_bk[$i] = $arr_bk[$j] + ($quant_o[$i] - $quant_c[$i]);	
+	}
+}
+
+$back = implode(',',$arr_bk);
+
+/*$conta = count($quant_c);
+$arr_bk[0] = $back_ini;
+
+for ($i=1; $i < ($conta); $i++) {
+	$j = $i-1;
+	$arr_bk[$i] = $arr_bk[$j] + ($quant_o[$j] - $quant_c[$j]);	
+}*/
+
 
 echo "
 <script type='text/javascript'>
@@ -290,6 +354,17 @@ $(function () {
 	                 	enabled: true
 	                 },
                 },
+                spline: {
+		            lineWidth: 4,
+		            states: {
+		                hover: {
+		                    lineWidth: 5
+		                }
+		            },
+		            marker: {
+		                enabled: false
+		            },
+		        },
             },
 
             tooltip: {
@@ -307,7 +382,7 @@ $(function () {
                     enabled: true,
     
                     },
-                data: [$quantm2]
+                data: [$quant_o2]
                 },
 
                 {
@@ -316,8 +391,15 @@ $(function () {
                     enabled: true,
                     //color: '#000'
                     },
-                data: [$quantf2]
+                data: [$quant_c2]
                 },
+                 {
+                name: '".__('Backlog','dashboard')." (".end($arr_bk).")',
+                type: 'spline',
+                dataLabels: { enabled: false },
+                color: '#db5e5e',
+                data: [$back]
+            	}
                 ]
         });
     });

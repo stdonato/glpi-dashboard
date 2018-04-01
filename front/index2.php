@@ -183,7 +183,7 @@ else {
    	echo "<body style=\"background: url('./img/".$back."') no-repeat top center fixed; \">";
    }
    else {
-   	echo "<body style='baclground-color:#E5E5E5;'>";
+   	echo "<body style='background-color:#e5e5e5;'>";
    }	 
    ?>
 
