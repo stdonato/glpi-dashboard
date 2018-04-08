@@ -348,8 +348,8 @@ echo "
 				<th style='text-align:center; cursor:pointer;'> ". __('Solved','dashboard') ."</th>
 				<th style='text-align:center; cursor:pointer;'> ". __('Closed','dashboard') ."</th>				
 				<th style='text-align:center; '> % ". __('Closed','dashboard') ."</th> 
-				<th style='text-align:center; cursor:pointer;'> ". __('Backlog','dashboard') ."</th>
-				<th style='text-align:center; cursor:pointer;'> ". __('Backlog (Acumulado)','dashboard') ."</th>";
+				<th style='text-align:center; cursor:pointer;'> ". __('Backlog','dashboard') ."</th>";
+				
 				if($sats != '') {
 					echo "<th style='text-align:center; '> ". __('Satisfaction','dashboard') ."</th>";
 				}
@@ -357,7 +357,6 @@ echo "
 		</thead>
 	<tbody>";
 
-//				<th style='text-align:center; '> % ". __('Late') . "</th> 
 
 while($id_tec = $DB->fetch_assoc($result_tec)) {
 
@@ -479,7 +478,7 @@ if($conta_cons > 0) {
 		$width = $barra;
 	
 		// cor barra
-		if($barra >= 100) { $cor = "progress-bar-success"; $width = 100; }
+		if($barra >= 100) { $cor = "progress-bar-success"; $text_color="#fff"; $width = 100; }
 		if($barra == 100) { $cor = "progress-bar-success"; $text_color="#fff"; }
 		if($barra >= 80 and $barra < 100) { $cor = " "; $text_color="#fff"; }
 		if($barra > 51 and $barra < 80) { $cor = "progress-bar-warning"; $text_color="#fff"; }
@@ -562,9 +561,6 @@ if($conta_cons > 0) {
 		$barra_due = $perc_due;
 		//$barra_due = 100 - $perc;		
 		
-	/**
-	* To-do: Turn values below configurable
-	*/
 		// cor barra_due
 		//if($barra_due == 100) { $cor_due = "progress-bar-danger"; }
 		if($barra_due > 80 and $barra_due <= 100) { $cor_due = "progress-bar-danger"; $text_color_due = "#fff"; }
@@ -575,7 +571,6 @@ if($conta_cons > 0) {
 }
 
 else { $barra_due = 0;}
-
 
 		echo "
 		<tr>
@@ -597,7 +592,6 @@ else { $barra_due = 0;}
 		   </td>
 		   
 		   </td>
-			<td style='vertical-align:middle; text-align:center;'><h4><span class='".$back_cor."'>". $backlog ."</span></h4></td>
 			<td style='vertical-align:middle; text-align:center;'><h4><span class='".$back_cor_ac."'>". $backlog_ac ."</span></h4></td> ";			
 
 /*
@@ -609,6 +603,7 @@ else { $barra_due = 0;}
 				</div>
 		   </td> 
 
+			<td style='vertical-align:middle; text-align:center;'><h4><span class='".$back_cor."'>". $backlog ."</span></h4></td>
 */
 
 		   

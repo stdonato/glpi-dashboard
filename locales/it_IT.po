@@ -509,3 +509,6 @@ msgstr "Creare una chiave API"
 
 msgid "Paste your key bellow and save"
 msgstr "Incollare la chiave qui sotto e salvare"
+
+msgid "accumulated"
+msgstr "accumulato"

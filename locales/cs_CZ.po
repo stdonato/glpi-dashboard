@@ -1,474 +1,473 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Stevenes Donato <stevenesdonato@gmail.com>, 2014
-
 msgid ""
 msgstr ""
 "Project-Id-Version: GLPI Project\n"
 "Rebyt-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-08 15:21+0100\n"
-"PO-Revision-Date: 2014-02-08 15:21+0400\n"
+"PO-Revision-Date: 2018-04-05 12:35+0200\n"
 "Last-Translator: Stevenes Donato <stevenesdonato@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en_GB\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: cs_CZ\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.4\n"
 
 msgid "Dashboard"
-msgstr "Dashboard"
+msgstr "Nástěnka"
 
 msgid "Tickets"
-msgstr "Tickets"
+msgstr "Požadavky"
 
 msgid "Reports"
-msgstr "Reports"
+msgstr "Výkazy"
 
 msgid "Charts"
-msgstr "Charts"
+msgstr "Grafy"
 
 msgid "Home"
-msgstr "Home"
+msgstr "Domů"
 
 msgid "Tickets Statistics"
-msgstr "Tickets Statistics"
+msgstr "Statistiky požadavků"
 
 msgid "by Technician"
-msgstr "by Technician"
+msgstr "podle technika"
 
 msgid "by Requester"
-msgstr "by Requester"
+msgstr "podle žadatele"
 
 msgid "by Date"
-msgstr "by Date"
+msgstr "podle data"
 
 msgid "Overall"
-msgstr "Overall"
+msgstr "Celkově"
 
 msgid "Today"
-msgstr "Today"
+msgstr "Dnes"
 
 msgid "Total"
-msgstr "Total"
+msgstr "Celkem"
 
 msgid "users"
-msgstr "users"
+msgstr "uživatelé"
 
 msgid "active"
-msgstr "atctive"
+msgstr "aktivní"
 
 msgid "Tickets Evolution"
-msgstr "Tickets Evolution"
+msgstr "Vývoj požadavků"
 
 msgid "Tickets by Status"
-msgstr "Tickets by Status"
+msgstr "Požadavky dle stavu"
 
 msgid "Tickets by Entity"
-msgstr "Tickets by Entity"
+msgstr "Požadavky dle entity"
 
 msgid "Tickets by Category"
-msgstr "Tickets by Category"
+msgstr "Požadavky dle kategorie"
 
 msgid "Daily Evolution"
-msgstr "Daily Evolution"
+msgstr "Denní vývoj"
 
 msgid "Tickets Total"
-msgstr "Tickets Total"
+msgstr "Celkem požadavků"
 
 msgid "by Entity"
-msgstr "by Entity" 
+msgstr "podle entity"
 
 msgid "TOP 10 - Requester"
-msgstr "TOP 10 - Requester"
+msgstr "Deset nej – žadatelé"
 
 msgid "Entity"
-msgstr "Entity"
+msgstr "Entita"
 
 msgid "Open Tickets"
-msgstr "Open Tickets"
+msgstr "Otevřené požadavky"
 
 msgid "Today Tickets"
-msgstr "Today Tickets"
+msgstr "Dnešní požadavky"
 
 msgid "by Group"
-msgstr "by Group"
+msgstr "podle skupin"
 
 msgid "Group"
-msgstr "Group"
+msgstr "Skupina"
 
 msgid "Satisfaction"
-msgstr "Satisfaction"
+msgstr "Spokojenost"
 
 msgid "Late"
-msgstr "Late"
+msgstr "Pozdě"
 
 msgid "Opened Tickets by Status"
-msgstr "Opened Tickets by Status"
+msgstr "Otevřené požadavky dle stavu"
 
 msgid "Last Tickets"
-msgstr "Last Tickets"
+msgstr "Nejnovější požadavky"
 
 msgid "All"
-msgstr "All"
+msgstr "Vše"
 
 msgid "New version"
-msgstr "New version"
+msgstr "Nová verze"
 
 msgid "avaliable"
-msgstr "avaliable"
+msgstr "k dispozici"
 
 msgid "January"
-msgstr "January"
+msgstr "leden"
 
 msgid "February"
-msgstr "February"
+msgstr "únor"
 
 msgid "March"
-msgstr "March"
+msgstr "březen"
 
 msgid "April"
-msgstr "April"
+msgstr "duben"
 
 msgid "May"
-msgstr "May"
+msgstr "květen"
 
 msgid "June"
-msgstr "June"
+msgstr "červen"
 
 msgid "July"
-msgstr "July"
+msgstr "červenec"
 
 msgid "August"
-msgstr "August"
+msgstr "srpen"
 
 msgid "September"
-msgstr "September"
+msgstr "září"
 
 msgid "October"
-msgstr "October"
+msgstr "říjen"
 
 msgid "November"
-msgstr "November"
+msgstr "listopad"
 
 msgid "December"
-msgstr "December"
+msgstr "prosinec"
 
 msgid "Sunday"
-msgstr "Sunday" 
+msgstr "neděle"
 
 msgid "Monday"
-msgstr "Monday" 
+msgstr "pondělí"
 
 msgid "Tuesday"
-msgstr "Tuesday"
+msgstr "úterý"
 
 msgid "Wednesday"
-msgstr "Wednesday"
+msgstr "středa"
 
 msgid "Thursday"
-msgstr "Thursday" 
+msgstr "čtvrtek"
 
 msgid "Friday"
-msgstr "Friday" 
+msgstr "pátek"
 
 msgid "Saturday"
-msgstr "Saturday" 
+msgstr "sobota"
 
 msgid "Consult"
-msgstr "Consult"
+msgstr "Konzultovat"
 
 msgid "Clean"
-msgstr "Clean"
+msgstr "Vyčistit"
 
 msgid "No ticket found"
-msgstr "No ticket found"
+msgstr "Nenalezen žádný požadavek"
 
 msgid "Select a technician"
-msgstr "Select a technician"
+msgstr "Vyberte technika"
 
 msgid "Select a requester"
-msgstr "Select a requester"
+msgstr "Vyberte žadatele"
 
 msgid "Title"
-msgstr "Title"
+msgstr "Nadpis"
 
 msgid "Opening date"
-msgstr "Opening date"
+msgstr "Datum otevření"
 
 msgid "Close date"
-msgstr "Close date"
+msgstr "Datum uzavření"
 
 msgid "Technician"
 msgid_plural "Technicians"
 msgstr[0] "Technician"
 msgstr[1] "Technicians"
+msgstr[2] ""
 
 msgid "Closed"
-msgstr "Closed"
+msgstr "Uzavřeno"
 
 msgid "Previous"
-msgstr "Previous"
+msgstr "Předchozí"
 
 msgid "Next"
-msgstr "Next"
+msgstr "Následující"
 
 msgid "Requester"
-msgstr "Requester"
+msgstr "Žadatel"
 
 msgid "Opened"
-msgstr "Opened"
+msgstr "Otevřeno"
 
 msgid "Period"
-msgstr "Period"
+msgstr "Období"
 
 msgid "Yesterday"
-msgstr "Yesterday"
+msgstr "Včera"
 
 msgid "Last 7 days"
-msgstr "Last 7 days"
+msgstr "Uplynulých 7 dnů"
 
 msgid "Last 15 days"
-msgstr "Last 15 days" 
+msgstr "Uplynulých 15 dnů"
 
 msgid "Last 30 days"
-msgstr "Last 30 days" 
+msgstr "Uplynulých 30 dnů"
 
 msgid "Last 90 days"
-msgstr "Last 90 days"
+msgstr "Uplynulých 90 dnů"
 
 msgid "Last 180 days"
-msgstr "Last 180 days"
+msgstr "Uplynulých 180 dnů"
 
 msgid "Last 3 months"
-msgstr "Last 3 months"
+msgstr "Uplynulé 3 měsíce"
 
 msgid "Select a entity"
-msgstr "Select a entity"
+msgstr "Vybrat entitu"
 
 msgid "Select a group"
-msgstr "Select a group"
+msgstr "Vybrat skupinu"
 
 msgid "Version"
-msgstr "Version"
+msgstr "Verze"
 
 msgid "Developed by"
-msgstr "Developed by"
+msgstr "Vyvinuto"
 
 msgid "User rights management"
-msgstr "User rights management"
+msgstr "Správa uživatelských oprávnění"
 
 msgid "Tab display"
-msgstr "Tab display"
+msgstr "Zobrazení v panelech"
 
 msgid "Tickets by Source"
-msgstr "Tickets by Source"
+msgstr "Požadavky dle zdroje"
 
 msgid "Last Events"
-msgstr "Last Events"
+msgstr "Nedávné události"
 
 msgid "Logged Users"
-msgstr "Logged Users"
+msgstr "Přihlášení uživatelé"
 
 msgid "Computers by Operating System"
-msgstr "Computers by Operating System"
+msgstr "Počítače podle operačního systému"
 
 msgid "Computers by Type"
-msgstr "Computers by Type"
+msgstr "Počítače dle typu"
 
 msgid "Quantity"
-msgstr "Quantity"
+msgstr "Množství"
 
 msgid "Monitors by Manufacturer"
-msgstr "Monitors by Manufacturer"
+msgstr "Monitory podle výrobce"
 
 msgid "Monitors by Model"
-msgstr "Monitors by Model"
+msgstr "Monitory podle modelu"
 
 msgid "Printers by Manufacturer"
-msgstr "Printers by Manufacturer"
+msgstr "Tiskárny podle výrobce"
 
 msgid "Printers by Model"
-msgstr "Printers by Model"
+msgstr "Tiskárny podle modelu"
 
 msgid "Networkequipments by Manufacturer"
-msgstr "Networkequipments by Manufacturer"
+msgstr "Síťová zařízení podle výrobce"
 
 msgid "Networkequipments by Model"
-msgstr "Networkequipments by Model"
+msgstr "Síťová zařízení podle modelu"
 
 msgid "Phones by Manufacturer"
-msgstr "Phones by Manufacturer"
+msgstr "Telefony podle výrobce"
 
 msgid "Phones by Model"
-msgstr "Phones by Model"
+msgstr "Telefony podle modelu"
 
 msgid "Peripherals by Manufacturer"
-msgstr "Peripherals by Manufacturer"
+msgstr "Periferie podle výrobce"
 
 msgid "Peripherals by Model"
-msgstr "Peripherals by Model"
+msgstr "Periferie podle modelu"
 
 msgid "Top 10 - Software Vendors"
-msgstr "Top 10 - Software Vendors"
+msgstr "Deset nejčastějších – výrobci software"
 
 msgid "Top 10 - Software Install"
-msgstr "Top 10 - Software Install"
+msgstr "Deset nejčastějších – nainstalovaný software"
 
 msgid "Cartridges by Manufacturer"
-msgstr "Cartridges by Manufacturer"
+msgstr "Náplně podle výrobce"
 
 msgid "Used"
-msgstr "Used"
+msgstr "Použito"
 
 msgid "Assets by Type"
-msgstr "Assets by Type"
+msgstr "Majetek podle typu"
 
 msgid "Unknown"
-msgstr "Unknown"
+msgstr "Neznámé"
 
 msgid "Computer"
-msgstr "Computer"
+msgstr "Počítač"
 
 msgid "Monitor"
 msgstr "Monitor"
 
 msgid "Printer"
-msgstr "Printer"
+msgstr "Tiskárna"
 
 msgid "Networkequipment"
-msgstr "Networkequipment"
+msgstr "Síťové zařízení"
 
 msgid "Phone"
-msgstr "Phone"
+msgstr "Telefon"
 
 msgid "Peripheral"
-msgstr "Peripheral"
+msgstr "Periferie"
 
 msgid "Map"
-msgstr "Map"
+msgstr "Mapa"
 
 msgid "Tickets Map"
-msgstr "Tickets Map"
+msgstr "Mapa požadavků"
 
 msgid "Fill in entities: address, city, state and country."
-msgstr "Fill in entities: address, city, state and country."
+msgstr "Vyplňte v entitách: adresa, město, stát a země."
 
 msgid "Select"
-msgstr "Select"
+msgstr "Vybrat"
 
 msgid "by Category"
-msgstr "by Category"
+msgstr "podle kategorie"
 
 msgid "Select a category"
-msgstr "Select a category"
+msgstr "Vybrat kategorii"
 
 msgid "by Location"
-msgstr "by Location"
+msgstr "podle umístění"
 
 msgid "Select a location"
-msgstr "Select a location"
+msgstr "Vybrat umístění"
 
 msgid "Welcome"
-msgstr "Welcome"
+msgstr "Vítejte"
 
 msgid "Select a asset"
-msgstr "Select a asset"
+msgstr "Vybrat majetek"
 
 msgid "by Assets"
-msgstr "by Assets"
+msgstr "podle majetku"
 
 msgid "Print"
-msgstr "Print"
+msgstr "Vytisknout"
 
 msgid "by SLA"
-msgstr "by SLA"
+msgstr "podle SLA"
 
 msgid "Select a SLA"
-msgstr "Select a SLA"
+msgstr "Vybrat SLA"
 
 msgid "Current"
-msgstr "Current"
+msgstr "Stávající"
 
 msgid "Current year"
-msgstr "Current year"
+msgstr "Tento rok"
 
 msgid "Period in index page"
-msgstr "Period in index page"
+msgstr "Období na domovské stránce"
 
 msgid "Theme"
-msgstr "Theme"
+msgstr "Motiv vzhledu"
 
 msgid "by Type"
-msgstr "by Type"
+msgstr "podle Typu"
 
 msgid "Select a type"
-msgstr "Select a type"
+msgstr "Vybrat typ"
 
 msgid "Select a manufacturer"
-msgstr "Select a manufacturer"
+msgstr "vybrat výrobce"
 
 msgid "Weekly Tickets"
-msgstr "Weekly Tickets"
+msgstr "Týdenní požadavky"
 
 msgid "Show/hide columns"
-msgstr "Show/hide columns"
+msgstr "Zobrazit/skrýt sloupce"
 
 msgid "day"
-msgstr "day"
+msgstr "dny"
 
 msgid "days"
-msgstr "days"
+msgstr "dnů"
 
 msgid "Ticket Solving Period"
-msgstr "Ticket Solving Period"
+msgstr "Období řešení požadavku"
 
 msgid "Open Tickets Age"
-msgstr "Open Tickets Age"
+msgstr "Stáří otevřených požadavků"
 
 msgid "My Dashboard"
-msgstr "My Dashboard"
+msgstr "Moje nástěnka"
 
 msgid "Tickets by Priority"
-msgstr "Tickets by Priority"
+msgstr "Požadavky dle priority"
 
 msgid "Solved"
-msgstr "Solved"
+msgstr "Vyřešeno"
 
 msgid "Tickets across time"
-msgstr "Tickets across time"
+msgstr "Požadavky v čase"
 
 msgid "Tickets by hour"
-msgstr "Tickets by hour"
+msgstr "Požadavků za hodinu"
 
 msgid "Tickets by week day"
-msgstr "Tickets by week day"
+msgstr "Požadavků za den"
 
 msgid "Tickets by month"
-msgstr "Tickets by month"
+msgstr "Požadavků za měsíc"
 
 msgid "Due Date"
-msgstr "Due Date"
+msgstr "Termín"
 
 msgid "Overdue"
-msgstr "Overdue"
+msgstr "Opožděné"
 
 msgid "Within"
-msgstr "Within"
+msgstr "V rámci"
 
 msgid "Summary Report"
-msgstr "Summary Report"
+msgstr "Souhrný výkaz"
 
 msgid "Summary"
-msgstr "Summary"
+msgstr "Souhrn"
 
 msgid "Selected"
-msgstr "Selected"
-
-msgid "Popup"
-msgstr "Popup"
+msgstr "Vybráno"
 
 msgid "accumulated"
-msgstr "accumulated"
+msgstr "nahromaděné"

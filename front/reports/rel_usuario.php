@@ -299,7 +299,7 @@ WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
 AND glpi_tickets_users.type = 1
 AND glpi_tickets_users.users_id = ". $id_tec ."
 AND glpi_tickets.is_deleted = 0
-AND (glpi_tickets.date ".$datas2." OR glpi_tickets.closedate ".$datas2." )
+AND glpi_tickets.date ".$datas2."
 ".$entidade."
 AND glpi_tickets.status IN ".$status."
 GROUP BY id
@@ -310,6 +310,7 @@ $conta_cons = $DB->numrows($result_cons1);
 
 $consulta = $conta_cons;
 
+//AND (glpi_tickets.date ".$datas2." OR glpi_tickets.closedate ".$datas2." )
 
 if($consulta > 0) {
 

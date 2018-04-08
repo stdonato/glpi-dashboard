@@ -124,8 +124,6 @@ ORDER BY name ASC ";
 
 $result_tec = $DB->query($sql_tec);
 
-//WHERE `glpi_profiles_users`.`is_recursive` = 1
-
 ?>
 <div id='content' >
 <div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
@@ -151,25 +149,25 @@ a:hover { color: #000099; }
 				$arr_url = explode("?", $url);
 				$url2 = $arr_url[0];
 				
-							echo'
-							<table>
-								<tr>
-									<td>
-									   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-									    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
-									    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-								    	</div>
-									</td>
-									<td>&nbsp;</td>
-									<td>
-								   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-									    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
-									    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-								    	</div>
-									</td>
-									<td>&nbsp;</td>
-								</tr>
-							</table> ';
+					echo'
+					<table>
+						<tr>
+							<td>
+							   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+							    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
+							    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+						    	</div>
+							</td>
+							<td>&nbsp;</td>
+							<td>
+						   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+							    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
+							    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+						    	</div>
+							</td>
+							<td>&nbsp;</td>
+						</tr>
+					</table> ';
 					?>
 				
 				<script language="Javascript">
@@ -303,18 +301,20 @@ if($con == "1") {
 	AND glpi_tickets_users.type =2
 	AND glpi_tickets_users.users_id = ". $id_tec ."
 	AND glpi_tickets.is_deleted = 0
-	AND ( glpi_tickets.date ".$datas2." OR glpi_tickets.closedate ".$datas2." )
+	AND glpi_tickets.date ".$datas2." 
 	AND glpi_tickets.status IN ".$status."
 	".$entidade."
 	GROUP BY id
 	ORDER BY id DESC ";
 	
 	$result_cham = $DB->query($sql_cham);
+	$conta_cons = $DB->numrows($result_cham);
+	$consulta = $conta_cons;
 	
 	
 	$consulta1 =
 	"SELECT glpi_tickets.id AS id, glpi_tickets.name, glpi_tickets.date AS adate, glpi_tickets.closedate AS sdate,
-	FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`closedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time
+	FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`date` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time
 	FROM `glpi_tickets_users` , glpi_tickets
 	WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
 	AND glpi_tickets_users.type = 2
@@ -328,8 +328,6 @@ if($con == "1") {
 	
 	$result_cons1 = $DB->query($consulta1);
 	
-	$conta_cons = $DB->numrows($result_cham);
-	$consulta = $conta_cons;	
 	
 	if($consulta > 0) {
 	

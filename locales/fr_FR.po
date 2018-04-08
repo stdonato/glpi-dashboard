@@ -508,3 +508,6 @@ msgstr "Créer une clé API"
 
 msgid "Paste your key bellow and save"
 msgstr "Coller votre clé ci-dessous et enregistrer"
+
+msgid "accumulated"
+msgstr "accumulé"

@@ -470,5 +470,6 @@ msgstr "Selected"
 msgid "Popup"
 msgstr "Popup"
 
-
+msgid "accumulated"
+msgstr "accumulated"
 

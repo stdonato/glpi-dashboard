@@ -5,12 +5,14 @@ Versão 0.9.1:
 - Adicionado contagem de backlog; 
 - Adicionado backlog nos gráficos e relatórios de Entidades, grupos e técnicos;
 - Nome da entidade ativa nas métricas;
+- Adicionado idioma Checo;
 - Correção de bugs diversos;
 
 
 Version 0.9.1:
 
 - Only for GLPI 9.2.x;
+- Czech language add;
 - Fix dropdown in Report by Category;
 - Fix minor bugs;
 

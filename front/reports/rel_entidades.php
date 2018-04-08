@@ -222,8 +222,7 @@ if(isset($_GET['con'])) {
 						<th style='text-align:center; cursor:pointer;'> ". __('Solved','dashboard') ."</th>	
 						<th style='text-align:center; cursor:pointer;'> ". __('Closed','dashboard') ."</th>									
 						<th style='text-align:center; '> % ". __('Closed','dashboard') ."</th>
-						<th style='text-align:center; '>". __('Backlog','dashboard') ."</th>
-						<th style='text-align:center; '>". __('Backlog (Acumulado)','dashboard') ."</th> ";
+						<th style='text-align:center; '>". __('Backlog','dashboard') ."</th>";
 		
 						echo "</tr>
 				</thead>
@@ -238,7 +237,6 @@ if(isset($_GET['con'])) {
 			WHERE glpi_tickets.entities_id = glpi_entities.id
 			AND glpi_entities.id = ".$id_ent['id']."
 			AND glpi_tickets.is_deleted = 0
-
 			AND glpi_tickets.date ".$datas2." ";
 			
 			$result_cham = $DB->query($sql_cham) or die ("erro_cham");
@@ -254,7 +252,6 @@ if(isset($_GET['con'])) {
 			AND glpi_entities.id = ".$id_ent['id']."
 			AND glpi_tickets.is_deleted = 0
 			AND glpi_tickets.status NOT IN ".$status_closed."
-
 			AND glpi_tickets.date ".$datas2." ";
 			
 			$result_ab = $DB->query($sql_ab) or die ("erro_ab");
@@ -270,7 +267,6 @@ if(isset($_GET['con'])) {
 			AND glpi_entities.id = ".$id_ent['id']."
 			AND glpi_tickets.is_deleted = 0
 			AND glpi_tickets.status = 5
-
 			AND glpi_tickets.solvedate ".$datas2." ";
 			
 			$result_sol = $DB->query($sql_sol) or die ("erro_ab");
@@ -292,6 +288,20 @@ if(isset($_GET['con'])) {
 			$data_clo = $DB->fetch_assoc($result_clo);
 			
 			$fechados = $data_clo['total'];
+			
+			//chamados pendentes
+/*			$sql_pen = "SELECT count(glpi_tickets.id) AS total, glpi_entities.name AS name, glpi_entities.completename AS cname
+			FROM glpi_entities, glpi_tickets
+			WHERE glpi_tickets.entities_id = glpi_entities.id
+			AND glpi_entities.id = ".$id_ent['id']."
+			AND glpi_tickets.is_deleted = 0
+			AND glpi_tickets.status = 4
+			AND glpi_tickets.closedate ".$datas2." ";
+			
+			$result_pen = $DB->query($sql_pen) or die ("erro_pen");
+			$data_pen = $DB->fetch_assoc($result_pen);
+			
+			$pendentes = $data_pen['total'];*/
 
 
 			//chamados atrasados
@@ -382,11 +392,11 @@ if(isset($_GET['con'])) {
 					 		</div>		
 						</div>			
 				   </td>
-				   <td style='vertical-align:middle; text-align:center;'><h4><span class='".$back_cor."'>". $backlog ."</span></h4></td>
 				   <td style='vertical-align:middle; text-align:center;'><h4><span class='".$back_cor_ac."'>". $backlog_ac ."</span></h4></td> ";			
 						
 			echo "</tr>";
 				
+//				   <td style='vertical-align:middle; text-align:center;'><h4><span class='".$back_cor."'>". $backlog ."</span></h4></td>
 		//fim while1
 		}	
 		

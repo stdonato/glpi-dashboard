@@ -258,8 +258,8 @@ if(isset($_GET['con'])) {
 						<th style='text-align:center; cursor:pointer;'> ". __('Solved','dashboard') ."</th>	
 						<th style='text-align:center; cursor:pointer;'> ". __('Closed','dashboard') ."</th>									
 						<th style='text-align:center; '> % ". __('Closed','dashboard') ."</th> 
-						<th style='text-align:center; '>". __('Backlog','dashboard') ."</th> 
-						<th style='text-align:center; '>". __('Backlog (Acumulado)','dashboard') ."</th> ";
+
+						<th style='text-align:center; '>". __('Backlog','dashboard') ." </th>";
 		
 						echo "</tr>
 				</thead>
@@ -428,11 +428,11 @@ if(isset($_GET['con'])) {
 					 		</div>		
 						</div>			
 				   </td>					
-				   <td style='vertical-align:middle; text-align:center;'><h4><span class='".$back_cor."'>". $backlog ."</span></h4></td>
 				   <td style='vertical-align:middle; text-align:center;'><h4><span class='".$back_cor_ac."'>". $backlog_ac ."</span></h4></td> ";			
 							
 			echo "</tr>";
 				
+//				   <td style='vertical-align:middle; text-align:center;'><h4><span class='".$back_cor."'>". $backlog ."</span></h4></td>
 		//fim while1
 		}	
 		

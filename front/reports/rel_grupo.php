@@ -287,7 +287,7 @@ AND glpi_groups_tickets.groups_id = ".$id_grp."
 AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
 ".$entidade_t." ";
 
- $result_stat = $DB->query($query_stat);
+$result_stat = $DB->query($query_stat);
 
 $new = $DB->result($result_stat,0,'new') + 0;
 $assig = $DB->result($result_stat,0,'assig') + 0;
@@ -312,7 +312,7 @@ GROUP BY id
 ORDER BY id DESC ";
 
 $result_cons1 = $DB->query($consulta1);
-$conta_cons = $DB->numrows($result_cons1);
+$conta_cons = $DB->numrows($result_cham);
 //$consulta = $conta_cons;
 
 $consulta = ($new + $plan + $assig + $pend + $solve + $close);

@@ -539,4 +539,5 @@ msgstr "Создать ключ API"
 msgid "Paste your key bellow and save"
 msgstr "Вставьте ваш ключ ниже и сохраните"
 
-
+msgid "accumulated"
+msgstr "накопленный"
