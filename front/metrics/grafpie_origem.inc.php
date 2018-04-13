@@ -1,24 +1,41 @@
-
 <?php
 
-$query2 = "
-SELECT glpi_requesttypes.name AS request, count( glpi_tickets.id ) AS total
-FROM `glpi_tickets` , glpi_requesttypes
-WHERE glpi_tickets.is_deleted =0
-AND glpi_tickets.`requesttypes_id` = glpi_requesttypes.id
-$period
-$entidade
-GROUP BY request
-ORDER BY total DESC ";
+if($id_grp != '') {
+
+	$query2 = "
+	SELECT glpi_requesttypes.name AS request, count( glpi_tickets.id ) AS total
+	FROM `glpi_groups_tickets`, glpi_tickets, glpi_groups, glpi_requesttypes
+	WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
+	AND glpi_groups_tickets.`groups_id` = glpi_groups.id
+	AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+	AND glpi_tickets.is_deleted = 0
+	AND glpi_tickets.`requesttypes_id` = glpi_requesttypes.id
+	$period
+	$entidade
+	GROUP BY request
+	ORDER BY total DESC ";
+}
+
+else {
+	$query2 = "
+	SELECT glpi_requesttypes.name AS request, count( glpi_tickets.id ) AS total
+	FROM `glpi_tickets`, glpi_requesttypes
+	WHERE glpi_tickets.is_deleted =0
+	AND glpi_tickets.`requesttypes_id` = glpi_requesttypes.id
+	$period
+	$entidade
+	GROUP BY request
+	ORDER BY total DESC ";
+}
 		
 $result2 = $DB->query($query2) or die('erro');
 
 $arr_grf2 = array();
 while ($row_result = $DB->fetch_assoc($result2))		
-	{ 
-		$v_row_result = $row_result['request'];
-		$arr_grf2[$v_row_result] = $row_result['total'];			
-	} 
+{ 
+	$v_row_result = $row_result['request'];
+	$arr_grf2[$v_row_result] = $row_result['total'];			
+} 
 	
 $grf2 = array_keys($arr_grf2);
 $quant2 = array_values($arr_grf2);
@@ -40,7 +57,7 @@ $(function () {
                 plotShadow: false,                
                 height:290,
                 backgroundColor:'transparent',
-                marginTop: -25                
+                marginTop: -35               
                 //backgroundColor: '#2b2b2b'
             },
             title: {
@@ -53,7 +70,7 @@ $(function () {
                 floating: false,
                 borderWidth: 0,
                 x: 0,
-                y: 20,
+                y: 10,
                 //backgroundColor: '#FFFFFF',
                 adjustChartSize: true,
                 format: '{series.name}: <b>{point.percentage:.1f}%</b>',
@@ -72,7 +89,7 @@ $(function () {
                 pie: {
                     allowPointSelect: true,
                     cursor: 'pointer',
-                    size: '70%',
+                    size: '65%',
                     x:0,
                     dataLabels: {
 									//format: '{point.y} - ( {point.percentage:.1f}% )',
@@ -101,8 +118,8 @@ $(function () {
                     {
                         name: '" .$grf2[0]."',
                         y: $quant2[0],
-                        sliced: true,
-                        selected: true
+                        sliced: false,
+                        selected: false
                     },";
                     
 for($i = 1; $i < $conta; $i++) {    

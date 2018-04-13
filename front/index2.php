@@ -779,23 +779,45 @@ else {
                                		 	?>		                                  
                            
                                     </ul>
-                                </li><!-- delighted pages -->  
-
-									     <li>									     
+                                </li><!-- delighted pages -->                               
+                                
+                                <li class='submenu'>
+	                                    <a class='dropdown' onClick='return false;' href='#' data-original-title='Metrics'>
+	                                        <i class='fa fa-line-chart'></i>
+	                                        <span class='hidden-minibar'><?php echo __('Metrics','dashboard');?>
+	                                            <i class='fa fa-chevron-right  pull-right'></i>
+	                                        </span>
+	                                    </a>
+													<ul  class="animated fadeInDown">
+                                        <li>
+                                            <a href="./metrics/index.php" data-original-title=' Geral' target="_blank">
+                                                <i class="fa fa-angle-right"></i>
+                                                <span class='hidden-minibar'> <?php echo __('Overall','dashboard'); ?> </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                             <a href="./metrics/select_ent.php" data-original-title=' por Entidade' target="_blank">
+                                                <i class="fa fa-angle-right"></i>
+                                                <span class='hidden-minibar'> <?php echo __('by Entity','dashboard'); ?> </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                              <a href="./metrics/select_grupo.php" data-original-title=' por Grupo' target="_blank">
+                                                <i class="fa fa-angle-right"></i>
+                                                <span class='hidden-minibar'> <?php echo __('by Group','dashboard'); ?> </span>
+                                            </a>
+                                        </li>   
+                                                                     
+                                    	</ul>                                    
+                                </li>
+                                
+                                <li>									     
                                     <a href="#" onclick="window.open('./assets/assets.php','iframe1'); scrollWin();" target="iframe1" data-original-title='Assets'>
                                         <i class='fa fa-desktop'></i>
                                         <span class='hidden-minibar'><?php echo __('Assets'); ?>
                                         </span>
                                     </a>  
-                                </li>
-                                
-                                <li>
-                                    <a href='metrics/index.php' target="_blank" data-original-title='Metrics'>
-                                        <i class='fa fa-line-chart'></i>
-                                        <span class='hidden-minibar'><?php echo __('Metrics','dashboard'); ?>
-                                        </span>
-                                    </a>  
-                                </li>
+                                </li>   
                                                                
                                 <li>
                                     <a href="#" onclick="window.open('./config.php','iframe1'); scrollWin();" target="iframe1"  data-original-title='Config'>

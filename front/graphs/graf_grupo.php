@@ -108,12 +108,16 @@ if($sel_ent == '' || $sel_ent == -1) {
 	$ent = implode(",",$entities);
 
 	$entidade = "WHERE entities_id IN (".$ent.") OR is_recursive = 1 ";
+	$entidade_and = "AND glpi_tickets.entities_id IN (".$ent.") ";
+	$entidade_pro = "AND glpi_problems.entities_id IN (".$ent.") ";
 	$entidade_age = "AND glpi_tickets.entities_id IN (".$ent.")";
 	$entidade1 = "";	
 }
 
 else {
 	$entidade = "WHERE entities_id IN (".$sel_ent.") OR is_recursive = 1 ";
+	$entidade_and = "AND glpi_tickets.entities_id IN (".$sel_ent.") ";
+	$entidade_pro = "AND glpi_problems.entities_id IN (".$sel_ent.") ";
 	$entidade_age = "AND glpi_tickets.entities_id IN (".$sel_ent.")";
 }
 

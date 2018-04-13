@@ -1,13 +1,32 @@
 <?php
 
-$query2 = "
-SELECT count( id ) AS chamados , DATEDIFF( solvedate, date ) AS days
-FROM glpi_tickets
-WHERE solvedate IS NOT NULL
-AND is_deleted = 0
-$period
-$entidade
-GROUP BY days ";
+if($id_grp != '') {
+
+	$query2 = "
+	SELECT count( glpi_tickets.id ) AS chamados , DATEDIFF( glpi_tickets.solvedate, date ) AS days
+	FROM `glpi_groups_tickets`, glpi_tickets, glpi_groups, glpi_requesttypes
+	WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
+	AND glpi_groups_tickets.`groups_id` = glpi_groups.id
+	AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+	AND glpi_tickets.is_deleted = 0
+	AND glpi_tickets.`requesttypes_id` = glpi_requesttypes.id
+	AND glpi_tickets.solvedate IS NOT NULL
+	$period
+	$entidade
+	GROUP BY days ";
+}
+
+else {
+
+	$query2 = "
+	SELECT count( glpi_tickets.id ) AS chamados , DATEDIFF( glpi_tickets.solvedate, date ) AS days
+	FROM glpi_tickets
+	WHERE glpi_tickets.solvedate IS NOT NULL
+	AND glpi_tickets.is_deleted = 0
+	$period
+	$entidade
+	GROUP BY days ";
+}
 		
 $result2 = $DB->query($query2) or die('erro');
 
@@ -110,8 +129,8 @@ $(function () {
                 data: [  {
                         name: '< 1 " .__('day','dashboard')."',
                         y: ".$arr_days[0].",
-                        sliced: true,
-                        selected: true
+                        sliced: false,
+                        selected: false
                     }, ['1 - 2 " .__('days','dashboard')."',  ".$arr_days[1]." ], ['2 - 3 " .__('days','dashboard')."',  ".$arr_days[2]." ],
                 			['3 - 4 " .__('days','dashboard')."', ".$arr_days[3]." ], ['4 - 5 " .__('days','dashboard')."',  ".$arr_days[4]." ], 
                 			['5 - 6 " .__('days','dashboard')."',  ".$arr_days[5]." ], ['6 - 7 " .__('days','dashboard')."',  ".$arr_days[6]." ]		]

@@ -2,11 +2,11 @@
 <?php
 
 if($data_ini == $data_fin) {
-$datas = "LIKE '".$data_ini."%'";	
+	$datas = "LIKE '".$data_ini."%'";	
 }	
 
 else {
-$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";	
+	$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";	
 }
 
 $query2 = "
@@ -16,6 +16,7 @@ WHERE glpi_tickets.is_deleted = '0'
 AND glpi_tickets.date ".$datas."
 AND glpi_groups_tickets.groups_id = ".$id_grp."
 AND glpi_groups_tickets.tickets_id = glpi_tickets.id
+". $entidade_and ."
 GROUP BY prio
 ORDER BY tick DESC    
 ";

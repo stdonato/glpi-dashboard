@@ -111,45 +111,46 @@ switch (date("w")) {
 
 
 // entity
-$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
+/*$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
 $result_e = $DB->query($sql_e);
-$sel_ent = $DB->result($result_e,0,'value');
+$sel_ent = $DB->result($result_e,0,'value');*/
 
-if($sel_ent != -1 && $sel_ent != '') {			
-	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.")";
-	$ent_problem =  "AND glpi_problems.entities_id IN (".$sel_ent.")";
-}
+if($id_ent != '') {
+	
+	$sel_ent = $id_ent;
 
-if($sel_ent == '') {
-	
-	$entities = $_SESSION['glpiactiveentities'];
-	$ent = implode(",",$entities);
-	
-	if($ent != '') {
-		$entidade = "AND glpi_tickets.entities_id IN (".$ent.")";
-		$ent_problem =  "AND glpi_problems.entities_id IN (".$ent.")";
+	if($sel_ent != -1 && $sel_ent != '') {			
+		$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.")";
+		$ent_problem =  "AND glpi_problems.entities_id IN (".$sel_ent.")";
 	}
+	
+	if($sel_ent == '') {
+		
+		$entities = $_SESSION['glpiactiveentities'];
+		$ent = implode(",",$entities);
+		
+		if($ent != '') {
+			$entidade = "AND glpi_tickets.entities_id IN (".$ent.")";
+			$ent_problem =  "AND glpi_problems.entities_id IN (".$ent.")";
+		}
+		else {
+			$entidade = "";
+			$ent_problem =  "";
+		}
+	}
+	
+	//entity name
+	if($sel_ent != '') {
+		
+		$sql_e = "SELECT name FROM glpi_entities WHERE id = ".$sel_ent."";
+		$result_e = $DB->query($sql_e);
+		$actent = $DB->result($result_e,0,'name');	
+	}
+	
 	else {
-		$entidade = "";
-		$ent_problem =  "";
-	}
-}
+		$actent = 'GLPI '.$CFG_GLPI['version'];
+	}	
 
-
-//entity name
-if($_SESSION['glpiactive_entity'] != '') {
-	
-	$sql_e = "SELECT name FROM glpi_entities WHERE id = ".$_SESSION['glpiactive_entity']."";
-	$result_e = $DB->query($sql_e);
-	$actent = $DB->result($result_e,0,'name');	
-}
-
-elseif($_SESSION['glpiactive_entity'] == 0) {
-	$actent = __('Root entity');
-}
-
-else {
-	$actent = 'GLPI '.$CFG_GLPI['version'];
 }
 
 //chamados ano

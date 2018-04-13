@@ -18,6 +18,7 @@ WHERE glpi_tickets.is_deleted = '0'
 AND glpi_groups_tickets.`groups_id` = ".$id_grp."
 AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
 AND glpi_tickets.date ".$datas."
+". $entidade_and ."
 GROUP BY glpi_itilcategories.id
 ORDER BY `cat_tick` DESC
 LIMIT 5

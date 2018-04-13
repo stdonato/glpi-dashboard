@@ -10,17 +10,20 @@ else {
 
 $sql_grpb = "
 SELECT `glpi_groups_users`.`users_id` AS uid, `glpi_users`.`firstname` AS name ,`glpi_users`.`realname` AS sname, count(glpi_tickets_users.id) AS conta
-FROM `glpi_groups_users`, glpi_tickets_users, glpi_users, glpi_tickets
-WHERE `glpi_groups_users`.`groups_id` = ".$id_grp."
+FROM `glpi_groups_users`, glpi_tickets_users, glpi_users, glpi_tickets, glpi_groups_tickets
+WHERE glpi_groups_tickets.groups_id = ".$id_grp."
 AND glpi_tickets_users.users_id = glpi_groups_users.users_id
 AND glpi_tickets_users.users_id = glpi_users.id
 AND glpi_tickets.id = glpi_tickets_users.tickets_id
+AND glpi_tickets.id = glpi_groups_tickets.tickets_id
+AND glpi_groups_users.groups_id = glpi_groups_tickets.groups_id
 AND glpi_tickets.date ".$datas."
 AND glpi_tickets.is_deleted = 0
+AND glpi_tickets_users.type = 2
+". $entidade_and ."
 GROUP BY uid
 ORDER BY conta DESC
-LIMIT 10
-";
+LIMIT 10 ";
 
 $query_grp_b = $DB->query($sql_grpb);
 

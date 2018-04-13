@@ -109,7 +109,6 @@ switch (date("w")) {
     case "6": $dia = __('Saturday','dashboard'); break;  
 }
 
-
 // entity
 $sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
 $result_e = $DB->query($sql_e);
@@ -136,12 +135,13 @@ if($sel_ent == '') {
 }
 
 
-//entity name
+//group name
 if($_SESSION['glpiactive_entity'] != '') {
 	
-	$sql_e = "SELECT name FROM glpi_entities WHERE id = ".$_SESSION['glpiactive_entity']."";
+	$sql_e = "SELECT name FROM glpi_groups WHERE id = ".$id_grp."";
 	$result_e = $DB->query($sql_e);
-	$actent = $DB->result($result_e,0,'name');	
+	$grp_name = $DB->result($result_e,0,'name');
+	$actent = __('Group').": ". $grp_name;
 }
 
 elseif($_SESSION['glpiactive_entity'] == 0) {
@@ -150,28 +150,32 @@ elseif($_SESSION['glpiactive_entity'] == 0) {
 
 else {
 	$actent = 'GLPI '.$CFG_GLPI['version'];
-}
+}	
 
 //chamados ano
-$sql_ano =	"SELECT COUNT(glpi_tickets.id) as total        
-      FROM glpi_tickets
-      LEFT JOIN glpi_entities ON glpi_tickets.entities_id = glpi_entities.id
-      WHERE glpi_tickets.is_deleted = '0'  
-      AND DATE_FORMAT( glpi_tickets.date, '%Y' ) IN (".$ano.")
-      $entidade ";
+$sql_ano =	"SELECT COUNT(glpi_tickets.id) as total 
+FROM `glpi_groups_tickets`, glpi_tickets, glpi_groups
+WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
+AND glpi_groups_tickets.`groups_id` = glpi_groups.id
+AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+AND glpi_tickets.is_deleted = 0
+AND DATE_FORMAT( glpi_tickets.date, '%Y' ) IN (".$ano.")
+$entidade ";
 
 $result_ano = $DB->query($sql_ano);
 $total_ano = $DB->fetch_assoc($result_ano);
   
 
 //chamados mes
-$sql_mes =	"SELECT COUNT(glpi_tickets.id) as total        
-      FROM glpi_tickets
-      LEFT JOIN glpi_entities ON glpi_tickets.entities_id = glpi_entities.id
-      WHERE glpi_tickets.date LIKE '$month%'      
-      AND glpi_tickets.is_deleted = '0'  
-      $period
-		$entidade ";
+$sql_mes =	"SELECT COUNT(glpi_tickets.id) as total 
+FROM `glpi_groups_tickets`, glpi_tickets, glpi_groups
+WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
+AND glpi_groups_tickets.`groups_id` = glpi_groups.id
+AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+AND glpi_tickets.is_deleted = '0'
+AND glpi_tickets.date LIKE '$month%'        
+$period
+$entidade ";
 
 $result_mes = $DB->query($sql_mes);
 $total_mes = $DB->fetch_assoc($result_mes);
@@ -179,9 +183,12 @@ $total_mes = $DB->fetch_assoc($result_mes);
   
 //ticktes by month
 $querym = "
-SELECT DISTINCT DATE_FORMAT( date, '%b-%y' ) AS month_l, COUNT( id ) AS nb, DATE_FORMAT( date, '%y-%m' ) AS MONTH
-FROM glpi_tickets
-WHERE glpi_tickets.is_deleted = '0'
+SELECT DISTINCT DATE_FORMAT( glpi_tickets.date, '%b-%y' ) AS month_l, COUNT( glpi_tickets.id ) AS nb, DATE_FORMAT( glpi_tickets.date, '%y-%m' ) AS MONTH
+FROM `glpi_groups_tickets`, glpi_tickets, glpi_groups
+WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
+AND glpi_groups_tickets.`groups_id` = glpi_groups.id
+AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+AND glpi_tickets.is_deleted = '0'
 $period
 $entidade
 GROUP BY MONTH
@@ -208,20 +215,25 @@ $opened = array_sum($quantm);
 
 //Today Ticktes
 $sql_hoje =	"SELECT COUNT(glpi_tickets.id) as total        
-      FROM glpi_tickets
-      LEFT JOIN glpi_entities ON glpi_tickets.entities_id = glpi_entities.id
-      WHERE glpi_tickets.date like '$hoje%'      
-      AND glpi_tickets.is_deleted = '0'
-      ".$entidade." ";
+FROM `glpi_groups_tickets`, glpi_tickets, glpi_groups
+WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
+AND glpi_groups_tickets.`groups_id` = glpi_groups.id
+AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+AND glpi_tickets.date like '$hoje%'      
+AND glpi_tickets.is_deleted = '0'
+".$entidade." ";
 
 $result_hoje = $DB->query($sql_hoje);
 $today_tickets = $DB->result($result_hoje,0,'total');
 
 //Ticktes by day
 $queryd = "
-SELECT DISTINCT DATE_FORMAT(date, '%b-%d') as day_l,  COUNT(id) as nb, DATE_FORMAT(date, '%Y-%m-%d') as day
-FROM glpi_tickets
-WHERE glpi_tickets.is_deleted = '0'
+SELECT DISTINCT DATE_FORMAT(glpi_tickets.date, '%b-%d') as day_l,  COUNT(glpi_tickets.id) as nb, DATE_FORMAT(glpi_tickets.date, '%Y-%m-%d') as day
+FROM `glpi_groups_tickets`, glpi_tickets, glpi_groups
+WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
+AND glpi_groups_tickets.`groups_id` = glpi_groups.id
+AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+AND glpi_tickets.is_deleted = '0'
 AND glpi_tickets.date BETWEEN '".$lastmonth." 00:00:00' AND '".$hoje." 23:59:59'
 $entidade
 GROUP BY day
@@ -250,18 +262,21 @@ $bydays = array_sum($quantd);
 
 //resolution time
 $query2 = "
-SELECT count( id ) AS chamados , DATEDIFF( solvedate, date ) AS days
-FROM glpi_tickets
-WHERE solvedate IS NOT NULL
-AND is_deleted = 0
+SELECT count( glpi_tickets.id ) AS chamados , DATEDIFF( glpi_tickets.solvedate, date ) AS days
+FROM `glpi_groups_tickets`, glpi_tickets, glpi_groups
+WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
+AND glpi_groups_tickets.`groups_id` = glpi_groups.id
+AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+AND glpi_tickets.solvedate IS NOT NULL
+AND glpi_tickets.is_deleted = 0
 $period
 $entidade
 GROUP BY days ";
 		
 $result2 = $DB->query($query2) or die('erro');
 
-
 $arr_grf2 = array();
+
 while ($row_result = $DB->fetch_assoc($result2))		
 { 
 	$v_row_result = $row_result['days'];
@@ -292,8 +307,11 @@ $sql_cham =
 "SELECT glpi_tickets.id AS id, glpi_tickets.name AS descr, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, 
 glpi_tickets.status, glpi_tickets.time_to_resolve AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
 FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time
-FROM glpi_tickets
-WHERE glpi_tickets.is_deleted = 0
+FROM `glpi_groups_tickets`, glpi_tickets, glpi_groups
+WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
+AND glpi_groups_tickets.`groups_id` = glpi_groups.id
+AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+AND glpi_tickets.is_deleted = 0
 $period
 $entidade
 GROUP BY id DESC
@@ -325,9 +343,12 @@ $gauge_val = round(($w*100)/$conta_cons,1);
 //STATUS
 $query_sta = "
 SELECT COUNT(glpi_tickets.id) as tick, glpi_tickets.status as stat
-FROM glpi_tickets
-WHERE glpi_tickets.is_deleted = 0
-AND status NOT IN (5,6)       
+FROM `glpi_groups_tickets`, glpi_tickets, glpi_groups
+WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
+AND glpi_groups_tickets.`groups_id` = glpi_groups.id
+AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+AND glpi_tickets.is_deleted = 0
+AND glpi_tickets.status NOT IN (5,6)       
 $period      
 $entidade 
 GROUP BY glpi_tickets.status
@@ -353,13 +374,16 @@ $sta_values = implode(',',$quant_sta);
 
 //Tickets type
 //incident - request
-$query_type = "SELECT count(id) AS quant, type
-	FROM glpi_tickets
-	WHERE is_deleted = 0
-	$period
-	$entidade
-	GROUP BY type
-	ORDER BY type ASC"; 
+$query_type = "SELECT count(glpi_tickets.id) AS quant, glpi_tickets.type
+FROM `glpi_groups_tickets`, glpi_tickets, glpi_groups
+WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
+AND glpi_groups_tickets.`groups_id` = glpi_groups.id
+AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+AND glpi_tickets.is_deleted = 0
+$period
+$entidade
+GROUP BY glpi_tickets.type
+ORDER BY glpi_tickets.type ASC"; 
 
 $res_type = $DB->query($query_type);
 
@@ -379,9 +403,12 @@ else {
 }
 
 //problems	
-$query_prob = "SELECT count(id) AS quant
-	FROM glpi_problems
-	WHERE is_deleted = 0
+$query_prob = "SELECT count(glpi_problems.id) AS quant
+	FROM `glpi_groups_problems`, glpi_problems, glpi_groups
+	WHERE glpi_groups_problems.`groups_id` = ".$id_grp."
+	AND glpi_groups_problems.`groups_id` = glpi_groups.id
+	AND glpi_groups_problems.`problems_id` = glpi_problems.id
+	AND glpi_problems.is_deleted = 0
 	$periodp
 	$ent_problem ";
 
@@ -406,10 +433,13 @@ $rag_labels = implode(",",$array_label);
 
 
 //Satisfaction
-$query_sat =
-"SELECT avg( `glpi_ticketsatisfactions`.satisfaction ) AS media
-	FROM glpi_tickets, `glpi_ticketsatisfactions`
-	WHERE glpi_tickets.is_deleted = '0'
+	$query_sat =
+	"SELECT avg( `glpi_ticketsatisfactions`.satisfaction ) AS media 
+	FROM `glpi_groups_tickets`, glpi_tickets, glpi_groups, `glpi_ticketsatisfactions`
+	WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
+	AND glpi_groups_tickets.`groups_id` = glpi_groups.id
+	AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+	AND glpi_tickets.is_deleted = 0
 	AND `glpi_ticketsatisfactions`.tickets_id = glpi_tickets.id
 	AND glpi_ticketsatisfactions.satisfaction <> 'NULL'
 	$period
@@ -429,8 +459,11 @@ $query_sat =
 	SUM(case when glpi_tickets.status = 4 then 1 else 0 end) AS pend,
 	SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve,
 	SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
-	FROM glpi_tickets
-	WHERE glpi_tickets.is_deleted = '0' 
+	FROM `glpi_groups_tickets`, glpi_tickets, glpi_groups
+	WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
+	AND glpi_groups_tickets.`groups_id` = glpi_groups.id
+	AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+	AND glpi_tickets.is_deleted = 0
 	$period
 	$entidade ";
 	
@@ -456,8 +489,11 @@ $query_sat =
 	SUM(case when glpi_tickets.status = 4 then 1 else 0 end) AS pend,
 	SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve,
 	SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
-	FROM glpi_tickets
-	WHERE glpi_tickets.is_deleted = '0'	
+	FROM `glpi_groups_tickets`, glpi_tickets, glpi_groups
+	WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
+	AND glpi_groups_tickets.`groups_id` = glpi_groups.id
+	AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+	AND glpi_tickets.is_deleted = 0
 	$periody	
 	$entidade ";
 	

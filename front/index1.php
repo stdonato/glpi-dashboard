@@ -378,12 +378,7 @@ else {
                         <li><a href="./reports/rel_localidade.php" target="iframe1" > <?php echo __('by Location','dashboard'); ?> </a></li>
                         <li><a href="./reports/rel_usuario.php" target="iframe1" > <?php echo __('by Requester','dashboard'); ?> </a></li>
                         <li><a href="./reports/rel_tecnico.php" target="iframe1" > <?php echo __('by Technician','dashboard'); ?> </a></li>
-						<?php
-                        	// distinguish between 0.90.x and 9.1 version
-							//if (GLPI_VERSION <= intval('9.1')){
-                        		//echo '<li><a href="./reports/rel_sla.php" target="iframe1" >'. __('by SLA','dashboard').'</a></li>';
-                        	//}	     
-                        ?>                   
+                
                         </li>
          	            <?php
 	                        // distinguish between 0.90.x and 9.1 version
@@ -396,7 +391,7 @@ else {
 										 </ul>
 						              </li>';
 				             	}
-				         ?>
+				            ?>
 				              	     							
                       </ul>
                     </div>
@@ -425,22 +420,15 @@ else {
 
                       <ul class="col-sm-2 list-unstyled menu1" style="width:180px;">
                         <li><!-- <p><strong>Links Title</strong></p> --></li>                        
-						<li><a href="./graphs/graf_categoria.php" target="iframe1" > <?php echo __('by Category','dashboard'); ?> </a></li>
+								<li><a href="./graphs/graf_categoria.php" target="iframe1" > <?php echo __('by Category','dashboard'); ?> </a></li>
                         <li><a href="./graphs/geral_mes.php" target="iframe1" > <?php echo __('by Date','dashboard'); ?> </a></li>
                         <li><a href="./graphs/graf_entidade.php" target="iframe1" > <?php echo __('by Entity','dashboard'); ?> </a></li>
-						<li><a href="./graphs/graf_grupo.php" target="iframe1" > <?php echo __('by Group','dashboard'); ?> </a></li>
-						<li><a href="./graphs/graf_localidade.php" target="iframe1" > <?php echo __('by Location','dashboard'); ?> </a></li>
+								<li><a href="./graphs/graf_grupo.php" target="iframe1" > <?php echo __('by Group','dashboard'); ?> </a></li>
+								<li><a href="./graphs/graf_localidade.php" target="iframe1" > <?php echo __('by Location','dashboard'); ?> </a></li>
                         <li><a href="./graphs/graf_usuario.php" target="iframe1" > <?php echo __('by Requester','dashboard'); ?> </a></li>
                         <li><a href="./graphs/graf_tecnico.php" target="iframe1" > <?php echo __('by Technician','dashboard'); ?> </a></li>
                         <li><a href="./graphs/graf_tipo.php" target="iframe1" > <?php echo __('by Type','dashboard'); ?> </a></li>
 								
-							<?php
-								// distinguish between 0.90.x and 9.1 version
-								//if (GLPI_VERSION <= intval('9.1')){
-									//echo '<li><a href="./graphs/slas.php" target="iframe1" >'. __('by SLA','dashboard').'</a></li>';
-								//}
-							?>
-
 							<?php
 	                        // distinguish between 0.90.x and 9.1 version
 									if (GLPI_VERSION >= 9.1){
@@ -461,13 +449,17 @@ else {
             </li>           
             
             <!-- Classic dropdown -->	            
-           <!-- <li class="nav-link"><span onclick="window.open('./assets/assets.php','iframe1');"><a href="#" data-toggle="dropdown" class="dropdown-toggle nav-icon"><i class='fa fa-desktop'></i>&nbsp;<?php //echo __('Assets');?></a></span></li>
-            <li class="nav-link"><span onclick="window.open('./metrics/index.php','self');"><a href="#" data-toggle="dropdown" class="dropdown-toggle nav-icon"><i class='fa fa-line-chart'></i>&nbsp;<?php //echo __('Metrics','dashboard');?></a></span></li>	                    
-			<li class="nav-link"><span onclick="window.open('./graphs/graf_tech.php?con=1','iframe1');"><a href="#" data-toggle="dropdown" class="dropdown-toggle nav-icon"><i class='fa fa-area-chart'></i>&nbsp;<?php //echo __('My Dashboard','dashboard');?></a></span></li> -->
-
-			<li class="dropdown menu"><a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color:#fff;"><span class="text-nav1" onclick="window.open('./assets/assets.php','iframe1');"><i class='fa fa-desktop'></i>&nbsp; <?php echo __('Assets');?></span></a></li>
-			<li class="dropdown menu"><a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color:#fff;"><span class="text-nav1" onclick="window.open('./metrics/index.php','self');"><i class='fa fa-line-chart'></i>&nbsp; <?php echo __('Metrics','dashboard');?></span></a></li>			
+			<!--<li class="dropdown menu"><a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color:#fff;"><span class="text-nav1" onclick="window.open('./metrics/index.php','self');"><i class='fa fa-line-chart'></i>&nbsp; <?php echo __('Metrics','dashboard');?></span></a>-->
+			<li class="dropdown menu"><a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color:#fff;"><span class="text-nav1"><i class='fa fa-line-chart'></i>&nbsp;<?php echo __('Metrics','dashboard');?>&nbsp;<b class="caret"></b></span></a>
+              <ul role="menu" class="dropdown-menu">
+                <li><a tabindex="-1" href="./metrics/index.php" target="_blank"> <?php echo __('Overall','dashboard'); ?> </a></li>
+                <li><a tabindex="-1" href="./metrics/select_ent.php" target="_blank"> <?php echo __('by Entity','dashboard'); ?> </a></li>
+                <li><a tabindex="-1" href="./metrics/select_grupo.php" target="_blank">  <?php echo __('by Group','dashboard'); ?> </a></li>                
+              </ul>			
+			</li>			
 						
+			<li class="dropdown menu"><a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color:#fff;"><span class="text-nav1" onclick="window.open('./assets/assets.php','iframe1');"><i class='fa fa-desktop'></i>&nbsp; <?php echo __('Assets');?></span></a></li>
+ 
           </ul>     
 			 
 			 <!-- Right aligned menu below button -->

@@ -2,11 +2,11 @@
 <?php
 
 if($data_ini == $data_fin) {
-$datas = "LIKE '".$data_ini."%'";	
+	$datas = "LIKE '".$data_ini."%'";	
 }	
 
 else {
-$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";	
+	$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";	
 }
 
 $query2 = "
@@ -16,11 +16,12 @@ WHERE glpi_tickets.is_deleted = '0'
 AND glpi_tickets.date ".$datas."
 AND glpi_groups_tickets.groups_id = ".$id_grp."
 AND glpi_tickets.id = glpi_groups_tickets.tickets_id   
+". $entidade_and ."
 GROUP BY glpi_tickets.status
 ORDER BY stat  ASC ";
 
 		
-$result2 = $DB->query($query2) or die('erro');
+$result2 = $DB->query($query2) or die('erro_age');
 
 $arr_grf2 = array();
 while ($row_result = $DB->fetch_assoc($result2))		

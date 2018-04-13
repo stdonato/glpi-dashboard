@@ -17,6 +17,7 @@ WHERE glpi_problems.is_deleted = 0
 AND glpi_groups_problems.groups_id = ".$id_grp."
 AND glpi_problems.id = glpi_groups_problems.problems_id    
 AND glpi_problems.date ".$datas."
+". $entidade_pro ."
  ";		
  
 $result_p = $DB->query($query_p) or die('erro-tipo');
@@ -30,6 +31,7 @@ FROM glpi_tickets, glpi_groups_tickets
 WHERE glpi_tickets.is_deleted = '0'
 AND glpi_tickets.date ".$datas."
 AND glpi_groups_tickets.groups_id = ".$id_grp."
+". $entidade_and ."
 AND glpi_tickets.id = glpi_groups_tickets.tickets_id   
 GROUP BY glpi_tickets.type
 ORDER BY tipo  ASC    

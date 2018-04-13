@@ -59,10 +59,10 @@ array_push($quant2,$more8);
 
 $conta_q = count($quant2)-1;
 
-print_r($arr_tick);
+/*print_r($arr_tick);
 print_r($arr_keys);
 var_dump($query2);
-
+*/
 echo "
 <script type='text/javascript'>
 

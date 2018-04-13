@@ -30,7 +30,6 @@ else {
 	$height = '450';
 }
 
-var_dump($sql_tec);
 
 echo "
 <script type='text/javascript'>

@@ -1,5 +1,26 @@
 <?php
+
+if(isset($_REQUEST['ent'])) {
+	$id_ent = $_REQUEST['ent'];
+	$indexw = "indexw.php?ent=".$id_ent;
+	$indexb = "index.php?ent=".$id_ent;
+	include "metrics_ent.inc.php";
+}
+	
+	
+elseif(isset($_REQUEST['grp'])) {
+	$id_grp = $_REQUEST['grp'];
+	$indexw = "indexw.php?grp=".$id_grp;
+	$indexb = "index.php?grp=".$id_grp;
+	include "metrics_grp.inc.php";
+}
+
+else {
+	$indexw = "indexw.php";
+	$indexb = "index.php";	
 	include "metrics.inc.php";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -63,13 +84,13 @@
 				</a>
 			</li>
 			<li class="current cf-nav-shortcut">
-				<a href="index.php" class="current active">
+				<a href="<?php echo $indexb; ?>" class="current active">
 					<span class="cf-nav-min">B</span>
 					<span class="cf-nav-max">Black</span>
 				</a>
 			</li>
 			<li class="cf-nav-shortcut">
-				<a href="indexw.php">
+				<a href="<?php echo $indexw; ?>">
 					<span class="cf-nav-min">W</span>
 					<span class="cf-nav-max">White</span>
 				</a>
@@ -151,7 +172,7 @@
 
 		<div style="min-height: 100px;" class="col-lg-5 cf-item-status tickets all">				
 			<header>
-					<p><span></span><?php echo __('Total');?></p>
+				<p><span></span><?php echo __('Total')." (".__('Opened','dashboard').")";?></p>
 			</header>
 			<div class="content">
 				<div class="metric5"><?php echo $total;?></div>
