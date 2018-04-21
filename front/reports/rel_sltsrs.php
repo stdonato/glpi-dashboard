@@ -209,10 +209,10 @@ else {
 	$sla_comp = "AND glpi_tickets.slas_ttr_id = glpi_slas.id";	
 	
 $sql_sla = 
-"SELECT COUNT(glpi_tickets.id) AS total, glpi_slms.name AS sla_name, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, 
+"SELECT COUNT(glpi_tickets.id) AS total, glpi_slas.name AS sla_name, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, 
 glpi_tickets.status, glpi_tickets.time_to_resolve AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
-FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time, glpi_slms.id AS sla_id
-FROM glpi_tickets, glpi_slms
+FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time, glpi_slas.id AS sla_id
+FROM glpi_tickets, glpi_slas
 WHERE glpi_tickets.is_deleted = 0
 AND glpi_tickets.date ".$datas2."
 ".$entidade."

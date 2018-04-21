@@ -360,8 +360,7 @@ if($con == "1") {
 	
 	$result_nome = $DB->query($sql_nome) ;
 	
-	$DB->data_seek($result_cham, 0);
-	
+	$DB->data_seek($result_cham, 0);	
 	while($row = $DB->fetch_assoc($result_nome)) {
 
 	$ent_name = $row['name'] ;
@@ -388,60 +387,60 @@ if($con == "1") {
 	$DB->data_seek($result_cham, 0);
 	while($row = $DB->fetch_assoc($result_cham)){
 			
-	$query_cost = "SELECT (SUM( gtc.`cost_time` ) + SUM( gtc.`cost_fixed` ) + SUM( gtc.`cost_material` )) AS costs
-	FROM glpi_ticketcosts gtc, glpi_tickets gt
-	WHERE gtc.`tickets_id` = gt.id
-	AND gt.is_deleted = 0
-	AND gtc.`tickets_id`  = ".$row['id']."	
-	GROUP BY gtc.`tickets_id` "; 
-	
-	$result_cost = $DB->query($query_cost);
-	$cost = $DB->result($result_cost,0,'costs');
-	
-	$total_cost += $cost; 
-	
+/*		$query_cost = "SELECT (SUM( gtc.`cost_time` ) + SUM( gtc.`cost_fixed` ) + SUM( gtc.`cost_material` )) AS costs
+		FROM glpi_ticketcosts gtc, glpi_tickets gt
+		WHERE gtc.`tickets_id` = gt.id
+		AND gt.is_deleted = 0
+		AND gtc.`tickets_id`  = ".$row['id']."	
+		GROUP BY gtc.`tickets_id` "; 
+		
+		$result_cost = $DB->query($query_cost);
+		$cost = $DB->result($result_cost,0,'costs');*/
+		
+		$total_cost += number_format(computeCost($row['id']), 2, ',', ' ');
+		
 	}
-
-	echo "
-	<table align='right' style='margin-bottom:10px;'>
-		<tr>
-			<td colspan=3 style='vertical-align:bottom;'>
-				<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_custo_ent.php?con=1&stat=open&sel_ent=".$id_ent."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened','dashboard'). " </button>
-				<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_custo_ent.php?con=1&stat=close&sel_ent=".$id_ent."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed','dashboard')." </button>
-				<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_custo_ent.php?con=1&stat=all&sel_ent=".$id_ent."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All','dashboard')." </button>
-			</td>
-		</tr>
-	</table>
-
-	<table style='font-size: 16px; font-weight:bold; width: 50%;' border=0>
-		<tr>
-			<td><span style='color: #000;'>". __('Total cost').":  </span><b>". number_format($total_cost, 2, ',', ' ') ." </b></td></tr>	 
-		<tr>
-			<td>&nbsp;</td></tr>
-		<tr><td>&nbsp;</td></tr>
-	</table>
-
-	<table id='tec' class='display' style='font-size: 13px; font-weight:bold;' cellpadding = 2px >
-		<thead>
+	
+		echo "
+		<table align='right' style='margin-bottom:10px;'>
 			<tr>
-				<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Tickets','dashboard') ." </th>
-				<th style='text-align:center; cursor:pointer; font-size: 12px; font-weight:bold; vertical-align:middle;'> ".__('Status')." </th>				
-				<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Title') ."</th>
-				<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Technician') ."</th>
-				<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Opened' ,'dashboard') ."</th>
-			   <th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Closed','dashboard') ."</th>
-				<th style='text-align:center; cursor:pointer;'> ". __('Time') ."</th>
-				<th style='text-align:center; cursor:pointer;' class='sum'> ". __('Cost') ."</th>
+				<td colspan=3 style='vertical-align:bottom;'>
+					<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_custo_ent.php?con=1&stat=open&sel_ent=".$id_ent."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened','dashboard'). " </button>
+					<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_custo_ent.php?con=1&stat=close&sel_ent=".$id_ent."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed','dashboard')." </button>
+					<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_custo_ent.php?con=1&stat=all&sel_ent=".$id_ent."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All','dashboard')." </button>
+				</td>
 			</tr>
-		</thead>
-		<tfoot>
-			<th colspan='7' class='right' style='background:#fff !important; color:#000 !important;'> ". __('Total cost') .": </th>
-			<th class='right' style='background:#fff !important; color:#000 !important;'></th>
-		</tfoot>
-	<tbody>
-	";
+		</table>
+	
+		<table style='font-size: 16px; font-weight:bold; width: 50%;' border=0>
+			<tr>
+				<td><span style='color: #000;'>". __('Total cost').":  </span><b>". number_format($total_cost, 2, ',', ' ') ." </b></td></tr>	 
+			<tr>
+				<td>&nbsp;</td></tr>
+			<tr><td>&nbsp;</td></tr>
+		</table>
+	
+		<table id='tec' class='display' style='font-size: 13px; font-weight:bold;' cellpadding = 2px >
+			<thead>
+				<tr>
+					<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Tickets','dashboard') ." </th>
+					<th style='text-align:center; cursor:pointer; font-size: 12px; font-weight:bold; vertical-align:middle;'> ".__('Status')." </th>				
+					<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Title') ."</th>
+					<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Technician') ."</th>
+					<th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Opened' ,'dashboard') ."</th>
+				   <th style='text-align:center; cursor:pointer; vertical-align:middle;'> ". __('Closed','dashboard') ."</th>
+					<th style='text-align:center; cursor:pointer;'> ". __('Time') ."</th>
+					<th style='text-align:center; cursor:pointer;' class='sum'> ". __('Cost') ."</th>
+				</tr>
+			</thead>
+			<tfoot>
+				<th colspan='7' class='right' style='background:#fff !important; color:#000 !important;'> ". __('Total cost') .": </th>
+				<th class='right' style='background:#fff !important; color:#000 !important;'></th>
+			</tfoot>
+		<tbody>
+		";
 
-}
+	}
 
 //listar chamados
 $DB->data_seek($result_cham, 0);
@@ -460,7 +459,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 	
 	
 	//costs by ticket
-	$query_cost = "SELECT (SUM( gtc.`cost_time` ) + SUM( gtc.`cost_fixed` ) + SUM( gtc.`cost_material` )) AS costs
+/*	$query_cost = "SELECT (SUM( gtc.`cost_time` ) + SUM( gtc.`cost_fixed` ) + SUM( gtc.`cost_material` )) AS costs
 	FROM glpi_ticketcosts gtc, glpi_tickets gt
 	WHERE gtc.`tickets_id` = gt.id
 	AND gt.is_deleted = 0
@@ -468,7 +467,9 @@ while($row = $DB->fetch_assoc($result_cham)){
 	GROUP BY gtc.`tickets_id` "; 
 	
 	$result_cost = $DB->query($query_cost);
-	$cost = $DB->result($result_cost,0,'costs');		
+	$cost = $DB->result($result_cost,0,'costs');	*/	
+	
+	//computeCost($row['id']);
 	
 	//tecnico
     $sql_tec = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
@@ -490,7 +491,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 			<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['date']) ." </td>
 			<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['closedate']) ." </td>
 			<td style='vertical-align:middle; text-align:right;'> ". time_ext($row['time']) ."</td>
-			<td style='vertical-align:middle; text-align:right;'> ". number_format($cost, 2, ',', ' ') ."</td>
+			<td style='vertical-align:middle; text-align:right;'> ". number_format(computeCost($row['id']), 2, ',', ' ') ."</td>
 		</tr>";	    
 }
 

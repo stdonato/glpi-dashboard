@@ -345,6 +345,32 @@ function super_unique($array)
   return $result;
 }
 
+
+//calcular custos de chamado
+
+   function computeCost($item) {
+      global $DB;
+
+      $totalcost = 0;
+
+      $query = "SELECT `glpi_ticketcosts`.*
+                FROM `glpi_tickets`, `glpi_ticketcosts`
+                WHERE `glpi_ticketcosts`.`tickets_id` = `glpi_tickets`.`id`
+                AND glpi_tickets.id = ".$item."
+                      AND (`glpi_ticketcosts`.`cost_time` > '0'
+                           OR `glpi_ticketcosts`.`cost_fixed` > '0'
+                           OR `glpi_ticketcosts`.`cost_material` > '0')";
+      $result = $DB->query($query);
+
+      $i = 0;
+      if ($DB->numrows($result)) {
+         while ($data = $DB->fetch_assoc($result)) {
+            $totalcost += TicketCost::computeTotalCost($data["actiontime"], $data["cost_time"],
+                                                       $data["cost_fixed"], $data["cost_material"]);
+         }
+      }
+      return $totalcost;
+   }
 ?>
 
 

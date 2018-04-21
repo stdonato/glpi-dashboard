@@ -1,18 +1,15 @@
-Versão 0.9.1:
+Versão 0.9.2:
 
 - GLPI 9.2.x apenas;
-- Correção no relatório de chamados;
-- Adicionado contagem de backlog; 
-- Adicionado backlog nos gráficos e relatórios de Entidades, grupos e técnicos;
-- Nome da entidade ativa nas métricas;
-- Adicionado idioma Checo;
+- Correção de relatórios e gráficos de SLA;
+- Correção de valores e total nos relatórios de custo;
 - Correção de bugs diversos;
 
 
-Version 0.9.1:
+Version 0.9.2:
 
 - Only for GLPI 9.2.x;
-- Czech language add;
-- Fix dropdown in Report by Category;
+- Fix SLA reports and charts;
+- Fix cost reports;
 - Fix minor bugs;
 

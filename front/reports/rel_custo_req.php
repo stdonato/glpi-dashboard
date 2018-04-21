@@ -108,7 +108,6 @@ $sql_tec = "
 SELECT DISTINCT glpi_users.id AS id , glpi_users.firstname AS name, glpi_users.realname AS sname
 FROM glpi_users, glpi_tickets_users
 WHERE glpi_tickets_users.users_id = glpi_users.id
-AND glpi_tickets_users.type = 1
 AND glpi_users.is_deleted = 0
 AND glpi_users.is_active = 1
 ".$entidade_u."
@@ -404,7 +403,7 @@ if($con == "1") {
 	$DB->data_seek($result_cham, 0);
 	while($row = $DB->fetch_assoc($result_cham)){
 
-	$query_cost = "SELECT (SUM( gtc.`cost_time` ) + SUM( gtc.`cost_fixed` ) + SUM( gtc.`cost_material` )) AS costs
+/*	$query_cost = "SELECT (SUM( gtc.`cost_time` ) + SUM( gtc.`cost_fixed` ) + SUM( gtc.`cost_material` )) AS costs
 	FROM glpi_ticketcosts gtc, glpi_tickets gt
 	WHERE gtc.`tickets_id` = gt.id
 	AND gt.is_deleted = 0
@@ -414,7 +413,9 @@ if($con == "1") {
 	$result_cost = $DB->query($query_cost);
 	$cost = $DB->result($result_cost,0,'costs');
 
-	$total_cost += $cost;
+	$total_cost += $cost;*/
+	
+	$total_cost += number_format(computeCost($row['id']), 2, ',', ' ');
 
 	}
 
@@ -476,7 +477,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 
 
 	//costs
-	$query_cost = "SELECT (SUM( gtc.`cost_time` ) + SUM( gtc.`cost_fixed` ) + SUM( gtc.`cost_material` )) AS costs
+/*	$query_cost = "SELECT (SUM( gtc.`cost_time` ) + SUM( gtc.`cost_fixed` ) + SUM( gtc.`cost_material` )) AS costs
 	FROM glpi_ticketcosts gtc, glpi_tickets gt
 	WHERE gtc.`tickets_id` = gt.id
 	AND gt.is_deleted = 0
@@ -484,7 +485,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 	GROUP BY gtc.`tickets_id` ";
 
 	$result_cost = $DB->query($query_cost);
-	$cost = $DB->result($result_cost,0,'costs');
+	$cost = $DB->result($result_cost,0,'costs');*/
 
 	//tecnico
 	$sql_tec = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
@@ -506,7 +507,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 			<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['date']) ." </td>
 			<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['closedate']) ." </td>
 			<td style='vertical-align:middle; text-align:right;'> ". time_ext($row['time']) ."</td>
-			<td style='vertical-align:middle; text-align:right;'> ". number_format($cost, 2, ',', ' ') ."</td>
+			<td style='vertical-align:middle; text-align:right;'> ". number_format(computeCost($row['id']), 2, ',', ' ') ."</td>
 		</tr>";
 
 }

@@ -29,9 +29,9 @@ else {
 $slaid = "slas_ttr_id";		
 
 $query3 = "
-SELECT count( glpi_tickets.id ) AS conta, glpi_tickets.".$slaid." AS id, glpi_slms.name
-FROM glpi_tickets, glpi_slms
-WHERE glpi_tickets.".$slaid." = glpi_slms.id
+SELECT count( glpi_tickets.id ) AS conta, glpi_tickets.".$slaid." AS id, glpi_slas.name
+FROM glpi_tickets, glpi_slas
+WHERE glpi_tickets.".$slaid." = glpi_slas.id
 AND glpi_tickets.is_deleted = 0
 AND glpi_tickets.date ".$datas."
 ".$entidade."

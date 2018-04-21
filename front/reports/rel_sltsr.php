@@ -42,13 +42,13 @@ if($sel_ent == '' || $sel_ent == -1) {
 	$ent = implode(",",$entities);
 
 	$entidade = "AND glpi_tickets.entities_id IN (".$ent.") ";
-	$entidade_s = "WHERE entities_id IN (".$ent.") ";
+	$entidade_s = "WHERE entities_id IN (".$ent.") or entities_id IN (select entities_id from glpi.glpi_entities where id IN (".$ent.")) ";
 	$entidade_sw = "WHERE entities_id IN (".$ent.") OR is_recursive = 1 ";
 	$entidade1 = "";
 }
 else {
 	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.") ";
-	$entidade_s = "WHERE entities_id IN (".$sel_ent.") ";
+	PARA: $entidade_s = "WHERE entities_id IN (".$sel_ent.") or entities_id IN (select entities_id from glpi.glpi_entities where id IN (".$sel_ent.")) ";
 	$entidade_sw = "WHERE entities_id IN (".$sel_ent.") OR is_recursive = 1 ";
 }
 
@@ -174,7 +174,7 @@ else {
 						// SLA list
 						$sql_loc = "
 						SELECT id, name AS name
-						FROM glpi_slms
+						FROM glpi_slas
 						".$entidade_s."
 						ORDER BY name ASC ";
 			
