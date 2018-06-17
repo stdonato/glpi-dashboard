@@ -47,7 +47,7 @@ $contador = $DB->numrows($query_cat);
 
 //chart height
 if($contador > 9) {	
-	$height = '900';	
+	$height = '1300';	
 }
 else {
 	$height = '500';
@@ -72,16 +72,13 @@ $(function () {
             xAxis: {
             categories: ";
 
-$categories = array();
-while ($entity = $DB->fetch_assoc($query_cat)) {
-    $categories[] = $entity['name'];
-}
-echo json_encode($categories);
-
-//zerar rows para segundo while
-$DB->data_seek($query_cat, 0) ;
-
-echo ",
+				$categories = array();
+				while ($entity = $DB->fetch_assoc($query_cat)) {
+				    $categories[] = $entity['name'];
+				}
+				echo json_encode($categories);
+				
+				echo ",
                 title: {
                     text: null
                 },
@@ -145,16 +142,18 @@ echo ",
                 data: [
 ";
 
-while ($entity = $DB->fetch_assoc($query_cat)) {
-	echo $entity['total'].",";
-}
-
-echo "]
-            }]
-        });
-    });
-
-</script>
-";
+				//zerar rows para segundo while
+				$DB->data_seek($query_cat, 0) ;
+				while ($entity = $DB->fetch_assoc($query_cat)) {
+					echo $entity['total'].",";
+				}
+				
+				echo "]
+				            }]
+				        });
+				    });
+				
+				</script>
+				";
 
 		?>

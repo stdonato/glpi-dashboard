@@ -111,8 +111,7 @@ $(function () {
             	 	},
                 name: '". __('Tickets','dashboard') ."',
                 data: [";
-                
-                		//{ y: 29.9, name: 'USA', key: 'United_States'}, 
+                                		
 							while ($entity = $DB->fetch_assoc($query_tec)){
 								echo "{y:".$entity['conta'].",name:'".$entity['cname']."',key:".$entity['id']."},";
 							}                			

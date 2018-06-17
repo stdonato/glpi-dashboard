@@ -43,7 +43,7 @@ $contador = $DB->numrows($query_tec);
 
 //chart height
 if($contador > 9) {	
-	$height = '1000';	
+	$height = '1100';	
 }
 else {
 	$height = '500';
@@ -133,6 +133,9 @@ $(function () {
                 name: '". __('Tickets','dashboard')."',
                 data: [  ";
 
+				//zerar rows para segundo while
+				$DB->data_seek($query_tec, 0) ;
+				
 				while ($tecnico = $DB->fetch_assoc($query_tec))
 				{
 					$user_name = str_replace("'","`",$tecnico['name']." ". $tecnico['sname']);				 	

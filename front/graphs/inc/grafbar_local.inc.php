@@ -43,7 +43,7 @@ $contador = $DB->numrows($query_tec);
 
 //chart height
 if($contador > 9) {	
-	$height = '950';	
+	$height = '1100';	
 }
 else {
 	$height = '500';
@@ -77,9 +77,6 @@ $(function () {
 				    $categories[] = $tecnico['name'];
 				}
 				echo json_encode($categories);
-				
-				//zerar rows para segundo while
-				$DB->data_seek($query_tec, 0) ;
 				
 				echo ",
                 title: {
@@ -145,6 +142,9 @@ $(function () {
                 data: [
 					";
 					
+									
+					//zerar rows para segundo while
+					$DB->data_seek($query_tec, 0) ;
 					while ($tecnico = $DB->fetch_assoc($query_tec)) {
 					 
 					 echo $tecnico['conta'].",";

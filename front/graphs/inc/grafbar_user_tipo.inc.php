@@ -24,7 +24,6 @@ LIMIT 10 ";
 
 $query_grp_b = $DB->query($sql_grpb);
 
-//var_dump($sql_grpb);
 
 echo "
 <script type='text/javascript'>
@@ -109,8 +108,7 @@ echo ",
 ";
 
 //zerar rows para segundo while
-
-$DB->data_seek($query_grp_b, 0) ;
+$DB->data_seek($query_grp_b, 0);
 
 while ($grupo = $DB->fetch_assoc($query_grp_b))
 {
