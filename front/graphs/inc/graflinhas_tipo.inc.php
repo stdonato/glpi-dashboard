@@ -60,7 +60,6 @@ else {
 	$monthsq = array_values($arr_months) ;
 }
 
-
 //chamados mensais
 $arr_grfm = array();
 
@@ -95,7 +94,6 @@ if($interval >= "31") {
 		$arr_opened = $arr_grfm;
 }
 
-
 else {
 
 		$DB->data_seek($resultd, 0);
@@ -111,8 +109,8 @@ else {
 			WHERE glpi_tickets.is_deleted = '0'
 			AND glpi_tickets.date ".$datas."
 			AND glpi_tickets.type = ".$id_tip."	
-			AND DATE_FORMAT(glpi_tickets.date, '%Y-%m-%d' ) = '".$row_result['day']."'
 			".$entidade_a."
+			AND DATE_FORMAT(glpi_tickets.date, '%Y-%m-%d' ) = '".$row_result['day']."'
 			GROUP BY day
 			ORDER BY day ";
 
@@ -130,6 +128,8 @@ else {
 
 		$arr_opened = $arr_grfm;
 }
+
+//var_dump($querym);
 
 /*$resultm = $DB->query($querym) or die('erro');
 
@@ -156,7 +156,7 @@ $arr_grff = array();
 if($interval >= "31") {
 
 	//fechados mensais
-	 $queryf = "
+	$queryf = "
 	SELECT DISTINCT DATE_FORMAT(glpi_tickets.closedate, '%b-%Y') as day_l, COUNT(glpi_tickets.id) as nb, DATE_FORMAT(glpi_tickets.closedate, '%Y-%m') as day
 	FROM glpi_tickets
 	WHERE glpi_tickets.is_deleted = '0'

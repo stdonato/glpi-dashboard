@@ -8,7 +8,7 @@ Session::checkRight("profile", READ);
 
 global $DB;
    
-    switch (date("m")) {
+switch (date("m")) {
     case "01": $mes = __('January','dashboard'); break;
     case "02": $mes = __('February','dashboard'); break;
     case "03": $mes = __('March','dashboard'); break;
@@ -21,8 +21,7 @@ global $DB;
     case "10": $mes = __('October','dashboard'); break;
     case "11": $mes = __('November','dashboard'); break;
     case "12": $mes = __('December','dashboard'); break;
-    }
-
+}
 ?>
 
 <html> 
@@ -116,19 +115,8 @@ if($sel_ent == '' || $sel_ent == -1) {
 else {
 	$entidade = "WHERE entities_id IN (".$sel_ent.") ";
 	$entidade_a = "AND glpi_tickets.entities_id IN (".$sel_ent.")";
-		$entidade_age = "AND glpi_tickets.entities_id IN (".$sel_ent.")";
+	$entidade_age = "AND glpi_tickets.entities_id IN (".$sel_ent.")";
 }
-
-/*//seleciona grupo
-$sql_grp = "
-SELECT id, name
-FROM `glpi_groups`
-".$entidade."
-ORDER BY `name` ASC ";
-
-$result_grp = $DB->query($sql_grp);
-$grp = $DB->fetch_assoc($result_grp);
-*/
 
 // lista de grupos
 
@@ -151,23 +139,6 @@ function dropdown( $name, array $options, $selected=null )
     /*** and return the completed dropdown ***/
     return $dropdown;
 }
-
-
-/*$res_grp = $DB->query($sql_grp);
-$arr_grp = array();
-$arr_grp[0] = "-- ". __('Select a type','dashboard') . " --" ;
-
-$DB->data_seek($result_grp, 0);
-
-while ($row_result = $DB->fetch_assoc($result_grp))		
-{ 
-	$v_row_result = $row_result['id'];
-	$arr_grp[$v_row_result] = $row_result['name'] ;			
-} 	 
-
-$name = 'sel_type';
-$options = $arr_grp;
-$selected = $id_tip;*/
 
 ?>
 <div id='content' >
