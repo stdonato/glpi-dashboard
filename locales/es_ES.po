@@ -509,3 +509,6 @@ msgstr "Pegue la clave abajo y guarde"
 
 msgid "accumulated"
 msgstr "acumulado"
+
+msgid "Sons"
+msgstr "Hijos"

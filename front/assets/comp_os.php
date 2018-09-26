@@ -1,33 +1,20 @@
 
 <?php
 
-/*$query_unk = "SELECT count(*) AS total
-FROM `glpi_computers`
-WHERE `is_deleted` = 0
-AND `operatingsystems_id` = 0
-".$ent_comp."";
-
-$result = $DB->query($query_unk) or die('erro');
-$unk = $DB->result($result,0,'total');
-
-*/
 $query_os = "
-SELECT glpi_operatingsystems.name AS so, count( glpi_computers.id ) AS conta
-FROM glpi_operatingsystems, glpi_computers, glpi_items_operatingsystems
+SELECT CONCAT(glpi_operatingsystems.name,' ',glpi_operatingsystemversions.name) AS so, count( glpi_computers.id ) AS conta
+FROM glpi_operatingsystems, glpi_computers, glpi_items_operatingsystems, glpi_operatingsystemversions
 WHERE glpi_computers.is_deleted =0
 AND glpi_items_operatingsystems.items_id = glpi_computers.id
 AND glpi_operatingsystems.id = glpi_items_operatingsystems.operatingsystems_id
+AND glpi_operatingsystemversions.id = glpi_items_operatingsystems.operatingsystemversions_id
 ".$ent_comp."
-GROUP BY glpi_operatingsystems.name
+GROUP BY CONCAT(glpi_operatingsystems.name,' ',glpi_operatingsystemversions.name)
 ORDER BY count( glpi_computers.id ) DESC ";
 		
 $result_os = $DB->query($query_os) or die('erro');
 
 $arr_grf_os = array();
-
-//if($unk != 0) {
-//	$arr_grf_os[__('Unknown','dashboard')] = $unk;
-//}
 
 
 while ($row_result = $DB->fetch_assoc($result_os))	{ 

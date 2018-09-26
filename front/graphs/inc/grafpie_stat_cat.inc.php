@@ -2,11 +2,11 @@
 <?php
 
 if($data_ini == $data_fin) {
-$datas = "LIKE '".$data_ini."%'";	
+	$datas = "LIKE '".$data_ini."%'";	
 }	
 
 else {
-$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";	
+	$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";	
 }
 
 $query2 = "
@@ -14,7 +14,7 @@ SELECT COUNT(glpi_tickets.id) as tick, glpi_tickets.status as stat
 FROM glpi_tickets
 WHERE glpi_tickets.date ".$datas."
 AND glpi_tickets.is_deleted = 0     
-AND glpi_tickets.itilcategories_id = ".$id_cat."    
+AND glpi_tickets.itilcategories_id IN (".$id_cat.")    
 ". $entidade ."   
 GROUP BY glpi_tickets.status
 ORDER BY stat  ASC ";
@@ -23,11 +23,10 @@ ORDER BY stat  ASC ";
 $result2 = $DB->query($query2) or die('erro');
 
 $arr_grf2 = array();
-while ($row_result = $DB->fetch_assoc($result2))		
-	{ 
-		$v_row_result = $row_result['stat'];
-		$arr_grf2[$v_row_result] = $row_result['tick'];			
-	} 
+while ($row_result = $DB->fetch_assoc($result2)){ 
+	$v_row_result = $row_result['stat'];
+	$arr_grf2[$v_row_result] = $row_result['tick'];			
+} 
 	
 $grf2 = array_keys($arr_grf2);
 $quant2 = array_values($arr_grf2);

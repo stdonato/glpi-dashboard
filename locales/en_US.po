@@ -473,3 +473,5 @@ msgstr "Popup"
 msgid "accumulated"
 msgstr "accumulated"
 
+msgid "Sons"
+msgstr "Sons"

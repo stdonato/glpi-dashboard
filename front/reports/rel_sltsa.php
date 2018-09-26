@@ -158,7 +158,8 @@ else {
 							$('#dp2').datepicker('update');
 						</script>
 						</td>
-						<td style="margin-top:2px;">	
+						<td style="margin-top:2px;">
+			
 						<?php
 			
 						// SLA list
@@ -166,7 +167,7 @@ else {
 						SELECT id, name AS name
 						FROM glpi_slms
 						".$entidade_s."
-						ORDER BY `name` ASC ";
+						ORDER BY name ASC ";
 			
 						$result_loc = $DB->query($sql_loc);
 			
@@ -227,7 +228,7 @@ else {
 	$id_sla = $_POST["sel_sla"];
 }
 
-if($id_sla == " " || $id_sla == 0) {
+if($id_sla == "" || $id_sla == 0) {
 	echo '<script language="javascript"> alert(" ' . __('Select a SLA', 'dashboard') . ' "); </script>';
 	echo '<script language="javascript"> location.href="rel_sltsa.php"; </script>';
 }
@@ -289,6 +290,7 @@ ORDER BY id DESC ";
 
 $result_cham = $DB->query($sql_cham);
 
+//var_dump($sql_cham);
 
 $conta_cons1 =
 "SELECT glpi_tickets.id AS total, FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time
@@ -351,8 +353,7 @@ $abertos = $data_ab;
 $sql_nm = "
 SELECT id , name AS name
 FROM `glpi_slms`
-WHERE id = ".$id_sla."
-";
+WHERE id = ".$id_sla." ";
 
 $result_nm = $DB->query($sql_nm);
 $ent_name = $DB->fetch_assoc($result_nm);
@@ -394,7 +395,8 @@ $w = $conta_cons - $v;
   $pend = $DB->result($result_stat,0,'pend') + 0;
   $solve = $DB->result($result_stat,0,'solve') + 0;
   $close = $DB->result($result_stat,0,'close') + 0;
-	
+
+
 //list tickets
 echo "
 
@@ -533,8 +535,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 	}
 
 	echo "
-		</tr>";		
-
+		</tr>";
 	}
 
 	echo "</tbody>

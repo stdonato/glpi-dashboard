@@ -19,8 +19,9 @@ else {
 	$data_fin = date("Y-m-d");	
 }  
 
-if(!isset($_POST["sel_ent"])) {
-	$id_ent = $_REQUEST["sel_ent"];	
+if(!isset($_POST["sel_ent"])) {	
+	//$id_ent = $_GET["sel_ent"];	
+	$id_ent = "";	
 }
 
 else {
@@ -203,10 +204,8 @@ function margins() {
 			else {
 				$ents = $sel_ent;
 			}
-
-			//echo "teste";
-			$user_ents = Profile_User::getUserEntities($_SESSION['glpiID'], true);
-			//var_dump($_SESSION['glpiactiveentities']);					
+			
+			$user_ents = Profile_User::getUserEntities($_SESSION['glpiID'], true);								
 				
 			// lista de entidades
 			$sql_ent = "
@@ -250,9 +249,7 @@ function margins() {
 					$id_sta = "AND glpi_tickets.status = ".$_REQUEST["sel_sta"] ;
 				}
 			}
-			else { $id_sta = ''; }
-			
-			//AND glpi_tickets.status LIKE '%".$id_sta."'
+			else { $id_sta = ''; }						
 			
 			if(isset($_REQUEST["sel_req"]) && $_REQUEST["sel_req"] != '0') { $id_req = $_REQUEST["sel_req"]; }
 			else { $id_req = ''; }

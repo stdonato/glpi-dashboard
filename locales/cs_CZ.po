@@ -471,3 +471,6 @@ msgstr "Vybráno"
 
 msgid "accumulated"
 msgstr "nahromaděné"
+
+msgid "Sons"
+msgstr "Podřízené"

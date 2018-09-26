@@ -121,7 +121,7 @@ $tec = $DB->fetch_assoc($result_tec);
 <div id="pad-wrapper" >
 <div id="head-rel" class="fluid">
 
-<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
+<a href="../index.php"><i class="fa fa-home fa-home-lg" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 
     <div id="titulo_rel"> <?php echo __('Tickets', 'dashboard') .'  '. __('by Requester', 'dashboard') ?>  </div>
 	    <div id="datas-tec" class="col-md-12 fluid" >

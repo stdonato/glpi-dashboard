@@ -4,51 +4,28 @@ include ("../../../../inc/includes.php");
 include ("../../../../inc/config.php");
 include "../inc/functions.php";
 
+global $DB;
+
 Session::checkLoginUser();
 Session::checkRight("profile", READ);
 
 if(!empty($_POST['submit']))
 {
-	$data_ini =  $_POST['date1'];
-	$data_fin = $_POST['date2'];
+    $data_ini =  $_POST['date1'];
+    $data_fin = $_POST['date2'];
 }
 
 else {
-	$data_ini = date("Y-m-01");
-	$data_fin = date("Y-m-d");	
+    $data_ini = date("Y-m-01");
+    $data_fin = date("Y-m-d");
 }
 
-/*if(!isset($_POST["sel_ent"])) {
-	$id_ent = $_GET["sel_ent"];
+if(!isset($_POST["sel_ent"])) {
+	$id_ent = $_REQUEST["sel_ent"];	
 }
 
 else {
 	$id_ent = $_POST["sel_ent"];
-}*/
-
-# entity
-$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
-$result_e = $DB->query($sql_e);
-$sel_ent = $DB->result($result_e,0,'value');
-
-//select entity
-if($sel_ent == '' || $sel_ent == -1) {
-
-	$entities = $_SESSION['glpiactiveentities'];	
-	$ent = implode(",",$entities);
-
-	$entidade = "AND glpi_tickets.entities_id IN (".$ent.") ";
-	$entidade_w = "WHERE id IN (".$ent.") ";
-	/*$entidade_l = "AND glpi_locations.entities_id IN (".$ent.") ";
-	$entidade_lw = "WHERE glpi_locations.entities_id IN (".$ent.") OR glpi_locations.is_recursive = 1";
-	$entidade1 = "";*/
-
-}
-else {
-	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.") ";
-	$entidade_w = "WHERE id IN (".$sel_ent.") ";
-	/*$entidade_l = "AND glpi_locations.entities_id IN (".$sel_ent.") ";
-	$entidade_lw = "WHERE glpi_locations.entities_id IN (".$sel_ent.") OR glpi_locations.is_recursive = 1";*/
 }
 
 ?>
@@ -68,7 +45,8 @@ else {
 <link href="../css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
 <link href="../css/font-awesome.css" type="text/css" rel="stylesheet" />
 
-<script language="javascript" src="../js/jquery.min.js"></script>
+<script language="javascript" src="../js/jquery.js"></script>
+
 <link href="../inc/select2/select2.css" rel="stylesheet" type="text/css">
 <script src="../inc/select2/select2.js" type="text/javascript" language="javascript"></script>
 
@@ -79,6 +57,13 @@ else {
 <script src="../js/media/js/dataTables.bootstrap.js"></script>
 <link href="../js/media/css/dataTables.bootstrap.css" type="text/css" rel="stylesheet" />
 
+<script src="../js/extensions/Select/js/dataTables.select.min.js"></script>
+<link href="../js/extensions/Select/css/select.bootstrap.css" type="text/css" rel="stylesheet" />
+
+<script src="../js/extensions/FixedHeader/js/dataTables.fixedHeader.min.js"></script>
+<link href="../js/extensions/FixedHeader/css/fixedHeader.dataTables.min.css" type="text/css" rel="stylesheet" />
+<link href="../js/extensions/FixedHeader/css/fixedHeader.bootstrap.min.css" type="text/css" rel="stylesheet" />
+
 <script src="../js/extensions/Buttons/js/dataTables.buttons.min.js"></script>
 <script src="../js/extensions/Buttons/js/buttons.html5.min.js"></script>
 <script src="../js/extensions/Buttons/js/buttons.bootstrap.min.js"></script>
@@ -88,8 +73,6 @@ else {
 <script src="../js/media/vfs_fonts.js"></script>
 <script src="../js/media/jszip.min.js"></script>
 
-<script src="../js/extensions/Select/js/dataTables.select.min.js"></script>
-<link href="../js/extensions/Select/css/select.bootstrap.css" type="text/css" rel="stylesheet" />
 
 <style type="text/css">
 	select { width: 60px; }
@@ -111,8 +94,8 @@ else {
 		<div id="head-lg" class="fluid">
 		<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 			<div id="titulo_rel"><?php echo __('Satisfaction survey'); ?> </div>
-				<div id="datas-tec" class="span12 fluid" >
-				<form id="form1" name="form1" class="form_rel" method="post" action="rel_satisfacao.php?con=1" style="margin-left: 37%;">
+			 <div id="datas-tec" class="col-md-12 col-sm-12 fluid" >
+				<form id="form1" name="form1" class="form_rel" method="post" action="rel_satisfacao.php?con=1" >
 					<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
 						<tr>
 							<td style="width: 310px;">
@@ -147,8 +130,54 @@ else {
 								$('#dp2').datepicker('update');
 							</script>
 							</td>
-						</tr>
-						<tr><td height="20px"></td></tr>
+							<td style="margin-top:2px;">
+										
+										<?php
+										//seleciona entidade
+										$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
+										$result_e = $DB->query($sql_e);
+										$sel_ent = $DB->result($result_e,0,'value');
+
+										if($sel_ent == '' || $sel_ent == -1) {
+											$entities = $_SESSION['glpiactiveentities'];
+											$ents = implode(",",$entities);
+										}
+										else {
+											$ents = $sel_ent;
+										}
+
+										$user_ents = Profile_User::getUserEntities($_SESSION['glpiID'], true);								
+				
+										//lista de entidades
+										$sql_ent = "
+										SELECT id, name, completename AS cname
+										FROM `glpi_entities`
+										WHERE id IN (".$ents.")
+										ORDER BY `name` ASC ";
+
+										$result_ent = $DB->query($sql_ent);
+
+										$arr_ent = array();
+										$arr_ent[-1] = "-- ". __('Select a entity', 'dashboard') . " --" ;
+										$arr_ent[0] = __('All');
+
+										//$DB->data_seek($result_ent, 0) ;
+										while ($row_result = $DB->fetch_assoc($result_ent)) {
+										   $v_row_result = $row_result['id'];
+										   $arr_ent[$v_row_result] = $row_result['cname'] ;
+										}
+
+										$name = 'sel_ent';
+										$options = $arr_ent;
+										$selected = $id_ent;
+
+										echo dropdown( $name, $options, $selected );
+
+										?>
+										</td>
+									</tr>
+									<tr><td height="15px"></td></tr>
+
 						<tr>
 							<td colspan="2" align="center">
 								<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult', 'dashboard'); ?></button>
@@ -179,19 +208,41 @@ else {
 		$data_ini2 = $_POST['date1'];
 		$data_fin2 = $_POST['date2'];
 	}
-	
+		
+		
 	//entity
-	if(!isset($_REQUEST["sel_ent"]) || $_REQUEST["sel_ent"] == 0 || $_REQUEST["sel_ent"] == "" )
-	{
-		$id_ent = 0;
-	   $entidade = "";
+	if(!isset($_REQUEST["sel_ent"]) || $_REQUEST["sel_ent"] == 0 || $_REQUEST["sel_ent"] == "" ) 
+	{ 
+		if(in_array(0,$user_ents)) {
+			$id_ent = 0 ;
+			$entidade = '';
+		}
+		else {			
+			$id_ent = implode(',',$_SESSION['glpiactiveentities']); 
+	   	$entidade = "AND glpi_tickets.entities_id IN (".$id_ent.")";
+	   }	
 	}
 	
-	else {
-		$id_ent = $_REQUEST["sel_ent"];
-		$entidade = "AND glpi_tickets.entities_id = ".$id_ent." ";
+	else { 
+		$id_ent = $_REQUEST["sel_ent"]; 
+		$entidade = "AND glpi_tickets.entities_id IN (".$id_ent.") ";
 	}
 	
+/*	//entity
+	if(!isset($_POST["sel_ent"])) {
+			$id_ent = $_REQUEST["sel_ent"];	
+			//$id_ent = '';	
+		}
+
+		else {
+			$id_ent = $_POST["sel_ent"];
+		}
+
+		if($id_ent == "") {
+			echo '<script language="javascript"> alert(" ' . __('Select a entity', 'dashboard') . ' "); </script>';
+			echo '<script language="javascript"> location.href="rel_entidade.php"; </script>';
+		}*/
+		
 	//$arr_param = array($id_ent, $id_sta, $id_req, $id_pri, $id_cat, $id_tip);
 	
 	//dates
@@ -211,6 +262,7 @@ else {
 	FROM glpi_tickets, glpi_ticketsatisfactions
 	WHERE glpi_tickets.is_deleted = 0
 	AND glpi_tickets.status = 6
+	".$entidade."
 	".$datas2."
 	AND glpi_ticketsatisfactions.tickets_id = glpi_tickets.id
 	AND glpi_ticketsatisfactions.satisfaction <> 'NULL'
@@ -223,9 +275,9 @@ else {
 	
 	// nome da entidade
 	$sql_nm = "
-	SELECT name
+	SELECT id , name AS name
 	FROM `glpi_entities`
-	".$entidade_w."";
+	WHERE id = ".$id_ent."";
 	
 	$result_nm = $DB->query($sql_nm);
 	$ent_name = $DB->fetch_assoc($result_nm);
@@ -233,14 +285,12 @@ else {
 	
 	//listar chamados
 	echo "
-	<div class='well info_box fluid report-tic col-md-12 col-sm-12 ' style='margin-left: -1px;'>
+	<div class='well info_box fluid report-tic col-md-12 col-sm-12 ' style='margin-left: -1px; margin-top: -110px;'>
 	
 	<table class='fluid' style='width:100%; font-size: 18px; font-weight:bold;  margin-bottom:25px;  margin-top:20px; ' cellpadding = 1px>
 		<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Entity', 'dashboard').": </span>".$ent_name['name']." </td>
 		<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Tickets', 'dashboard').": </span>".$consulta." </td>
-		<td colspan='3' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'>
-		".__('Period', 'dashboard') .": </span> " . conv_data($data_ini2) ." a ". conv_data($data_fin2)."
-		</td>
+		<td colspan='3' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'> ".__('Period', 'dashboard') .": </span> " . conv_data($data_ini2) ." a ". conv_data($data_fin2)."</td>
 		<td>&nbsp;</td>
 	</table>
 	
@@ -401,6 +451,10 @@ else {
 	} );
 	</script>
 	
+	<script type="text/javascript" >
+		$(document).ready(function() { $("#sel1").select2({dropdownAutoWidth : true}); });
+	</script>
+
 	</div>
 </div>
 </div>

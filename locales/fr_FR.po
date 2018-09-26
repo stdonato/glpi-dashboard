@@ -511,3 +511,6 @@ msgstr "Coller votre clé ci-dessous et enregistrer"
 
 msgid "accumulated"
 msgstr "accumulé"
+
+msgid "Sons"
+msgstr "Enfant"

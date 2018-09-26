@@ -89,7 +89,7 @@ if($interval >= "31") {
 		FROM glpi_tickets
 		WHERE glpi_tickets.is_deleted = '0'
 		AND glpi_tickets.date ".$datas."
-		AND glpi_tickets.itilcategories_id = ".$id_cat."
+		AND glpi_tickets.itilcategories_id IN (".$id_cat.")
 		AND DATE_FORMAT(glpi_tickets.date, '%Y-%m' ) = '".$row_result['day']."'
 		". $entidade ."
 		GROUP BY day
@@ -119,7 +119,7 @@ else {
 		FROM glpi_tickets
 		WHERE glpi_tickets.is_deleted = '0'
 		AND glpi_tickets.date ".$datas."
-		AND glpi_tickets.itilcategories_id = ".$id_cat."
+		AND glpi_tickets.itilcategories_id IN (".$id_cat.")
 		AND DATE_FORMAT(glpi_tickets.date, '%Y-%m-%d' ) = '".$row_result['day']."'
 		". $entidade ."
 		GROUP BY day
@@ -140,9 +140,6 @@ else {
 		$label = json_encode(array_keys($arr_daysn));
 }
 
-//$grfm = array_keys($arr_opened) ;
-//$grfm3 = json_encode($grfm);
-
 $quantm = array_values($arr_opened) ;
 $quantm2 = implode(',',$quantm);
 
@@ -161,7 +158,7 @@ if($interval >= "31") {
 	FROM glpi_tickets
 	WHERE glpi_tickets.is_deleted = '0'
 	AND glpi_tickets.closedate ".$datas."
-	AND glpi_tickets.itilcategories_id = ".$id_cat."
+	AND glpi_tickets.itilcategories_id IN (".$id_cat.")
 	". $entidade ."
 	GROUP BY day
 	ORDER BY day ";
@@ -194,7 +191,7 @@ else {
 		FROM glpi_tickets
 		WHERE glpi_tickets.is_deleted = '0'
 		AND glpi_tickets.closedate ".$datas."		
-		AND glpi_tickets.itilcategories_id = ".$id_cat."
+		AND glpi_tickets.itilcategories_id IN (".$id_cat.")
 		AND DATE_FORMAT(glpi_tickets.closedate, '%Y-%m-%d' ) = '".$row_result['day']."'
 		". $entidade ."
 		GROUP BY day

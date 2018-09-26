@@ -19,7 +19,7 @@ $query3 = "
 SELECT count( glpi_tickets.id ) AS conta, glpi_tickets_users.`users_id` AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
 FROM `glpi_tickets_users`, glpi_tickets , glpi_users
 WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
-AND glpi_tickets.itilcategories_id = ".$id_cat."
+AND glpi_tickets.itilcategories_id IN (".$id_cat.")
 AND glpi_tickets.date ".$datas."
 AND glpi_tickets_users.type = 1
 AND glpi_tickets_users.`users_id` NOT IN (SELECT DISTINCT users_id FROM glpi_tickets_users WHERE glpi_tickets_users.type=2)
@@ -44,7 +44,7 @@ $quant3 = array_values($arr_grf3) ;
 $soma3 = array_sum($arr_grf3);
 
 $grf_3 = json_encode($grf3);
-$quant_2 = implode(',',$quant3);
+$quant_u = implode(',',$quant3);
 
 echo "
 <script type='text/javascript'>
@@ -92,7 +92,7 @@ $(function () {
             },
             series: [{
                 name: '".__('Tickets','dashboard')."',
-                data: [$quant_2],
+                data: [$quant_u],
                 dataLabels: {
                     enabled: true,
                     //color: '#000099',
@@ -106,6 +106,4 @@ $(function () {
     });
 
 		</script>";
-	//echo '</div>';
-//	}
 		?>

@@ -16,6 +16,7 @@ elseif(isset($_REQUEST['grp'])) {
 }
 
 else {
+	$id_grp = "";
 	$indexw = "indexw.php";
 	$indexb = "index.php";	
 	include "metrics.inc.php";
@@ -344,13 +345,12 @@ else {
 				
 				<div class="content cf-svp clearfix" id="svp-1">				
 					<?php 
-					//satisfaction, or not	
-						//$sat = 0;				
+					//satisfaction, or not										
 						if($sat != 0) {
-							echo '<div class="chart" data-percent="' . $satisf .'" > <span class="percent">' . $satisf . '</span><sup></sup> </div>';	
-							}
+							echo '<div class="chart" data-percent="' . $satisf .'" style="margin-left: 20%;"> <span class="percent">' . $satisf . '</span><sup></sup> </div>';	
+						}
 						else {
-							echo '<div id="grafsat" class="content cf-piexx" style="margin-left:0px;">';
+//							echo '<div id="grafsat" class="content cf-piexx" style="margin-left:0px;">';
 							include ("grafbar_grupo.inc.php");
 							echo ' </div>';
 						}							

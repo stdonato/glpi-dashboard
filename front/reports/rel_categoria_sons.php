@@ -2,7 +2,7 @@
 
 include ("../../../../inc/includes.php");
 include ("../../../../inc/config.php");
-//include ("../../../../inc/dbutils.php");
+include ("../../../../inc/dbutils.php");
 include "../inc/functions.php";
 
 global $DB;
@@ -120,7 +120,7 @@ else {
 		<div id="charts" class="fluid chart">
 			<div id="pad-wrapper" >
 			<div id="head-lg" class="fluid">
-			<a href="../index.php"><i class="fa fa-home fa-home-lg" style="font-size:14pt;"></i><span></span></a>
+			<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:-50px;"></i><span></span></a>
 
 				<div id="titulo_rel"> <?php echo __('Tickets', 'dashboard') .'  '. __('by Category', 'dashboard') ?> </div>
 					<div id="datas-tec" class="col-md-12 col-sm-12 fluid">
@@ -128,7 +128,7 @@ else {
 						<form id="form1" name="form1" class="form_rel" method="post" action="rel_categoria.php?con=1">
 							<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" width="800">
 								<tr>
-									<td style="width: 360px;">
+									<td style="width: 350px;">
 									<?php
 									$url = $_SERVER['REQUEST_URI'];
 									$arr_url = explode("?", $url);
@@ -188,14 +188,14 @@ else {
 					
 									?>
 									</td>
-									<td style="width: 300px; padding-left: 15px; text-align: left;"> 
-										<input type="checkbox" name="sons" value="1"> <?php echo __('Sons','dashboard'); ?>
-									</td>
-									
+									<td width="10px" colspan="4"></td>
+									<td style="width: 300px; margin-left: 10px; text-align: center;"> 
+										<input type="checkbox" name="sons" value="1"> Incluir Filhas
+									</td>									
 							</tr>
-							<tr><td height="10px" colspan="1"></td></tr>
+							<tr><td height="10px" colspan="4"></td></tr>
 							<tr>
-								<td colspan="2" align="center">
+								<td colspan="3" align="center">
 									<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult','dashboard'); ?> </button>
 									<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2 ?>'" ><i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean','dashboard'); ?> </button>
 								</td>
@@ -247,7 +247,8 @@ else {
 			else {
 				$sons_cat = $_POST["sons"];
 			}
-						
+			
+			
 			#dates
 			if($data_ini2 == $data_fin2) {
 				$datas2 = "LIKE '".$data_ini2."%'";
@@ -281,16 +282,62 @@ else {
 			}
 
 			if($sons_cat == 1) {
- 
- 				//$get_sons = getSonsAndAncestorsOf('glpi_itilcategories',$id_cat);
+				
+				echo "teste sons   ";
+				
+				/*$sql_sons =
+				"SELECT `id`,`entities_id`,`is_recursive`,`itilcategories_id`,`name`,`level`,`sons_cache` 
+				FROM `glpi_itilcategories` 
+				WHERE itilcategories_id = ".$id_cat." ";
+				
+				$result_sons = $DB->query($sql_sons);
+				
+				$sons = $DB->fetch_assoc($result_sons);
+				*/
+
+				//$get_sons = getSonsAndAncestorsOf('glpi_itilcategories',$id_cat);
 				$get_sons = getSonsOf('glpi_itilcategories',$id_cat);
-				$id_cat_name = $id_cat;
-				$id_cat = implode(',',$get_sons);
-				$and_sons = " (+ ".__('Sons','dashboard').")";				
-			}		
-			else {
-				$id_cat_name = $id_cat;
+				$sons = implode(',',$get_sons);				
+
+//print_r($sons);
+				
+				// Chamados
+				$sql_cham =
+				"SELECT glpi_tickets.id AS id, glpi_tickets.name AS name, glpi_tickets.date AS date, glpi_tickets.closedate as closedate,
+				glpi_tickets.type, glpi_tickets.status, FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`closedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time,
+				glpi_tickets.solve_delay_stat AS time_sec
+				FROM glpi_tickets
+				WHERE glpi_tickets.itilcategories_id IN (".$sons.")
+				AND glpi_tickets.is_deleted = 0
+				AND glpi_tickets.date ".$datas2."
+				AND glpi_tickets.status IN ".$status."
+				".$entidade."
+				GROUP BY id
+				ORDER BY id DESC ";
+	
+				$result_cham = $DB->query($sql_cham);
+	
+	
+				$consulta1 =
+				"SELECT glpi_tickets.id AS id, glpi_tickets.name, glpi_tickets.date AS adate, glpi_tickets.closedate AS sdate,
+				FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`closedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time
+				FROM glpi_tickets
+				WHERE glpi_tickets.itilcategories_id IN (".$sons.")
+				AND glpi_tickets.is_deleted = 0
+				AND glpi_tickets.date ".$datas2."
+				AND glpi_tickets.status IN ".$status."
+				".$entidade."
+				GROUP BY id
+				ORDER BY id DESC ";
+	
+				$result_cons1 = $DB->query($consulta1);
+				
+				//var_dump($sql_sons);
+				//echo "<br><p>";
+				//print_r($sons['id']);
+				//echo "<br><p>";
 			}	
+			else {
 
 			// Chamados
 			$sql_cham =
@@ -298,7 +345,7 @@ else {
 			glpi_tickets.type, glpi_tickets.status, FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`closedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time,
 			glpi_tickets.solve_delay_stat AS time_sec
 			FROM glpi_tickets
-			WHERE glpi_tickets.itilcategories_id IN (".$id_cat.")
+			WHERE glpi_tickets.itilcategories_id = ".$id_cat."
 			AND glpi_tickets.is_deleted = 0
 			AND glpi_tickets.date ".$datas2."
 			AND glpi_tickets.status IN ".$status."
@@ -313,7 +360,7 @@ else {
 			"SELECT glpi_tickets.id AS id, glpi_tickets.name, glpi_tickets.date AS adate, glpi_tickets.closedate AS sdate,
 			FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`closedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time
 			FROM glpi_tickets
-			WHERE glpi_tickets.itilcategories_id IN (".$id_cat.")
+			WHERE glpi_tickets.itilcategories_id = ".$id_cat."
 			AND glpi_tickets.is_deleted = 0
 			AND glpi_tickets.date ".$datas2."
 			AND glpi_tickets.status IN ".$status."
@@ -321,17 +368,20 @@ else {
 			GROUP BY id
 			ORDER BY id DESC ";
 
-			$result_cons1 = $DB->query($consulta1);		
+			$result_cons1 = $DB->query($consulta1);
+			}
 			
 			$conta_cons = $DB->numrows($result_cons1);
 			$consulta = $conta_cons;
 
 			if($consulta > 0) {
 
+//var_dump($sql_cham);
+
 			//montar barra
 			$sql_ab = "SELECT glpi_tickets.id AS total
 			FROM glpi_tickets
-			WHERE glpi_tickets.itilcategories_id IN (".$id_cat.")
+			WHERE glpi_tickets.itilcategories_id = ".$id_cat."
 			AND glpi_tickets.is_deleted = 0
 			AND glpi_tickets.date ".$datas2."
 			AND glpi_tickets.status IN ".$status_open."
@@ -372,18 +422,18 @@ else {
 			$sql_nm = "
 			SELECT id , completename AS name
 			FROM `glpi_itilcategories`
-			WHERE id = ".$id_cat_name." ";
+			WHERE id = ".$id_cat." ";
 
 			$result_nm = $DB->query($sql_nm);
 			$cat_name = $DB->fetch_assoc($result_nm);
 
 			//listar chamados
 			echo "
-			<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>
+			<div class='well info_box fluid col-md-12 report' style='margin-left: -1px; margin-top:-110px;'>
 
 			<table class='col-md-12 col-sm-12 fluid'  style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
 				<tr>
-					<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Category').": </span>".$cat_name['name'].$and_sons." </td>
+					<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Category').": </span>".$cat_name['name']." </td>
 				</tr>
 				<tr>
 					<td style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Tickets', 'dashboard').": </span>".$consulta." </td>
@@ -411,7 +461,7 @@ else {
 			FROM glpi_tickets
 			WHERE glpi_tickets.is_deleted = '0'
 			AND glpi_tickets.date ".$datas2."
-			AND glpi_tickets.itilcategories_id IN (".$id_cat.")
+			AND glpi_tickets.itilcategories_id = ".$id_cat."
 			".$entidade."";
 
 		   $result_stat = $DB->query($query_stat);

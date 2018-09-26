@@ -512,3 +512,6 @@ msgstr "Incollare la chiave qui sotto e salvare"
 
 msgid "accumulated"
 msgstr "accumulato"
+
+msgid "Sons"
+msgstr "Figlio"

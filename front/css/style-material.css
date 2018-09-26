@@ -165,6 +165,15 @@ body {
 	position: absolute;		
 }
 
+.fa-home-lg {
+	color: #fff;
+	margin-top: 40px !important;
+	margin-left: 90px !important;
+	font-size: 14pt;	
+	width: 30px;	
+	position: absolute;		
+}
+
 .home-rel {
 	margin-left: 80px !important; 
 	margin-top: 45px !important; 
@@ -293,7 +302,7 @@ body {
 	font-family: 'RobotoDraft',sans-serif; 
 	/* text-shadow:0.0em 0.09em 0.09em #cecece;	 */	
 	margin-bottom:10px; 
-	margin-top:30px;
+	margin-top:45px;
 }
 
 #titulo_rel {
@@ -309,7 +318,7 @@ body {
 	font-family: 'RobotoDraft',sans-serif; 
 	/* text-shadow:0.0em 0.09em 0.09em #cecece;	 */	
 	margin-bottom:10px; 
-	margin-top:35px;
+	margin-top:45px;
 }
 
 .titulo_cham {
@@ -406,10 +415,20 @@ body {
 	left: 52%; */
 	position: relative; 
 	text-align: center;
-   	margin-bottom: 5px;
+   margin-bottom: 5px;
 	width: 600px;	
 	margin-top: 25px;
 	margin-left: 18%;
+	margin-right: auto;
+}
+
+.form2_cat {
+	position: relative; 
+	text-align: center;
+  	margin-bottom: 5px;
+	width: 600px;	
+	margin-top: 25px;
+	margin-left: 10%;
 	margin-right: auto;
 }
 
@@ -421,6 +440,17 @@ body {
 	margin-right: auto;
 	margin-top: 25px;
 	margin-left: 20%;
+	position: relative;	
+}
+
+.form_rel_cat {	
+	margin-bottom: 5px;
+	position: relative; 
+	text-align: center;
+	width: 600px;
+	margin-right: auto;
+	margin-top: 30px;
+	margin-left: 10%;
 	position: relative;	
 }
 

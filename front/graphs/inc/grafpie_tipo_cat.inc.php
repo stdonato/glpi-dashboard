@@ -15,7 +15,7 @@ SELECT COUNT(id) AS total
 FROM glpi_problems
 WHERE glpi_problems.is_deleted = 0     
 AND glpi_problems.date ".$datas."
-AND glpi_problems.itilcategories_id = ".$id_cat." 
+AND glpi_problems.itilcategories_id IN (".$id_cat.")
  
  ";		
  
@@ -28,7 +28,7 @@ SELECT COUNT(glpi_tickets.id) as tick, glpi_tickets.type AS tipo
 FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = 0     
 AND glpi_tickets.date ".$datas."
-AND glpi_tickets.itilcategories_id = ".$id_cat." 
+AND glpi_tickets.itilcategories_id IN (".$id_cat.")
 ". $entidade ."   
 GROUP BY glpi_tickets.type
 ORDER BY type  ASC ";
@@ -68,10 +68,8 @@ if($conta > 1) {
 	$grft2[0] = __('Incident'); 
 	$grft2[1] = __('Request');
 	
-//	if($problems['total'] != 0) {	
-		$grft2[2] = __('Problem'); 
-		$quantt2[2] = $problems['total']; 		
-//	}	
+	$grft2[2] = __('Problem'); 
+	$quantt2[2] = $problems['total']; 			
 }
 
 	

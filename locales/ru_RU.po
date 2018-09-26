@@ -541,3 +541,6 @@ msgstr "Вставьте ваш ключ ниже и сохраните"
 
 msgid "accumulated"
 msgstr "накопленный"
+
+msgid "Sons"
+msgstr "Потомок"

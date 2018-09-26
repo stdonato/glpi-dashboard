@@ -518,3 +518,6 @@ msgstr "Cole sua chave abaixo e salve"
 
 msgid "accumulated"
 msgstr "acumulado"
+
+msgid "Sons"
+msgstr "Filhos"

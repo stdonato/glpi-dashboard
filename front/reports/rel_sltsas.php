@@ -31,10 +31,9 @@ if($sel_ent == '' || $sel_ent == -1) {
 	$entities = $_SESSION['glpiactiveentities'];										
 	$ent = implode(",",$entities);
 
-	$entidade = "AND glpi_tickets.entities_id IN (".$ent.") ";	
-	$entidade1 = "";
-	
+	$entidade = "AND glpi_tickets.entities_id IN (".$ent.") ";		
 }
+
 else {
 	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.") ";
 }

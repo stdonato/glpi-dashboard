@@ -90,7 +90,6 @@ else {
 <div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
 	<div id="charts" class="fluid chart">
 		<div id="pad-wrapper" >
-
 			<div id="head-lg" class="fluid">
 				<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 				    <div id="titulo_rel"> <?php echo __('Tickets', 'dashboard') .'  '. __('by Entity', 'dashboard') ?> </div>
@@ -146,8 +145,10 @@ else {
 										else {
 											$ents = $sel_ent;
 										}
-
-
+										
+										$user_ents = Profile_User::getUserEntities($_SESSION['glpiID'], true);								
+				
+										//lista de entidades
 										$sql_ent = "
 										SELECT id, name, completename AS cname
 										FROM `glpi_entities`
@@ -157,7 +158,8 @@ else {
 										$result_ent = $DB->query($sql_ent);
 
 										$arr_ent = array();
-										$arr_ent[0] = "-- ". __('Select a entity', 'dashboard') . " --" ;
+										$arr_ent[-1] = "-- ". __('Select a entity', 'dashboard') . " --" ;
+										$arr_ent[0] = __('All');
 
 										//$DB->data_seek($result_ent, 0) ;
 										while ($row_result = $DB->fetch_assoc($result_ent)) {
@@ -209,6 +211,26 @@ else {
 		    $data_fin2 = $_POST['date2'];
 		}
 
+
+		//entity
+		if(!isset($_REQUEST["sel_ent"]) || $_REQUEST["sel_ent"] == 0 || $_REQUEST["sel_ent"] == "" ) 
+		{ 
+			if(in_array(0,$user_ents)) {
+				$id_ent = 0 ;
+				$entidade = '';
+			}
+			else {			
+				$id_ent = implode(',',$_SESSION['glpiactiveentities']); 
+		   	$entidade = "AND glpi_tickets.entities_id IN (".$id_ent.")";
+		   }	
+		}
+		
+		else { 
+			$id_ent = $_REQUEST["sel_ent"]; 
+			$entidade = "AND glpi_tickets.entities_id IN (".$id_ent.") ";
+		}
+
+/*	   //entity
 		if(!isset($_POST["sel_ent"])) {
 			$id_ent = $_REQUEST["sel_ent"];	
 			//$id_ent = '';	
@@ -221,8 +243,9 @@ else {
 		if($id_ent == "") {
 			echo '<script language="javascript"> alert(" ' . __('Select a entity', 'dashboard') . ' "); </script>';
 			echo '<script language="javascript"> location.href="rel_entidade.php"; </script>';
-		}
+		}*/
 
+		//dates
 		if($data_ini2 == $data_fin2) {
 			$datas2 = "LIKE '".$data_ini2."%'";
 		}
@@ -258,8 +281,8 @@ else {
 		$sql_cham =
 		"SELECT id, name AS descr, date, closedate, solvedate, status , actiontime AS act, itilcategories_id AS cat, TYPE, FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, glpi_tickets.solve_delay_stat AS time_sec
 		FROM glpi_tickets
-		WHERE entities_id = ".$id_ent."
-		AND is_deleted = 0
+		WHERE is_deleted = 0
+		".$entidade."
 		AND date ".$datas2."
 		AND status IN ".$status."
 		ORDER BY id DESC ";
@@ -270,8 +293,8 @@ else {
 		$consulta1 =
 		"SELECT glpi_tickets.id AS total
 		FROM glpi_tickets
-		WHERE glpi_tickets.entities_id = ".$id_ent."
-		AND glpi_tickets.is_deleted = 0
+		WHERE glpi_tickets.is_deleted = 0
+		".$entidade."
 		AND glpi_tickets.date ".$datas2."
 		AND glpi_tickets.status IN ".$status." ";
 
@@ -279,14 +302,15 @@ else {
 
 		$conta_cons = $DB->numrows($result_cons1);
 		$consulta = $conta_cons;
+		
 
 		if($consulta > 0) {
 
 		//montar barra
 		$sql_ab = "SELECT glpi_tickets.id AS total
 		FROM glpi_tickets
-		WHERE glpi_tickets.entities_id = ".$id_ent."
-		AND glpi_tickets.is_deleted = 0
+		WHERE glpi_tickets.is_deleted = 0
+		".$entidade."
 		AND glpi_tickets.date ".$datas2."
 		AND glpi_tickets.status IN ".$status_open ;
 
@@ -328,12 +352,9 @@ else {
 		$result_nm = $DB->query($sql_nm);
 		$ent_name = $DB->fetch_assoc($result_nm);
 
-
-		//total time
-		
+		//total time		
 		$total_time = '';
 		while($row = $DB->fetch_assoc($result_cham)){
-		//  $total_time += $row['time_sec'];
 
 		$sql = "SELECT ( TIMESTAMPDIFF(SECOND , date, solvedate ) ) AS time FROM glpi_tickets WHERE id = ".$row['id']." ";
 		$result = $DB->query($sql);
@@ -349,7 +370,6 @@ else {
 			}
 		}
 
-
 		//count by status
 		$query_stat = "
 		SELECT
@@ -361,17 +381,17 @@ else {
 		SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
 		FROM glpi_tickets
 		WHERE glpi_tickets.is_deleted = 0
-		AND glpi_tickets.date ".$datas2."
-		AND glpi_tickets.entities_id = ".$id_ent." ";
+		".$entidade."
+		AND glpi_tickets.date ".$datas2." ";
 
 		$result_stat = $DB->query($query_stat);
 
-                $new = $DB->result($result_stat,0,'new') + 0;
-                $assig = $DB->result($result_stat,0,'assig') + 0;
-                $plan = $DB->result($result_stat,0,'plan') + 0;
-                $pend = $DB->result($result_stat,0,'pend') + 0;
-                $solve = $DB->result($result_stat,0,'solve') + 0;
-                $close = $DB->result($result_stat,0,'close') + 0;
+	    $new = $DB->result($result_stat,0,'new') + 0;
+	    $assig = $DB->result($result_stat,0,'assig') + 0;
+	    $plan = $DB->result($result_stat,0,'plan') + 0;
+	    $pend = $DB->result($result_stat,0,'pend') + 0;
+	    $solve = $DB->result($result_stat,0,'solve') + 0;
+	    $close = $DB->result($result_stat,0,'close') + 0;
 
 
 		//listar chamados
@@ -457,7 +477,7 @@ else {
 				AND glpi_tickets_users.type = 1 ";
 
 				$result_user = $DB->query($sql_user);
-				    $row_user = $DB->fetch_assoc($result_user);
+				$row_user = $DB->fetch_assoc($result_user);
 
 		//tecnico
 		      $sql_tec = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
@@ -620,20 +640,32 @@ else {
 		</script>
 
 		<?php
-		echo '</div><br>';
+			echo '</div><br>';
+			}
+			else {
+	
+				echo "
+				<div id='nada_rel' class='well info_box fluid col-md-12'>
+					<table class='table' style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
+						<tr>
+							<td style='vertical-align:middle; text-align:center;'> <span style='color: #000;'>" . __('No ticket found', 'dashboard') . "</td></tr>
+						<tr></tr>
+					</table>
+				</div>\n";
+			}
 		}
-		else {
 
-			echo "
-			<div id='nada_rel' class='well info_box fluid col-md-12'>
-				<table class='table' style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
-					<tr>
-						<td style='vertical-align:middle; text-align:center;'> <span style='color: #000;'>" . __('No ticket found', 'dashboard') . "</td></tr>
-					<tr></tr>
-				</table>
-			</div>\n";
-		}
-	}
+/*
+//entidades filhas
+SELECT ent.`id`, ent.`name`, ent.`sons_cache`, count(sub_entities.id) as nb_subs
+                  FROM `glpi_entities` as ent
+                  LEFT JOIN `glpi_entities` as sub_entities
+                     ON sub_entities.entities_id = ent.id
+                  WHERE ent.`entities_id` = 26
+                  GROUP BY ent.`id`, ent.`name`, ent.`sons_cache`
+                  ORDER BY `name`
+
+*/				
 		?>
 
 		<script type="text/javascript" >

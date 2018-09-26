@@ -1,15 +1,19 @@
-Versão 0.9.3:
+Versão 0.9.4:
 
-- GLPI 9.2.x e 9.3
-- Correção dos gráficos por técnico;
-- Correção dos gráficos por requerente;
+- GLPI 9.2.x e 9.3.x
+
+- Correção de nomes de S.O. em Ativos;
+- Seleção de entidades no relatório de satisfação;
+- Seleção de filhas no relatório e gráfico por Categorias;
 - Correção de bugs diversos;
 
 
-Version 0.9.3:
+Version 0.9.4:
 
-- GLPI 9.2.x and 9.3;
-- Fix charts by technician;
-- Fix charts by requester;
+- GLPI 9.2.x and 9.3.x;
+
+- Fix O.S. names in Assets page;
+- Entities selection on satisfaction report;
+- Son category selection on report and chart by Category;
 - Fix minor bugs;
 
