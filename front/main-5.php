@@ -116,7 +116,7 @@ $_SESSION['back'] = $back;
     
     <?php     		 
     	$redir = '<meta http-equiv="refresh" content= "120"/>'; 
-    	echo $redir;
+    	echo $redir;    	
     ?>        
     
     <link rel="icon" href="img/dash.ico" type="image/x-icon" />
@@ -173,7 +173,7 @@ $_SESSION['back'] = $back;
    	echo "<body style=\"background: url('./img/".$back."') no-repeat top center fixed; \">";
    }
    else {
-   	echo "<body style='background-color:#e5e5e5;'>";
+   	echo "<body style='background-color:#E5E5E5;'>";
    }	 
    ?>
    
@@ -204,6 +204,7 @@ $_SESSION['back'] = $back;
            
     </ul>
 </div>
+
 <!-- END Theme Setting  -->     
                                                
 <?php     
@@ -253,6 +254,7 @@ while ($row_y = $DB->fetch_assoc($result_y))	{
 	$arr_years[] = $row_y['year'];			
 } 
 
+
 if($num_years > 1) {
 	$arr_years = array_reverse($arr_years);
 	$years = implode(",", $arr_years);
@@ -272,20 +274,7 @@ $sql_ano =	"SELECT COUNT(glpi_tickets.id) as total
 
 $result_ano = $DB->query($sql_ano);
 $total_ano = $DB->fetch_assoc($result_ano);
-
-
-$sql_ano_ab =	"SELECT COUNT(glpi_tickets.id) as total        
-      FROM glpi_tickets
-      LEFT JOIN glpi_entities ON glpi_tickets.entities_id = glpi_entities.id
-      WHERE glpi_tickets.is_deleted = '0' 
-      AND glpi_tickets.status <> 6
-      AND DATE_FORMAT( glpi_tickets.date, '%Y' ) IN (".$years.") 
-      ".$entidade." ";
-
-$result_ano_ab = $DB->query($sql_ano_ab);
-$total_ano_ab = $DB->fetch_assoc($result_ano_ab);
- 
-   
+      
 //chamados mes
 $sql_mes =	"SELECT COUNT(glpi_tickets.id) as total        
       FROM glpi_tickets
@@ -320,19 +309,8 @@ $sql_users = " SELECT COUNT(DISTINCT `glpi_users`.id) AS total
 $result_users = $DB->query($sql_users);
 $total_users = $DB->fetch_assoc($result_users);
 
-//count due tickets
-$sql_due = "SELECT DISTINCT COUNT(glpi_tickets.id) AS total
-FROM glpi_tickets
-WHERE glpi_tickets.status NOT IN (5,6)
-AND glpi_tickets.is_deleted = 0
-AND glpi_tickets.time_to_resolve IS NOT NULL
-AND glpi_tickets.time_to_resolve < NOW()
-".$entidade." ";
-
-$result_due = $DB->query($sql_due);
-$total_due = $DB->fetch_assoc($result_due);
-
 ?>
+
 <div class="site-holder">
 <!-- top -->
 <!-- .box-holder -->
@@ -341,7 +319,7 @@ $total_due = $DB->fetch_assoc($result_due);
       
 			<div id="panels" class="row">
 				<!-- COLUMN 1 -->															
-					  <div class="col-md-2 col-sm-2">
+					  <div class="col-xs-2 col-xs-15 statxx">
 						 <div class="dashbox shad panel panel-default db-red">
 							<div class="panel-body">
 							   <div class="panel-left red redbg">
@@ -356,7 +334,7 @@ $total_due = $DB->fetch_assoc($result_due);
 						 </div>
 					  </div>
 					  
-					  <div class="col-md-2 col-sm-2">
+					  <div class="col-xs-2 col-xs-15">
 						 <div class="dashbox shad panel panel-default db-blue">
 							<div class="panel-body">
 							   <div class="panel-left blue bluebg">
@@ -371,10 +349,10 @@ $total_due = $DB->fetch_assoc($result_due);
 						 </div>
 					  </div>																		
             								
-					  <div class="col-md-2 col-sm-2">
-						 <div class="dashbox shad panel panel-default db-purple">
+					  <div class="col-xs-2 col-xs-15">
+						 <div class="dashbox shad panel panel-default db-yellow">
 							<div class="panel-body">
-							   <div class="panel-left purple purplebg">
+							   <div class="panel-left yellow yellowbg">
 									<i class="fa fa-plus-square fa-3x"></i>
 							   </div>
 							   <div class="panel-right right">
@@ -384,68 +362,51 @@ $total_due = $DB->fetch_assoc($result_due);
 							   </div>										   
 							</div>
 						 </div>
-					  </div>					 
-					  
-					 <div class="col-md-2 col-sm-2">
-						 <div class="dashbox shad panel panel-default db-dred">
-							<div class="panel-body">
-							   <div class="panel-left dredbg">
-									<i class="fa fa-clock-o fa-clock-o-index fa-3x"></i>
-							   </div>
-					   		<div class="panel-right right">
-									<div id="odometer4" class="odometer" style="font-size: 25px;">   </div><p></p>
-               				<span class="chamado"><?php echo __('Tickets','dashboard'); ?></span><br>
-               				<span class="date"><b><?php echo __('Late','dashboard'); ?></b></span>                      				
-							   </div>
-							</div>
-						 </div>
-					 </div>	  
-
-					  <div class="col-md-2 col-sm-2">
-						 <div class="dashbox shad panel panel-default db-brown">
-							<div class="panel-body">
-							   <div class="panel-left brownbg">
-									<i class="fa fa-tag fa-tag-index fa-3x"></i>
-							   </div>
-					   		<div class="panel-right right">
-									<div id="odometer5" class="odometer" style="font-size: 25px;">   </div><p></p>
-               				<span class="chamado"><?php echo __('Backlog','dashboard'); ?></span><br>                        				
-							   </div>
-							</div>
-						 </div>
-					  </div>						 					 
-					  
-					 <div class="col-md-2 col-sm-2">
+					  </div>
+					  <div class="col-xs-2 col-xs-15">
 						 <div class="dashbox shad panel panel-default db-orange">
 							<div class="panel-body">
-							   <div class="panel-left orangebg">
+							   <div class="panel-left green orangebg">
 									<i class="fa fa-users fa-3x"></i>
 							   </div>
 					   		<div class="panel-right right">
-									<div id="odometer6" class="odometer" style="font-size: 25px;">   </div><p></p>
+									<div id="odometer4" class="odometer" style="font-size: 25px;">   </div><p></p>
                				<span class="chamado"><?php echo __('users','dashboard'); ?></span><br>                        				
 							   </div>
 							</div>
 						 </div>
-					</div>						 							  	
+					  </div>			
+					  
+					  <div class="col-xs-2 col-xs-15">
+						 <div class="dashbox shad panel panel-default db-orange">
+							<div class="panel-body">
+							   <div class="panel-left green orangebg">
+									<i class="fa fa-users fa-3x"></i>
+							   </div>
+					   		<div class="panel-right right">
+									<div id="odometer4" class="odometer" style="font-size: 25px;">   </div><p></p>
+               				<span class="chamado"><?php echo __('users','dashboard'); ?></span><br>                        				
+							   </div>
+							</div>
+						 </div>
+					  </div>	
 					  														                          				                           							
 			</div>                       
                 
 <!--<div class="container-fluid">  -->
       
 <script type="text/javascript" >
-	window.odometerOptions = {
-	   format: '( ddd).dd'
-	};
-	
-	setTimeout(function(){
-	    odometer1.innerHTML = <?php echo $total_hoje['total']; ?>;
-	    odometer2.innerHTML = <?php echo $total_mes['total']; ?>;
-	    odometer3.innerHTML = <?php echo $total_ano['total']; ?>;
-	    odometer4.innerHTML = <?php echo $total_due['total']; ?>;
-	    odometer5.innerHTML = <?php echo $total_ano_ab['total']; ?>;
-	    odometer6.innerHTML = <?php echo $total_users['total']; ?>;
-	}, 1000);
+window.odometerOptions = {
+   format: '( ddd).dd'
+};
+
+setTimeout(function(){
+    odometer1.innerHTML = <?php echo $total_hoje['total']; ?>;
+    odometer2.innerHTML = <?php echo $total_mes['total']; ?>;
+    odometer3.innerHTML = <?php echo $total_ano['total']; ?>;
+    odometer4.innerHTML = <?php echo $total_users['total']; ?>;
+}, 1000);
+
 </script> 
 
 <div id='content-main' class="container-fluid1 align col-md-12 row" style="">  
@@ -472,7 +433,8 @@ $total_due = $DB->fetch_assoc($result_due);
 	<div id="grfrow" class="row-fluid col-sm-11 col-md-11 card" style="width:100%;">	
       
       <p id="choices" style=" margin-right: 20px; margin-top: 5px; text-align:right; width:<?php echo $width_os; ?>;"></p>	  	
-		<div class="demo-container" style="margin-bottom:10px;">								
+		<div class="demo-container" style="margin-bottom:10px;">						
+		
 			<div id="graflinhas1" class="demo-placeholder" style="float:left; width: <?php echo $width_os; ?> ;"></div>
 				
 				<div id="srvinfo">					
@@ -566,7 +528,7 @@ $total_due = $DB->fetch_assoc($result_due);
 				?> 	 						            
 		</div> 
 	</div>
-</div>
+	</div>
 
 	<div class="col-sm-6 col-md-6 align2"> 	 				              
    <div id="last_week" class="widget widget-table action-table striped card1" >
@@ -583,7 +545,7 @@ $total_due = $DB->fetch_assoc($result_due);
   		</div>      
   </div>   
   	
-<div class="col-sm-6 col-md-6" > 	 				              
+	<div class="col-sm-6 col-md-6"> 	 				              
    <div id="tickets_age" class="widget widget-table action-table striped card1" >
       <div class="widget-header wpurple">                
       	<h3><i class="fa fa-pie-chart" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo __('Ticket Solving Period','dashboard'); ?></h3>
@@ -667,7 +629,6 @@ $total_due = $DB->fetch_assoc($result_due);
          <!-- /widget-content --> 
        </div>
 	</div> 
-
 <!--  open tickets by tech-->
 	<div class="col-sm-6 col-md-6"> 	
 		<div id="open_tickets" class="widget widget-table action-table striped card1">
@@ -696,24 +657,24 @@ $total_due = $DB->fetch_assoc($result_due);
             $result_tec = $DB->query($query_tec);			                        
             ?>    
            <table id="open_tickets" class="table table-hover table-bordered table-condensed" >
-	           <th style="text-align: center;"><?php echo __('Technician','dashboard'); ?></th><th style="text-align: center;">
-	          	<?php echo __('Open Tickets','dashboard'); ?>
-	           </th>
-	              
-					<?php
-						while($row = $DB->fetch_assoc($result_tec)) 
-						{					
-							echo "<tr><td><a href=./reports/rel_tecnico.php?con=1&sel_tec=".$row['id']."&stat=open target=_blank style='color: #526273;'>
-							".$row['name']." ".$row['sname']."</a></td><td style='text-align: center;' >".$row['tick']."</td></tr>";											
-						}				
-					?>                                       
+           <th style="text-align: center;"><?php echo __('Technician','dashboard'); ?></th><th style="text-align: center;">
+          	<?php echo __('Open Tickets','dashboard'); ?>
+           </th>
+              
+				<?php
+					while($row = $DB->fetch_assoc($result_tec)) 
+					{					
+						echo "<tr><td><a href=./reports/rel_tecnico.php?con=1&tec=".$row['id']."&stat=open target=_blank style='color: #526273;'>
+						".$row['name']." ".$row['sname']."</a></td><td style='text-align: center;' >".$row['tick']."</td></tr>";											
+					}				
+				?>                                       
               </table>              
             </div>
             <!-- /widget-content --> 
           </div>
        </div>
 
-<div class="col-sm-6 col-md-6" >  	 				              
+	<div class="col-sm-6 col-md-6">  	 				              
 		 <div id="events" class="widget widget-table action-table striped card1">
             <div class="widget-header wblue">
               <h3><i class="fa fa-list-alt" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><a href="../../../front/event.php" target="_blank" style="color: #525252;"><?php echo __('Last Events','dashboard'); ?></a></h3>
@@ -804,7 +765,7 @@ $total_due = $DB->fetch_assoc($result_due);
 	</div>
 
 	<div class="col-sm-6 col-md-6" style="margin-rightx:-15px;">  	 				              
-		 <div id="logged_users" class="widget widget-table action-table card1">
+		 <div id="logged_users" class="widget widget-table action-table">
             <div class="widget-header wblue">
 				<?php
 				//logged users								
@@ -819,7 +780,9 @@ $total_due = $DB->fetch_assoc($result_due);
 				     $arr_arq[] = $path.$arquivo;           
 				 }				 
 								
-				foreach ($arr_arq as $listar) {										  
+				foreach ($arr_arq as $listar) {
+				// retira "./" e "../" para que retorne apenas pastas e arquivos
+								  
 				   if ( is_file($listar) && $listar != '.' && $listar != '..'){ 
 							$arquivos[]=$listar;
 				   }
@@ -833,7 +796,8 @@ $total_due = $DB->fetch_assoc($result_due);
 					
 						$file = $arquivos[$i];						
 						
-						$string = file_get_contents( $file ); 						
+						$string = file_get_contents( $file ); 
+						//poderia ser um string ao invés de file_get_contents().
 						
 						$list = preg_match( '/glpiID\|s:[0-9]:"(.+)/', $string, $matches);
 						
@@ -880,7 +844,7 @@ $total_due = $DB->fetch_assoc($result_due);
 				while($row_name = $DB->fetch_assoc($result_name)) 
 	  			   {
 						echo "<tr>
-									<td style='text-align: left;'><img src=". User::getURLForPicture($row_name['picture']) ." alt='' width='30px' height='35px' />&nbsp; &nbsp;<a href=../../../front/user.form.php?id=".$row_name['uid']." target=_blank style='color: #526273;'>
+									<td style='text-align: left;'><img src=". User::getURLForPicture($row_name['picture']) ." alt='user' width='30px' height='35px' />&nbsp; &nbsp;<a href=../../../front/user.form.php?id=".$row_name['uid']." target=_blank style='color: #526273;'>
 										".$row_name['name']." ".$row_name['sname']." (".$row_name['uid'].")</a>	
 									</td>									
 								</tr>";												
@@ -907,6 +871,7 @@ $total_due = $DB->fetch_assoc($result_due);
 	<div id="go-top" class="go-top" onclick="scrollWin()">
 	   <i class="fa fa-chevron-up"></i>&nbsp; Top     							    
 	</div> 
+
 	 	
 </div> <!-- end content -->   
  <!--</div>-->		

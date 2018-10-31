@@ -132,9 +132,6 @@ a { color: #8E9E82; }
 }
 
 .form1 {
-	/*width: 900px;
-	margin-left: -500px;
-	left: 52%; */
 	position: relative; 
 	text-align: center;
 	margin-bottom: 5px;
@@ -145,8 +142,7 @@ a { color: #8E9E82; }
 }
 
 .form2 {
-	/*margin-left: -500px;
-	left: 52%; */
+
 	position: relative; 
 	text-align: center;
    margin-bottom: 5px;
@@ -1736,4 +1732,12 @@ td > a:hover {
 		margin-left: -9.5%;
 		margin-top: -3%;
 	}
+}
+
+
+.sons {
+	width: 300px; 
+	padding-left: 15px; 
+	text-align: left;
+	color: #000;
 }

@@ -142,9 +142,6 @@ font-weight:bold;
 }
 
 .form1 {
-	/*width: 900px;
-	margin-left: -500px;
-	left: 52%; */
 	position: relative; 
 	text-align: center;
 	margin-bottom: 5px;
@@ -1548,3 +1545,9 @@ td > a:hover {
 	}
 }
 
+.sons {
+	width: 300px; 
+	padding-left: 15px; 
+	text-align: left;
+	color: #000;
+}

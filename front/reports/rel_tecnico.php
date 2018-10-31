@@ -9,7 +9,6 @@ global $DB;
 Session::checkLoginUser();
 Session::checkRight("profile", READ);
 
-//if(!empty($_POST['submit']))
 if(!empty($_REQUEST['date1']))
 {
     $data_ini = $_REQUEST['date1'];
@@ -222,15 +221,17 @@ $con = $_GET['con'];
 
 if($con == "1") {
 
-	if(!isset($_POST['date1']))
+	if(!isset($_REQUEST['date1']))
 	{
-	    $data_ini2 = $_REQUEST['date1'];
-	    $data_fin2 = $_REQUEST['date2'];
+	   //$data_ini = date("Y-01-01");
+    	//$data_fin = date("Y-m-d");
+	   $data_ini2 = $_REQUEST['date1'];
+	   $data_fin2 = $_REQUEST['date2'];
 	}
 	
 	else {
-	    $data_ini2 = $_REQUEST['date1'];
-	    $data_fin2 = $_REQUEST['date2'];
+	   $data_ini2 = $_REQUEST['date1'];
+	   $data_fin2 = $_REQUEST['date2'];
 	}
 	
 	if(!isset($_POST["sel_tec"])) {

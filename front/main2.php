@@ -652,7 +652,7 @@ $total_due = $DB->fetch_assoc($result_due);
 						<?php
 							while($row = $DB->fetch_assoc($result_tec)) 
 							{					
-								echo "<tr><td><a href=./reports/rel_tecnico.php?con=1&tec=".$row['id']."&stat=open target=_blank style='color: #526273;'>
+								echo "<tr><td><a href=./reports/rel_tecnico.php?con=1&sel_tec=".$row['id']."&stat=open target=_blank style='color: #526273;'>
 								".$row['name']." ".$row['sname']."</a></td><td style='text-align: center;' >".$row['tick']."</td></tr>";											
 							}				
 						?>                                       
@@ -734,8 +734,7 @@ $total_due = $DB->fetch_assoc($result_due);
 					   while ($i < $number) {
 					   
 						  $type     = $DB->result($result_evt, $i, "type");
-	       			  $date     = date_create($DB->result($result_evt, $i, "date"));
-				        // $service  = $DB->result($result_evt, $i, "service");         							        
+	       			  $date     = date_create($DB->result($result_evt, $i, "date"));				              							        
 				        $message  = $DB->result($result_evt, $i, "message");
 						
 						echo "<tr><td style='text-align: left;'>". tipo($type) ."</td>
@@ -768,9 +767,7 @@ $total_due = $DB->fetch_assoc($result_due);
 				     $arr_arq[] = $path.$arquivo;           
 				 }				 
 								
-				foreach ($arr_arq as $listar) {
-				// retira "./" e "../" para que retorne apenas pastas e arquivos
-								  
+				foreach ($arr_arq as $listar) {												  
 				   if ( is_file($listar) && $listar != '.' && $listar != '..'){ 
 							$arquivos[]=$listar;
 				   }
@@ -784,8 +781,7 @@ $total_due = $DB->fetch_assoc($result_due);
 				
 					$file = $arquivos[$i];
 					
-					$string = file_get_contents( $file ); 
-					//poderia ser um string ao invés de file_get_contents().
+					$string = file_get_contents( $file ); 					
 					
 					$list = preg_match( '/glpiID\|s:[0-9]:"(.+)/', $string, $matches );
 					
@@ -833,7 +829,7 @@ $total_due = $DB->fetch_assoc($result_due);
 				while($row_name = $DB->fetch_assoc($result_name)) 
 	  			   {
 						echo "<tr>
-									<td style='text-align: left;'><img src=". User::getURLForPicture($row_name['picture']) ." alt='user' width='30px' height='35px' />&nbsp; &nbsp;<a href=../../../front/user.form.php?id=".$row_name['uid']." target=_blank style='color: #526273;'>
+									<td style='text-align: left;'><img src=". User::getURLForPicture($row_name['picture']) ." alt='' width='30px' height='35px' />&nbsp; &nbsp;<a href=../../../front/user.form.php?id=".$row_name['uid']." target=_blank style='color: #526273;'>
 										".$row_name['name']." ".$row_name['sname']." (".$row_name['uid'].")</a>	
 									</td>									
 								</tr>";												

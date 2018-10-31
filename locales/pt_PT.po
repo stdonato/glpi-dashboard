@@ -1,23 +1,23 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Jorge Manuel B. S. Vicetto <jmbsvicetto@gmail.com>, 2015
-
 msgid ""
 msgstr ""
 "Project-Id-Version: GLPI Project\n"
 "Rebyt-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-29 19:45+0000\n"
-"PO-Revision-Date: 2015-04-29 20:15+0000\n"
+"PO-Revision-Date: 2018-10-13 18:34+0200\n"
 "Last-Translator: Jorge Manuel B. S. Vicetto <jmbsvicetto@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt_PT\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
+"Language-Team: \n"
+"X-Generator: Poedit 2.1.1\n"
 
 msgid "Dashboard"
 msgstr "Painel"
@@ -521,3 +521,6 @@ msgstr "acumulado"
 
 msgid "Sons"
 msgstr "Filhos"
+
+msgid "Task sum"
+msgstr "Soma de Tarefas"

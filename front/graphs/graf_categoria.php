@@ -186,7 +186,7 @@ $selected = $id_cat;
 		<div id="datas-tec" class="col-md-12 col-sm-12 fluid" >
 		
 			<form id="form1" name="form1" class="form2" method="post" action="?date1=<?php echo $data_ini ?>&date2=<?php echo $data_fin ?>&con=1">
-				<table border="0" cellspacing="0" cellpadding="1" bgcolor="#efefef" width="800" style="margin-bottom: 20px;">
+				<table border="0" cellspacing="0" cellpadding="1" bgcolor="#efefef" width="850" style="margin-bottom: 20px;">
 					<tr>
 					<td style="width: 360px;">
 					<?php
@@ -224,7 +224,7 @@ $selected = $id_cat;
 						echo dropdown( $name, $options, $selected );
 					?>
 					</td>
-					<td style="width: 300px; padding-left: 15px; text-align: left;"> 
+					<td class="sons"> 
 						<input type="checkbox" name="sons" value="1"> <?php echo __('Sons','dashboard'); ?>
 					</td>
 					</tr>
