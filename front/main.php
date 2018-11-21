@@ -653,7 +653,7 @@ $total_due = $DB->fetch_assoc($result_due);
 	      
 	      $result_wid = $DB->query($query_wid);			            	      
 	      ?>    
-	        <table id="last_tickets" class="table table-hover table-bordered table-condensed" >
+	        <table id="last_tickets" class="table table-hover table-condensed" >
 		        <th style="text-align: center;"><?php echo __('Tickets','dashboard'); ?></th><th style="text-align: center;" ><?php echo __('Title','dashboard'); ?></th>	        
 					<?php
 						while($row = $DB->fetch_assoc($result_wid)) 
@@ -695,7 +695,7 @@ $total_due = $DB->fetch_assoc($result_due);
             
             $result_tec = $DB->query($query_tec);			                        
             ?>    
-           <table id="open_tickets" class="table table-hover table-bordered table-condensed" >
+           <table id="open_tickets" class="table table-hover table-condensed" >
 	           <th style="text-align: center;"><?php echo __('Technician','dashboard'); ?></th><th style="text-align: center;">
 	          	<?php echo __('Open Tickets','dashboard'); ?>
 	           </th>
@@ -768,10 +768,9 @@ $total_due = $DB->fetch_assoc($result_due);
 					return $service;
 					}
 					     ?>    
-				          <table id="lastevents" class="table table-hover table-bordered table-condensed" >
+				          <table id="lastevents" class="table table-hover table-condensed" >
 				            <th style="text-align: center;"><?php echo __('Type'); ?></th>
-								<th style="text-align: center;"><?php echo __('Date'); ?></th>
-								<!-- <th style="text-align: center;"><?php echo __('Service'); ?></th>  -->
+								<th style="text-align: center;"><?php echo __('Date'); ?></th>							
 								<th style="text-align: center;"><?php echo __('Message'); ?></th>                 
 								<?php
 								
@@ -789,8 +788,8 @@ $total_due = $DB->fetch_assoc($result_due);
 						        // $service  = $DB->result($result_evt, $i, "service");         							        
 						        $message  = $DB->result($result_evt, $i, "message");
 								
-								echo "<tr><td style='text-align: left;'>". tipo($type) ."</td>
-										<td style='text-align: left;'>" . date_format($date, $dataf.' H:i:s') . "</td>					
+								echo "<tr><td style='text-align: center;'>". tipo($type) ."</td>
+										<td style='text-align: center;'>" . date_format($date, $dataf.' H:i:s') . "</td>					
 										<td style='text-align: left;'>". substr($message,0,50) ."</td></tr>
 								";
 								++$i;													
@@ -835,16 +834,11 @@ $total_due = $DB->fetch_assoc($result_due);
 						
 						$string = file_get_contents( $file ); 						
 						
-						$list = preg_match( '/glpiID\|s:[0-9]:"(.+)/', $string, $matches);
-						
-						$arr = isset($matches[0]) ? $matches[0] : '';
-						
-						$posicao = strpos($arr, 'glpiID|s:');
-						
-						$string2 = substr($arr, $posicao, 25);
-						
-						$string3 = explode("\"", $string2);
-						
+						$list = preg_match( '/glpiID\|s:[0-9]:"(.+)/', $string, $matches);						
+						$arr = isset($matches[0]) ? $matches[0] : '';						
+						$posicao = strpos($arr, 'glpiID|s:');						
+						$string2 = substr($arr, $posicao, 25);						
+						$string3 = explode("\"", $string2);						
 						$arr_ids[] = isset($string3[1]) ? $string3[1] : '';						
 					}
 				}
@@ -874,7 +868,7 @@ $total_due = $DB->fetch_assoc($result_due);
 	          else {
 	          	echo '<div class="widget-content striped" style="min-height:318px;">'; }	          		          	
 				?>        
-              <table id="logged_users" class="table table-hover table-bordered table-condensed" >                         
+              <table id="logged_users" class="table table-hover table-condensed" >                         
 				<?php
 								
 				while($row_name = $DB->fetch_assoc($result_name)) 

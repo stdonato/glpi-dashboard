@@ -1,4 +1,4 @@
-Versão 0.9.4:
+Versão 0.9.5:
 
 - GLPI 9.2.x e 9.3.x
 
@@ -8,7 +8,7 @@ Versão 0.9.4:
 - Correção de bugs diversos;
 
 
-Version 0.9.4:
+Version 0.9.5:
 
 - GLPI 9.2.x and 9.3.x;
 
