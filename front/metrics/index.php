@@ -211,6 +211,7 @@ else {
 			</div>
 			</div> <!-- //end cf-item -->
 
+
 		<div style="" class="col-lg-3 cf-item">
 				<header>
 					<p><span></span><?php echo __('Tickets Total','dashboard');?></p>
@@ -235,6 +236,7 @@ else {
 					</div>					
 				</div>
 			</div> <!-- //end cf-item -->
+		
 			
 			<div style="min-height: 0px;" class="col-lg-3 cf-item">
 				<header>
