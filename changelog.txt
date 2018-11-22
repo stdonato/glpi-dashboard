@@ -2,9 +2,7 @@ Versão 0.9.5:
 
 - GLPI 9.2.x e 9.3.x
 
-- Correção de nomes de S.O. em Ativos;
-- Seleção de entidades no relatório de satisfação;
-- Seleção de filhas no relatório e gráfico por Categorias;
+- Top 5 in Metrics
 - Correção de bugs diversos;
 
 
@@ -12,8 +10,6 @@ Version 0.9.5:
 
 - GLPI 9.2.x and 9.3.x;
 
-- Fix O.S. names in Assets page;
-- Entities selection on satisfaction report;
-- Son category selection on report and chart by Category;
+- Top 5 in Metrics
 - Fix minor bugs;
 

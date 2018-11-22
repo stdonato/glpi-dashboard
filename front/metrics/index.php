@@ -7,7 +7,6 @@ if(isset($_REQUEST['ent'])) {
 	include "metrics_ent.inc.php";
 }
 	
-	
 elseif(isset($_REQUEST['grp'])) {
 	$id_grp = $_REQUEST['grp'];
 	$indexw = "indexw.php?grp=".$id_grp;
@@ -139,8 +138,7 @@ else {
 		
 		<?php
 
-		//Solved or closed ticktes	
-				
+		//Solved or closed ticktes					
 		if($solved > 0) {
 			$notopen = $solved;
 			$notopeny = $solvedy;
@@ -198,8 +196,7 @@ else {
 						-->
 						<script type="text/javascript">
 							var d_names = <?php echo '"'.$dia.'"' ; ?>;
-							var m_names = <?php echo '"'.$mes.'"' ; ?>;
-							
+							var m_names = <?php echo '"'.$mes.'"' ; ?>;							
 							var d = new Date();
 							var curr_day = d.getDay();
 							var curr_date = d.getDate();
@@ -345,7 +342,7 @@ else {
 							echo '<div class="chart" data-percent="' . $satisf .'" style="margin-left: 20%;"> <span class="percent">' . $satisf . '</span><sup></sup> </div>';	
 						}
 						else {
-//							echo '<div id="grafsat" class="content cf-piexx" style="margin-left:0px;">';
+						   echo '<div id="grafsat" class="content cf-piexx" style="margin-left:0px;">';
 							include ("grafbar_grupo.inc.php");
 							echo ' </div>';
 						}							
@@ -374,10 +371,8 @@ else {
 					
 			
 	</div> <!-- //end row -->
-</div> <!-- //end main --> 
- 	
-</div> <!-- //end row -->		
-		
+</div> <!-- //end main -->  	
+</div> <!-- //end row -->				
 </div> <!-- //end container -->
 
 </div>

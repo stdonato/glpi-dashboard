@@ -100,8 +100,8 @@ $(function () {
         });
     });
 
-		</script>";
+	</script>";
 
-	   echo '</div>';
+   echo '</div>';
 
-		?>
+	?>

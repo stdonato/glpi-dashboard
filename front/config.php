@@ -726,11 +726,11 @@ function chart(theme) {
 			echo "</tr>\n";	
 			
 			// google maps API key
-			echo "<tr>\n";
+/*			echo "<tr>\n";
 			echo "<td>\n";		
 			echo "-- ". __('Google maps API key','dashboard').":  &nbsp; &nbsp;  <button class='btn btn-sm btn-primary' onclick='window.open(\"./map/map_key.php\");'>". __('Edit')."</button>";
 			echo "</td>\n";
-			echo "</tr>\n";	
+			echo "</tr>\n";	*/
 					
 			/*		
 			//file upload				

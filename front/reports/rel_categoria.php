@@ -372,7 +372,7 @@ else {
 			$sql_nm = "
 			SELECT id , completename AS name
 			FROM `glpi_itilcategories`
-			WHERE id IN (".$id_cat_name.")";
+			WHERE id = ".$id_cat_name." ";
 
 			$result_nm = $DB->query($sql_nm);
 			$cat_name = $DB->fetch_assoc($result_nm);
