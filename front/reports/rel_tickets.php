@@ -79,7 +79,7 @@ function margins() {
 	if($layout == '0')
 	{
 		// sidebar
-		$margin = '0px 3% 0px 5%';
+		$margin = '0px 5% 0px 5%';
 	}
 	
 	if($layout == 1 || $layout == '' )
@@ -144,7 +144,7 @@ function margins() {
 <div id='content' >
 <div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
 <div id="charts" class="fluid chart"> 
-<div id="head-lg" class="fluid" style="height: 450px;">
+<div id="head-lg" class="fluid" style="min-height: 320px;">
 
 <style type="text/css">
 	a:link, a:visited, a:active {text-decoration: none;}

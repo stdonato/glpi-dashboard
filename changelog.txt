@@ -2,7 +2,8 @@ Versão 0.9.5:
 
 - GLPI 9.2.x e 9.3.x
 
-- Top 5 in Metrics
+- Correções na págian de ativos;
+- Correção do Top 5 in Metrics;
 - Correção de bugs diversos;
 
 
@@ -10,6 +11,7 @@ Version 0.9.5:
 
 - GLPI 9.2.x and 9.3.x;
 
-- Top 5 in Metrics
+- Fix Assets page;
+- Fix Top 5 in Metrics;
 - Fix minor bugs;
 

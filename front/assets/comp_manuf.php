@@ -71,7 +71,7 @@ $(document).ready(function() {
 		                 extend: "print",
 		                 autoPrint: true,
 		                 text: "<?php echo __('Selected','dashboard'); ?>",
-		                 7
+		                 		                 
 		                 exportOptions: {
 		                    modifier: {
 		                        selected: true

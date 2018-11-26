@@ -100,7 +100,7 @@ else {
 <div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
 <div id="charts" class="fluid chart">
 <div id="pad-wrapper" >
-<div id="head-rel" class="fluid" style="height:400px;">
+<div id="head-rel" class="fluid" style="min-height:320px;">
 
 <a href="../index.php"><i class="fa fa-home home-rel" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 

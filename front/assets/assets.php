@@ -143,6 +143,8 @@ foreach($arr_assets as $asset) {
 	
 	$global+=$total;
 }
+
+
 ?>        
 
 <html> 
@@ -208,7 +210,7 @@ foreach($arr_assets as $asset) {
 </head>
 
 <body style=" margin-left:0%; background:#E5E5E5;">
-<div id='content' style="margin: 20px 0% 0% 0%; float:none;">	
+<div id='content' style="float:none; margin: <?php echo margins(); ?> ;">
 	  	 	
 		<div id="head" class="fluid head-asset" style="min-height: 100px;">
 			<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
@@ -304,11 +306,11 @@ foreach($arr_assets as $asset) {
 						<?php  include('./comp_cat.php'); ?>		
 					</div>
 					
-					<div id="graf_manufac" class="well col-md-12" style="margin-top: 25px; margin-left: 1%;">
+					<div id="graf_manufac" class="well col-md-12" style="margin-top: 25px; margin-left: 0%;">
 						<?php  include('./comp_manuf.php'); ?>		
 					</div>
 									
-					<div id="graf_ticket" class="well col-md-12" style="margin-top: 20px; margin-left: 1%;">
+					<div id="graf_ticket" class="well col-md-12" style="margin-top: 20px; margin-left: 0%;">
 						<?php  include('./comp_ticket.php'); ?>		
 					</div>			
 														
@@ -349,7 +351,7 @@ foreach($arr_assets as $asset) {
 						<div id="graf_phone2" class="col-md-6 col-sm-6" style="margin-top: 0; min-height:500px;">
 							<?php  include('./phone_model.php'); ?>		
 						</div>
-						<div id="phones_report" class="col-md-12 col-sm-12 well" style="margin-top:25px; margin-left: 1%;">
+						<div id="phones_report" class="col-md-12 col-sm-12 well" style="margin-top:25px; margin-left: 0%;">
 							<?php  include('./phone_report.php'); ?>		
 						</div>							
 					</div>				
@@ -377,7 +379,7 @@ foreach($arr_assets as $asset) {
 						<div id="graf_cart1" class="col-md-12 col-sm-12" style="margin-top: 0; min-height:500px; width: 98%;">
 							<?php  include('./cart_manuf.php'); ?>		
 						</div>
-						<div id="graf_cart2" class="col-md-12 col-sm-12 well" style="margin-top: 25px; margin-left: 1%;">
+						<div id="graf_cart2" class="col-md-12 col-sm-12 well" style="margin-top: 25px; margin-left: 0%;">
 							<?php  include('./cart_quant.php'); ?>		
 						</div>							
 					</div>
@@ -393,7 +395,7 @@ foreach($arr_assets as $asset) {
 						<div id="graf_global1" class="col-md-12 col-sm-12" style="margin-top: 0; min-height:500px; width: 98%;">
 							<?php  include('./global_assets.php'); ?>		
 						</div>
-						<div id="asset_tickets" class="col-md-12 col-sm-12 well" style="margin-top: 25px; margin-left: 1%;">
+						<div id="asset_tickets" class="col-md-12 col-sm-12 well" style="margin-top: 25px; margin-left: 0%;">
 							<?php  include('./global_tickets.php'); ?>		
 						</div>							
 					</div>	 

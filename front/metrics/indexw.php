@@ -7,6 +7,7 @@ if(isset($_REQUEST['ent'])) {
 	include "metrics_ent.inc.php";
 }
 	
+	
 elseif(isset($_REQUEST['grp'])) {
 	$id_grp = $_REQUEST['grp'];
 	$indexw = "indexw.php?grp=".$id_grp;
@@ -17,7 +18,7 @@ elseif(isset($_REQUEST['grp'])) {
 else {
 	$id_grp = "";
 	$indexw = "indexw.php";
-	$indexb = "index.php";
+	$indexb = "index.php";	
 	include "metrics.inc.php";
 }
 
@@ -225,7 +226,7 @@ else {
 						<div class="metric total"></div>
 						<div class="change metric-small">
 							<div id="arrow"></div>
-							<span class="large"></span>
+							<span class="large"></span><!-- <span class="small">.45%</span> -->
 						</div>
 					</div>
 					<div class="cf-sparkline clearfix" style="margin-top:15px;">
@@ -251,7 +252,7 @@ else {
 							<div class="metric total-month"><?php echo $today_tickets; ?></div>
 							<div class="change metric-small daily">
 								<div id="arrow-2"></div>
-								<span class="large large-2"></span>
+								<span class="large large-2"></span><!-- <span class="small">.45%</span> ((V2-V1)/V1 × 100) -->
 							</div>
 						</div>
 						<div class="cf-sparkline clearfix" style="margin-top:15px;">
@@ -266,6 +267,7 @@ else {
 				</div>
 			</div> <!-- //end cf-item -->
 								
+
 			<div style="" class="col-lg-3 cf-item">
 				<header>
 					<p><span></span><?php echo _n('Ticket','Tickets',2)." ".__('Within','dashboard');?> - %</p>
@@ -307,10 +309,11 @@ else {
 						<p><span></span><?php echo _n('Ticket','Tickets',2)." ". __('by Type','dashboard') ;?></p>
 					</header>
 					<div class="content" >					
-						<div id="cf-rag-1" class="cf-rag">						
-							<div class="cf-bars"></div>
-								<div class="cf-figs "></div>
-									<div class="cf-txts"></div> 
+						<div id="cf-rag-1" class="cf-rag">
+						<?php //include ("grafpie_tipo.inc.php");  ?>
+						<div class="cf-bars"></div>
+							<div class="cf-figs "></div>
+								<div class="cf-txts"></div> 
 						</div>
 					</div>				
 			</div> 	<!-- //end cf-item -->	
@@ -347,7 +350,7 @@ else {
 							echo '<div class="chart" data-percent="' . $satisf .'" style="margin-left: 20%;"> <span class="percent">' . $satisf . '</span><sup></sup> </div>';	
 						}
 						else {
-						   echo '<div id="grafsat" class="content cf-piexx" style="margin-left:0px;">';
+//							echo '<div id="grafsat" class="content cf-piexx" style="margin-left:0px;">';
 							include ("grafbar_grupo.inc.php");
 							echo ' </div>';
 						}							
@@ -376,8 +379,10 @@ else {
 					
 			
 	</div> <!-- //end row -->
-</div> <!-- //end main -->  	
-</div> <!-- //end row -->				
+</div> <!-- //end main --> 
+ 	
+</div> <!-- //end row -->		
+		
 </div> <!-- //end container -->
 
 </div>

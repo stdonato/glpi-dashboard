@@ -1699,7 +1699,11 @@ td > a:hover {
 
 #graf_linhas {margin-top: 25px;}
 
-.head-asset {width: 98%;}
+.head-asset {
+	width: 98%;
+	margin-bottom: 20px;
+	margin-top: 30px;	
+}
 
 .mapkey {
 	height:320px; 

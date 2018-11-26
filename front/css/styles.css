@@ -17,7 +17,7 @@
   box-shadow: 4px 4px 4px #888888;
 }
 
-#head, #head-lg, #head-rel { min-height: 200px; }
+#head, #head-lg, #head-rel { min-height: 180px; }
 
 @font-face {
   font-family: Josefin;
