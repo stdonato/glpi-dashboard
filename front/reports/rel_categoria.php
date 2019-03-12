@@ -2,7 +2,6 @@
 
 include ("../../../../inc/includes.php");
 include ("../../../../inc/config.php");
-//include ("../../../../inc/dbutils.php");
 include "../inc/functions.php";
 
 global $DB;
@@ -32,7 +31,6 @@ else {
 
 # sons categories
 if(!isset($_POST["sons"])) {
-	//$sons_cat = $_GET["sons"];
 	$sons_cat = 0;
 }
 
@@ -41,6 +39,8 @@ else {
 }
 
 # entity
+if(!isset($_REQUEST['sel_ent']) || $_REQUEST['sel_ent'] == 0) {
+	
 $sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
 $result_e = $DB->query($sql_e);
 $sel_ent = $DB->result($result_e,0,'value');
@@ -56,8 +56,11 @@ if($sel_ent == '' || $sel_ent == -1) {
 	$entidade_c = "AND entities_id IN (".$ent.") ";
 	$entidade_cw = "WHERE (entities_id IN (".$ent.") OR is_recursive = 1)";	
 }
+}
 
 else {
+	$sel_ent = $_REQUEST['sel_ent'];
+	$id_ent = $_REQUEST['sel_ent'];
 	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.") ";
 	$entidade_c = "AND entities_id IN (".$sel_ent.") ";
 	$entidade_cw = "WHERE (entities_id IN (".$sel_ent.") OR is_recursive = 1)";
@@ -68,7 +71,6 @@ else {
 <html>
 <head>
 <title> GLPI - <?php echo __('Tickets', 'dashboard') .'  '. __('by Category', 'dashboard') ?> </title>
-<!-- <base href= "<?php $_SERVER['SERVER_NAME'] ?>" > -->
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
@@ -120,13 +122,13 @@ else {
 		<div id="charts" class="fluid chart">
 			<div id="pad-wrapper" >
 			<div id="head-lg" class="fluid">
-			<a href="../index.php"><i class="fa fa-home fa-home-lg" style="font-size:14pt;"></i><span></span></a>
+			<a href="../index.php"><i class="fa fa-home fa-home-lg" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
 
 				<div id="titulo_rel"> <?php echo __('Tickets', 'dashboard') .'  '. __('by Category', 'dashboard') ?> </div>
 					<div id="datas-tec" class="col-md-12 col-sm-12 fluid">
 		
 						<form id="form1" name="form1" class="form_rel" method="post" action="rel_categoria.php?con=1">
-							<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" width="800">
+							<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" width="810">
 								<tr>
 									<td style="width: 360px;">
 									<?php
@@ -232,11 +234,6 @@ else {
 
 			else {
 				$id_cat = $_POST["sel_cat"];
-			}
-
-			if($id_cat == "" || $id_cat == 0) {
-				echo '<script language="javascript"> alert(" ' . __('Select a category', 'dashboard') . ' "); </script>';
-				echo '<script language="javascript"> location.href="rel_categoria.php"; </script>';
 			}
 			
 			# sons categories
@@ -380,13 +377,12 @@ else {
 			//listar chamados
 			echo "
 			<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>
+				
+			<span  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Category').": </span>".$cat_name['name'].$and_sons." </span>				
 
 			<table class='col-md-12 col-sm-12 fluid'  style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
 				<tr>
-					<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Category').": </span>".$cat_name['name'].$and_sons." </td>
-				</tr>
-				<tr>
-					<td style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Tickets', 'dashboard').": </span>".$consulta." </td>
+					<td style='font-size: 16px; font-weight:bold; vertical-align:middle; width:180px;'><span style='color:#000;'> ".__('Tickets', 'dashboard').": </span>".$consulta." </td>
 					<td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'>".__('Period', 'dashboard') .": </span> " . conv_data($data_ini2) ." a ". conv_data($data_fin2)." </td>
 
 					<td style='vertical-align:middle; width: 190px; '>

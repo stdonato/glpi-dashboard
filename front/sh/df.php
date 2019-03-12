@@ -1,9 +1,7 @@
 <?php
 
 $disk = exec('/bin/df -hm |grep sd | awk \'{print $1","$2","$3","$4","$5","$6}\'', $result);
-
 $count = exec('/bin/df -h |grep sd | awk \'{print $1","$2","$3","$4","$5","$6}\' |wc -l');
-
 
 if($count == 1) {
 
@@ -38,13 +36,10 @@ if($count == 1) {
 
 if($count > 1) {
 
-	foreach($result as $a) {
-		
-		$a1 = explode(',', $a);
-		
+	foreach($result as $a) {		
+		$a1 = explode(',', $a);		
 		$size1+=$a1[1];
-		$size2+=$a1[2];
-			
+		$size2+=$a1[2];			
 	}
 	
 	if($size2 >= 1024) {

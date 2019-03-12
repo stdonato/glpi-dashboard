@@ -189,6 +189,11 @@ body {
 	margin-left: -3px;
 }
 
+#nada_tic {
+	margin-top: -5px;
+	margin-left: -3px;
+}
+
 #lista_chamados {
 	margin-top: 130px;	 
 	background-color: #fff;
@@ -230,7 +235,7 @@ body {
 }
 
 .report-tic {
-	margin-top: -80px;
+	margin-top: -2px;
 }
 
 #charts {
@@ -357,7 +362,7 @@ body {
 
 #datas-tec {
 	min-width: 900px;
-	width: 950px;
+	width: 900px;
 	margin-left: -500px;
 	left: 50%; 
 	position: absolute; 

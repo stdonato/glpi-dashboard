@@ -230,6 +230,20 @@ else {
 			$entidade = "AND glpi_tickets.entities_id IN (".$id_ent.") ";
 		}
 
+/*	   //entity
+		if(!isset($_POST["sel_ent"])) {
+			$id_ent = $_REQUEST["sel_ent"];	
+			//$id_ent = '';	
+		}
+
+		else {
+			$id_ent = $_POST["sel_ent"];
+		}
+
+		if($id_ent == "") {
+			echo '<script language="javascript"> alert(" ' . __('Select a entity', 'dashboard') . ' "); </script>';
+			echo '<script language="javascript"> location.href="rel_entidade.php"; </script>';
+		}*/
 
 		//dates
 		if($data_ini2 == $data_fin2) {
@@ -385,22 +399,18 @@ else {
 		<div class='well info_box fluid col-md-12 col-sm-12 report' style='margin-left: -1px;'>
 
 		<table class='fluid'  style='width:100%; font-size: 18px; font-weight:bold;' cellpadding = '1px'>
-			<tr>
-				<td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Entity', 'dashboard').": </span>".$ent_name['name']." </td>
-			</tr>
-			<tr>
-				<td style='font-size: 16px; font-weight:bold; vertical-align:middle; width:180px;'><span style='color:#000;'> ".__('Tickets', 'dashboard').": </span>".$consulta." </td>
-				<td colspan='3' style='font-size: 16px; vertical-align:middle; width:200px;'><span style='color:#000;'>
-				".__('Period', 'dashboard') .": </span> " . conv_data($data_ini2) ." a ". conv_data($data_fin2)."
-				</td>
-				<td style='vertical-align:middle; width: 190px;'>
-					<div class='progress' style='margin-top: 19px;'>
-						<div class='progress-bar ". $cor ." ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
-		    				".$barra." % ".__('Closed', 'dashboard') ."
-		    			</div>
-					</div>
-				</td>
-			</tr>
+			<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Entity', 'dashboard').": </span>".$ent_name['name']." </td>
+			<td  style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Tickets', 'dashboard').": </span>".$consulta." </td>
+			<td colspan='3' style='font-size: 16px vertical-align:middle; width:200px;'><span style='color:#000;'>
+			".__('Period', 'dashboard') .": </span> " . conv_data($data_ini2) ." a ". conv_data($data_fin2)."
+			</td>
+			<td style='vertical-align:middle; width: 190px;'>
+				<div class='progress' style='margin-top: 19px;'>
+					<div class='progress-bar ". $cor ." ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='width: ".$barra."%;'>
+		    			".$barra." % ".__('Closed', 'dashboard') ."
+		    		</div>
+				</div>
+			</td>
 		</table>
 
 		<table align='right' style='margin-bottom:10px;'>

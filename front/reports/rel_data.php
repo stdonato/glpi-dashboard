@@ -132,24 +132,24 @@ else {
 										$url2 = $arr_url[0];
 
 										echo'
-													<table>
-														<tr>
-															<td>
-															   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-															    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
-															    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-														    	</div>
-															</td>
-															<td>&nbsp;</td>
-															<td>
-														   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-															    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
-															    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
-														    	</div>
-															</td>
-															<td>&nbsp;</td>
-														</tr>
-													</table> ';
+											<table>
+												<tr>
+													<td>
+													   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+													    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >
+													    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+												    	</div>
+													</td>
+													<td>&nbsp;</td>
+													<td>
+												   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+													    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >
+													    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
+												    	</div>
+													</td>
+													<td>&nbsp;</td>
+												</tr>
+											</table> ';
 										?>
 
 										<script language="Javascript">

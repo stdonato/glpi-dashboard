@@ -1,6 +1,7 @@
 <?php
 
-$totalSeconds = shell_exec("/usr/bin/cut -d. -f1 /proc/uptime");
+$totalSeconds1 = shell_exec("/usr/bin/cut -d. -f1 /proc/uptime");
+$totalSeconds = strtotime($totalSeconds1);
 $totalMin   = $totalSeconds / 60;
 $totalHours = $totalMin / 60;
 

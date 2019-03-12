@@ -120,6 +120,17 @@ a { color: #8E9E82; }
 	margin-top: -10px;
 }
 
+#datas-tec3 {
+	min-width: 900px;
+	width: 950px;
+	margin-left: -500px;
+	left: 46%; 
+	position: relative; 
+	text-align: center;
+	margin-bottom: 12px;
+	margin-top: -10px;
+}
+
 #datas-cham {
 	min-width: 900px;
 	width: 950px;

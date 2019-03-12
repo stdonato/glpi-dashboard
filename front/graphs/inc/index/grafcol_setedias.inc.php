@@ -47,11 +47,17 @@ while ($row = $DB->fetch_assoc($query_tecd)) {
 		$arr_grfa[$v_row_result] = 0;
 	}	
 }
-	
-//if(count($arr_grfa) > 0) {		
+
+$quanta = array();
+
+if( empty($arr_grfa) ) {
+	$quanta = 0;
+	$quanta2 = 0;
+}
+else {		
 	$quanta = array_values($arr_grfa) ;
 	$quanta2 = implode(',',$quanta);		
-//}
+}
 
 //INCIDENTS
 $DB->data_seek($query_tecd, 0);
@@ -78,9 +84,20 @@ while ($row = $DB->fetch_assoc($query_tecd))	{
 	}	
 }	
 
-$quanti = array_values($arr_grfi);
-$quanti2 = implode(',',$quanti);
+$quanti = array();
 
+if( empty($arr_grfi) ) {
+	$quanti = 0;
+	$quanti2 = 0;
+}
+else {
+	$quanti = array_values($arr_grfi);
+	$quanti2 = implode(',',$quanti);
+}
+
+
+echo "teste <br>";
+print_r($quanti);
 
 echo "<script type='text/javascript'>
 
@@ -93,8 +110,7 @@ $(function () {
                 plotBorderColor: '#ffffff',
             	 plotBorderWidth: 0            	             	                 
             },
-            title: {
-               // text: '". __('Tickets')." - ". __('Last 7 days','dashboard') ."'
+            title: {               
                text: ''
             },
             subtitle: {
@@ -109,7 +125,7 @@ $(function () {
             	 
             formatter: function() 
          		{
-               return ''+ Highcharts.numberFormat(this.x, 0);
+               	return ''+ Highcharts.numberFormat(this.x, 0);
          		},
 
 				categories: $datas,                      

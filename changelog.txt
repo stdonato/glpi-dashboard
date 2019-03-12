@@ -1,17 +1,15 @@
-Versão 0.9.5:
+Versão 0.9.6:
 
-- GLPI 9.2.x e 9.3.x
+- GLPI 9.2.x a 9.4
 
-- Correções na págian de ativos;
-- Correção do Top 5 in Metrics;
+- Seleção de entidades no relatório de categorias;
 - Correção de bugs diversos;
 
 
-Version 0.9.5:
+Version 0.9.6:
 
-- GLPI 9.2.x and 9.3.x;
+- GLPI 9.2.x to 9.4;
 
-- Fix Assets page;
-- Fix Top 5 in Metrics;
+- Entity selection in Categories Report;
 - Fix minor bugs;
 

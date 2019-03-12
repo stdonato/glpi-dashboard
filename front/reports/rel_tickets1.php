@@ -185,8 +185,6 @@ function dropdown( $name, array $options, $selected=null )
 
 			//echo "teste";
 			$user_ents = Profile_User::getUserEntities($_SESSION['glpiID'], true);
-			//var_dump($_SESSION['glpiactiveentities']);
-			//print_r($entitiesx);		
 				
 			// lista de entidades
 			$sql_ent = "

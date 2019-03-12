@@ -216,11 +216,7 @@ $quant_c2 = implode(',',$quant_c);
 
 //backlog
 if($interval >= "31") {
-	
-	//$DB->data_seek($resultd, 0);
-	//primeiro dia do mes
-	//$data_ini = date('Y-m-01', strtotime($data_ini));
-		
+
    $queryb = "
 	SELECT COUNT(id) as nb, DATE_FORMAT(date, '%Y-%m') as day
 	FROM glpi_tickets
@@ -258,8 +254,6 @@ else {
 	$resultb = $DB->query($queryb) or die('erro b');
 	$row_result2 = $DB->fetch_assoc($resultb);
 
-	//$arr_bak[] = $row_result2['nb'];	
-	//$back_ini = array_sum($arr_bak);
 	$back_ini = $row_result2['nb'];
 	
 	$conta = count($quant_o);
@@ -274,15 +268,6 @@ else {
 
 
 $back = implode(',',$arr_bk);
-
-/*	$arr_bk = array();
-	$conta = count($quant_c);
-	$arr_bk[0] = $back_ini;
-	
-	for ($i=1; $i < ($conta); $i++) {
-		$j = $i-1;
-		$arr_bk[$i] = $arr_bk[$j] + ($quant_o[$j] - $quant_c[$j]);	
-	}*/
 	
 echo "
 <script type='text/javascript'>

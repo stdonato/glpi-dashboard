@@ -242,11 +242,9 @@ if($interval >= "31") {
 	$resultb = $DB->query($queryb) or die('erro b');
 	$row_result2 = $DB->fetch_assoc($resultb);
 
-	//$arr_bak[] = $row_result2['nb'];	
-	//$back_ini = array_sum($arr_bak);
 	$back_ini = $row_result2['nb'];
-
 	$conta = count($quant_o);
+	
 	$arr_bk[0] = $back_ini + ($quant_o[0] - $quant_c[0]);
 	
 	for ($i=1; $i < ($conta); $i++) {
@@ -271,12 +269,9 @@ else {
 	$resultb = $DB->query($queryb) or die('erro b');
 	$row_result2 = $DB->fetch_assoc($resultb);
 
-	//$arr_bak[] = $row_result2['nb'];	
-	//$back_ini = array_sum($arr_bak);
-	$back_ini = $row_result2['nb'];
-	
+	$back_ini = $row_result2['nb'];	
 	$conta = count($quant_o);
-	//$arr_bk[0] = ($quant_o[0] - $quant_c[0]);
+
 	$arr_bk[0] = $back_ini + ($quant_o[0] - $quant_c[0]);
 	
 	for ($i=1; $i < ($conta); $i++) {
@@ -286,29 +281,6 @@ else {
 }
 
 $back = implode(',',$arr_bk);
-
-//$back_ini = $result_bk ;
-//$arr_bk = array();
-
-/*$conta = count($quant_o);
-$arr_bk[0] = $back_ini;
-//$arr_bk[1] = $back_ini + ($quant_o[0] - $quant_c[0]);
-
-for ($i=1; $i < ($conta); $i++) {
-	$j = $i-1;
-	$arr_bk[$i] = $arr_bk[$j] + ($quant_o[$j] - $quant_c[$j]);	
-}*/
-
-
-/*echo $back_ini;
-echo "<br>";
-print_r($quant_o);
-echo "<br>";
-print_r($quant_c);
-echo "<br>";
-print_r($arr_bk);
-echo "<br>";
-var_dump($queryb);*/
 
 echo "
 <script type='text/javascript'>

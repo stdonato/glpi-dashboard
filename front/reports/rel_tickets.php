@@ -861,7 +861,7 @@ echo '</div><br>';
 else {
 	
 	echo "
-	<div id='nada_rel' class='well info_box fluid col-md-12'>
+	<div id='nada_tic' class='well info_box fluid col-md-12'>
 	<table class='table' style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
 	<tr><td style='vertical-align:middle; text-align:center;'> <span style='color: #000;'>" . __('No ticket found', 'dashboard') . "</td></tr>
 	<tr></tr>

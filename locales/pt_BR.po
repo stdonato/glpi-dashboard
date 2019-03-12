@@ -550,7 +550,7 @@ msgid "accumulated"
 msgstr "acumulado"
 
 msgid "Sons"
-msgstr "Filhos"
+msgstr "Filhas"
 
 msgid "Task sum"
 msgstr "Soma de Tarefas"

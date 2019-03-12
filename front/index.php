@@ -2,11 +2,9 @@
 
 include ("../../../inc/includes.php");
 include ("../../../inc/config.php");
-
 global $DB;
 
 Session::checkLoginUser();
-
 
 $query_lay = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'layout' AND users_id = ".$_SESSION['glpiID']." ";																
 					$result_lay = $DB->query($query_lay);					
@@ -23,8 +21,7 @@ if($layout == 1 || $layout == '' )
 	{
 		//top menu
 		$redir = '<meta http-equiv="refresh" content="0; url=index1.php" />';
-	}
-						
+	}						
 ?>
 
 <!DOCTYPE html>

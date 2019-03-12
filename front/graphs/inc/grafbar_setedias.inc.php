@@ -1,21 +1,7 @@
 <?php
-/*
-if($data_ini == $data_fin) {
-$datas = "LIKE '".$data_ini."%'";	
-}	
-
-else {
-$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";	
-}
-*/
 
 $data_inis = date("Y-m-d");  //hoje
-
 $data_fins = date('Y-m-d', strtotime('-1 week'));
-
-//$datas = "BETWEEN '" . $data_fin2 ." 00:00:00' AND '".$data_ini2." 23:59:59'";
-
-//echo $datas;
 
 $sql_tec = "
 SELECT DATE_FORMAT(date, '%b-%d') as data, COUNT(id) as conta
@@ -44,17 +30,17 @@ $(function () {
             xAxis: { 
             categories: ";
 
-$categories = array();
-while ($entity = $DB->fetch_assoc($query_tec)) {
-    $categories[] = $entity['data'];
-}   
-echo json_encode($categories);
-
-//zerar rows para segundo while
-
-$DB->data_seek($query_tec, 0) ;               
-
-echo ",
+				$categories = array();
+				while ($entity = $DB->fetch_assoc($query_tec)) {
+				    $categories[] = $entity['data'];
+				}   
+				echo json_encode($categories);
+				
+				//zerar rows para segundo while
+				
+				$DB->data_seek($query_tec, 0) ;               
+				
+				echo ",
                 title: {
                     text: ''
                 },
@@ -116,15 +102,13 @@ echo ",
                 name: '". $LANG['plugin_dashboard']['1']."',
                 data: [ ";
    
-$DB->data_seek($query_tec, 0) ;     
-             
-while ($entity = $DB->fetch_assoc($query_tec)) 
-
-{
-	echo $entity['conta'].",";
-}    
-
-echo "]
+					$DB->data_seek($query_tec, 0) ;     
+					             
+					while ($entity = $DB->fetch_assoc($query_tec)) {
+						echo $entity['conta'].",";
+					}    
+					
+					echo "]
             }]
         });
     });

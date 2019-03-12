@@ -17,7 +17,6 @@ if($totalm > 1024) {
 
 else {
 	echo $usedm." / ".$totalm. " MB";
-	//$totalu = $totalm ;
 	$titlem = "MEM - $totalm MB";
 
 	$totalmem = $totalm;

@@ -69,106 +69,105 @@ else {
 
 
 echo "
-<script type='text/javascript'>
-
-$(function () {
-        $('#grafcat').highcharts({
-            chart: {
-                type: 'bar',
-                height: '400'
-            },
-            title: {
-                text: ''
-            },
-            subtitle: {
-                text: ''
-            },
-            xAxis: {
-            categories: ";
-
-				$categories = array();
-				while ($entity = $DB->fetch_assoc($query_cat)) {
-				    $categories[] = $entity['name'];
-				}
-				echo json_encode($categories);
-				
-				//zerar rows para segundo while
-				$DB->data_seek($query_cat, 0) ;
-				
-				echo ",
-                title: {
-                    text: null
-                },
-                labels: {
-                	style: {
-                        fontSize: '12px',
-                        fontFamily: 'Verdana, sans-serif'
-                    }
-                }
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: '',
-                    align: 'high'
-                },
-                labels: {
-                    overflow: 'justify'
-                }
-            },
-            tooltip: {
-                valueSuffix: ''
-            },
-            plotOptions: {
-                bar: {
-                    dataLabels: {
-                        enabled: true
-                    },
-                     borderWidth: 1,
-                	borderColor: 'white',
-                	shadow:true,
-                	showInLegend: false
-                },
-              series: {
-		       	  animation: {
-		           duration: 2000,
-		           easing: 'easeOutBounce'
-		       	  }
-		   		}
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'top',
-                x: -40,
-                y: 100,
-                floating: true,
-                borderWidth: 0,
-                backgroundColor: '#FFFFFF',
-                shadow: true,
-                enabled: false
-            },
-            credits: {
-                enabled: false
-            },
-            series: [{
-            	 dataLabels: {
-            	 	//color: '#000099'
-            	 	},
-                name: '". __('Tickets','dashboard') ."',
-                data: [
-";
-
-while ($entity = $DB->fetch_assoc($query_cat)) {
-	echo $entity['total'].",";
-}
-
-echo "]
-            }]
-        });
-    });
-
-</script>
-";
+	<script type='text/javascript'>
+	
+	$(function () {
+	        $('#grafcat').highcharts({
+	            chart: {
+	                type: 'bar',
+	                height: '400'
+	            },
+	            title: {
+	                text: ''
+	            },
+	            subtitle: {
+	                text: ''
+	            },
+	            xAxis: {
+	            categories: ";
+	
+					$categories = array();
+					while ($entity = $DB->fetch_assoc($query_cat)) {
+					    $categories[] = $entity['name'];
+					}
+					echo json_encode($categories);
+					
+					//zerar rows para segundo while
+					$DB->data_seek($query_cat, 0) ;
+					
+					echo ",
+	                title: {
+	                    text: null
+	                },
+	                labels: {
+	                	style: {
+	                        fontSize: '12px',
+	                        fontFamily: 'Verdana, sans-serif'
+	                    }
+	                }
+	            },
+	            yAxis: {
+	                min: 0,
+	                title: {
+	                    text: '',
+	                    align: 'high'
+	                },
+	                labels: {
+	                    overflow: 'justify'
+	                }
+	            },
+	            tooltip: {
+	                valueSuffix: ''
+	            },
+	            plotOptions: {
+	                bar: {
+	                    dataLabels: {
+	                        enabled: true
+	                    },
+	                     borderWidth: 1,
+	                	borderColor: 'white',
+	                	shadow:true,
+	                	showInLegend: false
+	                },
+	              series: {
+			       	  animation: {
+			           duration: 2000,
+			           easing: 'easeOutBounce'
+			       	  }
+			   		}
+	            },
+	            legend: {
+	                layout: 'vertical',
+	                align: 'right',
+	                verticalAlign: 'top',
+	                x: -40,
+	                y: 100,
+	                floating: true,
+	                borderWidth: 0,
+	                backgroundColor: '#FFFFFF',
+	                shadow: true,
+	                enabled: false
+	            },
+	            credits: {
+	                enabled: false
+	            },
+	            series: [{
+	            	 dataLabels: {
+	            	 	//color: '#000099'
+	            	 	},
+	                name: '". __('Tickets','dashboard') ."',
+	                data: [
+						";
+						
+						while ($entity = $DB->fetch_assoc($query_cat)) {
+							echo $entity['total'].",";
+						}
+						
+						echo "]
+	            }]
+	        });
+	    });
+	
+	</script>\n ";
 
 		?>

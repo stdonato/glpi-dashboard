@@ -18,25 +18,31 @@ if(!empty($_POST['submit']))
 else {	
 	$data_ini = date("Y-01-01");
 	$data_fin = date("Y-m-d");	
-	}  
+}  
 
-// entity
-$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
-$result_e = $DB->query($sql_e);
-$sel_ent = $DB->result($result_e,0,'value');
+//entity
+if(!isset($_REQUEST['sel_ent']) || $_REQUEST['sel_ent'] == 0) {
 
-//select entity
-if($sel_ent == '' || $sel_ent == -1) {	
-
-	//get all user entities
-	$entities = $_SESSION['glpiactiveentities'];										
-	$ent = implode(",",$entities);
-
-	$entidade = "AND glpi_tickets.entities_id IN (".$ent.") ";	
-	$entidade1 = "";
+	// entity
+	$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
+	$result_e = $DB->query($sql_e);
+	$sel_ent = $DB->result($result_e,0,'value');
 	
+	//select entity
+	if($sel_ent == '' || $sel_ent == -1) {	
+	
+		//get all user entities
+		$entities = $_SESSION['glpiactiveentities'];										
+		$ent = implode(",",$entities);
+	
+		$entidade = "AND glpi_tickets.entities_id IN (".$ent.") ";			
+	}
+
 }
+
 else {
+	$sel_ent = $_REQUEST['sel_ent'];
+	$id_ent = $_REQUEST['sel_ent'];
 	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.") ";
 }
 ?>
@@ -95,64 +101,105 @@ else {
 	<div id='container-fluid' style="margin: <?php echo margins(); ?> ;">
 		<div id="charts" class="fluid chart"> 
 			<div id="pad-wrapper" >
-			<div id="head-rel" class="fluid">			
-			
-			<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
-			
+			<div id="head-lg" class="fluid">						
+			<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>			
 				<div id="titulo_rel"> <?php echo __('Tickets', 'dashboard') .'  '. __('by Category', 'dashboard') ?> </div>				
-				<div id="datas-tec" class="col-md-12 col-sm-12 fluid" >		
-					 
-				<form id="form1" name="form1" class="form_rel" method="post" action="rel_categorias.php?con=1" style="margin-left: 37%;"> 
-				<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
-				<tr>
-					<td style="width: 310px;">
-					<?php
-					$url = $_SERVER['REQUEST_URI']; 
-					$arr_url = explode("?", $url);
-					$url2 = $arr_url[0];
-					    
-					echo'
-								<table>
-									<tr>
-										<td>
-										   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-										    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >		    	
-										    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
-									    	</div>
-										</td>
-										<td>&nbsp;</td>
-										<td>
-									   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-										    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >		    	
-										    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
-									    	</div>
-										</td>
-										<td>&nbsp;</td>
-									</tr>
-								</table> ';
-					?>
-					
-					<script language="Javascript">					
-						$('#dp1').datepicker('update');
-						$('#dp2').datepicker('update');					
-					</script>
-					</td>			
-					<td style="margin-top:2px;">				
-					</td>
-			</tr>
-			<tr><td height="15px"></td></tr>
-			<tr>
-				<td colspan="2" align="center">
-					<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult','dashboard'); ?> </button>
-					<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2.'?con=1'; ?>'" ><i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean','dashboard'); ?> </button>
-				</td>
-			</tr>
+				<div id="datas-tec" class="col-md-12 col-sm-12 fluid" >							 
+					<form id="form1" name="form1" class="form_rel" method="post" action="rel_categorias.php?con=1" > 
+						<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef">
+							<tr>
+								<td style="width: 310px;">
+								<?php
+								$url = $_SERVER['REQUEST_URI']; 
+								$arr_url = explode("?", $url);
+								$url2 = $arr_url[0];
+								    
+								echo'
+										<table style="margin-top:0px;" border=0>
+											<tr>
+												<td>
+												   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+												    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >		    	
+												    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
+											    	</div>
+												</td>
+												<td>&nbsp;</td>
+												<td>
+											   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+												    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >		    	
+												    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
+											    	</div>
+												</td>
+												<td>&nbsp;</td>
+												</tr>
+										</table> ';
+										?>
+										
+								<td style="margin-top:2px;">
+										
+									<?php
+										//seleciona entidade
+										$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
+										$result_e = $DB->query($sql_e);
+										$sel_ent = $DB->result($result_e,0,'value');
+		
+										if($sel_ent == '' || $sel_ent == -1) {
+											$entities = $_SESSION['glpiactiveentities'];
+											$ents = implode(",",$entities);
+										}
+										else {
+											$ents = $sel_ent;
+										}
+										
+										$user_ents = Profile_User::getUserEntities($_SESSION['glpiID'], true);								
 				
-				</table>
-			<?php Html::closeForm(); ?>
-			<!-- </form> -->
-					</div>
+										//lista de entidades
+										$sql_ent = "
+										SELECT id, name, completename AS cname
+										FROM `glpi_entities`
+										WHERE id IN (".$ents.")
+										ORDER BY `name` ASC ";
+		
+										$result_ent = $DB->query($sql_ent);
+		
+										$arr_ent = array();
+										$arr_ent[-1] = "-- ". __('Select a entity', 'dashboard') . " --" ;
+										$arr_ent[0] = __('All');
+		
+										//$DB->data_seek($result_ent, 0) ;
+										while ($row_result = $DB->fetch_assoc($result_ent)) {
+										   $v_row_result = $row_result['id'];
+										   $arr_ent[$v_row_result] = $row_result['cname'] ;
+										}
+		
+										$name = 'sel_ent';
+										$options = $arr_ent;
+										$selected = $id_ent;
+		
+										echo dropdown( $name, $options, $selected );																
+								?>
+							</td>
+							<script language="Javascript">					
+								$('#dp1').datepicker('update');
+								$('#dp2').datepicker('update');					
+							</script>
+							</td>			
+							<td style="margin-top:2px;">				
+							</td>
+						</tr>
+						<tr><td height="15px"></td></tr>
+						<tr>
+							<td colspan="2" align="center">
+								<button class="btn btn-primary btn-sm" type="submit" name="submit" value="Atualizar" ><i class="fa fa-search"></i>&nbsp; <?php echo __('Consult','dashboard'); ?> </button>
+								<button class="btn btn-primary btn-sm" type="button" name="Limpar" value="Limpar" onclick="location.href='<?php echo $url2.'?con=1'; ?>'" ><i class="fa fa-trash-o"></i>&nbsp; <?php echo __('Clean','dashboard'); ?> </button>
+							</td>
+						</tr>
+						
+						</table>
+					<?php Html::closeForm(); ?>
+					<!-- </form> -->
 				</div>
+			</div>
 			
 			<?php 
 			
@@ -180,6 +227,28 @@ else {
 				$datas2 = "BETWEEN '".$data_ini2." 00:00:00' AND '".$data_fin2." 23:59:59'";	
 			}
 			
+			//entity
+			if(isset($_REQUEST['sel_ent'])) {
+				
+				$sel_ent = $_REQUEST['sel_ent'];
+				
+				if($sel_ent != 0) {
+					// nome da entidade
+					$sql_nm = "
+					SELECT id , name AS name
+					FROM `glpi_entities`
+					WHERE id = ".$sel_ent."";
+				
+					$result_nm = $DB->query($sql_nm);
+					$ent_name = $DB->fetch_assoc($result_nm);
+				}
+
+			}
+			else {
+				$sel_ent = 0;
+			}
+			
+				
 			//status
 			$status = "";
 			$status_open = "('2','1','3','4')";
@@ -201,7 +270,7 @@ else {
 			
 			else {
 				$status = $status_all;
-				}
+			}
 		
 		//select categories with tickets	
 		$sql_cat = 
@@ -216,9 +285,14 @@ else {
 		
 		$result_cat = $DB->query($sql_cat);				
 			
-echo "<div class='well info_box fluid col-md-12 col-sm-12 report' style='margin-left: -1px;'>";		
+echo "<div class='well info_box fluid col-md-12 col-sm-12 report' style='margin-left: -1px;'>\n";		
+
+if($sel_ent != 0) {
+	echo "<span style='font-size: 16px; font-weight:bold; vertical-align:middle; margin-bottom:20px;'><span style='color:#000;'> ".__('Entity', 'dashboard').": </span>".$ent_name['name']." </span>\n";
+}
+
 echo "							
-			<table id='cat' class='display'  style='font-size: 12px; font-weight:bold;' cellpadding = 2px>
+			<table id='cat' class='display'  style='font-size: 12px; font-weight:bold; margin-top:20px;' cellpadding = 2px>
 				<thead>
 					<tr>
 						<th style='text-align:center; cursor:pointer;'> ". __('Category')." </th>
@@ -228,7 +302,7 @@ echo "
 						<th style='text-align:center; cursor:pointer;'> ". __('Closed','dashboard') ."</th>															
 					</tr>
 				</thead>
-			<tbody> ";
+			<tbody>\n ";
 			
 			while($row = $DB->fetch_assoc($result_cat)){			
 											
@@ -289,7 +363,7 @@ echo "
 				
 				echo "	
 				<tr>
-					<td style='vertical-align:middle; text-align:left;'><a href='rel_categoria.php?con=1&cat=". $row['id'] ."&date1=".$data_ini."&date2=".$data_fin."' target='_blank' >".$row['name']." </a></td>
+					<td style='vertical-align:middle; text-align:left;'><a href='rel_categoria.php?con=1&cat=". $row['id'] ."&date1=".$data_ini."&date2=".$data_fin."&sel_ent=".$sel_ent."' target='_blank' >".$row['name']." </a></td>
 					<td style='vertical-align:middle; text-align:center;'> ".$chamados." </td>
 					<td style='vertical-align:middle; text-align:center;'> ". $abertos ." </td>
 					<td style='vertical-align:middle; text-align:center;'> ". $solucionados ." </td>
