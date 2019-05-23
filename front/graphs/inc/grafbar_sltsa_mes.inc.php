@@ -25,8 +25,7 @@ else {
 	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.")";
 }
 
-
-$slaid = "slas_tto_id";		
+$slaid = "slas_id_tto";		
 
 $query3 = "
 SELECT count( glpi_tickets.id ) AS conta, glpi_tickets.".$slaid." AS id, glpi_slms.name

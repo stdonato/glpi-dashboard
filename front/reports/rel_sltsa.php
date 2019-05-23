@@ -165,8 +165,9 @@ else {
 						// SLA list
 						$sql_loc = "
 						SELECT id, name AS name
-						FROM glpi_slms
+						FROM glpi_slas
 						".$entidade_s."
+						AND type = 1
 						ORDER BY name ASC ";
 			
 						$result_loc = $DB->query($sql_loc);
@@ -241,15 +242,7 @@ else {
 	$datas2 = "BETWEEN '".$data_ini2." 00:00:00' AND '".$data_fin2." 23:59:59'";
 }
 
-
-// distinguish between 0.90.x and 9.1 version
-if (GLPI_VERSION >= 9.1){
-	$slaid = "AND glpi_tickets.slas_tto_id = ".$id_sla."";	
-}
-
-else {
-	$slaid = "AND glpi_tickets.slas_id = ".$id_sla."";
-}	
+$slaid = "AND glpi_tickets.slas_id_tto = ".$id_sla."";	
 
 //status
 $status = "";
@@ -322,6 +315,7 @@ $result_ab = $DB->query($sql_ab) or die ("erro_ab");
 $data_ab = $DB->numrows($result_ab);
 
 $abertos = $data_ab;
+$cor = '';
 
 	//barra de porcentagem
 	if($conta_cons > 0) {
@@ -346,13 +340,16 @@ $abertos = $data_ab;
 	
 		}
 	}
-	else { $barra = 0;}
+	else { 
+		$barra = 0; 
+		$cor = ''; 
+	}
 
 
 // sla name
 $sql_nm = "
 SELECT id , name AS name
-FROM `glpi_slms`
+FROM `glpi_slas`
 WHERE id = ".$id_sla." ";
 
 $result_nm = $DB->query($sql_nm);

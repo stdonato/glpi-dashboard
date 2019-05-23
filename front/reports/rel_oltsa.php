@@ -20,12 +20,12 @@ else {
 	$data_fin = date("Y-m-d");
 }
 
-if(!isset($_POST["sel_sla"])) {
-	$id_sla = $_GET["sel_sla"];
+if(!isset($_POST["sel_ola"])) {
+	$id_ola = $_GET["sel_ola"];
 }
 
 else {
-	$id_sla = $_POST["sel_sla"];
+	$id_ola = $_POST["sel_ola"];
 }
 
 
@@ -42,25 +42,21 @@ if($sel_ent == '' || $sel_ent == -1) {
 	$ent = implode(",",$entities);
 
 	$entidade = "AND glpi_tickets.entities_id IN (".$ent.") ";
-	$entidade_s = "WHERE entities_id IN (".$ent.")";
-//	$entidade_s = "WHERE entities_id IN (".$ent.") or entities_id IN (select entities_id from glpi_entities where id IN (".$ent.")) ";
+	$entidade_s = "WHERE entities_id IN (".$ent.") ";
 	$entidade_sw = "WHERE entities_id IN (".$ent.") OR is_recursive = 1 ";
+	$entidade1 = "";
 }
-
 else {
 	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.") ";
 	$entidade_s = "WHERE entities_id IN (".$sel_ent.") ";
-//	$entidade_s = "WHERE entities_id IN (".$sel_ent.") or entities_id IN (select entities_id from glpi_entities where id IN (".$sel_ent.")) ";
 	$entidade_sw = "WHERE entities_id IN (".$sel_ent.") OR is_recursive = 1 ";
 }
-
-$slaid = "AND glpi_tickets.slas_id_ttr = ".$id_sla."";	
 
 ?>
 
 <html>
 <head>
-<title> GLPI - <?php echo __('Tickets') .'  '. __('by SLA', 'dashboard') ?> </title>
+<title> GLPI - <?php echo __('Tickets') .'  '. __('by OLA', 'dashboard') ?> </title>
 
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
@@ -116,17 +112,17 @@ $slaid = "AND glpi_tickets.slas_id_ttr = ".$id_sla."";
 				<div id="head-lg" class="fluid">
 
 				<style type="text/css">
-					a:link, a:visited, a:active {text-decoration: none; }
-					a:hover {color: #000099;}
+				a:link, a:visited, a:active {text-decoration: none; }
+				a:hover {color: #000099;}
 				</style>
 				<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:25px;"></i><span></span></a>
-		
+
 				<div id="titulo_rel"> 
-					<?php echo __('Tickets', 'dashboard') .'  '. __('by SLA', 'dashboard') ?> - <?php echo __('Time to resolve'); ?> 
+					<?php echo __('Tickets', 'dashboard') .'  '. __('by OLA', 'dashboard') ?> - <?php echo __('Time to own'); ?> 				
 				</div>
-				
+
 			<div id="datas-tec" class="col-md-12 col-sm-12 fluid" >
-			<form id="form1" name="form1" class="form_rel" method="post" action="rel_sltsr.php?con=1">
+			<form id="form1" name="form1" class="form_rel" method="post" action="rel_oltsa.php?con=1" >
 				<table border="0" cellspacing="0" cellpadding="3" bgcolor="#efefef" >
 					<tr>
 						<td style="width: 310px;">
@@ -169,15 +165,15 @@ $slaid = "AND glpi_tickets.slas_id_ttr = ".$id_sla."";
 						// SLA list
 						$sql_loc = "
 						SELECT id, name AS name
-						FROM glpi_slas
+						FROM glpi_olas
 						".$entidade_s."
-						AND type = 0
+						AND type = 1
 						ORDER BY name ASC ";
 			
-						$result_loc = $DB->query($sql_loc);							
+						$result_loc = $DB->query($sql_loc);
 			
 						$arr_sla = array();
-						$arr_sla[0] = "-- ". __('Select a SLA', 'dashboard') . " --" ;
+						$arr_sla[0] = "-- ". __('Select a OLA', 'dashboard') . " --" ;
 			
 						while ($row_result = $DB->fetch_assoc($result_loc))
 						{
@@ -185,9 +181,9 @@ $slaid = "AND glpi_tickets.slas_id_ttr = ".$id_sla."";
 							$arr_sla[$v_row_result] = $row_result['name'] ;
 						}
 			
-						$name = 'sel_sla';
+						$name = 'sel_ola';
 						$options = $arr_sla;
-						$selected = $id_sla;
+						$selected = $id_ola;
 			
 						echo dropdown( $name, $options, $selected );
 						?>
@@ -225,17 +221,17 @@ else {
 	$data_fin2 = $_POST['date2'];
 }
 
-if(!isset($_POST["sel_sla"])) {
-	$id_sla = $_GET["sel_sla"];
+if(!isset($_POST["sel_ola"])) {
+	$id_ola = $_GET["sel_ola"];
 }
 
 else {
-	$id_sla = $_POST["sel_sla"];
+	$id_ola = $_POST["sel_ola"];
 }
 
-if($id_sla == " " || $id_sla == 0) {
-	echo '<script language="javascript"> alert(" ' . __('Select a SLA', 'dashboard') . ' "); </script>';
-	echo '<script language="javascript"> location.href="rel_sltsr.php"; </script>';
+if($id_ola == "" || $id_ola == 0) {
+	echo '<script language="javascript"> alert(" ' . __('Select a OLA', 'dashboard') . ' "); </script>';
+	echo '<script language="javascript"> location.href="rel_oltsa.php"; </script>';
 }
 
 if($data_ini2 == $data_fin2) {
@@ -245,6 +241,16 @@ if($data_ini2 == $data_fin2) {
 else {
 	$datas2 = "BETWEEN '".$data_ini2." 00:00:00' AND '".$data_fin2." 23:59:59'";
 }
+
+
+// distinguish between 0.90.x and 9.1 version
+//if (GLPI_VERSION >= 9.1){
+	$slaid = "AND glpi_tickets.olas_id_tto = ".$id_ola."";	
+/*}
+
+else {
+	$slaid = "AND glpi_tickets.olas_tto = ".$id_ola."";
+}	*/
 
 //status
 $status = "";
@@ -271,9 +277,9 @@ else {
 
 // Chamados
 $sql_cham =
-"SELECT glpi_tickets.id AS id, glpi_tickets.name AS descr, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate,
-glpi_tickets.status, glpi_tickets.time_to_resolve AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
-FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time
+"SELECT glpi_tickets.id AS id, glpi_tickets.name AS descr, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, glpi_tickets.status, glpi_tickets.internal_time_to_resolve AS duedate, ola_waiting_duration AS olawait, glpi_tickets.type,
+FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.takeintoaccount_delay_stat ) AS time,
+glpi_tickets.internal_time_to_own AS tto, glpi_tickets.takeintoaccount_delay_stat AS tia, glpi_tickets.date_creation AS aceite
 FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = 0
 ".$slaid."
@@ -285,6 +291,7 @@ ORDER BY id DESC ";
 
 $result_cham = $DB->query($sql_cham);
 
+//var_dump($sql_cham);
 
 $conta_cons1 =
 "SELECT glpi_tickets.id AS total, FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time
@@ -316,6 +323,7 @@ $result_ab = $DB->query($sql_ab) or die ("erro_ab");
 $data_ab = $DB->numrows($result_ab);
 
 $abertos = $data_ab;
+$cor = '';
 
 	//barra de porcentagem
 	if($conta_cons > 0) {
@@ -340,14 +348,17 @@ $abertos = $data_ab;
 	
 		}
 	}
-	else { $barra = 0;}
+	else { 
+		$barra = 0; 
+		$cor = ''; 
+	}
 
 
 // sla name
 $sql_nm = "
 SELECT id , name AS name
-FROM `glpi_slas`
-WHERE id = ".$id_sla." ";
+FROM `glpi_olas`
+WHERE id = ".$id_ola." ";
 
 $result_nm = $DB->query($sql_nm);
 $ent_name = $DB->fetch_assoc($result_nm);
@@ -357,7 +368,7 @@ $ent_name = $DB->fetch_assoc($result_nm);
 $v = 0;
 while($row = $DB->fetch_assoc($result_cham)){
 
-	if($row['solvedate'] > $row['duedate'] && $row['slawait'] == 0) {
+	if($row['solvedate'] > $row['duedate'] && $row['olawait'] == 0) {
 		$v =  $v+1;
 	}
 
@@ -383,12 +394,12 @@ $w = $conta_cons - $v;
 
 	$result_stat = $DB->query($query_stat);
 
-        $new = $DB->result($result_stat,0,'new') + 0;
-        $assig = $DB->result($result_stat,0,'assig') + 0;
-        $plan = $DB->result($result_stat,0,'plan') + 0;
-        $pend = $DB->result($result_stat,0,'pend') + 0;
-        $solve = $DB->result($result_stat,0,'solve') + 0;
-        $close = $DB->result($result_stat,0,'close') + 0;
+  $new = $DB->result($result_stat,0,'new') + 0;
+  $assig = $DB->result($result_stat,0,'assig') + 0;
+  $plan = $DB->result($result_stat,0,'plan') + 0;
+  $pend = $DB->result($result_stat,0,'pend') + 0;
+  $solve = $DB->result($result_stat,0,'solve') + 0;
+  $close = $DB->result($result_stat,0,'close') + 0;
 
 
 //list tickets
@@ -398,7 +409,7 @@ echo "
 
 <table class='col-md-12 col-sm-12 fluid'  style='font-size: 18px; font-weight:bold;' cellpadding = 1px >
 	<tr>
-		<td style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('SLA').": </span>".$ent_name['name']. " </td>
+		<td style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('OLA').": </span>".$ent_name['name']. " </td>
 		<td style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> ".__('Tickets', 'dashboard').": </span>".$conta_cons." </td>
 		<td colspan='2'   style='font-size: 16px; font-weight:bold; vertical-align:middle; width:230px;'><span style='color:#000;'>".__('Period', 'dashboard') .": </span> " . conv_data($data_ini2) ." a ". conv_data($data_fin2)."
 		</td>
@@ -415,9 +426,9 @@ echo "
 <table align='right' style='margin-bottom:10px;'>
 	<tr>
 		<td>
-			<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_sltsr.php?con=1&stat=open&sel_sla=".$id_sla."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened', 'dashboard')." </button>
-			<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_sltsr.php?con=1&stat=close&sel_sla=".$id_sla."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed', 'dashboard')." </button>
-			<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_sltsr.php?con=1&stat=all&sel_sla=".$id_sla."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>
+			<button class='btn btn-primary btn-sm' type='button' name='abertos' value='Abertos' onclick='location.href=\"rel_oltsa.php?con=1&stat=open&sel_ola=".$id_ola."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Opened', 'dashboard')." </button>
+			<button class='btn btn-primary btn-sm' type='button' name='fechados' value='Fechados' onclick='location.href=\"rel_oltsa.php?con=1&stat=close&sel_ola=".$id_ola."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('Closed', 'dashboard')." </button>
+			<button class='btn btn-primary btn-sm' type='button' name='todos' value='Todos' onclick='location.href=\"rel_oltsa.php?con=1&stat=all&sel_ola=".$id_ola."&date1=".$data_ini2."&date2=".$data_fin2."\"' <i class='icon-white icon-trash'></i> ".__('All', 'dashboard')." </button>
 		</td>
 	</tr>
 	<tr>
@@ -454,9 +465,9 @@ echo "
 			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> ".__('Requester')." </th>
 			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> ".__('Technician')." </th>
 			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> ".__('Opened', 'dashboard')."</th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> ".__('Closed')." </th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> ". __('Resolution') ."</th>
-			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> ". __('Status')." </th>
+			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> ".__('Time to own')." </th>
+			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> "._x('status', 'Accepted') ."</th>
+			<th style='font-size: 12px; font-weight:bold; text-align: center; cursor:pointer; vertical-align:middle;'> ".__('Status')." </th>
 		</tr>
 	</thead>
 <tbody> ";
@@ -513,25 +524,19 @@ while($row = $DB->fetch_assoc($result_cham)){
 		<td style='vertical-align:middle;'> ". $row_user['name'] ." ".$row_user['sname'] ." </td>
 		<td style='vertical-align:middle;'> ". $row_tec['name'] ." ".$row_tec['sname'] ." </td>
 		<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['date']) ." </td>
-		<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['solvedate']) ." </td>
+		<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['tto']) ." </td>
 		<td style='vertical-align:middle; text-align:center;'> ". time_ext($row['time']) ."</td> ";
+
 
 	//sla status	
 	$today = date("Y-m-d H:i:s");
-
-	if($row['solvedate'] > $row['duedate']) {
+	
+	if(isset($row['aceite']) && $row['aceite'] >= $row['tto']) {	
 		echo "<td style='vertical-align:middle; text-align:center; color:red;'> <span class='label label-danger'>". __('Overdue','dashboard') ." </span></td>";
 	}	
 
-	else {	
-		
-		if(!isset($row['solvedate']) AND $today > $row['duedate']) {
-			echo "<td style='vertical-align:middle; text-align:center; color:red;'> <span class='label label-danger'>". __('Overdue','dashboard') ." </span></td>";
-		}
-	
-		else {
-			echo "<td style='vertical-align:middle; text-align:center; color:green;'> <span class='label label-success'>". __('Within','dashboard') ." </span></td>";
-		}
+	if(isset($row['aceite']) && $row['aceite'] < $row['tto']) {	
+		echo "<td style='vertical-align:middle; text-align:center; color:green;'> <span class='label label-success'>". __('Within','dashboard') ." </span></td>";
 	}
 
 	echo "
@@ -540,7 +545,8 @@ while($row = $DB->fetch_assoc($result_cham)){
 
 	echo "</tbody>
 			</table>
-			</div>"; ?>
+			</div>"; 			
+?>
 
 <script type="text/javascript" charset="utf-8">
 
@@ -572,13 +578,13 @@ $(document).ready(function() {
 		                 extend: "print",
 		                 autoPrint: true,
 		                 text: "<?php echo __('All','dashboard'); ?>",
-		                 message: "<div id='print' class='info_box fluid' style='margin-bottom:35px; margin-left: -1px;'><table id='print_tb' class='fluid'  style='width: 80%; margin-left: 10%; font-size: 18px; font-weight:bold;' cellpadding = '1px'><td style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo __('SLA'); ?> : </span><?php echo $ent_name['name']; ?> </td> <td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  __('Tickets','dashboard'); ?> : </span><?php echo $conta_cons ; ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'> <?php echo  __('Period','dashboard'); ?> : </span> <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2); ?> </td> </table></div>",		     
+		                 message: "<div id='print' class='info_box fluid' style='margin-bottom:35px; margin-left: -1px;'><table id='print_tb' class='fluid'  style='width: 80%; margin-left: 10%; font-size: 18px; font-weight:bold;' cellpadding = '1px'><td style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo __('OLA'); ?> : </span><?php echo $ent_name['name']; ?> </td> <td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  __('Tickets','dashboard'); ?> : </span><?php echo $conta_cons ; ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'> <?php echo  __('Period','dashboard'); ?> : </span> <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2); ?> </td> </table></div>",		     
 		                }, 
 							  {               
 		                 extend: "print",
 		                 autoPrint: true,
 		                 text: "<?php echo __('Selected','dashboard'); ?>",
-		                 message: "<div id='print' class='info_box fluid' style='margin-bottom:35px; margin-left: -1px;'><table id='print_tb' class='fluid'  style='width: 80%; margin-left: 10%; font-size: 18px; font-weight:bold;' cellpadding = '1px'><td style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo __('SLA'); ?> : </span><?php echo $ent_name['name']; ?> </td> <td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  __('Tickets','dashboard'); ?> : </span><?php echo $conta_cons ; ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'> <?php echo  __('Period','dashboard'); ?> : </span> <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2); ?> </td> </table></div>",
+		                 message: "<div id='print' class='info_box fluid' style='margin-bottom:35px; margin-left: -1px;'><table id='print_tb' class='fluid'  style='width: 80%; margin-left: 10%; font-size: 18px; font-weight:bold;' cellpadding = '1px'><td style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo __('OLA'); ?> : </span><?php echo $ent_name['name']; ?> </td> <td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  __('Tickets','dashboard'); ?> : </span><?php echo $conta_cons ; ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'> <?php echo  __('Period','dashboard'); ?> : </span> <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2); ?> </td> </table></div>",
 		                 exportOptions: {
 		                    modifier: {
 		                        selected: true
@@ -594,7 +600,7 @@ $(document).ready(function() {
                   {
                  		extend: "pdfHtml5",
                  		orientation: "landscape",
-                 		message: "<?php echo __('SLA'); ?> : <?php echo $ent_name['name'] . '  -  '; ?> <?php echo  __('Tickets','dashboard'); ?> : <?php echo $conta_cons . '  -  '; ?> <?php echo  __('Period','dashboard'); ?> : <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2); ?>",
+                 		message: "<?php echo __('OLA'); ?> : <?php echo $ent_name['name'] . '  -  '; ?> <?php echo  __('Tickets','dashboard'); ?> : <?php echo $conta_cons . '  -  '; ?> <?php echo  __('Period','dashboard'); ?> : <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2); ?>",
                   } 
                   ]
              }

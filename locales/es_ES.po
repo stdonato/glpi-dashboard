@@ -390,6 +390,12 @@ msgstr "por ANS"
 msgid "Select a SLA"
 msgstr "Selecciona por ANS"
 
+msgid "by OLA"
+msgstr "por ANO"
+
+msgid "Select a OLA"
+msgstr "Selecciona por ANO"
+
 msgid "Current"
 msgstr "Actual"
 

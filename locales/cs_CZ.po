@@ -391,6 +391,12 @@ msgstr "podle SLA"
 msgid "Select a SLA"
 msgstr "Vybrat SLA"
 
+msgid "by OLA"
+msgstr "podle OLA"
+
+msgid "Select a OLA"
+msgstr "Vybrat OLA"
+
 msgid "Current"
 msgstr "Stávající"
 

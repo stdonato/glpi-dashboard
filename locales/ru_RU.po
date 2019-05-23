@@ -390,6 +390,12 @@ msgstr "По SLA"
 msgid "Select a SLA"
 msgstr "Выберите SLA"
 
+msgid "by OLA"
+msgstr "По OLA"
+
+msgid "Select a OLA"
+msgstr "Выберите OLA"
+
 msgid "Current"
 msgstr "Текущий"
 

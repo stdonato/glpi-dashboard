@@ -317,12 +317,6 @@ else {
                         <li><a href="./reports/rel_projects.php?con=1" target="iframe1" > <?php echo _sn('Project','Projects',2); ?> </a></li>                       
                         <li><a href="./reports/rel_satisfacao.php" target="iframe1" > <?php echo __('Satisfaction'); ?> </a></li>
                         <li><a href="./reports/rel_tecnicos.php?con=1" target="iframe1" > <?php echo _sn('Technician','Technicians',2,'dashboard'); ?> </a></li>
-							<?php
-								// distinguish between 0.90.x and 9.1 version
-								//if (GLPI_VERSION <= intval('9.1')){
-									//echo '<li><a href="./reports/rel_slas.php?con=1" target="iframe1" >'. __('SLA').'</a></li>';
-								//}	
-							?>
                        
 							<li class="dropdown-submenu">
                 				<a tabindex="-1" href="#"><?php echo __('Cost'); ?></a>
@@ -343,19 +337,21 @@ else {
 				               </ul>
 				             </li> 
                         
-
-				             <?php
-	                        // distinguish between 0.90.x and 9.1 version
-								if (GLPI_VERSION >= 9.1){
-					             echo '<li class="dropdown-submenu">';
-	                			 echo	'<a tabindex="-1" href="#">'. __('SLA').'</a>';
-					             echo '<ul class="dropdown-menu">
-											<li><a href="./reports/rel_sltsas.php?con=1" target="iframe1" style="color:#000;">'. __('Time to own').'</a></li>
-											<li><a href="./reports/rel_sltsrs.php?con=1" target="iframe1" style="color:#000;">'. __('Time to resolve').' </a></li>										
-									   </ul>
-									  </li> ';
-					          	} 
-					          ?>				             				                                
+								<li class="dropdown-submenu">
+		                		<a tabindex="-1" href="#"><?php echo __('SLA'); ?> </a>
+						         <ul class="dropdown-menu">
+										<li><a href="./reports/rel_sltsas.php?con=1" target="iframe1" style="color:#000;"><?php echo __('Time to own'); ?></a></li>
+										<li><a href="./reports/rel_sltsrs.php?con=1" target="iframe1" style="color:#000;"><?php echo __('Time to resolve'); ?></a></li>										
+									</ul>
+						      </li> 
+								<li class="dropdown-submenu">
+		                		<a tabindex="-1" href="#"><?php echo __('OLA'); ?> </a>
+						         <ul class="dropdown-menu">
+										<li><a href="./reports/rel_oltsas.php?con=1" target="iframe1" style="color:#000;"><?php echo __('Time to own'); ?></a></li>
+										<li><a href="./reports/rel_oltsrs.php?con=1" target="iframe1" style="color:#000;"><?php echo __('Time to resolve'); ?></a></li>										
+									</ul>
+						      </li> 						      
+						      			             				                                
 							<li class="dropdown-submenu">
                 			   <a tabindex="-1" href="#"><?php echo _sn('Task','Tasks',2); ?></a>
 				               <ul class="dropdown-menu">
@@ -367,7 +363,6 @@ else {
 				             </li>				             
                       </ul>
                                            
-
                       <ul class="col-sm-2 list-unstyled menu1" style="width:180px;"> 
                         <li>
                           <!-- <p><strong>Links Title</strong></p> -->                        
@@ -377,22 +372,23 @@ else {
                         <li><a href="./reports/rel_grupo.php" target="iframe1" > <?php echo __('by Group','dashboard'); ?> </a></li>
                         <li><a href="./reports/rel_localidade.php" target="iframe1" > <?php echo __('by Location','dashboard'); ?> </a></li>
                         <li><a href="./reports/rel_usuario.php" target="iframe1" > <?php echo __('by Requester','dashboard'); ?> </a></li>
-                        <li><a href="./reports/rel_tecnico.php" target="iframe1" > <?php echo __('by Technician','dashboard'); ?> </a></li>
-                
+                        <li><a href="./reports/rel_tecnico.php" target="iframe1" > <?php echo __('by Technician','dashboard'); ?> </a></li>                
                         </li>
-         	            <?php
-	                        // distinguish between 0.90.x and 9.1 version
-								if (GLPI_VERSION >= 9.1){
-		                        echo '<li class="dropdown-submenu">';
-		                			echo '<a tabindex="-1" href="#">'. __('by SLA','dashboard').'</a>';
-						            echo '<ul class="dropdown-menu">
-											<li><a href="./reports/rel_sltsa.php" target="iframe1" style="color:#000;">'. __('Time to own') .'</a></li>
-											<li><a href="./reports/rel_sltsr.php" target="iframe1" style="color:#000;">'. __('Time to resolve').'</a></li>										
-										 </ul>
-						              </li>';
-				             	}
-				            ?>
-				              	     							
+
+								<li class="dropdown-submenu">
+		                		<a tabindex="-1" href="#"><?php echo __('by SLA','dashboard'); ?> </a>
+						         <ul class="dropdown-menu">
+										<li><a href="./reports/rel_sltsa.php" target="iframe1" style="color:#000;"><?php echo __('Time to own'); ?></a></li>
+										<li><a href="./reports/rel_sltsr.php" target="iframe1" style="color:#000;"><?php echo __('Time to resolve'); ?></a></li>										
+									</ul>
+						      </li> 
+  								<li class="dropdown-submenu">
+		                		<a tabindex="-1" href="#"><?php echo __('by OLA','dashboard'); ?> </a>
+						         <ul class="dropdown-menu">
+										<li><a href="./reports/rel_oltsa.php" target="iframe1" style="color:#000;"><?php echo __('Time to own'); ?></a></li>
+										<li><a href="./reports/rel_oltsr.php" target="iframe1" style="color:#000;"><?php echo __('Time to resolve'); ?></a></li>										
+									</ul>
+						      </li> 							
                       </ul>
                     </div>
                   </div>                
@@ -428,19 +424,22 @@ else {
                         <li><a href="./graphs/graf_usuario.php" target="iframe1" > <?php echo __('by Requester','dashboard'); ?> </a></li>
                         <li><a href="./graphs/graf_tecnico.php" target="iframe1" > <?php echo __('by Technician','dashboard'); ?> </a></li>
                         <li><a href="./graphs/graf_tipo.php" target="iframe1" > <?php echo __('by Type','dashboard'); ?> </a></li>
-								
-							<?php
-	                        // distinguish between 0.90.x and 9.1 version
-									if (GLPI_VERSION >= 9.1){
-										echo '<li class="dropdown-submenu">';
-										echo '	<a tabindex="-1" href="#">'. __('SLA').'</a>';
-										echo '<ul class="dropdown-menu">
-												<li><a href="./graphs/sltsa.php" target="iframe1" style="color:#000;">'. __('Time to own').' </a></li>
-												<li><a href="./graphs/sltsr.php" target="iframe1" style="color:#000;">'. __('Time to resolve').'</a></li>										
-											 </ul>
-											</li>'; 
-						             }
-				             ?>
+
+								<li class="dropdown-submenu">
+		                		<a tabindex="-1" href="#"><?php echo __('SLA'); ?> </a>
+						         <ul class="dropdown-menu">
+										<li><a href="./graphs/sltsa.php" target="iframe1" style="color:#000;"><?php echo __('Time to own'); ?></a></li>
+										<li><a href="./graphs/sltsr.php" target="iframe1" style="color:#000;"><?php echo __('Time to resolve'); ?></a></li>										
+									</ul>
+						      </li> 	
+						      
+  								<li class="dropdown-submenu">
+		                		<a tabindex="-1" href="#"><?php echo __('OLA'); ?> </a>
+						         <ul class="dropdown-menu">
+										<li><a href="./graphs/oltsa.php" target="iframe1" style="color:#000;"><?php echo __('Time to own'); ?></a></li>
+										<li><a href="./graphs/oltsr.php" target="iframe1" style="color:#000;"><?php echo __('Time to resolve'); ?></a></li>										
+									</ul>
+						      </li> 							
 				             
                       </ul>
                     </div>

@@ -27,12 +27,12 @@ else {
 }
 
 
-$slaid = "slas_id_ttr";		
+$slaid = "olas_id_ttr";		
 
 $query3 = "
-SELECT count( glpi_tickets.id ) AS conta, glpi_tickets.".$slaid." AS id, glpi_slas.name
-FROM glpi_tickets, glpi_slas
-WHERE glpi_tickets.".$slaid." = glpi_slas.id
+SELECT count( glpi_tickets.id ) AS conta, glpi_tickets.".$slaid." AS id, glpi_olas.name
+FROM glpi_tickets, glpi_olas
+WHERE glpi_tickets.".$slaid." = glpi_olas.id
 AND glpi_tickets.is_deleted = 0
 AND glpi_tickets.date ".$datas."
 ".$entidade."
@@ -42,16 +42,14 @@ ORDER BY conta DESC ";
 $result3 = $DB->query($query3) or die('erro');
 
 $arr_grf3 = array();
-while ($row_result = $DB->fetch_assoc($result3))		
-	{ 
+while ($row_result = $DB->fetch_assoc($result3)) { 
 	$v_row_result = $row_result['name'];
 	$arr_grf3[$v_row_result] = $row_result['conta'];			
-	} 
+} 
 	
 $grf3 = array_keys($arr_grf3) ;
 $quant3 = array_values($arr_grf3) ;
 $soma3 = array_sum($arr_grf3);
-
 
 $grf_3 = json_encode($grf3);
 $quant_2 = implode(',',$quant3);
@@ -121,4 +119,4 @@ if($soma3 != 0) {
 	echo '</div>';
 		
 }	 
-		?>
+?>

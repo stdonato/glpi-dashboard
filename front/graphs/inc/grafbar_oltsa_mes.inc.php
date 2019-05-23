@@ -15,7 +15,6 @@ $result_e = $DB->query($sql_e);
 $sel_ent = $DB->result($result_e,0,'value');
 
 if($sel_ent == '' || $sel_ent == -1) {
-	
 	//get user entities
 	$entities = $_SESSION['glpiactiveentities'];
 	$ent = implode(",",$entities);
@@ -26,13 +25,12 @@ else {
 	$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.")";
 }
 
-
-$slaid = "slas_id_ttr";		
+$slaid = "olas_id_tto";		
 
 $query3 = "
-SELECT count( glpi_tickets.id ) AS conta, glpi_tickets.".$slaid." AS id, glpi_slas.name
-FROM glpi_tickets, glpi_slas
-WHERE glpi_tickets.".$slaid." = glpi_slas.id
+SELECT count( glpi_tickets.id ) AS conta, glpi_tickets.".$slaid." AS id, glpi_olas.name
+FROM glpi_tickets, glpi_olas
+WHERE glpi_tickets.".$slaid." = glpi_olas.id
 AND glpi_tickets.is_deleted = 0
 AND glpi_tickets.date ".$datas."
 ".$entidade."
@@ -42,16 +40,14 @@ ORDER BY conta DESC ";
 $result3 = $DB->query($query3) or die('erro');
 
 $arr_grf3 = array();
-while ($row_result = $DB->fetch_assoc($result3))		
-	{ 
+while ($row_result = $DB->fetch_assoc($result3)) { 
 	$v_row_result = $row_result['name'];
 	$arr_grf3[$v_row_result] = $row_result['conta'];			
-	} 
+} 
 	
 $grf3 = array_keys($arr_grf3) ;
 $quant3 = array_values($arr_grf3) ;
 $soma3 = array_sum($arr_grf3);
-
 
 $grf_3 = json_encode($grf3);
 $quant_2 = implode(',',$quant3);

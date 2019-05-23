@@ -532,6 +532,29 @@ else {
 			                                        </li> 		 
 			                                      </ul>
 			                                  </li>';
+			                                  
+ 														 echo "<li class='submenu'>";
+				                                    echo "<a class='dropdown' onClick='return false;' href='#' data-original-title='SLA'>
+				                                        <i class='fa fa-angle-right'></i>";
+				                                    echo "<span class='hidden-minibar'>". __('OLA')."
+				                                            <i class='fa fa-angle-right  pull-right'></i>
+				                                        </span>
+				                                    </a>";
+				                                    echo '<ul  class="animated fadeInDown menu2">
+				                                      <li>';
+			                                            echo '<a href="#" onclick="window.open(\'./reports/rel_oltsas.php?con=1\',\'iframe1\'); scrollWin();"  data-original-title=" Custos">
+			                                                <i class="fa fa-angle-right"></i>
+			                                                <span class="hidden-minibar">'. __('Time to own').'</span>
+			                                            </a>
+			                                        </li> 
+							        							 <li>
+			                                           <a href="#" onclick="window.open(\'./reports/rel_oltsrs.php?con=1\',\'iframe1\'); scrollWin();"  data-original-title=" Custos">
+			                                                <i class="fa fa-angle-right"></i>
+			                                                <span class="hidden-minibar">'. __('Time to resolve').'</span>
+			                                            </a>
+			                                        </li> 		 
+			                                      </ul>
+			                                  </li>';
 			                               }
 			                               ?>
 
@@ -592,7 +615,7 @@ else {
                                         
                                        <?php
 					                        // distinguish between 0.90.x and 9.1 version
-													if (GLPI_VERSION >= 9.1){
+													if (GLPI_VERSION >= 9.1) {
 	                                        echo "<li class='submenu'>
 				                                    <a class='dropdown' onClick='return false;' href='#' data-original-title='by SLA'>
 				                                        <i class='fa fa-angle-right'></i>
@@ -615,6 +638,29 @@ else {
 			                                        </li> 		 
 			                                      </ul>
 			                                  </li>'; 
+			                                  
+														echo "<li class='submenu'>
+				                                    <a class='dropdown' onClick='return false;' href='#' data-original-title='by SLA'>
+				                                        <i class='fa fa-angle-right'></i>
+				                                        <span class='hidden-minibar'>". __('by OLA','dashboard')."
+				                                            <i class='fa fa-angle-right  pull-right'></i>
+				                                        </span>
+				                                    </a>";
+				                                echo '<ul  class="animated fadeInDown menu2">
+				                                      <li>
+			                                            <a href="#" onclick="window.open(\'./reports/rel_oltsa.php\',\'iframe1\'); scrollWin();"  data-original-title=" SLA">
+			                                                <i class="fa fa-angle-right"></i>
+			                                                <span class="hidden-minibar">'. __('Time to own').'</span>
+			                                            </a>
+			                                        </li> 
+							        							 <li>
+			                                           <a href="#" onclick="window.open(\'./reports/rel_oltsr.php\',\'iframe1\'); scrollWin();"  data-original-title=" SLA">
+			                                                <i class="fa fa-angle-right"></i>
+			                                                <span class="hidden-minibar">'. __('Time to resolve').'</span>
+			                                            </a>
+			                                        </li> 		 
+			                                      </ul>
+			                                  </li>'; 			                                  
                                		 		}
                                		 	?>
                                		 		                             
@@ -775,6 +821,29 @@ else {
 			                                        </li> 		 
 			                                      </ul>
 			                                  </li>'; 
+			                                  
+	                                        echo "<li class='submenu'>
+				                                    <a class='dropdown' onClick='return false;' href='#' data-original-title='by SLA'>
+				                                        <i class='fa fa-angle-right'></i>
+				                                        <span class='hidden-minibar'>". __('by OLA','dashboard')."
+				                                            <i class='fa fa-angle-right  pull-right'></i>
+				                                        </span>
+				                                    </a>";
+				                                echo '<ul  class="animated fadeInDown menu2">
+				                                      <li>
+			                                            <a href="#" onclick="window.open(\'./graphs/oltsa.php\',\'iframe1\'); scrollWin();"  data-original-title=" SLA">
+			                                                <i class="fa fa-angle-right"></i>
+			                                                <span class="hidden-minibar">'. __('Time to own').'</span>
+			                                            </a>
+			                                        </li> 
+							        							 <li>
+			                                           <a href="#" onclick="window.open(\'./graphs/oltsr.php\',\'iframe1\'); scrollWin();"  data-original-title=" SLA">
+			                                                <i class="fa fa-angle-right"></i>
+			                                                <span class="hidden-minibar">'. __('Time to resolve').'</span>
+			                                            </a>
+			                                        </li> 		 
+			                                      </ul>
+			                                  </li>'; 			                                  
                                		 		}
                                		 	?>		                                  
                            

@@ -390,6 +390,12 @@ msgstr "nach SLA"
 msgid "Select a SLA"
 msgstr "SLA wählen"
 
+msgid "by OLA"
+msgstr "nach OLA"
+
+msgid "Select a OLA"
+msgstr "OLA wählen"
+
 msgid "Current"
 msgstr "Laufend"
 

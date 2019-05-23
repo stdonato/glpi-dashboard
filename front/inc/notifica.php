@@ -85,7 +85,7 @@ $refresh = $DB->result($result_n,0,'refresh') * 5;
 //$refresh = 5;
 
 $queryf = "SELECT DISTINCT gtf.tickets_id AS id, gtu.users_id, gtf.content AS name, date_format(gtf.date,'%d-%m-%Y %H:%i') AS data
-FROM glpi_ticketfollowups gtf, glpi_tickets_users gtu
+FROM glpi_itilfollowups gtf, glpi_tickets_users gtu
 WHERE date BETWEEN DATE_ADD( NOW() , INTERVAL -".$refresh." MINUTE ) AND NOW()
 AND gtf.tickets_id =  gtu.tickets_id 
 AND gtu.users_id = ". $_SESSION['glpiID'] ." ";
@@ -100,7 +100,7 @@ while($row = $DB->fetch_assoc($resultf)) {
 //followups
 
 $queryn = "SELECT COUNT(gtf.id) AS total
-FROM glpi_ticketfollowups gtf, glpi_tickets_users gtu
+FROM glpi_itilfollowups gtf, glpi_tickets_users gtu
 WHERE gtf.tickets_id =  gtu.tickets_id 
 AND gtu.type = 2
 AND gtu.users_id = ". $_SESSION['glpiID'] ." ";
@@ -140,7 +140,7 @@ $difn = $abertosn - $atualn;
 		
 		$queryc = 
 		"SELECT DISTINCT gt.id AS id, gt.name AS name, gtf.content AS content 
-		FROM glpi_tickets_users gtu, glpi_tickets gt, glpi_ticketfollowups gtf
+		FROM glpi_tickets_users gtu, glpi_tickets gt, glpi_itilfollowups gtf
 		WHERE gtu.users_id = ".$_SESSION['glpiID']."
 		AND gtf.tickets_id =  gtu.tickets_id 
 		AND gtu.type = 2

@@ -206,15 +206,16 @@ else {
 
 // distinguish between 0.90.x and 9.1 version
 //if (GLPI_VERSION >= 9.1){	
-$slaid = "AND glpi_tickets.slas_tto_id = ";
-$sla_comp = "AND glpi_tickets.slas_tto_id = glpi_slms.id";	
+$slaid = "AND glpi_tickets.slas_id_tto = ";
+$sla_comp = "AND glpi_tickets.slas_id_tto = glpi_slas.id";	
 
 $sql_sla = 
-"SELECT COUNT(glpi_tickets.id) AS total, glpi_slms.name AS sla_name, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, 
+"SELECT COUNT(glpi_tickets.id) AS total, glpi_slas.name AS sla_name, glpi_tickets.date AS date, glpi_tickets.solvedate as solvedate, 
 glpi_tickets.status, glpi_tickets.time_to_resolve AS duedate, sla_waiting_duration AS slawait, glpi_tickets.type,
-FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time, glpi_slms.id AS sla_id
-FROM glpi_tickets, glpi_slms
+FROM_UNIXTIME( UNIX_TIMESTAMP( `glpi_tickets`.`solvedate` ) , '%Y-%m' ) AS date_unix, AVG( glpi_tickets.solve_delay_stat ) AS time, glpi_slas.id AS sla_id
+FROM glpi_tickets, glpi_slas
 WHERE glpi_tickets.is_deleted = 0
+AND glpi_slas.type = 1
 AND glpi_tickets.date ".$datas2."
 ".$entidade."
 
@@ -299,8 +300,7 @@ if($conta_cons > 0) {
 				$data_fech = $DB->fetch_assoc($result_fech);
 				$fechados = $data_fech['total'];		
 								
-				//count by status
-				//SELECT SUM(case when glpi_tickets.takeintoaccount_delay_stat <> 0 then 1 else 0 end) AS solve_sla				
+				//count by status							
 				$query_stat = "
 				SELECT SUM(case when glpi_tickets.takeintoaccount_delay_stat >= (time_to_own - date) then 1 else 0 end) AS solve_sla				
 				FROM glpi_tickets
