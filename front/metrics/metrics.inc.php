@@ -3,8 +3,6 @@
 include ("../../../../inc/includes.php");
 include ("../../../../inc/config.php");
 
-//error_reporting(E_ALL);
-
 global $DB;
 
 $ano = date("Y");
@@ -25,9 +23,9 @@ $dataf = date('Y-m-d', strtotime('-365 days'));
 
 // time period for metrics
 if(isset($_SESSION['glpiID'])) {
-$sql_met = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'metric' AND users_id = ".$_SESSION['glpiID']."";
-$result_met = $DB->query($sql_met);
-$sel_period = $DB->result($result_met,0,'value');
+	$sql_met = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'metric' AND users_id = ".$_SESSION['glpiID']."";
+	$result_met = $DB->query($sql_met);
+	$sel_period = $DB->result($result_met,0,'value');
 }
 else {
 	$sel_period = 0;
@@ -397,7 +395,7 @@ $query_prob = "SELECT count(id) AS quant
 	FROM glpi_problems
 	WHERE is_deleted = 0
 	".$period."
-	".$entidade." ";
+	".$ent_problem." ";
 
 $res_prob = $DB->query($query_prob);
 
