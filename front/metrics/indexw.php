@@ -6,8 +6,7 @@ if(isset($_REQUEST['ent'])) {
 	$indexb = "index.php?ent=".$id_ent;
 	include "metrics_ent.inc.php";
 }
-	
-	
+		
 elseif(isset($_REQUEST['grp'])) {
 	$id_grp = $_REQUEST['grp'];
 	$indexw = "indexw.php?grp=".$id_grp;
@@ -18,7 +17,7 @@ elseif(isset($_REQUEST['grp'])) {
 else {
 	$id_grp = "";
 	$indexw = "indexw.php";
-	$indexb = "index.php";	
+	$indexb = "index.php";
 	include "metrics.inc.php";
 }
 
@@ -133,14 +132,13 @@ else {
 			</header>
 			<div class="content">
 				<div class="metric5"><?php echo $pend;?></div>
-				<div class="metric-small5"><?php //percent($pend,$pendy); ?></div>
+				<div class="metric-small5"></div>
 			</div>
 		</div>
 		
 		<?php
 
-		//Solved or closed ticktes	
-				
+		//Solved or closed ticktes					
 		if($solved > 0) {
 			$notopen = $solved;
 			$notopeny = $solvedy;
@@ -163,8 +161,7 @@ else {
 				<div class="metric5"><?php echo $notopen;?></div>
 				<?php 
 					if($count_notop < 5) {
-						echo "<div class='metric-small5'>";
-						//percent($notopen,$notopeny);
+						echo "<div class='metric-small5'>";						
 						echo  " </div>";
 					}
 				?>		
@@ -177,7 +174,7 @@ else {
 			</header>
 			<div class="content">
 				<div class="metric5"><?php echo $total;?></div>
-				<div class="metric-small5"><?php //percent($total,$totaly); ?></div>			
+				<div class="metric-small5"></div>			
 			</div>
 		</div>
 	</div> <!-- fim row1 -->
@@ -226,7 +223,7 @@ else {
 						<div class="metric total"></div>
 						<div class="change metric-small">
 							<div id="arrow"></div>
-							<span class="large"></span><!-- <span class="small">.45%</span> -->
+							<span class="large"></span>
 						</div>
 					</div>
 					<div class="cf-sparkline clearfix" style="margin-top:15px;">
@@ -240,7 +237,6 @@ else {
 					</div>					
 				</div>
 			</div> <!-- //end cf-item -->
-		
 			
 			<div style="min-height: 0px;" class="col-lg-3 cf-item">
 				<header>
@@ -252,7 +248,7 @@ else {
 							<div class="metric total-month"><?php echo $today_tickets; ?></div>
 							<div class="change metric-small daily">
 								<div id="arrow-2"></div>
-								<span class="large large-2"></span><!-- <span class="small">.45%</span> ((V2-V1)/V1 × 100) -->
+								<span class="large large-2"></span>
 							</div>
 						</div>
 						<div class="cf-sparkline clearfix" style="margin-top:15px;">
@@ -265,8 +261,7 @@ else {
 						</div>
 					</div>					
 				</div>
-			</div> <!-- //end cf-item -->
-								
+			</div> <!-- //end cf-item -->								
 
 			<div style="" class="col-lg-3 cf-item">
 				<header>
@@ -345,12 +340,12 @@ else {
 				
 				<div class="content cf-svp clearfix" id="svp-1">				
 					<?php 
-					//satisfaction, or not										
+					//satisfaction, or not					
 						if($sat != 0) {
 							echo '<div class="chart" data-percent="' . $satisf .'" style="margin-left: 20%;"> <span class="percent">' . $satisf . '</span><sup></sup> </div>';	
 						}
 						else {
-//							echo '<div id="grafsat" class="content cf-piexx" style="margin-left:0px;">';
+						   echo '<div id="grafsat" class="content cf-piexx" style="margin-left:0px;">';
 							include ("grafbar_grupo.inc.php");
 							echo ' </div>';
 						}							
@@ -379,10 +374,8 @@ else {
 					
 			
 	</div> <!-- //end row -->
-</div> <!-- //end main --> 
- 	
-</div> <!-- //end row -->		
-		
+</div> <!-- //end main -->  	
+</div> <!-- //end row -->				
 </div> <!-- //end container -->
 
 </div>
