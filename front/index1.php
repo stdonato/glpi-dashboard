@@ -318,7 +318,7 @@ else {
                         <li><a href="./reports/rel_satisfacao.php" target="iframe1" > <?php echo __('Satisfaction'); ?> </a></li>
                         <li><a href="./reports/rel_tecnicos.php?con=1" target="iframe1" > <?php echo _sn('Technician','Technicians',2,'dashboard'); ?> </a></li>
                        
-							<li class="dropdown-submenu">
+								<li class="dropdown-submenu">
                 				<a tabindex="-1" href="#"><?php echo __('Cost'); ?></a>
 				               <ul class="dropdown-menu">
 									<li><a href="./reports/rel_custo_ent.php" target="iframe1" style="color:#000;"> <?php echo __('by Entity','dashboard'); ?> </a></li>
@@ -327,7 +327,7 @@ else {
 									<li><a href="./reports/rel_custo_loc.php" target="iframe1" style="color:#000;"> <?php echo __('by Location','dashboard'); ?> </a></li>
 				               </ul>
 				             </li> 
-							<li class="dropdown-submenu">
+								<li class="dropdown-submenu">
 							   <a tabindex="-1" href="#"><?php echo __('Summary','dashboard'); ?></a>
 				               <ul class="dropdown-menu">
 									<li><a href="./reports/rel_sint_all.php" target="iframe1" style="color:#000;"> <?php echo __('Overall','dashboard'); ?> </a></li>
@@ -338,7 +338,7 @@ else {
 				             </li> 
                         
 								<li class="dropdown-submenu">
-		                		<a tabindex="-1" href="#"><?php echo __('SLA'); ?> </a>
+		                		<a tabindex="-1" href="#"><?php echo __('SLA','dashboard'); ?> </a>
 						         <ul class="dropdown-menu">
 										<li><a href="./reports/rel_sltsas.php?con=1" target="iframe1" style="color:#000;"><?php echo __('Time to own'); ?></a></li>
 										<li><a href="./reports/rel_sltsrs.php?con=1" target="iframe1" style="color:#000;"><?php echo __('Time to resolve'); ?></a></li>										
@@ -352,7 +352,7 @@ else {
 									</ul>
 						      </li> 						      
 						      			             				                                
-							<li class="dropdown-submenu">
+								<li class="dropdown-submenu">
                 			   <a tabindex="-1" href="#"><?php echo _sn('Task','Tasks',2); ?></a>
 				               <ul class="dropdown-menu">
 									<li><a href="./reports/rel_tarefa.php" target="iframe1" style="color:#000;"> <?php echo __('Technician'); ?> </a></li>
@@ -426,7 +426,7 @@ else {
                         <li><a href="./graphs/graf_tipo.php" target="iframe1" > <?php echo __('by Type','dashboard'); ?> </a></li>
 
 								<li class="dropdown-submenu">
-		                		<a tabindex="-1" href="#"><?php echo __('SLA'); ?> </a>
+		                		<a tabindex="-1" href="#"><?php echo __('SLA','dashboard'); ?> </a>
 						         <ul class="dropdown-menu">
 										<li><a href="./graphs/sltsa.php" target="iframe1" style="color:#000;"><?php echo __('Time to own'); ?></a></li>
 										<li><a href="./graphs/sltsr.php" target="iframe1" style="color:#000;"><?php echo __('Time to resolve'); ?></a></li>										

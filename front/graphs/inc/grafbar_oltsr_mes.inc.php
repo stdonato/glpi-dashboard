@@ -34,6 +34,7 @@ SELECT count( glpi_tickets.id ) AS conta, glpi_tickets.".$slaid." AS id, glpi_ol
 FROM glpi_tickets, glpi_olas
 WHERE glpi_tickets.".$slaid." = glpi_olas.id
 AND glpi_tickets.is_deleted = 0
+AND glpi_olas.type = 0
 AND glpi_tickets.date ".$datas."
 ".$entidade."
 GROUP BY ".$slaid."

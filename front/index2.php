@@ -397,7 +397,7 @@ else {
 		                                     echo '<li>';
 	                                            echo '<a href="#" onclick="window.open(\'./reports/rel_slas.php?con=1\',\'iframe1\'); scrollWin();" data-original-title=" SLAs">';
 	                                            echo '   <i class="fa fa-angle-right"></i>';
-	                                            echo '   <span class="hidden-minibar">'. __('SLA').'</span>';
+	                                            echo '   <span class="hidden-minibar">'. __('SLA','dashboard').'</span>';
 	                                            echo '</a>
 	                                        </li>';
                                         	}
@@ -511,9 +511,9 @@ else {
 						                        // distinguish between 0.90.x and 9.1 version
 														if (GLPI_VERSION >= 9.1){
 			                                  echo "<li class='submenu'>";
-				                                    echo "<a class='dropdown' onClick='return false;' href='#' data-original-title='SLA'>
+				                                    echo "<a class='dropdown' onClick='return false;' href='#' data-original-title='SLA','dashboard'>
 				                                        <i class='fa fa-angle-right'></i>";
-				                                    echo "<span class='hidden-minibar'>". __('SLA')."
+				                                    echo "<span class='hidden-minibar'>". __('SLA','dashboard')."
 				                                            <i class='fa fa-angle-right  pull-right'></i>
 				                                        </span>
 				                                    </a>";
@@ -534,7 +534,7 @@ else {
 			                                  </li>';
 			                                  
  														 echo "<li class='submenu'>";
-				                                    echo "<a class='dropdown' onClick='return false;' href='#' data-original-title='SLA'>
+				                                    echo "<a class='dropdown' onClick='return false;' href='#' data-original-title='SLA','dashboard'>
 				                                        <i class='fa fa-angle-right'></i>";
 				                                    echo "<span class='hidden-minibar'>". __('OLA')."
 				                                            <i class='fa fa-angle-right  pull-right'></i>

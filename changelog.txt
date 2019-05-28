@@ -1,15 +1,20 @@
-Versão 0.9.6:
+Versão 0.9.7:
 
-- GLPI 9.2.x a 9.4
+- GLPI 9.4.x
 
-- Seleção de entidades no relatório de categorias;
+- Relatórios e gráficos de OLA;
+- Correção dos relatórios e gráficos de SLA devida à mudança dos campos no BD;
+- Correção de SLA na página de métricas;
 - Correção de bugs diversos;
 
 
-Version 0.9.6:
 
-- GLPI 9.2.x to 9.4;
+Version 0.9.7:
 
-- Entity selection in Categories Report;
+- GLPI 9.4.x
+
+- OLA reports and charts;
+- SLA reports and charts fixes;
+- Fix SLA in metrics page;
 - Fix minor bugs;
 
