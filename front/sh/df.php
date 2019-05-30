@@ -1,5 +1,8 @@
 <?php
 
+Session::checkLoginUser();
+Session::checkRight("profile", READ);
+
 $disk = exec('/bin/df -hm |grep sd | awk \'{print $1","$2","$3","$4","$5","$6}\'', $result);
 $count = exec('/bin/df -h |grep sd | awk \'{print $1","$2","$3","$4","$5","$6}\' |wc -l');
 

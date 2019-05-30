@@ -8,9 +8,6 @@ global $DB;
 Session::checkLoginUser();
 Session::checkRight("profile", READ);
 
-//$ver = explode(" ",implode(" ",plugin_version_dashboard()));
-
-
 // count years	
 $query_y = "SELECT DISTINCT DATE_FORMAT( date, '%Y' ) AS year
 FROM glpi_tickets

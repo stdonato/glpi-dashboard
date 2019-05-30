@@ -1,5 +1,8 @@
 <?php
 
+Session::checkLoginUser();
+Session::checkRight("profile", READ);
+
 	 $interval = 2;	
 		
     $tx_path = 'cat /sys/class/net/eth0/statistics/tx_bytes';

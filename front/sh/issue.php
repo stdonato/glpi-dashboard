@@ -1,6 +1,7 @@
 <?php
 
-//header('Content-Type: application/json; charset=UTF-8');
+Session::checkLoginUser();
+Session::checkRight("profile", READ);
 
 if(file_exists('/usr/bin/lsb_release')) {
 	echo substr(shell_exec('/usr/bin/lsb_release -ds'),0,21); //ubuntu - debian

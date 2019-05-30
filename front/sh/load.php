@@ -1,6 +1,7 @@
 <?php
 
-// /bin/cat /proc/loadavg | /usr/bin/awk '{print $1","$2","$3}'
+Session::checkLoginUser();
+Session::checkRight("profile", READ);
 
 $cores = exec('/bin/grep -c ^processor /proc/cpuinfo');
 
@@ -8,7 +9,6 @@ $loadavg = exec('/bin/cat /proc/loadavg | /usr/bin/awk \'{print $2}\'');
 
 $load = round(($loadavg*100)/$cores ,1);
 
-//$load = $perc;	
 
 if($cores == 1) {
 	$ncores = '1 core'; }
