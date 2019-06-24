@@ -325,8 +325,8 @@ $sql_due = "SELECT DISTINCT COUNT(glpi_tickets.id) AS total
 FROM glpi_tickets
 WHERE glpi_tickets.status NOT IN (5,6)
 AND glpi_tickets.is_deleted = 0
-AND glpi_tickets.due_date IS NOT NULL
-AND glpi_tickets.due_date < NOW()
+AND glpi_tickets.time_to_resolve IS NOT NULL
+AND glpi_tickets.time_to_resolve < NOW()
 ".$entidade." ";
 
 $result_due = $DB->query($sql_due);
