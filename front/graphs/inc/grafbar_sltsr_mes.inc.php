@@ -43,11 +43,10 @@ ORDER BY conta DESC ";
 $result3 = $DB->query($query3) or die('erro');
 
 $arr_grf3 = array();
-while ($row_result = $DB->fetch_assoc($result3))		
-	{ 
+while ($row_result = $DB->fetch_assoc($result3)) { 
 	$v_row_result = $row_result['name'];
 	$arr_grf3[$v_row_result] = $row_result['conta'];			
-	} 
+} 
 	
 $grf3 = array_keys($arr_grf3) ;
 $quant3 = array_values($arr_grf3) ;
@@ -104,11 +103,12 @@ if($soma3 != 0) {
                 }
             },
             series: [{
+					 colorByPoint: true,
                 name: '".__('Tickets','dashboard')."',
                 data: [$quant_2],
                 dataLabels: {
                     enabled: true,                    
-                    ///color: '#000099',
+                    //color: '#000099',
                     style: {
                        // fontSize: '13px',
                        // fontFamily: 'Verdana, sans-serif'

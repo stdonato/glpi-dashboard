@@ -100,11 +100,12 @@ if($soma3 != 0) {
                 }
             },
             series: [{
+            	 colorByPoint: true,
                 name: '".__('Tickets','dashboard')."',
                 data: [$quant_2],
                 dataLabels: {
                     enabled: true,                    
-                    ///color: '#000099',
+                    //color: '#000099',
                     style: {
                        // fontSize: '13px',
                        // fontFamily: 'Verdana, sans-serif'

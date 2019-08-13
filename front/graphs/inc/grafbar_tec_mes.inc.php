@@ -219,13 +219,6 @@ $categories = json_encode(array_keys($arr_cham2));
 	                    easing: 'easeOutBounce'	                   
 	                	  },
 	                	  cursor: 'pointer',
-			          		//point: {
-			                //events: {
-			                   // click: function () {
-			                      //  window.open('../reports/rel_tecnico.php?con=1&sel_open=' + this.options.key + '&date1=$data_ini&date2=$data_fin','_blank');
-			                    		//}
-			                		//}
-			            		//}
 	            }
 	
 	            },

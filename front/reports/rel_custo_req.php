@@ -396,7 +396,7 @@ if($con == "1") {
 				</div>
 			</td>
 		</tr>
-	</table> ";
+	</table>\n ";
 
 
 	//total costs
@@ -415,7 +415,7 @@ if($con == "1") {
 
 	$total_cost += $cost;*/
 	
-	$total_cost += number_format(computeCost($row['id']), 2, ',', ' ');
+	$total_cost += computeCost($row['id']);
 
 	}
 
@@ -449,12 +449,8 @@ if($con == "1") {
 				<th style='text-align:center; cursor:pointer;' class='sum'> ". __('Cost') ."</th>
 			</tr>
 		</thead>
-		<tfoot>
-			<th colspan='7' class='right' style='background:#fff !important; color:#000 !important;'> ". __('Total cost') .": </th>
-			<th class='right' style='background:#fff !important; color:#000 !important;'></th>
-		</tfoot>
-	<tbody>
-	";
+
+	<tbody>\n ";
 
 }
 
@@ -497,6 +493,8 @@ while($row = $DB->fetch_assoc($result_cham)){
 
 	$result_tec = $DB->query($sql_tec);
 	$row_tec = $DB->fetch_assoc($result_tec);
+	
+	$comp_cost = computeCost($row['id']);
 
 		echo "
 		<tr style='font-weight:normal;'>
@@ -507,13 +505,19 @@ while($row = $DB->fetch_assoc($result_cham)){
 			<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['date']) ." </td>
 			<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['closedate']) ." </td>
 			<td style='vertical-align:middle; text-align:right;'> ". time_ext($row['time']) ."</td>
-			<td style='vertical-align:middle; text-align:right;'> ". number_format(computeCost($row['id']), 2, ',', ' ') ."</td>
-		</tr>";
+			<td style='vertical-align:middle; text-align:right;' class='sum'> ". number_format($comp_cost, 2, ',', ' ') ."</td>
+		</tr>\n";
 
+	$comp_cost2 += computeCost($row['id']);
+	
 }
 echo "</tbody>
+		<tfoot>
+			<th colspan='7' class='right' style='background:#fff !important; color:#000 !important;'> ". __('Total cost') .": </th>
+			<th class='right' style='background:#fff !important; color:#000 !important;'>". number_format($comp_cost2, 2, ',', ' ') ."</th>
+		</tfoot>
 		</table>
-		</div>"; ?>
+		</div>\n"; ?>
 
 <script type="text/javascript" charset="utf-8">
 
@@ -526,73 +530,73 @@ $(document).ready(function() {
 
 var table =  $('#tec').DataTable( {
 
-    	  select:true,
-        dom: 'Bflrtip',
-        filter: false,
-        pagingType: "full_numbers",
-        sorting: [[0,'desc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc']],
-		  displayLength: 25,
-        lengthMenu: [[25, 50, 75, 100], [25, 50, 75, 100]],
-        buttons: [
-        	    {
-                 extend: "copyHtml5",
-                 text: "<?php echo __('Copy'); ?>"
-             },
-             {
-             	  extend: "collection",
-                 text: "<?php echo __('Print','dashboard'); ?>",
-						  buttons:[
-						  	{
-		                 extend: "print",
-		                 autoPrint: true,
-		                 text: "<?php echo __('All','dashboard'); ?>",
-
-		                 message: "<div id='print' class='fluid span12' style='margin-bottom: 25px; margin-left: -1px;'><table id='print_tb' class='fluid'  style='width: 80%; margin-left: 10%; font-size: 18px; font-weight:bold;' cellpadding = '1px'><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo __('Requester', 'dashboard'); ?> : </span><?php echo $tech; ?> </td> <td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  __('Tickets','dashboard'); ?> : </span><?php echo $conta_cons ; ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'> <?php echo  __('Period','dashboard'); ?> : </span> <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2); ?> </td></tr> <tr><td>&nbsp;</td></tr> <tr><td style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  __('Total cost'); ?> : </span><?php echo number_format($total_cost, 2, ',', ' '); ?></td></tr> </table></div>",
-		                },
-							  {
-		                 extend: "print",
-		                 autoPrint: true,
-		                 text: "<?php echo __('Selected','dashboard'); ?>",
-		                 message: "<div id='print' class='fluid span12' style='margin-bottom: 25px; margin-left: -1px;'><table id='print_tb' class='fluid'  style='width: 80%; margin-left: 10%; font-size: 18px; font-weight:bold;' cellpadding = '1px'><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo __('Requester', 'dashboard'); ?> : </span><?php echo $tech; ?> </td> <td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  __('Tickets','dashboard'); ?> : </span><?php echo $conta_cons ; ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'> <?php echo  __('Period','dashboard'); ?> : </span> <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2); ?> </td></tr> <tr><td>&nbsp;</td></tr> <tr><td style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  __('Total cost'); ?> : </span><?php echo number_format($total_cost, 2, ',', ' '); ?></td></tr> </table></div>",
-		                 exportOptions: {
-		                    modifier: {
-		                        selected: true
-		                    }
-		                }
-		                }
-	                ]
-             },
-             {
-                 extend: "collection",
-                 text: "<?php echo _x('button', 'Export'); ?>",
-                 buttons: [ "csvHtml5", "excelHtml5",
-                  {
-                 		extend: "pdfHtml5",
-                 		orientation: "landscape",
-                 		message: "<?php echo __('Requester', 'dashboard'); ?> : <?php echo $tech . '  - '; ?> <?php echo  __('Tickets','dashboard'); ?> : <?php echo $conta_cons . '  - ' ; ?>  <?php echo  __('Total cost'); ?> : <?php echo number_format($total_cost, 2, ',', ' ') .' - '; ?> <?php echo  __('Period','dashboard'); ?> : <?php echo conv_data($data_ini2); ?> - <?php echo conv_data($data_fin2); ?>"
-                  }
-                  ]
-             }
-        ]
+	 select:true,
+	  dom: 'Bflrtip',
+	  filter: false,
+	  pagingType: "full_numbers",
+	  sorting: [[0,'desc'],[1,'desc'],[2,'desc'],[3,'desc'],[4,'desc'],[5,'desc'],[6,'desc']],
+	  displayLength: 25,
+	  lengthMenu: [[25, 50, 75, 100], [25, 50, 75, 100]],
+	  buttons: [
+	  	    {
+	           extend: "copyHtml5",
+	           text: "<?php echo __('Copy'); ?>"
+	       },
+	       {
+	       	  extend: "collection",
+	           text: "<?php echo __('Print','dashboard'); ?>",
+					  buttons:[
+					  	{
+	                 extend: "print",
+	                 autoPrint: true,
+	                 text: "<?php echo __('All','dashboard'); ?>",
+	
+	                 message: "<div id='print' class='fluid span12' style='margin-bottom: 25px; margin-left: -1px;'><table id='print_tb' class='fluid'  style='width: 80%; margin-left: 10%; font-size: 18px; font-weight:bold;' cellpadding = '1px'><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo __('Requester', 'dashboard'); ?> : </span><?php echo $tech; ?> </td> <td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  __('Tickets','dashboard'); ?> : </span><?php echo $conta_cons ; ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'> <?php echo  __('Period','dashboard'); ?> : </span> <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2); ?> </td></tr> <tr><td>&nbsp;</td></tr> <tr><td style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  __('Total cost'); ?> : </span><?php echo number_format($total_cost, 2, ',', ' '); ?></td></tr> </table></div>",
+	                },
+						  {
+	                 extend: "print",
+	                 autoPrint: true,
+	                 text: "<?php echo __('Selected','dashboard'); ?>",
+	                 message: "<div id='print' class='fluid span12' style='margin-bottom: 25px; margin-left: -1px;'><table id='print_tb' class='fluid'  style='width: 80%; margin-left: 10%; font-size: 18px; font-weight:bold;' cellpadding = '1px'><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo __('Requester', 'dashboard'); ?> : </span><?php echo $tech; ?> </td> <td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  __('Tickets','dashboard'); ?> : </span><?php echo $conta_cons ; ?></td><td colspan='2' style='font-size: 16px; font-weight:bold; vertical-align:middle; width:200px;'><span style='color:#000;'> <?php echo  __('Period','dashboard'); ?> : </span> <?php echo conv_data($data_ini2); ?> a <?php echo conv_data($data_fin2); ?> </td></tr> <tr><td>&nbsp;</td></tr> <tr><td style='font-size: 16px; font-weight:bold; vertical-align:middle;'><span style='color:#000;'> <?php echo  __('Total cost'); ?> : </span><?php echo number_format($total_cost, 2, ',', ' '); ?></td></tr> </table></div>",
+	                 exportOptions: {
+	                    modifier: {
+	                        selected: true
+	                    }
+	                }
+	                }
+	             ]
+	       },
+	       {
+	           extend: "collection",
+	           text: "<?php echo _x('button', 'Export'); ?>",
+	           buttons: [ "csvHtml5", "excelHtml5",
+	            {
+	           		extend: "pdfHtml5",
+	           		orientation: "landscape",
+	           		message: "<?php echo __('Requester', 'dashboard'); ?> : <?php echo $tech . '  - '; ?> <?php echo  __('Tickets','dashboard'); ?> : <?php echo $conta_cons . '  - ' ; ?>  <?php echo  __('Total cost'); ?> : <?php echo number_format($total_cost, 2, ',', ' ') .' - '; ?> <?php echo  __('Period','dashboard'); ?> : <?php echo conv_data($data_ini2); ?> - <?php echo conv_data($data_fin2); ?>"
+	            }
+	            ]
+	       }
+	  ]
 
     } );
 
 
-table.columns( '.sum' ).every( function () {
-    var sum = this
-        .data()
-        .reduce( function (a,b) {
-        		var ar = parseFloat(a);
-        		var br = parseFloat(b);
+		table.columns( '.sumxx' ).every( function () {
+		    var sum = this
+		        .data()
+		        .reduce( function (a,b) {
+		        		var ar = parseFloat(a);
+		        		var br = parseFloat(b);
+		
+		            return (ar + br).toFixed(5) ;
+		        } );
+		
+		    $( this.footer() ).html( sum );
+		} );
+		
+		} );
 
-            return (ar + br).toFixed(2) ;
-        } );
-
-    $( this.footer() ).html( sum );
-} );
-
-
-} );
 </script>
 
 <?php
@@ -601,13 +605,13 @@ echo '</div><br>';
 
 else {
 
-			echo "
-			<div id='nada_rel' class='well info_box fluid col-md-12'>
-			<table class='table' style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
-			<tr><td style='vertical-align:middle; text-align:center;'> <span style='color: #000;'>" . __('No ticket found', 'dashboard') . "</td></tr>
-			<tr></tr>
-			</table></div>";
-		}
+		echo "
+		<div id='nada_rel' class='well info_box fluid col-md-12'>
+		<table class='table' style='font-size: 18px; font-weight:bold;' cellpadding = 1px>
+		<tr><td style='vertical-align:middle; text-align:center;'> <span style='color: #000;'>" . __('No ticket found', 'dashboard') . "</td></tr>
+		<tr></tr>
+		</table></div>";
+	}
 }
 }
 ?>

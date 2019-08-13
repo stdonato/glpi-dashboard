@@ -259,6 +259,7 @@ $(function () {
              },
              series: {
              cursor: 'pointer',
+				 colorByPoint: true, 
              point: {
                     events: {
                         click: function () {

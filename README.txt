@@ -1,6 +1,4 @@
 
-![](https://repository-images.githubusercontent.com/70857242/8070cf00-85f1-11e9-9ebc-79caf16a2e40)
-
 1 - Proceder a instalação como a de um plugin qualquer, descompactando o arquivo e copiando a pasta para a pasta plugins no servidor de GLPI.
 
 2 - Na interface do GLPI acessar Configurar -> Plugins e efetuar a instalação.

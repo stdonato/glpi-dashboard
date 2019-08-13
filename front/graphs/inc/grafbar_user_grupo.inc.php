@@ -102,6 +102,7 @@ $(function () {
                 enabled: false
             },
             series: [{
+            	colorByPoint: true, 
             	 dataLabels: {
             	 	//color: '#000099'
             	 	},

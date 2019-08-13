@@ -79,15 +79,15 @@ echo "	};
             xAxis: {
             categories: ";
 
-$DB->data_seek($query_grp, 0) ;
-$categories = array();
-while ($grupo = $DB->fetch_assoc($query_grp)) {
-    $categories[] = $grupo['name'];
-}
-echo json_encode($categories);
-
-echo ",
-                title: {
+				$DB->data_seek($query_grp, 0) ;
+				$categories = array();
+				while ($grupo = $DB->fetch_assoc($query_grp)) {
+				    $categories[] = $grupo['name'];
+				}
+				echo json_encode($categories);
+				
+				echo ",
+				        title: {
                     text: null
                 },
                 labels: {
@@ -147,6 +147,7 @@ echo ",
               }
           },
             series: [{
+            	 //colorByPoint: true, 
             	 dataLabels: {
             	 	//color: '#000099'
             	 	},

@@ -43,13 +43,13 @@ $(function () {
             xAxis: {
             categories: ";
 
-$categories = array();
-while ($grupo = $DB->fetch_assoc($query_grp_b)) {
-    $categories[] = $grupo['name']." ".$grupo['sname'];
-}
-echo json_encode($categories);
-
-echo ",
+				$categories = array();
+				while ($grupo = $DB->fetch_assoc($query_grp_b)) {
+					$categories[] = $grupo['name']." ".$grupo['sname'];
+				}
+				echo json_encode($categories);
+				
+				echo ",
                 title: {
                     text: null
                 },
@@ -100,22 +100,23 @@ echo ",
                 enabled: false
             },
             series: [{
+					colorByPoint: true, 
             	 dataLabels: {
             	 	//color: '#000099'
             	 	},
                 name: '". __('Tickets','dashboard')."',
                 data: [
-";
-
-//zerar rows para segundo while
-$DB->data_seek($query_grp_b, 0);
-
-while ($grupo = $DB->fetch_assoc($query_grp_b))
-{
-	echo $grupo['conta'].",";
-}
-
-echo "]
+				";
+				
+				//zerar rows para segundo while
+				$DB->data_seek($query_grp_b, 0);
+				
+				while ($grupo = $DB->fetch_assoc($query_grp_b))
+				{
+					echo $grupo['conta'].",";
+				}
+				
+				echo "]
             }]
         });
     });

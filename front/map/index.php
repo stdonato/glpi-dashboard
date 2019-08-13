@@ -8,20 +8,6 @@ global $DB;
 
 Session::checkLoginUser();
 Session::checkRight("profile", READ);
-
-//check if exists google maps api key
-/*$query_key = "SELECT * FROM glpi_plugin_dashboard_config WHERE name = 'map_key'"; 
-$res_key = $DB->query($query_key);
-$api_key = $DB->result($res_key,0,'value'); 
-
-if($api_key != '') {
-	$key = $api_key;
-}
-else {
-	$key = '';
-	echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=\"map_key.php\"'>";
-}
-*/
 ?>
 
 <html> 
@@ -43,11 +29,6 @@ else {
 
 <!--<script src="./js/markerclusterer.js" type="text/javascript" ></script>
 <link href="css/google_api.css" rel="stylesheet" type="text/css" />  -->   
-
-<?php 
-//echo '<script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&key='.$key.'">'; 
-//echo "</script>\n" 
-?>  
 
 <script src="../js/bootstrap.min.js" type="text/javascript" ></script>  
 
@@ -176,6 +157,31 @@ else {
 	$sel_date = "";
 }
 
+// entity
+if(isset($_SESSION['glpiID'])) {
+	$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
+	$result_e = $DB->query($sql_e);
+	$sel_ent = $DB->result($result_e,0,'value');
+
+	$entidade = "AND gt.entities_id IN (".$sel_ent.")";
+}
+else {
+	$entidade = '';
+}
+
+/*if(isset($_SESSION['glpiID'])) {
+	
+	$entities = $_SESSION['glpiactiveentities'];
+	$ent = implode(",",$entities);
+	
+	if($ent != '') {
+		$entidade = "AND gt.entities_id IN (".$ent.")";
+	}
+	else {
+		$entidade = "";
+	}
+}	*/
+
 ?>
 
 <!-- maps - by Stevenes Donato -->
@@ -186,19 +192,15 @@ var locations =
 
 $locations = [];
 
-/*
-$icon_red = "http://chart.apis.google.com/chart?chst=d_map_spin&chld=1|0|FF0000|14|_|";
-$icon_green = "http://chart.apis.google.com/chart?chst=d_map_spin&chld=1|0|43B53C|14|_|";
-*/
-
 //select not closed tickets
 $query_loc = "
-	SELECT gpdm.entities_id, gpdm.location, gpdm.lat, gpdm.lng, count( gt.id ) AS conta
-	FROM glpi_plugin_dashboard_map gpdm
-	LEFT JOIN glpi_tickets gt ON gpdm.entities_id = gt.entities_id
+	SELECT gpdm.entities_id, gpdm.location, gpdm.lat, gpdm.lng, count(gt.id) AS conta
+	FROM glpi_plugin_dashboard_map gpdm, glpi_tickets gt
+	WHERE gpdm.entities_id = gt.entities_id
 	AND gt.status IN ".$status."
 	".$sel_date."
-	AND gt.is_deleted = 0
+	".$entidade."
+	AND gt.is_deleted = 0	
 	GROUP BY gpdm.id
 	ORDER BY gpdm.entities_id ";
 

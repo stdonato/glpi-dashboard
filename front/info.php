@@ -49,12 +49,12 @@ $ver = explode(" ",implode(" ",plugin_version_dashboard()));
 	    <br>
 	    <b>Stevenes Donato
 	    <br>
-	     <a href="mailto:stevenesdonato@gmail.com"> stevenesdonato@gmail.com </b> </a>
-	    <br>
+
 	    <br>
 	     <a href="https://forge.glpi-project.org/projects/dashboard/files" target="_blank" >https://forge.glpi-project.org/projects/dashboard/files</a>    
 	    <br>
-	    <a href="https://sourceforge.net/projects/glpidashboard" target="_blank" >https://sourceforge.net/projects/glpidashboard</a>
+	     <a href="https://github.com/stdonato/glpi-dashboard" target="_blank" >https://github.com/stdonato/glpi-dashboard</a>    
+	   
 	    <br><p></p>
 	    
 	    <div id="donate" style="margin-top:25px; margin-left:0px;">

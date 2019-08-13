@@ -21,11 +21,10 @@ LIMIT 0 , 30 ";
 $result3 = $DB->query($query3) or die('erro');
 
 $arr_grf3 = array();
-while ($row_result = $DB->fetch_assoc($result3))		
-	{ 
+while ($row_result = $DB->fetch_assoc($result3)) { 
 	$v_row_result = $row_result['day_l'];
 	$arr_grf3[$v_row_result] = $row_result['conta'];			
-	} 
+} 
 	
 $grf3 = array_keys($arr_grf3) ;
 $quant3 = array_values($arr_grf3) ;
@@ -35,8 +34,6 @@ $soma3 = array_sum($arr_grf3);
 $grf_3 = json_encode($grf3);
 $quant_2 = implode(',',$quant3);
 
-
-//if($soma3 != 0) {
 
 echo "
 <script type='text/javascript'>
@@ -91,6 +88,7 @@ $(function () {
 		  			 }
 		            },
             series: [{
+            	colorByPoint: true, 
                 name: '".__('Tickets','dashboard')."',
                 data: [$quant_2],
                 dataLabels: {

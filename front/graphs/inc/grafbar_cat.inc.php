@@ -31,14 +31,12 @@ AND glpi_users.id = glpi_tickets_users.users_id
 ". $entidade ."   
 GROUP BY `users_id`
 ORDER BY conta DESC
-LIMIT 20
-";
+LIMIT 20 ";
 
 $result3 = $DB->query($query3) or die('erro');
 
 $arr_grf3 = array();
-while ($row_result = $DB->fetch_assoc($result3))		
-{ 
+while ($row_result = $DB->fetch_assoc($result3)) { 
 	$v_row_result = $row_result['name']. " ".$row_result['sname'];
 	$arr_grf3[$v_row_result] = $row_result['conta'];			
 } 
@@ -96,6 +94,7 @@ $(function () {
                 }
             },
             series: [{
+            	 colorByPoint: true, 
                 name: '".__('Tickets','dashboard')."',
                 data: [$quant_2],
                 dataLabels: {

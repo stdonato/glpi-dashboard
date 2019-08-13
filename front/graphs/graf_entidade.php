@@ -411,11 +411,8 @@ $selected = $id_ent;
 					}
 				?>
 			</div>
-
 			</div>
-
 			</div>
-
 		</div>
 	</div>
 </div>

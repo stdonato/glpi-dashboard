@@ -152,6 +152,7 @@ $(function () {
                 }
             },
             series: [{
+            	 colorByPoint: true, 
                 name: ' " .__('Tickets')."',
                 data: [ $week, $quinz, $month, $month1, $month2 ],
                 dataLabels: {

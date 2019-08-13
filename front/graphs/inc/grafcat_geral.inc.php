@@ -11,17 +11,15 @@ AND glpi_itilcategories.id = glpi_tickets.itilcategories_id
 ".$entidade."
 GROUP BY glpi_itilcategories.id
 ORDER BY `cat_tick` DESC
-LIMIT 10
-";
+LIMIT 10 ";
 
 $result4 = $DB->query($query4) or die('erro');
 
 $arr_grf4 = array();
-while ($row_result = $DB->fetch_assoc($result4))
-	{
+while ($row_result = $DB->fetch_assoc($result4)) {
 	$v_row_result = $row_result['cat_name'];
 	$arr_grf4[$v_row_result] = $row_result['cat_tick'];
-	}
+}
 
 $grf4 = array_keys($arr_grf4) ;
 $quant4 = array_values($arr_grf4) ;
@@ -80,6 +78,7 @@ $(function () {
                 }
             },
             series: [{
+            	 colorByPoint: true, 
                 name: '".__('Tickets','dashboard')."',
                 data: [".$quant_2a."],
                 dataLabels: {

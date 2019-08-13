@@ -24,8 +24,7 @@ LIMIT 10 ";
 $result3 = $DB->query($query3) or die('erro');
 
 $arr_grf3 = array();
-while ($row_result = $DB->fetch_assoc($result3))
-{
+while ($row_result = $DB->fetch_assoc($result3)) {
 	$v_row_result = $row_result['name'];
 	$arr_grf3[$v_row_result] = $row_result['conta'];
 }
@@ -87,6 +86,7 @@ $(function () {
                 }
             },
             series: [{
+            	 colorByPoint: true, 
                 name: '".__('Tickets','dashboard')."',
                 data: [$quant_2],
                 dataLabels: {

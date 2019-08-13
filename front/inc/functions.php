@@ -10,9 +10,7 @@ function conv_data($data) {
 	    case "1": $dataf = $date->format('d-m-Y'); break;
 	    case "2": $dataf = $date->format('m-d-Y'); break;    
     }        
-        
-        //return $date->format('d-m-Y');}
-        return $dataf;}
+       return $dataf;}
     else {
         return "";
     }
@@ -96,9 +94,6 @@ function time_hrs2($time)
  if ($time == 0){
         return '';
     }
-
-  // $days = floor($time / 86400); // 60*60*24
-  // $time -= $days * 86400;
 	
 	$hours = floor($time / (60 * 60));
 	$time -= $hours * (60 * 60);
@@ -116,7 +111,7 @@ function time_hrs2($time)
 
 
 
-function dropdown( $name, array $options, $selected=null )
+function dropdown($name, array $options, $selected=null)
 {
     /*** begin the select ***/
     $dropdown = '<select id="sel1" style="width: 300px;" autofocus onChange="javascript: document.form1.submit.focus()" name="'.$name.'" id="'.$name.'">'."\n";
@@ -203,16 +198,15 @@ function getEntityName($id) {
    }
    
    else { 
-	$sql_ent = "
-	SELECT name
-	FROM `glpi_entities`
-	WHERE id = ".$id." ";
-	
-	$result_ent = $DB->query($sql_ent);
-	$name = $DB->result($result_ent,0,'name');
-	return $name;
+		$sql_ent = "
+		SELECT name
+		FROM `glpi_entities`
+		WHERE id = ".$id." ";
+		
+		$result_ent = $DB->query($sql_ent);
+		$name = $DB->result($result_ent,0,'name');
+		return $name;
 	}
-
 }
 
 
@@ -226,18 +220,16 @@ function getEntityLevel($id) {
    }
    
    else { 
-	$sql_ent = "
-	SELECT level
-	FROM `glpi_entities`
-	WHERE id = ".$id." ";
-	
-	$result_ent = $DB->query($sql_ent);
-	$level = $DB->result($result_ent,0,'level');
-	return $level;
+		$sql_ent = "
+		SELECT level
+		FROM `glpi_entities`
+		WHERE id = ".$id." ";
+		
+		$result_ent = $DB->query($sql_ent);
+		$level = $DB->result($result_ent,0,'level');
+		return $level;
 	}
-
 }
-
 
 
 function getChildren($node) {
@@ -287,6 +279,7 @@ if ($node == -1) {
                   ORDER BY `name`";
 
       if ($result = $DB->query($query)) {
+      	
          while ($row = $DB->fetch_assoc($result)) {
             $path = [
                'id'   => $row['id'],
@@ -303,6 +296,7 @@ if ($node == -1) {
                   $path['state']['opened'] = 'true';
                }
             }
+            
             $nodes[] = $path;
          }
       }
@@ -310,7 +304,6 @@ if ($node == -1) {
 
 //return json_encode($nodes);
 return $nodes;
-
 }
 
 
@@ -357,9 +350,10 @@ function super_unique($array)
                 FROM `glpi_tickets`, `glpi_ticketcosts`
                 WHERE `glpi_ticketcosts`.`tickets_id` = `glpi_tickets`.`id`
                 AND glpi_tickets.id = ".$item."
-                      AND (`glpi_ticketcosts`.`cost_time` > '0'
-                           OR `glpi_ticketcosts`.`cost_fixed` > '0'
-                           OR `glpi_ticketcosts`.`cost_material` > '0')";
+                AND (`glpi_ticketcosts`.`cost_time` > '0'
+                	OR `glpi_ticketcosts`.`cost_fixed` > '0'
+                	OR `glpi_ticketcosts`.`cost_material` > '0')";
+                
       $result = $DB->query($query);
 
       $i = 0;
@@ -371,6 +365,7 @@ function super_unique($array)
       }
       return $totalcost;
    }
+   
 ?>
 
 

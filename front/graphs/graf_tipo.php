@@ -39,8 +39,8 @@ switch (date("m")) {
 <link href="../css/font-awesome.css" type="text/css" rel="stylesheet" />
 
 <script type="text/javascript" src="../js/jquery.min.js"></script>
-<link href="../inc/select2/select2.css" rel="stylesheet" type="text/css">
 <script src="../inc/select2/select2.js" type="text/javascript" language="javascript"></script>
+<link href="../inc/select2/select2.css" rel="stylesheet" type="text/css">
 
 <script src="../js/highcharts.js"></script>
 <script src="../js/modules/exporting.js"></script>
@@ -139,8 +139,8 @@ function dropdown( $name, array $options, $selected=null )
     /*** and return the completed dropdown ***/
     return $dropdown;
 }
-
 ?>
+
 <div id='content' >
 <div id='container-fluid' style="margin: 0px 5% 0px 5%;"> 
 <div id="pad-wrapper" >
@@ -153,31 +153,32 @@ function dropdown( $name, array $options, $selected=null )
    <?php echo __('Tickets','dashboard') ." ". __('by Type','dashboard'); ?> 
 	<span style="color:#8b1a1a; font-size:35pt; font-weight:bold;"> </span> 
 </div>
-<div id="datas-tec" class="col-md-12 col-sm-12 fluid" > 
+
+<div id="datas-tec" class="col-md-12 fluid" > 
 	<form id="form1" name="form1" class="form2" method="post" action="?date1=<?php echo $data_ini ?>&date2=<?php echo $data_fin ?>&con=1"> 
 		<table border="0" cellspacing="0" cellpadding="1" bgcolor="#efefef">
 		<tr>
 			<td>	
 			<?php 
 				echo'
-						<table>
-							<tr>
-								<td>
-								   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
-								    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >		    	
-								    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
-							    	</div>
-								</td>
-								<td>&nbsp;</td>
-								<td>
-							   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
-								    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >		    	
-								    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
-							    	</div>
-								</td>
-								<td>&nbsp;</td>
-							</tr>
-						</table> ';
+					<table>
+						<tr>
+							<td>
+							   <div class="input-group date" id="dp1" data-date="'.$data_ini.'" data-date-format="yyyy-mm-dd">
+							    	<input class="col-md-9 form-control" size="13" type="text" name="date1" value="'.$data_ini.'" >		    	
+							    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
+						    	</div>
+							</td>
+							<td>&nbsp;</td>
+							<td>
+						   	<div class="input-group date" id="dp2" data-date="'.$data_fin.'" data-date-format="yyyy-mm-dd">
+							    	<input class="col-md-9 form-control" size="13" type="text" name="date2" value="'.$data_fin.'" >		    	
+							    	<span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>	    	
+						    	</div>
+							</td>
+							<td>&nbsp;</td>
+						</tr>
+					</table> ';
 				?>	
 			</td>
 			<td style="margin-top:2px;">

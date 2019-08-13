@@ -1,20 +1,20 @@
-Versão 0.9.7:
+Versão 0.9.8:
 
 - GLPI 9.4.x
 
-- Relatórios e gráficos de OLA;
-- Correção dos relatórios e gráficos de SLA devida à mudança dos campos no BD;
-- Correção de SLA na página de métricas;
+- correções de segurança
+- correção de exibição de entidades no mapa
+- correção do relatório de custos
 - Correção de bugs diversos;
 
 
 
-Version 0.9.7:
+Version 0.9.8:
 
 - GLPI 9.4.x
 
-- OLA reports and charts;
-- SLA reports and charts fixes;
-- Fix SLA in metrics page;
+- Security fix
+- Fix entities in map
+- Fix Cost report
 - Fix minor bugs;
 

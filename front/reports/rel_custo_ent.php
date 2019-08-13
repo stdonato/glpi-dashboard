@@ -380,24 +380,14 @@ if($con == "1") {
 				</div>
 			</td>
 		</tr>
-	</table> ";
+	</table>\n ";
 
 
 	//total costs
 	$DB->data_seek($result_cham, 0);
-	while($row = $DB->fetch_assoc($result_cham)){
-			
-/*		$query_cost = "SELECT (SUM( gtc.`cost_time` ) + SUM( gtc.`cost_fixed` ) + SUM( gtc.`cost_material` )) AS costs
-		FROM glpi_ticketcosts gtc, glpi_tickets gt
-		WHERE gtc.`tickets_id` = gt.id
-		AND gt.is_deleted = 0
-		AND gtc.`tickets_id`  = ".$row['id']."	
-		GROUP BY gtc.`tickets_id` "; 
+	while($row = $DB->fetch_assoc($result_cham)){			
 		
-		$result_cost = $DB->query($query_cost);
-		$cost = $DB->result($result_cost,0,'costs');*/
-		
-		$total_cost += number_format(computeCost($row['id']), 2, ',', ' ');
+		$total_cost += computeCost($row['id']);
 		
 	}
 	
@@ -433,12 +423,7 @@ if($con == "1") {
 					<th style='text-align:center; cursor:pointer;' class='sum'> ". __('Cost') ."</th>
 				</tr>
 			</thead>
-			<tfoot>
-				<th colspan='7' class='right' style='background:#fff !important; color:#000 !important;'> ". __('Total cost') .": </th>
-				<th class='right' style='background:#fff !important; color:#000 !important;'></th>
-			</tfoot>
-		<tbody>
-		";
+		<tbody>\n";
 
 	}
 
@@ -457,20 +442,6 @@ while($row = $DB->fetch_assoc($result_cham)){
 
 	$type = Ticket::getTicketTypeName($row['type']);
 	
-	
-	//costs by ticket
-/*	$query_cost = "SELECT (SUM( gtc.`cost_time` ) + SUM( gtc.`cost_fixed` ) + SUM( gtc.`cost_material` )) AS costs
-	FROM glpi_ticketcosts gtc, glpi_tickets gt
-	WHERE gtc.`tickets_id` = gt.id
-	AND gt.is_deleted = 0
-	AND gtc.`tickets_id`  = ".$row['id']."	
-	GROUP BY gtc.`tickets_id` "; 
-	
-	$result_cost = $DB->query($query_cost);
-	$cost = $DB->result($result_cost,0,'costs');	*/	
-	
-	//computeCost($row['id']);
-	
 	//tecnico
     $sql_tec = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
 		FROM `glpi_tickets_users` , glpi_tickets, glpi_users
@@ -481,6 +452,8 @@ while($row = $DB->fetch_assoc($result_cham)){
 
 		$result_tec = $DB->query($sql_tec);
 		$row_tec = $DB->fetch_assoc($result_tec);
+		
+		$comp_cost = computeCost($row['id']);
 
 		echo "
 		<tr style='font-weight:normal;'>
@@ -491,13 +464,19 @@ while($row = $DB->fetch_assoc($result_cham)){
 			<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['date']) ." </td>
 			<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['closedate']) ." </td>
 			<td style='vertical-align:middle; text-align:right;'> ". time_ext($row['time']) ."</td>
-			<td style='vertical-align:middle; text-align:right;'> ". number_format(computeCost($row['id']), 2, ',', ' ') ."</td>
-		</tr>";	    
+			<td style='vertical-align:middle; text-align:right;'> ". number_format($comp_cost, 2, ',', ' ') ."</td>
+		</tr>\n";	  
+		
+		$comp_cost2 += computeCost($row['id']);  
 }
 
 echo "</tbody>
+		<tfoot>
+			<th colspan='7' class='right' style='background:#fff !important; color:#000 !important;'> ". __('Total cost') .": </th>
+			<th class='right' style='background:#fff !important; color:#000 !important;'>". number_format($comp_cost2, 2, ',', ' ') ."</th>
+		</tfoot>
 		</table>
-		</div>"; ?>
+		</div>\n"; ?>
 
 <script type="text/javascript" charset="utf-8">
 
@@ -560,7 +539,7 @@ var table =  $('#tec').DataTable( {
     } );
 
 
-table.columns( '.sum' ).every( function () {
+table.columns( '.sumxx' ).every( function () {
     var sum = this
         .data()
         .reduce( function (a,b) {

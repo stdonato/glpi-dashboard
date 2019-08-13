@@ -91,6 +91,7 @@ $(function () {
                 }
             },
             series: [{
+            	 colorByPoint: true, 
                 name: '".__('Tickets','dashboard')."',
                 data: [$quant_t],
                 dataLabels: {

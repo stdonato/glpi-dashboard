@@ -135,20 +135,20 @@ $(function () {
                 enabled: false
             },
             series: [{
-            	 dataLabels: {
-            	 	//color: '#000099'
-            	 	},
-                name: '". __('Tickets','dashboard') ."',
-                data: [
-";
-
-				//zerar rows para segundo while
-				$DB->data_seek($query_cat, 0) ;
-				while ($entity = $DB->fetch_assoc($query_cat)) {
-					echo $entity['total'].",";
-				}
-				
-				echo "]
+		            	 colorByPoint: true, 
+		            	 dataLabels: {
+		            	 	//color: '#000099'
+		            	 	},
+		                name: '". __('Tickets','dashboard') ."',
+		                data: [";
+		
+						//zerar rows para segundo while
+						$DB->data_seek($query_cat, 0) ;
+						while ($entity = $DB->fetch_assoc($query_cat)) {
+							echo $entity['total'].",";
+						}
+						
+						echo "]
 				            }]
 				        });
 				    });
