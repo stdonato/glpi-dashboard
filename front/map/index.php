@@ -169,19 +169,6 @@ else {
 	$entidade = '';
 }
 
-/*if(isset($_SESSION['glpiID'])) {
-	
-	$entities = $_SESSION['glpiactiveentities'];
-	$ent = implode(",",$entities);
-	
-	if($ent != '') {
-		$entidade = "AND gt.entities_id IN (".$ent.")";
-	}
-	else {
-		$entidade = "";
-	}
-}	*/
-
 ?>
 
 <!-- maps - by Stevenes Donato -->

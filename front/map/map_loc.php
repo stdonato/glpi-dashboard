@@ -31,11 +31,6 @@ Session::checkRight("profile", READ);
 <!--<script src="./js/markerclusterer.js" type="text/javascript" ></script>
 <link href="css/google_api.css" rel="stylesheet" type="text/css" />  -->   
 
-<?php 
-//echo '<script async defer src="https://maps.googleapis.com/maps/api/js?sensor=false&key='.$key.'">'; 
-//echo "</script>\n" 
-?>  
-
 <script src="../js/bootstrap.min.js" type="text/javascript" ></script>  
 
 <?php echo '<link rel="stylesheet" type="text/css" href="../css/style-'.$_SESSION['style'].'">';  ?> 
@@ -81,6 +76,19 @@ Session::checkRight("profile", READ);
 </head>
 
 <?php
+
+
+//entities
+if(isset($_SESSION['glpiID'])) {
+	$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
+	$result_e = $DB->query($sql_e);
+	$sel_ent = $DB->result($result_e,0,'value');
+
+	$entidade = "AND entities_id IN (".$sel_ent.")";
+}
+else {
+	$entidade = '';
+}
 
 $status = "";
 $status_open = "('1','2','3','4','13','14')";
@@ -166,6 +174,7 @@ $conta_loc = count($cloc);
 $query_coo = "	SELECT id
 	FROM glpi_locations
 	WHERE latitude IS NOT NULL	
+	".$entidade."
 	ORDER BY id ASC ";
 	
 $res_coo = $DB->query($query_coo);
@@ -180,34 +189,29 @@ var locations =
 
 $locations = [];
 
-/*
-$icon_red = "http://chart.apis.google.com/chart?chst=d_map_spin&chld=1|0|FF0000|14|_|";
-$icon_green = "http://chart.apis.google.com/chart?chst=d_map_spin&chld=1|0|43B53C|14|_|";
-*/
-
 while ($row_id = $DB->fetch_assoc($res_coo)) {
 	
 	// get location info
 	$query_loc = "
-	SELECT gl.id, gl.entities_id, gl.name AS location, gl.latitude AS lat, gl.longitude AS lng
-	FROM glpi_locations gl
-	WHERE gl.id = ".$row_id['id']."		
-	GROUP BY gl.id
-	ORDER BY gl.id DESC";	
+	SELECT id, entities_id, name AS location, latitude AS lat, longitude AS lng
+	FROM glpi_locations
+	WHERE id = ".$row_id['id']."		
+	GROUP BY id
+	ORDER BY id DESC";	
 	
 	$result = $DB->query($query_loc) or die ("error query_loc");
 	$row = $DB->fetch_assoc($result);
 	
 	// get location tickets
 	$query_cham = "
-	SELECT gt.locations_id, COUNT(gt.id) AS conta
-	FROM glpi_tickets gt
-	WHERE gt.locations_id = ".$row_id['id']."
-	AND gt.status IN ".$status."
+	SELECT locations_id, COUNT(id) AS conta
+	FROM glpi_tickets
+	WHERE locations_id = ".$row_id['id']."
+	AND status IN ".$status."
 	".$sel_date."	
-	AND gt.is_deleted = 0
-	GROUP BY gt.locations_id 
-	ORDER BY gt.locations_id DESC";	
+	AND is_deleted = 0
+	GROUP BY locations_id 
+	ORDER BY locations_id DESC";	
 	
 	$result_cham = $DB->query($query_cham) or die ("error query_cham");
 	$row_cham = $DB->fetch_assoc($result_cham); 
@@ -291,15 +295,7 @@ function initialize() {
 										 	 		 	 			
 			var options = { isAlphaNumericIcon: true, text: a[7], iconShape: 'marker', borderColor: cor, textColor: cor};
 		   var marker = L.marker([a[1], a[2]], {icon: L.BeautifyIcon.icon(options), draggable: true}, {title: a[3]});
-		   marker.l = a[8];
-		   
-		   //show popup on mouse over
-/*		   marker.on('mouseover', function (e) {
-            this.openPopup();
-         });*/
-/*         marker.on('mouseout', function (e) {
-            this.closePopup();
-         });	*/	   
+		   marker.l = a[8];		     
 
 			marker.bindPopup(a[5]);
 			markers.addLayer(marker);
@@ -314,14 +310,6 @@ function initialize() {
 		var bounds = L.latLngBounds(arr_markers);
 		map.fitBounds(bounds);
 
-/*		
-  var popup = markers[i].name +
-              '<br/>' + markers[i].city +
-              '<br/><b>IATA/FAA:</b> ' + markers[i].iata_faa +
-              '<br/><b>ICAO:</b> ' + markers[i].icao +
-              '<br/><b>Altitude:</b> ' + Math.round( markers[i].alt * 0.3048 ) + ' m' +
-              '<br/><b>Timezone:</b> ' + markers[i].tz;		
-*/
 }
 
 </script> 
