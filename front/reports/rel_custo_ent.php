@@ -28,6 +28,27 @@ else {
     $id_ent = $_POST["sel_ent"];
 }
 
+
+if(!isset($_GET['sel_ent']) || $_GET['sel_ent'] == -1) {
+//seleciona entidade											
+$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
+$result_e = $DB->query($sql_e);
+$sel_ent = $DB->result($result_e,0,'value');
+$ents = $sel_ent;
+}
+
+else {
+
+//if($sel_ent == "" || $sel_ent == -1) {
+	$entities = $_SESSION['glpiactiveentities'];
+	$ents = implode(",",$entities);									
+//}
+/*else {										
+	$id_ent = $sel_ent;
+}*/
+
+}
+
 ?>
 
 <html>
@@ -133,21 +154,7 @@ a:hover { color: #000099; }
 				</script>		
 				</td>		
 				<td style="margin-top:2px;">
-		<?php
-		
-		//seleciona entidade											
-		$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
-		$result_e = $DB->query($sql_e);
-		$sel_ent = $DB->result($result_e,0,'value');
-		
-		if($sel_ent == '' || $sel_ent == -1) {
-			$entities = $_SESSION['glpiactiveentities'];
-			$ents = implode(",",$entities);									
-		}
-		else {										
-			$ents = $sel_ent;
-		}
-
+		<?php		
 
 		$sql_ent = "
 		SELECT id, completename AS name
@@ -217,7 +224,7 @@ if($con == "1") {
 		$id_ent = $_POST["sel_ent"];
 	}
 	
-	if($id_ent == 0) {
+	if($id_ent == "" || $id_ent == -1) {
 		echo '<script language="javascript"> alert(" ' . __('Select a entity','dashboard') . ' "); </script>';
 		echo '<script language="javascript"> location.href="rel_custo_ent.php"; </script>';
 	}
@@ -476,7 +483,9 @@ echo "</tbody>
 			<th class='right' style='background:#fff !important; color:#000 !important;'>". number_format($comp_cost2, 2, ',', ' ') ."</th>
 		</tfoot>
 		</table>
-		</div>\n"; ?>
+		</div>\n"; 
+
+?>
 
 <script type="text/javascript" charset="utf-8">
 
