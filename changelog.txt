@@ -1,20 +1,16 @@
-Versão 0.9.8:
+Versão 0.9.9:
 
 - GLPI 9.4.x
 
-- correções de segurança
-- correção de exibição de entidades no mapa
-- correção do relatório de custos
+- tempo de solução > 7 dias em métricas
 - Correção de bugs diversos;
 
 
 
-Version 0.9.8:
+Version 0.9.9:
 
 - GLPI 9.4.x
 
-- Security fix
-- Fix entities in map
-- Fix Cost report
+
 - Fix minor bugs;
 

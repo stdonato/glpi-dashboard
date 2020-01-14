@@ -261,6 +261,7 @@ FROM `glpi_groups_tickets` , glpi_tickets, glpi_groups
 WHERE glpi_groups_tickets.`groups_id` = ".$id_grp."
 AND glpi_groups_tickets.`groups_id` = glpi_groups.id
 AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
+AND glpi_groups_tickets.`type` = 2
 AND glpi_tickets.is_deleted = 0
 AND glpi_tickets.date ".$datas2."
 AND glpi_tickets.status IN ".$status."
@@ -282,6 +283,7 @@ SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve,
 SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
 FROM glpi_groups_tickets, glpi_tickets
 WHERE glpi_tickets.is_deleted = '0'
+AND glpi_groups_tickets.`type` = 2
 AND glpi_tickets.date ".$datas2."
 AND glpi_groups_tickets.groups_id = ".$id_grp."
 AND glpi_groups_tickets.`tickets_id` = glpi_tickets.id
@@ -305,6 +307,7 @@ WHERE glpi_groups_tickets.groups_id = ".$id_grp."
 AND glpi_groups_tickets.groups_id = glpi_groups.id
 AND glpi_groups_tickets.tickets_id = glpi_tickets.id
 AND glpi_tickets.is_deleted = 0
+AND glpi_groups_tickets.`type` = 2
 AND glpi_tickets.date ".$datas2."
 AND glpi_tickets.status IN ".$status."
 ".$entidade_t."
@@ -327,6 +330,7 @@ WHERE glpi_groups_tickets.groups_id = ".$id_grp."
 AND glpi_groups_tickets.groups_id = glpi_groups.id
 AND glpi_groups_tickets.tickets_id = glpi_tickets.id
 AND glpi_tickets.is_deleted = 0
+AND glpi_groups_tickets.`type` = 2
 AND glpi_tickets.date ".$datas2."
 AND glpi_tickets.status IN ".$status_open."
 ".$entidade_t." ";
@@ -460,10 +464,10 @@ $result_user = $DB->query($sql_user);
 
 //grupo
 $sql_tec = "SELECT name
-FROM `glpi_groups` , `glpi_groups_tickets`
+FROM `glpi_groups`, `glpi_groups_tickets`
 WHERE `glpi_groups_tickets`.tickets_id = ".$row['id']."
 AND glpi_groups.id = glpi_groups_tickets.groups_id
-AND glpi_groups_tickets.type = 2
+AND glpi_groups_tickets.`type` = 2
 ".$entidade." ";
 
 $result_tec = $DB->query($sql_tec);

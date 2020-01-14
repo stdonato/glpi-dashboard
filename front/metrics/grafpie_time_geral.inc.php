@@ -44,7 +44,7 @@ $quant2 = array_values($arr_grf2);
 $conta = count($arr_grf2);
 
 
-for($i=0; $i < 8; $i++) {
+for($i=0; $i < 10; $i++) {
 
 	if($quant2[$i] != 0) {
 		$till[$i] = $quant2[$i];
@@ -55,6 +55,22 @@ for($i=0; $i < 8; $i++) {
 	
 	$arr_days[] += $till[$i];
 
+}
+
+$resto = 0;
+if ($conta > 10){
+	
+	for($i=10; $i < $conta; $i++) {
+
+		if($quant2[$i] != 0) {
+			$till[$i] = $quant2[$i];
+		}
+		else {
+			$till[$i] = 0;
+		}	
+	
+		$resto += $till[$i];
+	}
 }
 
 echo "
@@ -133,7 +149,9 @@ $(function () {
                         selected: false
                     }, ['1 - 2 " .__('days','dashboard')."',  ".$arr_days[1]." ], ['2 - 3 " .__('days','dashboard')."',  ".$arr_days[2]." ],
                 			['3 - 4 " .__('days','dashboard')."', ".$arr_days[3]." ], ['4 - 5 " .__('days','dashboard')."',  ".$arr_days[4]." ], 
-                			['5 - 6 " .__('days','dashboard')."',  ".$arr_days[5]." ], ['6 - 7 " .__('days','dashboard')."',  ".$arr_days[6]." ]		]
+                			['5 - 6 " .__('days','dashboard')."',  ".$arr_days[5]." ], ['6 - 7 " .__('days','dashboard')."',  ".$arr_days[6]." ],	
+							['7 - 8 " .__('days','dashboard')."',  ".$till[7]." ], ['8 - 9 " .__('days','dashboard')."',  ".$till[8]." ], 
+							['9 - 10 " .__('days','dashboard')."',  ".$till[9]." ], ['> 10 " .__('days','dashboard')."',  ".$resto." ],]
             }]
         });
     });

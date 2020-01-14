@@ -393,14 +393,14 @@ else {
                                         </li>                                        
                              				 <?php
 					                        	// distinguish between 0.90.x and 9.1 version
-														if (GLPI_VERSION <= intval('9.1')){
+/*														if (GLPI_VERSION <= intval('9.1')){
 		                                     echo '<li>';
 	                                            echo '<a href="#" onclick="window.open(\'./reports/rel_slas.php?con=1\',\'iframe1\'); scrollWin();" data-original-title=" SLAs">';
 	                                            echo '   <i class="fa fa-angle-right"></i>';
 	                                            echo '   <span class="hidden-minibar">'. __('SLA','dashboard').'</span>';
 	                                            echo '</a>
 	                                        </li>';
-                                        	}
+                                        	}*/
                                         ?>
 													<li class='submenu'>
 			                                    <a class='dropdown' onClick='return false;' href='#' data-original-title='Custos'>
@@ -575,13 +575,29 @@ else {
                                                 <i class="fa fa-angle-right"></i>
                                                 <span class='hidden-minibar'> <?php echo __('by Entity','dashboard'); ?> </span>
                                             </a>
-                                        </li>                                         
-                                        <li>
-                                            <a href="#" onclick="window.open('./reports/rel_grupo.php','iframe1'); scrollWin();"  data-original-title=' por Grupo'>
-                                                <i class="fa fa-angle-right"></i>
-                                                <span class='hidden-minibar'> <?php echo __('by Group','dashboard'); ?> </span>
-                                            </a>
                                         </li>   
+ 		                                  <li class='submenu'>
+			                                    <a class='dropdown' onClick='return false;' href='#' data-original-title='por Grupo'>
+			                                        <i class='fa fa-angle-right'></i>
+			                                        <span class='hidden-minibar'><?php echo __('by Group','dashboard');?>
+			                                            <i class='fa fa-angle-right  pull-right'></i>
+			                                        </span>
+			                                    </a>
+			                                   <ul  class="animated fadeInDown menu2">
+   		                                  	<li>
+	                                            <a href="#" onclick="window.open('./reports/rel_grupo_tec.php','iframe1'); scrollWin();" data-original-title=' Atribuído' >
+	                                                <i class="fa fa-angle-right"></i>
+	                                                <span class='hidden-minibar'> <?php echo __('Assigned'); ?> </span>
+	                                            </a>
+	                                        	</li>
+		                                      <li>
+	                                            <a href="#" onclick="window.open('./reports/rel_grupo_req.php','iframe1'); scrollWin();" data-original-title=' Requerente' >
+	                                                <i class="fa fa-angle-right"></i>
+	                                                <span class='hidden-minibar'> <?php echo __('Requester','dashboard'); ?> </span>
+	                                            </a>
+	                                         </li> 
+		                                      </ul>
+		                                  </li>  
                                         <li>
                                               <a href="#" onclick="window.open('./reports/rel_localidade.php','iframe1'); scrollWin();"  data-original-title=' by Localization'>
                                                 <i class="fa fa-angle-right"></i>
@@ -603,14 +619,14 @@ else {
 
                              				 <?php
 					                        	// distinguish between 0.90.x and 9.1 version
-														if (GLPI_VERSION <= intval('9.1')){
+/*														if (GLPI_VERSION <= intval('9.1')){
 			                                    echo '<li>
 		                                            <a href="#" onclick="window.open(\'./reports/rel_sla.php\',\'iframe1\'); scrollWin();"  data-original-title=" por SLA">
 		                                                <i class="fa fa-angle-right"></i>
 		                                                <span class="hidden-minibar">'. __('by SLA','dashboard').'</span>
 		                                            </a>
 		                                        </li>'; 
-		                                     }
+		                                     }*/
                                         ?>
                                         
                                        <?php
@@ -786,14 +802,14 @@ else {
                                         
                                         <?php
 					                        	// distinguish between 0.90.x and 9.1 version
-														if (GLPI_VERSION <= intval('9.1')){
+/*														if (GLPI_VERSION <= intval('9.1')){
 		                                     echo '<li>';
 	                                            echo '<a href="#" onclick="window.open(\'./graphs/slas.php?con=1\',\'iframe1\'); scrollWin();" data-original-title=" SLAs">';
 	                                            echo '   <i class="fa fa-angle-right"></i>';
 	                                            echo '   <span class="hidden-minibar">'. __('by SLA','dashboard').'</span>';
 	                                            echo '</a>
 	                                        </li>';
-                                        	}
+                                        	}*/
                                         ?>
 
 		                                 <?php

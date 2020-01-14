@@ -158,7 +158,7 @@ else {
 }
 
 // entity
-if(isset($_SESSION['glpiID'])) {
+/*if(isset($_SESSION['glpiID'])) {
 	$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
 	$result_e = $DB->query($sql_e);
 	$sel_ent = $DB->result($result_e,0,'value');
@@ -167,7 +167,20 @@ if(isset($_SESSION['glpiID'])) {
 }
 else {
 	$entidade = '';
-}
+}*/
+
+if(isset($_SESSION['glpiID'])) {
+	
+	$entities = $_SESSION['glpiactiveentities'];
+	$ent = implode(",",$entities);
+	
+	if($ent != '') {
+		$entidade = "AND gt.entities_id IN (".$ent.")";
+	}
+	else {
+		$entidade = "";
+	}
+}	
 
 ?>
 

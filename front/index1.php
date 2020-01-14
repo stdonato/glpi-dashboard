@@ -369,7 +369,20 @@ else {
                         <li><a href="./reports/rel_categoria.php" target="iframe1" > <?php echo __('by Category','dashboard'); ?> </a></li>                        
                         <li><a href="./reports/rel_data.php" target="iframe1" > <?php echo __('by Date','dashboard'); ?> </a></li> 
                         <li><a href="./reports/rel_entidade.php" target="iframe1" > <?php echo __('by Entity','dashboard'); ?> </a></li>
-                        <li><a href="./reports/rel_grupo.php" target="iframe1" > <?php echo __('by Group','dashboard'); ?> </a></li>
+                        <li class="dropdown-submenu">
+		                		<a tabindex="-1" href="#"><?php echo __('by Group','dashboard'); ?> </a>
+						         <ul class="dropdown-menu">
+										<li><a href="./reports/rel_grupo_tec.php" target="iframe1" style="color:#000;"><?php echo __('Assigned'); ?></a></li>										
+										<li><a href="./reports/rel_grupo_req.php" target="iframe1" style="color:#000;"><?php echo __('Requester','dashboard'); ?></a></li>
+									</ul>
+						      </li> 
+  								<li class="dropdown-submenu">
+		                		<a tabindex="-1" href="#"><?php echo __('by OLA','dashboard'); ?> </a>
+						         <ul class="dropdown-menu">
+										<li><a href="./reports/rel_oltsa.php" target="iframe1" style="color:#000;"><?php echo __('Time to own'); ?></a></li>
+										<li><a href="./reports/rel_oltsr.php" target="iframe1" style="color:#000;"><?php echo __('Time to resolve'); ?></a></li>										
+									</ul>
+						      </li>
                         <li><a href="./reports/rel_localidade.php" target="iframe1" > <?php echo __('by Location','dashboard'); ?> </a></li>
                         <li><a href="./reports/rel_usuario.php" target="iframe1" > <?php echo __('by Requester','dashboard'); ?> </a></li>
                         <li><a href="./reports/rel_tecnico.php" target="iframe1" > <?php echo __('by Technician','dashboard'); ?> </a></li>                
@@ -388,7 +401,8 @@ else {
 										<li><a href="./reports/rel_oltsa.php" target="iframe1" style="color:#000;"><?php echo __('Time to own'); ?></a></li>
 										<li><a href="./reports/rel_oltsr.php" target="iframe1" style="color:#000;"><?php echo __('Time to resolve'); ?></a></li>										
 									</ul>
-						      </li> 							
+						      </li>
+						       							
                       </ul>
                     </div>
                   </div>                

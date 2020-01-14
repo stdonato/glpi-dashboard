@@ -18,7 +18,7 @@ if(!empty($_POST['submit']))
 else {
     $data_ini = date("Y-m-01");
     $data_fin = date("Y-m-d");
-    }
+}
 
 if(!isset($_POST["sel_loc"])) {
 	$id_loc = $_GET["sel_loc"];
