@@ -394,7 +394,7 @@ else {
 $query_prob = "SELECT count(id) AS quant
 	FROM glpi_problems
 	WHERE is_deleted = 0
-	".$period."
+	".$periodp."
 	".$ent_problem." ";
 
 $res_prob = $DB->query($query_prob);
