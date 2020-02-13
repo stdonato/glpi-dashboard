@@ -1,0 +1,564 @@
+# Croatian translation of dashboard.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Milo Ivir <mail@milotype.de>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: dashboard\n"
+"POT-Creation-Date: 2014-02-08 15:21+0100\n"
+"PO-Revision-Date: 2020-02-13 22:12+0100\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>\n"
+"Language-Team: \n"
+"Language: hr_HR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Rebyt-Msgid-Bugs-To: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.8.12\n"
+
+msgid "Dashboard"
+msgstr "Pregledna ploča"
+
+msgid "Tickets"
+msgstr "Nalozi"
+
+msgid "Reports"
+msgstr "Izvještaji"
+
+msgid "Charts"
+msgstr "Dijagrami"
+
+msgid "Home"
+msgstr "Početna"
+
+msgid "Tickets Statistics"
+msgstr "Statistika naloga"
+
+msgid "by Technician"
+msgstr "prema tehničaru"
+
+msgid "by Requester"
+msgstr "prema podnositelju"
+
+msgid "by Date"
+msgstr "prema datumu"
+
+msgid "Overall"
+msgstr "Kompletno"
+
+msgid "Today"
+msgstr "Danas"
+
+msgid "Total"
+msgstr "Ukupno"
+
+msgid "users"
+msgstr "korisnici"
+
+msgid "active"
+msgstr "aktivni"
+
+msgid "Tickets Evolution"
+msgstr "Razvoj naloga"
+
+msgid "Tickets by Status"
+msgstr "Nalozi prema stanju"
+
+msgid "Tickets by Entity"
+msgstr "Nalozi prema entitetu"
+
+msgid "Tickets by Category"
+msgstr "Nalozi prema kategoriji"
+
+msgid "Daily Evolution"
+msgstr "Dnevni razvoj"
+
+msgid "Tickets Total"
+msgstr "Naloga ukupno"
+
+msgid "by Entity"
+msgstr "prema entitetu"
+
+msgid "TOP 10 - Requester"
+msgstr "TOP 10 – Podnostielj"
+
+msgid "Entity"
+msgstr "Entitet"
+
+msgid "Open Tickets"
+msgstr "Otvoreni nalozi"
+
+msgid "Today Tickets"
+msgstr "Današnji nalozi"
+
+msgid "by Group"
+msgstr "prema grupi"
+
+msgid "Group"
+msgstr "Grupa"
+
+msgid "Satisfaction"
+msgstr "Zadovoljstvo"
+
+msgid "Late"
+msgstr "Kasni"
+
+msgid "Opened Tickets by Status"
+msgstr "Otvoreni nalozi prema stanju"
+
+msgid "Last Tickets"
+msgstr "Zadnji nalozi"
+
+msgid "All"
+msgstr "Svi"
+
+msgid "New version"
+msgstr "Nova verzija"
+
+msgid "avaliable"
+msgstr "dostupno"
+
+msgid "January"
+msgstr "Siječanj"
+
+msgid "February"
+msgstr "Veljača"
+
+msgid "March"
+msgstr "Ožujak"
+
+msgid "April"
+msgstr "Travanj"
+
+msgid "May"
+msgstr "Svibanj"
+
+msgid "June"
+msgstr "Lipanj"
+
+msgid "July"
+msgstr "Srpanj"
+
+msgid "August"
+msgstr "Kolovoz"
+
+msgid "September"
+msgstr "Rujan"
+
+msgid "October"
+msgstr "Listopad"
+
+msgid "November"
+msgstr "Studeni"
+
+msgid "December"
+msgstr "Prosinac"
+
+msgid "Sunday"
+msgstr "Nedelja"
+
+msgid "Monday"
+msgstr "Ponedeljak"
+
+msgid "Tuesday"
+msgstr "Utorak"
+
+msgid "Wednesday"
+msgstr "Srijeda"
+
+msgid "Thursday"
+msgstr "Četvrtak"
+
+msgid "Friday"
+msgstr "Petak"
+
+msgid "Saturday"
+msgstr "Subota"
+
+msgid "Consult"
+msgstr "Uvid"
+
+msgid "Clean"
+msgstr "Očisti"
+
+msgid "No ticket found"
+msgstr "Nijedan nalog nije pronađen"
+
+msgid "Select a technician"
+msgstr "Odaberi tehničara"
+
+msgid "Select a requester"
+msgstr "Odaberi podnositelja"
+
+msgid "Title"
+msgstr "Naslov"
+
+msgid "Opening date"
+msgstr "Datum otvaranja"
+
+msgid "Close date"
+msgstr "Datum zatvaranja"
+
+msgid "Technician"
+msgid_plural "Technicians"
+msgstr[0] "Tehničar"
+msgstr[1] "Tehničari"
+msgstr[2] "Tehničari"
+
+msgid "Closed"
+msgstr "Zatvoreni"
+
+msgid "Previous"
+msgstr "Prethodni"
+
+msgid "Next"
+msgstr "Sljedeći"
+
+msgid "Requester"
+msgstr "Podnositelj"
+
+msgid "Opened"
+msgstr "Otvoreni"
+
+msgid "Period"
+msgstr "Razdoblje"
+
+msgid "Yesterday"
+msgstr "Jučer"
+
+msgid "Last 7 days"
+msgstr "Zadnjih 7 dana"
+
+msgid "Last 15 days"
+msgstr "Zadnjih 15 dana"
+
+msgid "Last 30 days"
+msgstr "Zadnjih 30 dana"
+
+msgid "Last 90 days"
+msgstr "Zadnjih 90 dana"
+
+msgid "Last 180 days"
+msgstr "Zadnjih 180 dana"
+
+msgid "Last 3 months"
+msgstr "Zadnja 3 mjeseca"
+
+msgid "Select a entity"
+msgstr "Odaberi entitet"
+
+msgid "Select group"
+msgstr "Odaberi grupu"
+
+msgid "Version"
+msgstr "Verzija"
+
+msgid "Developed by"
+msgstr "Razvoj:"
+
+msgid "User rights management"
+msgstr "Upravljanje pravima korisnika"
+
+msgid "Tab display"
+msgstr "Prikaz kartica"
+
+msgid "Tickets by Source"
+msgstr "Nalozi prema izvoru"
+
+msgid "Last Events"
+msgstr "Zadnji događaji"
+
+msgid "Logged Users"
+msgstr "Prijavljeni korisnici"
+
+msgid "Computers by Operating System"
+msgstr "Računala prema operacijskom sustavu"
+
+msgid "Computers by Type"
+msgstr "Računala prema vrsti"
+
+msgid "Quantity"
+msgstr "Količina"
+
+msgid "Monitors by Manufacturer"
+msgstr "Ekrani prema proizvođaču"
+
+msgid "Monitors by Model"
+msgstr "Ekrani prema modelu"
+
+msgid "Printers by Manufacturer"
+msgstr "Pisači prema proizvođaču"
+
+msgid "Printers by Model"
+msgstr "Pisači prema modelu"
+
+msgid "Networkequipments by Manufacturer"
+msgstr "Mrežna oprema prema proizvođaču"
+
+msgid "Networkequipments by Model"
+msgstr "Mrežna oprema prema modelu"
+
+msgid "Phones by Manufacturer"
+msgstr "Telefoni prema proizvođaču"
+
+msgid "Phones by Model"
+msgstr "Telefoni prema modelu"
+
+msgid "Peripherals by Manufacturer"
+msgstr "Periferni uređaji prema proizvođaču"
+
+msgid "Peripherals by Model"
+msgstr "Periferni uređaji prema modelu"
+
+msgid "Top 10 - Software Vendors"
+msgstr "Top 10 – Prodavač softvera"
+
+msgid "Top 10 - Software Install"
+msgstr "Top 10 – Instalirani softver"
+
+msgid "Cartridges by Manufacturer"
+msgstr "Toneri prema proizvođaču"
+
+msgid "Used"
+msgstr "Korišteno"
+
+msgid "Assets by Type"
+msgstr "Inventar prema vrsti"
+
+msgid "Unknown"
+msgstr "Nepoznato"
+
+msgid "Computer"
+msgstr "Kompjuter"
+
+msgid "Monitor"
+msgstr "Monitor"
+
+msgid "Printer"
+msgstr "Pisač"
+
+msgid "Networkequipment"
+msgstr "Mrežna oprema"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Peripheral"
+msgstr "Periferni uređaj"
+
+msgid "Map"
+msgstr "Karta"
+
+msgid "Tickets Map"
+msgstr "Karta naloga"
+
+msgid "Fill in entities: address, city, state and country."
+msgstr "Ispuni entitete: adresa, grad i država."
+
+msgid "Select"
+msgstr "Odaberi"
+
+msgid "by Category"
+msgstr "prema kategoriji"
+
+msgid "Select a category"
+msgstr "Odaberi kategoriju"
+
+msgid "by Location"
+msgstr "prema lokaciji"
+
+msgid "Select a location"
+msgstr "Odaberi lokaciju"
+
+msgid "Welcome"
+msgstr "Dobro došao, dobro došla"
+
+msgid "Select a asset"
+msgstr "Odaberi inventar"
+
+msgid "by Assets"
+msgstr "prema inventaru"
+
+msgid "Print"
+msgstr "Ispiši"
+
+msgid "by SLA"
+msgstr "prema ugovoru o razini usluge (SLA)"
+
+msgid "Select a SLA"
+msgstr "Odaberi ugovor o razini usluge (SLA)"
+
+msgid "by OLA"
+msgstr "prema ugovor o operativnim razinama (OLA)"
+
+msgid "Select a OLA"
+msgstr "Odaberi ugovor o operativnim razinama (OLA)"
+
+msgid "Current"
+msgstr "Tekući"
+
+msgid "Current year"
+msgstr "Tekuća godina"
+
+msgid "Period in index page"
+msgstr "Razdoblje na početnoj stranici"
+
+msgid "Theme"
+msgstr "Dizajn"
+
+msgid "by Type"
+msgstr "prema vrsti"
+
+msgid "Select a type"
+msgstr "Odaberi vrstu"
+
+msgid "Select a manufacturer"
+msgstr "Odaberi proizvođača"
+
+msgid "Weekly Tickets"
+msgstr "Tjedni nalozi"
+
+msgid "Show/hide columns"
+msgstr "Prikaži/sakrij stupce"
+
+msgid "day"
+msgstr "dan"
+
+msgid "days"
+msgstr "dana"
+
+msgid "Ticket Solving Period"
+msgstr "Vrijeme rješavanja naloga"
+
+msgid "Open Tickets Age"
+msgstr "Starost otvorenih naloga"
+
+msgid "My Dashboard"
+msgstr "Moja pregledna ploča"
+
+msgid "Tickets by Priority"
+msgstr "Nalozi prema prioritetu"
+
+msgid "Solved"
+msgstr "Riješen"
+
+msgid "Tickets across time"
+msgstr "Nalozi kroz vrijeme"
+
+msgid "Tickets by hour"
+msgstr "Nalozi prema satu"
+
+msgid "Tickets by week day"
+msgstr "Nalozi prema radnom danu"
+
+msgid "Tickets by month"
+msgstr "Nalozi prema mjesecu"
+
+msgid "Due Date"
+msgstr "Rok dospijeća"
+
+msgid "Overdue"
+msgstr "Prekoračen rok"
+
+msgid "Within"
+msgstr "Unutar roka"
+
+msgid "Metrics"
+msgstr "Metrika"
+
+msgid "Period for Metrics"
+msgstr "Vrijeme za metriku"
+
+msgid "Current month"
+msgstr "Tekući mjesec"
+
+msgid "Last 60 days"
+msgstr "Zadnjih 60 dana"
+
+msgid "Show Server info"
+msgstr "Prikaži podatke poslužitelja"
+
+msgid "Tickets Page"
+msgstr "Stranica naloga"
+
+msgid "Widgets settings"
+msgstr "Postavke programčića"
+
+msgid "Summary Report"
+msgstr "Sažeti izvještaj"
+
+msgid "Summary"
+msgstr "Sažetak"
+
+msgid "Selected"
+msgstr "Odabrano"
+
+msgid "Popup"
+msgstr "Skočna obavijest"
+
+msgid ""
+"Enter the latitude and longitude in Administration -> Entities -> Dashboard "
+"Map"
+msgstr ""
+"Upiši zemljopisnu širinu i duljinu u Administracija -> Entiteti -> Karta "
+"nadzorne ploče"
+
+msgid "Google maps API key"
+msgstr "API ključ za Google karte"
+
+msgid "Dashboard map"
+msgstr "Karta nadzorne ploče"
+
+msgid "To configure Google maps"
+msgstr "Za konfiguriranje Google karata"
+
+msgid "Create an API key"
+msgstr "Stvori API ključ"
+
+msgid "Paste your key bellow and save"
+msgstr "Dolje umetni ključ i spremi"
+
+msgid "accumulated"
+msgstr "kumulirano"
+
+msgid "Sons"
+msgstr "Podređeni"
+
+msgid "Task sum"
+msgstr "Zbroj zadataka"
+
+#~ msgid "Select a group"
+#~ msgstr "Odaberi grupu"
+
+#~ msgid "Response time"
+#~ msgstr "Vrijeme odziva"
+
+#~ msgid "Status in Tickets page"
+#~ msgstr "Stanje na stranici naloga"
+
+#~ msgid "Layout"
+#~ msgstr "Raspored"
+
+#~ msgid "Background"
+#~ msgstr "Pozadina"
+
+#~ msgid "Charts Theme"
+#~ msgstr "Dizajn dijagrama"
+
+#~ msgid "Left side menu"
+#~ msgstr "Izbornik lijevo"
+
+#~ msgid "Top menu"
+#~ msgstr "Izbornik gore"
+
+#~ msgid "Info"
+#~ msgstr "Informacije"
+
+#~ msgid "Server Info"
+#~ msgstr "Podaci poslužitelja"
+
+#~ msgid "SLA"
+#~ msgstr "Ugovor o razini usluge"
