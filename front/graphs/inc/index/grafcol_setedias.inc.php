@@ -96,8 +96,8 @@ else {
 }
 
 
-echo "teste <br>";
-print_r($quanti);
+//echo "teste <br>";
+//print_r($quanti);
 
 echo "<script type='text/javascript'>
 
