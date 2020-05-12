@@ -638,7 +638,7 @@ $total_due = $DB->fetch_assoc($result_due);
 					AND glpi_tickets.id = glpi_tickets_users.tickets_id
 					AND glpi_tickets.status NOT IN ".$status."
 					".$entidade."
-					GROUP BY `glpi_users`.`firstname` ASC
+					GROUP BY `glpi_users`.`firstname`
 					ORDER BY tick DESC
 					LIMIT 10 ";
 	            
