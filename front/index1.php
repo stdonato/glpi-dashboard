@@ -7,8 +7,10 @@ global $DB;
 
 Session::checkLoginUser();
 
+$userID = $_SESSION['glpiID'];
+
 # entity in index
-$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
+$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$userID."";
 $result_e = $DB->query($sql_e);
 $sel_ent = $DB->result($result_e,0,'value');
 
@@ -24,7 +26,7 @@ else {
 }
 
 # years in index
-$sql_y = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'num_years' AND users_id = ".$_SESSION['glpiID']."";
+$sql_y = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'num_years' AND users_id = ".$userID."";
 $result_y = $DB->query($sql_y);
 $num_years = $DB->result($result_y,0,'value');
 
@@ -33,7 +35,7 @@ if($num_years == '') {
 }
 
 # color theme
-$sql_theme = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'theme' AND users_id = ".$_SESSION['glpiID']."";
+$sql_theme = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'theme' AND users_id = ".$userID."";
 $result_theme = $DB->query($sql_theme);
 $theme = $DB->result($result_theme,0,'value');
 $style = $theme;
@@ -48,7 +50,7 @@ $_SESSION['style'] = $theme;
 
 
 # background
-$sql_back = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'back' AND users_id = ".$_SESSION['glpiID']."";
+$sql_back = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'back' AND users_id = ".$userID."";
 $result_back = $DB->query($sql_back);
 $back = $DB->result($result_back,0,'value');
 
@@ -59,7 +61,7 @@ $_SESSION['back'] = $back;
 
 
 # charts colors 
-$sql_colors = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'charts_colors' AND users_id = ".$_SESSION['glpiID']."";
+$sql_colors = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'charts_colors' AND users_id = ".$userID."";
 $result_colors = $DB->query($sql_colors);
 $colors = $DB->result($result_colors,0,'value');
 
@@ -95,10 +97,7 @@ $_SESSION['charts_colors'] = $colors;
     }
     
 //user image and name
-	$sql_photo = "SELECT picture 
-					FROM glpi_users
-					WHERE id = ".$_SESSION["glpiID"]." ";
-	
+	$sql_photo = "SELECT picture, name FROM glpi_users WHERE id = $userID ";	
 	$res_photo = $DB->query($sql_photo);
 	$pic = $DB->result($res_photo,0,'picture');
 	
@@ -509,6 +508,6 @@ else {
 
  	<!-- Remove below two lines in production
  	<script src="js/theme-options.js"></script>       
- 	<script src="js/core.js"></script>  -->  
+ 	<script src="js/core.js"></script>  --> 
 </body>
 </html>

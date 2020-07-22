@@ -161,7 +161,6 @@ $_SESSION['back'] = $back;
  	<!-- gauge -->
 	<script src="js/raphael.2.1.0.min.js"></script>
 	<script src="js/justgage.1.0.1.min.js"></script>	
-	
 	<style type="text/css">
 		.col-xs-15{
     		width:20%;
@@ -655,17 +654,14 @@ $total_due = $DB->fetch_assoc($result_due);
 	      $result_wid = $DB->query($query_wid);			            	      
 	      ?>    
 	        <table id="last_tickets" class="table table-hover table-condensed" >
-	        <tr>
-		        <th style="text-align: center;"><?php echo __('Tickets','dashboard'); ?></th>
-		        <th style="text-align: center;" ><?php echo __('Title','dashboard'); ?></th>	        
+		        <th style="text-align: center;"><?php echo __('Tickets','dashboard'); ?></th><th style="text-align: center;" ><?php echo __('Title','dashboard'); ?></th>	        
 					<?php
 						while($row = $DB->fetch_assoc($result_wid)) 
 						{					
-							echo "<tr><td style='text-align: center;'><a href='../../../front/ticket.form.php?id=".$row['id']."' target=_blank style='color: #526273;'>".$row['id']."</a>
+							echo "<tr><td style='text-align: center;'><a href=../../../front/ticket.form.php?id=".$row['id']." target=_blank style='color: #526273;'>".$row['id']."</a>
 							</td><td>". substr($row['name'],0,60)."</td></tr>";											
 						}				
-					?>
-			  </tr>		                                       
+					?>                                       
 	        </table>        
       </div>
          <!-- /widget-content --> 
@@ -693,24 +689,22 @@ $total_due = $DB->fetch_assoc($result_due);
 				AND glpi_tickets.id = glpi_tickets_users.tickets_id
 				AND glpi_tickets.status NOT IN ".$status."
 				".$entidade."
-				GROUP BY `glpi_users`.`firstname` 
+				GROUP BY `glpi_users`.`firstname` ASC
 				ORDER BY tick DESC
 				LIMIT 10 ";
             
             $result_tec = $DB->query($query_tec);			                        
             ?>    
            <table id="open_tickets" class="table table-hover table-condensed" >
-           	  <tr>
-	           <th style="text-align: center;"><?php echo __('Technician','dashboard'); ?></th>
-	           <th style="text-align: center;">
+	           <th style="text-align: center;"><?php echo __('Technician','dashboard'); ?></th><th style="text-align: center;">
 	          	<?php echo __('Open Tickets','dashboard'); ?>
 	           </th>
-	           </tr>
 	              
 					<?php
 						while($row = $DB->fetch_assoc($result_tec)) 
 						{					
-							echo "<tr><td><a href=./reports/rel_tecnico.php?con=1&sel_tec=".$row['id']."&stat=open target=_blank style='color: #526273;'> ".$row['name']." ".$row['sname']."</a></td><td style='text-align: center;' >".$row['tick']."</td></tr>";											
+							echo "<tr><td><a href=./reports/rel_tecnico.php?con=1&sel_tec=".$row['id']."&stat=open target=_blank style='color: #526273;'>
+							".$row['name']." ".$row['sname']."</a></td><td style='text-align: center;' >".$row['tick']."</td></tr>";											
 						}				
 					?>                                       
               </table>              
@@ -794,11 +788,11 @@ $total_due = $DB->fetch_assoc($result_due);
 						        // $service  = $DB->result($result_evt, $i, "service");         							        
 						        $message  = $DB->result($result_evt, $i, "message");
 								
-									echo "<tr><td style='text-align: center;'>". tipo($type) ."</td>
-											<td style='text-align: center;'>" . date_format($date, $dataf.' H:i:s') . "</td>					
-											<td style='text-align: left;'>". substr($message,0,50) ."</td></tr>
-									";
-									++$i;													
+								echo "<tr><td style='text-align: center;'>". tipo($type) ."</td>
+										<td style='text-align: center;'>" . date_format($date, $dataf.' H:i:s') . "</td>					
+										<td style='text-align: left;'>". substr($message,0,50) ."</td></tr>
+								";
+								++$i;													
 								}												
 						?>                                       
               </table>  
@@ -813,7 +807,7 @@ $total_due = $DB->fetch_assoc($result_due);
             <div class="widget-header wblue">
 				<?php
 				//logged users								
-				$path = GLPI_SESSION_DIR . '/' ;
+			$path = GLPI_SESSION_DIR . '/' ;
 				$diretorio = opendir($path);        
 				
 				$arr_arq = array();
@@ -838,28 +832,39 @@ $total_due = $DB->fetch_assoc($result_due);
 					
 						$file = $arquivos[$i];						
 						
-						$string = file_get_contents( $file ); 						
+						$strings = file_get_contents( $file ); 
 						
-						$list = preg_match( '/glpiID\|s:[0-9]:"(.+)/', $string, $matches);						
-						$arr = isset($matches[0]) ? $matches[0] : '';						
-						$posicao = strpos($arr, 'glpiID|s:');						
-						$string2 = substr($arr, $posicao, 25);						
-						$string3 = explode("\"", $string2);						
-						$arr_ids[] = isset($string3[1]) ? $string3[1] : '';						
+						if (version_compare(phpversion(), '7.2', '<')) {
+
+							$list = preg_match( '/glpiID\|[a-z]:[0-9]:"(.+)/', $strings, $matches );					
+							$arr = isset($matches[0]) ? $matches[0] : '';					
+							$posicao = strpos($arr, 'glpiID|s:');					
+							$string2 = substr($arr, $posicao, 25);					
+							$string3 = explode("\"", $string2);					
+							$arr_ids[] = isset($string3[1]) ? $string3[1] : '';			
+					
+					   } else { 																		
+							$list = preg_match('/glpiID\|[a-z]:[0-9]+/', $strings, $matches);
+							$string = isset($matches[0]) ? $matches[0] : '';	
+	//						$string1 = substr("$string",0, strrpos($string,':'));
+							$string2 = substr("$string", (strrpos($string,':') + 1));	
+							$arr_ids[] = isset($string2) ? $string2 : '';
+						}									
+					
 					}
 				}
 				
 				$ids = array_values($arr_ids);
 				$ids2 = implode("','",$ids);
-				
+
 				$query_name = 
 				"SELECT firstname AS name, realname AS sname, id AS uid, name AS glpiname, picture 
 				FROM glpi_users				
 				WHERE id IN ('".$ids2."')
-				ORDER BY name"; 
+				ORDER BY name"; 														
 				
 				$result_name = $DB->query($query_name); 
-				$num_users = $DB->numrows($result_name);          
+				$num_users = $DB->numrows($result_name);         
 				            
 				?>    
            <h3><i class="fa fa-group" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo __('Logged Users','dashboard')."  :  " .$num_users; ?></h3>
@@ -880,9 +885,10 @@ $total_due = $DB->fetch_assoc($result_due);
 				while($row_name = $DB->fetch_assoc($result_name)) 
 	  			   {
 						echo "<tr>
-									<td style='text-align: left;'><img src=". User::getURLForPicture($row_name['picture']) ." alt='' width='30px' height='35px' />&nbsp; &nbsp;<a href=../../../front/user.form.php?id=".$row_name['uid']." target=_blank style='color: #526273;'>".$row_name['name']." ".$row_name['sname']." (".$row_name['uid'].")</a>	
+									<td style='text-align: left;'><img src=". User::getURLForPicture($row_name['picture']) ." alt='' width='30px' height='35px' />&nbsp; &nbsp;<a href=../../../front/user.form.php?id=".$row_name['uid']." target=_blank style='color: #526273;'>
+										".$row_name['name']." ".$row_name['sname']." (".$row_name['uid'].")</a>	
 									</td>									
-								</tr>";																					
+								</tr>";												
 					}	
 
 				?>                                       
@@ -892,6 +898,8 @@ $total_due = $DB->fetch_assoc($result_due);
           </div>
 </div> <!-- end widgets -->                   		
           <!-- content row 2 --> 
+	<!-- </div>                     
+   </div>   totals   --> 
 </div> 
  
 <script>
@@ -967,6 +975,6 @@ $total_due = $DB->fetch_assoc($result_due);
 
 <!-- Remove below two lines in production -->  
 <script src="js/theme-options.js"></script>       
-<script src="js/core.js"></script>	
+<script src="js/core.js"></script>
 </body>
 </html>

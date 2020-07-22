@@ -638,7 +638,7 @@ $total_due = $DB->fetch_assoc($result_due);
 					AND glpi_tickets.id = glpi_tickets_users.tickets_id
 					AND glpi_tickets.status NOT IN ".$status."
 					".$entidade."
-					GROUP BY `glpi_users`.`firstname`
+					GROUP BY `glpi_users`.`firstname` ASC
 					ORDER BY tick DESC
 					LIMIT 10 ";
 	            
@@ -777,17 +777,28 @@ $total_due = $DB->fetch_assoc($result_due);
 				
 				if($conta > 0) {
 				
-				for($i=0; $i < $conta; $i++) {
-				
-					$file = $arquivos[$i];
+					for($i=0; $i < $conta; $i++) {					
 					
-					$string = file_get_contents( $file ); 										
-					$list = preg_match( '/glpiID\|s:[0-9]:"(.+)/', $string, $matches );					
-					$arr = isset($matches[0]) ? $matches[0] : '';					
-					$posicao = strpos($arr, 'glpiID|s:');					
-					$string2 = substr($arr, $posicao, 25);					
-					$string3 = explode("\"", $string2);					
-					$arr_ids[] = isset($string3[1]) ? $string3[1] : '';
+						$file = $arquivos[$i];						
+						
+						$strings = file_get_contents( $file ); 
+						
+						if (version_compare(phpversion(), '7.2', '<')) {
+
+							$list = preg_match( '/glpiID\|[a-z]:[0-9]:"(.+)/', $strings, $matches );					
+							$arr = isset($matches[0]) ? $matches[0] : '';					
+							$posicao = strpos($arr, 'glpiID|s:');					
+							$string2 = substr($arr, $posicao, 25);					
+							$string3 = explode("\"", $string2);					
+							$arr_ids[] = isset($string3[1]) ? $string3[1] : '';			
+					
+					   } else { 																		
+							$list = preg_match('/glpiID\|[a-z]:[0-9]+/', $strings, $matches);
+							$string = isset($matches[0]) ? $matches[0] : '';	
+	//						$string1 = substr("$string",0, strrpos($string,':'));
+							$string2 = substr("$string", (strrpos($string,':') + 1));	
+							$arr_ids[] = isset($string2) ? $string2 : '';
+						}									
 					
 					}
 				}
