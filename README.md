@@ -8,9 +8,7 @@
 
 3 - Acessar no menu do GLPI: Plugins -> Dashboard
 
-
 #############################################################
-
 
 1 - Unzip the file and copy the folder to the "plugins" folder on the GLPI server, renaming the plugin folder to "dashboard";
 
@@ -18,9 +16,6 @@
 
 3 - Get in GLPI Menu: Plugins -> Dashboard
 
-
 ##############################################################
-
-
 
 ![](https://sourceforge.net/p/glpidashboard/screenshot/GLPI_-_Dashboard_-_Home.png)

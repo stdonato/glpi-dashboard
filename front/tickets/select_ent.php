@@ -75,6 +75,7 @@ $sel_ent = $DB->result($result_e,0,'value');
 if($sel_ent == '' || $sel_ent == -1) {
 	
 	$entities = $_SESSION['glpiactiveentities'];
+	//$entities = Profile_User::getUserEntitiesForRight($_SESSION['glpiID'],Ticket::$rightname,Ticket::READALL);
 	$ents = implode(",",$entities);
 
 }
@@ -163,7 +164,7 @@ $selected = "0";
 	?>
 	
 	<script type="text/javascript" >
-		location.href="cham_entidades.php?ent=<?php echo $id_ent; ?>";
+		location.href="tickets_ent.php?ent=<?php echo $id_ent; ?>";
 	</script>		
 	
 	</div>

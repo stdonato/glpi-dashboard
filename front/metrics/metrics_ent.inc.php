@@ -21,11 +21,6 @@ $last6month = date('Y-m-d', strtotime('-180 days'));
 $datai_m2 = date('Y-m-d', strtotime('-90 days'));
 $dataf = date('Y-m-d', strtotime('-365 days'));
 
-// time period for metrics
-$sql_met = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'metric' AND users_id = ".$_SESSION['glpiID']."";
-$result_met = $DB->query($sql_met);
-$sel_period = $DB->result($result_met,0,'value');
-
 switch ($sel_period) {
     case 0:
         $period = '';
@@ -109,22 +104,22 @@ switch (date("w")) {
     case "6": $dia = __('Saturday','dashboard'); break;  
 }
 
+// time period for metrics
+$sql_met = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'metric' AND users_id = ".$_SESSION['glpiID']."";
+$result_met = $DB->query($sql_met);
+$sel_period = $DB->result($result_met,0,'value');
 
 // entity
-/*$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
-$result_e = $DB->query($sql_e);
-$sel_ent = $DB->result($result_e,0,'value');*/
-
 if($id_ent != '') {
 	
 	$sel_ent = $id_ent;
-
-	if($sel_ent != -1 && $sel_ent != '') {			
+	
+	if($sel_ent != -1) {			
 		$entidade = "AND glpi_tickets.entities_id IN (".$sel_ent.")";
 		$ent_problem =  "AND glpi_problems.entities_id IN (".$sel_ent.")";
 	}
 	
-	if($sel_ent == '') {
+/*	if($sel_ent == '') {
 		
 		$entities = $_SESSION['glpiactiveentities'];
 		$ent = implode(",",$entities);
@@ -137,11 +132,10 @@ if($id_ent != '') {
 			$entidade = "";
 			$ent_problem =  "";
 		}
-	}
+	}*/
 	
 	//entity name
-	if($sel_ent != '') {
-		
+	if($sel_ent != '') {		
 		$sql_e = "SELECT name FROM glpi_entities WHERE id = ".$sel_ent."";
 		$result_e = $DB->query($sql_e);
 		$actent = $DB->result($result_e,0,'name');	
@@ -151,7 +145,10 @@ if($id_ent != '') {
 		$actent = 'GLPI '.$CFG_GLPI['version'];
 	}	
 
-}
+} else {
+	//echo "<script>alert('Selecione uma entidade');</script>";
+	header("Location: select_ent.php"); 	
+}	
 
 //chamados ano
 $sql_ano =	"SELECT COUNT(glpi_tickets.id) as total        

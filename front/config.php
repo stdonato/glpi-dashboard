@@ -109,11 +109,12 @@ function chart(theme) {
 						if(count($arr1)>1){
 						    $formated_arr = array_merge($formated_arr,explode(',',$arr));
 						}else{
-						    $formated_arr[]= $arr;
+						    $formated_arr[] = $arr;
 						}
 					}					
 
-					$entities = $_SESSION['glpiactiveentities'];
+					//$entities = $_SESSION['glpiactiveentities'];
+					$entities = Profile_User::getUserEntitiesForRight($_SESSION['glpiID'],Ticket::$rightname,Ticket::READALL);
 					$ents = implode(",",$entities);
 					
 					// lista de entidades
@@ -126,8 +127,6 @@ function chart(theme) {
 					$result_ent = $DB->query($sql_ent);
 					
 					$arr_ent = array();
-					$arr_ent[0] = "-- ". __('Select a entity', 'dashboard') . " --" ;
-				   $arr_ent[-1] = __('All', 'dashboard') ;		
 					
 					while ($row_result = $DB->fetch_assoc($result_ent))
 					 {
@@ -135,6 +134,9 @@ function chart(theme) {
 					    $arr_ent[$v_row_result] = $row_result['cname'] ;
 					 }
 					 
+					//$arr_ent[-2] = "-- ". __('Select a entity', 'dashboard') . " --" ;
+				   $arr_ent[-1] = __('All', 'dashboard') ;
+				   		
 					//reload page	
 					if(isset($_REQUEST['up'])) {						
 						echo "<meta HTTP-EQUIV='refresh' CONTENT='0.1;URL=config.php'>";						
@@ -172,10 +174,12 @@ function chart(theme) {
 					echo '<select name="sel_ent[]" id="sel_ent" multiple style="width: 600px; height: 250px;">';
 					
 					foreach( $arr_ent as $key=>$option )
-					{						
-						if(in_array($key,$formated_arr)) { $select = 'selected'; }	
-						else {$select = '';}						
-						echo '<option value="'.$key.'" '.$select.'>'.$option.'</option>'."\n";
+					{	
+						if($key != 0) {					
+							if(in_array($key,$formated_arr)) { $select = 'selected'; }	
+							else {$select = '';}						
+							echo '<option value="'.$key.'" '.$select.'>'.$option.'</option>'."\n";
+						}
 					}					
 					echo "</select>"."\n";
 										
@@ -191,11 +195,11 @@ function chart(theme) {
 							if(in_array(-1, $ents_sel)) {	
 
 								//$entities = Profile_User::getUserEntities($_SESSION['glpiID'], true);
-								$entities = $_SESSION['glpiactiveentities'];	
+								//$entities = $_SESSION['glpiactiveentities'];
+								$entities = Profile_User::getUserEntitiesForRight($_SESSION['glpiID'],Ticket::$rightname,Ticket::READALL);	
 								$ent = implode(",",$entities);												
 								
-								$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
-											  VALUES ('entity', '".$ent."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$ent."' ";																
+								$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id) VALUES ('entity', '".$ent."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$ent."' ";																
 								$result = $DB->query($query);	
 								
 								//reload page

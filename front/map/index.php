@@ -171,15 +171,24 @@ else {
 
 if(isset($_SESSION['glpiID'])) {
 	
-	$entities = $_SESSION['glpiactiveentities'];
-	$ent = implode(",",$entities);
+	$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
+	$result_e = $DB->query($sql_e);
+	$sel_ent = $DB->result($result_e,0,'value');
 	
-	if($ent != '') {
+	if($sel_ent == '' || $sel_ent == -1) {
+	$entities = $_SESSION['glpiactiveentities'];
+	//$entities = Profile_User::getUserEntitiesForRight($_SESSION['glpiID'],Ticket::$rightname,Ticket::READALL);	
+	$ent = implode(",",$entities);	
+	$entidade = "AND gt.entities_id IN (".$ent.")";
+	} else {	
+		$entidade = "AND gt.entities_id IN (".$sel_ent.")";
+	}	
+/*	if($ent != '') {
 		$entidade = "AND gt.entities_id IN (".$ent.")";
 	}
 	else {
 		$entidade = "";
-	}
+	}*/
 }	
 
 ?>

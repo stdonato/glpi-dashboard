@@ -128,6 +128,7 @@ if(isset($_SESSION['glpiID'])) {
 	
 	if($sel_ent == '') {
 		
+		//$entities = Profile_User::getUserEntitiesForRight($_SESSION['glpiID'],Ticket::$rightname,Ticket::READALL);		
 		$entities = $_SESSION['glpiactiveentities'];
 		$ent = implode(",",$entities);
 		
@@ -147,7 +148,7 @@ else {
 }
 
 //entity name
-if(isset($_SESSION['glpiactive_entity'])) {
+/*if(isset($_SESSION['glpiactive_entity'])) {
 	
 	if($_SESSION['glpiactive_entity'] != 0 AND $_SESSION['glpiactive_entity'] != '') {
 		$sql_e = "SELECT name FROM glpi_entities WHERE id = ".$_SESSION['glpiactive_entity']."";
@@ -163,6 +164,29 @@ if(isset($_SESSION['glpiactive_entity'])) {
 else {
 	$actent = 'GLPI '.$CFG_GLPI['version'];
 }
+*/
+
+# entity name
+$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
+$result_e = $DB->query($sql_e);
+$sel_ent = $DB->result($result_e,0,'value');
+
+if($sel_ent == '' OR strstr($sel_ent,",")) { 	
+   //if($sel_ent == '') { 	
+	$sel_ent1 = explode(",",$sel_ent);
+	$actent = 'GLPI '.$CFG_GLPI['version'];
+}
+
+if($sel_ent != '' AND !strstr($sel_ent,",")) {
+	$query = "SELECT name FROM glpi_entities WHERE id IN (".$sel_ent.")";
+	$result = $DB->query($query);
+	$ent_name1 = $DB->result($result,0,'name');
+	$actent = $ent_name1 ;
+}
+else {
+	$actent = 'GLPI '.$CFG_GLPI['version'];
+}
+
 
 //chamados ano
 $sql_ano =	"SELECT COUNT(glpi_tickets.id) as total        
@@ -308,7 +332,7 @@ FROM glpi_tickets
 WHERE glpi_tickets.is_deleted = 0
 ".$period."
 ".$entidade."
-GROUP BY id
+GROUP BY id 
 ORDER BY id DESC ";
 
 $result_cham = $DB->query($sql_cham);

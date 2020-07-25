@@ -1,11 +1,21 @@
 <?php
 
+include ("../../../../inc/includes.php");
+include ("../../../../inc/config.php");
+
 if(isset($_REQUEST['ent'])) {
-	$id_ent = $_REQUEST['ent'];
-	$indexw = "indexw.php?ent=".$id_ent;
-	$indexb = "index.php?ent=".$id_ent;
-	include "metrics_ent.inc.php";
-}
+
+   $entities = Profile_User::getUserEntitiesForRight($_SESSION['glpiID'],Ticket::$rightname,Ticket::READALL);	 	
+	
+	if(in_array($_REQUEST['ent'], $entities)){
+		$id_ent = $_REQUEST['ent'];
+		$indexw = "indexw.php?ent=".$id_ent;
+		$indexb = "index.php?ent=".$id_ent;
+		include "metrics_ent.inc.php";
+	} else {
+		header("Location: select_ent.php"); 
+	}	
+}	
 		
 elseif(isset($_REQUEST['grp'])) {
 	$id_grp = $_REQUEST['grp'];
@@ -112,7 +122,7 @@ else {
 			</header>
 			<div class="content" >
 				<div class="metric5"><?php echo $new; ?></div>
-				<div class="metric-small5"><?php //if(isset($newy) && $newy != 0) { percent($new,$newy); } else { echo '0'; } ?></div>
+				<div class="metric-small5"></div>
 			</div>
 		</div>
 		
@@ -122,7 +132,7 @@ else {
 			</header>
 			<div class="content">
 				<div class="metric5"><?php echo $assigned;?></div>
-				<div class="metric-small5"><?php //percent($assigned,$assignedy); ?></div>
+				<div class="metric-small5"></div>
 			</div>
 		</div>
 
@@ -185,33 +195,31 @@ else {
 			<header>
 				<p><span></span><?php echo __('Time')." &amp; ". __('Date'); ?> </p>
 			</header>
-				<div class="content">
-					<div class="cf-td">
-					<!-- <div class="cf-td cf-td-12"> -->
-						<div class="cf-version metric-small" style="font-size:30px !important;"><?php echo $actent; ?></div>
-						<div class="cf-td-time metric hora"></div>
-						<div class="cf-td-dd">
-							<!--<p class="cf-td-day metric-small" ></p>
-							<p class="cf-td-date metric-small" ></p>						
-							-->
-							<script type="text/javascript">
-								var d_names = <?php echo '"'.$dia.'"' ; ?>;
-								var m_names = <?php echo '"'.$mes.'"' ; ?>;
-								
-								var d = new Date();
-								var curr_day = d.getDay();
-								var curr_date = d.getDate();
-								var curr_month = d.getMonth();
-								var curr_year = d.getFullYear();
-			
+			<div class="content">
+				<div class="cf-td">
+				<!-- <div class="cf-td cf-td-12"> -->
+					<div class="cf-version metric-small" style="font-size:30px !important;"><?php echo $actent; ?></div>
+					<div class="cf-td-time metric hora"></div>
+					<div class="cf-td-dd">
+						<!--<p class="cf-td-day metric-small" ></p>
+						<p class="cf-td-date metric-small" ></p>						
+						-->
+						<script type="text/javascript">
+							var d_names = <?php echo '"'.$dia.'"' ; ?>;
+							var m_names = <?php echo '"'.$mes.'"' ; ?>;							
+							var d = new Date();
+							var curr_day = d.getDay();
+							var curr_date = d.getDate();
+							var curr_month = d.getMonth();
+							var curr_year = d.getFullYear();
+		
 							document.write("<span style='font-size:26px; margin-top: -6px !important;'>" + d_names + "</span><br> <span style='font-size:26px;'>" + curr_date + " " + m_names + " " + curr_year + "</span><br>" );		
-							</script>
-							<span style="font-size:20px;"><?php echo __('Period'). ": ".$period_name ?></span>
-						</div>					
-					</div>
+						</script>
+						<span style="font-size:20px;"><?php echo __('Period'). ": ".$period_name ?></span>
+					</div>					
 				</div>
+			</div>
 			</div> <!-- //end cf-item -->
-
 
 		<div style="" class="col-lg-3 cf-item">
 				<header>
@@ -304,11 +312,10 @@ else {
 						<p><span></span><?php echo _n('Ticket','Tickets',2)." ". __('by Type','dashboard') ;?></p>
 					</header>
 					<div class="content" >					
-						<div id="cf-rag-1" class="cf-rag">
-						<?php //include ("grafpie_tipo.inc.php");  ?>
-						<div class="cf-bars"></div>
-							<div class="cf-figs "></div>
-								<div class="cf-txts"></div> 
+						<div id="cf-rag-1" class="cf-rag">						
+							<div class="cf-bars"></div>
+								<div class="cf-figs "></div>
+									<div class="cf-txts"></div> 
 						</div>
 					</div>				
 			</div> 	<!-- //end cf-item -->	

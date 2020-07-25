@@ -14,7 +14,20 @@ $sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' A
 $result_e = $DB->query($sql_e);
 $sel_ent = $DB->result($result_e,0,'value');
 
-if($sel_ent == '' OR strstr($sel_ent,",")) { 
+if($sel_ent == '') { 	
+	$entities = $_SESSION['glpiactiveentities'];
+	$sel_ent = implode(",",$entities);		
+	$query = "SELECT name FROM glpi_entities WHERE id IN (".$sel_ent.")";
+	$result = $DB->query($query);
+	$ent_name1 = $DB->result($result,0,'name');
+	if(count($entities)>1) {
+		$ent_name = __('Tickets Statistics','dashboard');
+	} else {
+		$ent_name = __('Tickets Statistics','dashboard')." :  ". $ent_name1 ;
+	}		
+}
+
+elseif(strstr($sel_ent,",")) { 	
 	$ent_name = __('Tickets Statistics','dashboard');
 }
 
@@ -285,7 +298,7 @@ else {
 	                                    </a>
 													<ul  class="animated fadeInDown">
                                         <li>
-                                            <a href="./tickets/chamados.php" data-original-title=' Geral' target="_blank">
+                                            <a href="./tickets/tickets.php" data-original-title=' Geral' target="_blank">
                                                 <i class="fa fa-angle-right"></i>
                                                 <span class='hidden-minibar'> <?php echo __('Overall','dashboard'); ?> </span>
                                             </a>

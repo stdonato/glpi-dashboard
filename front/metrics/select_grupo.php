@@ -1,3 +1,4 @@
+
 <?php
 
 include ("../../../../inc/includes.php");
@@ -76,7 +77,8 @@ $sel_ent = $DB->result($result_e,0,'value');
 //select entity
 if($sel_ent == '' || $sel_ent == -1) {
 	
-	$entities = $_SESSION['glpiactiveentities'];										
+	//$entities = $_SESSION['glpiactiveentities'];
+	$entities = Profile_User::getUserEntitiesForRight($_SESSION['glpiID'],Ticket::$rightname,Ticket::READALL);								
 	$ent = implode(",",$entities);
 	
 	$entidade = "WHERE entities_id IN (".$ent.") OR is_recursive = 1 ";

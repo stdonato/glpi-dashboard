@@ -72,8 +72,7 @@ Session::checkRight("profile", READ);
 		else {
 			$status = "('5','6')";
 			$status1 = "AND glpi_tickets.status NOT IN ".$status."";
-		}
-		
+		}		
 		
 		// entity
 		$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
@@ -82,9 +81,12 @@ Session::checkRight("profile", READ);
 		
 		if($sel_ent == '' || $sel_ent == -1) {
 			//get user entities
-			$entities = Profile_User::getUserEntities($_SESSION['glpiID'], true);
-			$ent = implode(",",$entities);
-		
+			//$entities = Profile_User::getUserEntities($_SESSION['glpiID'], true);
+			//$entities = $_SESSION['glpiactive_entity'];
+			//$entities = $_SESSION['glpiactiveentities'];
+			$entities = Profile_User::getUserEntitiesForRight($_SESSION['glpiID'],Ticket::$rightname,Ticket::READALL);
+			$ent = implode(",",$entities);		
+			//$ent = $entities;		
 			$entidade = "AND glpi_tickets.entities_id IN (".$ent.")";	
 			$ent_problem = "AND glpi_problems.entities_id IN (".$ent.")";
 		}
@@ -95,6 +97,7 @@ Session::checkRight("profile", READ);
 			$ent_problem =  "AND glpi_problems.entities_id IN (".$sel_ent.")";
 		}
 		
+		//var_dump($entities);
 		
 		// contar chamados abertos
 		$sql = "SELECT COUNT(glpi_tickets.id) AS total

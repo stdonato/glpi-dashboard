@@ -14,7 +14,22 @@ $sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' A
 $result_e = $DB->query($sql_e);
 $sel_ent = $DB->result($result_e,0,'value');
 
-if($sel_ent == '' OR strstr($sel_ent,",")) { 	
+if($sel_ent == '') { 	
+	//if($sel_ent == '') { 	
+   //$sel_ent1 = explode(",",$sel_ent);
+	$entities = $_SESSION['glpiactiveentities'];
+	$sel_ent = implode(",",$entities);		
+	$query = "SELECT name FROM glpi_entities WHERE id IN (".$sel_ent.")";
+	$result = $DB->query($query);
+	$ent_name1 = $DB->result($result,0,'name');
+	if(count($entities)>1) {
+		$ent_name = __('Tickets Statistics','dashboard');
+	} else {
+		$ent_name = __('Tickets Statistics','dashboard')." :  ". $ent_name1 ;
+	}		
+}
+
+elseif(strstr($sel_ent,",")) { 	
 	$ent_name = __('Tickets Statistics','dashboard');
 }
 
@@ -281,7 +296,7 @@ else {
            <!-- Classic dropdown -->            
             <li class="dropdown menu"><a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color:#fff;"><span class="text-nav1"><i class='fa fa-edit'></i>&nbsp;<?php echo __('Tickets','dashboard');?>&nbsp;<b class="caret"></b></span></a>
               <ul role="menu" class="dropdown-menu">
-                <li><a tabindex="-1" href="./tickets/chamados.php" target="_blank"> <?php echo __('Overall','dashboard'); ?> </a></li>
+                <li><a tabindex="-1" href="./tickets/tickets.php" target="_blank"> <?php echo __('Overall','dashboard'); ?> </a></li>
                 <li><a tabindex="-1" href="./tickets/select_ent.php" target="_blank"> <?php echo __('by Entity','dashboard'); ?> </a></li>
                 <li><a tabindex="-1" href="./tickets/select_grupo.php" target="_blank">  <?php echo __('by Group','dashboard'); ?> </a></li>                
                 <!-- <li><a tabindex="-1" href="./map/index.php" target="_blank"> <?php echo __('Map','dashboard'); ?> </a></li> -->

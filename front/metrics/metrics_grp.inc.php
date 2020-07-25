@@ -21,11 +21,6 @@ $last6month = date('Y-m-d', strtotime('-180 days'));
 $datai_m2 = date('Y-m-d', strtotime('-90 days'));
 $dataf = date('Y-m-d', strtotime('-365 days'));
 
-// time period for metrics
-$sql_met = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'metric' AND users_id = ".$_SESSION['glpiID']."";
-$result_met = $DB->query($sql_met);
-$sel_period = $DB->result($result_met,0,'value');
-
 switch ($sel_period) {
     case 0:
         $period = '';
@@ -108,6 +103,11 @@ switch (date("w")) {
     case "5": $dia = __('Friday','dashboard'); break;
     case "6": $dia = __('Saturday','dashboard'); break;  
 }
+
+// time period for metrics
+$sql_met = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'metric' AND users_id = ".$_SESSION['glpiID']."";
+$result_met = $DB->query($sql_met);
+$sel_period = $DB->result($result_met,0,'value');
 
 // entity
 $sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";

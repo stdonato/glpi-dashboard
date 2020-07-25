@@ -1,10 +1,20 @@
 <?php
 
+include ("../../../../inc/includes.php");
+include ("../../../../inc/config.php");
+
 if(isset($_REQUEST['ent'])) {
-	$id_ent = $_REQUEST['ent'];
-	$indexw = "indexw.php?ent=".$id_ent;
-	$indexb = "index.php?ent=".$id_ent;
-	include "metrics_ent.inc.php";
+
+   $entities = Profile_User::getUserEntitiesForRight($_SESSION['glpiID'],Ticket::$rightname,Ticket::READALL);	 	
+	
+	if(in_array($_REQUEST['ent'], $entities)){
+		$id_ent = $_REQUEST['ent'];
+		$indexw = "indexw.php?ent=".$id_ent;
+		$indexb = "index.php?ent=".$id_ent;
+		include "metrics_ent.inc.php";
+	} else {
+		header("Location: select_ent.php"); 
+	}	
 }
 	
 elseif(isset($_REQUEST['grp'])) {

@@ -5,9 +5,7 @@
 
 3 - Acessar no menu do GLPI: Plugins -> Dashboard
 
-
 #############################################################
-
 
 1 - Unzip the file and copy the folder to the "plugins" folder on the GLPI server, renaming the plugin folder to "dashboard";
 
@@ -15,6 +13,6 @@
 
 3 - Get in GLPI Menu: Plugins -> Dashboard
 
-
 ##############################################################
 
+contact: stevenesdonato@gmail.com
