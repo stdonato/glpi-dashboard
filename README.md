@@ -23,7 +23,7 @@
 
 <p align="center">
 <a href="https://github.com/builtbybel/patchlady/releases/latest" target="_blank">
-<img alt="Latest GitHub release" src="https://img.shields.io/github/release/builtbybel/patchfluent.svg?style=flat-square" />
+<img alt="Latest GitHub release" src="https://img.shields.io/github/release/stdonato/glpi-dashboard.svg?style=flat-square" />
 </a>
 	
 <a href="https://github.com/builtbybel/patchlady/releases" target="_blank">
@@ -31,8 +31,8 @@
 </a>
 
 <a href="https://github.com/builtbybel/patchlady/commits/master">
-<img src="https://img.shields.io/github/last-commit/builtbybel/patchfluent.svg?style=flat-square&logo=github&logoColor=white"
+<img src="https://img.shields.io/github/last-commit/stdonato/glpi-dashboard.svg?style=flat-square&logo=github&logoColor=white"
 alt="GitHub last commit">
 <a href="https://github.com/builtbybel/patchlady/issues">
-<img src="https://img.shields.io/github/issues-raw/builtbybel/patchfluent.svg?style=flat-square&logo=github&logoColor=white"
+<img src="https://img.shields.io/github/issues-raw/stdonato/glpi-dashboard.svg?style=flat-square&logo=github&logoColor=white"
 alt="GitHub issues">   
