@@ -17,22 +17,4 @@
 
 ##############################################################
 
-![](https://sourceforge.net/p/glpidashboard/screenshot/GLPI_-_Dashboard_-_Home.png)
-
-
-
-<p align="center">
-<a href="https://github.com/builtbybel/patchlady/releases/latest" target="_blank">
-<img alt="Latest GitHub release" src="https://img.shields.io/github/release/stdonato/glpi-dashboard.svg?style=flat-square" />
-</a>
-	
-<a href="https://github.com/builtbybel/patchlady/releases" target="_blank">
-<img alt="Downloads on GitHub" src="https://img.shields.io/github/downloads/stdonato/glpi-dashboard/total.svg?style=flat-square" />
-</a>
-
-<a href="https://github.com/builtbybel/patchlady/commits/master">
-<img src="https://img.shields.io/github/last-commit/stdonato/glpi-dashboard.svg?style=flat-square&logo=github&logoColor=white"
-alt="GitHub last commit">
-<a href="https://github.com/builtbybel/patchlady/issues">
-<img src="https://img.shields.io/github/issues-raw/stdonato/glpi-dashboard.svg?style=flat-square&logo=github&logoColor=white"
-alt="GitHub issues">   
+![](https://sourceforge.net/p/glpidashboard/screenshot/GLPI_-_Dashboard_-_Home.png)   
