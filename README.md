@@ -13,7 +13,7 @@
 </a>
 	
 <a href="https://github.com/builtbybel/patchlady/releases" target="_blank">
-<img alt="Downloads on GitHub" src="https://img.shields.io/github/downloads/builtbybel/glpi-dashboard/total.svg?style=flat-square" />
+<img alt="Downloads on GitHub" src="https://img.shields.io/github/downloads/stdonato/glpi-dashboard/total.svg?style=flat-square" />
 </a>
 
 <a href="https://github.com/builtbybel/patchlady/commits/master">
