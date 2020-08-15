@@ -1,6 +1,11 @@
 
 # Dashboard
-
+<p align="center">
+  <a href="#about">About</a> •
+  <a href="#about">How-to</a> •
+  <a href="#download">Download</a> •
+  <a href="#credits">Credits</a>
+</p>
 
 1 - Descompactar o arquivo e copiar a pasta para a pasta "plugins" no servidor de GLPI, renomeando a pasta do plugin para "dashboard" apenas;
 
