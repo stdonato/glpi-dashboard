@@ -27,7 +27,7 @@ echo '
 	</thead>
 	<tbody>'; 		
 
-while ($row = $DB->fetch_assoc($result2))		
+while ($row = $DB->fetchAssoc($result2))		
 {		
 	echo '<tr>
 			<td>'. $row['name'].'</td>

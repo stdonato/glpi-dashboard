@@ -84,7 +84,7 @@ Session::checkRight("profile", READ);
 		AND glpi_tickets.entities_id IN (".$ent.")" ;
 		
 		$result = $DB->query($sql);
-		$data = $DB->fetch_assoc($result);
+		$data = $DB->fetchAssoc($result);
 		
 		$abertos = $data['total']; 
 		
@@ -102,7 +102,7 @@ Session::checkRight("profile", READ);
 		AND type = 2 ";
 		
 		$result = $DB->query($query);
-		$quant = $DB->fetch_assoc($result);
+		$quant = $DB->fetchAssoc($result);
 		
 		$atual = $quant['quant']; 
 		
@@ -125,7 +125,7 @@ Session::checkRight("profile", READ);
 		AND glpi_tickets.entities_id = ".$ent."" ;
 		
 		$result = $DB->query($sql);
-		$hoje = $DB->fetch_assoc($result);
+		$hoje = $DB->fetchAssoc($result);
 		
 		
 		// chamados de ontem - yesterday tickets
@@ -139,7 +139,7 @@ Session::checkRight("profile", READ);
 		AND glpi_tickets.entities_id = ".$ent."" ;
 		
 		$result = $DB->query($sql);
-		$ontem = $DB->fetch_assoc($result);
+		$ontem = $DB->fetchAssoc($result);
 		
 		//$cham_ontem = "'Chamados de ontem: " . $ontem['total'] . "'";
 		if ($ontem['total'] > $hoje['total']) { $up_down = "../img/down.png"; }
@@ -326,7 +326,7 @@ else {
 		<tbody>";
 		
 
-while($row = $DB->fetch_assoc($result_cham)){ 
+while($row = $DB->fetchAssoc($result_cham)){ 
 
 		$status1 = $row['status']; 
 		
@@ -350,7 +350,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 		AND glpi_tickets_users.type = 2 ";
 		    
 		$result_tec = $DB->query($sql_tec);	
-		$row_tec = $DB->fetch_assoc($result_tec);
+		$row_tec = $DB->fetchAssoc($result_tec);
 		
 		//get requester
 		$sql_req = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
@@ -362,7 +362,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 		AND glpi_tickets.entities_id = ".$ent." ";
 		    
 		$result_req = $DB->query($sql_req);	
-		$row_req = $DB->fetch_assoc($result_req);
+		$row_req = $DB->fetchAssoc($result_req);
 		
 		//get priority
 		$sql_prio = "SELECT name, value
@@ -370,7 +370,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 				WHERE name LIKE 'priority_".$row['priority']."' ";
 		
 		$result_prio = $DB->query($sql_prio);	
-		$row_prio = $DB->fetch_assoc($result_prio);	
+		$row_prio = $DB->fetchAssoc($result_prio);	
 		
 		$priority = substr($row_prio['name'],9,10);
 		
@@ -398,7 +398,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 		WHERE glpi_locations.id = ". $row['lid'] ." ";
 		    
 		$result_loc = $DB->query($sql_loc);	
-		$row_loc = $DB->fetch_assoc($result_loc);		 				 					 	
+		$row_loc = $DB->fetchAssoc($result_loc);		 				 					 	
 
 		echo "
 		<tr class='title' style='font-weight:normal;'>

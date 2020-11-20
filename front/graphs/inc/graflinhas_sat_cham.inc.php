@@ -19,7 +19,7 @@ SELECT COUNT(id) AS id
 FROM glpi_ticketsatisfactions ";
 
 $result_if = $DB->query($query_if) or die('erro');
-$sat_if = $DB->fetch_assoc($result_if);
+$sat_if = $DB->fetchAssoc($result_if);
 
 
 if($sat_if['id'] != 0) {
@@ -44,7 +44,7 @@ if($interval >= "31") {
 	$contador = $DB->numrows($resultm);
 
 	$arr_grfm = array();
-	while ($row_result = $DB->fetch_assoc($resultm)){
+	while ($row_result = $DB->fetchAssoc($resultm)){
 		$v_row_result = $row_result['month_l'];
 		$arr_grfm[$v_row_result] = $row_result['nb'];
 	}
@@ -69,7 +69,7 @@ else {
 	$contador = $DB->numrows($resultm);
 
 	$arr_grfm = array();
-	while ($row_result = $DB->fetch_assoc($resultm)){
+	while ($row_result = $DB->fetchAssoc($resultm)){
 		$v_row_result = $row_result['month'];
 		$arr_grfm[$v_row_result] = $row_result['nb'];
 	}
@@ -91,7 +91,7 @@ if($interval >= "31") {
 
 	$arr_month = array();
 
-	while ($row_result = $DB->fetch_assoc($resultm))
+	while ($row_result = $DB->fetchAssoc($resultm))
 		{
 			$v_row_result = $row_result['month_l'];
 			$arr_month[$v_row_result] = 0;
@@ -100,7 +100,7 @@ if($interval >= "31") {
 else {
 	$arr_month = array();
 
-	while ($row_result = $DB->fetch_assoc($resultm))
+	while ($row_result = $DB->fetchAssoc($resultm))
 		{
 			$v_row_result = $row_result['month'];
 			$arr_month[$v_row_result] = 0;
@@ -126,7 +126,7 @@ if($interval >= "31") {
 	$resulta = $DB->query($querya) or die('erro');
 
 	$arr_grfa = array();
-	while ($row_result = $DB->fetch_assoc($resulta)){
+	while ($row_result = $DB->fetchAssoc($resulta)){
 		$v_row_result = $row_result['month_l'];
 		$arr_grfa[$v_row_result] = $row_result['nb'];
 	}
@@ -150,7 +150,7 @@ else {
 	$resulta = $DB->query($querya) or die('erro');
 
 	$arr_grfa = array();
-	while ($row_result = $DB->fetch_assoc($resulta)){
+	while ($row_result = $DB->fetchAssoc($resulta)){
 		$v_row_result = $row_result['month'];
 		$arr_grfa[$v_row_result] = $row_result['nb'];
 	}
@@ -183,7 +183,7 @@ if($interval >= "31") {
 	$resultf = $DB->query($queryf) or die('erro');
 
 	$arr_grff = array();
-	while ($row_result = $DB->fetch_assoc($resultf)){
+	while ($row_result = $DB->fetchAssoc($resultf)){
 		$v_row_result = $row_result['month_l'];
 		$arr_grff[$v_row_result] = $row_result['nb'];
 	}
@@ -207,7 +207,7 @@ else {
 	$resultf = $DB->query($queryf) or die('erro');
 
 	$arr_grff = array();
-	while ($row_result = $DB->fetch_assoc($resultf)) {
+	while ($row_result = $DB->fetchAssoc($resultf)) {
 		$v_row_result = $row_result['month'];
 		$arr_grff[$v_row_result] = $row_result['nb'];
 	}
@@ -242,7 +242,7 @@ if($interval >= "31") {
 
 //array with satisfaction average
 $arr_grfsat = array();
-while ($row_result1 = $DB->fetch_assoc($result_sat))
+while ($row_result1 = $DB->fetchAssoc($result_sat))
 	{
 		$v_row_result1 = $row_result1['month_l'];
 		$arr_grfsat[$v_row_result1] = round(($row_result1['media']/5)*100,1);
@@ -269,7 +269,7 @@ else {
 
 //array with satisfaction average
 $arr_grfsat = array();
-while ($row_result1 = $DB->fetch_assoc($result_sat))
+while ($row_result1 = $DB->fetchAssoc($result_sat))
 	{
 		$v_row_result1 = $row_result1['month'];
 		$arr_grfsat[$v_row_result1] = round(($row_result1['media']/5)*100,1);

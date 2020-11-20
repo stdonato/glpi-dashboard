@@ -142,7 +142,7 @@ SELECT DISTINCT glpi_users.`id` AS id , glpi_users.`firstname` AS name, glpi_use
 ORDER BY name ASC ";
 
 $result_tec = $DB->query($sql_tec);
-$tec = $DB->fetch_assoc($result_tec);
+$tec = $DB->fetchAssoc($result_tec);
 
 $url = $_SERVER['REQUEST_URI'];
 $arr_url = explode("?", $url);
@@ -186,7 +186,7 @@ $arr_tec[0] = "-- ". __('Select a technician', 'dashboard') . " --" ;
 
 $DB->data_seek($result_tec, 0);
 
-while ($row_result = $DB->fetch_assoc($result_tec)) {
+while ($row_result = $DB->fetchAssoc($result_tec)) {
     $v_row_result = $row_result['id'];
     $arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname'] ;
 }
@@ -303,12 +303,12 @@ $result_nome = $DB->query($sql_nome) ;
 
 
 //total time of tasks
-while($row = $DB->fetch_assoc($result_cons1)){
+while($row = $DB->fetchAssoc($result_cons1)){
     $tempo_total += $row['actiontime'];
 }
 
 //table thread
-while($row = $DB->fetch_assoc($result_nome)){
+while($row = $DB->fetchAssoc($result_nome)){
 
 	$tech = $row['firstname'] ." ". $row['realname'];
 	
@@ -346,7 +346,7 @@ while($row = $DB->fetch_assoc($result_nome)){
 //listar chamados
 
 $DB->data_seek($result_cham, 0);
-while($row = $DB->fetch_assoc($result_cham)){
+while($row = $DB->fetchAssoc($result_cham)){
 	
 	$sql_req = "SELECT gu.firstname AS name, gu.realname AS sname
 					FROM glpi_users gu, glpi_tickets_users gtu
@@ -354,7 +354,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 					AND gtu.users_id = gu.id
 					AND gtu.type = 1 ";
 	$result_req = $DB->query($sql_req);
-	$req = $DB->fetch_assoc($result_req);
+	$req = $DB->fetchAssoc($result_req);
 	
 	echo "
 	<tr style='font-weight:normal;'>

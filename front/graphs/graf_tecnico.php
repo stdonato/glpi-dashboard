@@ -136,7 +136,7 @@ ORDER BY name ASC ";
 
 $result_tec = $DB->query($sql_tec);
 
-$tec = $DB->fetch_assoc($result_tec);
+$tec = $DB->fetchAssoc($result_tec);
 
 // lista de tecnicos
 function dropdown( $name, array $options, $selected=null )
@@ -183,7 +183,7 @@ $arr_tec[0] = "-- ". __('Select a technician','dashboard') . " --" ;
 
 $DB->data_seek($result_tec, 0) ;
 
-while ($row_result = $DB->fetch_assoc($result_tec))		
+while ($row_result = $DB->fetchAssoc($result_tec))		
 { 
 	$v_row_result = $row_result['id'];
 	$arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;			
@@ -288,7 +288,7 @@ AND glpi_tickets_users.type = 2
 ORDER BY glpi_users.firstname ASC ";
 
 $result_nm = $DB->query($sql_nm);
-$tec_name = $DB->fetch_assoc($result_nm);
+$tec_name = $DB->fetchAssoc($result_nm);
 
 
 if($data_ini == $data_fin) {
@@ -309,7 +309,7 @@ AND glpi_tickets_users.type = 2
 AND glpi_tickets_users.tickets_id = glpi_tickets.id ";
 
 $result_total = $DB->query($query_total);
-$total_cham = $DB->fetch_assoc($result_total);
+$total_cham = $DB->fetchAssoc($result_total);
 
 //count by status
 $query_stat = "

@@ -18,7 +18,7 @@ echo '
 	</thead>
 	<tbody>'; 		
 
-while ($row = $DB->fetch_assoc($result2))	{		
+while ($row = $DB->fetchAssoc($result2))	{		
 
 	$query = "
 	SELECT count(id) AS conta
@@ -26,7 +26,7 @@ while ($row = $DB->fetch_assoc($result2))	{
 	WHERE consumableitems_id = ".$row['id']." ";
 	
 	$result = $DB->query($query);
-	$quant = $DB->fetch_assoc($result);
+	$quant = $DB->fetchAssoc($result);
 
 
 	echo '<tr>

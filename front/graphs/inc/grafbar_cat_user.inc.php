@@ -5,7 +5,7 @@ global $DB;
 $sql_ent = "SELECT COUNT(id) AS id FROM glpi_itilcategories ";
 
 $result_ent = $DB->query($sql_ent) or die('erro');
-$num_ent = $DB->fetch_assoc($result_ent);
+$num_ent = $DB->fetchAssoc($result_ent);
 
 if($data_ini == $data_fin) {
 	$datas = "LIKE '".$data_ini."%'";
@@ -34,7 +34,7 @@ LIMIT 20
 $result3 = $DB->query($query3) or die('erro');
 
 $arr_grf3 = array();
-while ($row_result = $DB->fetch_assoc($result3)) {
+while ($row_result = $DB->fetchAssoc($result3)) {
 	$v_row_result = $row_result['name']. " ".$row_result['sname'];
 	$arr_grf3[$v_row_result] = $row_result['conta'];
 }

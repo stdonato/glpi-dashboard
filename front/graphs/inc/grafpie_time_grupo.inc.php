@@ -13,7 +13,7 @@ $resultdays = $DB->query($querydays) or die('erro');
 $arr_keys = array();
 $arr_days = array();
 
-while ($row_result = $DB->fetch_assoc($resultdays)) { 
+while ($row_result = $DB->fetchAssoc($resultdays)) { 
 	$v_row_result = $row_result['days'];
 	$arr_days[$v_row_result] = 0;						
 }
@@ -40,7 +40,7 @@ GROUP BY days ";
 		
 $result2 = $DB->query($query2) or die('erro');
 
-while ($row_result = $DB->fetch_assoc($result2)){ 	
+while ($row_result = $DB->fetchAssoc($result2)){ 	
 	$v_row_result = $row_result['days'];
 	$arr_keys[$v_row_result] = $row_result['chamados'];			
 }

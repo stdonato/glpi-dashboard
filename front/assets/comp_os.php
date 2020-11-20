@@ -17,7 +17,7 @@ $result_os = $DB->query($query_os) or die('erro');
 $arr_grf_os = array();
 
 
-while ($row_result = $DB->fetch_assoc($result_os))	{ 
+while ($row_result = $DB->fetchAssoc($result_os))	{ 
 	$v_row_result = $row_result['so'];
 	$arr_grf_os[$v_row_result] = $row_result['conta'];			
 } 

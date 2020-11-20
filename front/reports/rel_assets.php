@@ -449,7 +449,7 @@ else	{
 }
 
 	$result_item = $DB->query($sql_item);
-	$row_item = $DB->fetch_assoc($result_item);
+	$row_item = $DB->fetchAssoc($result_item);
 
 	//contar chamados
 	$sql_count = "SELECT count(glpi_tickets.id) AS conta
@@ -461,7 +461,7 @@ else	{
 					AND date ".$datas2." ";
 
 	$result_count = $DB->query($sql_count);
-	$row_count = $DB->fetch_assoc($result_count);
+	$row_count = $DB->fetchAssoc($result_count);
 
 
 	//fabricantes
@@ -472,7 +472,7 @@ else	{
 				 		".$id_fabw." ";
 
 		$result_fab = $DB->query($sql_fab);
-		$row_fab = $DB->fetch_assoc($result_fab);
+		$row_fab = $DB->fetchAssoc($result_fab);
 	}
 
 	//modelo
@@ -487,7 +487,7 @@ else	{
 							AND gt.id = ".$row['id']." ";
 
 			$result_mod = $DB->query($sql_mod);
-			$row_mod = $DB->fetch_assoc($result_mod);
+			$row_mod = $DB->fetchAssoc($result_mod);
 		}
 
 		else {
@@ -496,7 +496,7 @@ else	{
 							WHERE `softwares_id` = ".$row['id']."";
 
 			$result_mod = $DB->query($sql_mod);
-			$row_mod = $DB->fetch_assoc($result_mod);
+			$row_mod = $DB->fetchAssoc($result_mod);
 			  }
 	}
 
@@ -511,7 +511,7 @@ else	{
 							AND gt.is_deleted = 0 ";
 
 			$result_mod = $DB->query($sql_mod);
-			$row_mod = $DB->fetch_assoc($result_mod);
+			$row_mod = $DB->fetchAssoc($result_mod);
 		}
 		else {
 			$sql_mod = "SELECT id, name
@@ -520,7 +520,7 @@ else	{
 			ORDER BY name";
 
 			$result_mod = $DB->query($sql_mod);
-			$row_mod = $DB->fetch_assoc($result_mod);
+			$row_mod = $DB->fetchAssoc($result_mod);
 
 		}
 	}

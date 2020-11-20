@@ -25,7 +25,7 @@ LIMIT 5 ";
 $result4 = $DB->query($query4) or die('erro');
 
 $arr_grf4 = array();
-while ($row_result = $DB->fetch_assoc($result4)){
+while ($row_result = $DB->fetchAssoc($result4)){
 	$v_row_result = $row_result['cat_name']." (".$row_result['id'].")";
 	$arr_grf4[$v_row_result] = $row_result['cat_tick'];
 }

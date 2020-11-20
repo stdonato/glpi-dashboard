@@ -28,7 +28,7 @@ if($interval <= "31") {
 	$resultd = $DB->query($queryd) or die('erro');
 
 	$arr_days = array();
-	while ($row_result = $DB->fetch_assoc($resultd))
+	while ($row_result = $DB->fetchAssoc($resultd))
 	{
 		$v_row_result = $row_result['day'];
 		$arr_days[$v_row_result] = $row_result['nb'];
@@ -55,7 +55,7 @@ if($interval >= "31") {
 
 	$resultm = $DB->query($querym) or die('erro');
 
-	while ($row_result = $DB->fetch_assoc($resultm)) {
+	while ($row_result = $DB->fetchAssoc($resultm)) {
 		$v_row_result = $row_result['day_l'];
 		$arr_grfm[$v_row_result] = $row_result['nb'];
 	}
@@ -65,7 +65,7 @@ if($interval >= "31") {
 else {
 
 		$DB->data_seek($resultd, 0);
-		while ($row_result = $DB->fetch_assoc($resultd))
+		while ($row_result = $DB->fetchAssoc($resultd))
 		{
 			$querym = "
 			SELECT DISTINCT DATE_FORMAT(date, '%b-%d') as day_l,  COUNT(id) as nb, DATE_FORMAT(date, '%Y-%m-%d') as day
@@ -77,7 +77,7 @@ else {
 			ORDER BY day ";
 
 			$resultm = $DB->query($querym) or die('erro');
-			$row_result2 = $DB->fetch_assoc($resultm);
+			$row_result2 = $DB->fetchAssoc($resultm);
 
 			$v_row_result = $row_result['day'];
 			if($row_result2['nb'] != '') {
@@ -103,7 +103,7 @@ $DB->data_seek($resultm, 0);
 
 $arr_month = array();
 
-while ($row_result = $DB->fetch_assoc($resultm)){
+while ($row_result = $DB->fetchAssoc($resultm)){
 	$v_row_result = $row_result['day_l'];
 	$arr_month[$v_row_result] = 0;
 }
@@ -139,7 +139,7 @@ else {
 
 if($interval >= "31") {
 
-	while ($row_result = $DB->fetch_assoc($resulta))
+	while ($row_result = $DB->fetchAssoc($resulta))
 	{
 		$querya2 = "
 		SELECT DISTINCT DATE_FORMAT( date, '%b-%y' ) AS day_l, DATE_FORMAT( date, '%y-%m' ) AS day, count(id) AS nb
@@ -155,7 +155,7 @@ if($interval >= "31") {
 		ORDER BY day";
 
 		$resulta2 = $DB->query($querya2) or die('erro a');
-		$row_result2 = $DB->fetch_assoc($resulta2);
+		$row_result2 = $DB->fetchAssoc($resulta2);
 
 		$v_row_result = $row_result['day_l'];
 		if($row_result2['nb'] != '') {
@@ -170,7 +170,7 @@ if($interval >= "31") {
 else {
 
 		$DB->data_seek($resultd, 0);
-		while ($row_result = $DB->fetch_assoc($resulta)) {
+		while ($row_result = $DB->fetchAssoc($resulta)) {
 
 		$querya2 = "
 		SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(`solvedate`),'%Y-%m-%d') AS day, COUNT(id) AS nb
@@ -185,7 +185,7 @@ else {
 		ORDER BY day";
 
 		$resulta2 = $DB->query($querya2) or die('erro a');
-		$row_result2 = $DB->fetch_assoc($resulta2);
+		$row_result2 = $DB->fetchAssoc($resulta2);
 
 		$v_row_result = $row_result['day'];
 		if($row_result2['nb'] != '') {
@@ -222,7 +222,7 @@ if($interval >= "31") {
 
 	$results = $DB->query($querys) or die('erro');
 
-	while ($row_result = $DB->fetch_assoc($results)) {
+	while ($row_result = $DB->fetchAssoc($results)) {
 
 		$v_row_result = $row_result['day_l'];
 		if($row_result['nb'] != '') {
@@ -237,7 +237,7 @@ if($interval >= "31") {
 else {
 
 	$DB->data_seek($resultd, 0);
-	while ($row_result = $DB->fetch_assoc($resultd)) {
+	while ($row_result = $DB->fetchAssoc($resultd)) {
 	
 		$querys = "
 		SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(`solvedate`),'%Y-%m-%d') AS day, COUNT(id) AS nb
@@ -251,7 +251,7 @@ else {
 		ORDER BY day  ";
 		
 		$results = $DB->query($querys) or die('erro s' . $DB->error());
-		$row_result2 = $DB->fetch_assoc($results);
+		$row_result2 = $DB->fetchAssoc($results);
 	
 		$v_row_result = $row_result['day'];
 		if($row_result2['nb'] != '') {
@@ -289,7 +289,7 @@ if($interval >= "31") {
 	
 	$resultf = $DB->query($queryf) or die('erro');
 	
-	while ($row_result = $DB->fetch_assoc($resultf)) {
+	while ($row_result = $DB->fetchAssoc($resultf)) {
 	
 		$v_row_result = $row_result['day_l'];
 		if($row_result['nb'] != '') {
@@ -305,7 +305,7 @@ if($interval >= "31") {
 else {
 	
 	$DB->data_seek($resultd, 0);
-	while ($row_result = $DB->fetch_assoc($resultd)) {
+	while ($row_result = $DB->fetchAssoc($resultd)) {
 	
 		$queryf = "
 		SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(`closedate`),'%Y-%m-%d') AS day, COUNT(id) AS nb
@@ -318,7 +318,7 @@ else {
 		ORDER BY day  ";
 		
 		$resultf = $DB->query($queryf) or die('erro f' . $DB->error());
-		$row_result2 = $DB->fetch_assoc($resultf);
+		$row_result2 = $DB->fetchAssoc($resultf);
 	
 		$v_row_result = $row_result['day'];
 		if($row_result2['nb'] != '') {
@@ -373,7 +373,7 @@ $result_sat = $DB->query($query_sat) or die('erro');
 
 //array with satisfaction average
 $arr_grfsat = array();
-while ($row_result1 = $DB->fetch_assoc($result_sat))	{
+while ($row_result1 = $DB->fetchAssoc($result_sat))	{
 	$v_row_result1 = $row_result1['day_l'];
 	$arr_grfsat[$v_row_result1] = round(($row_result1['media']/5)*100,1);
 }

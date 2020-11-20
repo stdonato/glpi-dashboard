@@ -94,7 +94,7 @@ function reload() {
 		$arr_ent[0] = "-- ". __('Select a entity', 'dashboard') . " --" ;
 	   $arr_ent[-1] = __('All', 'dashboard') ;		
 		
-		while ($row_result = $DB->fetch_assoc($result_ent))
+		while ($row_result = $DB->fetchAssoc($result_ent))
 		    {
 		    $v_row_result = $row_result['id'];
 		    $arr_ent[$v_row_result] = $row_result['name'] ;
@@ -152,7 +152,7 @@ function reload() {
 		
 		$arr_years = array();
 		
-		while ($row_y = $DB->fetch_assoc($result))		
+		while ($row_y = $DB->fetchAssoc($result))		
 			{ 
 				$arr_years[] = $row_y['year'];			
 			} 

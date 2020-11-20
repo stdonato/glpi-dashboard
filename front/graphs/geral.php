@@ -85,7 +85,7 @@ $sql =	"SELECT COUNT(glpi_tickets.id) as total
       ".$entidade." ";
 
 $result = $DB->query($sql) or die ("erro");
-$total_mes = $DB->fetch_assoc($result);
+$total_mes = $DB->fetchAssoc($result);
 
 ?>
 <div id='content' >

@@ -112,7 +112,7 @@ AND `glpi_users`.`is_active` = '1'
 ORDER BY name ASC ";
 
 $result_tec = $DB->query($sql_tec);
-$tec = $DB->fetch_assoc($result_tec);
+$tec = $DB->fetchAssoc($result_tec);
 ?>
 
 <div id='content' >
@@ -167,7 +167,7 @@ $tec = $DB->fetch_assoc($result_tec);
 
 				$DB->data_seek($result_tec, 0) ;
 
-				while ($row_result = $DB->fetch_assoc($result_tec))
+				while ($row_result = $DB->fetchAssoc($result_tec))
 			    {
 			    	$v_row_result = $row_result['id'];
 			    	$arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;
@@ -325,7 +325,7 @@ AND glpi_tickets.is_deleted = 0
 ".$entidade." " ;
 
 $result_ab = $DB->query($sql_ab) or die ("erro_ab");
-$data_ab = $DB->fetch_assoc($result_ab);
+$data_ab = $DB->fetchAssoc($result_ab);
 
 $abertos = $data_ab['total'];
 
@@ -365,7 +365,7 @@ AND glpi_users.id = glpi_profiles_users.users_id
 
 $result_nome = $DB->query($sql_nome) ;
 
-while($row = $DB->fetch_assoc($result_nome)){
+while($row = $DB->fetchAssoc($result_nome)){
 
 $user = $row['firstname'] ." ". $row['realname'];
 
@@ -485,7 +485,7 @@ $user = $row['firstname'] ." ". $row['realname'];
 
 //listar chamados
 
-while($row = $DB->fetch_assoc($result_cham)){
+while($row = $DB->fetchAssoc($result_cham)){
 
     $status1 = $row['status'];
 

@@ -173,7 +173,7 @@ else {
 					".$entidade." ";
 					
 					$result_total = $DB->query($query_total) or die('erro');
-					$total = $DB->fetch_assoc($result_total);
+					$total = $DB->fetchAssoc($result_total);
 					
 				 
 				echo '<div id="entidade" class="col-md-12 col-sm-12 fluid" style="margin-left:-5px;">';

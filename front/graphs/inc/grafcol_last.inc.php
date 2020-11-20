@@ -46,7 +46,7 @@ $(function () {
             xAxis: {
             categories: [ ";
 
-while ($entity = $DB->fetch_assoc($query_tec)) {
+while ($entity = $DB->fetchAssoc($query_tec)) {
 
 echo "'". $entity['data']."',";
 
@@ -115,7 +115,7 @@ echo "    ],
 
 $DB->data_seek($query_tec, 0) ;
 
-while ($entity = $DB->fetch_assoc($query_tec))
+while ($entity = $DB->fetchAssoc($query_tec))
 
 {
 	echo $entity['conta'].",";

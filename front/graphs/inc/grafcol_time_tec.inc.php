@@ -31,7 +31,7 @@ else
 	
 	$arr_grft2 = array();
 	
-	while($row_result = $DB->fetch_assoc($result2))	 
+	while($row_result = $DB->fetchAssoc($result2))	 
 		{				 			
 			$v_row_result = $row_result['name']." ".$row_result['sname'];
 			$arr_grft2[$v_row_result] =  round($row_result['time']/3600, 2);		

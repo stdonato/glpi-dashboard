@@ -222,7 +222,7 @@ $conta_y = $DB->numrows($result_y);
 
 $arr_years = array();
 
-while ($row_y = $DB->fetch_assoc($result_y))		
+while ($row_y = $DB->fetchAssoc($result_y))		
 { 
 	$arr_years[] = $row_y['year'];			
 } 
@@ -246,7 +246,7 @@ $sql_ano =	"SELECT COUNT(glpi_tickets.id) as total
       ".$entidade." ";
 
 $result_ano = $DB->query($sql_ano);
-$total_ano = $DB->fetch_assoc($result_ano);
+$total_ano = $DB->fetchAssoc($result_ano);
       
 //chamados mes
 $sql_mes =	"SELECT COUNT(glpi_tickets.id) as total        
@@ -257,7 +257,7 @@ $sql_mes =	"SELECT COUNT(glpi_tickets.id) as total
       ".$entidade." ";
 
 $result_mes = $DB->query($sql_mes);
-$total_mes = $DB->fetch_assoc($result_mes);
+$total_mes = $DB->fetchAssoc($result_mes);
 
 //chamados dia
 $sql_hoje =	"SELECT COUNT(glpi_tickets.id) as total        
@@ -268,7 +268,7 @@ $sql_hoje =	"SELECT COUNT(glpi_tickets.id) as total
       ".$entidade." ";
 
 $result_hoje = $DB->query($sql_hoje);
-$total_hoje = $DB->fetch_assoc($result_hoje);
+$total_hoje = $DB->fetchAssoc($result_hoje);
 
 // total users
 $sql_users = " SELECT COUNT(DISTINCT `glpi_users`.id) AS total
@@ -280,7 +280,7 @@ $sql_users = " SELECT COUNT(DISTINCT `glpi_users`.id) AS total
      				".$entidade_u." ";
 
 $result_users = $DB->query($sql_users);
-$total_users = $DB->fetch_assoc($result_users);
+$total_users = $DB->fetchAssoc($result_users);
 
 
 $sql_ano_ab =	"SELECT COUNT(glpi_tickets.id) as total        
@@ -292,7 +292,7 @@ $sql_ano_ab =	"SELECT COUNT(glpi_tickets.id) as total
       ".$entidade." ";
 
 $result_ano_ab = $DB->query($sql_ano_ab);
-$total_ano_ab = $DB->fetch_assoc($result_ano_ab);
+$total_ano_ab = $DB->fetchAssoc($result_ano_ab);
 
 //count due tickets
 $sql_due = "SELECT DISTINCT COUNT(glpi_tickets.id) AS total
@@ -304,7 +304,7 @@ AND glpi_tickets.time_to_resolve < NOW()
 ".$entidade." ";
 
 $result_due = $DB->query($sql_due);
-$total_due = $DB->fetch_assoc($result_due);
+$total_due = $DB->fetchAssoc($result_due);
 
 
 ?>
@@ -608,7 +608,7 @@ $total_due = $DB->fetch_assoc($result_due);
 	        <table id="last_tickets" class="table table-hover table-condensed" >
 		        <th style="text-align: center;"><?php echo __('Tickets','dashboard'); ?></th><th style="text-align: center;" ><?php echo __('Title','dashboard'); ?></th>	        
 					<?php
-						while($row = $DB->fetch_assoc($result_wid)) 
+						while($row = $DB->fetchAssoc($result_wid)) 
 						{					
 							echo "<tr><td style='text-align: center;'><a href=../../../front/ticket.form.php?id=".$row['id']." target=_blank style='color: #526273;'>".$row['id']."</a>
 							</td><td>". substr($row['name'],0,60)."</td></tr>";											
@@ -653,7 +653,7 @@ $total_due = $DB->fetch_assoc($result_due);
 		           </th>
 		              
 						<?php
-							while($row = $DB->fetch_assoc($result_tec)) 
+							while($row = $DB->fetchAssoc($result_tec)) 
 							{					
 								echo "<tr><td><a href=./reports/rel_tecnico.php?con=1&sel_tec=".$row['id']."&stat=open target=_blank style='color: #526273;'>
 								".$row['name']." ".$row['sname']."</a></td><td style='text-align: center;' >".$row['tick']."</td></tr>";											
@@ -834,7 +834,7 @@ $total_due = $DB->fetch_assoc($result_due);
               <table id="logged_users" class="table table-hover table-condensed" >                         
 				<?php
 								
-				while($row_name = $DB->fetch_assoc($result_name)) 
+				while($row_name = $DB->fetchAssoc($result_name)) 
 	  			   {
 						echo "<tr>
 									<td style='text-align: left;'><img src=". User::getURLForPicture($row_name['picture']) ." alt='' width='30px' height='35px' />&nbsp; &nbsp;<a href=../../../front/user.form.php?id=".$row_name['uid']." target=_blank style='color: #526273;'>

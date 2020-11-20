@@ -113,7 +113,7 @@ $(function () {
                 name: '". __('Tickets','dashboard') ."',
                 data: [";
                                 		
-							while ($entity = $DB->fetch_assoc($query_tec)){
+							while ($entity = $DB->fetchAssoc($query_tec)){
 								echo "{y:".$entity['conta'].",name:'".$entity['cname']."',key:".$entity['id']."},";
 							}                			
                 			

@@ -175,7 +175,7 @@ else {
 						$arr_sla = array();
 						$arr_sla[0] = "-- ". __('Select a OLA', 'dashboard') . " --" ;
 			
-						while ($row_result = $DB->fetch_assoc($result_loc))
+						while ($row_result = $DB->fetchAssoc($result_loc))
 						{
 							$v_row_result = $row_result['id'];
 							$arr_sla[$v_row_result] = $row_result['name'] ;
@@ -361,12 +361,12 @@ FROM `glpi_olas`
 WHERE id = ".$id_ola." ";
 
 $result_nm = $DB->query($sql_nm);
-$ent_name = $DB->fetch_assoc($result_nm);
+$ent_name = $DB->fetchAssoc($result_nm);
 
 
 // Count overdue tickets
 $v = 0;
-while($row = $DB->fetch_assoc($result_cham)){
+while($row = $DB->fetchAssoc($result_cham)){
 
 	if($row['solvedate'] > $row['duedate'] && $row['olawait'] == 0) {
 		$v =  $v+1;
@@ -475,7 +475,7 @@ echo "
 
 $DB->data_seek($result_cham,0);
 
-while($row = $DB->fetch_assoc($result_cham)){
+while($row = $DB->fetchAssoc($result_cham)){
 
 	$status1 = $row['status'];
 
@@ -497,7 +497,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 
 	$result_user = $DB->query($sql_user);
 
-	$row_user = $DB->fetch_assoc($result_user);
+	$row_user = $DB->fetchAssoc($result_user);
 
 	//tecnico
 	$sql_tec = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
@@ -509,7 +509,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 	".$entidade."	";
 
 	$result_tec = $DB->query($sql_tec);
-	$row_tec = $DB->fetch_assoc($result_tec);
+	$row_tec = $DB->fetchAssoc($result_tec);
 
 	//ticket type
 	if($row['type'] == 1) { $type = "Incident"; }

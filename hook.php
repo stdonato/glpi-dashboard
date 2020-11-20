@@ -66,7 +66,7 @@ function plugin_dashboard_install(){
 		$query_ent = "SELECT users_id FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND value = '-1' ";		
 		$result = $DB->query($query_ent) or die("error alter table glpi_plugin_dashboard_config value size" . $DB->error());		
 		
-		while ($row = $DB->fetch_assoc($result)) {
+		while ($row = $DB->fetchAssoc($result)) {
 			$query = "UPDATE glpi_plugin_dashboard_config SET value = '' WHERE name = 'entity' AND users_id = ".$row['users_id']." ";
 			$DB->query($query) or die("error updating table glpi_plugin_dashboard_config entity value" . $DB->error());
 		}				

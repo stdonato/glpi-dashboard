@@ -221,7 +221,7 @@ function margins() {
 			
 			$arr_ent[0] = __('All') ;
 			
-			while ($row_ent = $DB->fetch_assoc($result_ent)) { 
+			while ($row_ent = $DB->fetchAssoc($result_ent)) { 
 				$v_row_ent = $row_ent['id'];
 				$arr_ent[$v_row_ent] = $row_ent['cname'] ;			
 			} 
@@ -296,7 +296,7 @@ function margins() {
 			$arr_sta = array();
 			$arr_sta[0] = "-----";
 			
-			while ($row_sta = $DB->fetch_assoc($result_sta))		
+			while ($row_sta = $DB->fetchAssoc($result_sta))		
 			{ 
 				$v_row_sta = $row_sta['status'];
 				$arr_sta[$v_row_sta] = Ticket::getStatus($row_sta['status']) ;			
@@ -353,7 +353,7 @@ function margins() {
 			$arr_cat = array();
 			$arr_cat[0] = "-----" ;
 			
-			while ($row_cat = $DB->fetch_assoc($result_cat))		
+			while ($row_cat = $DB->fetchAssoc($result_cat))		
 			{ 
 				$v_row_cat = $row_cat['id'];
 				$arr_cat[$v_row_cat] = $row_cat['name'] ;			
@@ -420,7 +420,7 @@ function margins() {
 			$arr_req = array();
 			$arr_req[0] = "-----";
 			
-			while ($row_req = $DB->fetch_assoc($result_req))		
+			while ($row_req = $DB->fetchAssoc($result_req))		
 			{ 
 				$v_row_req = $row_req['id'];
 				$arr_req[$v_row_req] = $row_req['name'] ;			
@@ -572,7 +572,7 @@ if($consulta > 0) {
 		WHERE id IN (".$id_ent.")";
 		
 		$result_nm = $DB->query($sql_nm);
-		$ent_name = $DB->fetch_assoc($result_nm);	
+		$ent_name = $DB->fetchAssoc($result_nm);	
 	}
 	else { $ent_name['cname'] = __("All"); }
 	
@@ -651,7 +651,7 @@ if($consulta > 0) {
 	<tbody>";
 	
 	
-	while($row = $DB->fetch_assoc($result_cham)){
+	while($row = $DB->fetchAssoc($result_cham)){
 		
 		$status1 = $row['status']; 
 	
@@ -686,7 +686,7 @@ if($consulta > 0) {
 	
 		$result_user = $DB->query($sql_user);
 				
-		$row_user = $DB->fetch_assoc($result_user);
+		$row_user = $DB->fetchAssoc($result_user);
 					
 		//tecnico	
 		$sql_tec = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
@@ -697,7 +697,7 @@ if($consulta > 0) {
 		AND glpi_tickets_users.type = 2 ";
 		
 		$result_tec = $DB->query($sql_tec);	
-		$row_tec = $DB->fetch_assoc($result_tec);
+		$row_tec = $DB->fetchAssoc($result_tec);
 			
 			
 		//origem	
@@ -707,7 +707,7 @@ if($consulta > 0) {
 		AND glpi_tickets.id = ". $row['id'] ." ";
 		
 		$result_req = $DB->query($sql_req);	
-		$row_req = $DB->fetch_assoc($result_req);
+		$row_req = $DB->fetchAssoc($result_req);
 			
 			
 		//categoria	
@@ -717,7 +717,7 @@ if($consulta > 0) {
 		AND glpi_tickets.id = ". $row['id'] ." ";
 		
 		$result_cat = $DB->query($sql_cat);	
-		$row_cat = $DB->fetch_assoc($result_cat);
+		$row_cat = $DB->fetchAssoc($result_cat);
 				
 		//check time_to_resolve	
 		$sql_due = "SELECT time_to_resolve, closedate, solvedate 
@@ -726,7 +726,7 @@ if($consulta > 0) {
 		AND glpi_tickets.id = ". $row['id'] ." ";
 				
 		$result_due = $DB->query($sql_due);
-		$row_due = $DB->fetch_assoc($result_due);
+		$row_due = $DB->fetchAssoc($result_due);
 	
 			
 	echo "	

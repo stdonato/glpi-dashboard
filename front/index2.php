@@ -1090,7 +1090,7 @@ $conta_y = $DB->numrows($result_y);
 
 $arr_years = array();
 
-while ($row_y = $DB->fetch_assoc($result_y))		
+while ($row_y = $DB->fetchAssoc($result_y))		
 	{ 
 		$arr_years[] = $row_y['year'];			
 	} 
@@ -1114,7 +1114,7 @@ $sql_ano =	"SELECT COUNT(glpi_tickets.id) as total
       ".$entidade." ";
 
 $result_ano = $DB->query($sql_ano);
-$total_ano = $DB->fetch_assoc($result_ano);
+$total_ano = $DB->fetchAssoc($result_ano);
       
 //chamados mes
 $sql_mes =	"SELECT COUNT(glpi_tickets.id) as total        
@@ -1125,7 +1125,7 @@ $sql_mes =	"SELECT COUNT(glpi_tickets.id) as total
       ".$entidade." ";
 
 $result_mes = $DB->query($sql_mes);
-$total_mes = $DB->fetch_assoc($result_mes);
+$total_mes = $DB->fetchAssoc($result_mes);
 
 //chamados dia
 $sql_hoje =	"SELECT COUNT(glpi_tickets.id) as total        
@@ -1136,7 +1136,7 @@ $sql_hoje =	"SELECT COUNT(glpi_tickets.id) as total
       ".$entidade." ";
 
 $result_hoje = $DB->query($sql_hoje);
-$total_hoje = $DB->fetch_assoc($result_hoje);
+$total_hoje = $DB->fetchAssoc($result_hoje);
 
 // total users
 $sql_users = "SELECT COUNT(id) AS total
@@ -1146,7 +1146,7 @@ $sql_users = "SELECT COUNT(id) AS total
 				AND is_active = 1";
 
 $result_users = $DB->query($sql_users);
-$total_users = $DB->fetch_assoc($result_users);
+$total_users = $DB->fetchAssoc($result_users);
 
 ?>
 

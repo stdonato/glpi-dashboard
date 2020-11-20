@@ -25,7 +25,7 @@ $result_grp = $DB->query($query_grp);
 
 $arr_grft2 = array();
 
-while ($row = $DB->fetch_assoc($result_grp)) {
+while ($row = $DB->fetchAssoc($result_grp)) {
 	
 	//tickets by type
 	$query2 = "
@@ -40,7 +40,7 @@ while ($row = $DB->fetch_assoc($result_grp)) {
 	
 	$result2 = $DB->query($query2) or die('erro');
 	
-	$row_result = $DB->fetch_assoc($result2);		
+	$row_result = $DB->fetchAssoc($result2);		
 		 			
 		$v_row_result = $row_result['gname'];
 		$arr_grft2[$v_row_result] =  round($row_result['time'], 3);		

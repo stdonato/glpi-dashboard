@@ -28,7 +28,7 @@ if($unk != 0) {
 }
 
 
-while ($row_result = $DB->fetch_assoc($result_os))	{ 
+while ($row_result = $DB->fetchAssoc($result_os))	{ 
 	$v_row_result = $row_result['name'];
 	$arr_grf_os[$v_row_result] = $row_result['conta'];			
 } 

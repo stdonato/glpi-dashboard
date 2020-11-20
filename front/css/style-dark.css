@@ -31,6 +31,8 @@ body {
   	box-shadow: 0px 0px 0px #888888 !important; 
 }
 
+.head-rel-sint {min-height: 230px !important ; }
+
 #head-map {
 	background-color: #323234;
 	color: #fff;

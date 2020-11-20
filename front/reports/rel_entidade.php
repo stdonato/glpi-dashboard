@@ -162,7 +162,7 @@ else {
 										$arr_ent[0] = __('All');
 
 										//$DB->data_seek($result_ent, 0) ;
-										while ($row_result = $DB->fetch_assoc($result_ent)) {
+										while ($row_result = $DB->fetchAssoc($result_ent)) {
 										   $v_row_result = $row_result['id'];
 										   $arr_ent[$v_row_result] = $row_result['cname'] ;
 										}
@@ -336,16 +336,16 @@ else {
 		WHERE id = ".$id_ent."";
 
 		$result_nm = $DB->query($sql_nm);
-		$ent_name = $DB->fetch_assoc($result_nm);
+		$ent_name = $DB->fetchAssoc($result_nm);
 
 		//total time		
 		$total_time = '';
-		while($row = $DB->fetch_assoc($result_cham)){
+		while($row = $DB->fetchAssoc($result_cham)){
 
 		$sql = "SELECT ( TIMESTAMPDIFF(SECOND , date, solvedate ) ) AS time FROM glpi_tickets WHERE id = ".$row['id']." ";
 		$result = $DB->query($sql);
 
-			while($row_t = $DB->fetch_assoc($result)) {
+			while($row_t = $DB->fetchAssoc($result)) {
 
 				if($row_t['time'] >= 86400) {
 					$total_time += ($row_t['time'] / 3) ;
@@ -447,7 +447,7 @@ else {
 
 		$DB->data_seek($result_cham,0);
 
-		while($row = $DB->fetch_assoc($result_cham)){
+		while($row = $DB->fetchAssoc($result_cham)){
 
 		    $status1 = $row['status'];
 
@@ -467,7 +467,7 @@ else {
 				AND glpi_tickets_users.type = 1 ";
 
 				$result_user = $DB->query($sql_user);
-				$row_user = $DB->fetch_assoc($result_user);
+				$row_user = $DB->fetchAssoc($result_user);
 
 		//tecnico
 		      $sql_tec = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
@@ -478,7 +478,7 @@ else {
 				AND glpi_tickets_users.type = 2 ";
 
 				$result_tec = $DB->query($sql_tec);
-				$row_tec = $DB->fetch_assoc($result_tec);
+				$row_tec = $DB->fetchAssoc($result_tec);
 
 
 				//category
@@ -487,7 +487,7 @@ else {
 				WHERE id = ".$row['cat']." ";
 
 				$result_cat = $DB->query($sql_cat);
-				$row_cat = $DB->fetch_assoc($result_cat);
+				$row_cat = $DB->fetchAssoc($result_cat);
 
 
 				// associated element
@@ -496,7 +496,7 @@ else {
 				WHERE glpi_items_tickets.tickets_id = ". $row['id'] ."";
 
 				$result_item = $DB->query($sql_item);
-				$row_item = $DB->fetch_assoc($result_item);
+				$row_item = $DB->fetchAssoc($result_item);
 
 				$type = strtolower($row_item['itemtype']);
 				$url_type = $CFG_GLPI['url_base']."/front/".$type.".form.php?id=";
@@ -518,11 +518,11 @@ else {
 				AND glpi_tickets.`requesttypes_id` = glpi_requesttypes.id";
 				
 				$result_source = $DB->query($sql_source);
-				$row_source = $DB->fetch_assoc($result_source);
+				$row_source = $DB->fetchAssoc($result_source);
 
 
 		if(isset($result_ass) AND $result_ass != '') {
-			$row_item = $DB->fetch_assoc($result_ass);
+			$row_item = $DB->fetchAssoc($result_ass);
 		}
 
 		echo "

@@ -19,7 +19,7 @@ AND glpi_problems.entities_id = ".$id_ent."
  ";		
  
 $result_p = $DB->query($query_p) or die('erro');
-$problems = $DB->fetch_assoc($result_p);
+$problems = $DB->fetchAssoc($result_p);
 
 //tickets by type
 $query2 = "
@@ -34,7 +34,7 @@ ORDER BY type  ASC ";
 $result2 = $DB->query($query2) or die('erro');
 
 $arr_grf2 = array();
-while ($row_result = $DB->fetch_assoc($result2))		
+while ($row_result = $DB->fetchAssoc($result2))		
 { 
 	$v_row_result = $row_result['tipo'];
 	$arr_grf2[$v_row_result] = $row_result['tick'];			

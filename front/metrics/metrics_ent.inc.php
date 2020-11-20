@@ -159,7 +159,7 @@ $sql_ano =	"SELECT COUNT(glpi_tickets.id) as total
       $entidade ";
 
 $result_ano = $DB->query($sql_ano);
-$total_ano = $DB->fetch_assoc($result_ano);
+$total_ano = $DB->fetchAssoc($result_ano);
   
 
 //chamados mes
@@ -172,7 +172,7 @@ $sql_mes =	"SELECT COUNT(glpi_tickets.id) as total
 		$entidade ";
 
 $result_mes = $DB->query($sql_mes);
-$total_mes = $DB->fetch_assoc($result_mes);
+$total_mes = $DB->fetchAssoc($result_mes);
 
   
 //ticktes by month
@@ -188,7 +188,7 @@ ORDER BY MONTH ASC ";
 $resultm = $DB->query($querym) or die('erro');
 
 $arr_grfm = array();
-while ($row_result = $DB->fetch_assoc($resultm))		
+while ($row_result = $DB->fetchAssoc($resultm))		
 { 
 	$v_row_result = $row_result['month_l'];
 	$arr_grfm[$v_row_result] = $row_result['nb'];			
@@ -230,7 +230,7 @@ $resultd = $DB->query($queryd) or die('erro_day');
 $arr_day = array();
 $arr_days = array();
 
-while ($row_result = $DB->fetch_assoc($resultd))		
+while ($row_result = $DB->fetchAssoc($resultd))		
 { 
 	$v_row_result = $row_result['day_l'];
 	$arr_day[$v_row_result] = $row_result['nb'];			
@@ -260,7 +260,7 @@ $result2 = $DB->query($query2) or die('erro');
 
 
 $arr_grf2 = array();
-while ($row_result = $DB->fetch_assoc($result2))		
+while ($row_result = $DB->fetchAssoc($result2))		
 { 
 	$v_row_result = $row_result['days'];
 	$arr_grf2[$v_row_result] = $row_result['chamados'];			
@@ -302,7 +302,7 @@ $conta_cons = $DB->numrows($result_cham);
 
 // Count overdue tickets
 $v = 0;
-while($row = $DB->fetch_assoc($result_cham)){
+while($row = $DB->fetchAssoc($result_cham)){
 
 	if($row['solvedate'] > $row['duedate']) {
 		$v = $v+1;
@@ -334,7 +334,7 @@ ORDER BY tick DESC ";
 $result_sta = $DB->query($query_sta) or die('erro_stat');
 
 $arr_sta = array();
-while ($row_result = $DB->fetch_assoc($result_sta))		
+while ($row_result = $DB->fetchAssoc($result_sta))		
 { 
    $v_row_result = Ticket::getStatus($row_result['stat']);
    $arr_sta[$v_row_result] = $row_result['tick'];			

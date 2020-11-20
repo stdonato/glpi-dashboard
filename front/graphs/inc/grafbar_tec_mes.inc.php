@@ -42,7 +42,7 @@ $query_tec = $DB->query($sql_tec) or die('erro t');
 //$techs = array();
 $arr_techs = array();
 
-while ($row = $DB->fetch_assoc($query_tec)) {
+while ($row = $DB->fetchAssoc($query_tec)) {
 	
 	//$techs[] = $row['id'];
 	$v_row_result = $row['name']." ".$row['sname'];
@@ -51,7 +51,7 @@ while ($row = $DB->fetch_assoc($query_tec)) {
 
 	
 $DB->data_seek($query_tec, 0);
-while ($row_result = $DB->fetch_assoc($query_tec)) {
+while ($row_result = $DB->fetchAssoc($query_tec)) {
 
 	$sql_open = "
 	SELECT count( glpi_tickets.id ) AS conta, glpi_tickets_users.`users_id` AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
@@ -69,7 +69,7 @@ while ($row_result = $DB->fetch_assoc($query_tec)) {
 	
 	$query_open = $DB->query($sql_open) or die('erro o');
 	
-	$res_open = $DB->fetch_assoc($query_open);
+	$res_open = $DB->fetchAssoc($query_open);
 	
 	$v_row_result = $row_result['name']." ".$row_result['sname'];
 		if($res_open['conta'] != '') {
@@ -83,7 +83,7 @@ while ($row_result = $DB->fetch_assoc($query_tec)) {
 
 //closed
 $DB->data_seek($query_tec, 0);
-while ($row_result = $DB->fetch_assoc($query_tec)) {
+while ($row_result = $DB->fetchAssoc($query_tec)) {
 
 	$sql_close = "
 	SELECT count( glpi_tickets.id ) AS conta, glpi_tickets_users.`users_id` AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
@@ -101,7 +101,7 @@ while ($row_result = $DB->fetch_assoc($query_tec)) {
 	
 	$query_close = $DB->query($sql_close) or die('erro o');
 	
-	$res_close = $DB->fetch_assoc($query_close);
+	$res_close = $DB->fetchAssoc($query_close);
 	
 	$v_row_result = $row_result['name']." ".$row_result['sname'];
 		if($res_close['conta'] != '') {

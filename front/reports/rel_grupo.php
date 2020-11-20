@@ -161,7 +161,7 @@ else {
 							ORDER BY `name` ASC";
 		
 							$result_grp = $DB->query($sql_grp);
-							$grp = $DB->fetch_assoc($result_grp);
+							$grp = $DB->fetchAssoc($result_grp);
 		
 							$res_grp = $DB->query($sql_grp);
 							$arr_grp = array();
@@ -169,7 +169,7 @@ else {
 		
 							$DB->data_seek($result_grp, 0) ;
 		
-							while ($row_result = $DB->fetch_assoc($result_grp)){
+							while ($row_result = $DB->fetchAssoc($result_grp)){
 							   $v_row_result = $row_result['id'];
 							   $arr_grp[$v_row_result] = $row_result['name'] ." (". $row_result['id'] .")" ;
 							 }
@@ -371,7 +371,7 @@ FROM `glpi_groups`
 WHERE id = ".$id_grp." ";
 
 $result_nm = $DB->query($sql_nm);
-$grp_name = $DB->fetch_assoc($result_nm);
+$grp_name = $DB->fetchAssoc($result_nm);
 
 
 //listar chamados
@@ -434,7 +434,7 @@ echo "
 <tbody>
 ";
 
-while($row = $DB->fetch_assoc($result_cham)){
+while($row = $DB->fetchAssoc($result_cham)){
 
     $status1 = $row['status'];
 
@@ -460,7 +460,7 @@ AND glpi_tickets_users.type = 2
 ";
 $result_user = $DB->query($sql_user);
 
-    $row_user = $DB->fetch_assoc($result_user);
+    $row_user = $DB->fetchAssoc($result_user);
 
 //grupo
 $sql_tec = "SELECT name
@@ -471,7 +471,7 @@ AND glpi_groups_tickets.`type` = 2
 ".$entidade." ";
 
 $result_tec = $DB->query($sql_tec);
-$row_tec = $DB->fetch_assoc($result_tec);
+$row_tec = $DB->fetchAssoc($result_tec);
 
 echo "
 <tr style='font-weight:normal; font-size:11px;'>

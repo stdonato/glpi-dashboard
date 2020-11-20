@@ -4,7 +4,7 @@ echo ' <script type="text/javascript">
 
 $(function() {
 
-		var datasets = {';
+var datasets = {';
 		
 
 for($i=0; $i < $conta_y; $i++) {	
@@ -25,7 +25,7 @@ for($i=0; $i < $conta_y; $i++) {
 	
 	echo 'data: [';
 	
-	while ($row_m = $DB->fetch_assoc($resultm)) {
+	while ($row_m = $DB->fetchAssoc($resultm)) {
 		//echo '['.$row_m['month'].', '.$row_m['nb'].'],'; 
 		echo "['".$row_m["month"]."', '".$row_m["nb"]."'],"; 
 	}

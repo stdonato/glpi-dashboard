@@ -50,7 +50,7 @@ else {
 }
 
 
-if($DB->fetch_assoc($query_tec) != '') {
+if($DB->fetchAssoc($query_tec) != '') {
 
 echo "
 <script type='text/javascript'>
@@ -73,7 +73,7 @@ $(function () {
 
 				$DB->data_seek($query_tec, 0) ;
 				$categories = array();
-				while ($tecnico = $DB->fetch_assoc($query_tec)) {
+				while ($tecnico = $DB->fetchAssoc($query_tec)) {
 				    $categories[] = $tecnico['name'];
 				}
 				echo json_encode($categories);
@@ -145,7 +145,7 @@ $(function () {
 									
 					//zerar rows para segundo while
 					$DB->data_seek($query_tec, 0) ;
-					while ($tecnico = $DB->fetch_assoc($query_tec)) {
+					while ($tecnico = $DB->fetchAssoc($query_tec)) {
 					 
 					 echo $tecnico['conta'].",";
 					}

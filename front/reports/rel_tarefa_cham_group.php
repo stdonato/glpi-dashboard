@@ -245,7 +245,7 @@ $consulta = $conta_cons;
 if($conta_cons > 0) {
 
 //total time of tasks
-while($row = $DB->fetch_assoc($result_cons1)){
+while($row = $DB->fetchAssoc($result_cons1)){
     $tempo_total += $row['actiontime'];
 }
 	
@@ -278,7 +278,7 @@ while($row = $DB->fetch_assoc($result_cons1)){
 
 //listar chamados
 
-while($row = $DB->fetch_assoc($result_cham)){
+while($row = $DB->fetchAssoc($result_cham)){
 
 	echo "	
 	<tr>
@@ -298,7 +298,7 @@ ORDER BY id DESC ";
 $res_data = $DB->query($sql_data);
 
 
-	while($row = $DB->fetch_assoc($res_data)){
+	while($row = $DB->fetchAssoc($res_data)){
 			
 		//nome e total
 		$sql_nome = "
@@ -308,7 +308,7 @@ $res_data = $DB->query($sql_data);
 		AND glpi_users.id = ".$row['uid']." ";
 		
 		$result_nome = $DB->query($sql_nome) ;
-		$row_nome = $DB->fetch_assoc($result_nome);
+		$row_nome = $DB->fetchAssoc($result_nome);
 		
 		//Requester
 		$sql_req = "SELECT gu.firstname AS name, gu.realname AS sname
@@ -318,7 +318,7 @@ $res_data = $DB->query($sql_data);
 						AND gtu.type = 1 ";
 		
 		$result_req = $DB->query($sql_req) ;
-		$req = $DB->fetch_assoc($result_req);
+		$req = $DB->fetchAssoc($result_req);
 				
 	echo"
 		<tr>	

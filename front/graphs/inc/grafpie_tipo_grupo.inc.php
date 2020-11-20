@@ -21,7 +21,7 @@ AND glpi_problems.date ".$datas."
  ";		
  
 $result_p = $DB->query($query_p) or die('erro-tipo');
-$problems = $DB->fetch_assoc($result_p);
+$problems = $DB->fetchAssoc($result_p);
 
 
 //tickets by type
@@ -40,7 +40,7 @@ ORDER BY tipo  ASC
 $result2 = $DB->query($query2) or die('erro');
 
 $arr_grft2 = array();
-while ($row_result = $DB->fetch_assoc($result2))		
+while ($row_result = $DB->fetchAssoc($result2))		
 { 			
 	$v_row_result = $row_result['tipo'];
 	$arr_grft2[$v_row_result] = $row_result['tick'];			

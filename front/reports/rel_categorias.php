@@ -167,7 +167,7 @@ else {
 										$arr_ent[0] = __('All');
 		
 										//$DB->data_seek($result_ent, 0) ;
-										while ($row_result = $DB->fetch_assoc($result_ent)) {
+										while ($row_result = $DB->fetchAssoc($result_ent)) {
 										   $v_row_result = $row_result['id'];
 										   $arr_ent[$v_row_result] = $row_result['cname'] ;
 										}
@@ -240,7 +240,7 @@ else {
 					WHERE id = ".$sel_ent."";
 				
 					$result_nm = $DB->query($sql_nm);
-					$ent_name = $DB->fetch_assoc($result_nm);
+					$ent_name = $DB->fetchAssoc($result_nm);
 				}
 
 			}
@@ -304,7 +304,7 @@ echo "
 				</thead>
 			<tbody>\n ";
 			
-			while($row = $DB->fetch_assoc($result_cat)){			
+			while($row = $DB->fetchAssoc($result_cat)){			
 											
 				 // Chamados
 				$sql_cham = 
@@ -316,7 +316,7 @@ echo "
 				".$entidade." ";
 				
 				$result_cham = $DB->query($sql_cham);
-				$data_cham = $DB->fetch_assoc($result_cham);
+				$data_cham = $DB->fetchAssoc($result_cham);
 				$chamados = $data_cham['total'];			
 				
 				//chamados abertos
@@ -330,7 +330,7 @@ echo "
 				".$entidade." ";
 				
 				$result_abe = $DB->query($sql_abe);	
-				$data_abe = $DB->fetch_assoc($result_abe);
+				$data_abe = $DB->fetchAssoc($result_abe);
 				$abertos = $data_abe['total'];	
 				
 				//chamados solucionados
@@ -344,7 +344,7 @@ echo "
 				".$entidade." ";
 				
 				$result_sol = $DB->query($sql_sol);	
-				$data_sol = $DB->fetch_assoc($result_sol);
+				$data_sol = $DB->fetchAssoc($result_sol);
 				$solucionados = $data_sol['total'];
 				
 				//chamados fechados
@@ -358,7 +358,7 @@ echo "
 				".$entidade." ";
 				
 				$result_fech = $DB->query($sql_fech);	
-				$data_fech = $DB->fetch_assoc($result_fech);
+				$data_fech = $DB->fetchAssoc($result_fech);
 				$fechados = $data_fech['total'];							
 				
 				echo "	

@@ -21,7 +21,7 @@ echo '
 	</thead>
 	<tbody>'; 		
 
-while ($row = $DB->fetch_assoc($result2))		
+while ($row = $DB->fetchAssoc($result2))		
 {		
 	echo '<tr>
 				<td><a href=../../../../front/computer.php?is_deleted=0&field[0]=view&searchtype[0]=contains&contains[0]='. urlencode($row['name']) .'&itemtype=Computer&start=0

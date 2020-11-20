@@ -280,7 +280,7 @@ if ($node == -1) {
 
       if ($result = $DB->query($query)) {
       	
-         while ($row = $DB->fetch_assoc($result)) {
+         while ($row = $DB->fetchAssoc($result)) {
             $path = [
                'id'   => $row['id'],
                'text' => $row['name'],
@@ -358,7 +358,7 @@ function super_unique($array)
 
       $i = 0;
       if ($DB->numrows($result)) {
-         while ($data = $DB->fetch_assoc($result)) {
+         while ($data = $DB->fetchAssoc($result)) {
             $totalcost += TicketCost::computeTotalCost($data["actiontime"], $data["cost_time"],
                                                        $data["cost_fixed"], $data["cost_material"]);
          }

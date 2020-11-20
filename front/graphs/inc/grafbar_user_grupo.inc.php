@@ -46,7 +46,7 @@ $(function () {
             categories: ";
 
 				$categories = array();
-				while ($grupo = $DB->fetch_assoc($query_grp_b)) {
+				while ($grupo = $DB->fetchAssoc($query_grp_b)) {
 				    $categories[] = $grupo['name']." ".$grupo['sname'];
 				}
 				echo json_encode($categories);
@@ -114,7 +114,7 @@ $(function () {
 
 $DB->data_seek($query_grp_b, 0) ;
 
-while ($grupo = $DB->fetch_assoc($query_grp_b))
+while ($grupo = $DB->fetchAssoc($query_grp_b))
 {
 	echo $grupo['conta'].",";
 }

@@ -67,7 +67,7 @@ $passo = $abertos - ($dif - 1);
 		
 		$conta_ticket1 = array();
 			
-		while($row = $DB->fetch_assoc($res)) {
+		while($row = $DB->fetchAssoc($res)) {
 			$conta_ticket1[] = $row['id'];	
 		}
 		
@@ -92,7 +92,7 @@ AND gtu.users_id = ". $_SESSION['glpiID'] ." ";
 
 $resultf = $DB->query($queryf);
 
-while($row = $DB->fetch_assoc($resultf)) {
+while($row = $DB->fetchAssoc($resultf)) {
 		$conta_follow1[] = $row['id'];	
 	}
 */	
@@ -153,7 +153,7 @@ $difn = $abertosn - $atualn;
 		
 		$conta_follow1 = array();
 			
-		while($row = $DB->fetch_assoc($resn)) {
+		while($row = $DB->fetchAssoc($resn)) {
 			$conta_follow1[] = $row['id'];	
 		}
 		
@@ -184,7 +184,7 @@ echo "
 
 	$DB->data_seek($res, 0);	
 		
-	while($row = $DB->fetch_assoc($res)) {
+	while($row = $DB->fetchAssoc($res)) {
 				
 			$titulo = "<b>". __('New ticket')."</b>";
 			$text = "<b>".$row['id']."</b> - ".$row['name'];	
@@ -201,7 +201,7 @@ echo "
 if($conta_follow != 0 ) {
 
 	$DB->data_seek($resn, 0);
-	while($row = $DB->fetch_assoc($resn)) {
+	while($row = $DB->fetchAssoc($resn)) {
 	
 		$titulo = "<b>" .__('New followup') . "</b>";
 		$text = "<b>".$row['id']."</b> - ". substr($row['content'],0,50); 					

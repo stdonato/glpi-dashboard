@@ -108,7 +108,7 @@ Session::checkRight("profile", READ);
 		
 		
 		$result = $DB->query($sql);
-		$data = $DB->fetch_assoc($result);
+		$data = $DB->fetchAssoc($result);
 		
 		$abertos = $data['total']; 
 		
@@ -126,7 +126,7 @@ Session::checkRight("profile", READ);
 		AND type = 1 ";
 		
 		$result = $DB->query($query);
-		$quant = $DB->fetch_assoc($result);
+		$quant = $DB->fetchAssoc($result);
 		
 		$atual = $quant['quant']; 
 		
@@ -195,7 +195,7 @@ AND glpi_tickets.is_deleted =0
 AND glpi_tickets.entities_id IN (".$ent.")" ;
 
 $result = $DB->query($sql);
-$hoje = $DB->fetch_assoc($result);
+$hoje = $DB->fetchAssoc($result);
 
 
 // chamados de ontem - yesterday tickets
@@ -209,7 +209,7 @@ AND glpi_tickets.is_deleted =0
 AND glpi_tickets.entities_id IN (".$ent.")" ;
 
 $result = $DB->query($sql);
-$ontem = $DB->fetch_assoc($result);
+$ontem = $DB->fetchAssoc($result);
 
 
 //$cham_ontem = "'Chamados de ontem: " . $ontem['total'] . "'";
@@ -353,7 +353,7 @@ $ent_name = $DB->result($result_n, 0, 'cname');
 				<tbody>";
 			
 		
-				while($row = $DB->fetch_assoc($result_cham)){ 
+				while($row = $DB->fetchAssoc($result_cham)){ 
 				
 					$status1 = $row['status']; 
 					
@@ -377,7 +377,7 @@ $ent_name = $DB->result($result_n, 0, 'cname');
 					AND glpi_tickets_users.type = 2 ";
 					    
 					$result_tec = $DB->query($sql_tec);	
-					$row_tec = $DB->fetch_assoc($result_tec);
+					$row_tec = $DB->fetchAssoc($result_tec);
 					
 					//get requester
 					$sql_req = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
@@ -389,7 +389,7 @@ $ent_name = $DB->result($result_n, 0, 'cname');
 					AND glpi_tickets.entities_id IN (".$ent.")" ;
 					    
 					$result_req = $DB->query($sql_req);	
-					$row_req = $DB->fetch_assoc($result_req);
+					$row_req = $DB->fetchAssoc($result_req);
 					
 					//get priority
 					$sql_prio = "SELECT name, value
@@ -397,7 +397,7 @@ $ent_name = $DB->result($result_n, 0, 'cname');
 							WHERE name LIKE 'priority_".$row['priority']."' ";
 					
 					$result_prio = $DB->query($sql_prio);	
-					$row_prio = $DB->fetch_assoc($result_prio);	
+					$row_prio = $DB->fetchAssoc($result_prio);	
 					
 					$priority = substr($row_prio['name'],9,10);
 					
@@ -425,7 +425,7 @@ $ent_name = $DB->result($result_n, 0, 'cname');
 					WHERE glpi_locations.id = ". $row['lid'] ." ";
 					    
 					$result_loc = $DB->query($sql_loc);	
-					$row_loc = $DB->fetch_assoc($result_loc);	
+					$row_loc = $DB->fetchAssoc($result_loc);	
 					
 					//get entity				
 					$sql_ent = "SELECT id, name, completename AS cname
@@ -433,7 +433,7 @@ $ent_name = $DB->result($result_n, 0, 'cname');
 					WHERE glpi_entities.id = ". $row['entity'] ." ";
 					    
 					$result_ent = $DB->query($sql_ent);	
-					$row_ent = $DB->fetch_assoc($result_ent);					
+					$row_ent = $DB->fetchAssoc($result_ent);					
 			
 					echo "
 					<tr class='title' style='font-weight:normal;'>

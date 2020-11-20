@@ -69,7 +69,7 @@ $media_mes = round(($num_tickets/$num_months),0);
 
 <?php
 
-while($row = $DB->fetch_assoc($result_m)) {
+while($row = $DB->fetchAssoc($result_m)) {
 
 $query =  "SELECT DISTINCT DATE_FORMAT( date, '%Y-%m' ) AS data, count(*) AS conta
 FROM glpi_tickets
@@ -77,7 +77,7 @@ WHERE is_deleted = 0
 AND date LIKE '%".$row['month']."%' ";
 
 $result = $DB->query($query);
-$row_mes = $DB->fetch_assoc($result);
+$row_mes = $DB->fetchAssoc($result);
 
 echo $row_mes['data']." - ".$row_mes['conta']."<br />";
 	

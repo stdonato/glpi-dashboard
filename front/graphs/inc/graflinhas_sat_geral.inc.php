@@ -13,7 +13,7 @@ ORDER BY MONTH ASC ";
 $resultm = $DB->query($querym) or die('erro');
 
 $arr_grfm = array();
-while ($row_result = $DB->fetch_assoc($resultm))
+while ($row_result = $DB->fetchAssoc($resultm))
 {
 	$v_row_result = $row_result['month_l'];
 	$arr_grfm[$v_row_result] = $row_result['nb'];
@@ -31,7 +31,7 @@ $opened = array_sum($quantm);
 $DB->data_seek($resultm, 0);
 
 $arr_month = array();
-while ($row_result = $DB->fetch_assoc($resultm))
+while ($row_result = $DB->fetchAssoc($resultm))
 {
 	$v_row_result = $row_result['month_l'];
 	$arr_month[$v_row_result] = 0;
@@ -41,7 +41,7 @@ while ($row_result = $DB->fetch_assoc($resultm))
 $arr_grfa = array();
 
 $DB->data_seek($resultm, 0);
-while ($row_result = $DB->fetch_assoc($resultm))
+while ($row_result = $DB->fetchAssoc($resultm))
 {
 
 	$querya2 = "
@@ -56,7 +56,7 @@ while ($row_result = $DB->fetch_assoc($resultm))
 	ORDER BY month";
 
 	$resulta2 = $DB->query($querya2) or die('erronb');
-	$row_result2 = $DB->fetch_assoc($resulta2);
+	$row_result2 = $DB->fetchAssoc($resulta2);
 
 	$v_row_result = $row_result['month_l'];
 	if($row_result2['nb'] != '') {
@@ -81,7 +81,7 @@ $late = array_sum($quanta);
 $arr_grfs = array();
 
 $DB->data_seek($resultm, 0);
-while ($row_result = $DB->fetch_assoc($resultm))
+while ($row_result = $DB->fetchAssoc($resultm))
 {
 	$querys2 = "
 	SELECT DISTINCT DATE_FORMAT( date, '%b-%y' ) AS month_l, DATE_FORMAT( date, '%y-%m' ) AS month, count(id) AS nb
@@ -94,7 +94,7 @@ while ($row_result = $DB->fetch_assoc($resultm))
 	ORDER BY month";
 
 	$results2 = $DB->query($querys2) or die('erronb');
-	$row_result2 = $DB->fetch_assoc($results2);
+	$row_result2 = $DB->fetchAssoc($results2);
 
 	$v_row_result = $row_result['month_l'];
 	if($row_result2['nb'] != '') {
@@ -118,7 +118,7 @@ $solved = array_sum($quants);
 $arr_grff = array();
 
 $DB->data_seek($resultm, 0);
-while ($row_result = $DB->fetch_assoc($resultm))
+while ($row_result = $DB->fetchAssoc($resultm))
 {
 	$queryf = "
 	SELECT DISTINCT DATE_FORMAT(date, '%b-%y') as month_l, DATE_FORMAT(date, '%y-%m') as month, COUNT(id) as nb
@@ -131,7 +131,7 @@ while ($row_result = $DB->fetch_assoc($resultm))
 	ORDER BY month ";
 
 	$resultf = $DB->query($queryf) or die('errof');
-	$row_resultf = $DB->fetch_assoc($resultf);
+	$row_resultf = $DB->fetchAssoc($resultf);
 
 	$v_row_result = $row_result['month_l'];
 	if($row_resultf['nb'] != '') {
@@ -167,7 +167,7 @@ $result_sat = $DB->query($query_sat) or die('erro');
 //array with satisfaction average
 
 $arr_grfsat = array();
-while ($row_result1 = $DB->fetch_assoc($result_sat)){
+while ($row_result1 = $DB->fetchAssoc($result_sat)){
 	$v_row_result1 = $row_result1['month_l'];
 	$arr_grfsat[$v_row_result1] = round(($row_result1['media']/5)*100,1);
 }

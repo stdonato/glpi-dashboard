@@ -114,7 +114,7 @@ AND glpi_users.is_active = 1
 ORDER BY name ASC ";
 
 $result_tec = $DB->query($sql_tec);
-$tec = $DB->fetch_assoc($result_tec);
+$tec = $DB->fetchAssoc($result_tec);
 
 ?>
 <div id='content' >
@@ -177,7 +177,7 @@ a:hover { color: #000099; }
 
 		$DB->data_seek($result_tec, 0) ;
 
-		while ($row_result = $DB->fetch_assoc($result_tec))
+		while ($row_result = $DB->fetchAssoc($result_tec))
 	    {
 		    $v_row_result = $row_result['id'];
 	   	 $arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;
@@ -338,7 +338,7 @@ if($con == "1") {
 	".$entidade." " ;
 
 	$result_ab = $DB->query($sql_ab) or die ("erro_ab");
-	$data_ab = $DB->fetch_assoc($result_ab);
+	$data_ab = $DB->fetchAssoc($result_ab);
 
 	$abertos = $data_ab['total'];
 
@@ -377,7 +377,7 @@ if($con == "1") {
 	$result_nome = $DB->query($sql_nome) ;
 
 	$DB->data_seek($result_cham, 0);
-	while($row = $DB->fetch_assoc($result_nome)) {
+	while($row = $DB->fetchAssoc($result_nome)) {
 
 	$tech = $row['firstname'] ." ". $row['realname'];
 
@@ -401,7 +401,7 @@ if($con == "1") {
 
 	//total costs
 	$DB->data_seek($result_cham, 0);
-	while($row = $DB->fetch_assoc($result_cham)){
+	while($row = $DB->fetchAssoc($result_cham)){
 
 /*	$query_cost = "SELECT (SUM( gtc.`cost_time` ) + SUM( gtc.`cost_fixed` ) + SUM( gtc.`cost_material` )) AS costs
 	FROM glpi_ticketcosts gtc, glpi_tickets gt
@@ -458,7 +458,7 @@ if($con == "1") {
 
 $DB->data_seek($result_cham, 0);
 
-while($row = $DB->fetch_assoc($result_cham)){
+while($row = $DB->fetchAssoc($result_cham)){
 
 	$status1 = $row['status'];
 
@@ -492,7 +492,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 	AND glpi_tickets_users.type = 2 ";
 
 	$result_tec = $DB->query($sql_tec);
-	$row_tec = $DB->fetch_assoc($result_tec);
+	$row_tec = $DB->fetchAssoc($result_tec);
 	
 	$comp_cost = computeCost($row['id']);
 

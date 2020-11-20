@@ -113,7 +113,7 @@ FROM glpi_locations
 ORDER BY name ASC ";
 
 $result_loc = $DB->query($sql_loc);
-$ent = $DB->fetch_assoc($result_loc);
+$ent = $DB->fetchAssoc($result_loc);
 
 
 // lista de entidades
@@ -146,7 +146,7 @@ $arr_loc[0] = "-- ". __('Select a location','dashboard') . " --" ;
 
 $DB->data_seek($result_loc, 0);
 
-while ($row_result = $DB->fetch_assoc($result_loc))
+while ($row_result = $DB->fetchAssoc($result_loc))
 {
 
 	$sql_ent = "
@@ -277,7 +277,7 @@ $selected = $id_loc;
 		WHERE id = ".$id_loc." ";
 		
 		$result_nm = $DB->query($sql_nm);
-		$ent_name = $DB->fetch_assoc($result_nm);
+		$ent_name = $DB->fetchAssoc($result_nm);
 		
 		
 		//quant chamados
@@ -289,7 +289,7 @@ $selected = $id_loc;
 		AND glpi_tickets.locations_id = ".$id_loc." ";
 		
 		$result2 = $DB->query($query2) or die('erro');
-		$total = $DB->fetch_assoc($result2);
+		$total = $DB->fetchAssoc($result2);
 		
 		echo '<div id="entidade" class="col-md-12 fluid">';
 		echo $ent_name['name']." - <span> ".$total['total']." ".__('Tickets','dashboard')."</span>

@@ -194,7 +194,7 @@ $conta_cons = $DB->numrows($result_cham);
 $consulta = $conta_cons;
 
 //tempo de todas as tarefas
-while($row = $DB->fetch_assoc($result_cham)){
+while($row = $DB->fetchAssoc($result_cham)){
     $tempo_total += $row['effective_duration'];
 }
 	
@@ -232,7 +232,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 //listar projetos
 
 $DB->data_seek($result_cham, 0);
-while($row = $DB->fetch_assoc($result_cham)){
+while($row = $DB->fetchAssoc($result_cham)){
 	
 	//percent done		
 	$barra = $row['percent_done'];

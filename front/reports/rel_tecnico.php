@@ -184,7 +184,7 @@ a:hover { color: #000099; }
 		
 		$DB->data_seek($result_tec, 0) ;
 		
-		while ($row_result = $DB->fetch_assoc($result_tec))
+		while ($row_result = $DB->fetchAssoc($result_tec))
 	    {
 		    $v_row_result = $row_result['id'];
 	   	 $arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;
@@ -348,7 +348,7 @@ if($con == "1") {
 	ORDER BY id DESC  " ;
 	
 	$result_ab = $DB->query($sql_ab) or die ("erro_ab");
-	$data_ab = $DB->fetch_assoc($result_ab);
+	$data_ab = $DB->fetchAssoc($result_ab);
 	
 	$abertos = $data_ab['total'];
 	
@@ -367,7 +367,7 @@ if($con == "1") {
 	".$entidade." ";
 	
 	$result_sat = $DB->query($query_sat) or die('erro');
-	$media = $DB->fetch_assoc($result_sat);
+	$media = $DB->fetchAssoc($result_sat);
 	
 	$satisfacao = round(($media['media']/5)*100,1);
 	$nota = round($media['media'],0);
@@ -406,7 +406,7 @@ if($con == "1") {
 	$result_nome = $DB->query($sql_nome) ;
 	
 	$DB->data_seek($result_cham, 0);
-	while($row = $DB->fetch_assoc($result_nome)) {
+	while($row = $DB->fetchAssoc($result_nome)) {
 		
 	  //count by status
    $query_stat = "
@@ -586,7 +586,7 @@ if($con == "1") {
 }
 
 //listar chamados
-while($row = $DB->fetch_assoc($result_cham)){
+while($row = $DB->fetchAssoc($result_cham)){
 
 	$status1 = $row['status'];
 
@@ -608,7 +608,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 	AND glpi_tickets_users.type = 1 ";
 	
 	$result_user = $DB->query($sql_user);			
-	$row_user = $DB->fetch_assoc($result_user);
+	$row_user = $DB->fetchAssoc($result_user);
 	
 
 	if($satisfacao != '' || $satisfacao > 0) {
@@ -618,7 +618,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 		WHERE glpi_ticketsatisfactions.tickets_id = ". $row['id'] ." ";
 
 		$result_satc = $DB->query($query_satc);
-		$satc = $DB->fetch_assoc($result_satc);
+		$satc = $DB->fetchAssoc($result_satc);
 
 		$satc1 = $satc['sat'];
 		$nota1 = round(($satc['satavg']/5)*100,1);
@@ -717,6 +717,7 @@ var table =  $('#tec').DataTable( {
                   {
                  		extend: "pdfHtml5",
                  		orientation: "landscape",
+                 		pageSize:'A4',
                  		message: "<?php echo __('Technician', 'dashboard'); ?> : <?php echo $tech . '  - '; ?> <?php echo  __('Tickets','dashboard'); ?> : <?php echo $conta_cons . '  - ' ; ?>  <?php echo  __('Period','dashboard'); ?> : <?php echo conv_data($data_ini2); ?> - <?php echo conv_data($data_fin2); ?>"							
                   } 
                   ]

@@ -27,6 +27,8 @@ body {background-color: #F1F1F1;}
   box-shadow: 4px 4px 4px #888888; 
 }
 
+.head-rel-sint {min-height: 230px !important ; }
+
 #head-map {	
 	background-color: #fff;
 	color: #fff;

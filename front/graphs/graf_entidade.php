@@ -109,7 +109,7 @@ WHERE id IN (".$ents.")
 ORDER BY `cname` ASC ";
 
 $result_ent = $DB->query($sql_ent);
-$ent = $DB->fetch_assoc($result_ent);
+$ent = $DB->fetchAssoc($result_ent);
 
 
 // lista de entidades
@@ -142,7 +142,7 @@ $arr_ent[0] = "-- ". __('Select a entity','dashboard') . " --" ;
 
 $DB->data_seek($result_ent, 0);
 
-while ($row_result = $DB->fetch_assoc($result_ent)) {
+while ($row_result = $DB->fetchAssoc($result_ent)) {
 	$v_row_result = $row_result['id'];
 	$arr_ent[$v_row_result] = $row_result['cname'] ;
 }
@@ -263,7 +263,7 @@ $selected = $id_ent;
 			WHERE id = ".$id_ent." ";
 
 			$result_nm = $DB->query($sql_nm);
-			$ent_name = $DB->fetch_assoc($result_nm);
+			$ent_name = $DB->fetchAssoc($result_nm);
 
 			//quant chamados
 			$query2 = "
@@ -274,7 +274,7 @@ $selected = $id_ent;
 			AND glpi_tickets.entities_id = ".$id_ent." ";
 
 			$result2 = $DB->query($query2) or die('erro');
-			$total = $DB->fetch_assoc($result2);
+			$total = $DB->fetchAssoc($result2);
 
 			//count by status
 			$query_stat = "

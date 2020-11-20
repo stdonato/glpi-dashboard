@@ -312,7 +312,7 @@ else {
 
 		$result_cham2 = $DB->query($sql_cham2);
 
-		$conta_cham = $DB->fetch_assoc($result_cham2) ;
+		$conta_cham = $DB->fetchAssoc($result_cham2) ;
 
 		$total_cham = $conta_cham['total'];
 
@@ -350,7 +350,7 @@ else {
 		".$entidade." ";
 
 		$result_ab = $DB->query($sql_ab) or die ("erro_ab");
-		$data_ab = $DB->fetch_assoc($result_ab);
+		$data_ab = $DB->fetchAssoc($result_ab);
 
 		$abertos = $data_ab['total'];
 
@@ -434,7 +434,7 @@ else {
 			</thead>
 		<tbody>";
 
-		while($row = $DB->fetch_assoc($result_cham)){
+		while($row = $DB->fetchAssoc($result_cham)){
 
 		    $status1 = $row['status'];
 		    if($status1 == "1" ) { $status1 = "new";}
@@ -463,7 +463,7 @@ else {
 			".$entidade." ";
 
 			$result_user = $DB->query($sql_user);
-			$row_user = $DB->fetch_assoc($result_user);
+			$row_user = $DB->fetchAssoc($result_user);
 
 			//tecnico
 			$sql_tec = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
@@ -475,7 +475,7 @@ else {
 			".$entidade." ";
 
 			$result_tec = $DB->query($sql_tec);
-			$row_tec = $DB->fetch_assoc($result_tec);
+			$row_tec = $DB->fetchAssoc($result_tec);
 
 			echo "
 			<tr style='font-weight:normal;'>

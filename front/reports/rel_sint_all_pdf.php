@@ -147,7 +147,7 @@ else {
 		ORDER BY id DESC ";
 		
 		$result_cham = $DB->query($sql_cham);
-		$chamados = $DB->fetch_assoc($result_cham) ;
+		$chamados = $DB->fetchAssoc($result_cham) ;
 		
 				
 		//quant de chamados
@@ -159,7 +159,7 @@ else {
 		".$entidade." ";
 		
 		$result_cham2 = $DB->query($sql_cham2);		
-		$conta_cham = $DB->fetch_assoc($result_cham2);
+		$conta_cham = $DB->fetchAssoc($result_cham2);
 		
 		$total_cham = $conta_cham['total'];
 		//$numdias = $conta_cham['numdias'];
@@ -209,7 +209,7 @@ else {
 			".$entidade." ";
 			
 			$result_time = $DB->query($sql_time);		
-			$time_cham = $DB->fetch_assoc($result_time);
+			$time_cham = $DB->fetchAssoc($result_time);
 			
 			$avgtime = $time_cham['avgtime'];
 			
@@ -276,11 +276,11 @@ else {
 			//else {
 			if (!file_exists('../../../../pics/logo_big.png')) {						
 				if ($CFG_GLPI['version'] >= 0.90){					
-					$logo = "../../../../pics/logo-glpi-login.png";
-					$imgsize = "background-color:#000;";
+					$logo = "../../../../pics/logos/logo-GLPI-100-black.png";
+					#$imgsize = "background-color:#000;";
 				}	
 				else {
-					$logo = "../../../../pics/logo-glpi-login.png";
+					$logo = "../../../../pics/logos/logo-GLPI-100-black.png";
 					$imgsize = "";
 				}
 			}
@@ -428,7 +428,7 @@ $content .= "
 
 			 <tbody>";
 			
-			while($row = $DB->fetch_assoc($result_grp)) {
+			while($row = $DB->fetchAssoc($result_grp)) {
 				$content .= "<tr>
 				 <td width='300'>".$row['name']."</td>
 				 <td width='200' align='right'>".$row['conta']."</td>			
@@ -448,7 +448,7 @@ $content .= "
 
 			 <tbody>";		
 			
-			while($row_tec = $DB->fetch_assoc($result_tec)) {
+			while($row_tec = $DB->fetchAssoc($result_tec)) {
 				 $content .= "<tr>
 				 <td width='300'>".$row_tec['name']." ".$row_tec['sname']."</td>
 				 <td width='200' align='right'>".$row_tec['conta']."</td>			
@@ -469,7 +469,7 @@ $content .= "
 			 
 			 <tbody>";	
 			
-			while($row = $DB->fetch_assoc($result_req)) {
+			while($row = $DB->fetchAssoc($result_req)) {
 				$content .= "<tr>
 				 <td width='300'>".$row['name']." ".$row['sname']."</td>
 				 <td width='200' align='right'>".$row['conta']."</td>			

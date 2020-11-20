@@ -31,7 +31,7 @@ $contador = $DB->numrows($result);
 //array with satisfaction average
 $arr_grfsat = array();
 
-while ($row_result = $DB->fetch_assoc($result))
+while ($row_result = $DB->fetchAssoc($result))
 	{
 		$v_row_result = $row_result['month_l'];
 		$arr_grfsat[$v_row_result] = round(($row_result['media']/5)*100,1);

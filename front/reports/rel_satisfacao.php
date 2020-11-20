@@ -162,7 +162,7 @@ else {
 										$arr_ent[0] = __('All');
 
 										//$DB->data_seek($result_ent, 0) ;
-										while ($row_result = $DB->fetch_assoc($result_ent)) {
+										while ($row_result = $DB->fetchAssoc($result_ent)) {
 										   $v_row_result = $row_result['id'];
 										   $arr_ent[$v_row_result] = $row_result['cname'] ;
 										}
@@ -280,7 +280,7 @@ else {
 	WHERE id = ".$id_ent."";
 	
 	$result_nm = $DB->query($sql_nm);
-	$ent_name = $DB->fetch_assoc($result_nm);
+	$ent_name = $DB->fetchAssoc($result_nm);
 	
 	
 	//listar chamados
@@ -309,7 +309,7 @@ else {
 		</thead>
 	<tbody>";
 	
-	while($row = $DB->fetch_assoc($result_cham)){
+	while($row = $DB->fetchAssoc($result_cham)){
 	
 		//requerente
 		$sql_user = "SELECT glpi_tickets.id AS id, glpi_tickets.name AS descr, glpi_users.firstname AS name, glpi_users.realname AS sname
@@ -320,7 +320,7 @@ else {
 		AND glpi_tickets_users.type = 1 ";
 		$result_user = $DB->query($sql_user);
 	
-		$row_user = $DB->fetch_assoc($result_user);
+		$row_user = $DB->fetchAssoc($result_user);
 	
 		//tecnico
 		$sql_tec = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
@@ -332,7 +332,7 @@ else {
 	
 		$result_tec = $DB->query($sql_tec);
 	
-		$row_tec = $DB->fetch_assoc($result_tec);
+		$row_tec = $DB->fetchAssoc($result_tec);
 	
 	echo "
 		<tr style='font-weight:normal;'>

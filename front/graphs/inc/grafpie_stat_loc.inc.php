@@ -22,7 +22,7 @@ ORDER BY stat  ASC ";
 $result2 = $DB->query($query2) or die('erro');
 
 $arr_grf2 = array();
-while ($row_result = $DB->fetch_assoc($result2))		
+while ($row_result = $DB->fetchAssoc($result2))		
 	{ 
 	$v_row_result = $row_result['stat'];
 	$arr_grf2[$v_row_result] = $row_result['tick'];			

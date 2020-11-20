@@ -26,7 +26,7 @@ echo '
 	</thead>
 	<tbody>'; 		
 
-while ($row = $DB->fetch_assoc($result2))		
+while ($row = $DB->fetchAssoc($result2))		
 {		
 	
 	$sql_state = "SELECT name FROM glpi_states WHERE id = ".$row['states_id']." ";

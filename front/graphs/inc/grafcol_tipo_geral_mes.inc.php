@@ -46,7 +46,7 @@ $months = $DB->query($querya) or die('erro');
 
 $arr_grfa = array();
 
-while ($row_result = $DB->fetch_assoc($months))
+while ($row_result = $DB->fetchAssoc($months))
 	{
 	if($interval >= "31") {
 
@@ -78,7 +78,7 @@ while ($row_result = $DB->fetch_assoc($months))
 		}
 
 $months2 = $DB->query($querya2) or die('erro a');
-$row_result2 = $DB->fetch_assoc($months2);
+$row_result2 = $DB->fetchAssoc($months2);
 
 	$v_row_result = $row_result['day_l'];
 		if($row_result2['nb'] != '') {
@@ -131,7 +131,7 @@ $months = $DB->query($querys) or die('erro');
 
 $arr_grfs = array();
 
-while ($row_result = $DB->fetch_assoc($months))
+while ($row_result = $DB->fetchAssoc($months))
 	{
 	if($interval >= "31") {
 
@@ -163,7 +163,7 @@ while ($row_result = $DB->fetch_assoc($months))
 		}
 
 $months2 = $DB->query($querys2) or die('erro a');
-$row_result2 = $DB->fetch_assoc($months2);
+$row_result2 = $DB->fetchAssoc($months2);
 
 	$v_row_result = $row_result['day_l'];
 		if($row_result2['nb'] != '') {
@@ -214,7 +214,7 @@ $months = $DB->query($queryp) or die('erro');
 
 $arr_grfp = array();
 
-while ($row_result = $DB->fetch_assoc($months))
+while ($row_result = $DB->fetchAssoc($months))
 	{
 	if($interval >= "31") {
 
@@ -244,7 +244,7 @@ while ($row_result = $DB->fetch_assoc($months))
 		}
 
 $months2 = $DB->query($queryp2) or die('erro a');
-$row_result2 = $DB->fetch_assoc($months2);
+$row_result2 = $DB->fetchAssoc($months2);
 
 	$v_row_result = $row_result['day_l'];
 		if($row_result2['nb'] != '') {

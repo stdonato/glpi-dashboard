@@ -160,7 +160,7 @@ $result_cat = $DB->query($sql_cat);
 $arr_cat = array();
 $arr_cat[0] = "-- ". __('Select a category', 'dashboard') . " --" ;
 
-while ($row_result = $DB->fetch_assoc($result_cat))
+while ($row_result = $DB->fetchAssoc($result_cat))
 {
 	$v_row_result = $row_result['id'];
 	$arr_cat[$v_row_result] = $row_result['name'] ;
@@ -293,7 +293,7 @@ if($con == "1") {
 		WHERE id = ".$id_cat." ";
 		
 		$result_nm = $DB->query($sql_nm);
-		$ent_name = $DB->fetch_assoc($result_nm);
+		$ent_name = $DB->fetchAssoc($result_nm);
 
 		if($sons_cat == 1) {
 				
@@ -316,7 +316,7 @@ if($con == "1") {
 		
 		$result2 = $DB->query($query2) or die('erro1');
 		
-		$total = $DB->fetch_assoc($result2);
+		$total = $DB->fetchAssoc($result2);
 		
 		echo '<div id="entidade" class="col-md-12 col-sm-12 fluid" style="margin-top: -110px !important;">';
 		echo $ent_name['name']." ".$and_sons." - <span> ".$total['total']." ".__('Tickets','dashboard')."</span>";

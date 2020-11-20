@@ -79,7 +79,7 @@ Session::checkRight("profile", READ);
 // check if any entity has address
 $query1 = "SELECT entities_id FROM glpi_plugin_dashboard_map";
 $result1 = $DB->query($query1);
-$teste = $DB->fetch_assoc($result1);
+$teste = $DB->fetchAssoc($result1);
 
 $conta_teste = count($teste);
 
@@ -215,7 +215,7 @@ $query_loc = "
 
 $result_loc = $DB->query($query_loc) or die ("erro");
 
-while ($row = $DB->fetch_assoc($result_loc))
+while ($row = $DB->fetchAssoc($result_loc))
 {
  
   $id = $row['entities_id'];

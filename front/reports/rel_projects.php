@@ -236,7 +236,7 @@ $conta_cons = $DB->numrows($result_cham);
 //listar projetos
 
 $DB->data_seek($result_cham, 0);
-while($row = $DB->fetch_assoc($result_cham)){
+while($row = $DB->fetchAssoc($result_cham)){
 
 	//status
 	$sql_stat = "
@@ -245,7 +245,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 	WHERE id = ".$row['projectstates_id']." ";
 
 	$result_stat = $DB->query($sql_stat) ;
-	$row_stat = $DB->fetch_assoc($result_stat);
+	$row_stat = $DB->fetchAssoc($result_stat);
 
 	//tasks
 	$sql_task = "
@@ -254,7 +254,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 	WHERE projects_id = ".$row['id']." ";
 
 	$result_task = $DB->query($sql_task) ;
-	$row_task = $DB->fetch_assoc($result_task);
+	$row_task = $DB->fetchAssoc($result_task);
 
 	//planned time
 	$sql_time = "SELECT TIMESTAMPDIFF(SECOND,plan_start_date,plan_end_date) AS time FROM glpi_projects WHERE id = ".$row['id']."";

@@ -129,7 +129,7 @@ FROM `glpi_groups`
 ORDER BY `name` ASC ";
 
 $result_grp = $DB->query($sql_grp);
-$grp = $DB->fetch_assoc($result_grp);
+$grp = $DB->fetchAssoc($result_grp);
 
 
 // lista de grupos
@@ -161,7 +161,7 @@ $arr_grp[0] = "-- ". __('Select a group','dashboard') . " --" ;
 
 $DB->data_seek($result_grp, 0);
 
-while ($row_result = $DB->fetch_assoc($result_grp))		
+while ($row_result = $DB->fetchAssoc($result_grp))		
 { 
 	$v_row_result = $row_result['id'];
 	$arr_grp[$v_row_result] = $row_result['name'] ;			
@@ -283,7 +283,7 @@ FROM `glpi_groups`
 WHERE id = ".$id_grp." ";
 
 $result_nm = $DB->query($sql_nm);
-$grp_name = $DB->fetch_assoc($result_nm);
+$grp_name = $DB->fetchAssoc($result_nm);
 
 //quant de chamados
 $query_quant = "
@@ -297,7 +297,7 @@ AND glpi_tickets.date ".$datas."
 ". $entidade_age ." ";
 
 $result_quant = $DB->query($query_quant);
-$total = $DB->fetch_assoc($result_quant);
+$total = $DB->fetchAssoc($result_quant);
 
 echo '<div id="entidade" class="col-md-12 col-sm-12 fluid" >';
 echo $grp_name['name']." - <span> ".$total['total']." ".__('Tickets','dashboard')."</span>";

@@ -73,7 +73,7 @@ $(function () {
             categories: ";
 
 				$categories = array();
-				while ($entity = $DB->fetch_assoc($query_cat)) {
+				while ($entity = $DB->fetchAssoc($query_cat)) {
 				    $categories[] = $entity['name'];
 				}
 				echo json_encode($categories);
@@ -144,7 +144,7 @@ $(function () {
 		
 						//zerar rows para segundo while
 						$DB->data_seek($query_cat, 0) ;
-						while ($entity = $DB->fetch_assoc($query_cat)) {
+						while ($entity = $DB->fetchAssoc($query_cat)) {
 							echo $entity['total'].",";
 						}
 						

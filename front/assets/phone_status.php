@@ -25,7 +25,7 @@ echo '
 	</thead>
 	<tbody>'; 		
 
-while ($row = $DB->fetch_assoc($result2))		
+while ($row = $DB->fetchAssoc($result2))		
 {		
 	echo '<tr>
 			<td><a href=../../../../front/computer.form.php?id='.$row['cid'].' target="_blank"  style="color:#555555;" >'. $row['name'].'</td>

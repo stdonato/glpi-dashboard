@@ -202,7 +202,7 @@ var locations =
 
 $locations = [];
 
-while ($row_id = $DB->fetch_assoc($res_coo)) {
+while ($row_id = $DB->fetchAssoc($res_coo)) {
 	
 	// get location info
 	$query_loc = "
@@ -213,7 +213,7 @@ while ($row_id = $DB->fetch_assoc($res_coo)) {
 	ORDER BY id DESC";	
 	
 	$result = $DB->query($query_loc) or die ("error query_loc");
-	$row = $DB->fetch_assoc($result);
+	$row = $DB->fetchAssoc($result);
 	
 	// get location tickets
 	$query_cham = "
@@ -227,7 +227,7 @@ while ($row_id = $DB->fetch_assoc($res_coo)) {
 	ORDER BY locations_id DESC";	
 	
 	$result_cham = $DB->query($query_cham) or die ("error query_cham");
-	$row_cham = $DB->fetch_assoc($result_cham); 
+	$row_cham = $DB->fetchAssoc($result_cham); 
  
   $id = $row['entities_id'];
   $title = $row['location'];        	

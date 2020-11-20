@@ -65,7 +65,7 @@ class PluginDashboardConfig extends CommonDBTM {
       if(isset($_GET['id'])) {
 	      $query_coo = "SELECT * FROM glpi_plugin_dashboard_map WHERE entities_id = ".$_GET['id'];
 	      $result_coo = $DB->query($query_coo) or die ("erro");
-			$ent_info = $DB->fetch_assoc($result_coo);
+			$ent_info = $DB->fetchAssoc($result_coo);
 			
 			$LNG = $ent_info['lng'];
 			$LAT = $ent_info['lat'];

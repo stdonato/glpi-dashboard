@@ -87,7 +87,7 @@ Session::checkRight("profile", READ);
 		".$status1."";
 		
 		$result = $DB->query($sql);
-		$data = $DB->fetch_assoc($result);
+		$data = $DB->fetchAssoc($result);
 		
 		$abertos = $data['total']; 
 		
@@ -105,7 +105,7 @@ Session::checkRight("profile", READ);
 		AND type = 3 ";
 		
 		$result = $DB->query($query);
-		$quant = $DB->fetch_assoc($result);
+		$quant = $DB->fetchAssoc($result);
 		
 		$atual = $quant['quant']; 
 		
@@ -131,7 +131,7 @@ Session::checkRight("profile", READ);
 		AND glpi_tickets.date LIKE '".$datahoje."%' " ;
 		
 		$result = $DB->query($sql);
-		$hoje=$DB->fetch_assoc($result);
+		$hoje=$DB->fetchAssoc($result);
 		
 		// chamados de ontem - yesterday tickets
 		$dataontem = date('Y-m-d', strtotime('-1 day'));
@@ -147,7 +147,7 @@ Session::checkRight("profile", READ);
 		AND glpi_tickets.date LIKE '".$dataontem."%' ";
 		
 		$result = $DB->query($sql);
-		$ontem = $DB->fetch_assoc($result);
+		$ontem = $DB->fetchAssoc($result);
 		
 		if ($ontem['total'] > $hoje['total']) { $up_down = "../img/down.png"; }
 		if ($ontem['total'] < $hoje['total']) { $up_down = "../img/up.png"; }
@@ -336,7 +336,7 @@ else {
 				</thead>
 				<tbody>";
 
-	while($row = $DB->fetch_assoc($result_cham)){ 
+	while($row = $DB->fetchAssoc($result_cham)){ 
 	
 	$status1 = $row['status']; 
 	
@@ -360,7 +360,7 @@ else {
 	";
 	$result_grp = $DB->query($sql_grp);	
 
-	$row_grp = $DB->fetch_assoc($result_grp);
+	$row_grp = $DB->fetchAssoc($result_grp);
 
 
 	//get technician
@@ -372,7 +372,7 @@ else {
 		AND glpi_tickets_users.type = 2";
 	    
 	$result_tec = $DB->query($sql_tec);	
-	$row_tec = $DB->fetch_assoc($result_tec);
+	$row_tec = $DB->fetchAssoc($result_tec);
 	
 	//get requester
 	$sql_req = "SELECT glpi_tickets.id AS id, glpi_users.firstname AS name, glpi_users.realname AS sname
@@ -383,7 +383,7 @@ else {
 		AND glpi_tickets_users.type = 1";
 	    
 	$result_req = $DB->query($sql_req);	
-	$row_req = $DB->fetch_assoc($result_req);
+	$row_req = $DB->fetchAssoc($result_req);
 	
 	//get priority
 	$sql_prio = "SELECT name, value
@@ -391,7 +391,7 @@ else {
 				WHERE name LIKE 'priority_".$row['priority']."' ";
 
 		$result_prio = $DB->query($sql_prio);	
-		$row_prio = $DB->fetch_assoc($result_prio);	
+		$row_prio = $DB->fetchAssoc($result_prio);	
 		
 		$priority = substr($row_prio['name'],9,10);
 		
@@ -419,7 +419,7 @@ else {
 		WHERE glpi_locations.id = ". $row['lid'] ." ";
 		    
 		$result_loc = $DB->query($sql_loc);	
-		$row_loc = $DB->fetch_assoc($result_loc);		 			 				 		
+		$row_loc = $DB->fetchAssoc($result_loc);		 			 				 		
 
 		echo "
 		<tr class='title' style='font-weight:normal;'>

@@ -243,7 +243,7 @@ if($conta_cons > 0) {
 				</thead>
 				<tbody> ";
 			
-			while($row = $DB->fetch_assoc($result_sla)){			
+			while($row = $DB->fetchAssoc($result_sla)){			
 											
 				 // Chamados
 				$sql_cham = 
@@ -255,7 +255,7 @@ if($conta_cons > 0) {
 				".$entidade." ";
 				
 				$result_cham = $DB->query($sql_cham);
-				$data_cham = $DB->fetch_assoc($result_cham);
+				$data_cham = $DB->fetchAssoc($result_cham);
 				$chamados = $data_cham['total'];			
 				
 				//chamados abertos
@@ -269,7 +269,7 @@ if($conta_cons > 0) {
 				".$entidade." ";
 				
 				$result_abe = $DB->query($sql_abe);	
-				$data_abe = $DB->fetch_assoc($result_abe);
+				$data_abe = $DB->fetchAssoc($result_abe);
 				$abertos = $data_abe['total'];	
 				
 				//chamados solucionados
@@ -283,7 +283,7 @@ if($conta_cons > 0) {
 				".$entidade." ";
 				
 				$result_sol = $DB->query($sql_sol);	
-				$data_sol = $DB->fetch_assoc($result_sol);
+				$data_sol = $DB->fetchAssoc($result_sol);
 				$solucionados = $data_sol['total'];
 				
 				//chamados fechados
@@ -297,7 +297,7 @@ if($conta_cons > 0) {
 				".$entidade." ";
 				
 				$result_fech = $DB->query($sql_fech);	
-				$data_fech = $DB->fetch_assoc($result_fech);
+				$data_fech = $DB->fetchAssoc($result_fech);
 				$fechados = $data_fech['total'];		
 								
 				//count by status							

@@ -201,7 +201,7 @@ else {
 								ORDER BY `name` ASC";
 
 								$result_techs = $DB->query($sql_techs);
-								$grp = $DB->fetch_assoc($result_techs);
+								$grp = $DB->fetchAssoc($result_techs);
 
 								$res_techs = $DB->query($sql_techs);
 								$arr_techs = array();										
@@ -209,7 +209,7 @@ else {
 
 								$DB->data_seek($result_techs, 0) ;
 
-								while ($row_result = $DB->fetch_assoc($result_techs)) {										
+								while ($row_result = $DB->fetchAssoc($result_techs)) {										
 								   $v_row_result = $row_result['id'];
 								   $arr_techs[$v_row_result] = $row_result['name'] ;										      
 								}
@@ -319,7 +319,7 @@ $status_closed = "('5','6')";
 $query_sats = " SELECT * FROM `glpi_ticketsatisfactions` WHERE 1";
 
 $result_sats = $DB->query($query_sats);
-$sats = $DB->fetch_assoc($result_sats);
+$sats = $DB->fetchAssoc($result_sats);
 
 echo "<div class='well info_box fluid col-md-12 report' style='margin-left: -1px;'>";
 
@@ -358,7 +358,7 @@ echo "
 	<tbody>";
 
 
-while($id_tec = $DB->fetch_assoc($result_tec)) {
+while($id_tec = $DB->fetchAssoc($result_tec)) {
 
 //chamados total
 $sql_total = "SELECT count( glpi_tickets.id ) AS total, glpi_tickets_users.users_id AS id
@@ -374,7 +374,7 @@ AND glpi_tickets_users.type = 2
 ". $grupo_tic1 ." " ;
 
 $result_total = $DB->query($sql_total) or die ("erro_total");
-$data_total = $DB->fetch_assoc($result_total);
+$data_total = $DB->fetchAssoc($result_total);
 
 $total = $data_total['total'];
 
@@ -394,7 +394,7 @@ AND glpi_tickets_users.type = 2
 ". $grupo_tic1 ." " ;
 
 $result_ab = $DB->query($sql_ab) or die ("erro_ab");
-$data_ab = $DB->fetch_assoc($result_ab);
+$data_ab = $DB->fetchAssoc($result_ab);
 
 $abertos = $data_ab['total'];
 
@@ -414,7 +414,7 @@ AND glpi_tickets_users.type = 2
 ". $grupo_tic1 ." " ;
 
 $result_sol = $DB->query($sql_sol) or die ("erro_sol");
-$data_sol = $DB->fetch_assoc($result_sol);
+$data_sol = $DB->fetchAssoc($result_sol);
 
 $solucionados = $data_sol['total'];
 
@@ -434,7 +434,7 @@ AND glpi_tickets_users.type = 2
 ". $grupo_tic1 ." " ;
 
 $result_clo = $DB->query($sql_clo) or die ("erro_clo");
-$data_clo = $DB->fetch_assoc($result_clo);
+$data_clo = $DB->fetchAssoc($result_clo);
 
 $fechados = $data_clo['total'];
 
@@ -455,7 +455,7 @@ AND glpi_tickets_users.users_id = ".$id_tec['id']."
 ".$grupo_tic1." ";
 
 $result_sat = $DB->query($query_sat) or die('erro_sat');
-$media = $DB->fetch_assoc($result_sat);
+$media = $DB->fetchAssoc($result_sat);
 
 $satisfacao = round(($media['media']/5)*100,1);
 $nota = round($media['media'],0);
@@ -514,7 +514,7 @@ AND glpi_tickets.solvedate ".$datas2."
 ". $grupo_tic1 ." " ;
 
 $result_due = $DB->query($sql_due) or die ("erro_late");
-$data_due = $DB->fetch_assoc($result_due);
+$data_due = $DB->fetchAssoc($result_due);
  
 $atrasados = $data_due['total'];
 
@@ -534,7 +534,7 @@ AND glpi_tickets_users.type = 2
 ". $grupo_tic1 ." " ;			
 
 $result_bac = $DB->query($sql_bac) or die ("erro_ab");
-$data_bac = $DB->fetch_assoc($result_bac);
+$data_bac = $DB->fetchAssoc($result_bac);
 
 $back_ac = $data_bac['total'];		
 

@@ -266,7 +266,7 @@ if(isset($_GET['con'])) {
 			<tbody>";
 			
 		
-		while($id_grp = $DB->fetch_assoc($result_tec)) {	
+		while($id_grp = $DB->fetchAssoc($result_tec)) {	
 		
 			//tickets
 			$sql_cham = "SELECT count( glpi_tickets.id ) AS total, glpi_groups_tickets.groups_id AS id
@@ -279,7 +279,7 @@ if(isset($_GET['con'])) {
 			". $entidade ." ";
 			
 			$result_cham = $DB->query($sql_cham) or die ("erro_cham");
-			$data_cham = $DB->fetch_assoc($result_cham);
+			$data_cham = $DB->fetchAssoc($result_cham);
 			
 			$chamados = $data_cham['total'];
 			
@@ -296,7 +296,7 @@ if(isset($_GET['con'])) {
 			". $entidade ."  ";
 			
 			$result_ab = $DB->query($sql_ab) or die ("erro_ab");
-			$data_ab = $DB->fetch_assoc($result_ab);
+			$data_ab = $DB->fetchAssoc($result_ab);
 			
 			$abertos = $data_ab['total'];
 			
@@ -313,7 +313,7 @@ if(isset($_GET['con'])) {
 			". $entidade ." " ;
 			
 			$result_sol = $DB->query($sql_sol) or die ("erro_ab");
-			$data_sol = $DB->fetch_assoc($result_sol);
+			$data_sol = $DB->fetchAssoc($result_sol);
 			
 			$solucionados = $data_sol['total'];
 			
@@ -338,7 +338,7 @@ if(isset($_GET['con'])) {
 			) ";
 			
 			$result_due = $DB->query($sql_due) or die ("erro_late");
-			$data_due = $DB->fetch_assoc($result_due);
+			$data_due = $DB->fetchAssoc($result_due);
 			 
 			$atrasados = $data_due['total'];
 			
@@ -355,7 +355,7 @@ if(isset($_GET['con'])) {
 			". $entidade ." " ;
 			
 			$result_clo = $DB->query($sql_clo) or die ("erro_ab");
-			$data_clo = $DB->fetch_assoc($result_clo);
+			$data_clo = $DB->fetchAssoc($result_clo);
 			
 			$fechados = $data_clo['total'];
 			
@@ -372,7 +372,7 @@ if(isset($_GET['con'])) {
 			AND glpi_tickets.date < '".$data_ini." 00:00:00' ";
 			
 			$result_bac = $DB->query($sql_bac) or die ("erro_ab");
-			$data_bac = $DB->fetch_assoc($result_bac);
+			$data_bac = $DB->fetchAssoc($result_bac);
 			
 			$back_ac = $data_bac['total'];		
 			

@@ -87,7 +87,7 @@ echo "
 	            categories: ";
 	
 					$categories = array();
-					while ($entity = $DB->fetch_assoc($query_cat)) {
+					while ($entity = $DB->fetchAssoc($query_cat)) {
 					    $categories[] = $entity['name'];
 					}
 					echo json_encode($categories);
@@ -159,7 +159,7 @@ echo "
 	                data: [
 						";
 						
-						while ($entity = $DB->fetch_assoc($query_cat)) {
+						while ($entity = $DB->fetchAssoc($query_cat)) {
 							echo $entity['total'].",";
 						}
 						

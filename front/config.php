@@ -96,7 +96,7 @@ function chart(theme) {
 					// selected entity for index
 					$sql_e = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'entity' AND users_id = ".$_SESSION['glpiID']."";
 					$result_e = $DB->query($sql_e);					
-					$prev_ent = $DB->fetch_assoc($result_e);	
+					$prev_ent = $DB->fetchAssoc($result_e);	
 					
 			      echo '<div id="datas-tec2" class="col-md-12 fluid" style="background-color:#fff; margin-top:20px;">';
 					
@@ -128,7 +128,7 @@ function chart(theme) {
 					
 					$arr_ent = array();
 					
-					while ($row_result = $DB->fetch_assoc($result_ent))
+					while ($row_result = $DB->fetchAssoc($result_ent))
 					 {
 					    $v_row_result = $row_result['id'];
 					    $arr_ent[$v_row_result] = $row_result['cname'] ;
@@ -235,7 +235,7 @@ function chart(theme) {
 					
 					$arr_years = array();
 					
-					while ($row_y = $DB->fetch_assoc($result)) { 
+					while ($row_y = $DB->fetchAssoc($result)) { 
 						$arr_years[] = $row_y['year'];			
 					} 
 						
@@ -311,7 +311,7 @@ function chart(theme) {
 			//status for tickets page
 			$query_sta = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'status' AND users_id = ".$_SESSION['glpiID']."";
 			$result_sta = $DB->query($query_sta);
-			$prev_status = $DB->fetch_assoc($result_sta);
+			$prev_status = $DB->fetchAssoc($result_sta);
 			
 			//separa string com virgulas e converte em array
 			$format_Arr = $prev_status;

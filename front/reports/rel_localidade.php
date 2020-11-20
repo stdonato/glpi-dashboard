@@ -158,7 +158,7 @@ else {
 					$arr_loc[0] = "-- ". __('Select a location', 'dashboard') . " --" ;
 					
 					
-					while ($row_result = $DB->fetch_assoc($result_loc))
+					while ($row_result = $DB->fetchAssoc($result_loc))
 					{
 					
 						$sql_ent = "
@@ -346,7 +346,7 @@ FROM glpi_locations
 WHERE id=".$id_loc." ";
 
 $result_nm = $DB->query($sql_nm);
-$ent_name = $DB->fetch_assoc($result_nm);
+$ent_name = $DB->fetchAssoc($result_nm);
 
 
 //listar chamados
@@ -401,7 +401,7 @@ echo "
 <tbody>
 ";
 
-while($row = $DB->fetch_assoc($result_cham)){
+while($row = $DB->fetchAssoc($result_cham)){
 
 	$status1 = $row['status'];
 
@@ -423,7 +423,7 @@ while($row = $DB->fetch_assoc($result_cham)){
 	".$entidade."	";
 	$result_user = $DB->query($sql_user);
 
-		$row_user = $DB->fetch_assoc($result_user);
+		$row_user = $DB->fetchAssoc($result_user);
 
 	//tecnico
 
@@ -436,7 +436,7 @@ while($row = $DB->fetch_assoc($result_cham)){
   ".$entidade."	";
 	$result_tec = $DB->query($sql_tec);
 
-	$row_tec = $DB->fetch_assoc($result_tec);
+	$row_tec = $DB->fetchAssoc($result_tec);
 
 	echo "
 

@@ -159,7 +159,7 @@ else {
 		ORDER BY id DESC ";
 		
 		$result_cham = $DB->query($sql_cham);
-		$chamados = $DB->fetch_assoc($result_cham) ;
+		$chamados = $DB->fetchAssoc($result_cham) ;
 		
 				
 		//quant de chamados
@@ -174,7 +174,7 @@ else {
 		".$entidade." ";
 		
 		$result_cham2 = $DB->query($sql_cham2);		
-		$conta_cham = $DB->fetch_assoc($result_cham2);
+		$conta_cham = $DB->fetchAssoc($result_cham2);
 		
 		$total_cham = $conta_cham['total'];
 		//$numdias = $conta_cham['numdias'];
@@ -189,7 +189,7 @@ else {
 			WHERE id = ".$id_tec." ";
 			
 			$result_nome = $DB->query($sql_nome);
-			$tec_name = $DB->fetch_assoc($result_nome);
+			$tec_name = $DB->fetchAssoc($result_nome);
 			
 			//date diff
 			$numdias = round(abs(strtotime($data_fin2) - strtotime($data_ini2)) / 86400,0);			
@@ -223,7 +223,7 @@ else {
 			".$entidade." ";
 			
 			$result_time = $DB->query($sql_time);		
-			$time_cham = $DB->fetch_assoc($result_time);
+			$time_cham = $DB->fetchAssoc($result_time);
 			
 			$avgtime = $time_cham['avgtime'];
 			
@@ -311,13 +311,12 @@ else {
 				$imgsize = "width:100px; height:100px;";
 			}
 			else {					
-				if ($CFG_GLPI['version'] >= 0.90){
-					//$logo = "../img/logo-glpi-login-b.png";
-					$logo = "../../../../pics/logo-glpi-login.png";
-					$imgsize = "background-color:#000;";
+				if ($CFG_GLPI['version'] >= 0.90){					
+					$logo = "../../../../pics/logos/logo-GLPI-100-black.png";
+					#$imgsize = "background-color:#000;";
 				}	
 				else {
-					$logo = "../../../../pics/logo-glpi-login.png";
+					$logo = "../../../../pics/logos/logo-GLPI-100-black.png";
 					$imgsize = "";
 				}
 			}
@@ -457,7 +456,7 @@ $content .= "
 
 			 <tbody>	";		
 			
-			while($row = $DB->fetch_assoc($result_cat)) {
+			while($row = $DB->fetchAssoc($result_cat)) {
 				$content .= "<tr>
 				 <td width='300'>".$row['cat_name']."</td>
 				 <td width='200' align='right'>".$row['cat_conta']."</td>			
@@ -477,7 +476,7 @@ $content .= "
 
 			 <tbody>	";		
 			
-			while($row = $DB->fetch_assoc($result_req)) {
+			while($row = $DB->fetchAssoc($result_req)) {
 				$content .= "<tr>
 				 <td width='300'>".$row['name']." ".$row['sname']."</td>
 				 <td width='200' align='right'>".$row['conta']."</td>			

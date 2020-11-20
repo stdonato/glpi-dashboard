@@ -37,7 +37,7 @@ function xmlEscape($string) {
 
 	$res = $DB->query($sql);	
 
-	 while ($row = $DB->fetch_assoc($res)) {
+	 while ($row = $DB->fetchAssoc($res)) {
 		echo "<nome id='".$row['id']."'>".xmlEscape($row['name'])."</nome>";    
     }	  
 

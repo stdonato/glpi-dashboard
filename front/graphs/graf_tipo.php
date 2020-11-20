@@ -281,7 +281,7 @@ AND glpi_tickets.is_deleted = 0
 AND glpi_tickets.type =".$id_tip." ";
 
 $result_quant = $DB->query($query_quant);
-$total = $DB->fetch_assoc($result_quant);
+$total = $DB->fetchAssoc($result_quant);
 
 echo '<div id="entidade" class="col-md-12 col-sm-12 fluid" >';
 echo $type." - <span> ".$total['total']." ".__('Tickets','dashboard')."</span>";

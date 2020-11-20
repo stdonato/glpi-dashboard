@@ -31,7 +31,7 @@ $(function () {
             categories: ";
 
 				$categories = array();
-				while ($entity = $DB->fetch_assoc($query_tec)) {
+				while ($entity = $DB->fetchAssoc($query_tec)) {
 				    $categories[] = $entity['data'];
 				}   
 				echo json_encode($categories);
@@ -104,7 +104,7 @@ $(function () {
    
 					$DB->data_seek($query_tec, 0) ;     
 					             
-					while ($entity = $DB->fetch_assoc($query_tec)) {
+					while ($entity = $DB->fetchAssoc($query_tec)) {
 						echo $entity['conta'].",";
 					}    
 					

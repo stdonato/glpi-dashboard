@@ -89,7 +89,7 @@ $result_ent = $DB->query($sql_ent);
 	<div id='container-fluid' style="margin: 0px 5% 0px 5%;">
 		<div id="charts" class="fluid chart">
 			<div id="pad-wrapper" >			
-				<div id="head-rel" class="fluid">				
+				<div id="head-rel" class="fluid head-rel-sint">				
 					<a href="../index.php"><i class="fa fa-home" style="font-size:14pt; margin-left:20px;"></i><span></span></a>					
 					<div id="titulo_rel"> <?php echo __('Summary Report','dashboard') .' - ' .__('Entity'); ?> </div>		
 						<div id="datas-tec" class="span12 fluid" >			
@@ -156,7 +156,7 @@ $result_ent = $DB->query($sql_ent);
 										$arr_ent[0] = "-- ". __('Select a entity', 'dashboard') . " --" ;
 										
 										//$DB->data_seek($result_ent, 0) ;
-										while ($row_result = $DB->fetch_assoc($result_ent))
+										while ($row_result = $DB->fetchAssoc($result_ent))
 										 {
 										 	$v_row_result = $row_result['id'];
 										 	$arr_ent[$v_row_result] = $row_result['cname'] ;
@@ -271,7 +271,7 @@ $result_ent = $DB->query($sql_ent);
 		ORDER BY id DESC ";
 		
 		$result_cham = $DB->query($sql_cham);
-		$chamados = $DB->fetch_assoc($result_cham) ;
+		$chamados = $DB->fetchAssoc($result_cham) ;
 		
 				
 		//quant de chamados
@@ -283,7 +283,7 @@ $result_ent = $DB->query($sql_ent);
 		".$entidade." ";
 		
 		$result_cham2 = $DB->query($sql_cham2);		
-		$conta_cham = $DB->fetch_assoc($result_cham2);
+		$conta_cham = $DB->fetchAssoc($result_cham2);
 		
 		$total_cham = $conta_cham['total'];
 		//$numdias = $conta_cham['numdias'];
@@ -331,7 +331,7 @@ $result_ent = $DB->query($sql_ent);
 			".$entidade." ";
 			
 			$result_time = $DB->query($sql_time);		
-			$time_cham = $DB->fetch_assoc($result_time);
+			$time_cham = $DB->fetchAssoc($result_time);
 			
 			$avgtime = $time_cham['avgtime'];
 			
@@ -397,11 +397,11 @@ $result_ent = $DB->query($sql_ent);
 			}
 			else {					
 				if ($CFG_GLPI['version'] >= 0.90){					
-					$logo = "../../../../pics/logo-glpi-login.png";
-					$imgsize = "background-color:#000;";
+					$logo = "../../../../pics/logos/logo-GLPI-100-black.png";
+					#$imgsize = "background-color:#000;";
 				}	
 				else {
-					$logo = "../../../../pics/logo-glpi-login.png";
+					$logo = "../../../../pics/logos/logo-GLPI-100-black.png";
 					$imgsize = "";
 				}
 			}
@@ -532,7 +532,7 @@ $content .= "
 
 			 <tbody>";		
 			
-			while($row = $DB->fetch_assoc($result_grp)) {
+			while($row = $DB->fetchAssoc($result_grp)) {
 				$content .= "<tr>
 				 <td>".$row['name']."</td>
 				 <td align='right'>".$row['conta']."</td>			
@@ -551,7 +551,7 @@ $content .= "
 
 			 <tbody>";		
 			
-			while($row_tec = $DB->fetch_assoc($result_tec)) {
+			while($row_tec = $DB->fetchAssoc($result_tec)) {
 				 $content .= "<tr>
 				 <td>".$row_tec['name']." ".$row_tec['sname']."</td>
 				 <td align='right'>".$row_tec['conta']."</td>			
@@ -569,7 +569,7 @@ $content .= "
 
 			 <tbody>";		
 			
-			while($row = $DB->fetch_assoc($result_req)) {
+			while($row = $DB->fetchAssoc($result_req)) {
 				$content .= "<tr>
 				 <td>".$row['name']." ".$row['sname']."</td>
 				 <td align='right'>".$row['conta']."</td>			

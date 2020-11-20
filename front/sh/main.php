@@ -170,7 +170,7 @@ $conta_y = $DB->numrows($result_y);
 
 $arr_years = array();
 
-while ($row_y = $DB->fetch_assoc($result_y))		
+while ($row_y = $DB->fetchAssoc($result_y))		
 	{ 
 		$arr_years[] = $row_y['year'];			
 	} 
@@ -192,7 +192,7 @@ $sql_ano =	"SELECT COUNT(glpi_tickets.id) as total
       AND DATE_FORMAT( glpi_tickets.date, '%Y' ) IN (".$years.") ";
 
 $result_ano = $DB->query($sql_ano);
-$total_ano = $DB->fetch_assoc($result_ano);
+$total_ano = $DB->fetchAssoc($result_ano);
 
       
 //chamados mes
@@ -203,7 +203,7 @@ $sql_mes =	"SELECT COUNT(glpi_tickets.id) as total
       AND glpi_tickets.is_deleted = '0' ";
 
 $result_mes = $DB->query($sql_mes);
-$total_mes = $DB->fetch_assoc($result_mes);
+$total_mes = $DB->fetchAssoc($result_mes);
 
 //chamados dia
 $sql_hoje =	"SELECT COUNT(glpi_tickets.id) as total        
@@ -213,7 +213,7 @@ $sql_hoje =	"SELECT COUNT(glpi_tickets.id) as total
       AND glpi_tickets.is_deleted = '0'";
 
 $result_hoje = $DB->query($sql_hoje);
-$total_hoje = $DB->fetch_assoc($result_hoje);
+$total_hoje = $DB->fetchAssoc($result_hoje);
 
 // total users
 $sql_users = "SELECT COUNT(id) AS total
@@ -222,7 +222,7 @@ WHERE is_deleted = 0
 AND is_active = 1";
 
 $result_users = $DB->query($sql_users);
-$total_users = $DB->fetch_assoc($result_users);
+$total_users = $DB->fetchAssoc($result_users);
 
 ?>
 
@@ -379,7 +379,7 @@ setTimeout(function(){
               <th style="text-align: center;"><?php echo __('Tickets','dashboard'); ?></th><th style="text-align: center;" ><?php echo __('Title','dashboard'); ?></th>
               
 				<?php
-					while($row = $DB->fetch_assoc($result_wid)) 
+					while($row = $DB->fetchAssoc($result_wid)) 
 					{					
 						echo "<tr><td style='text-align: center;'><a href=../../../front/ticket.form.php?id=".$row['id']." target=_blank style='color: #526273;'>".$row['id']."</a>
 						</td><td>". substr($row['name'],0,60)."</td></tr>";											
@@ -426,7 +426,7 @@ setTimeout(function(){
               <?php echo __('Open Tickets','dashboard'); ?></th>
               
 				<?php
-					while($row = $DB->fetch_assoc($result_op)) 
+					while($row = $DB->fetchAssoc($result_op)) 
 					{					
 						echo "<tr><td><a href='".$CFG_GLPI['root_doc']."/front/ticket.php?is_deleted=0&criteria[0][field]=5&criteria[0][searchtype]=equals&criteria[0][value]=".$row['id']."&criteria[1][link]=AND&criteria[1][field]=12&criteria[1][searchtype]=equals&criteria[1][value]=2&itemtype=Ticket&start=0' target='_parent' style='color: #526273;'>
 						".$row['name']." ".$row['sname']." (".$row['id'].")</a></td><td style='text-align: center;' >".$row['tick']."</td></tr>";											
@@ -606,7 +606,7 @@ setTimeout(function(){
             <!-- <th style="text-align: center;"><?php echo __('','dashboard'); ?></th> -->              
 				<?php
 								
-				while($row_name = $DB->fetch_assoc($result_name)) 
+				while($row_name = $DB->fetchAssoc($result_name)) 
 	  			   {
 						echo "<tr><td style='text-align: left;'><a href=../../../front/user.form.php?id=".$row_name['uid']." target=_blank style='color: #526273;'>
 						".$row_name['name']." ".$row_name['sname']." (".$row_name['uid'].")</a>	</td></tr>";												

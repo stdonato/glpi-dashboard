@@ -95,7 +95,7 @@ else {
 		<div id="charts" class="fluid chart">
 			<div id="pad-wrapper" >
 			
-				<div id="head-rel" class="fluid">
+				<div id="head-lg" class="fluid head-rel-sint">
 					<style type="text/css">
 						a:link, a:visited, a:active { text-decoration: none; } 
 						a:hover { color: #000099;}
@@ -176,8 +176,7 @@ else {
 										".$entidade_u."
 										ORDER BY name ASC ";
 		
-										$result_tec = $DB->query($sql_tec);
-										//$tec = $DB->fetch_assoc($result_tec);
+										$result_tec = $DB->query($sql_tec);										
 										
 										// lista de técnicos
 										$res_tec = $DB->query($sql_tec);
@@ -186,7 +185,7 @@ else {
 										
 										$DB->data_seek($result_tec, 0) ;
 										
-										while ($row_result = $DB->fetch_assoc($result_tec))
+										while ($row_result = $DB->fetchAssoc($result_tec))
 									    {
 										    $v_row_result = $row_result['id'];
 									   	 $arr_tec[$v_row_result] = $row_result['name']." ".$row_result['sname']." (".$row_result['id'].")" ;
@@ -279,23 +278,7 @@ else {
           break;		
 		}		
 		
-		// Chamados
-/*		$sql_cham = 
-		"SELECT glpi_tickets.id AS id, COUNT(glpi_tickets.id) AS conta_id, glpi_tickets.name AS name, glpi_tickets.date AS date	
-		FROM `glpi_tickets_users` , glpi_tickets
-		WHERE glpi_tickets.id = glpi_tickets_users.`tickets_id`
-		AND glpi_tickets_users.type = 1
-		AND glpi_tickets_users.users_id = ". $id_req ."
-		AND glpi_tickets.is_deleted = 0
-		AND glpi_tickets.date ".$sel_date."
-		".$entidade."
-		GROUP BY id
-		ORDER BY id DESC ";
-		
-		$result_cham = $DB->query($sql_cham);
-		$chamados = $DB->fetch_assoc($result_cham) ;*/
-		
-				
+			
 		//quant de chamados
 		$sql_cham2 =
 		"SELECT count(glpi_tickets.id) AS total, count(glpi_tickets.date) AS numdias, AVG(glpi_tickets.close_delay_stat) AS avgtime
@@ -308,7 +291,7 @@ else {
 		".$entidade." ";
 		
 		$result_cham2 = $DB->query($sql_cham2);		
-		$conta_cham = $DB->fetch_assoc($result_cham2);
+		$conta_cham = $DB->fetchAssoc($result_cham2);
 		
 		$total_cham = $conta_cham['total'];
 		//$numdias = $conta_cham['numdias'];
@@ -323,7 +306,7 @@ else {
 			WHERE id = ".$id_req." ";
 			
 			$result_nome = $DB->query($sql_nome);
-			$tec_name = $DB->fetch_assoc($result_nome);
+			$tec_name = $DB->fetchAssoc($result_nome);
 			
 			//date diff
 			$numdias = round(abs(strtotime($data_fin2) - strtotime($data_ini2)) / 86400,0);			
@@ -357,7 +340,7 @@ else {
 			".$entidade." ";
 			
 			$result_time = $DB->query($sql_time);		
-			$time_cham = $DB->fetch_assoc($result_time);
+			$time_cham = $DB->fetchAssoc($result_time);
 			
 			$avgtime = $time_cham['avgtime'];
 			
@@ -446,13 +429,12 @@ else {
 				$imgsize = "width:100px; height:100px;";
 			}
 			else {					
-				if ($CFG_GLPI['version'] >= 0.90){
-					//$logo = "../img/logo-glpi-login-b.png";
-					$logo = "../../../../pics/logo-glpi-login.png";
-					$imgsize = "background-color:#000;";
+				if ($CFG_GLPI['version'] >= 0.90){					
+					$logo = "../../../../pics/logos/logo-GLPI-100-black.png";
+					#$imgsize = "background-color:#000;";
 				}	
 				else {
-					$logo = "../../../../pics/logo-glpi-login.png";
+					$logo = "../../../../pics/logos/logo-GLPI-100-black.png";
 					$imgsize = "";
 				}
 			}
@@ -584,7 +566,7 @@ $content .= "
 
 			 <tbody>	";		
 			
-			while($row = $DB->fetch_assoc($result_cat)) {
+			while($row = $DB->fetchAssoc($result_cat)) {
 				$content .= "<tr>
 				 <td>".$row['cat_name']."</td>
 				 <td align='right'>".$row['cat_conta']."</td>			
@@ -603,7 +585,7 @@ $content .= "
 
 			 <tbody>	";		
 			
-			while($row = $DB->fetch_assoc($result_req)) {
+			while($row = $DB->fetchAssoc($result_req)) {
 				$content .= "<tr>
 				 <td>".$row['name']." ".$row['sname']."</td>
 				 <td align='right'>".$row['conta']."</td>			

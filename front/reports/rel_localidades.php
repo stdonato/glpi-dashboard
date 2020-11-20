@@ -232,7 +232,7 @@ echo "
 		</thead>
 	<tbody>";
 
-while($id_loc = $DB->fetch_assoc($result_loc)){
+while($id_loc = $DB->fetchAssoc($result_loc)){
 	
 //tickets
 $sql_cham = "SELECT count( glpi_tickets.id ) AS total, glpi_locations.id AS id
@@ -244,7 +244,7 @@ AND glpi_tickets.date ".$datas2."
 ". $entidade ."  ";
 
 $result_cham = $DB->query($sql_cham) or die ("erro_cham");
-$data_cham = $DB->fetch_assoc($result_cham);
+$data_cham = $DB->fetchAssoc($result_cham);
 
 $chamados = $data_cham['total'];
 
@@ -260,7 +260,7 @@ AND glpi_tickets.date ".$datas2."
 ". $entidade ."  ";
 
 $result_ab = $DB->query($sql_ab) or die ("erro_ab");
-$data_ab = $DB->fetch_assoc($result_ab);
+$data_ab = $DB->fetchAssoc($result_ab);
 
 $abertos = $data_ab['total'];
 
@@ -276,7 +276,7 @@ AND glpi_tickets.date ".$datas2."
 ". $entidade ."  ";
 
 $result_sol = $DB->query($sql_sol) or die ("erro_ab");
-$data_sol = $DB->fetch_assoc($result_sol);
+$data_sol = $DB->fetchAssoc($result_sol);
 
 $solucionados = $data_sol['total'];
 
@@ -292,7 +292,7 @@ AND glpi_tickets.date ".$datas2."
 ". $entidade ."  ";
 
 $result_clo = $DB->query($sql_clo) or die ("erro_ab");
-$data_clo = $DB->fetch_assoc($result_clo);
+$data_clo = $DB->fetchAssoc($result_clo);
 
 $fechados = $data_clo['total'];
 

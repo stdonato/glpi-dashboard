@@ -28,7 +28,7 @@ if($interval <= "31") {
 
 	$arr_days = array();
 	
-	while ($row_result = $DB->fetch_assoc($resultd))
+	while ($row_result = $DB->fetchAssoc($resultd))
 	{
 		$v_row_result = $row_result['day'];
 		$arr_days[$v_row_result] = 0;		
@@ -50,7 +50,7 @@ else {
 
 	$resultd = $DB->query($queryd) or die('erro');
 	
-	while ($row_result = $DB->fetch_assoc($resultd))
+	while ($row_result = $DB->fetchAssoc($resultd))
 	{
 		$v_row_result = $row_result['day'];
 		$arr_months[$v_row_result] = 0;		
@@ -66,7 +66,7 @@ $arr_grfm = array();
 if($interval >= "31") {
 	
 	$DB->data_seek($resultd, 0);
-	while ($row_result = $DB->fetch_assoc($resultd))
+	while ($row_result = $DB->fetchAssoc($resultd))
 	{
 	 
 		$querym = "
@@ -81,7 +81,7 @@ if($interval >= "31") {
 		ORDER BY day ";
 		
 		$resultm = $DB->query($querym) or die('erro m');			
-		$row_result2 = $DB->fetch_assoc($resultm);
+		$row_result2 = $DB->fetchAssoc($resultm);
 	
 		$v_row_result = $row_result['day'];
 		if($row_result2['nb'] != '') {
@@ -97,7 +97,7 @@ if($interval >= "31") {
 else {
 
 		$DB->data_seek($resultd, 0);
-		while ($row_result = $DB->fetch_assoc($resultd))
+		while ($row_result = $DB->fetchAssoc($resultd))
 		{
 
 			$datas = "BETWEEN '".$data_ini." 00:00:00' AND '".$data_fin." 23:59:59'";
@@ -115,7 +115,7 @@ else {
 			ORDER BY day ";
 
 			$resultm = $DB->query($querym) or die('erro m');
-			$row_result2 = $DB->fetch_assoc($resultm);
+			$row_result2 = $DB->fetchAssoc($resultm);
 
 			$v_row_result = $row_result['day'];
 			if($row_result2['nb'] != '') {
@@ -136,7 +136,7 @@ else {
 $contador = $DB->numrows($resultm);
 
 $arr_grfm = array();
-while ($row_result = $DB->fetch_assoc($resultm))	{
+while ($row_result = $DB->fetchAssoc($resultm))	{
 	$v_row_result = $row_result['day'];
 	$arr_grfm[$v_row_result] = $row_result['nb'];
 }*/
@@ -168,7 +168,7 @@ if($interval >= "31") {
 
 	$resultf = $DB->query($queryf) or die('erro f');
 	
-	while ($row_result = $DB->fetch_assoc($resultf)) {
+	while ($row_result = $DB->fetchAssoc($resultf)) {
 	
 		$v_row_result = $row_result['day'];
 		if($row_result['nb'] != '') {
@@ -185,7 +185,7 @@ if($interval >= "31") {
 else {
 
 	$DB->data_seek($resultd, 0);
-	while ($row_result = $DB->fetch_assoc($resultd))
+	while ($row_result = $DB->fetchAssoc($resultd))
 	{
 		//fechados mensais
 		$queryf = "
@@ -200,7 +200,7 @@ else {
 		ORDER BY day ";
 
 		$resultf = $DB->query($queryf) or die('erro f');
-		$row_result2 = $DB->fetch_assoc($resultf);
+		$row_result2 = $DB->fetchAssoc($resultf);
 
 		$v_row_result = $row_result['day'];
 		
@@ -217,7 +217,7 @@ else {
 /*$resultf = $DB->query($queryf) or die('erro');
 
 $arr_grff = array();
-while ($row_result = $DB->fetch_assoc($resultf)){
+while ($row_result = $DB->fetchAssoc($resultf)){
 	$v_row_result = $row_result['day'];
 	$arr_grff[$v_row_result] = $row_result['nb'];
 }*/

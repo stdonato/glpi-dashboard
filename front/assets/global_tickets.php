@@ -18,7 +18,7 @@ $result_os = $DB->query($query_os) or die('erro_global');
 
 $arr_grf_os = array();
 
-while ($row_result = $DB->fetch_assoc($result_os))	
+while ($row_result = $DB->fetchAssoc($result_os))	
 	{ 
 	$v_row_result = $row_result['tipo'];
 	$arr_grf_os[$v_row_result] = $row_result['conta'];			
@@ -42,7 +42,7 @@ echo '
 	<tbody>'; 		
 
 $DB->data_seek($result_os,0);
-while ($row_result = $DB->fetch_assoc($result_os))	
+while ($row_result = $DB->fetchAssoc($result_os))	
 {		
 
 $tipo = strtolower($row_result['tipo']);
@@ -57,7 +57,7 @@ WHERE id = ".$id." ";
 		
 $result = $DB->query($query) or die('erro');
 
-while ($row = $DB->fetch_assoc($result))
+while ($row = $DB->fetchAssoc($result))
 {
 	echo '<tr>
 			<td><a href=../../../../front/'.$tipo.'.form.php?id='.$id.' target="_blank"  style="color:#555555;" >'. $row['name'].'</a></td>

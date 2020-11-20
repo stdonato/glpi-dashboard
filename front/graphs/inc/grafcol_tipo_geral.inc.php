@@ -15,7 +15,7 @@ ORDER BY month
 $resultm = $DB->query($querym) or die('erro');
 
 $arr_grfm = array();
-while ($row_result = $DB->fetch_assoc($resultm))
+while ($row_result = $DB->fetchAssoc($resultm))
 	{
 		$v_row_result = $row_result['month_l'];
 		$arr_grfm[$v_row_result] = $row_result['nb'];
@@ -33,7 +33,7 @@ $opened = array_sum($quantm);
 $DB->data_seek($resultm, 0);
 
 $arr_month = array();
-while ($row_result = $DB->fetch_assoc($resultm))
+while ($row_result = $DB->fetchAssoc($resultm))
 	{
 		$v_row_result = $row_result['month_l'];
 		$arr_month[$v_row_result] = 0;
@@ -44,7 +44,7 @@ while ($row_result = $DB->fetch_assoc($resultm))
 $arr_grfa = array();
 
 $DB->data_seek($resultm, 0);
-while ($row_result = $DB->fetch_assoc($resultm))
+while ($row_result = $DB->fetchAssoc($resultm))
 {
 
 	$querya2 = "
@@ -58,7 +58,7 @@ while ($row_result = $DB->fetch_assoc($resultm))
 	ORDER BY month";
 
 	$resulta2 = $DB->query($querya2) or die('erronb');
-	$row_result2 = $DB->fetch_assoc($resulta2);
+	$row_result2 = $DB->fetchAssoc($resulta2);
 
 		$v_row_result = $row_result['month_l'];
 		if($row_result2['nb'] != '') {
@@ -83,7 +83,7 @@ $quanta2 = implode(',',$quanta);
 $arr_grfs = array();
 
 $DB->data_seek($resultm, 0);
-while ($row_result = $DB->fetch_assoc($resultm))
+while ($row_result = $DB->fetchAssoc($resultm))
 {
 
 	$querys2 = "
@@ -97,7 +97,7 @@ while ($row_result = $DB->fetch_assoc($resultm))
 	ORDER BY month";
 
 	$results2 = $DB->query($querys2) or die('erronb');
-	$row_result2 = $DB->fetch_assoc($results2);
+	$row_result2 = $DB->fetchAssoc($results2);
 
 		$v_row_result = $row_result['month_l'];
 		if($row_result2['nb'] != '') {
@@ -119,7 +119,7 @@ $quants2 = implode(',',$quants);
 $arr_grfp = array();
 
 $DB->data_seek($resultm, 0);
-while ($row_result = $DB->fetch_assoc($resultm))
+while ($row_result = $DB->fetchAssoc($resultm))
 {
 
 	$queryp = "
@@ -133,7 +133,7 @@ while ($row_result = $DB->fetch_assoc($resultm))
 
 	$resultp = $DB->query($queryp) or die('errof');
 
-	$row_resultp = $DB->fetch_assoc($resultp);
+	$row_resultp = $DB->fetchAssoc($resultp);
 
 	$v_row_result = $row_result['month_l'];
 	if($row_resultp['nb'] != '') {

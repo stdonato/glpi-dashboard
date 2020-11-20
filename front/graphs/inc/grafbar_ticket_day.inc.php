@@ -21,7 +21,7 @@ LIMIT 0 , 30 ";
 $result3 = $DB->query($query3) or die('erro');
 
 $arr_grf3 = array();
-while ($row_result = $DB->fetch_assoc($result3))		
+while ($row_result = $DB->fetchAssoc($result3))		
 	{ 
 	
 	    switch ($row_result['day_l']) {
