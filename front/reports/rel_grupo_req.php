@@ -167,7 +167,7 @@ else {
 							$arr_grp = array();
 							$arr_grp[0] = "-- ". __('Select a group', 'dashboard') . " --" ;
 		
-							$DB->data_seek($result_grp, 0) ;
+							$DB->dataSeek($result_grp, 0) ;
 		
 							while ($row_result = $DB->fetchAssoc($result_grp)){
 							   $v_row_result = $row_result['id'];

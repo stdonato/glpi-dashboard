@@ -71,7 +71,7 @@ $(function () {
             xAxis: {
             categories: ";
 
-				$DB->data_seek($query_tec, 0) ;
+				$DB->dataSeek($query_tec, 0) ;
 				$categories = array();
 				while ($tecnico = $DB->fetchAssoc($query_tec)) {
 				    $categories[] = $tecnico['name'];
@@ -144,7 +144,7 @@ $(function () {
 					
 									
 					//zerar rows para segundo while
-					$DB->data_seek($query_tec, 0) ;
+					$DB->dataSeek($query_tec, 0) ;
 					while ($tecnico = $DB->fetchAssoc($query_tec)) {
 					 
 					 echo $tecnico['conta'].",";

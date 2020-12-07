@@ -491,6 +491,12 @@ else {
 
 			$result_tec = $DB->query($sql_tec);
 			$row_tec = $DB->fetchAssoc($result_tec);
+						
+			if($row_tec != '') {
+				$tec_name_full = $row_tec['name']." ".$row_tec['sname'];			
+			}else {
+				$tec_name_full = '';
+			}
 
 			echo "
 			<tr style='font-size:11px;'>
@@ -498,7 +504,7 @@ else {
 				<td style='vertical-align:middle;'><img src=".$CFG_GLPI['url_base']."/pics/".$status1.".png title='".Ticket::getStatus($row['status'])."' style=' cursor: pointer; cursor: hand;'/>&nbsp; ".Ticket::getStatus($row['status'])."  </td>
 				<td style='vertical-align:middle;'> ". substr($row['name'],0,55) ." </td>
 				<td style='vertical-align:middle;'> ". $row_user['name'] ." ".$row_user['sname'] ." </td>
-				<td style='vertical-align:middle;'> ". $row_tec['name'] ." ".$row_tec['sname'] ." </td>
+				<td style='vertical-align:middle;'> ". $tec_name_full ." </td>
 				<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['date']) ." </td>
 				<td style='vertical-align:middle; text-align:center;'> ". conv_data_hora($row['closedate']) ." </td>
 				<td style='vertical-align:middle; text-align:center;'> ". time_ext($row['time']) ."</td>

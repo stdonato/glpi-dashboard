@@ -144,7 +144,7 @@ $res_loc = $DB->query($sql_loc);
 $arr_loc = array();
 $arr_loc[0] = "-- ". __('Select a location','dashboard') . " --" ;
 
-$DB->data_seek($result_loc, 0);
+$DB->dataSeek($result_loc, 0);
 
 while ($row_result = $DB->fetchAssoc($result_loc))
 {

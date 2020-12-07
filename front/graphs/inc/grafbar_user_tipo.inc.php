@@ -109,7 +109,7 @@ $(function () {
 				";
 				
 				//zerar rows para segundo while
-				$DB->data_seek($query_grp_b, 0);
+				$DB->dataSeek($query_grp_b, 0);
 				
 				while ($grupo = $DB->fetchAssoc($query_grp_b))
 				{

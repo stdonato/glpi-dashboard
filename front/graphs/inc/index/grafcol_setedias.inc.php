@@ -23,7 +23,7 @@ $datas = json_encode($arr_data);
 	
 
 //REQUESTS 
-$DB->data_seek($query_tecd, 0);
+$DB->dataSeek($query_tecd, 0);
 
 while ($row = $DB->fetchAssoc($query_tecd)) { 
 	
@@ -60,7 +60,7 @@ else {
 }
 
 //INCIDENTS
-$DB->data_seek($query_tecd, 0);
+$DB->dataSeek($query_tecd, 0);
 while ($row = $DB->fetchAssoc($query_tecd))	{ 
 
 	$sql_teci = "

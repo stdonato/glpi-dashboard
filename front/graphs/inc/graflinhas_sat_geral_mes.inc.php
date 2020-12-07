@@ -64,7 +64,7 @@ if($interval >= "31") {
 
 else {
 
-		$DB->data_seek($resultd, 0);
+		$DB->dataSeek($resultd, 0);
 		while ($row_result = $DB->fetchAssoc($resultd))
 		{
 			$querym = "
@@ -99,7 +99,7 @@ $opened = array_sum($quantm);
 
 
 //array to compare months
-$DB->data_seek($resultm, 0);
+$DB->dataSeek($resultm, 0);
 
 $arr_month = array();
 
@@ -169,7 +169,7 @@ if($interval >= "31") {
 
 else {
 
-		$DB->data_seek($resultd, 0);
+		$DB->dataSeek($resultd, 0);
 		while ($row_result = $DB->fetchAssoc($resulta)) {
 
 		$querya2 = "
@@ -236,7 +236,7 @@ if($interval >= "31") {
 
 else {
 
-	$DB->data_seek($resultd, 0);
+	$DB->dataSeek($resultd, 0);
 	while ($row_result = $DB->fetchAssoc($resultd)) {
 	
 		$querys = "
@@ -304,7 +304,7 @@ if($interval >= "31") {
 
 else {
 	
-	$DB->data_seek($resultd, 0);
+	$DB->dataSeek($resultd, 0);
 	while ($row_result = $DB->fetchAssoc($resultd)) {
 	
 		$queryf = "

@@ -473,7 +473,7 @@ echo "
 <tbody> ";
 
 
-$DB->data_seek($result_cham,0);
+$DB->dataSeek($result_cham,0);
 
 while($row = $DB->fetchAssoc($result_cham)){
 

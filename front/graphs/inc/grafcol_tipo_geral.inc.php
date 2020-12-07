@@ -30,7 +30,7 @@ $quantm2 = implode(',',$quantm);
 $opened = array_sum($quantm);
 
 //array to compare months
-$DB->data_seek($resultm, 0);
+$DB->dataSeek($resultm, 0);
 
 $arr_month = array();
 while ($row_result = $DB->fetchAssoc($resultm))
@@ -43,7 +43,7 @@ while ($row_result = $DB->fetchAssoc($resultm))
 // incidents
 $arr_grfa = array();
 
-$DB->data_seek($resultm, 0);
+$DB->dataSeek($resultm, 0);
 while ($row_result = $DB->fetchAssoc($resultm))
 {
 
@@ -82,7 +82,7 @@ $quanta2 = implode(',',$quanta);
 // requests
 $arr_grfs = array();
 
-$DB->data_seek($resultm, 0);
+$DB->dataSeek($resultm, 0);
 while ($row_result = $DB->fetchAssoc($resultm))
 {
 
@@ -118,7 +118,7 @@ $quants2 = implode(',',$quants);
 // problems
 $arr_grfp = array();
 
-$DB->data_seek($resultm, 0);
+$DB->dataSeek($resultm, 0);
 while ($row_result = $DB->fetchAssoc($resultm))
 {
 

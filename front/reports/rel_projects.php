@@ -235,7 +235,7 @@ $conta_cons = $DB->numrows($result_cham);
 
 //listar projetos
 
-$DB->data_seek($result_cham, 0);
+$DB->dataSeek($result_cham, 0);
 while($row = $DB->fetchAssoc($result_cham)){
 
 	//status

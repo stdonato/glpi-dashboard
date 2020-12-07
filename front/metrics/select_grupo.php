@@ -102,7 +102,7 @@ $res_grp = $DB->query($sql_grp);
 $arr_grp = array();
 $arr_grp[0] = "-- ". __('Select a group', 'dashboard') . " --" ;
 
-$DB->data_seek($result_grp, 0) ;
+$DB->dataSeek($result_grp, 0) ;
 
 while ($row_result = $DB->fetchAssoc($result_grp))		
 	{ 

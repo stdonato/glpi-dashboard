@@ -28,7 +28,7 @@ $quantm2 = implode(',',$quantm);
 $opened = array_sum($quantm);
 
 //array to compare months
-$DB->data_seek($resultm, 0);
+$DB->dataSeek($resultm, 0);
 
 $arr_month = array();
 while ($row_result = $DB->fetchAssoc($resultm))
@@ -40,7 +40,7 @@ while ($row_result = $DB->fetchAssoc($resultm))
 // late tickets
 $arr_grfa = array();
 
-$DB->data_seek($resultm, 0);
+$DB->dataSeek($resultm, 0);
 while ($row_result = $DB->fetchAssoc($resultm))
 {
 
@@ -80,7 +80,7 @@ $late = array_sum($quanta);
 // solved
 $arr_grfs = array();
 
-$DB->data_seek($resultm, 0);
+$DB->dataSeek($resultm, 0);
 while ($row_result = $DB->fetchAssoc($resultm))
 {
 	$querys2 = "
@@ -117,7 +117,7 @@ $solved = array_sum($quants);
 // fechados mensais
 $arr_grff = array();
 
-$DB->data_seek($resultm, 0);
+$DB->dataSeek($resultm, 0);
 while ($row_result = $DB->fetchAssoc($resultm))
 {
 	$queryf = "

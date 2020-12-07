@@ -161,7 +161,7 @@ else {
 										$arr_ent[-1] = "-- ". __('Select a entity', 'dashboard') . " --" ;
 										$arr_ent[0] = __('All');
 
-										//$DB->data_seek($result_ent, 0) ;
+										//$DB->dataSeek($result_ent, 0) ;
 										while ($row_result = $DB->fetchAssoc($result_ent)) {
 										   $v_row_result = $row_result['id'];
 										   $arr_ent[$v_row_result] = $row_result['cname'] ;
@@ -445,7 +445,7 @@ else {
 		<tbody>
 		";
 
-		$DB->data_seek($result_cham,0);
+		$DB->dataSeek($result_cham,0);
 
 		while($row = $DB->fetchAssoc($result_cham)){
 
@@ -498,15 +498,22 @@ else {
 				$result_item = $DB->query($sql_item);
 				$row_item = $DB->fetchAssoc($result_item);
 
-				$type = strtolower($row_item['itemtype']);
-				$url_type = $CFG_GLPI['url_base']."/front/".$type.".form.php?id=";
+				if($row_item != ''){
 
-				if(!empty($row_item['items_id'])) {
-			    	$sql_ass = "SELECT id, name
-					FROM glpi_".$type."s
-					WHERE id = ".$row_item['items_id']." ";
+					$type = strtolower($row_item['itemtype']);
+					$url_type = $CFG_GLPI['url_base']."/front/".$type.".form.php?id=";
 	
-					$result_ass = $DB->query($sql_ass);
+					if(!empty($row_item['items_id'])) {
+				    	$sql_ass = "SELECT id, name
+						FROM glpi_".$type."s
+						WHERE id = ".$row_item['items_id']." ";
+		
+						$result_ass = $DB->query($sql_ass);
+					}
+				} else {
+					$url_type = 0;
+					$row_item['id'] = '';
+					$row_item['name'] = '';
 				}
 				
 				//ticket source

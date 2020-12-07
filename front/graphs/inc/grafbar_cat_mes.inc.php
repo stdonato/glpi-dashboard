@@ -143,7 +143,7 @@ $(function () {
 		                data: [";
 		
 						//zerar rows para segundo while
-						$DB->data_seek($query_cat, 0) ;
+						$DB->dataSeek($query_cat, 0) ;
 						while ($entity = $DB->fetchAssoc($query_cat)) {
 							echo $entity['total'].",";
 						}

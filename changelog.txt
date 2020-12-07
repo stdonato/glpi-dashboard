@@ -1,14 +1,16 @@
-Versão 1.0.1:
+Versão 0.9.9:
 
-- Removida função fetch_assoc (deprecated)
-- Correções de CSS
-- Correção de bugs diversos
+- GLPI 9.4.x
+
+- tempo de solução > 7 dias em métricas
+- Correção de bugs diversos;
 
 
 
-Versão 1.0.1:
+Version 0.9.9:
 
-- Fix fecth_assoc function error (deprecated)
-- Fix CSS
-- Fix minor bugs
+- GLPI 9.4.x
+
+
+- Fix minor bugs;
 

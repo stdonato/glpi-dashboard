@@ -140,7 +140,7 @@ $res_ent = $DB->query($sql_ent);
 $arr_ent = array();
 $arr_ent[0] = "-- ". __('Select a entity','dashboard') . " --" ;
 
-$DB->data_seek($result_ent, 0);
+$DB->dataSeek($result_ent, 0);
 
 while ($row_result = $DB->fetchAssoc($result_ent)) {
 	$v_row_result = $row_result['id'];

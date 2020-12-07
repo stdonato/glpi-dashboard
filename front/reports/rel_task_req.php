@@ -182,7 +182,7 @@ $res_tec = $DB->query($sql_tec);
 $arr_tec = array();
 $arr_tec[0] = "-- ". __('Select a requester', 'dashboard') . " --" ;
 
-$DB->data_seek($result_tec, 0);
+$DB->dataSeek($result_tec, 0);
 
 while ($row_result = $DB->fetchAssoc($result_tec)) {
     $v_row_result = $row_result['id'];
@@ -343,7 +343,7 @@ while($row = $DB->fetchAssoc($result_nome)){
 
 //listar chamados
 
-$DB->data_seek($result_cham, 0);
+$DB->dataSeek($result_cham, 0);
 while($row = $DB->fetchAssoc($result_cham)){
 	
 	$sql_req = "SELECT gu.firstname AS name, gu.realname AS sname

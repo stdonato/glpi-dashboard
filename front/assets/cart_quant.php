@@ -37,7 +37,7 @@ echo '
 	</thead>
 	<tbody>'; 		
 
-$DB->data_seek($result_os,0);
+$DB->dataSeek($result_os,0);
 while ($row_result = $DB->fetchAssoc($result_os))	
 {		
 

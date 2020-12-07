@@ -380,7 +380,7 @@ if($con == "1") {
 	WHERE id=".$id_loc." ";
 	
 	$result_nome = $DB->query($sql_nm);
-	$DB->data_seek($result_cham, 0);
+	$DB->dataSeek($result_cham, 0);
 	
 	while($row = $DB->fetchAssoc($result_nome)) {
 
@@ -407,7 +407,7 @@ if($con == "1") {
 
 
 	//total costs
-	$DB->data_seek($result_cham, 0);
+	$DB->dataSeek($result_cham, 0);
 	while($row = $DB->fetchAssoc($result_cham)){			
 	
 	//$total_cost += $cost; 
@@ -450,7 +450,7 @@ if($con == "1") {
 }
 
 //listar chamados
-$DB->data_seek($result_cham, 0);
+$DB->dataSeek($result_cham, 0);
 while($row = $DB->fetchAssoc($result_cham)){
 
 	$status1 = $row['status'];

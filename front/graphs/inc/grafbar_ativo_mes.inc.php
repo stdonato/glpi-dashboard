@@ -56,7 +56,7 @@ $(function () {
 	var categoryLinks = {
 ";
 
-$DB->data_seek($query_grp, 0) ;
+$DB->dataSeek($query_grp, 0) ;
 while ($grupo = $DB->fetchAssoc($query_grp)) {
 
 echo "
@@ -79,7 +79,7 @@ echo "	};
             xAxis: {
             categories: ";
 
-				$DB->data_seek($query_grp, 0) ;
+				$DB->dataSeek($query_grp, 0) ;
 				$categories = array();
 				while ($grupo = $DB->fetchAssoc($query_grp)) {
 				    $categories[] = $grupo['name'];
@@ -157,7 +157,7 @@ echo "	};
 
 //zerar rows para segundo while
 
-$DB->data_seek($query_grp, 0) ;
+$DB->dataSeek($query_grp, 0) ;
 
 while ($grupo = $DB->fetchAssoc($query_grp))
 {

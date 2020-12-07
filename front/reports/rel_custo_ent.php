@@ -167,7 +167,7 @@ a:hover { color: #000099; }
 		$arr_ent = array();
 		$arr_ent[0] = "-- ". __('Select a entity', 'dashboard') . " --" ;
 
-		//$DB->data_seek($result_ent, 0) ;
+		//$DB->dataSeek($result_ent, 0) ;
 		while ($row_result = $DB->fetchAssoc($result_ent))
 	    {
 	    	$v_row_result = $row_result['id'];
@@ -367,7 +367,7 @@ if($con == "1") {
 	
 	$result_nome = $DB->query($sql_nome) ;
 	
-	$DB->data_seek($result_cham, 0);	
+	$DB->dataSeek($result_cham, 0);	
 	while($row = $DB->fetchAssoc($result_nome)) {
 
 	$ent_name = $row['name'] ;
@@ -391,7 +391,7 @@ if($con == "1") {
 
 
 	//total costs
-	$DB->data_seek($result_cham, 0);
+	$DB->dataSeek($result_cham, 0);
 	while($row = $DB->fetchAssoc($result_cham)){			
 		
 		$total_cost += computeCost($row['id']);
@@ -435,7 +435,7 @@ if($con == "1") {
 	}
 
 //listar chamados
-$DB->data_seek($result_cham, 0);
+$DB->dataSeek($result_cham, 0);
 while($row = $DB->fetchAssoc($result_cham)){
 
 	$status1 = $row['status'];

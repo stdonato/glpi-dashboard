@@ -189,7 +189,7 @@ else {
 										$arr_tec = array();
 										$arr_tec[0] = "-- ". __('Select a technician','dashboard') . " --" ;
 										
-										$DB->data_seek($result_tec, 0) ;
+										$DB->dataSeek($result_tec, 0) ;
 										
 										while ($row_result = $DB->fetchAssoc($result_tec))
 									    {

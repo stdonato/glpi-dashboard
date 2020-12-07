@@ -99,7 +99,7 @@ $(function () {
         	colorByPoint: true,
         	data: [ ";
     
-    			//$DB->data_seek($query_gid, 0) ;  
+    			//$DB->dataSeek($query_gid, 0) ;  
 				while ($row = $DB->fetchAssoc($query_gid)) {				
 						
 					$query = "SELECT count( glpi_groups_tickets.id ) AS conta, glpi_groups.name AS name
@@ -130,7 +130,7 @@ echo "
         	series: [ ";
 
 
-				$DB->data_seek($query_gid, 0) ;  
+				$DB->dataSeek($query_gid, 0) ;  
 				while ($row = $DB->fetchAssoc($query_gid)) {					
 					
 					$query = "SELECT 

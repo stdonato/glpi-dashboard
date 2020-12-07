@@ -37,7 +37,7 @@ if($interval <= "31") {
 	$days = array_keys($arr_days) ;
 	$quantd = array_values($arr_days);
 	
-	$DB->data_seek($resultd, 0);
+	$DB->dataSeek($resultd, 0);
 	while ($row_result = $DB->fetchAssoc($resultd))
 	{
 		$v_row_result = $row_result['day_l'];
@@ -66,7 +66,7 @@ else {
 	$months = array_keys($arr_months) ;
 	$monthsq = array_values($arr_months);
 	
-	$DB->data_seek($resultd, 0);	
+	$DB->dataSeek($resultd, 0);	
 	while ($row_result = $DB->fetchAssoc($resultd))
 	{
 		$v_row_result = $row_result['day_l'];
@@ -80,7 +80,7 @@ $arr_opened = array();
 
 if($interval >= "31") {
 	
-	$DB->data_seek($resultd, 0);
+	$DB->dataSeek($resultd, 0);
 	while ($row_result = $DB->fetchAssoc($resultd)) {
 	
 		$querym = "
@@ -113,7 +113,7 @@ if($interval >= "31") {
 
 else {
 	
-	$DB->data_seek($resultd, 0);
+	$DB->dataSeek($resultd, 0);
 	while ($row_result = $DB->fetchAssoc($resultd)) {
 		
 		$querym = "
@@ -190,7 +190,7 @@ if($interval >= "31") {
 
 else {
 	
-	$DB->data_seek($resultd, 0);
+	$DB->dataSeek($resultd, 0);
 	while ($row_result = $DB->fetchAssoc($resultd))	{
 		$queryf = "
 		SELECT DISTINCT DATE_FORMAT(glpi_tickets.closedate, '%b-%d') as day_l,  COUNT(glpi_tickets.id) as nb, DATE_FORMAT(glpi_tickets.date, '%Y-%m-%d') as day

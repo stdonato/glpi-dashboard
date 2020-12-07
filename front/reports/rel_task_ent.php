@@ -316,7 +316,7 @@ while($row = $DB->fetchAssoc($result_cons1)){
 
 //listar chamados
 
-$DB->data_seek($result_cham, 0);
+$DB->dataSeek($result_cham, 0);
 while($row = $DB->fetchAssoc($result_cham)){
 	
 	//nome e total

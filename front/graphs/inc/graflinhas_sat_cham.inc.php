@@ -85,7 +85,7 @@ $quantm2 = implode(',',$quantm);
 $status = "('5','6')"	;
 
 //array to compare months
-$DB->data_seek($resultm, 0);
+$DB->dataSeek($resultm, 0);
 
 if($interval >= "31") {
 

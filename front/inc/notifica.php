@@ -182,7 +182,7 @@ echo "
 
 	if($abertos > $atual) {
 
-	$DB->data_seek($res, 0);	
+	$DB->dataSeek($res, 0);	
 		
 	while($row = $DB->fetchAssoc($res)) {
 				
@@ -200,7 +200,7 @@ echo "
 //follow
 if($conta_follow != 0 ) {
 
-	$DB->data_seek($resn, 0);
+	$DB->dataSeek($resn, 0);
 	while($row = $DB->fetchAssoc($resn)) {
 	
 		$titulo = "<b>" .__('New followup') . "</b>";

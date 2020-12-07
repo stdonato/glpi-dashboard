@@ -207,7 +207,7 @@ else {
 								$arr_techs = array();										
 								$arr_techs[0] = "". __('All') . "" ;
 
-								$DB->data_seek($result_techs, 0) ;
+								$DB->dataSeek($result_techs, 0) ;
 
 								while ($row_result = $DB->fetchAssoc($result_techs)) {										
 								   $v_row_result = $row_result['id'];

@@ -65,7 +65,7 @@ $arr_grfm = array();
 
 if($interval >= "31") {
 	
-	$DB->data_seek($resultd, 0);
+	$DB->dataSeek($resultd, 0);
 	while ($row_result = $DB->fetchAssoc($resultd))
 	{
 	 
@@ -96,7 +96,7 @@ if($interval >= "31") {
 
 else {
 
-		$DB->data_seek($resultd, 0);
+		$DB->dataSeek($resultd, 0);
 		while ($row_result = $DB->fetchAssoc($resultd))
 		{
 
@@ -184,7 +184,7 @@ if($interval >= "31") {
 
 else {
 
-	$DB->data_seek($resultd, 0);
+	$DB->dataSeek($resultd, 0);
 	while ($row_result = $DB->fetchAssoc($resultd))
 	{
 		//fechados mensais

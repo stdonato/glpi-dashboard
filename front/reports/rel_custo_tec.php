@@ -180,7 +180,7 @@ a:hover { color: #000099; }
 		$arr_tec = array();
 		$arr_tec[0] = "-- ". __('Select a technician','dashboard') . " --" ;
 		
-		$DB->data_seek($result_tec, 0) ;
+		$DB->dataSeek($result_tec, 0) ;
 		
 		while ($row_result = $DB->fetchAssoc($result_tec))
 	    {
@@ -381,7 +381,7 @@ if($con == "1") {
 	
 	$result_nome = $DB->query($sql_nome) ;
 	
-	$DB->data_seek($result_cham, 0);
+	$DB->dataSeek($result_cham, 0);
 	while($row = $DB->fetchAssoc($result_nome)) {
 
 	$tech = $row['firstname'] ." ". $row['realname'];
@@ -404,7 +404,7 @@ if($con == "1") {
 	</table>\n ";
 
 	//total costs
-	$DB->data_seek($result_cham, 0);
+	$DB->dataSeek($result_cham, 0);
 	while($row = $DB->fetchAssoc($result_cham)){
 	
 	$total_cost += computeCost($row['id']);
@@ -445,7 +445,7 @@ if($con == "1") {
 }
 
 //listar chamados
-$DB->data_seek($result_cham, 0);
+$DB->dataSeek($result_cham, 0);
 while($row = $DB->fetchAssoc($result_cham)){
 
 	$status1 = $row['status'];

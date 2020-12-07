@@ -54,7 +54,7 @@ echo "'". $entity['data']."',";
 
 //zerar rows para segundo while
 
-$DB->data_seek($query_tec, 0) ;
+$DB->dataSeek($query_tec, 0) ;
 
 echo "    ],
                 title: {
@@ -113,7 +113,7 @@ echo "    ],
                 name: '". $LANG['plugin_dashboard']['1']."',
                 data: [ ";
 
-$DB->data_seek($query_tec, 0) ;
+$DB->dataSeek($query_tec, 0) ;
 
 while ($entity = $DB->fetchAssoc($query_tec))
 

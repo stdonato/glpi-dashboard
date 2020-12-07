@@ -50,7 +50,7 @@ while ($row = $DB->fetchAssoc($query_tec)) {
 }	
 
 	
-$DB->data_seek($query_tec, 0);
+$DB->dataSeek($query_tec, 0);
 while ($row_result = $DB->fetchAssoc($query_tec)) {
 
 	$sql_open = "
@@ -82,7 +82,7 @@ while ($row_result = $DB->fetchAssoc($query_tec)) {
 
 
 //closed
-$DB->data_seek($query_tec, 0);
+$DB->dataSeek($query_tec, 0);
 while ($row_result = $DB->fetchAssoc($query_tec)) {
 
 	$sql_close = "
