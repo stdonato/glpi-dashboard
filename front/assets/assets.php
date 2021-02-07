@@ -17,7 +17,7 @@ $asset = '';
 //select entity
 if($sel_ent == '' || $sel_ent == -1) {	
 
-	$entities = $_SESSION['glpiactiveentities'];	
+	$entities = $_SESSION['glpiactiveentities'];		
 	$ent = implode(",",$entities);
 
 	$ent_comp = "AND glpi_computers.entities_id IN (".$ent.")"; 
@@ -47,7 +47,7 @@ else {
 	$ent_global = "AND glpi_". strtolower($asset)."s.entities_id IN (".$sel_ent.")";
 	$ent_global1 = "AND glpi_tickets.entities_id IN (".$sel_ent.")";
 	$ent = "AND entities_id IN (".$sel_ent.")";
-	}
+}
 
 
 //Count assets 
@@ -117,6 +117,7 @@ function conta1($asset,$sel_ent) {
 }	
 
 //all assets - global
+#$arr_assets =  array('computers', 'monitors', 'printers', 'networkequipments', 'phones', 'peripherals', 'pdus', 'racks', 'enclosures', 'passivedcequipments', 'devicesimcards');
 $arr_assets =  array('computers', 'monitors', 'printers', 'networkequipments', 'phones', 'peripherals');
 $global = 0;
 
@@ -217,7 +218,7 @@ foreach($arr_assets as $asset) {
 			<div id="titulo_graf" style="margin-bottom: 20px;"> <?php echo __('Assets'); ?> </div> 	 
 		<!--</div>-->
       
-         <div id="tabela_assets" class="tab_assets">  
+         <div id="tabela_assets" class="tab_assets fluid col-md-12">  
 	        <table id="assets" class="assets" border="0" cellpadding="3" style="font-size:14px;">
 	          <tbody>	         
 	            <tr>

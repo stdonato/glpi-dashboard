@@ -1,5 +1,6 @@
 <?php
 
+#$arr_assets =  array('Computer', 'Monitor', 'Printer', 'Networkequipment', 'Phone', 'Peripheral', 'PDU', 'Rack', 'Enclosure', 'Passivedcequipment', 'Devicesimcard');
 $arr_assets =  array('Computer', 'Monitor', 'Printer', 'Networkequipment', 'Phone', 'Peripheral');
 $global = 0;
 
@@ -11,8 +12,7 @@ foreach($arr_assets as $asset) {
 	WHERE is_deleted = 0
 	AND is_template = 0
 	".$ent_global." ";
-	
-	
+		
 	$result = $DB->query($query);
 	$total = $DB->result($result,0,'id');
 	

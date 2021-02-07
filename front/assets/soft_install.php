@@ -1,32 +1,27 @@
 <?php
 
 $query_os = "
-SELECT glpi_softwares.name AS name, COUNT( glpi_computers_softwareversions.computers_id ) AS conta
-FROM glpi_computers_softwareversions, glpi_softwares, glpi_softwareversions
+SELECT glpi_softwares.name AS name, COUNT( glpi_items_softwareversions.items_id ) AS conta
+FROM glpi_items_softwareversions, glpi_softwares, glpi_softwareversions
 WHERE glpi_softwares.id = glpi_softwareversions.softwares_id
-AND glpi_computers_softwareversions.softwareversions_id = glpi_softwareversions.id
+AND glpi_items_softwareversions.softwareversions_id = glpi_softwareversions.id
 ".$ent_soft."
 GROUP BY name
 ORDER BY conta DESC
 LIMIT 10 ";
-
 		
 $result_os = $DB->query($query_os) or die('erro');
-
 $arr_grf_os = array();
 
-
 while ($row_result = $DB->fetchAssoc($result_os))		
-	{ 
+{ 
 	$v_row_result = $row_result['name'];
 	$arr_grf_os[$v_row_result] = $row_result['conta'];			
-	} 
+} 
 	
 $grf_os2 = array_keys($arr_grf_os);
 $quant_os2 = array_values($arr_grf_os);
-
 $conta_os = count($arr_grf_os);
-
 
 echo "
 <script type='text/javascript'>
