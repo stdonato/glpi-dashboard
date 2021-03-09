@@ -21,7 +21,7 @@ function plugin_version_dashboard(){
 	global $DB, $LANG;
 
 	return array('name'			=> __('Dashboard','dashboard'),
-					'version' 			=> '1.0.2',
+					'version' 			=> '1.0.3',
 					'author'			   => '<a href="https://forge.glpi-project.org/projects/dashboard"> Stevenes Donato </b> </a>',
 					'license'		 	=> 'GPLv2+',
 					'homepage'			=> 'https://forge.glpi-project.org/projects/dashboard',

@@ -207,8 +207,7 @@ function chart(theme) {
 							}
 							else {
 																					
-								$ent = implode(',',$ents_sel);												
-								
+								$ent = implode(',',$ents_sel);																				
 								$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
 											  VALUES ('entity', '".$ent."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$ent."' ";																
 								$result = $DB->query($query);	
@@ -228,7 +227,7 @@ function chart(theme) {
 						FROM glpi_tickets
 						WHERE glpi_tickets.is_deleted = '0'
 						AND date IS NOT NULL
-						ORDER BY year DESC";
+						ORDER BY year ASC";
 					
 					$result = $DB->query($query);
 					$conta_y = $DB->numrows($result);
@@ -236,77 +235,65 @@ function chart(theme) {
 					$arr_years = array();
 					
 					while ($row_y = $DB->fetchAssoc($result)) { 
-						$arr_years[] = $row_y['year'];			
+						$arr_years[$row_y['year']] = $row_y['year'];			
 					} 
 						
 					$count_y = count($arr_years);
-					            
-							      if(isset($_REQUEST['conf']) && $_REQUEST['conf'] == 1 ) {	
-							            	
-										if(isset($_REQUEST['num'])) {				
-												$num = $_REQUEST['num'];																								
-												$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
-															  VALUES ('num_years', '".$num."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$num."' ";																
-												$result = $DB->query($query);	
-												
-												//reload page
-												echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=config.php'>";													
-										}								
-									}		
+					            				    
 									
-									// color theme  	
-										if(isset($_REQUEST['theme'])) {	
-													
-												$skin = $_REQUEST['theme'];																									
-												$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
-															  VALUES ('theme', '".$skin."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$skin."' ";																
-												$result = $DB->query($query);	
-												
-												$_SESSION['theme'] = $skin;
-												$_SESSION['style'] = $skin;
-												
-												//reload page
-												echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=config.php'>";
-																																													
-										}	
-										
-										// backgrounds  	
-										if(isset($_REQUEST['back'])) {				
-										
-												$back = $_REQUEST['back'];																									
-												$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
-															  VALUES ('back', '".$back."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$back."' ";																
-												$result = $DB->query($query);	
-												
-												$_SESSION['back'] = $back;																																													
-										}
-										
-									// chats colors  	
-										if(isset($_REQUEST['colors'])) {				
-										
-												$colors = $_REQUEST['colors'];																									
-												$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id) 
-															VALUES ('charts_colors', '".$colors."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$colors."' ";																
-												$result = $DB->query($query);	
-												
-												$_SESSION['charts_colors'] = $colors;
-												
-												//reload page
-												echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=config.php'>";																																													
-										}		
-										
-									// metricas			
-									if(isset($_REQUEST['met']))  {	      	
-										
-											$metric = $_REQUEST['metric'];																							
-											$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
-														  VALUES ('metric', '".$metric."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$metric."' ";																
-											$result = $DB->query($query);	
-											
-											//reload page
-											echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=config.php'>";		
-																																														
-										}			
+					// color theme  	
+						if(isset($_REQUEST['theme'])) {	
+									
+								$skin = $_REQUEST['theme'];																									
+								$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
+											  VALUES ('theme', '".$skin."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$skin."' ";																
+								$result = $DB->query($query);	
+								
+								$_SESSION['theme'] = $skin;
+								$_SESSION['style'] = $skin;
+								
+								//reload page
+								echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=config.php'>";
+																																									
+						}	
+						
+						// backgrounds  	
+						if(isset($_REQUEST['back'])) {				
+						
+								$back = $_REQUEST['back'];																									
+								$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
+											  VALUES ('back', '".$back."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$back."' ";																
+								$result = $DB->query($query);	
+								
+								$_SESSION['back'] = $back;																																													
+						}
+						
+					// chats colors  	
+						if(isset($_REQUEST['colors'])) {				
+						
+								$colors = $_REQUEST['colors'];																									
+								$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id) 
+											VALUES ('charts_colors', '".$colors."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$colors."' ";																
+								$result = $DB->query($query);	
+								
+								$_SESSION['charts_colors'] = $colors;
+								
+								//reload page
+								echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=config.php'>";																																													
+						}		
+						
+					// metricas			
+					if(isset($_REQUEST['met']))  {	      	
+						
+							$metric = $_REQUEST['metric'];																							
+							$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
+										  VALUES ('metric', '".$metric."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$metric."' ";																
+							$result = $DB->query($query);	
+							
+							//reload page
+							echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=config.php'>";		
+																																										
+						}			
 			
 			//status for tickets page
 			$query_sta = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'status' AND users_id = ".$_SESSION['glpiID']."";
@@ -335,6 +322,9 @@ function chart(theme) {
 				if( in_array($i,$formated_arr)) { $active_stat[$i] = 'selected'; }
 				else { $active_stat[$i] = ''; }
 			}
+			
+			unset($format_Arr);
+			unset($formated_arr);
 					
 			echo "<tr>\n";
 				echo "<td>\n";			                                		 
@@ -356,36 +346,87 @@ function chart(theme) {
 
 				if(isset($_REQUEST['status']) && $_REQUEST['status'] == 1 ) {	
 				         																												
-								$status = implode(',',$_REQUEST['sel_stat']);												
-								
-								$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
-											  VALUES ('status', '".$status."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$status."' ";																
-								$result = $DB->query($query);	
-								
-								//reload page
-								echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=config.php'>\n";																						
-											
-					}										
-																							 
-					                               
+					$status = implode(',',$_REQUEST['sel_stat']);																	
+					$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
+								  VALUES ('status', '".$status."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$status."' ";																
+					$result = $DB->query($query);	
+					
+					//reload page
+					echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=config.php'>\n";																																	
+				}										
+																							 					                               
 		echo "<tr>\n";
 		echo "<td>\n";					
+
+
+			//years for index page
+			$query_years = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'num_years' AND users_id = ".$_SESSION['glpiID']."";
+			$result_years = $DB->query($query_years);
+			$prev_years = $DB->fetchAssoc($result_years);
+			
+			//separa string com virgulas e converte em array
+			$format_Arr = $prev_years;
+			$formated_arr = array();
+			
+			foreach($format_Arr as $arr){
+
+				$arr1 = explode(",",$arr);
 				
-		 		echo '<form id="form1" name="form1" method="post" action="config.php?conf=1">';   						
-				echo "-- ".__('Period in index page','dashboard').":&nbsp; ";  
-				echo "<select id='num' name='num' style='width: 130px;' onChange='reload(\"form1\")'> 
-							<option value=''>".__('Select','dashboard')."</option>
-							<option value='0'>".__('All')."</option>
-							<option value='1'>".__('Current year','dashboard')."</option>\n";
+				if(count($arr1)>=1){
+				    $formated_arr = array_merge($formated_arr,explode(',',$arr));
+				}else{
+				    $formated_arr[]= $arr;
+				}
+			}	
 						
-						$year = date("Y");		
-						for($i=2; $i <= $conta_y; $i++) {	
-							echo "<option value='".$i."'>".$year." - ".($arr_years[0]-($i-1))."</option>\n";
-					   }							   			
-				Html::closeForm(); 
+			//set selected years	
+			//if all years		
+			if(in_array(-1,$formated_arr)) {
+				$active_all = 'selected' ;  
+			}
+			else {
+				$active_all = '' ;  
+				$active_years = array();
+			
+				for($i = reset($arr_years); $i <= end($arr_years); $i++) {
+					if( in_array($i,$formated_arr)) { 
+						$active_years[$i] = 'selected';  														
+					}
+					else {
+						$active_years[$i] = '' ; 
+					}				
+				}
+			}			
+				
+ 		echo '<form id="form1" name="form1" method="post" action="config.php?num_years=1">';   						
+		echo "-- ".__('Period in index page','dashboard').":&nbsp; ";  
+		echo "<select id='num' name='num[]' multiple='multiple' style='width: 350px;'> 					
+					<option value='-1' ".$active_all.">".__('All')."</option>\n";
+				
+				$year = date("Y");		
+				
+				for($i = reset($arr_years); $i <= end($arr_years); $i++) {	
+					echo "<option value='".$arr_years[$i]."' ".$active_years[$i].">".$arr_years[$i]."</option>\n";
+			   }				
+
+		echo "</select>"."\n";
+		echo "<tr><td align='center'><button type='button' class='btn btn-primary' onclick='javascript:this.form.submit();' > ".__('Save')."</button></td></tr>";					   			   			
+		Html::closeForm(); 
+
+	  		if(isset($_REQUEST['num_years']) && $_REQUEST['num_years'] == 1 ) {	
+			            	
+				$num = implode(',',$_POST['num']);																									
+				$query = "INSERT INTO glpi_plugin_dashboard_config (name, value, users_id)
+							  VALUES ('num_years', '".$num."', '".$_SESSION['glpiID']."') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), value = '".$num."' ";																
+				$result = $DB->query($query);	
+				
+				//reload page
+				echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=config.php'>";																				
+			}						
 
 		echo "</td>\n";					 	
 		echo "</tr>\n";			
+		
 
 		// metric period
 		$query_met = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'metric' AND users_id = ".$_SESSION['glpiID']." ";																

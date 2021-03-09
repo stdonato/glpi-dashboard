@@ -41,14 +41,13 @@ else {
 	$entidade_u = "AND glpi_profiles_users.entities_id IN (".$ent.")";				
 }
 
-
 # years in index
 $sql_y = "SELECT value FROM glpi_plugin_dashboard_config WHERE name = 'num_years' AND users_id = ".$userID."";
 $result_y = $DB->query($sql_y);
 $num_years = $DB->result($result_y,0,'value');
 
 if($num_years == '') {
-	$num_years = 0;
+	$num_years = -1;
 }
 
 # color theme
@@ -217,7 +216,7 @@ $month = date("Y-m");
 $hoje = date("Y-m-d");
 
 //selecionar anos 
-if($num_years == 0) {
+if($num_years == -1) {
 	
 	$query_y = "SELECT DISTINCT DATE_FORMAT( date, '%Y' ) AS year
 	FROM glpi_tickets
@@ -225,8 +224,17 @@ if($num_years == 0) {
 	AND date IS NOT NULL	
 	ORDER BY year ASC ";
 }
+else {
 
-if($num_years == 1) {
+	$query_y = "SELECT DISTINCT DATE_FORMAT( date, '%Y' ) AS year
+	FROM glpi_tickets
+	WHERE glpi_tickets.is_deleted = '0'
+	AND date IS NOT NULL
+	AND DATE_FORMAT( glpi_tickets.date, '%Y' ) IN (".$num_years.") 
+	ORDER BY year DESC";
+
+}	
+/*if($num_years == 1) {
 	
 	$query_y = "SELECT DISTINCT DATE_FORMAT( date, '%Y' ) AS year
 	FROM glpi_tickets
@@ -245,7 +253,7 @@ if($num_years > 1) {
 	ORDER BY year DESC
 	LIMIT ".$num_years."";
 	
-}
+}*/
 
 $result_y = $DB->query($query_y);
 
@@ -254,7 +262,8 @@ $conta_y = $DB->numrows($result_y);
 
 $arr_years = array();
 
-while ($row_y = $DB->fetchAssoc($result_y))	{ 
+while ($row_y = $DB->fetchAssoc($result_y))		
+{ 
 	$arr_years[] = $row_y['year'];			
 } 
 
@@ -338,6 +347,7 @@ $result_due = $DB->query($sql_due);
 $total_due = $DB->fetchAssoc($result_due);
 
 ?>
+
 <div class="site-holder">
 <!-- top -->
 <!-- .box-holder -->
