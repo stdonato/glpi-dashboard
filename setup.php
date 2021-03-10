@@ -22,9 +22,9 @@ function plugin_version_dashboard(){
 
 	return array('name'			=> __('Dashboard','dashboard'),
 					'version' 			=> '1.0.3',
-					'author'			   => '<a href="https://forge.glpi-project.org/projects/dashboard"> Stevenes Donato </b> </a>',
+					'author'			   => '<a href="https://plugins.glpi-project.org/#/plugin/dashboard"> Stevenes Donato </b> </a>',
 					'license'		 	=> 'GPLv2+',
-					'homepage'			=> 'https://forge.glpi-project.org/projects/dashboard',
+					'homepage'			=> 'https://plugins.glpi-project.org/#/plugin/dashboard',
 					'minGlpiVersion'	=> '9.4'
 					);
 }
