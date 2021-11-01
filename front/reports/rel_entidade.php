@@ -257,11 +257,9 @@ else {
 		    else {
 		    	$status = $status_all;
 		    }
+		}else {
+		    $status = $status_all;
 		}
-
-		else {
-		    	$status = $status_all;
-		    }
 
 		// Chamados
 		$sql_cham =
@@ -285,90 +283,88 @@ else {
 		AND glpi_tickets.status IN ".$status." ";
 
 		$result_cons1 = $DB->query($consulta1);
-
-		$conta_cons = $DB->numrows($result_cons1);
+        $conta_cons = $DB->numrows($result_cons1);
 		$consulta = $conta_cons;
 		
 
 		if($consulta > 0) {
 
-		//montar barra
-		$sql_ab = "SELECT glpi_tickets.id AS total
-		FROM glpi_tickets
-		WHERE glpi_tickets.is_deleted = 0
-		".$entidade."
-		AND glpi_tickets.date ".$datas2."
-		AND glpi_tickets.status IN ".$status_open ;
+		    //montar barra
+		    $sql_ab = "SELECT glpi_tickets.id AS total
+		    FROM glpi_tickets
+		    WHERE glpi_tickets.is_deleted = 0
+		    ".$entidade."
+		    AND glpi_tickets.date ".$datas2."
+		    AND glpi_tickets.status IN ".$status_open ;
 
-		$result_ab = $DB->query($sql_ab) or die ("erro_ab");
-		$data_ab = $DB->numrows($result_ab);
+		    $result_ab = $DB->query($sql_ab) or die ("erro_ab");
+		    $data_ab = $DB->numrows($result_ab);
 
-		$abertos = $data_ab;
+		    $abertos = $data_ab;
 
-		//barra de porcentagem
-		if($conta_cons > 0) {
+		    //barra de porcentagem
+		    if($conta_cons > 0) {
 	
-			//barra de porcentagem
-			if($status == $status_close ) {
-			    $barra = 100;
-			    $cor = "progress-bar-success";
-			}	
-	
-			else {
-				//porcentagem
-				$perc = round(($abertos*100)/$conta_cons,1);
-				$barra = 100 - $perc;
+			    //barra de porcentagem
+			    if($status == $status_close ) {
+			        $barra = 100;
+			        $cor = "progress-bar-success";
+			    }else {
+				    //porcentagem
+				    $perc = round(($abertos*100)/$conta_cons,1);
+				    $barra = 100 - $perc;
 		
-				// cor barra
-				if($barra == 100) { $cor = "progress-bar-success"; }
-				if($barra >= 80 and $barra < 100) { $cor = " "; }
-				if($barra > 51 and $barra < 80) { $cor = "progress-bar-warning"; }
-				if($barra > 0 and $barra <= 50) { $cor = "progress-bar-danger"; }
-				if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }		
-			}		
-		}
-		else { $barra = 0;}
+				    // cor barra
+				    if($barra == 100) { $cor = "progress-bar-success"; }
+				    if($barra >= 80 and $barra < 100) { $cor = " "; }
+				    if($barra > 51 and $barra < 80) { $cor = "progress-bar-warning"; }
+				    if($barra > 0 and $barra <= 50) { $cor = "progress-bar-danger"; }
+				    if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }		
+			    }		
+		    }else { 
+		        $barra = 0;
+		    }
 
-		// nome da entidade
-		$sql_nm = "
-		SELECT id , name AS name
-		FROM `glpi_entities`
-		WHERE id = ".$id_ent."";
+		    // nome da entidade
+		    $sql_nm = "
+		    SELECT id , name AS name
+		    FROM `glpi_entities`
+	    	WHERE id = ".$id_ent."";
 
-		$result_nm = $DB->query($sql_nm);
-		$ent_name = $DB->fetchAssoc($result_nm);
+		    $result_nm = $DB->query($sql_nm);
+		    $ent_name = $DB->fetchAssoc($result_nm);
 
-		//total time		
-		$total_time = '';
-		while($row = $DB->fetchAssoc($result_cham)){
+		    //total time		
+		    $total_time = '';
+		    //-- Impede a renderização do relatório
+		    while($row = $DB->fetchAssoc($result_cham)){
+		        
+		        $sql = "SELECT ( TIMESTAMPDIFF(SECOND , date, solvedate ) ) AS time FROM glpi_tickets WHERE id = ".$row['id']." ";
+		        $result = $DB->query($sql);
 
-		$sql = "SELECT ( TIMESTAMPDIFF(SECOND , date, solvedate ) ) AS time FROM glpi_tickets WHERE id = ".$row['id']." ";
-		$result = $DB->query($sql);
+// 			    while($row_t = $DB->fetchAssoc($result)) {
+// 				    if($row_t['time'] >= 86400) {
+// 					    $total_time += ($row_t['time'] / 3) ;
+// 				    }else {
+// 					    $total_time += ($row_t['time']);
+// 				    }
+// 				}
+            }
 
-			while($row_t = $DB->fetchAssoc($result)) {
-
-				if($row_t['time'] >= 86400) {
-					$total_time += ($row_t['time'] / 3) ;
-				}
-				else {
-					$total_time += ($row_t['time']);
-				}
-			}
-		}
-
-		//count by status
-		$query_stat = "
-		SELECT
-		SUM(case when glpi_tickets.status = 1 then 1 else 0 end) AS new,
-		SUM(case when glpi_tickets.status = 2 then 1 else 0 end) AS assig,
-		SUM(case when glpi_tickets.status = 3 then 1 else 0 end) AS plan,
-		SUM(case when glpi_tickets.status = 4 then 1 else 0 end) AS pend,
-		SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve,
-		SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
-		FROM glpi_tickets
-		WHERE glpi_tickets.is_deleted = 0
-		".$entidade."
-		AND glpi_tickets.date ".$datas2." ";
+		    //count by status
+		    $query_stat = "
+		    SELECT
+		    SUM(case when glpi_tickets.status = 1 then 1 else 0 end) AS new,
+		    SUM(case when glpi_tickets.status = 2 then 1 else 0 end) AS assig,
+		    SUM(case when glpi_tickets.status = 3 then 1 else 0 end) AS plan,
+		    SUM(case when glpi_tickets.status = 4 then 1 else 0 end) AS pend,
+		    SUM(case when glpi_tickets.status = 5 then 1 else 0 end) AS solve,
+		    SUM(case when glpi_tickets.status = 6 then 1 else 0 end) AS close
+		    FROM glpi_tickets
+		    WHERE glpi_tickets.is_deleted = 0
+		    ".$entidade."
+		    AND glpi_tickets.date ".$datas2."' ";
+		    
 
 		$result_stat = $DB->query($query_stat);
 
